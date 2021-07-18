@@ -1,5 +1,5 @@
-#include <ell/greeter.h>
-#include <ell/version.h>
+#include <ellalgo/greeter.h>
+#include <ellalgo/version.h>
 
 #include <cxxopts.hpp>
 #include <iostream>
@@ -7,11 +7,11 @@
 #include <unordered_map>
 
 auto main(int argc, char** argv) -> int {
-  const std::unordered_map<std::string, ell::LanguageCode> languages{
-      {"en", ell::LanguageCode::EN},
-      {"de", ell::LanguageCode::DE},
-      {"es", ell::LanguageCode::ES},
-      {"fr", ell::LanguageCode::FR},
+  const std::unordered_map<std::string, ellalgo::LanguageCode> languages{
+      {"en", ellalgo::LanguageCode::EN},
+      {"de", ellalgo::LanguageCode::DE},
+      {"es", ellalgo::LanguageCode::ES},
+      {"fr", ellalgo::LanguageCode::FR},
   };
 
   cxxopts::Options options(*argv, "A program to welcome the world!");
@@ -36,7 +36,7 @@ auto main(int argc, char** argv) -> int {
   }
 
   if (result["version"].as<bool>()) {
-    std::cout << "Ell, version " << ELL_VERSION << std::endl;
+    std::cout << "EllAlgo, version " << ELLALGO_VERSION << std::endl;
     return 0;
   }
 
@@ -46,8 +46,8 @@ auto main(int argc, char** argv) -> int {
     return 1;
   }
 
-  ell::Ell ell(name);
-  std::cout << ell.greet(langIt->second) << std::endl;
+  ellalgo::EllAlgo ellalgo(name);
+  std::cout << ellalgo.greet(langIt->second) << std::endl;
 
   return 0;
 }

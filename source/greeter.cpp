@@ -1,11 +1,11 @@
+#include <ellalgo/greeter.h>
 #include <fmt/format.h>
-#include <ell/greeter.h>
 
-using namespace ell;
+using namespace ellalgo;
 
-Ell::Ell(std::string _name) : name(std::move(_name)) {}
+EllAlgo::EllAlgo(std::string _name) : name(std::move(_name)) {}
 
-std::string Ell::greet(LanguageCode lang) const {
+std::string EllAlgo::greet(LanguageCode lang) const {
   switch (lang) {
     default:
     case LanguageCode::EN:

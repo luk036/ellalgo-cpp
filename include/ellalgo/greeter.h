@@ -2,23 +2,23 @@
 
 #include <string>
 
-namespace ell {
+namespace ellalgo {
 
-  /**  Language codes to be used with the Ell class */
+  /**  Language codes to be used with the EllAlgo class */
   enum class LanguageCode { EN, DE, ES, FR };
 
   /**
    * @brief A class for saying hello in multiple languages
    */
-  class Ell {
+  class EllAlgo {
     std::string name;
 
   public:
     /**
-     * @brief Creates a new ell
+     * @brief Creates a new ellalgo
      * @param name the name to greet
      */
-    Ell(std::string name);
+    EllAlgo(std::string name);
 
     /**
      * @brief Creates a localized string containing the greeting
@@ -28,4 +28,4 @@ namespace ell {
     std::string greet(LanguageCode lang = LanguageCode::EN) const;
   };
 
-}  // namespace ell
+}  // namespace ellalgo

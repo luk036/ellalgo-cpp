@@ -1,19 +1,19 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(EllDocs)
+project(EllAlgoDocs)
 
 # ---- Dependencies ----
 
 include(../cmake/CPM.cmake)
 
 CPMAddPackage("gh:mosra/m.css#42d4a9a48f31f5df6e246c948403b54b50574a2a")
-CPMAddPackage(NAME Ell SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+CPMAddPackage(NAME EllAlgo SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 # ---- Doxygen variables ----
 
 # set Doxyfile variables
-set(DOXYGEN_PROJECT_NAME Ell)
-set(DOXYGEN_PROJECT_VERSION ${Ell_VERSION})
+set(DOXYGEN_PROJECT_NAME EllAlgo)
+set(DOXYGEN_PROJECT_VERSION ${EllAlgo_VERSION})
 set(DOXYGEN_PROJECT_ROOT "${CMAKE_CURRENT_LIST_DIR}/..")
 set(DOXYGEN_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/doxygen")
 
