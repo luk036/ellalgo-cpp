@@ -39,7 +39,7 @@ jobs:
           conda list
           conda config --show-sources
           conda config --show
-          conda install -c conda-forge cmake xtensor xtensor-blas openblas
+          conda install -c conda-forge cmake openblas
 
       - name: build and install library
         run: |
