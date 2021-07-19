@@ -13,8 +13,7 @@
  * and hence keep $M$ symmetric positive definite.
  * More stable but slightly more computation.
  */
-class ell_stable : public ell
-{
+class ell_stable : public ell {
   public:
     using Arr = xt::xarray<double, xt::layout_type::row_major>;
 
@@ -24,10 +23,7 @@ class ell_stable : public ell
      * @param[in] val
      * @param[in] x
      */
-    ell_stable(const Arr& val, Arr x) noexcept
-        : ell {val, std::move(x)}
-    {
-    }
+    ell_stable(const Arr& val, Arr x) noexcept : ell{val, std::move(x)} {}
 
     /*!
      * @brief Construct a new ell_stable object
@@ -35,10 +31,7 @@ class ell_stable : public ell
      * @param[in] alpha
      * @param[in] x
      */
-    ell_stable(const double& alpha, Arr x) noexcept
-        : ell {alpha, std::move(x)}
-    {
-    }
+    ell_stable(const double& alpha, Arr x) noexcept : ell{alpha, std::move(x)} {}
 
     /**
      * @brief Construct a new ell_stable object
@@ -60,17 +53,14 @@ class ell_stable : public ell
      * @brief Destroy the ell stable object
      *
      */
-    ~ell_stable() { }
+    ~ell_stable() {}
 
     /**
      * @brief explicitly copy
      *
      * @return ell_stable
      */
-    [[nodiscard]] auto copy() const -> ell_stable
-    {
-        return ell_stable(*this);
-    }
+    [[nodiscard]] auto copy() const -> ell_stable { return ell_stable(*this); }
 
     /*!
      * @brief Update ellipsoid core function using the cut(s)
@@ -83,6 +73,6 @@ class ell_stable : public ell
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T>
-    auto update(const std::tuple<Arr, T>& cut) -> std::tuple<CUTStatus, double>;
-}; // } ell_stable
+    template <typename T> auto update(const std::tuple<Arr, T>& cut)
+        -> std::tuple<CUTStatus, double>;
+};  // } ell_stable

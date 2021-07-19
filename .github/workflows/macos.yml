@@ -32,14 +32,14 @@ jobs:
         uses: conda-incubator/setup-miniconda@v2.1.1
         with:
           auto-update-conda: ture
-          
+
       - name: Install dependent software
         run: |
           conda info
           conda list
           conda config --show-sources
           conda config --show
-          conda install -c conda-forge cmake openblas
+          conda env update --file environment-dev.yml --name base
 
       - name: configure
         run: cmake -Stest -Bbuild -DCMAKE_BUILD_TYPE=Debug

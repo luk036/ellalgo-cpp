@@ -1,12 +1,12 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include "cut_config.hpp"
-#include "half_nonnegative.hpp"
 #include <cassert>
 #include <cmath>
 #include <tuple>
 
+#include "cut_config.hpp"
+#include "half_nonnegative.hpp"
 
 /*!
  * @brief Find a point in a convex set (defined through a cutting-plane oracle).
@@ -32,29 +32,23 @@
  * @return Information of Cutting-plane method
  */
 template <typename Oracle, typename Space>
-auto cutting_plane_feas(
-    Oracle&& Omega, Space&& S, const Options& options = Options()) -> CInfo
-{
+auto cutting_plane_feas(Oracle&& Omega, Space&& S, const Options& options = Options()) -> CInfo {
     auto feasible = false;
     auto status = CUTStatus::success;
 
     auto niter = 0U;
-    while (++niter != options.max_it)
-    {
-        const auto cut = Omega(S.xc()); // query the oracle at S.xc()
-        if (!cut)
-        { // feasible sol'n obtained
+    while (++niter != options.max_it) {
+        const auto cut = Omega(S.xc());  // query the oracle at S.xc()
+        if (!cut) {                      // feasible sol'n obtained
             feasible = true;
             break;
         }
-        const auto [cutstatus, tsq] = S.update(*cut); // update S
-        if (cutstatus != CUTStatus::success)
-        {
+        const auto [cutstatus, tsq] = S.update(*cut);  // update S
+        if (cutstatus != CUTStatus::success) {
             status = cutstatus;
             break;
         }
-        if (tsq < options.tol)
-        { // no more
+        if (tsq < options.tol) {  // no more
             status = CUTStatus::smallenough;
             break;
         }
@@ -75,36 +69,30 @@ auto cutting_plane_feas(
  * @return Information of Cutting-plane method
  */
 template <typename Oracle, typename Space, typename opt_type>
-auto cutting_plane_dc(
-    Oracle&& Omega, Space&& S, opt_type&& t, const Options& options = Options())
-{
+auto cutting_plane_dc(Oracle&& Omega, Space&& S, opt_type&& t, const Options& options = Options()) {
     const auto t_orig = t;
     decltype(S.xc()) x_best;
     auto status = CUTStatus::success;
 
     auto niter = 0U;
-    while (++niter != options.max_it)
-    {
+    while (++niter != options.max_it) {
         const auto [cut, shrunk] = Omega(S.xc(), t);
-        if (shrunk)
-        { // best t obtained
+        if (shrunk) {  // best t obtained
             x_best = S.xc();
         }
         const auto [cutstatus, tsq] = S.update(cut);
-        if (cutstatus != CUTStatus::success) // ???
+        if (cutstatus != CUTStatus::success)  // ???
         {
             status = cutstatus;
             break;
         }
-        if (tsq < options.tol)
-        { // no more
+        if (tsq < options.tol) {  // no more
             status = CUTStatus::smallenough;
             break;
         }
     }
-    return std::make_tuple(
-        std::move(x_best), CInfo {t != t_orig, niter, status});
-} // END
+    return std::make_tuple(std::move(x_best), CInfo{t != t_orig, niter, status});
+}  // END
 
 /*!
     Cutting-plane method for solving convex discrete optimization problem
@@ -135,45 +123,36 @@ auto cutting_plane_dc(
  * @return Information of Cutting-plane method
  */
 template <typename Oracle, typename Space, typename opt_type>
-auto cutting_plane_q(
-    Oracle&& Omega, Space&& S, opt_type&& t, const Options& options = Options())
-{
+auto cutting_plane_q(Oracle&& Omega, Space&& S, opt_type&& t, const Options& options = Options()) {
     const auto t_orig = t;
     decltype(S.xc()) x_best;
-    auto status = CUTStatus::nosoln; // note!!!
+    auto status = CUTStatus::nosoln;  // note!!!
 
     auto niter = 0U;
-    while (++niter != options.max_it)
-    {
+    while (++niter != options.max_it) {
         auto retry = (status == CUTStatus::noeffect);
         const auto [cut, x0, shrunk, more_alt] = Omega(S.xc(), t, retry);
-        if (shrunk)
-        { // best t obtained
+        if (shrunk) {  // best t obtained
             // t = t1;
             x_best = x0;
         }
         const auto [cutstatus, tsq] = S.update(cut);
-        if (cutstatus == CUTStatus::noeffect)
-        {
-            if (!more_alt)
-            {
-                break; // no more alternative cut
+        if (cutstatus == CUTStatus::noeffect) {
+            if (!more_alt) {
+                break;  // no more alternative cut
             }
         }
-        if (cutstatus == CUTStatus::nosoln)
-        {
+        if (cutstatus == CUTStatus::nosoln) {
             status = cutstatus;
             break;
         }
-        if (tsq < options.tol)
-        {
+        if (tsq < options.tol) {
             status = CUTStatus::smallenough;
             break;
         }
     }
-    return std::make_tuple(
-        std::move(x_best), CInfo {t != t_orig, niter, status});
-} // END
+    return std::make_tuple(std::move(x_best), CInfo{t != t_orig, niter, status});
+}  // END
 
 /*!
  * @brief
@@ -186,9 +165,7 @@ auto cutting_plane_q(
  * @return CInfo
  */
 template <typename Oracle, typename Space>
-auto bsearch(Oracle&& Omega, Space&& I, const Options& options = Options())
-    -> CInfo
-{
+auto bsearch(Oracle&& Omega, Space&& I, const Options& options = Options()) -> CInfo {
     // assume monotone
     // auto& [lower, upper] = I;
     auto& lower = I.first;
@@ -198,23 +175,18 @@ auto bsearch(Oracle&& Omega, Space&& I, const Options& options = Options())
     auto niter = 0U;
     auto status = CUTStatus::success;
 
-    for (; niter != options.max_it; ++niter)
-    {
+    for (; niter != options.max_it; ++niter) {
         auto tau = algo::half_nonnegative(upper - lower);
-        if (tau < options.tol)
-        {
+        if (tau < options.tol) {
             status = CUTStatus::smallenough;
             break;
         }
 
-        auto t = lower; // l may be `int` or `Fraction`
+        auto t = lower;  // l may be `int` or `Fraction`
         t += tau;
-        if (Omega(t))
-        { // feasible sol'n obtained
+        if (Omega(t)) {  // feasible sol'n obtained
             upper = t;
-        }
-        else
-        {
+        } else {
             lower = t;
         }
     }
@@ -227,9 +199,8 @@ auto bsearch(Oracle&& Omega, Space&& I, const Options& options = Options())
  * @tparam Oracle
  * @tparam Space
  */
-template <typename Oracle, typename Space> //
-class bsearch_adaptor
-{
+template <typename Oracle, typename Space>  //
+class bsearch_adaptor {
   private:
     Oracle& _P;
     Space& _S;
@@ -242,10 +213,7 @@ class bsearch_adaptor
      * @param[in,out] P perform assessment on x0
      * @param[in,out] S search Space containing x*
      */
-    bsearch_adaptor(Oracle& P, Space& S)
-        : bsearch_adaptor {P, S, Options()}
-    {
-    }
+    bsearch_adaptor(Oracle& P, Space& S) : bsearch_adaptor{P, S, Options()} {}
 
     /*!
      * @brief Construct a new bsearch adaptor object
@@ -255,21 +223,14 @@ class bsearch_adaptor
      * @param[in] options maximum iteration and error tolerance etc.
      */
     bsearch_adaptor(Oracle& P, Space& S, const Options& options)
-        : _P {P}
-        , _S {S}
-        , _options {options}
-    {
-    }
+        : _P{P}, _S{S}, _options{options} {}
 
     /*!
      * @brief get best x
      *
      * @return auto
      */
-    [[nodiscard]] auto x_best() const
-    {
-        return this->_S.xc();
-    }
+    [[nodiscard]] auto x_best() const { return this->_S.xc(); }
 
     /*!
      * @brief
@@ -277,14 +238,11 @@ class bsearch_adaptor
      * @param[in] t the best-so-far optimal value
      * @return bool
      */
-    template <typename opt_type>
-    auto operator()(const opt_type& t) -> bool
-    {
+    template <typename opt_type> auto operator()(const opt_type& t) -> bool {
         Space S = this->_S.copy();
         this->_P.update(t);
         const auto ell_info = cutting_plane_feas(this->_P, S, this->_options);
-        if (ell_info.feasible)
-        {
+        if (ell_info.feasible) {
             this->_S.set_xc(S.xc());
         }
         return ell_info.feasible;

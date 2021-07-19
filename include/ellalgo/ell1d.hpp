@@ -11,8 +11,7 @@ enum class CUTStatus;
  * @brief Ellipsoid Method for special 1D case
  *
  */
-class ell1d
-{
+class ell1d {
   public:
     using return_t = std::tuple<CUTStatus, double>;
 
@@ -27,11 +26,7 @@ class ell1d
      * @param[in] l
      * @param[in] u
      */
-    ell1d(const double& l, const double& u) noexcept
-        : _r {(u - l) / 2}
-        , _xc {l + _r}
-    {
-    }
+    ell1d(const double& l, const double& u) noexcept : _r{(u - l) / 2}, _xc{l + _r} {}
 
     /*!
      * @brief Construct a new ell1d object
@@ -45,20 +40,14 @@ class ell1d
      *
      * @return double
      */
-    auto xc() const noexcept -> double
-    {
-        return _xc;
-    }
+    auto xc() const noexcept -> double { return _xc; }
 
     /*!
      * @brief Set the xc object
      *
      * @param[in] xc
      */
-    auto set_xc(const double& xc) noexcept -> void
-    {
-        _xc = xc;
-    }
+    auto set_xc(const double& xc) noexcept -> void { _xc = xc; }
 
     /*!
      * @brief
@@ -67,4 +56,4 @@ class ell1d
      * @return return_t
      */
     auto update(const std::tuple<double, double>& cut) noexcept -> return_t;
-}; // } ell1d
+};  // } ell1d

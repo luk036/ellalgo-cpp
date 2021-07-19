@@ -23,8 +23,7 @@
  *        v: output price
  *        k: a given constant that restricts the quantity of x1
  */
-class profit_oracle
-{
+class profit_oracle {
     using Arr = xt::xarray<double, xt::layout_type::row_major>;
     using Cut = std::tuple<Arr, double>;
 
@@ -36,7 +35,6 @@ class profit_oracle
   public:
     Arr _a;
 
-
     /*!
      * @brief Construct a new profit oracle object
      *
@@ -47,12 +45,7 @@ class profit_oracle
      * @param[in] v output price
      */
     profit_oracle(double p, double A, double k, const Arr& a, const Arr& v)
-        : _log_pA {std::log(p * A)}
-        , _log_k {std::log(k)}
-        , _v {v}
-        , _a {a}
-    {
-    }
+        : _log_pA{std::log(p * A)}, _log_k{std::log(k)}, _v{v}, _a{a} {}
 
     /**
      * @brief Construct a new profit oracle object (only explicitly)
@@ -87,8 +80,7 @@ class profit_oracle
  *
  * @see profit_oracle
  */
-class profit_rb_oracle
-{
+class profit_rb_oracle {
     using Arr = xt::xarray<double, xt::layout_type::row_major>;
 
   private:
@@ -108,13 +100,9 @@ class profit_rb_oracle
      * @param[in] e paramters for uncertainty
      * @param[in] e3 paramters for uncertainty
      */
-    profit_rb_oracle(double p, double A, double k, const Arr& a, const Arr& v,
-        const Arr& e, double e3)
-        : _uie {e}
-        , _a {a}
-        , _P(p - e3, A, k - e3, a, v + e3)
-    {
-    }
+    profit_rb_oracle(double p, double A, double k, const Arr& a, const Arr& v, const Arr& e,
+                     double e3)
+        : _uie{e}, _a{a}, _P(p - e3, A, k - e3, a, v + e3) {}
 
     /*!
      * @brief Make object callable for cutting_plane_dc()
@@ -125,8 +113,7 @@ class profit_rb_oracle
      *
      * @see cutting_plane_dc
      */
-    auto operator()(const Arr& y, double& t)
-    {
+    auto operator()(const Arr& y, double& t) {
         auto a_rb = this->_a;
         a_rb[0] += y[0] > 0. ? -this->_uie[0] : this->_uie[0];
         a_rb[1] += y[1] > 0. ? -this->_uie[1] : this->_uie[1];
@@ -155,8 +142,7 @@ class profit_rb_oracle
  *
  * @see profit_oracle
  */
-class profit_q_oracle
-{
+class profit_q_oracle {
     using Arr = xt::xarray<double, xt::layout_type::row_major>;
     using Cut = std::tuple<Arr, double>;
 
@@ -174,10 +160,7 @@ class profit_q_oracle
      * @param[in] a the output elasticities
      * @param[in] v output price
      */
-    profit_q_oracle(double p, double A, double k, const Arr& a, const Arr& v)
-        : _P(p, A, k, a, v)
-    {
-    }
+    profit_q_oracle(double p, double A, double k, const Arr& a, const Arr& v) : _P(p, A, k, a, v) {}
 
     /*!
      * @brief Make object callable for cutting_plane_q()
@@ -188,6 +171,5 @@ class profit_q_oracle
      *
      * @see cutting_plane_q
      */
-    auto operator()(const Arr& y, double& t, bool retry)
-        -> std::tuple<Cut, Arr, bool, bool>;
+    auto operator()(const Arr& y, double& t, bool retry) -> std::tuple<Cut, Arr, bool, bool>;
 };

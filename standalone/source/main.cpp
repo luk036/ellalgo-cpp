@@ -46,8 +46,8 @@ auto main(int argc, char** argv) -> int {
         return 1;
     }
 
-    ellalgo::EllAlgo ellalgo(name);
-    std::cout << ellalgo.greet(langIt->second) << std::endl;
+    // ellalgo::EllAlgo ellalgo(name);
+    // std::cout << ellalgo.greet(langIt->second) << std::endl;
 
     return 0;
 }

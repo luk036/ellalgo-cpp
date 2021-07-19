@@ -6,7 +6,6 @@
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 
-
 /*!
  * @brief
  *
@@ -14,32 +13,28 @@ using Arr = xt::xarray<double, xt::layout_type::row_major>;
  * @param[in] b1
  * @return int
  */
-auto ell::_calc_ll_core(const double& b0, const double& b1) -> CUTStatus
-{
+auto ell::_calc_ll_core(const double& b0, const double& b1) -> CUTStatus {
     // const auto b1sq = b1 * b1;
     const auto b1sqn = b1 * (b1 / this->_tsq);
     const auto t1n = 1. - b1sqn;
-    if (t1n < 0. || !this->use_parallel_cut)
-    {
+    if (t1n < 0. || !this->use_parallel_cut) {
         return this->_calc_dc(b0);
     }
 
     const auto bdiff = b1 - b0;
-    if (bdiff < 0.)
-    {
-        return CUTStatus::nosoln; // no sol'n
+    if (bdiff < 0.) {
+        return CUTStatus::nosoln;  // no sol'n
     }
 
-    if (b0 == 0.) // central cut
+    if (b0 == 0.)  // central cut
     {
         this->_calc_ll_cc(b1, b1sqn);
         return CUTStatus::success;
     }
 
     const auto b0b1n = b0 * (b1 / this->_tsq);
-    if (ELL_UNLIKELY(this->_nFloat * b0b1n < -1.))
-    {
-        return CUTStatus::noeffect; // no effect
+    if (ELL_UNLIKELY(this->_nFloat * b0b1n < -1.)) {
+        return CUTStatus::noeffect;  // no effect
     }
 
     // const auto t0 = this->_tsq - b0 * b0;
@@ -50,8 +45,7 @@ auto ell::_calc_ll_core(const double& b0, const double& b1) -> CUTStatus
     const auto bav = bsum / 2.;
     const auto tempn = this->_halfN * bsumn * bdiff;
     const auto xi = std::sqrt(t0n * t1n + tempn * tempn);
-    this->_sigma =
-        this->_c3 + (1. - b0b1n - xi) / (bsumn * bav) / this->_nPlus1;
+    this->_sigma = this->_c3 + (1. - b0b1n - xi) / (bsumn * bav) / this->_nPlus1;
     this->_rho = this->_sigma * bav;
     this->_delta = this->_c1 * ((t0n + t1n) / 2. + xi / this->_nFloat);
     return CUTStatus::success;
@@ -64,8 +58,7 @@ auto ell::_calc_ll_core(const double& b0, const double& b1) -> CUTStatus
  * @param[in] b1sq
  * @return void
  */
-void ell::_calc_ll_cc(const double& b1, const double& b1sqn)
-{
+void ell::_calc_ll_cc(const double& b1, const double& b1sqn) {
     const auto temp = this->_halfN * b1sqn;
     const auto xi = std::sqrt(1. - b1sqn + temp * temp);
     this->_sigma = this->_c3 + this->_c2 * (1. - xi) / b1sqn;
@@ -79,26 +72,22 @@ void ell::_calc_ll_cc(const double& b1, const double& b1sqn)
  * @param[in] beta
  * @return int
  */
-CUTStatus ell::_calc_dc(const double& beta) noexcept
-{
+CUTStatus ell::_calc_dc(const double& beta) noexcept {
     const auto tau = std::sqrt(this->_tsq);
 
     const auto bdiff = tau - beta;
-    if (bdiff < 0.)
-    {
-        return CUTStatus::nosoln; // no sol'n
+    if (bdiff < 0.) {
+        return CUTStatus::nosoln;  // no sol'n
     }
 
-    if (beta == 0.)
-    {
+    if (beta == 0.) {
         this->_calc_cc(tau);
         return CUTStatus::success;
     }
 
     const auto gamma = tau + this->_nFloat * beta;
-    if (ELL_UNLIKELY(gamma < 0))
-    {
-        return CUTStatus::noeffect; // no effect
+    if (ELL_UNLIKELY(gamma < 0)) {
+        return CUTStatus::noeffect;  // no effect
     }
 
     this->_mu = (bdiff / gamma) * this->_halfNminus1;
@@ -114,14 +103,12 @@ CUTStatus ell::_calc_dc(const double& beta) noexcept
  * @param[in] tau
  * @return int
  */
-void ell::_calc_cc(const double& tau) noexcept
-{
+void ell::_calc_cc(const double& tau) noexcept {
     this->_mu = this->_halfNminus1;
     this->_sigma = this->_c2;
     this->_rho = tau / this->_nPlus1;
     this->_delta = this->_c1;
 }
-
 
 /*!
  * @brief Update ellipsoid core function using the cut
@@ -132,33 +119,28 @@ void ell::_calc_cc(const double& tau) noexcept
  * @param[in] cut
  * @return std::tuple<int, double>
  */
-template <typename T>
-std::tuple<CUTStatus, double> ell::update(const std::tuple<Arr, T>& cut)
-{
+template <typename T> std::tuple<CUTStatus, double> ell::update(const std::tuple<Arr, T>& cut) {
     // const auto& [g, beta] = cut;
     const auto& beta = std::get<1>(cut);
 
     const auto& g = std::get<0>(cut);
     // n^2
-    const auto Qg = Arr {xt::linalg::dot(this->_Q, g)}; // n^2
+    const auto Qg = Arr{xt::linalg::dot(this->_Q, g)};  // n^2
     const auto omega = xt::linalg::dot(g, Qg)();        // n
     this->_tsq = this->_kappa * omega;
 
     auto status = this->_update_cut(beta);
-    if (status != CUTStatus::success)
-    {
+    if (status != CUTStatus::success) {
         return {status, this->_tsq};
     }
 
-    this->_xc -= (this->_rho / omega) * Qg; // n
+    this->_xc -= (this->_rho / omega) * Qg;  // n
     // n*(n+1)/2 + n
     // this->_Q -= (this->_sigma / omega) * xt::linalg::outer(Qg, Qg);
     const auto r = this->_sigma / omega;
-    for (auto i = 0; i != this->_n; ++i)
-    {
+    for (auto i = 0; i != this->_n; ++i) {
         const auto rQg = r * Qg(i);
-        for (auto j = 0; j < i; ++j)
-        {
+        for (auto j = 0; j < i; ++j) {
             this->_Q(i, j) -= rQg * Qg(j);
             this->_Q(j, i) = this->_Q(i, j);
         }
@@ -167,16 +149,13 @@ std::tuple<CUTStatus, double> ell::update(const std::tuple<Arr, T>& cut)
 
     this->_kappa *= this->_delta;
 
-    if (this->no_defer_trick)
-    {
+    if (this->no_defer_trick) {
         this->_Q *= this->_kappa;
         this->_kappa = 1.;
     }
-    return {status, this->_tsq}; // g++-7 is ok
+    return {status, this->_tsq};  // g++-7 is ok
 }
 
 // Instantiation
-template std::tuple<CUTStatus, double> ell::update(
-    const std::tuple<Arr, double>& cut);
-template std::tuple<CUTStatus, double> ell::update(
-    const std::tuple<Arr, Arr>& cut);
+template std::tuple<CUTStatus, double> ell::update(const std::tuple<Arr, double>& cut);
+template std::tuple<CUTStatus, double> ell::update(const std::tuple<Arr, Arr>& cut);

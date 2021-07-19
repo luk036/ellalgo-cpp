@@ -16,8 +16,7 @@ enum class CUTStatus;
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */
-class ell
-{
+class ell {
   public:
     using Arr = xt::xarray<double, xt::layout_type::row_major>;
     // using params_t = std::tuple<double, double, double>;
@@ -27,11 +26,11 @@ class ell
     bool no_defer_trick = false;
 
   protected:
-    double _mu {};
-    double _rho {};
-    double _sigma {};
-    double _delta {};
-    double _tsq {};
+    double _mu{};
+    double _rho{};
+    double _sigma{};
+    double _delta{};
+    double _tsq{};
 
     const int _n;
 
@@ -63,24 +62,21 @@ class ell
      * @param[in] val
      * @param[in] x
      */
-    template <typename V, typename U>
-    ell(V&& kappa, Arr&& Q, U&& x) noexcept
-        : _n {int(x.size())}
-        , _nFloat {double(_n)}
-        , _nPlus1 {_nFloat + 1.}
-        , _nMinus1 {_nFloat - 1.}
-        , _halfN {_nFloat / 2.}
-        , _halfNplus1 {_nPlus1 / 2.}
-        , _halfNminus1 {_nMinus1 / 2.}
-        , _nSq {_nFloat * _nFloat}
-        , _c1 {_nSq / (_nSq - 1)}
-        , _c2 {2. / _nPlus1}
-        , _c3 {_nFloat / _nPlus1}
-        , _kappa {std::forward<V>(kappa)}
-        , _Q {std::move(Q)}
-        , _xc {std::forward<U>(x)}
-    {
-    }
+    template <typename V, typename U> ell(V&& kappa, Arr&& Q, U&& x) noexcept
+        : _n{int(x.size())},
+          _nFloat{double(_n)},
+          _nPlus1{_nFloat + 1.},
+          _nMinus1{_nFloat - 1.},
+          _halfN{_nFloat / 2.},
+          _halfNplus1{_nPlus1 / 2.},
+          _halfNminus1{_nMinus1 / 2.},
+          _nSq{_nFloat * _nFloat},
+          _c1{_nSq / (_nSq - 1)},
+          _c2{2. / _nPlus1},
+          _c3{_nFloat / _nPlus1},
+          _kappa{std::forward<V>(kappa)},
+          _Q{std::move(Q)},
+          _xc{std::forward<U>(x)} {}
 
   public:
     /*!
@@ -89,10 +85,7 @@ class ell
      * @param[in] val
      * @param[in] x
      */
-    ell(const Arr& val, Arr x) noexcept
-        : ell {1., xt::diag(val), std::move(x)}
-    {
-    }
+    ell(const Arr& val, Arr x) noexcept : ell{1., xt::diag(val), std::move(x)} {}
 
     /*!
      * @brief Construct a new ell object
@@ -100,10 +93,7 @@ class ell
      * @param[in] alpha
      * @param[in] x
      */
-    ell(const double& alpha, Arr x) noexcept
-        : ell {alpha, xt::eye(x.size()), std::move(x)}
-    {
-    }
+    ell(const double& alpha, Arr x) noexcept : ell{alpha, xt::eye(x.size()), std::move(x)} {}
 
     /**
      * @brief Construct a new ell object
@@ -116,7 +106,7 @@ class ell
      * @brief Destroy the ell object
      *
      */
-    ~ell() { }
+    ~ell() {}
 
     /**
      * @brief Construct a new ell object
@@ -132,30 +122,21 @@ class ell
      *
      * @return ell
      */
-    [[nodiscard]] auto copy() const -> ell
-    {
-        return ell(*this);
-    }
+    [[nodiscard]] auto copy() const -> ell { return ell(*this); }
 
     /*!
      * @brief copy the whole array anyway
      *
      * @return Arr
      */
-    [[nodiscard]] auto xc() const -> Arr
-    {
-        return _xc;
-    }
+    [[nodiscard]] auto xc() const -> Arr { return _xc; }
 
     /*!
      * @brief Set the xc object
      *
      * @param[in] xc
      */
-    void set_xc(const Arr& xc)
-    {
-        _xc = xc;
-    }
+    void set_xc(const Arr& xc) { _xc = xc; }
 
     /*!
      * @brief Update ellipsoid core function using the cut(s)
@@ -164,19 +145,14 @@ class ell
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T>
-    auto update(const std::tuple<Arr, T>& cut) -> std::tuple<CUTStatus, double>;
+    template <typename T> auto update(const std::tuple<Arr, T>& cut)
+        -> std::tuple<CUTStatus, double>;
 
   protected:
-    auto _update_cut(const double& beta) -> CUTStatus
-    {
-        return this->_calc_dc(beta);
-    }
+    auto _update_cut(const double& beta) -> CUTStatus { return this->_calc_dc(beta); }
 
-    CUTStatus _update_cut(const Arr& beta)
-    { // parallel cut
-        if (beta.shape()[0] < 2)
-        {
+    CUTStatus _update_cut(const Arr& beta) {  // parallel cut
+        if (beta.shape()[0] < 2) {
             return this->_calc_dc(beta[0]);
         }
         return this->_calc_ll_core(beta[0], beta[1]);
@@ -222,4 +198,4 @@ class ell
      * @param[in] tau
      */
     auto _calc_cc(const double& tau) noexcept -> void;
-}; // } ell
+};  // } ell
