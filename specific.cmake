@@ -1,8 +1,5 @@
-find_package(xtensor REQUIRED)
-if (xtensor_FOUND)
-  message(STATUS "Found xtensor: ${xtensor_INCLUDE_DIRS}")
-  include_directories(${xtensor_INCLUDE_DIRS})
-endif(xtensor-blas_FOUND)
+CPMAddPackage("gh:xtensor-stack/xtl#0.7.2")
+CPMAddPackage("gh:xtensor-stack/xtensor#0.23.10")
 
 find_package(xtensor-blas REQUIRED)
 if (xtensor-blas_FOUND)
