@@ -18,6 +18,8 @@ include(../cmake/CPM.cmake)
 CPMAddPackage("gh:onqtam/doctest#2.4.5")
 CPMAddPackage("gh:TheLartians/Format.cmake@1.7.0")
 
+include(../specific.cmake)
+
 if(TEST_INSTALLED_VERSION)
   find_package(EllAlgo REQUIRED)
 else()
@@ -28,15 +30,16 @@ endif()
 
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 add_executable(EllAlgoTests ${sources})
-target_link_libraries(EllAlgoTests doctest::doctest EllAlgo::EllAlgo)
+target_link_libraries(EllAlgoTests doctest::doctest EllAlgo::EllAlgo ${OpenBLAS_LIBRARIES})
 set_target_properties(EllAlgoTests PROPERTIES CXX_STANDARD 17)
 
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    target_compile_options(EllAlgo PUBLIC -Wall -Wpedantic -Wextra -Werror)
+    # target_compile_options(Lds PUBLIC -Wall -Wpedantic -Wextra -Werror)
+    target_compile_options(EllAlgo PUBLIC -Wall -Wextra)
   elseif(MSVC)
-    target_compile_options(EllAlgo PUBLIC /W4 /WX)
+    target_compile_options(EllAlgo PUBLIC /W4 /WX /wd4819 /wd4146 /wd4127)
     target_compile_definitions(EllAlgoTests PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
   endif()
 endif()
