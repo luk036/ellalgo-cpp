@@ -1,16 +1,13 @@
-CPMAddPackage("gh:xtensor-stack/xtl#0.7.2")
-CPMAddPackage("gh:xtensor-stack/xtensor#0.23.0")
+find_package(xtensor REQUIRED)
+if (xtensor_FOUND)
+  message(STATUS "Found xtensor: ${xtensor_INCLUDE_DIRS}")
+  include_directories(${xtensor_INCLUDE_DIRS})
+endif(xtensor-blas_FOUND)
 
-add_definitions(-DHAVE_CBLAS=1)
-
-CPMAddPackage("gh:luk036/xtensor-blas#0.17.2")
-if (xtensor-blas_ADDED)
-  message(STATUS "Added xtensor-blas: ${xtensor-blas_SOURCE_DIR}")
-  include_directories(${xtensor-blas_SOURCE_DIR}/include)
-endif(xtensor-blas_ADDED)
+find_package(xtensor-blas REQUIRED)
 if (xtensor-blas_FOUND)
   message(STATUS "Found xtensor-blas: ${xtensor-blas_INCLUDE_DIRS}")
-  include_directories(${xtensor-blas_INCLUDE_DIR})
+  include_directories(${xtensor-blas_INCLUDE_DIRS})
 endif(xtensor-blas_FOUND)
 
 find_package(OpenBLAS REQUIRED)
