@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ell class | EllAlgo</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">EllAlgo</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li>
+              <a href="pages.html">Pages</a>
+              <ol>
+                <li><a href="about.html">About</a></li>
+              </ol>
+            </li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          ell <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ell_8hpp.html">&lt;ellalgo/ell.hpp&gt;</a></div>
+        </h1>
+        <p>Ellipsoid Search Space.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<pre>   ell = {x | (x - xc)&#x27; Q^-1 (x - xc) \le \kappa}
+</pre><p>Keep $Q$ symmetric but no promise of positive definite</p>
+        <section id="derived-classes">
+          <h2><a href="#derived-classes">Derived classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classell__stable.html" class="m-doc">ell_stable</a>
+            </dt>
+            <dd>Ellipsoid Search Space.</dd>
+          </dl>
+        </section>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="a14b0f8c1df1f5a4aafc99fa694831904">
+              using <a href="#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc-self">Arr</a> = xt::xarray&lt;double, xt::layout_type::row_major&gt;
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <div class="m-doc-template">template&lt;typename V, typename U&gt;</div>
+              <span class="m-doc-wrap-bumper"><a href="#a1cc6cd66b04c9baabb55816b53e84197" class="m-doc">ell</a>(</span><span class="m-doc-wrap">V&amp;&amp; kappa,
+              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp;&amp; Q,
+              U&amp;&amp; x) <span class="m-label m-flat m-warning">protected</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Construct a new ell object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a68db079f6a8c35cc1bd6e9794ba67df5" class="m-doc">ell</a>(</span><span class="m-doc-wrap">const <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp; val,
+              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a> x) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Construct a new ell object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a4961a98d255dab587f0fba8253b7c9ca" class="m-doc">ell</a>(</span><span class="m-doc-wrap">const double&amp; alpha,
+              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a> x) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Construct a new ell object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#afa633a2b82b9668a2228a1231303304e" class="m-doc">ell</a>(</span><span class="m-doc-wrap"><a href="classell.html" class="m-doc">ell</a>&amp;&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Construct a new ell object.</dd>
+            <dt id="a9af0141db164d7df06a7e480b6a76455">
+              <span class="m-doc-wrap-bumper"><a href="#a9af0141db164d7df06a7e480b6a76455" class="m-doc-self">~ell</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Destroy the ell object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a104f02d37f45cb7ca24d45e6acecba38" class="m-doc">ell</a>(</span><span class="m-doc-wrap">const <a href="classell.html" class="m-doc">ell</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-info">explicit</span> </span>
+            </dt>
+            <dd>Construct a new ell object.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a031dd9da2511778a6034910b96a9069d" class="m-doc">copy</a>(</span><span class="m-doc-wrap">) const -&gt; ell -&gt; auto</span>
+            </dt>
+            <dd>explicitly copy</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a52e2c3b84796b3786991f36f2b2cbc4e" class="m-doc">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr -&gt; auto</span>
+            </dt>
+            <dd>copy the whole array anyway</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a76f0b8a8760f4c26c8ea32afaec71abf" class="m-doc">set_xc</a>(</span><span class="m-doc-wrap">const <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp; xc)</span>
+            </dt>
+            <dd>Set the xc object.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0630ca2734c05caf402085dc1fe83729" class="m-doc">update</a>(</span><span class="m-doc-wrap">const std::tuple&lt;<a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; std::tuple&lt; CUTStatus, double &gt; -&gt; auto</span>
+            </dt>
+            <dd>Update ellipsoid core function using the cut(s)</dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="ab03801ec2e234a1bf708c8f3f34e91f5">
+              bool <a href="#ab03801ec2e234a1bf708c8f3f34e91f5" class="m-doc-self">use_parallel_cut</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a41a355d399e8a1b1ecc3abd3c973568c">
+              bool <a href="#a41a355d399e8a1b1ecc3abd3c973568c" class="m-doc-self">no_defer_trick</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pro-methods">
+          <h2><a href="#pro-methods">Protected functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3cb0b723ca57b2a8114daf63f0c5fa0e" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classell.html" class="m-doc">ell</a>&amp; E) -&gt; ell &amp; -&gt; auto <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd>Construct a new ell object.</dd>
+            <dt id="a78a3d8a825cdf90f86fc85e74b2da090">
+              <span class="m-doc-wrap-bumper">auto <a href="#a78a3d8a825cdf90f86fc85e74b2da090" class="m-doc-self">_update_cut</a>(</span><span class="m-doc-wrap">const double&amp; beta) -&gt; CUTStatus -&gt; auto</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a7e6f53084df022960639efa9fa18f6ad">
+              <span class="m-doc-wrap-bumper">auto <a href="#a7e6f53084df022960639efa9fa18f6ad" class="m-doc-self">_update_cut</a>(</span><span class="m-doc-wrap">const <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp; beta) -&gt; <a href="cut__config_8hpp.html#a3a18232e74bd4bdc089ea0a6e17407e4" class="m-doc">CUTStatus</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a71b5d8821924c42417edd70ef76e74d6" class="m-doc">_calc_ll_core</a>(</span><span class="m-doc-wrap">const double&amp; b0,
+              const double&amp; b1) -&gt; CUTStatus -&gt; auto</span>
+            </dt>
+            <dd>Calculate new ellipsoid under Parallel Cut.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aadf6cda1ffc33dd74bd4fc5c0eff9603" class="m-doc">_calc_ll_cc</a>(</span><span class="m-doc-wrap">const double&amp; b1,
+              const double&amp; b1sq) -&gt; void -&gt; auto</span>
+            </dt>
+            <dd>Calculate new ellipsoid under Parallel Cut, one of them is central.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1998443b8c74bcd11f0b62ffbaf9fba8" class="m-doc">_calc_dc</a>(</span><span class="m-doc-wrap">const double&amp; beta) noexcept -&gt; CUTStatus -&gt; auto</span>
+            </dt>
+            <dd>Calculate new ellipsoid under Deep Cut.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad206b1df12e970f54de5cd9c38127d26" class="m-doc">_calc_cc</a>(</span><span class="m-doc-wrap">const double&amp; tau) noexcept -&gt; void -&gt; auto</span>
+            </dt>
+            <dd>Calculate new ellipsoid under Central Cut.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="afd6a2ba7c573d6bfb2b46c92d167db68">
+              double <a href="#afd6a2ba7c573d6bfb2b46c92d167db68" class="m-doc-self">_mu</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a8f2c3e14158398e332f4484cf7cacb80">
+              double <a href="#a8f2c3e14158398e332f4484cf7cacb80" class="m-doc-self">_rho</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af543616bed30b80c3ad49e063b96e79a">
+              double <a href="#af543616bed30b80c3ad49e063b96e79a" class="m-doc-self">_sigma</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a8eecc0d3dce5c107cd2cab7556a7b731">
+              double <a href="#a8eecc0d3dce5c107cd2cab7556a7b731" class="m-doc-self">_delta</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab32cb2e2f17d8b08c387ffc2586e372b">
+              double <a href="#ab32cb2e2f17d8b08c387ffc2586e372b" class="m-doc-self">_tsq</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a173d78b3d6d9547f2ec8be61cb5c340c">
+              const int <a href="#a173d78b3d6d9547f2ec8be61cb5c340c" class="m-doc-self">_n</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3ecd540f60c12564682c31bde6a2a0ca">
+              const double <a href="#a3ecd540f60c12564682c31bde6a2a0ca" class="m-doc-self">_nFloat</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1c6cfa0957e2a91211cee211c4a58aff">
+              const double <a href="#a1c6cfa0957e2a91211cee211c4a58aff" class="m-doc-self">_nPlus1</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab09c71762d66a7bc4203dac034946d70">
+              const double <a href="#ab09c71762d66a7bc4203dac034946d70" class="m-doc-self">_nMinus1</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4feb4a3c6e057ae617d71dcc87910a7d">
+              const double <a href="#a4feb4a3c6e057ae617d71dcc87910a7d" class="m-doc-self">_halfN</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3adc64b1bd4e395518f605ca57464d1a">
+              const double <a href="#a3adc64b1bd4e395518f605ca57464d1a" class="m-doc-self">_halfNplus1</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa19a36cbbeba697ec19761e7e711fc6e">
+              const double <a href="#aa19a36cbbeba697ec19761e7e711fc6e" class="m-doc-self">_halfNminus1</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa65236e8e3d2d9b9a1b78cd78152f928">
+              const double <a href="#aa65236e8e3d2d9b9a1b78cd78152f928" class="m-doc-self">_nSq</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a84e9d57308acca4e09621d6b2eaf8781">
+              const double <a href="#a84e9d57308acca4e09621d6b2eaf8781" class="m-doc-self">_c1</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a8fa8743872084690c4dc345008572373">
+              const double <a href="#a8fa8743872084690c4dc345008572373" class="m-doc-self">_c2</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a147cabee9c2e8fd0eaa903789ed768c5">
+              const double <a href="#a147cabee9c2e8fd0eaa903789ed768c5" class="m-doc-self">_c3</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae5397eea0443552ed31fd804e8301ea0">
+              double <a href="#ae5397eea0443552ed31fd804e8301ea0" class="m-doc-self">_kappa</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af85577b463ef8a88cc539d6f9d431412">
+              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a> <a href="#af85577b463ef8a88cc539d6f9d431412" class="m-doc-self">_Q</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a292090810a6339fffafdcbbca4e752c3">
+              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a> <a href="#a292090810a6339fffafdcbbca4e752c3" class="m-doc-self">_xc</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a1cc6cd66b04c9baabb55816b53e84197"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename V, typename U&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1cc6cd66b04c9baabb55816b53e84197" class="m-doc-self">ell</a>(</span><span class="m-doc-wrap">V&amp;&amp; kappa,
+              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp;&amp; Q,
+              U&amp;&amp; x) <span class="m-label m-warning">protected</span> <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Construct a new ell object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">kappa</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Q</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>x&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a68db079f6a8c35cc1bd6e9794ba67df5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a68db079f6a8c35cc1bd6e9794ba67df5" class="m-doc-self">ell</a>(</span><span class="m-doc-wrap">const <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp; val,
+              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a> x) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Construct a new ell object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">val&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>x&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4961a98d255dab587f0fba8253b7c9ca"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4961a98d255dab587f0fba8253b7c9ca" class="m-doc-self">ell</a>(</span><span class="m-doc-wrap">const double&amp; alpha,
+              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a> x) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Construct a new ell object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">alpha&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>x&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afa633a2b82b9668a2228a1231303304e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afa633a2b82b9668a2228a1231303304e" class="m-doc-self">ell</a>(</span><span class="m-doc-wrap"><a href="classell.html" class="m-doc">ell</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span></span></span>
+            </h3>
+            <p>Construct a new ell object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">E&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>(move)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a104f02d37f45cb7ca24d45e6acecba38"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a104f02d37f45cb7ca24d45e6acecba38" class="m-doc-self">ell</a>(</span><span class="m-doc-wrap">const <a href="classell.html" class="m-doc">ell</a>&amp; E) <span class="m-label m-info">explicit</span>  <span class="m-label m-info">defaulted</span></span></span>
+            </h3>
+            <p>Construct a new ell object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">E</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+<p>To avoid accidentally copying, only explicit copy is allowed</p>
+          </div></section>
+          <section class="m-doc-details" id="a031dd9da2511778a6034910b96a9069d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a031dd9da2511778a6034910b96a9069d" class="m-doc-self">copy</a>(</span><span class="m-doc-wrap">) const -&gt; ell</span></span>
+            </h3>
+            <p>explicitly copy</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>ell</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a52e2c3b84796b3786991f36f2b2cbc4e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a52e2c3b84796b3786991f36f2b2cbc4e" class="m-doc-self">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr</span></span>
+            </h3>
+            <p>copy the whole array anyway</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Arr</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a76f0b8a8760f4c26c8ea32afaec71abf"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a76f0b8a8760f4c26c8ea32afaec71abf" class="m-doc-self">set_xc</a>(</span><span class="m-doc-wrap">const <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp; xc)</span></span>
+            </h3>
+            <p>Set the xc object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">xc&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0630ca2734c05caf402085dc1fe83729"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0630ca2734c05caf402085dc1fe83729" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">const std::tuple&lt;<a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; std::tuple&lt; CUTStatus, double &gt;</span></span>
+            </h3>
+            <p>Update ellipsoid core function using the cut(s)</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>cut&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>cutting-plane</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::tuple&lt;int, double&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3cb0b723ca57b2a8114daf63f0c5fa0e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3cb0b723ca57b2a8114daf63f0c5fa0e" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classell.html" class="m-doc">ell</a>&amp; E) -&gt; ell &amp; <span class="m-label m-warning">protected</span> <span class="m-label m-danger">deleted</span></span></span>
+            </h3>
+            <p>Construct a new ell object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">E&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a71b5d8821924c42417edd70ef76e74d6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a71b5d8821924c42417edd70ef76e74d6" class="m-doc-self">_calc_ll_core</a>(</span><span class="m-doc-wrap">const double&amp; b0,
+              const double&amp; b1) -&gt; CUTStatus <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Calculate new ellipsoid under Parallel Cut.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">b0&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>b1&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>int</td>
+                </tr>
+              </tfoot>
+            </table>
+<pre>   g&#x27; (x - xc) + beta0 \le 0
+   g&#x27; (x - xc) + beta1 \ge 0
+</pre>
+          </div></section>
+          <section class="m-doc-details" id="aadf6cda1ffc33dd74bd4fc5c0eff9603"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aadf6cda1ffc33dd74bd4fc5c0eff9603" class="m-doc-self">_calc_ll_cc</a>(</span><span class="m-doc-wrap">const double&amp; b1,
+              const double&amp; b1sq) -&gt; void <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Calculate new ellipsoid under Parallel Cut, one of them is central.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">b1&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>b1sq&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+<pre>   g&#x27; (x - xc) \le 0
+   g&#x27; (x - xc) + beta1 \ge 0
+</pre>
+          </div></section>
+          <section class="m-doc-details" id="a1998443b8c74bcd11f0b62ffbaf9fba8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1998443b8c74bcd11f0b62ffbaf9fba8" class="m-doc-self">_calc_dc</a>(</span><span class="m-doc-wrap">const double&amp; beta) noexcept -&gt; CUTStatus <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Calculate new ellipsoid under Deep Cut.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">beta&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+<pre>   g&#x27; (x - xc) + beta \le 0
+</pre>
+          </div></section>
+          <section class="m-doc-details" id="ad206b1df12e970f54de5cd9c38127d26"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad206b1df12e970f54de5cd9c38127d26" class="m-doc-self">_calc_cc</a>(</span><span class="m-doc-wrap">const double&amp; tau) noexcept -&gt; void <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Calculate new ellipsoid under Central Cut.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tau&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+<pre>   g&#x27; (x - xc) \le 0
+</pre>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
