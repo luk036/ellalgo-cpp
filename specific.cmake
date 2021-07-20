@@ -1,4 +1,9 @@
 CPMAddPackage("gh:xtensor-stack/xtl#0.7.2")
+if(xtl_ADDED)
+  message(STATUS "Found xtl: ${xtl_SOURCE_DIR}")
+  include_directories(${xtl_SOURCE_DIR}/include)
+endif(xtl_ADDED)
+
 CPMAddPackage("gh:xtensor-stack/xtensor#0.23.10")
 if(xtensor_ADDED)
   message(STATUS "Found xtensor: ${xtensor_SOURCE_DIR}")
