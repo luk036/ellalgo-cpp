@@ -54,7 +54,7 @@ set_target_properties(EllAlgo PROPERTIES CXX_STANDARD 17)
 target_compile_options(EllAlgo PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
 
 # Link dependencies
-target_link_libraries(EllAlgo PRIVATE fmt::fmt ${OpenBLAS_LIBRARIES})
+target_link_libraries(EllAlgo PRIVATE fmt::fmt)
 
 target_include_directories(
   EllAlgo PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>

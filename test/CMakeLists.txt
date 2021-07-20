@@ -30,7 +30,7 @@ endif()
 
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 add_executable(EllAlgoTests ${sources})
-target_link_libraries(EllAlgoTests doctest::doctest EllAlgo::EllAlgo ${OpenBLAS_LIBRARIES})
+target_link_libraries(EllAlgoTests doctest::doctest EllAlgo::EllAlgo)
 set_target_properties(EllAlgoTests PROPERTIES CXX_STANDARD 17)
 
 # enable compiler warnings

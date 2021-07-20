@@ -1,5 +1,5 @@
 #include <ellalgo/oracles/profit_oracle.hpp>
-#include <xtensor-blas/xlinalg.hpp>
+// #include <xtensor-blas/xlinalg.hpp>
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 using Cut = std::tuple<Arr, double>;
@@ -18,9 +18,9 @@ auto profit_oracle::operator()(const Arr& y, double& t) const -> std::tuple<Cut,
         return {{Arr{1., 0.}, f1}, false};
     }
 
-    const auto log_Cobb = this->_log_pA + xt::linalg::dot(this->_a, y)();
+    const auto log_Cobb = this->_log_pA + this->_a(0) * y(0) + this->_a(1) * y(1);
     const auto x = Arr{xt::exp(y)};
-    const auto vx = xt::linalg::dot(this->_v, x)();
+    const auto vx = this->_v(0) * x(0) + this->_v(1) * x(1);
     auto te = t + vx;
 
     auto fj = std::log(te) - log_Cobb;
@@ -52,6 +52,8 @@ std::tuple<Cut, Arr, bool, bool> profit_q_oracle::operator()(const Arr& y, doubl
     }
     auto [cut, shrunk] = this->_P(this->_yd, t);
     auto& [g, h] = cut;
-    h += xt::linalg::dot(g, this->_yd - y)();
+    // h += xt::linalg::dot(g, this->_yd - y)();
+    auto d = this->_yd - y;
+    h += g(0) * d(0) + g(1) * d(1);
     return {std::move(cut), this->_yd, shrunk, !retry};
 }

@@ -2,7 +2,7 @@
 #include <ellalgo/cut_config.hpp>
 #include <ellalgo/ell.hpp>
 #include <ellalgo/ell_assert.hpp>
-#include <xtensor-blas/xlinalg.hpp>
+// #include <xtensor-blas/xlinalg.hpp>
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 
@@ -125,8 +125,18 @@ template <typename T> std::tuple<CUTStatus, double> ell::update(const std::tuple
 
     const auto& g = std::get<0>(cut);
     // n^2
-    const auto Qg = Arr{xt::linalg::dot(this->_Q, g)};  // n^2
-    const auto omega = xt::linalg::dot(g, Qg)();        // n
+    // const auto Qg = Arr{xt::linalg::dot(this->_Q, g)};  // n^2
+    // const auto omega = xt::linalg::dot(g, Qg)();        // n
+
+    auto Qg = zeros({this->_n});  // initial x0
+    auto omega = 0.;
+    for (auto i = 0; i != this->_n; ++i) {
+        for (auto j = 0; j != this->_n; ++j) {
+            Qg(i) += this->_Q(i, j) * g(j);
+        }
+        omega += Qg(i) * g(i);
+    }
+
     this->_tsq = this->_kappa * omega;
 
     auto status = this->_update_cut(beta);

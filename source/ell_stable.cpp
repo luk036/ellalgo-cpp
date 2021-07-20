@@ -51,8 +51,8 @@ template <typename T> auto ell_stable::update(const std::tuple<Arr, T>& cut)
     }
 
     // calculate Q*g = inv(L')*inv(D)*inv(L)*g : (n-1)*n/2
-    auto Qg = Arr{invDinvLg};                  // initially
-    for (auto i = this->_n - 1; i > 0; --i) {  // backward subsituition
+    auto Qg = Arr{invDinvLg};                   // initially
+    for (auto i = this->_n - 1; i != 0; --i) {  // backward subsituition
         for (auto j = i; j != this->_n; ++j) {
             Qg(i - 1) -= this->_Q(i, j) * Qg(j);  // ???
         }
