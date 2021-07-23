@@ -16,3 +16,4 @@ if(xtensor_ADDED)
   message(STATUS "Found xtensor: ${xtensor_SOURCE_DIR}")
   include_directories(${xtensor_SOURCE_DIR}/include)
 endif(xtensor_ADDED)
+# remember to turn off the warnings
