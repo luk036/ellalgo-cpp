@@ -27,6 +27,9 @@ jobs:
           path: "**/cpm_modules"
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
+      - name: install dependency
+        run: sudo apt-get install lcov
+
       - name: configure
         run: cmake -S. -Bbuild -DENABLE_TEST_COVERAGE=1 -DCMAKE_BUILD_TYPE=Debug
 
@@ -39,4 +42,8 @@ jobs:
           ctest --build-config Debug
 
       - name: collect code coverage
-        run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+        run: |
+          lcov --directory . --capture --output-file coverage.info # capture coverage info
+          lcov --remove coverage.info '/usr/*' 'standalone/*' 'bench/*' --output-file coverage.info # filter out system
+          lcov --list coverage.info #debug info
+          bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
