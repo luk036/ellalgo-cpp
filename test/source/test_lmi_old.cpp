@@ -11,7 +11,7 @@
 #include <vector>
 // #include <xtensor-blas/xlinalg.hpp>
 
-/*!
+/**
  * @brief my_oracle
  *
  */
@@ -26,7 +26,7 @@ class my_oracle {
     const Arr c;
 
   public:
-    /*!
+    /**
      * @brief Construct a new my oracle object
      *
      * @param[in] F1
@@ -38,14 +38,14 @@ class my_oracle {
     my_oracle(gsl::span<const Arr> F1, Arr B1, gsl::span<const Arr> F2, Arr B2, Arr c)
         : lmi1{F1, std::move(B1)}, lmi2{F2, std::move(B2)}, c{std::move(c)} {}
 
-    /*!
+    /**
      * @brief
      *
      * @param[in] x
-     * @param[in] t the best-so-far optimal value
+     * @param[in,out] t the best-so-far optimal value
      * @return std::tuple<Cut, double>
      */
-    std::tuple<Cut, bool> operator()(const Arr& x, double& t) {
+    auto operator()(const Arr& x, double& t) -> std::tuple<Cut, bool> {
         const auto cut1 = this->lmi1(x);
         if (cut1) {
             return {*cut1, false};

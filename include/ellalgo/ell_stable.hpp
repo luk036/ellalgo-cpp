@@ -3,12 +3,12 @@
 
 #include <ellalgo/ell.hpp>
 
-/*!
+/**
  * @brief Ellipsoid Search Space
- *
+ * \f[
  *    ell_stable = {x | (x - xc)' M^-1 (x - xc) \le \kappa}
  *               = {x | (x - xc)' L D^-1 L' (x - xc) \le \kappa}
- *
+ * \f]
  * Store $M$ in the form of Lg \ D^-1 \ L' in an n x n array `Q`,
  * and hence keep $M$ symmetric positive definite.
  * More stable but slightly more computation.
@@ -17,7 +17,7 @@ class ell_stable : public ell {
   public:
     using Arr = xt::xarray<double, xt::layout_type::row_major>;
 
-    /*!
+    /**
      * @brief Construct a new ell_stable object
      *
      * @param[in] val
@@ -25,7 +25,7 @@ class ell_stable : public ell {
      */
     ell_stable(const Arr& val, Arr x) noexcept : ell{val, std::move(x)} {}
 
-    /*!
+    /**
      * @brief Construct a new ell_stable object
      *
      * @param[in] alpha
@@ -53,7 +53,7 @@ class ell_stable : public ell {
      * @brief Destroy the ell stable object
      *
      */
-    ~ell_stable() {}
+    ~ell_stable() = default;
 
     /**
      * @brief explicitly copy
@@ -62,7 +62,7 @@ class ell_stable : public ell {
      */
     [[nodiscard]] auto copy() const -> ell_stable { return ell_stable(*this); }
 
-    /*!
+    /**
      * @brief Update ellipsoid core function using the cut(s)
      *
      * Overwrite the base class.

@@ -7,7 +7,7 @@
 
 #include "benchmark/benchmark.h"
 
-/*!
+/**
  * @brief
  *
  * @tparam Oracle
@@ -22,7 +22,7 @@ template <typename Oracle> class my_oracle {
     const Arr c;
 
   public:
-    /*!
+    /**
      * @brief Construct a new my oracle object
      *
      * @param[in] F1
@@ -34,11 +34,11 @@ template <typename Oracle> class my_oracle {
     my_oracle(gsl::span<const Arr> F1, const Arr& B1, gsl::span<const Arr> F2, const Arr& B2, Arr c)
         : lmi1{F1, B1}, lmi2{F2, B2}, c{std::move(c)} {}
 
-    /*!
+    /**
      * @brief
      *
      * @param[in] x
-     * @param[in] t
+     * @param[in,out] t
      * @return std::tuple<Cut, double>
      */
     std::tuple<Cut, bool> operator()(const Arr& x, double& t) {
@@ -60,7 +60,7 @@ template <typename Oracle> class my_oracle {
     }
 };
 
-/*!
+/**
  * @brief
  *
  * @param[in,out] state
@@ -90,7 +90,7 @@ BENCHMARK(LMI_Lazy);
 
 //~~~~~~~~~~~~~~~~
 
-/*!
+/**
  * @brief Define another benchmark
  *
  * @param[in,out] state
@@ -116,7 +116,7 @@ static void LMI_old(benchmark::State& state) {
 }
 BENCHMARK(LMI_old);
 
-/*!
+/**
  * @brief
  *
  * @param[in,out] state

@@ -6,7 +6,7 @@
 
 // #include <tuple>
 
-/*!
+/**
  * @brief
  *
  * @param[in] cut

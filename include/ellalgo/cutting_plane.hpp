@@ -8,7 +8,7 @@
 #include "cut_config.hpp"
 #include "half_nonnegative.hpp"
 
-/*!
+/**
  * @brief Find a point in a convex set (defined through a cutting-plane oracle).
  *
  *     A function f(x) is *convex* if there always exist a g(x)
@@ -56,7 +56,7 @@ auto cutting_plane_feas(Oracle&& Omega, Space&& S, const Options& options = Opti
     return {feasible, niter, status};
 }
 
-/*!
+/**
  * @brief Cutting-plane method for solving convex problem
  *
  * @tparam Oracle
@@ -94,7 +94,7 @@ auto cutting_plane_dc(Oracle&& Omega, Space&& S, opt_type&& t, const Options& op
     return std::make_tuple(std::move(x_best), CInfo{t != t_orig, niter, status});
 }  // END
 
-/*!
+/**
     Cutting-plane method for solving convex discrete optimization problem
     input
              oracle        perform assessment on x0
@@ -111,7 +111,7 @@ auto cutting_plane_dc(Oracle&& Omega, Space&& S, opt_type&& t, const Options& op
 // #include <xtensor-blas/xlinalg.hpp>
 // #include <xtensor/xarray.hpp>
 
-/*!
+/**
  * @brief Cutting-plane method for solving convex discrete optimization problem
  *
  * @tparam Oracle
@@ -154,7 +154,7 @@ auto cutting_plane_q(Oracle&& Omega, Space&& S, opt_type&& t, const Options& opt
     return std::make_tuple(std::move(x_best), CInfo{t != t_orig, niter, status});
 }  // END
 
-/*!
+/**
  * @brief
  *
  * @tparam Oracle
@@ -193,7 +193,7 @@ auto bsearch(Oracle&& Omega, Space&& I, const Options& options = Options()) -> C
     return {upper != u_orig, niter + 1, status};
 }
 
-/*!
+/**
  * @brief
  *
  * @tparam Oracle
@@ -207,7 +207,7 @@ class bsearch_adaptor {
     const Options _options;
 
   public:
-    /*!
+    /**
      * @brief Construct a new bsearch adaptor object
      *
      * @param[in,out] P perform assessment on x0
@@ -215,7 +215,7 @@ class bsearch_adaptor {
      */
     bsearch_adaptor(Oracle& P, Space& S) : bsearch_adaptor{P, S, Options()} {}
 
-    /*!
+    /**
      * @brief Construct a new bsearch adaptor object
      *
      * @param[in,out] P perform assessment on x0
@@ -225,17 +225,17 @@ class bsearch_adaptor {
     bsearch_adaptor(Oracle& P, Space& S, const Options& options)
         : _P{P}, _S{S}, _options{options} {}
 
-    /*!
+    /**
      * @brief get best x
      *
      * @return auto
      */
     [[nodiscard]] auto x_best() const { return this->_S.xc(); }
 
-    /*!
+    /**
      * @brief
      *
-     * @param[in] t the best-so-far optimal value
+     * @param[in,out] t the best-so-far optimal value
      * @return bool
      */
     template <typename opt_type> auto operator()(const opt_type& t) -> bool {

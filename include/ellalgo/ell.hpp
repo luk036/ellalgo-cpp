@@ -9,7 +9,7 @@
 // forward declaration
 enum class CUTStatus;
 
-/*!
+/**
  * @brief Ellipsoid Search Space
  *
  *        ell = {x | (x - xc)' Q^-1 (x - xc) \le \kappa}
@@ -49,18 +49,21 @@ class ell {
     Arr _Q;
     Arr _xc;
 
-    /*!
+    /**
      * @brief Construct a new ell object
      *
      * @param[in] E
      */
     auto operator=(const ell& E) -> ell& = delete;
 
-    /*!
+    /**
      * @brief Construct a new ell object
-     *
-     * @param[in] val
-     * @param[in] x
+     * 
+     * @tparam V 
+     * @tparam U 
+     * @param kappa 
+     * @param Q 
+     * @param x 
      */
     template <typename V, typename U> ell(V&& kappa, Arr&& Q, U&& x) noexcept
         : _n{int(x.size())},
@@ -79,7 +82,7 @@ class ell {
           _xc{std::forward<U>(x)} {}
 
   public:
-    /*!
+    /**
      * @brief Construct a new ell object
      *
      * @param[in] val
@@ -87,7 +90,7 @@ class ell {
      */
     ell(const Arr& val, Arr x) noexcept : ell{1., xt::diag(val), std::move(x)} {}
 
-    /*!
+    /**
      * @brief Construct a new ell object
      *
      * @param[in] alpha
@@ -124,21 +127,21 @@ class ell {
      */
     [[nodiscard]] auto copy() const -> ell { return ell(*this); }
 
-    /*!
+    /**
      * @brief copy the whole array anyway
      *
      * @return Arr
      */
     [[nodiscard]] auto xc() const -> Arr { return _xc; }
 
-    /*!
+    /**
      * @brief Set the xc object
      *
      * @param[in] xc
      */
     void set_xc(const Arr& xc) { _xc = xc; }
 
-    /*!
+    /**
      * @brief Update ellipsoid core function using the cut(s)
      *
      * @tparam T
@@ -158,7 +161,7 @@ class ell {
         return this->_calc_ll_core(beta[0], beta[1]);
     }
 
-    /*!
+    /**
      * @brief Calculate new ellipsoid under Parallel Cut
      *
      *        g' (x - xc) + beta0 \le 0
@@ -170,7 +173,7 @@ class ell {
      */
     auto _calc_ll_core(const double& b0, const double& b1) -> CUTStatus;
 
-    /*!
+    /**
      * @brief Calculate new ellipsoid under Parallel Cut, one of them is central
      *
      *        g' (x - xc) \le 0
@@ -181,7 +184,7 @@ class ell {
      */
     auto _calc_ll_cc(const double& b1, const double& b1sq) -> void;
 
-    /*!
+    /**
      * @brief Calculate new ellipsoid under Deep Cut
      *
      *        g' (x - xc) + beta \le 0
@@ -190,7 +193,7 @@ class ell {
      */
     auto _calc_dc(const double& beta) noexcept -> CUTStatus;
 
-    /*!
+    /**
      * @brief Calculate new ellipsoid under Central Cut
      *
      *        g' (x - xc) \le 0

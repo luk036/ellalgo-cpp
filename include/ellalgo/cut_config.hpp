@@ -4,7 +4,7 @@
 
 enum class CUTStatus { success, nosoln, smallenough, noeffect };
 
-/*!
+/**
  * @brief Options
  *
  */
@@ -13,7 +13,7 @@ struct Options {
     double tol = 1e-8;           //!< error tolerance
 };
 
-/*!
+/**
  * @brief CInfo
  *
  */

@@ -9,7 +9,7 @@
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 using Cut = std::tuple<Arr, double>;
 
-/*!
+/**
  * @brief
  *
  * @param[in] z

@@ -4,11 +4,11 @@
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 using Cut = std::tuple<Arr, double>;
 
-/*!
+/**
  * @brief
  *
  * @param[in] y
- * @param[in] t the best-so-far optimal value
+ * @param[in,out] t the best-so-far optimal value
  * @return std::tuple<Cut, double>
  */
 auto profit_oracle::operator()(const Arr& y, double& t) const -> std::tuple<Cut, bool> {
@@ -34,12 +34,13 @@ auto profit_oracle::operator()(const Arr& y, double& t) const -> std::tuple<Cut,
     return {{std::move(g), fj}, false};
 }
 
-/*!
+/**
  * @param[in] y
- * @param[in] t the best-so-far optimal value
+ * @param[in,out] t the best-so-far optimal value
  * @return std::tuple<Cut, double, Arr, int>
  */
-std::tuple<Cut, Arr, bool, bool> profit_q_oracle::operator()(const Arr& y, double& t, bool retry) {
+auto profit_q_oracle::operator()(const Arr& y, double& t, bool retry)
+    -> std::tuple<Cut, Arr, bool, bool> {
     if (!retry) {
         auto x = Arr{xt::round(xt::exp(y))};
         if (x[0] == 0.) {

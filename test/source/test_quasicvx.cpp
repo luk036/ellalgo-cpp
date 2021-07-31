@@ -11,14 +11,14 @@
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 using Cut = std::tuple<Arr, double>;
 
-/*!
+/**
  * @brief
  *
  * @param[in] z
- * @param[in] t
+ * @param[in,out] t
  * @return std::tuple<Cut, double>
  */
-std::tuple<Cut, bool> my_quasicvx_oracle(const Arr& z, double& t) {
+auto my_quasicvx_oracle(const Arr& z, double& t) -> std::tuple<Cut, bool> {
     auto sqrtx = z[0];
     auto ly = z[1];
 

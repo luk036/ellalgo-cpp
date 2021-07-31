@@ -8,7 +8,7 @@
 
 #include "ldlt_ext.hpp"
 
-/*!
+/**
  * @brief Oracle for Linear Matrix Inequality
  *
  *    This oracle solves the following feasibility problem:
@@ -27,14 +27,14 @@ class lmi0_oracle {
   public:
     ldlt_ext _Q;
 
-    /*!
+    /**
      * @brief Construct a new lmi0 oracle object
      *
      * @param[in] F
      */
     explicit lmi0_oracle(gsl::span<const Arr> F) : _F{F}, _n{F[0].shape()[0]}, _Q(_n) {}
 
-    /*!
+    /**
      * @brief
      *
      * @param[in] x

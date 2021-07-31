@@ -1,6 +1,4 @@
 // -*- coding: utf-8 -*-
-#include <tuple>
-
 #include <cmath>
 #include <complex>
 #include <ellalgo/cutting_plane.hpp>
@@ -8,6 +6,7 @@
 #include <ellalgo/oracles/lowpass_oracle.hpp>
 #include <ellalgo/utility.hpp>
 #include <limits>
+#include <tuple>
 // #include <xtensor-blas/xlinalg.hpp>
 #include <xtensor/xview.hpp>
 
@@ -48,8 +47,7 @@ static const auto PI = std::acos(-1);
 // filter specs (for a low-pass filter)
 // *********************************************************************
 // number of FIR coefficients (including zeroth)
-struct filter_design_construct
-{
+struct filter_design_construct {
     const int N = 32;
     Arr Ap;
     Arr As;
@@ -59,8 +57,8 @@ struct filter_design_construct
     double Spsq;
 
     filter_design_construct() {
-        const auto wpass = 0.12 * PI; // end of passband
-        const auto wstop = 0.20 * PI; // start of stopband
+        const auto wpass = 0.12 * PI;  // end of passband
+        const auto wstop = 0.20 * PI;  // start of stopband
         const auto delta0_wpass = 0.125;
         const auto delta0_wstop = 0.125;
         // maximum passband ripple in dB (+/- around 0 dB)
@@ -73,7 +71,7 @@ struct filter_design_construct
         // *********************************************************************
         // rule-of-thumb discretization (from Cheney's Approximation Theory)
         const auto m = 15 * N;
-        const auto w = Arr {xt::linspace<double>(0, PI, m)}; // omega
+        const auto w = Arr{xt::linspace<double>(0, PI, m)};  // omega
 
         // passband 0 <= w <= w_pass
         const auto Lp = std::pow(10, -delta / 20);
@@ -91,11 +89,11 @@ struct filter_design_construct
         }
         Arr A = xt::concatenate(xt::xtuple(xt::ones<double>({m, 1}), An), 1);
 
-        const auto ind_p = xt::where(w <= wpass)[0]; // passband
-        Ap = Arr {xt::view(A, xt::range(0, ind_p.size()), xt::all())};
+        const auto ind_p = xt::where(w <= wpass)[0];  // passband
+        Ap = Arr{xt::view(A, xt::range(0, ind_p.size()), xt::all())};
 
         // stopband (w_stop <= w)
-        auto ind_s = xt::where(wstop <= w)[0]; // stopband
+        auto ind_s = xt::where(wstop <= w)[0];  // stopband
         const auto Sp = std::pow(10, delta2 / 20);
 
         using xt::placeholders::_;
@@ -122,9 +120,8 @@ static filter_design_construct Fdc{};
 // optimization
 // ********************************************************************
 
-auto run_lowpass(bool use_parallel_cut)
-{
-    auto r0 = zeros({Fdc.N}); // initial x0
+auto run_lowpass(bool use_parallel_cut) {
+    auto r0 = zeros({Fdc.N});  // initial x0
     auto E = ell(40., r0);
     auto P = lowpass_oracle(Fdc.Ap, Fdc.As, Fdc.Anr, Fdc.Lpsq, Fdc.Upsq);
     auto options = Options();
@@ -142,7 +139,7 @@ auto run_lowpass(bool use_parallel_cut)
     return std::make_tuple(ell_info.feasible, ell_info.num_iters);
 }
 
-/*!
+/**
  * @brief
  *
  * @param[in,out] state
@@ -156,7 +153,7 @@ static void Lowpass_with_parallel_cut(benchmark::State& state) {
 // Register the function as a benchmark
 BENCHMARK(Lowpass_with_parallel_cut);
 
-/*!
+/**
  * @brief
  *
  * @param[in,out] state

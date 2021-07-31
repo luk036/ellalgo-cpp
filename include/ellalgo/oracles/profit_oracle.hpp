@@ -5,7 +5,7 @@
 #include <tuple>
 #include <xtensor/xarray.hpp>
 
-/*!
+/**
  * @brief Oracle for a profit maximization problem.
  *
  *    This example is taken from [Aliabadi and Salahi, 2013]:
@@ -35,7 +35,7 @@ class profit_oracle {
   public:
     Arr _a;
 
-    /*!
+    /**
      * @brief Construct a new profit oracle object
      *
      * @param[in] p the market price per unit
@@ -53,17 +53,17 @@ class profit_oracle {
      */
     explicit profit_oracle(const profit_oracle&) = default;
 
-    /*!
+    /**
      * @brief
      *
      * @param[in] y input quantity (in log scale)
-     * @param[in] t the best-so-far optimal value
+     * @param[in,out] t the best-so-far optimal value
      * @return std::tuple<Cut, double> Cut and the updated best-so-far value
      */
     auto operator()(const Arr& y, double& t) const -> std::tuple<Cut, bool>;
 };
 
-/*!
+/**
  * @brief Oracle for a profit maximization problem (robust version)
  *
  *    This example is taken from [Aliabadi and Salahi, 2013]:
@@ -89,7 +89,7 @@ class profit_rb_oracle {
     profit_oracle _P;
 
   public:
-    /*!
+    /**
      * @brief Construct a new profit rb oracle object
      *
      * @param[in] p the market price per unit
@@ -104,11 +104,11 @@ class profit_rb_oracle {
                      double e3)
         : _uie{e}, _a{a}, _P(p - e3, A, k - e3, a, v + e3) {}
 
-    /*!
+    /**
      * @brief Make object callable for cutting_plane_dc()
      *
      * @param[in] y input quantity (in log scale)
-     * @param[in] t the best-so-far optimal value
+     * @param[in,out] t the best-so-far optimal value
      * @return Cut and the updated best-so-far value
      *
      * @see cutting_plane_dc
@@ -122,7 +122,7 @@ class profit_rb_oracle {
     }
 };
 
-/*!
+/**
  * @brief Oracle for profit maximization problem (discrete version)
  *
  *    This example is taken from [Aliabadi and Salahi, 2013]
@@ -151,7 +151,7 @@ class profit_q_oracle {
     Arr _yd;
 
   public:
-    /*!
+    /**
      * @brief Construct a new profit q oracle object
      *
      * @param[in] p the market price per unit
@@ -162,11 +162,12 @@ class profit_q_oracle {
      */
     profit_q_oracle(double p, double A, double k, const Arr& a, const Arr& v) : _P(p, A, k, a, v) {}
 
-    /*!
+    /**
      * @brief Make object callable for cutting_plane_q()
      *
      * @param[in] y input quantity (in log scale)
-     * @param[in] t the best-so-far optimal value
+     * @param[in,out] t the best-so-far optimal value
+     * @param[in] retry whether it is a retry 
      * @return Cut and the updated best-so-far value
      *
      * @see cutting_plane_q

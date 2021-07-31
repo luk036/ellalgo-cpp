@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <xtensor/xtensor_config.hpp>
 
-/*!
+/**
  * @brief witness that certifies $A$ is not
  * symmetric positive definite (spd)
  *
@@ -26,7 +26,7 @@ auto ldlt_ext::witness() -> double {
     return -this->T(m, m);
 }
 
-/*!
+/**
  * @brief Calculate v'*{A}(p,p)*v
  *
  * @param[in] A

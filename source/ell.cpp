@@ -6,7 +6,7 @@
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 
-/*!
+/**
  * @brief
  *
  * @param[in] b0
@@ -51,7 +51,7 @@ auto ell::_calc_ll_core(const double& b0, const double& b1) -> CUTStatus {
     return CUTStatus::success;
 }
 
-/*!
+/**
  * @brief
  *
  * @param[in] b1
@@ -66,7 +66,7 @@ void ell::_calc_ll_cc(const double& b1, const double& b1sqn) {
     this->_delta = this->_c1 * (1. - b1sqn / 2. + xi / this->_nFloat);
 }
 
-/*!
+/**
  * @brief Deep Cut
  *
  * @param[in] beta
@@ -97,7 +97,7 @@ CUTStatus ell::_calc_dc(const double& beta) noexcept {
     return CUTStatus::success;
 }
 
-/*!
+/**
  * @brief Central Cut
  *
  * @param[in] tau
@@ -110,7 +110,7 @@ void ell::_calc_cc(const double& tau) noexcept {
     this->_delta = this->_c1;
 }
 
-/*!
+/**
  * @brief Update ellipsoid core function using the cut
  *
  *        g' * (x - xc) + beta <= 0

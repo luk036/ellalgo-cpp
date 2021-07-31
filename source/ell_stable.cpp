@@ -6,7 +6,7 @@
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 
-/*!
+/**
  * @brief Update ellipsoid core function using the cut
  *
  *        g' * (x - xc) + beta <= 0

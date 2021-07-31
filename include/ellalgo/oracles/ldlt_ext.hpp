@@ -4,7 +4,7 @@
 #include <ellalgo/utility.hpp>
 #include <xtensor/xarray.hpp>
 
-/*!
+/**
  * @brief LDLT factorization for LMI
  *
  *  - LDL^T square-root-free version
@@ -28,7 +28,7 @@ class ldlt_ext {
     Mat T;            //!< temporary storage
 
   public:
-    /*!
+    /**
      * @brief Construct a new ldlt ext object
      *
      * @param[in] N dimension
@@ -39,7 +39,7 @@ class ldlt_ext {
     ldlt_ext& operator=(const ldlt_ext&) = delete;
     ldlt_ext(ldlt_ext&&) = default;
 
-    /*!
+    /**
      * @brief Perform LDLT Factorization
      *
      * @param[in] A Symmetric Matrix
@@ -53,7 +53,7 @@ class ldlt_ext {
         return this->factor([&](size_t i, size_t j) { return A(i, j); });
     }
 
-    /*!
+    /**
      * @brief Perform LDLT Factorization (Lazy evaluation)
      *
      * @tparam Fn
@@ -102,7 +102,7 @@ class ldlt_ext {
         return this->is_spd();
     }
 
-    /*!
+    /**
      * @brief Is $A$ symmetric positive definite (spd)
      *
      * @return true
@@ -110,7 +110,7 @@ class ldlt_ext {
      */
     auto is_spd() const noexcept -> bool { return this->p.second == 0; }
 
-    /*!
+    /**
      * @brief witness that certifies $A$ is not
      * symmetric positive definite (spd)
      *
@@ -118,13 +118,13 @@ class ldlt_ext {
      */
     auto witness() -> double;
 
-    /*!
+    /**
      * @brief Calculate v'*{A}(p,p)*v
      *
      * @param[in] A
      * @return double
      */
-    auto sym_quad(const Vec& A) const -> double;
+    [[nodiscard]] auto sym_quad(const Vec& A) const -> double;
 
     auto sqrt() -> Mat;
 };
