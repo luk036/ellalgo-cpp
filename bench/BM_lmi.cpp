@@ -1,4 +1,3 @@
-#include "benchmark/benchmark.h"
 #include <ellalgo/cutting_plane.hpp>
 #include <ellalgo/ell.hpp>
 #include <ellalgo/oracles/lmi_old_oracle.hpp>
@@ -6,15 +5,14 @@
 #include <gsl/span>
 #include <vector>
 
+#include "benchmark/benchmark.h"
 
 /*!
  * @brief
  *
  * @tparam Oracle
  */
-template <typename Oracle>
-class my_oracle
-{
+template <typename Oracle> class my_oracle {
     using Arr = xt::xarray<double, xt::layout_type::row_major>;
     using Cut = std::tuple<Arr, double>;
 
@@ -33,13 +31,8 @@ class my_oracle
      * @param[in] B2
      * @param[in] c
      */
-    my_oracle(gsl::span<const Arr> F1, const Arr& B1, gsl::span<const Arr> F2,
-        const Arr& B2, Arr c)
-        : lmi1 {F1, B1}
-        , lmi2 {F2, B2}
-        , c {std::move(c)}
-    {
-    }
+    my_oracle(gsl::span<const Arr> F1, const Arr& B1, gsl::span<const Arr> F2, const Arr& B2, Arr c)
+        : lmi1{F1, B1}, lmi2{F2, B2}, c{std::move(c)} {}
 
     /*!
      * @brief
@@ -48,22 +41,18 @@ class my_oracle
      * @param[in] t
      * @return std::tuple<Cut, double>
      */
-    std::tuple<Cut, bool> operator()(const Arr& x, double& t)
-    {
+    std::tuple<Cut, bool> operator()(const Arr& x, double& t) {
         const auto f0 = xt::sum(this->c * x)();
         const auto f1 = f0 - t;
-        if (f1 > 0)
-        {
+        if (f1 > 0) {
             return {{this->c, f1}, false};
         }
         const auto cut2 = this->lmi1(x);
-        if (cut2)
-        {
+        if (cut2) {
             return {*cut2, false};
         }
         const auto cut3 = this->lmi2(x);
-        if (cut3)
-        {
+        if (cut3) {
             return {*cut3, false};
         }
         t = f0;
@@ -76,25 +65,22 @@ class my_oracle
  *
  * @param[in,out] state
  */
-static void LMI_Lazy(benchmark::State& state)
-{
+static void LMI_Lazy(benchmark::State& state) {
     using Arr = xt::xarray<double, xt::layout_type::row_major>;
 
     // auto c = Arr {1., -1., 1.};
-    const auto F1 = std::vector<Arr> {{{-7., -11.}, {-11., 3.}},
-        {{7., -18.}, {-18., 8.}}, {{-2., -8.}, {-8., 1.}}};
-    const auto B1 = Arr {{33., -9.}, {-9., 26.}};
-    const auto F2 =
-        std::vector<Arr> {{{-21., -11., 0.}, {-11., 10., 8.}, {0., 8., 5.}},
-            {{0., 10., 16.}, {10., -10., -10.}, {16., -10., 3.}},
-            {{-5., 2., -17.}, {2., -6., 8.}, {-17., 8., 6.}}};
-    const auto B2 = Arr {{14., 9., 40.}, {9., 91., 10.}, {40., 10., 15.}};
+    const auto F1 = std::vector<Arr>{
+        {{-7., -11.}, {-11., 3.}}, {{7., -18.}, {-18., 8.}}, {{-2., -8.}, {-8., 1.}}};
+    const auto B1 = Arr{{33., -9.}, {-9., 26.}};
+    const auto F2 = std::vector<Arr>{{{-21., -11., 0.}, {-11., 10., 8.}, {0., 8., 5.}},
+                                     {{0., 10., 16.}, {10., -10., -10.}, {16., -10., 3.}},
+                                     {{-5., 2., -17.}, {2., -6., 8.}, {-17., 8., 6.}}};
+    const auto B2 = Arr{{14., 9., 40.}, {9., 91., 10.}, {40., 10., 15.}};
 
-    while (state.KeepRunning())
-    {
-        auto P = my_oracle<lmi_oracle>(F1, B1, F2, B2, Arr {1., -1., 1.});
-        auto E = ell(10., Arr {0., 0., 0.});
-        auto t = 1.e100; // std::numeric_limits<double>::max()
+    while (state.KeepRunning()) {
+        auto P = my_oracle<lmi_oracle>(F1, B1, F2, B2, Arr{1., -1., 1.});
+        auto E = ell(10., Arr{0., 0., 0.});
+        auto t = 1.e100;  // std::numeric_limits<double>::max()
         [[maybe_unused]] const auto rslt = cutting_plane_dc(P, E, t);
     }
 }
@@ -109,25 +95,22 @@ BENCHMARK(LMI_Lazy);
  *
  * @param[in,out] state
  */
-static void LMI_old(benchmark::State& state)
-{
+static void LMI_old(benchmark::State& state) {
     using Arr = xt::xarray<double, xt::layout_type::row_major>;
 
     // auto c = Arr {1., -1., 1.};
-    const auto F1 = std::vector<Arr> {{{-7., -11.}, {-11., 3.}},
-        {{7., -18.}, {-18., 8.}}, {{-2., -8.}, {-8., 1.}}};
-    const auto B1 = Arr {{33., -9.}, {-9., 26.}};
-    const auto F2 =
-        std::vector<Arr> {{{-21., -11., 0.}, {-11., 10., 8.}, {0., 8., 5.}},
-            {{0., 10., 16.}, {10., -10., -10.}, {16., -10., 3.}},
-            {{-5., 2., -17.}, {2., -6., 8.}, {-17., 8., 6.}}};
-    const auto B2 = Arr {{14., 9., 40.}, {9., 91., 10.}, {40., 10., 15.}};
+    const auto F1 = std::vector<Arr>{
+        {{-7., -11.}, {-11., 3.}}, {{7., -18.}, {-18., 8.}}, {{-2., -8.}, {-8., 1.}}};
+    const auto B1 = Arr{{33., -9.}, {-9., 26.}};
+    const auto F2 = std::vector<Arr>{{{-21., -11., 0.}, {-11., 10., 8.}, {0., 8., 5.}},
+                                     {{0., 10., 16.}, {10., -10., -10.}, {16., -10., 3.}},
+                                     {{-5., 2., -17.}, {2., -6., 8.}, {-17., 8., 6.}}};
+    const auto B2 = Arr{{14., 9., 40.}, {9., 91., 10.}, {40., 10., 15.}};
 
-    while (state.KeepRunning())
-    {
-        auto P = my_oracle<lmi_old_oracle>(F1, B1, F2, B2, Arr {1., -1., 1.});
-        auto E = ell(10., Arr {0., 0., 0.});
-        auto t = 1.e100; // std::numeric_limits<double>::max()
+    while (state.KeepRunning()) {
+        auto P = my_oracle<lmi_old_oracle>(F1, B1, F2, B2, Arr{1., -1., 1.});
+        auto E = ell(10., Arr{0., 0., 0.});
+        auto t = 1.e100;  // std::numeric_limits<double>::max()
         [[maybe_unused]] const auto rslt = cutting_plane_dc(P, E, t);
     }
 }
@@ -138,26 +121,23 @@ BENCHMARK(LMI_old);
  *
  * @param[in,out] state
  */
-static void LMI_No_Trick(benchmark::State& state)
-{
+static void LMI_No_Trick(benchmark::State& state) {
     using Arr = xt::xarray<double, xt::layout_type::row_major>;
 
     // const auto c = Arr {1., -1., 1.};
-    const auto F1 = std::vector<Arr> {{{-7., -11.}, {-11., 3.}},
-        {{7., -18.}, {-18., 8.}}, {{-2., -8.}, {-8., 1.}}};
-    const auto B1 = Arr {{33., -9.}, {-9., 26.}};
-    const auto F2 =
-        std::vector<Arr> {{{-21., -11., 0.}, {-11., 10., 8.}, {0., 8., 5.}},
-            {{0., 10., 16.}, {10., -10., -10.}, {16., -10., 3.}},
-            {{-5., 2., -17.}, {2., -6., 8.}, {-17., 8., 6.}}};
-    const auto B2 = Arr {{14., 9., 40.}, {9., 91., 10.}, {40., 10., 15.}};
+    const auto F1 = std::vector<Arr>{
+        {{-7., -11.}, {-11., 3.}}, {{7., -18.}, {-18., 8.}}, {{-2., -8.}, {-8., 1.}}};
+    const auto B1 = Arr{{33., -9.}, {-9., 26.}};
+    const auto F2 = std::vector<Arr>{{{-21., -11., 0.}, {-11., 10., 8.}, {0., 8., 5.}},
+                                     {{0., 10., 16.}, {10., -10., -10.}, {16., -10., 3.}},
+                                     {{-5., 2., -17.}, {2., -6., 8.}, {-17., 8., 6.}}};
+    const auto B2 = Arr{{14., 9., 40.}, {9., 91., 10.}, {40., 10., 15.}};
 
-    while (state.KeepRunning())
-    {
-        auto P = my_oracle<lmi_oracle>(F1, B1, F2, B2, Arr {1., -1., 1.});
-        auto E = ell(10., Arr {0., 0., 0.});
+    while (state.KeepRunning()) {
+        auto P = my_oracle<lmi_oracle>(F1, B1, F2, B2, Arr{1., -1., 1.});
+        auto E = ell(10., Arr{0., 0., 0.});
         E.no_defer_trick = true;
-        auto t = 1.e100; // std::numeric_limits<double>::max()
+        auto t = 1.e100;  // std::numeric_limits<double>::max()
         [[maybe_unused]] const auto rslt = cutting_plane_dc(P, E, t);
     }
 }
