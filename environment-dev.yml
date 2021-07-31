@@ -1,7 +1,0 @@
-name: ellalgo-cpp
-channels:
-  - conda-forge
-dependencies:
-  - cmake
-  - openblas
-  - xtensor-blas

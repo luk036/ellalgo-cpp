@@ -5,6 +5,8 @@ CPMAddPackage(
   OPTIONS "FMT_INSTALL YES" # create an installable target
 )
 
+CPMAddPackage("gh:microsoft/GSL@3.1.0")
+
 CPMAddPackage("gh:xtensor-stack/xtl#0.6.23")
 if(xtl_ADDED)
   message(STATUS "Found xtl: ${xtl_SOURCE_DIR}")
@@ -17,5 +19,5 @@ if(xtensor_ADDED)
   include_directories(${xtensor_SOURCE_DIR}/include)
 endif(xtensor_ADDED)
 
-set(SPECIFIC_LIBS fmt::fmt)
+set(SPECIFIC_LIBS fmt::fmt GSL)
 # remember to turn off the warnings
