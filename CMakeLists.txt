@@ -87,6 +87,7 @@ packageProject(
 
 if(NOT INSTALL_ONLY)
   add_subdirectory(test)
+  add_subdirectory(bench)
   add_subdirectory(standalone)
   add_subdirectory(documentation)
 endif()

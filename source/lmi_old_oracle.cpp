@@ -1,5 +1,5 @@
-#include <ellalgo/utility.hpp>
 #include <ellalgo/oracles/lmi_old_oracle.hpp>
+#include <ellalgo/utility.hpp>
 
 // #include <xtensor-blas/xlinalg.hpp>
 

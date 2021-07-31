@@ -1,5 +1,5 @@
-#include <fmt/format.h>
 #include <ellalgo/greeter.h>
+#include <fmt/format.h>
 
 using namespace ellalgo;
 

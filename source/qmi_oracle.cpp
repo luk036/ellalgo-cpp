@@ -14,7 +14,7 @@ using Cut = std::tuple<Arr, double>;
  * @param[in] x
  * @return std::optional<Cut>
  */
-std::optional<Cut> qmi_oracle::operator()(const Arr& x) {    
+std::optional<Cut> qmi_oracle::operator()(const Arr& x) {
     this->_count = 0;
     this->_nx = x.shape()[0];
 
