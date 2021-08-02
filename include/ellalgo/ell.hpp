@@ -58,12 +58,12 @@ class ell {
 
     /**
      * @brief Construct a new ell object
-     * 
-     * @tparam V 
-     * @tparam U 
-     * @param kappa 
-     * @param Q 
-     * @param x 
+     *
+     * @tparam V
+     * @tparam U
+     * @param kappa
+     * @param Q
+     * @param x
      */
     template <typename V, typename U> ell(V&& kappa, Arr&& Q, U&& x) noexcept
         : _n{int(x.size())},

@@ -167,10 +167,10 @@ class profit_q_oracle {
      *
      * @param[in] y input quantity (in log scale)
      * @param[in,out] t the best-so-far optimal value
-     * @param[in] retry whether it is a retry 
+     * @param[in] retry whether it is a retry
      * @return Cut and the updated best-so-far value
      *
      * @see cutting_plane_q
      */
-    auto operator()(const Arr& y, double& t, bool retry) -> std::tuple<Cut, Arr, bool, bool>;
+    auto operator()(const Arr& y, double& t, bool retry) -> std::tuple<Cut, bool, Arr, bool>;
 };

@@ -40,7 +40,7 @@ auto profit_oracle::operator()(const Arr& y, double& t) const -> std::tuple<Cut,
  * @return std::tuple<Cut, double, Arr, int>
  */
 auto profit_q_oracle::operator()(const Arr& y, double& t, bool retry)
-    -> std::tuple<Cut, Arr, bool, bool> {
+    -> std::tuple<Cut, bool, Arr, bool> {
     if (!retry) {
         auto x = Arr{xt::round(xt::exp(y))};
         if (x[0] == 0.) {
@@ -56,5 +56,5 @@ auto profit_q_oracle::operator()(const Arr& y, double& t, bool retry)
     // h += xt::linalg::dot(g, this->_yd - y)();
     auto d = this->_yd - y;
     h += g(0) * d(0) + g(1) * d(1);
-    return {std::move(cut), this->_yd, shrunk, !retry};
+    return {std::move(cut), shrunk, this->_yd, !retry};
 }

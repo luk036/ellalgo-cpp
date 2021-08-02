@@ -131,7 +131,7 @@ auto cutting_plane_q(Oracle&& Omega, Space&& S, opt_type&& t, const Options& opt
     auto niter = 0U;
     while (++niter != options.max_it) {
         auto retry = (status == CUTStatus::noeffect);
-        const auto [cut, x0, shrunk, more_alt] = Omega(S.xc(), t, retry);
+        const auto [cut, shrunk, x0, more_alt] = Omega(S.xc(), t, retry);
         if (shrunk) {  // best t obtained
             // t = t1;
             x_best = x0;
