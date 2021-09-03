@@ -47,13 +47,13 @@ template <typename Oracle> class my_oracle {
         if (f1 > 0) {
             return {{this->c, f1}, false};
         }
-        const auto cut2 = this->lmi1(x);
+        const auto cut1 = this->lmi1(x);
+        if (cut1) {
+            return {*cut1, false};
+        }
+        const auto cut2 = this->lmi2(x);
         if (cut2) {
             return {*cut2, false};
-        }
-        const auto cut3 = this->lmi2(x);
-        if (cut3) {
-            return {*cut3, false};
         }
         t = f0;
         return {{this->c, 0.}, true};

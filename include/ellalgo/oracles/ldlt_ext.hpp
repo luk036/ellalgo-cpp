@@ -90,8 +90,7 @@ class ldlt_ext {
                     start = i + 1;
                     // restart at i + 1, special as an LMI oracle
                 }
-            } else  // not Allow_semidefinite
-            {
+            } else {  // not Allow_semidefinite
                 if (d <= 0.) {
                     stop = i + 1;
                     break;
