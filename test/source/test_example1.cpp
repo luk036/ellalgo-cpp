@@ -56,7 +56,7 @@ TEST_CASE("Example 1, test feasible") {
 
 TEST_CASE("Example 1, test infeasible 1") {
     ell_stable E{10., Arr{100., 100.}};  // wrong initial guess
-                                                // or ellipsoid is too small
+                                         // or ellipsoid is too small
     const auto P = my_oracle;
     auto t = -1.e100;  // std::numeric_limits<double>::min()
     const auto result = cutting_plane_dc(P, E, t);

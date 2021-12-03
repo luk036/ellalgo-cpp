@@ -38,7 +38,7 @@ template <typename T> auto ell_stable::update(const std::tuple<Arr, T>& cut)
 
     // calculate omega: n
     Arr gQg{invDinvLg};  // initially
-    auto omega = 0.;            // initially
+    auto omega = 0.;     // initially
     for (auto i = 0; i != this->_n; ++i) {
         gQg(i) *= invLg(i);
         omega += gQg(i);
@@ -51,7 +51,7 @@ template <typename T> auto ell_stable::update(const std::tuple<Arr, T>& cut)
     }
 
     // calculate Q*grad = inv(L')*inv(D)*inv(L)*grad : (n-1)*n/2
-    Arr Qg{invDinvLg};                   // initially
+    Arr Qg{invDinvLg};                          // initially
     for (auto i = this->_n - 1; i != 0; --i) {  // backward subsituition
         for (auto j = i; j != this->_n; ++j) {
             Qg(i - 1) -= this->_Q(i, j) * Qg(j);  // ???

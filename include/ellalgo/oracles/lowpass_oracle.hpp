@@ -47,7 +47,7 @@ class lowpass_oracle {
     /**
      * @brief Construct a new lowpass oracle object (deleted)
      * Avoid accidential created
-     * 
+     *
      */
     lowpass_oracle(const lowpass_oracle&) = delete;
 

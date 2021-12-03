@@ -41,7 +41,7 @@ auto my_oracle2(const Arr& z) -> Cut* {
 
 TEST_CASE("Example 2") {
     ell_stable E{10., Arr{0., 0.}};
-    
+
     const auto P = my_oracle2;
     auto ell_info = cutting_plane_feas(P, E);
     CHECK(ell_info.feasible);
