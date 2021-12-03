@@ -51,7 +51,7 @@ class profit_oracle {
      * @brief Construct a new profit oracle object (only explicitly)
      *
      */
-    explicit profit_oracle(const profit_oracle&) = default;
+    profit_oracle(const profit_oracle&) = delete;
 
     /**
      * @brief
@@ -160,7 +160,8 @@ class profit_q_oracle {
      * @param[in] a the output elasticities
      * @param[in] v output price
      */
-    profit_q_oracle(double p, double A, double k, const Arr& a, const Arr& v) : _P(p, A, k, a, v) {}
+    profit_q_oracle(double p, double A, double k, const Arr& a, const Arr& v) : 
+        _P{p, A, k, a, v} {}
 
     /**
      * @brief Make object callable for cutting_plane_q()

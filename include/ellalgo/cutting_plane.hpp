@@ -43,7 +43,10 @@ auto cutting_plane_feas(Oracle&& Omega, Space&& S, const Options& options = Opti
             feasible = true;
             break;
         }
-        const auto [cutstatus, tsq] = S.update(*cut);  // update S
+        const auto result = S.update(*cut);  // update S
+
+        const auto& cutstatus = std::get<0>(result);
+        const auto& tsq = std::get<1>(result);
         if (cutstatus != CUTStatus::success) {
             status = cutstatus;
             break;
@@ -76,11 +79,16 @@ auto cutting_plane_dc(Oracle&& Omega, Space&& S, opt_type&& t, const Options& op
 
     auto niter = 0U;
     while (++niter != options.max_it) {
-        const auto [cut, shrunk] = Omega(S.xc(), t);
+        const auto result1 = Omega(S.xc(), t);
+        const auto& cut = std::get<0>(result1);
+        const auto& shrunk = std::get<1>(result1);
         if (shrunk) {  // best t obtained
             x_best = S.xc();
         }
-        const auto [cutstatus, tsq] = S.update(cut);
+        const auto result2 = S.update(cut);
+
+        const auto& cutstatus = std::get<0>(result2);
+        const auto& tsq = std::get<1>(result2);
         if (cutstatus != CUTStatus::success)  // ???
         {
             status = cutstatus;
@@ -127,20 +135,31 @@ auto cutting_plane_q(Oracle&& Omega, Space&& S, opt_type&& t, const Options& opt
     const auto t_orig = t;
     decltype(S.xc()) x_best;
     auto status = CUTStatus::nosoln;  // note!!!
+    auto retry = (status == CUTStatus::noeffect);
 
     auto niter = 0U;
     while (++niter != options.max_it) {
-        auto retry = (status == CUTStatus::noeffect);
-        const auto [cut, shrunk, x0, more_alt] = Omega(S.xc(), t, retry);
+        // auto retry = (status == CUTStatus::noeffect);
+        const auto result1 = Omega(S.xc(), t, retry);
+        const auto& cut = std::get<0>(result1);
+        const auto& shrunk = std::get<1>(result1);        
+        const auto& x0 = std::get<2>(result1);
+        const auto& more_alt = std::get<3>(result1);        
         if (shrunk) {  // best t obtained
             // t = t1;
-            x_best = x0;
+            x_best = x0; // x0
+
         }
-        const auto [cutstatus, tsq] = S.update(cut);
+        const auto result2 = S.update(cut);
+        const auto& cutstatus = std::get<0>(result2);
+        const auto& tsq = std::get<1>(result2);
+
         if (cutstatus == CUTStatus::noeffect) {
-            if (!more_alt) {
+            if (!more_alt) { // more alt?
                 break;  // no more alternative cut
             }
+            status = cutstatus;
+            retry = true;
         }
         if (cutstatus == CUTStatus::nosoln) {
             status = cutstatus;
@@ -230,7 +249,7 @@ class bsearch_adaptor {
      *
      * @return auto
      */
-    [[nodiscard]] auto x_best() const { return this->_S.xc(); }
+    auto x_best() const { return this->_S.xc(); }
 
     /**
      * @brief

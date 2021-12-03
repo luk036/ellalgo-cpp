@@ -19,7 +19,7 @@ auto profit_oracle::operator()(const Arr& y, double& t) const -> std::tuple<Cut,
     }
 
     const auto log_Cobb = this->_log_pA + this->_a(0) * y(0) + this->_a(1) * y(1);
-    const auto x = Arr{xt::exp(y)};
+    const Arr x = xt::exp(y);
     const auto vx = this->_v(0) * x(0) + this->_v(1) * x(1);
     auto te = t + vx;
 
@@ -27,10 +27,10 @@ auto profit_oracle::operator()(const Arr& y, double& t) const -> std::tuple<Cut,
     if (fj < 0.) {
         te = std::exp(log_Cobb);
         t = te - vx;
-        auto g = Arr{(this->_v * x) / te - this->_a};
+        Arr g = (this->_v * x) / te - this->_a;
         return {{std::move(g), 0.}, true};
     }
-    auto g = Arr{(this->_v * x) / te - this->_a};
+    Arr g = (this->_v * x) / te - this->_a;
     return {{std::move(g), fj}, false};
 }
 
@@ -42,7 +42,7 @@ auto profit_oracle::operator()(const Arr& y, double& t) const -> std::tuple<Cut,
 auto profit_q_oracle::operator()(const Arr& y, double& t, bool retry)
     -> std::tuple<Cut, bool, Arr, bool> {
     if (!retry) {
-        auto x = Arr{xt::round(xt::exp(y))};
+        Arr x = xt::round(xt::exp(y));
         if (x[0] == 0.) {
             x[0] = 1.;  // nearest integer than 0
         }
@@ -51,8 +51,11 @@ auto profit_q_oracle::operator()(const Arr& y, double& t, bool retry)
         }
         this->_yd = xt::log(x);
     }
-    auto [cut, shrunk] = this->_P(this->_yd, t);
-    auto& [g, h] = cut;
+    auto result1 = this->_P(this->_yd, t);
+    auto& cut = std::get<0>(result1);
+    auto& shrunk = std::get<1>(result1);
+    auto& g = std::get<0>(cut);
+    auto& h = std::get<1>(cut);
     // h += xt::linalg::dot(g, this->_yd - y)();
     auto d = this->_yd - y;
     h += g(0) * d(0) + g(1) * d(1);

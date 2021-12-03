@@ -45,6 +45,13 @@ class lowpass_oracle {
         : _Ap{Ap}, _As{As}, _Anr{Anr}, _Lpsq{Lpsq}, _Upsq{Upsq} {}
 
     /**
+     * @brief Construct a new lowpass oracle object (deleted)
+     * Avoid accidential created
+     * 
+     */
+    lowpass_oracle(const lowpass_oracle&) = delete;
+
+    /**
      * @brief
      *
      * @param[in] x

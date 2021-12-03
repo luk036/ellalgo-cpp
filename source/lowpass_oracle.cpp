@@ -15,9 +15,9 @@ auto lowpass_oracle::operator()(const Arr& x, double& Spsq) const -> std::tuple<
     // 1. nonnegative-real constraint
     // case 1,
     if (x[0] < 0) {
-        auto g = Arr{xt::zeros<double>({x.size()})};
+        Arr g = xt::zeros<double>({x.size()});
         g[0] = -1.;
-        auto f = Arr{-x[0]};
+        Arr f = -x[0];
         return {{std::move(g), std::move(f)}, false};
     }
 

@@ -21,26 +21,32 @@ TEST_CASE("Profit Test") {
     const auto v = Vec{10., 35.};
 
     {
-        auto E = ell{100., Vec{0., 0.}};
-        auto P = profit_oracle{p, A, k, a, v};
+        ell E{100., Vec{0., 0.}};
+        profit_oracle P{p, A, k, a, v};
 
-        const auto [y, ell_info] = cutting_plane_dc(std::move(P), std::move(E), 0.);
+        const auto result = cutting_plane_dc(std::move(P), std::move(E), 0.);
+        const auto& y = std::get<0>(result);
+        const auto& ell_info = std::get<1>(result);
         CHECK(y[0] <= std::log(k));
         CHECK(ell_info.num_iters == 37);
     }
 
     {
-        auto E = ell{100., Vec{0., 0.}};
-        auto P = profit_rb_oracle{p, A, k, a, v, Vec{0.003, 0.007}, 1.};
-        const auto [y, ell_info] = cutting_plane_dc(std::move(P), std::move(E), 0.);
+        ell E{100., Vec{0., 0.}};
+        profit_rb_oracle P{p, A, k, a, v, Vec{0.003, 0.007}, 1.};
+        const auto result = cutting_plane_dc(std::move(P), std::move(E), 0.);
+        const auto& y = std::get<0>(result);
+        const auto& ell_info = std::get<1>(result);
         CHECK(y[0] <= std::log(k));
         CHECK(ell_info.num_iters == 42);
     }
 
     {
-        auto E = ell{100., Vec{2., 0.}};
-        auto P = profit_q_oracle{p, A, k, a, v};
-        const auto [y, ell_info] = cutting_plane_q(std::move(P), std::move(E), 0.);
+        ell E{100., Vec{2., 0.}};
+        profit_q_oracle P{p, A, k, a, v};
+        const auto result = cutting_plane_q(std::move(P), std::move(E), 0.);
+        const auto& y = std::get<0>(result);
+        const auto& ell_info = std::get<1>(result);
         CHECK(y[0] <= std::log(k));
         CHECK(ell_info.num_iters == 28);
     }
@@ -56,26 +62,32 @@ TEST_CASE("Profit Test (Stable)") {
     const auto v = Vec{10., 35.};
 
     {
-        auto E = ell_stable{100., Vec{0., 0.}};
-        auto P = profit_oracle{p, A, k, a, v};
+        ell_stable E{100., Vec{0., 0.}};
+        profit_oracle P{p, A, k, a, v};
 
-        const auto [y, ell_info] = cutting_plane_dc(std::move(P), std::move(E), 0.);
+        const auto result = cutting_plane_dc(std::move(P), std::move(E), 0.);
+        const auto& y = std::get<0>(result);
+        const auto& ell_info = std::get<1>(result);
         CHECK(y[0] <= std::log(k));
         CHECK(ell_info.num_iters == 42);
     }
 
     {
-        auto E = ell_stable{100., Vec{0., 0.}};
-        auto P = profit_rb_oracle{p, A, k, a, v, Vec{0.003, 0.007}, 1.};
-        const auto [y, ell_info] = cutting_plane_dc(std::move(P), std::move(E), 0.);
+        ell_stable E{100., Vec{0., 0.}};
+        profit_rb_oracle P{p, A, k, a, v, Vec{0.003, 0.007}, 1.};
+        const auto result = cutting_plane_dc(std::move(P), std::move(E), 0.);
+        const auto& y = std::get<0>(result);
+        const auto& ell_info = std::get<1>(result);
         CHECK(y[0] <= std::log(k));
         CHECK(ell_info.num_iters == 38);
     }
 
     {
-        auto E = ell_stable{100., Vec{2., 0.}};
-        auto P = profit_q_oracle{p, A, k, a, v};
-        const auto [y, ell_info] = cutting_plane_q(std::move(P), std::move(E), 0.);
+        ell_stable E{100., Vec{2., 0.}};
+        profit_q_oracle P{p, A, k, a, v};
+        const auto result = cutting_plane_q(std::move(P), std::move(E), 0.);
+        const auto& y = std::get<0>(result);
+        const auto& ell_info = std::get<1>(result);
         CHECK(y[0] <= std::log(k));
         CHECK(ell_info.num_iters == 30);
     }

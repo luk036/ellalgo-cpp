@@ -113,32 +113,30 @@ void ell::_calc_cc(const double& tau) noexcept {
 /**
  * @brief Update ellipsoid core function using the cut
  *
- *        g' * (x - xc) + beta <= 0
+ *        grad' * (x - xc) + beta <= 0
  *
  * @tparam T
  * @param[in] cut
  * @return std::tuple<int, double>
  */
 template <typename T> std::tuple<CUTStatus, double> ell::update(const std::tuple<Arr, T>& cut) {
-    // const auto& [g, beta] = cut;
+    // const auto& [grad, beta] = cut;
+    const auto& grad = std::get<0>(cut);
     const auto& beta = std::get<1>(cut);
-
-    const auto& g = std::get<0>(cut);
     // n^2
-    // const auto Qg = Arr{xt::linalg::dot(this->_Q, g)};  // n^2
-    // const auto omega = xt::linalg::dot(g, Qg)();        // n
+    // const auto Qg = Arr{xt::linalg::dot(this->_Q, grad)};  // n^2
+    // const auto omega = xt::linalg::dot(grad, Qg)();        // n
 
     auto Qg = zeros({this->_n});  // initial x0
     auto omega = 0.;
     for (auto i = 0; i != this->_n; ++i) {
         for (auto j = 0; j != this->_n; ++j) {
-            Qg(i) += this->_Q(i, j) * g(j);
+            Qg(i) += this->_Q(i, j) * grad(j);
         }
-        omega += Qg(i) * g(i);
+        omega += Qg(i) * grad(i);
     }
 
     this->_tsq = this->_kappa * omega;
-
     auto status = this->_update_cut(beta);
     if (status != CUTStatus::success) {
         return {status, this->_tsq};

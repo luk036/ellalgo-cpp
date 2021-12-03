@@ -71,7 +71,7 @@ struct filter_design_construct {
         // *********************************************************************
         // rule-of-thumb discretization (from Cheney's Approximation Theory)
         const auto m = 15 * N;
-        const auto w = Arr{xt::linspace<double>(0, PI, m)};  // omega
+        const Arr w = xt::linspace<double>(0, PI, m);  // omega
 
         // passband 0 <= w <= w_pass
         const auto Lp = std::pow(10, -delta / 20);
@@ -81,7 +81,7 @@ struct filter_design_construct {
         // A(w,:) = [1 2*cos(w) 2*cos(2*w) ... 2*cos((N-1)*w)]
 
         // Arr An = 2 * xt::cos(xt::linalg::outer(w, xt::arange(1, N)));
-        auto An = Arr(xt::zeros<double>({m, N - 1}));
+        Arr An = xt::zeros<double>({m, N - 1});
         for (auto i = 0; i != m; ++i) {
             for (auto j = 0; j != N - 1; ++j) {
                 An(i, j) = 2. * std::cos(w(i) * (j + 1));
@@ -90,7 +90,7 @@ struct filter_design_construct {
         Arr A = xt::concatenate(xt::xtuple(xt::ones<double>({m, 1}), An), 1);
 
         const auto ind_p = xt::where(w <= wpass)[0];  // passband
-        Ap = Arr{xt::view(A, xt::range(0, ind_p.size()), xt::all())};
+        Ap = xt::view(A, xt::range(0, ind_p.size()), xt::all());
 
         // stopband (w_stop <= w)
         auto ind_s = xt::where(wstop <= w)[0];  // stopband
@@ -122,8 +122,8 @@ static filter_design_construct Fdc{};
 
 auto run_lowpass(bool use_parallel_cut) {
     auto r0 = zeros({Fdc.N});  // initial x0
-    auto E = ell(40., r0);
-    auto P = lowpass_oracle(Fdc.Ap, Fdc.As, Fdc.Anr, Fdc.Lpsq, Fdc.Upsq);
+    ell E(40., r0);
+    lowpass_oracle P(Fdc.Ap, Fdc.As, Fdc.Anr, Fdc.Lpsq, Fdc.Upsq);
     auto options = Options();
 
     options.max_it = 50000;
@@ -131,7 +131,8 @@ auto run_lowpass(bool use_parallel_cut) {
     // options.tol = 1e-8;
 
     auto t = Fdc.Spsq;
-    const auto [r, ell_info] = cutting_plane_dc(P, E, t, options);
+    const auto result = cutting_plane_dc(P, E, t, options);
+    const auto& ell_info = std::get<1>(result);
     // std::cout << "lowpass r: " << r << '\n';
     // auto Ustop = 20 * std::log10(std::sqrt(Spsq_new));
     // std::cout << "Min attenuation in the stopband is " << Ustop << " dB.\n";
@@ -140,7 +141,9 @@ auto run_lowpass(bool use_parallel_cut) {
 }
 
 TEST_CASE("Lowpass Filter (w/ parallel cut)") {
-    const auto [feasible, num_iters] = run_lowpass(true);
+    const auto result = run_lowpass(true);
+    const auto& feasible = std::get<0>(result);
+    const auto& num_iters = std::get<1>(result);
     CHECK(feasible);
     CHECK(num_iters <= 634);
 }

@@ -42,10 +42,13 @@ auto my_quasicvx_oracle(const Arr& z, double& t) -> std::tuple<Cut, bool> {
 }
 
 TEST_CASE("Quasiconvex 1, test feasible") {
-    auto E = ell{10., Arr{0., 0.}};
+    ell E{10., Arr{0., 0.}};
+
     const auto P = my_quasicvx_oracle;
     auto t = 0.;
-    const auto [x, ell_info] = cutting_plane_dc(P, E, t);
+    const auto result = cutting_plane_dc(P, E, t);
+    const auto& x = std::get<0>(result);
+    const auto& ell_info = std::get<1>(result);
     CHECK(ell_info.feasible);
     CHECK(-t == doctest::Approx(-0.4288673397));
     CHECK(x[0] * x[0] == doctest::Approx(0.5029823096));
@@ -53,10 +56,11 @@ TEST_CASE("Quasiconvex 1, test feasible") {
 }
 
 TEST_CASE("Quasiconvex 1, test feasible (stable)") {
-    auto E = ell_stable{10., Arr{0., 0.}};
+    ell_stable E{10., Arr{0., 0.}};
     const auto P = my_quasicvx_oracle;
     auto t = 0.;
-    const auto [x, ell_info] = cutting_plane_dc(P, E, t);
+    const auto result = cutting_plane_dc(P, E, t);
+    const auto& ell_info = std::get<1>(result);
     CHECK(ell_info.feasible);
     // CHECK(-t == doctest::Approx(-0.4288673397));
     // CHECK(x[0] * x[0] == doctest::Approx(0.5029823096));

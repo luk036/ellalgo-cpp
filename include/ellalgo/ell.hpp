@@ -125,14 +125,14 @@ class ell {
      *
      * @return ell
      */
-    [[nodiscard]] auto copy() const -> ell { return ell(*this); }
+    auto copy() const -> ell { return ell(*this); }
 
     /**
      * @brief copy the whole array anyway
      *
      * @return Arr
      */
-    [[nodiscard]] auto xc() const -> Arr { return _xc; }
+    auto xc() const -> Arr { return _xc; }
 
     /**
      * @brief Set the xc object

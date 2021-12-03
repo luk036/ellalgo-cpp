@@ -13,7 +13,10 @@
  * @return ell1d::return_t
  */
 auto ell1d::update(const std::tuple<double, double>& cut) noexcept -> ell1d::return_t {
-    const auto& [g, beta] = cut;
+    // const auto& [g, beta] = cut;
+    const auto& g = std::get<0>(cut);
+    const auto& beta = std::get<1>(cut);
+
     const auto tau = std::abs(this->_r * g);
     const auto tsq = tau * tau;
 

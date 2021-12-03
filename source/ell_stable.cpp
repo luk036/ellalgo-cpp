@@ -17,10 +17,11 @@ using Arr = xt::xarray<double, xt::layout_type::row_major>;
  */
 template <typename T> auto ell_stable::update(const std::tuple<Arr, T>& cut)
     -> std::tuple<CUTStatus, double> {
-    const auto& [g, beta] = cut;
-
-    // calculate inv(L)*g: (n-1)*n/2 multiplications
-    auto invLg = Arr{g};  // initially
+    // const auto& [g, beta] = cut;
+    const auto& grad = std::get<0>(cut);
+    const auto& beta = std::get<1>(cut);
+    // calculate inv(L)*grad: (n-1)*n/2 multiplications
+    Arr invLg{grad};  // initially
     for (auto i = 1; i != this->_n; ++i) {
         for (auto j = 0; j != i; ++j) {
             this->_Q(i, j) = this->_Q(j, i) * invLg(j);
@@ -29,14 +30,14 @@ template <typename T> auto ell_stable::update(const std::tuple<Arr, T>& cut)
         }
     }
 
-    // calculate inv(D)*inv(L)*g: n
-    auto invDinvLg = Arr{invLg};  // initially
+    // calculate inv(D)*inv(L)*grad: n
+    Arr invDinvLg{invLg};  // initially
     for (auto i = 0; i != this->_n; ++i) {
         invDinvLg(i) *= this->_Q(i, i);
     }
 
     // calculate omega: n
-    auto gQg = Arr{invDinvLg};  // initially
+    Arr gQg{invDinvLg};  // initially
     auto omega = 0.;            // initially
     for (auto i = 0; i != this->_n; ++i) {
         gQg(i) *= invLg(i);
@@ -44,14 +45,13 @@ template <typename T> auto ell_stable::update(const std::tuple<Arr, T>& cut)
     }
 
     this->_tsq = this->_kappa * omega;
-
     auto status = this->_update_cut(beta);
     if (status != CUTStatus::success) {
         return {status, this->_tsq};
     }
 
-    // calculate Q*g = inv(L')*inv(D)*inv(L)*g : (n-1)*n/2
-    auto Qg = Arr{invDinvLg};                   // initially
+    // calculate Q*grad = inv(L')*inv(D)*inv(L)*grad : (n-1)*n/2
+    Arr Qg{invDinvLg};                   // initially
     for (auto i = this->_n - 1; i != 0; --i) {  // backward subsituition
         for (auto j = i; j != this->_n; ++j) {
             Qg(i - 1) -= this->_Q(i, j) * Qg(j);  // ???

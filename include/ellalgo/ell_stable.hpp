@@ -60,7 +60,7 @@ class ell_stable : public ell {
      *
      * @return ell_stable
      */
-    [[nodiscard]] auto copy() const -> ell_stable { return ell_stable(*this); }
+    auto copy() const -> ell_stable { return ell_stable(*this); }
 
     /**
      * @brief Update ellipsoid core function using the cut(s)
