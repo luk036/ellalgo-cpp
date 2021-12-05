@@ -13,7 +13,7 @@
 
 Ellipsoid method for modern C++
 
-- This library requires C++17 or above.
+- This library requires C++14 or above.
 - This library depends on Xtensor.
 
 ## Features
