@@ -72,7 +72,7 @@ void ell::_calc_ll_cc(const double& b1, const double& b1sqn) {
  * @param[in] beta
  * @return int
  */
-CUTStatus ell::_calc_dc(const double& beta) noexcept {
+auto ell::_calc_dc(const double& beta) noexcept -> CUTStatus {
     const auto tau = std::sqrt(this->_tsq);
 
     const auto bdiff = tau - beta;
@@ -119,7 +119,8 @@ void ell::_calc_cc(const double& tau) noexcept {
  * @param[in] cut
  * @return std::tuple<int, double>
  */
-template <typename T> std::tuple<CUTStatus, double> ell::update(const std::tuple<Arr, T>& cut) {
+template <typename T> auto ell::update(const std::tuple<Arr, T>& cut)
+    -> std::tuple<CUTStatus, double> {
     // const auto& [grad, beta] = cut;
     const auto& grad = std::get<0>(cut);
     const auto& beta = std::get<1>(cut);

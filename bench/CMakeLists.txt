@@ -6,7 +6,7 @@ cpmaddpackage(
   GITHUB_REPOSITORY
   google/benchmark
   VERSION
-  1.5.2
+  1.5
   OPTIONS
   "BENCHMARK_ENABLE_TESTING Off")
 

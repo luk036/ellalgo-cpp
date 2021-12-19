@@ -13,7 +13,6 @@
 #include <xtensor/xview.hpp>
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
-static const auto PI = std::acos(-1);
 
 // Modified from CVX code by Almir Mutapcic in 2006.
 // Adapted in 2010 for impulse response peak-minimization by convex iteration by
@@ -57,6 +56,8 @@ struct filter_design_construct {
     double Spsq;
 
     filter_design_construct() {
+        static const auto PI = std::acos(-1);
+
         const auto wpass = 0.12 * PI;  // end of passband
         const auto wstop = 0.20 * PI;  // start of stopband
         const auto delta0_wpass = 0.125;
@@ -114,13 +115,13 @@ struct filter_design_construct {
     }
 };
 
-static filter_design_construct Fdc{};
-
 // ********************************************************************
 // optimization
 // ********************************************************************
 
 auto run_lowpass(bool use_parallel_cut) {
+    static const filter_design_construct Fdc{};
+
     auto r0 = zeros({Fdc.N});  // initial x0
     ell E(40., r0);
     lowpass_oracle P(Fdc.Ap, Fdc.As, Fdc.Anr, Fdc.Lpsq, Fdc.Upsq);
