@@ -1,7 +1,7 @@
 #include <cmath>
-#include <ellalgo/cut_config.hpp>
-#include <ellalgo/ell.hpp>
-#include <ellalgo/ell_assert.hpp>
+#include <ellalgo/cut_config.hpp>  // for CUTStatus, CUTStatus::success
+#include <ellalgo/ell.hpp>         // for ell1d, ell1d::return_t
+#include <ellalgo/ell_assert.hpp>  // for ELL_UNLIKELY
 // #include <xtensor-blas/xlinalg.hpp>
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;

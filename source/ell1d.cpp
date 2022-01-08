@@ -1,10 +1,8 @@
-#include <cmath>
-#include <ellalgo/cut_config.hpp>
-#include <ellalgo/ell1d.hpp>
-#include <ellalgo/ell_assert.hpp>
-#include <ellalgo/half_nonnegative.hpp>
-
-// #include <tuple>
+#include <ellalgo/cut_config.hpp>        // for CUTStatus, CUTStatus::success
+#include <ellalgo/ell1d.hpp>             // for ell1d, ell1d::return_t
+#include <ellalgo/ell_assert.hpp>        // for ELL_UNLIKELY
+#include <ellalgo/half_nonnegative.hpp>  // for half_nonnegative
+#include <tuple>                         // for get, tuple
 
 /**
  * @brief
