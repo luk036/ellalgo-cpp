@@ -1,0 +1,405 @@
+Consolidate compiler generated dependencies of target EllAlgo
+[  5%] Building CXX object CMakeFiles/EllAlgo.dir/source/ell.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/source/ell.cpp should add these lines:
+#include <tuple>                        // for tuple
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xcontainer.hpp>       // for xcontainer
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator-
+#include <xtensor/xsemantic.hpp>        // for xsemantic_base
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+#include "ellalgo/utility.hpp"          // for zeros
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/source/ell.cpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/source/ell.cpp:
+#include <cmath>                        // for sqrt
+#include <ellalgo/cut_config.hpp>       // for CUTStatus, CUTStatus::success
+#include <ellalgo/ell.hpp>              // for ell, ell::Arr
+#include <ellalgo/ell_assert.hpp>       // for ELL_UNLIKELY
+#include <tuple>                        // for tuple
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xcontainer.hpp>       // for xcontainer
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator-
+#include <xtensor/xsemantic.hpp>        // for xsemantic_base
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+#include "ellalgo/utility.hpp"          // for zeros
+---
+
+[ 11%] Building CXX object CMakeFiles/EllAlgo.dir/source/ell1d.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/source/ell1d.cpp should add these lines:
+#include <math.h>                        // for abs
+#include <cstdlib>                       // for abs
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/source/ell1d.cpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/source/ell1d.cpp:
+#include <math.h>                        // for abs
+#include <cstdlib>                       // for abs
+#include <ellalgo/cut_config.hpp>        // for CUTStatus, CUTStatus::success
+#include <ellalgo/ell1d.hpp>             // for ell1d, ell1d::return_t
+#include <ellalgo/ell_assert.hpp>        // for ELL_UNLIKELY
+#include <ellalgo/half_nonnegative.hpp>  // for half_nonnegative
+#include <tuple>                         // for get, tuple
+---
+
+[ 16%] Building CXX object CMakeFiles/EllAlgo.dir/source/ell_stable.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/source/ell_stable.cpp should add these lines:
+#include <tuple>                        // for tuple
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xcontainer.hpp>       // for xcontainer
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator-
+#include <xtensor/xsemantic.hpp>        // for xsemantic_base
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+#include "ellalgo/ell.hpp"              // for ell::Arr
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/source/ell_stable.cpp should remove these lines:
+- #include <cmath>  // lines 1-1
+- #include <ellalgo/ell_assert.hpp>  // lines 3-3
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/source/ell_stable.cpp:
+#include <ellalgo/cut_config.hpp>       // for CUTStatus, CUTStatus::success
+#include <ellalgo/ell_stable.hpp>       // for ell_stable, ell_stable::Arr
+#include <tuple>                        // for tuple
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xcontainer.hpp>       // for xcontainer
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator-
+#include <xtensor/xsemantic.hpp>        // for xsemantic_base
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+#include "ellalgo/ell.hpp"              // for ell::Arr
+---
+
+[ 22%] Building CXX object CMakeFiles/EllAlgo.dir/source/greeter.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/include/ellalgo/greeter.h should add these lines:
+#include <iosfwd>  // for string
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/include/ellalgo/greeter.h should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/include/ellalgo/greeter.h:
+#include <iosfwd>  // for string
+#include <string>  // for basic_string
+---
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/source/greeter.cpp should add these lines:
+#include <type_traits>   // for move
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/source/greeter.cpp should remove these lines:
+- #include <utility>  // lines 4-4
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/source/greeter.cpp:
+#include <ellalgo/greeter.h>
+#include <fmt/format.h>  // for format
+#include <type_traits>   // for move
+---
+
+[ 27%] Building CXX object CMakeFiles/EllAlgo.dir/source/lowpass_oracle.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/include/ellalgo/oracles/lowpass_oracle.hpp should add these lines:
+#include <stddef.h>                     // for size_t
+#include <tuple>                        // for tuple
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/include/ellalgo/oracles/lowpass_oracle.hpp should remove these lines:
+- #include <limits>  // lines 4-4
+- #include <xtensor/xarray.hpp>  // lines 5-5
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/include/ellalgo/oracles/lowpass_oracle.hpp:
+#include <stddef.h>                     // for size_t
+#include <tuple>                        // for tuple
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+---
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/source/lowpass_oracle.cpp should add these lines:
+#include <type_traits>              // for move
+#include <xtensor/xaccessible.hpp>  // for xconst_accessible, xaccessible
+#include <xtensor/xarray.hpp>       // for xarray_container
+#include <xtensor/xbroadcast.hpp>   // for xbroadcast
+#include <xtensor/xbuilder.hpp>     // for zeros
+#include <xtensor/xcontainer.hpp>   // for xcontainer<>::inner_shape_type
+#include <xtensor/xmath.hpp>        // for sum
+#include <xtensor/xoperation.hpp>   // for xfunction_type_t, operator*, oper...
+#include <xtensor/xreducer.hpp>     // for xreducer
+#include <xtensor/xslice.hpp>       // for all
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/source/lowpass_oracle.cpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/source/lowpass_oracle.cpp:
+#include <ellalgo/oracles/lowpass_oracle.hpp>
+#include <type_traits>              // for move
+#include <xtensor/xaccessible.hpp>  // for xconst_accessible, xaccessible
+#include <xtensor/xarray.hpp>       // for xarray_container
+#include <xtensor/xbroadcast.hpp>   // for xbroadcast
+#include <xtensor/xbuilder.hpp>     // for zeros
+#include <xtensor/xcontainer.hpp>   // for xcontainer<>::inner_shape_type
+#include <xtensor/xmath.hpp>        // for sum
+#include <xtensor/xoperation.hpp>   // for xfunction_type_t, operator*, oper...
+#include <xtensor/xreducer.hpp>     // for xreducer
+#include <xtensor/xslice.hpp>       // for all
+#include <xtensor/xview.hpp>        // for xview, view
+---
+
+[ 33%] Building CXX object CMakeFiles/EllAlgo.dir/source/profit_oracle.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/include/ellalgo/oracles/profit_oracle.hpp should add these lines:
+#include <xtensor/xaccessible.hpp>      // for xconst_accessible, xaccessible
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator+
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/include/ellalgo/oracles/profit_oracle.hpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/include/ellalgo/oracles/profit_oracle.hpp:
+#include <cmath>                        // for log
+#include <tuple>                        // for tuple
+#include <xtensor/xaccessible.hpp>      // for xconst_accessible, xaccessible
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator+
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+---
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/source/profit_oracle.cpp should add these lines:
+#include <type_traits>             // for move
+#include <xtensor/xcontainer.hpp>  // for xcontainer
+#include <xtensor/xfunction.hpp>   // for xfunction
+#include <xtensor/xiterator.hpp>   // for linear_begin
+#include <xtensor/xmath.hpp>       // for exp, log, round, exp_fun
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/source/profit_oracle.cpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/source/profit_oracle.cpp:
+#include <ellalgo/oracles/profit_oracle.hpp>
+#include <type_traits>             // for move
+#include <xtensor/xcontainer.hpp>  // for xcontainer
+#include <xtensor/xfunction.hpp>   // for xfunction
+#include <xtensor/xiterator.hpp>   // for linear_begin
+#include <xtensor/xmath.hpp>       // for exp, log, round, exp_fun
+---
+
+[ 38%] Linking CXX static library libEllAlgo.a
+[ 38%] Built target EllAlgo
+Consolidate compiler generated dependencies of target EllAlgoTests
+[ 44%] Building CXX object test/CMakeFiles/EllAlgoTests.dir/source/main.cpp.o
+[ 50%] Building CXX object test/CMakeFiles/EllAlgoTests.dir/source/test_example1.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_example1.cpp should add these lines:
+#include <xtensor/xaccessible.hpp>      // for xconst_accessible
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+#include "ellalgo/cut_config.hpp"       // for CInfo, CUTStatus, CUTStatus::...
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_example1.cpp should remove these lines:
+- #include <ellalgo/ell.hpp>  // lines 5-5
+- #include <limits>  // lines 7-7
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_example1.cpp:
+#include <doctest/doctest.h>            // for ResultBuilder, TestCase, CHECK
+#include <ellalgo/cutting_plane.hpp>    // for cutting_plane_dc
+#include <ellalgo/ell_stable.hpp>       // for ell_stable
+#include <tuple>                        // for get, tuple
+#include <xtensor/xaccessible.hpp>      // for xconst_accessible
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+#include "ellalgo/cut_config.hpp"       // for CInfo, CUTStatus, CUTStatus::...
+---
+
+[ 55%] Building CXX object test/CMakeFiles/EllAlgoTests.dir/source/test_example2.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_example2.cpp should add these lines:
+#include <tuple>                        // for get, tuple
+#include <xtensor/xaccessible.hpp>      // for xconst_accessible
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+#include "ellalgo/cut_config.hpp"       // for CInfo
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_example2.cpp should remove these lines:
+- #include <ellalgo/ell.hpp>  // lines 5-5
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_example2.cpp:
+#include <doctest/doctest.h>            // for ResultBuilder, TestCase, CHECK
+#include <ellalgo/cutting_plane.hpp>    // for cutting_plane_feas
+#include <ellalgo/ell_stable.hpp>       // for ell_stable
+#include <tuple>                        // for get, tuple
+#include <xtensor/xaccessible.hpp>      // for xconst_accessible
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+#include "ellalgo/cut_config.hpp"       // for CInfo
+---
+
+[ 61%] Building CXX object test/CMakeFiles/EllAlgoTests.dir/source/test_lowpass.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_lowpass.cpp should add these lines:
+#include <vector>                              // for vector, vector<>::size...
+#include <xtensor/xarray.hpp>                  // for xarray_container
+#include <xtensor/xbroadcast.hpp>              // for xbroadcast
+#include <xtensor/xbuilder.hpp>                // for concatenate, linspace
+#include <xtensor/xcontainer.hpp>              // for xcontainer
+#include <xtensor/xexception.hpp>              // for throw_concatenate_error
+#include <xtensor/xgenerator.hpp>              // for xgenerator
+#include <xtensor/xlayout.hpp>                 // for layout_type, layout_ty...
+#include <xtensor/xoperation.hpp>              // for xfunction_type_t, oper...
+#include <xtensor/xslice.hpp>                  // for xtuph, all, range, _
+#include <xtensor/xtensor_forward.hpp>         // for xarray
+#include <xtensor/xutils.hpp>                  // for accumulate
+#include "ellalgo/cut_config.hpp"              // for CInfo, Options
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_lowpass.cpp should remove these lines:
+- #include <complex>  // lines 5-5
+- #include <limits>  // lines 10-10
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_lowpass.cpp:
+#include <doctest/doctest.h>                   // for ResultBuilder, CHECK
+#include <cmath>                               // for pow, log10, acos, cos
+#include <ellalgo/cutting_plane.hpp>           // for cutting_plane_dc
+#include <ellalgo/ell.hpp>                     // for ell
+#include <ellalgo/oracles/lowpass_oracle.hpp>  // for lowpass_oracle
+#include <ellalgo/utility.hpp>                 // for zeros
+#include <tuple>                               // for get, make_tuple
+#include <vector>                              // for vector, vector<>::size...
+#include <xtensor/xarray.hpp>                  // for xarray_container
+#include <xtensor/xbroadcast.hpp>              // for xbroadcast
+#include <xtensor/xbuilder.hpp>                // for concatenate, linspace
+#include <xtensor/xcontainer.hpp>              // for xcontainer
+#include <xtensor/xexception.hpp>              // for throw_concatenate_error
+#include <xtensor/xgenerator.hpp>              // for xgenerator
+#include <xtensor/xlayout.hpp>                 // for layout_type, layout_ty...
+#include <xtensor/xoperation.hpp>              // for xfunction_type_t, oper...
+#include <xtensor/xslice.hpp>                  // for xtuph, all, range, _
+#include <xtensor/xtensor_forward.hpp>         // for xarray
+#include <xtensor/xutils.hpp>                  // for accumulate
+#include <xtensor/xview.hpp>                   // for view, xview
+#include "ellalgo/cut_config.hpp"              // for CInfo, Options
+---
+
+[ 66%] Building CXX object test/CMakeFiles/EllAlgoTests.dir/source/test_profit.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_profit.cpp should add these lines:
+#include <cmath>                              // for log
+#include <tuple>                              // for get
+#include <type_traits>                        // for move, remove_reference<...
+#include <xtensor/xaccessible.hpp>            // for xconst_accessible
+#include <xtensor/xlayout.hpp>                // for layout_type, layout_typ...
+#include <xtensor/xtensor_forward.hpp>        // for xarray
+#include "ellalgo/cut_config.hpp"             // for CInfo
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_profit.cpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_profit.cpp:
+#include <doctest/doctest.h>                  // for ResultBuilder, CHECK
+#include <cmath>                              // for log
+#include <ellalgo/cutting_plane.hpp>          // for cutting_plane_dc, cutti...
+#include <ellalgo/ell.hpp>                    // for ell
+#include <ellalgo/ell_stable.hpp>             // for ell_stable
+#include <ellalgo/oracles/profit_oracle.hpp>  // for profit_oracle, profit_r...
+#include <tuple>                              // for get
+#include <type_traits>                        // for move, remove_reference<...
+#include <xtensor/xaccessible.hpp>            // for xconst_accessible
+#include <xtensor/xarray.hpp>                 // for xarray_container
+#include <xtensor/xlayout.hpp>                // for layout_type, layout_typ...
+#include <xtensor/xtensor_forward.hpp>        // for xarray
+#include "ellalgo/cut_config.hpp"             // for CInfo
+---
+
+[ 72%] Building CXX object test/CMakeFiles/EllAlgoTests.dir/source/test_quasicvx.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_quasicvx.cpp should add these lines:
+#include <xtensor/xaccessible.hpp>      // for xconst_accessible
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+#include "ellalgo/cut_config.hpp"       // for CInfo
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_quasicvx.cpp should remove these lines:
+- #include <limits>  // lines 8-8
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/test/source/test_quasicvx.cpp:
+#include <doctest/doctest.h>            // for ResultBuilder, Approx, CHECK
+#include <cmath>                        // for exp
+#include <ellalgo/cutting_plane.hpp>    // for cutting_plane_dc
+#include <ellalgo/ell.hpp>              // for ell
+#include <ellalgo/ell_stable.hpp>       // for ell_stable
+#include <tuple>                        // for get, tuple
+#include <xtensor/xaccessible.hpp>      // for xconst_accessible
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+#include "ellalgo/cut_config.hpp"       // for CInfo
+---
+
+[ 77%] Linking CXX executable EllAlgoTests
+[ 77%] Built target EllAlgoTests
+Consolidate compiler generated dependencies of target Bench_BM_lowpass
+[ 83%] Building CXX object bench/CMakeFiles/Bench_BM_lowpass.dir/BM_lowpass.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/bench/BM_lowpass.cpp should add these lines:
+#include <vector>                              // for vector, vector<>::size...
+#include <xtensor/xarray.hpp>                  // for xarray_container
+#include <xtensor/xbroadcast.hpp>              // for xbroadcast
+#include <xtensor/xbuilder.hpp>                // for concatenate, linspace
+#include <xtensor/xcontainer.hpp>              // for xcontainer
+#include <xtensor/xexception.hpp>              // for throw_concatenate_error
+#include <xtensor/xgenerator.hpp>              // for xgenerator
+#include <xtensor/xlayout.hpp>                 // for layout_type, layout_ty...
+#include <xtensor/xoperation.hpp>              // for xfunction_type_t, oper...
+#include <xtensor/xslice.hpp>                  // for xtuph, all, range, _
+#include <xtensor/xtensor_forward.hpp>         // for xarray
+#include <xtensor/xutils.hpp>                  // for accumulate
+#include "ellalgo/cut_config.hpp"              // for CInfo, Options
+
+/data/data/com.termux/files/home/github/ellalgo-cpp/bench/BM_lowpass.cpp should remove these lines:
+- #include <complex>  // lines 3-3
+- #include <limits>  // lines 8-8
+
+The full include-list for /data/data/com.termux/files/home/github/ellalgo-cpp/bench/BM_lowpass.cpp:
+#include <cmath>                               // for pow, log10, acos, cos
+#include <ellalgo/cutting_plane.hpp>           // for cutting_plane_dc
+#include <ellalgo/ell.hpp>                     // for ell
+#include <ellalgo/oracles/lowpass_oracle.hpp>  // for lowpass_oracle
+#include <ellalgo/utility.hpp>                 // for zeros
+#include <tuple>                               // for get, make_tuple
+#include <vector>                              // for vector, vector<>::size...
+#include <xtensor/xarray.hpp>                  // for xarray_container
+#include <xtensor/xbroadcast.hpp>              // for xbroadcast
+#include <xtensor/xbuilder.hpp>                // for concatenate, linspace
+#include <xtensor/xcontainer.hpp>              // for xcontainer
+#include <xtensor/xexception.hpp>              // for throw_concatenate_error
+#include <xtensor/xgenerator.hpp>              // for xgenerator
+#include <xtensor/xlayout.hpp>                 // for layout_type, layout_ty...
+#include <xtensor/xoperation.hpp>              // for xfunction_type_t, oper...
+#include <xtensor/xslice.hpp>                  // for xtuph, all, range, _
+#include <xtensor/xtensor_forward.hpp>         // for xarray
+#include <xtensor/xutils.hpp>                  // for accumulate
+#include <xtensor/xview.hpp>                   // for view, xview
+#include "benchmark/benchmark.h"               // for BENCHMARK, State, BENC...
+#include "ellalgo/cut_config.hpp"              // for CInfo, Options
+---
+
+[ 88%] Linking CXX executable BM_lowpass
+[ 88%] Built target Bench_BM_lowpass
+Consolidate compiler generated dependencies of target EllAlgoStandalone
+[ 94%] Building CXX object standalone/CMakeFiles/EllAlgoStandalone.dir/source/main.cpp.o
+[100%] Linking CXX executable EllAlgo
+[100%] Built target EllAlgoStandalone
