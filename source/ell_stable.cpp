@@ -1,7 +1,14 @@
-#include <cmath>
-#include <ellalgo/cut_config.hpp>
-#include <ellalgo/ell_assert.hpp>
-#include <ellalgo/ell_stable.hpp>
+#include <ellalgo/cut_config.hpp>       // for CUTStatus, CUTStatus::success
+#include <ellalgo/ell_stable.hpp>       // for ell_stable, ell_stable::Arr
+#include <tuple>                        // for tuple
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xcontainer.hpp>       // for xcontainer
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator-
+#include <xtensor/xsemantic.hpp>        // for xsemantic_base
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+
+#include "ellalgo/ell.hpp"  // for ell::Arr
 // #include <xtensor-blas/xlinalg.hpp>
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;

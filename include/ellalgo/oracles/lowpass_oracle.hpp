@@ -1,9 +1,10 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include <limits>
-#include <xtensor/xarray.hpp>
+#include <stddef.h>  // for size_t
 
+#include <tuple>               // for tuple
+#include <xtensor/xarray.hpp>  // for xarray
 // from itertools import chain
 
 /**

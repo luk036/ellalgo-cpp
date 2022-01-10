@@ -1,9 +1,13 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include <cmath>
-#include <tuple>
-#include <xtensor/xarray.hpp>
+#include <cmath>                        // for log
+#include <tuple>                        // for tuple
+#include <xtensor/xaccessible.hpp>      // for xconst_accessible, xaccessible
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator+
+#include <xtensor/xtensor_forward.hpp>  // for xarray
 
 /**
  * @brief Oracle for a profit maximization problem.

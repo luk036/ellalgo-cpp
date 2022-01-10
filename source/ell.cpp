@@ -1,7 +1,16 @@
-#include <cmath>
-#include <ellalgo/cut_config.hpp>  // for CUTStatus, CUTStatus::success
-#include <ellalgo/ell.hpp>         // for ell1d, ell1d::return_t
-#include <ellalgo/ell_assert.hpp>  // for ELL_UNLIKELY
+#include <cmath>                        // for sqrt
+#include <ellalgo/cut_config.hpp>       // for CUTStatus, CUTStatus::success
+#include <ellalgo/ell.hpp>              // for ell, ell::Arr
+#include <ellalgo/ell_assert.hpp>       // for ELL_UNLIKELY
+#include <tuple>                        // for tuple
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xcontainer.hpp>       // for xcontainer
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator-
+#include <xtensor/xsemantic.hpp>        // for xsemantic_base
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+
+#include "ellalgo/utility.hpp"  // for zeros
 // #include <xtensor-blas/xlinalg.hpp>
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;

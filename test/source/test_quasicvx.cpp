@@ -1,12 +1,17 @@
 // -*- coding: utf-8 -*-
-#include <doctest/doctest.h>
+#include <doctest/doctest.h>  // for ResultBuilder, Approx, CHECK
 
-#include <cmath>
-#include <ellalgo/cutting_plane.hpp>
-#include <ellalgo/ell.hpp>
-#include <ellalgo/ell_stable.hpp>
-#include <limits>
-#include <tuple>
+#include <cmath>                        // for exp
+#include <ellalgo/cutting_plane.hpp>    // for cutting_plane_dc
+#include <ellalgo/ell.hpp>              // for ell
+#include <ellalgo/ell_stable.hpp>       // for ell_stable
+#include <tuple>                        // for get, tuple
+#include <xtensor/xaccessible.hpp>      // for xconst_accessible
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+
+#include "ellalgo/cut_config.hpp"  // for CInfo
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 using Cut = std::tuple<Arr, double>;

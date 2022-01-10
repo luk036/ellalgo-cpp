@@ -1,16 +1,28 @@
 // -*- coding: utf-8 -*-
-#include <doctest/doctest.h>
+#include <doctest/doctest.h>  // for ResultBuilder, CHECK
 
-#include <cmath>
-#include <complex>
-#include <ellalgo/cutting_plane.hpp>
-#include <ellalgo/ell.hpp>
-#include <ellalgo/oracles/lowpass_oracle.hpp>
-#include <ellalgo/utility.hpp>
-#include <limits>
-#include <tuple>
+#include <ellalgo/cutting_plane.hpp>           // for cutting_plane_dc
+#include <ellalgo/ell.hpp>                     // for ell
+#include <ellalgo/oracles/lowpass_oracle.hpp>  // for lowpass_oracle
+#include <ellalgo/utility.hpp>                 // for zeros
 // #include <xtensor-blas/xlinalg.hpp>
-#include <xtensor/xview.hpp>
+#include <cmath>                        // for pow, log10, acos, cos
+#include <tuple>                        // for get, make_tuple
+#include <vector>                       // for vector, vector<>::size...
+#include <xtensor/xarray.hpp>           // for xarray_container
+#include <xtensor/xbroadcast.hpp>       // for xbroadcast
+#include <xtensor/xbuilder.hpp>         // for concatenate, linspace
+#include <xtensor/xcontainer.hpp>       // for xcontainer
+#include <xtensor/xexception.hpp>       // for throw_concatenate_error
+#include <xtensor/xgenerator.hpp>       // for xgenerator
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_ty...
+#include <xtensor/xoperation.hpp>       // for xfunction_type_t, oper...
+#include <xtensor/xslice.hpp>           // for xtuph, all, range, _
+#include <xtensor/xtensor_forward.hpp>  // for xarray
+#include <xtensor/xutils.hpp>           // for accumulate
+#include <xtensor/xview.hpp>            // for view, xview
+
+#include "ellalgo/cut_config.hpp"  // for CInfo, Options
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 

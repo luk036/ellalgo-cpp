@@ -1,5 +1,15 @@
 #include <ellalgo/oracles/lowpass_oracle.hpp>
-#include <xtensor/xview.hpp>
+#include <type_traits>              // for move
+#include <xtensor/xaccessible.hpp>  // for xconst_accessible, xaccessible
+#include <xtensor/xarray.hpp>       // for xarray_container
+#include <xtensor/xbroadcast.hpp>   // for xbroadcast
+#include <xtensor/xbuilder.hpp>     // for zeros
+#include <xtensor/xcontainer.hpp>   // for xcontainer<>::inner_shape_type
+#include <xtensor/xmath.hpp>        // for sum
+#include <xtensor/xoperation.hpp>   // for xfunction_type_t, operator*, oper...
+#include <xtensor/xreducer.hpp>     // for xreducer
+#include <xtensor/xslice.hpp>       // for all
+#include <xtensor/xview.hpp>        // for xview, view
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 using ParallelCut = std::tuple<Arr, Arr>;

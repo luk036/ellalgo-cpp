@@ -1,3 +1,6 @@
+#include <math.h>  // for abs
+
+#include <cstdlib>                       // for abs
 #include <ellalgo/cut_config.hpp>        // for CUTStatus, CUTStatus::success
 #include <ellalgo/ell1d.hpp>             // for ell1d, ell1d::return_t
 #include <ellalgo/ell_assert.hpp>        // for ELL_UNLIKELY

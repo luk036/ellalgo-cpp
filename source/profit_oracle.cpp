@@ -1,4 +1,9 @@
 #include <ellalgo/oracles/profit_oracle.hpp>
+#include <type_traits>             // for move
+#include <xtensor/xcontainer.hpp>  // for xcontainer
+#include <xtensor/xfunction.hpp>   // for xfunction
+#include <xtensor/xiterator.hpp>   // for linear_begin
+#include <xtensor/xmath.hpp>       // for exp, log, round, exp_fun
 // #include <xtensor-blas/xlinalg.hpp>
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;

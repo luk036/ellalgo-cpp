@@ -1,13 +1,21 @@
 /*
  *  Distributed under the MIT License (See accompanying file /LICENSE )
  */
-#include <doctest/doctest.h>
+#include <doctest/doctest.h>  // for ResultBuilder, CHECK
 
-#include <ellalgo/cutting_plane.hpp>
-#include <ellalgo/ell.hpp>
-#include <ellalgo/ell_stable.hpp>
-#include <ellalgo/oracles/profit_oracle.hpp>
-#include <xtensor/xarray.hpp>
+#include <cmath>                              // for log
+#include <ellalgo/cutting_plane.hpp>          // for cutting_plane_dc, cutti...
+#include <ellalgo/ell.hpp>                    // for ell
+#include <ellalgo/ell_stable.hpp>             // for ell_stable
+#include <ellalgo/oracles/profit_oracle.hpp>  // for profit_oracle, profit_r...
+#include <tuple>                              // for get
+#include <type_traits>                        // for move, remove_reference<...
+#include <xtensor/xaccessible.hpp>            // for xconst_accessible
+#include <xtensor/xarray.hpp>                 // for xarray_container
+#include <xtensor/xlayout.hpp>                // for layout_type, layout_typ...
+#include <xtensor/xtensor_forward.hpp>        // for xarray
+
+#include "ellalgo/cut_config.hpp"  // for CInfo
 
 // using namespace fun;
 
