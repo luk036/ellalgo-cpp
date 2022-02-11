@@ -70,7 +70,7 @@ template <typename T> auto ell_stable::update(const std::tuple<Arr, T>& cut)
 
     // rank-one update: 3*n + (n-1)*n/2
     // const auto r = this->_sigma / omega;
-    const auto mu = this->_sigma / (1. - this->_sigma);
+    const auto mu = this->_sigma / (1.0 - this->_sigma);
     auto oldt = omega / mu;  // initially
     const auto m = this->_n - 1;
     for (auto j = 0; j != m; ++j) {

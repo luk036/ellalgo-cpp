@@ -19,7 +19,7 @@ using Cut = std::tuple<Arr, double>;
 auto profit_oracle::operator()(const Arr& y, double& t) const -> std::tuple<Cut, bool> {
     // y0 <= log k
     const auto f1 = y[0] - this->_log_k;
-    if (f1 > 0.) {
+    if (f1 > 0.0) {
         return {{Arr{1., 0.}, f1}, false};
     }
 
@@ -29,7 +29,7 @@ auto profit_oracle::operator()(const Arr& y, double& t) const -> std::tuple<Cut,
     auto te = t + vx;
 
     auto fj = std::log(te) - log_Cobb;
-    if (fj < 0.) {
+    if (fj < 0.0) {
         te = std::exp(log_Cobb);
         t = te - vx;
         Arr g = (this->_v * x) / te - this->_a;
@@ -48,10 +48,10 @@ auto profit_q_oracle::operator()(const Arr& y, double& t, bool retry)
     -> std::tuple<Cut, bool, Arr, bool> {
     if (!retry) {
         Arr x = xt::round(xt::exp(y));
-        if (x[0] == 0.) {
+        if (x[0] == 0.0) {
             x[0] = 1.;  // nearest integer than 0
         }
-        if (x[1] == 0.) {
+        if (x[1] == 0.0) {
             x[1] = 1.;
         }
         this->_yd = xt::log(x);

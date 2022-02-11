@@ -27,20 +27,20 @@ auto my_oracle(const Arr& z, double& t) -> std::tuple<Cut, bool> {
 
     // constraint 1: x + y <= 3
     auto fj = x + y - 3.;
-    if (fj > 0.) {
+    if (fj > 0.0) {
         return {{Arr{1., 1.}, fj}, false};
     }
 
     // constraint 2: x - y >= 1
     fj = -x + y + 1.;
-    if (fj > 0.) {
+    if (fj > 0.0) {
         return {{Arr{-1., 1.}, fj}, false};
     }
 
     // objective: maximize x + y
     auto f0 = x + y;
     fj = t - f0;
-    if (fj < 0.) {
+    if (fj < 0.0) {
         t = f0;
         return {{Arr{-1., -1.}, 0.}, true};
     }
@@ -54,7 +54,7 @@ TEST_CASE("Example 1, test feasible") {
     const auto result = cutting_plane_dc(P, E, t);
     const auto& x = std::get<0>(result);
     const auto& ell_info = std::get<1>(result);
-    CHECK(x[0] >= 0.);
+    CHECK(x[0] >= 0.0);
     CHECK(ell_info.feasible);
 }
 
@@ -72,7 +72,7 @@ TEST_CASE("Example 1, test infeasible 1") {
 TEST_CASE("Example 1, test infeasible 2") {
     ell_stable E{10., Arr{0., 0.}};
     const auto P = my_oracle;
-    const auto result = cutting_plane_dc(P, E, 100.);  // wrong initial guess
+    const auto result = cutting_plane_dc(P, E, 100.0);  // wrong initial guess
     const auto& ell_info = std::get<1>(result);
     CHECK(!ell_info.feasible);
 }

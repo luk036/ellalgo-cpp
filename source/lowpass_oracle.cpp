@@ -101,7 +101,7 @@ auto lowpass_oracle::operator()(const Arr& x, double& Spsq) const -> std::tuple<
             k = 0;  // round robin
         }
         auto v = xt::sum(xt::view(this->_Anr, k, xt::all()) * x)();
-        if (v < 0.) {
+        if (v < 0.0) {
             Arr f{-v};
             Arr g = -xt::view(this->_Anr, k, xt::all());
             this->_i_Anr = k + 1;

@@ -20,9 +20,9 @@ auto ell1d::update(const std::tuple<double, double>& cut) noexcept -> ell1d::ret
     const auto tau = ::my_abs(this->_r * g);
     const auto tsq = tau * tau;
 
-    if (beta == 0.) {
+    if (beta == 0.0) {
         this->_r /= 2;
-        this->_xc += g > 0. ? -this->_r : this->_r;
+        this->_xc += g > 0.0 ? -this->_r : this->_r;
         return {CUTStatus::success, tsq};
     }
     if (beta > tau) {
@@ -33,8 +33,8 @@ auto ell1d::update(const std::tuple<double, double>& cut) noexcept -> ell1d::ret
     }
 
     const auto bound = this->_xc - beta / g;
-    const auto u = g > 0. ? bound : this->_xc + this->_r;
-    const auto l = g > 0. ? this->_xc - this->_r : bound;
+    const auto u = g > 0.0 ? bound : this->_xc + this->_r;
+    const auto l = g > 0.0 ? this->_xc - this->_r : bound;
 
     this->_r = algo::half_nonnegative(u - l);
     this->_xc = l + this->_r;

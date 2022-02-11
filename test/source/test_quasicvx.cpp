@@ -29,7 +29,7 @@ auto my_quasicvx_oracle(const Arr& z, double& t) -> std::tuple<Cut, bool> {
 
     // constraint 1: exp(x) <= y, or sqrtx**2 <= ly
     auto fj = sqrtx * sqrtx - ly;
-    if (fj > 0.) {
+    if (fj > 0.0) {
         return {{Arr{2 * sqrtx, -1.}, fj}, false};
     }
 
@@ -37,7 +37,7 @@ auto my_quasicvx_oracle(const Arr& z, double& t) -> std::tuple<Cut, bool> {
     auto tmp2 = std::exp(ly);
     auto tmp3 = t * tmp2;
     fj = -sqrtx + tmp3;
-    if (fj < 0.)  // feasible
+    if (fj < 0.0)  // feasible
     {
         t = sqrtx / tmp2;
         return {{Arr{-1., sqrtx}, 0}, true};

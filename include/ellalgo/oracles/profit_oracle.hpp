@@ -119,8 +119,8 @@ class profit_rb_oracle {
      */
     auto operator()(const Arr& y, double& t) {
         auto a_rb = this->_a;
-        a_rb[0] += y[0] > 0. ? -this->_uie[0] : this->_uie[0];
-        a_rb[1] += y[1] > 0. ? -this->_uie[1] : this->_uie[1];
+        a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
+        a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
         this->_P._a = a_rb;
         return this->_P(y, t);
     }
