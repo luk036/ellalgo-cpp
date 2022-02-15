@@ -20,7 +20,7 @@ auto profit_oracle::operator()(const Arr& y, double& t) const -> std::tuple<Cut,
     // y0 <= log k
     const auto f1 = y[0] - this->_log_k;
     if (f1 > 0.0) {
-        return {{Arr{1., 0.}, f1}, false};
+        return {{Arr{1.0, 0.0}, f1}, false};
     }
 
     const auto log_Cobb = this->_log_pA + this->_a(0) * y(0) + this->_a(1) * y(1);
@@ -33,7 +33,7 @@ auto profit_oracle::operator()(const Arr& y, double& t) const -> std::tuple<Cut,
         te = std::exp(log_Cobb);
         t = te - vx;
         Arr g = (this->_v * x) / te - this->_a;
-        return {{std::move(g), 0.}, true};
+        return {{std::move(g), 0.0}, true};
     }
     Arr g = (this->_v * x) / te - this->_a;
     return {{std::move(g), fj}, false};

@@ -56,7 +56,7 @@ auto ell::_calc_ll_core(const double& b0, const double& b1) -> CUTStatus {
     const auto xi = std::sqrt(t0n * t1n + tempn * tempn);
     this->_sigma = this->_c3 + (1.0 - b0b1n - xi) / (bsumn * bav) / this->_nPlus1;
     this->_rho = this->_sigma * bav;
-    this->_delta = this->_c1 * ((t0n + t1n) / 2. + xi / this->_nFloat);
+    this->_delta = this->_c1 * ((t0n + t1n) / 2.0 + xi / this->_nFloat);
     return CUTStatus::success;
 }
 
@@ -72,7 +72,7 @@ void ell::_calc_ll_cc(const double& b1, const double& b1sqn) {
     const auto xi = std::sqrt(1.0 - b1sqn + temp * temp);
     this->_sigma = this->_c3 + this->_c2 * (1.0 - xi) / b1sqn;
     this->_rho = this->_sigma * b1 / 2;
-    this->_delta = this->_c1 * (1.0 - b1sqn / 2. + xi / this->_nFloat);
+    this->_delta = this->_c1 * (1.0 - b1sqn / 2.0 + xi / this->_nFloat);
 }
 
 /**
@@ -101,7 +101,7 @@ auto ell::_calc_dc(const double& beta) noexcept -> CUTStatus {
 
     this->_mu = (bdiff / gamma) * this->_halfNminus1;
     this->_rho = gamma / this->_nPlus1;
-    this->_sigma = 2. * this->_rho / (tau + beta);
+    this->_sigma = 2.0 * this->_rho / (tau + beta);
     this->_delta = this->_c1 * (1.0 - beta * (beta / this->_tsq));
     return CUTStatus::success;
 }

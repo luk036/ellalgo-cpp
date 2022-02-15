@@ -112,7 +112,7 @@ auto lowpass_oracle::operator()(const Arr& x, double& Spsq) const -> std::tuple<
     // Begin objective function
     // Spsq, imax = w.max(), w.argmax(); // update best so far Spsq
     Spsq = fmax;
-    Arr f{0., fmax};  // ???
+    Arr f{0.0, fmax};  // ???
     // f = 0
     Arr g = xt::view(this->_As, imax, xt::all());
     return {{std::move(g), std::move(f)}, true};

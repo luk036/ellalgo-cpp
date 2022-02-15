@@ -28,13 +28,13 @@ auto my_oracle(const Arr& z, double& t) -> std::tuple<Cut, bool> {
     // constraint 1: x + y <= 3
     auto fj = x + y - 3.;
     if (fj > 0.0) {
-        return {{Arr{1., 1.}, fj}, false};
+        return {{Arr{1.0, 1.0}, fj}, false};
     }
 
     // constraint 2: x - y >= 1
     fj = -x + y + 1.;
     if (fj > 0.0) {
-        return {{Arr{-1., 1.}, fj}, false};
+        return {{Arr{-1.0, 1.0}, fj}, false};
     }
 
     // objective: maximize x + y
@@ -42,13 +42,13 @@ auto my_oracle(const Arr& z, double& t) -> std::tuple<Cut, bool> {
     fj = t - f0;
     if (fj < 0.0) {
         t = f0;
-        return {{Arr{-1., -1.}, 0.}, true};
+        return {{Arr{-1.0, -1.0}, 0.0}, true};
     }
-    return {{Arr{-1., -1.}, fj}, false};
+    return {{Arr{-1.0, -1.0}, fj}, false};
 }
 
 TEST_CASE("Example 1, test feasible") {
-    ell_stable E{10., Arr{0., 0.}};
+    ell_stable E{10.0, Arr{0.0, 0.0}};
     const auto P = my_oracle;
     auto t = -1.e100;  // std::numeric_limits<double>::min()
     const auto result = cutting_plane_dc(P, E, t);
@@ -59,7 +59,7 @@ TEST_CASE("Example 1, test feasible") {
 }
 
 TEST_CASE("Example 1, test infeasible 1") {
-    ell_stable E{10., Arr{100., 100.}};  // wrong initial guess
+    ell_stable E{10.0, Arr{100.0, 100.0}};  // wrong initial guess
                                          // or ellipsoid is too small
     const auto P = my_oracle;
     auto t = -1.e100;  // std::numeric_limits<double>::min()
@@ -70,7 +70,7 @@ TEST_CASE("Example 1, test infeasible 1") {
 }
 
 TEST_CASE("Example 1, test infeasible 2") {
-    ell_stable E{10., Arr{0., 0.}};
+    ell_stable E{10.0, Arr{0.0, 0.0}};
     const auto P = my_oracle;
     const auto result = cutting_plane_dc(P, E, 100.0);  // wrong initial guess
     const auto& ell_info = std::get<1>(result);

@@ -30,7 +30,7 @@ auto my_quasicvx_oracle(const Arr& z, double& t) -> std::tuple<Cut, bool> {
     // constraint 1: exp(x) <= y, or sqrtx**2 <= ly
     auto fj = sqrtx * sqrtx - ly;
     if (fj > 0.0) {
-        return {{Arr{2 * sqrtx, -1.}, fj}, false};
+        return {{Arr{2 * sqrtx, -1.0}, fj}, false};
     }
 
     // constraint 2: x - y >= 1
@@ -40,14 +40,14 @@ auto my_quasicvx_oracle(const Arr& z, double& t) -> std::tuple<Cut, bool> {
     if (fj < 0.0)  // feasible
     {
         t = sqrtx / tmp2;
-        return {{Arr{-1., sqrtx}, 0}, true};
+        return {{Arr{-1.0, sqrtx}, 0}, true};
     }
 
-    return {{Arr{-1., tmp3}, fj}, false};
+    return {{Arr{-1.0, tmp3}, fj}, false};
 }
 
 TEST_CASE("Quasiconvex 1, test feasible") {
-    ell E{10., Arr{0., 0.}};
+    ell E{10.0, Arr{0.0, 0.0}};
 
     const auto P = my_quasicvx_oracle;
     auto t = 0.;
@@ -61,7 +61,7 @@ TEST_CASE("Quasiconvex 1, test feasible") {
 }
 
 TEST_CASE("Quasiconvex 1, test feasible (stable)") {
-    ell_stable E{10., Arr{0., 0.}};
+    ell_stable E{10.0, Arr{0.0, 0.0}};
     const auto P = my_quasicvx_oracle;
     auto t = 0.;
     const auto result = cutting_plane_dc(P, E, t);

@@ -68,14 +68,14 @@ class ell {
     template <typename V, typename U> ell(V&& kappa, Arr&& Q, U&& x) noexcept
         : _n{int(x.size())},
           _nFloat{double(_n)},
-          _nPlus1{_nFloat + 1.},
-          _nMinus1{_nFloat - 1.},
-          _halfN{_nFloat / 2.},
-          _halfNplus1{_nPlus1 / 2.},
-          _halfNminus1{_nMinus1 / 2.},
+          _nPlus1{_nFloat + 1.0},
+          _nMinus1{_nFloat - 1.0},
+          _halfN{_nFloat / 2.0},
+          _halfNplus1{_nPlus1 / 2.0},
+          _halfNminus1{_nMinus1 / 2.0},
           _nSq{_nFloat * _nFloat},
-          _c1{_nSq / (_nSq - 1)},
-          _c2{2. / _nPlus1},
+          _c1{_nSq / (_nSq - 1.0)},
+          _c2{2.0 / _nPlus1},
           _c3{_nFloat / _nPlus1},
           _kappa{std::forward<V>(kappa)},
           _Q{std::move(Q)},
@@ -88,7 +88,7 @@ class ell {
      * @param[in] val
      * @param[in] x
      */
-    ell(const Arr& val, Arr x) noexcept : ell{1., xt::diag(val), std::move(x)} {}
+    ell(const Arr& val, Arr x) noexcept : ell{1.0, xt::diag(val), std::move(x)} {}
 
     /**
      * @brief Construct a new ell object

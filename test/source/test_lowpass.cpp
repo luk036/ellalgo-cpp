@@ -97,7 +97,7 @@ struct filter_design_construct {
         Arr An = xt::zeros<double>({m, N - 1});
         for (auto i = 0; i != m; ++i) {
             for (auto j = 0; j != N - 1; ++j) {
-                An(i, j) = 2. * std::cos(w(i) * (j + 1));
+                An(i, j) = 2.0 * std::cos(w(i) * (j + 1));
             }
         }
         Arr A = xt::concatenate(xt::xtuple(xt::ones<double>({m, 1}), An), 1);
@@ -135,7 +135,7 @@ auto run_lowpass(bool use_parallel_cut) {
     static const filter_design_construct Fdc{};
 
     auto r0 = zeros({Fdc.N});  // initial x0
-    ell E(40., r0);
+    ell E(40.0, r0);
     lowpass_oracle P(Fdc.Ap, Fdc.As, Fdc.Anr, Fdc.Lpsq, Fdc.Upsq);
     auto options = Options();
 

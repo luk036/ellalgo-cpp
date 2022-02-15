@@ -21,8 +21,8 @@ using Cut = std::tuple<Arr, double>;
  * @return std::optional<Cut>
  */
 auto my_oracle2(const Arr& z) -> Cut* {
-    static auto cut1 = Cut{Arr{1., 1.}, 0.};
-    static auto cut2 = Cut{Arr{-1., 1.}, 0.};
+    static auto cut1 = Cut{Arr{1.0, 1.0}, 0.0};
+    static auto cut2 = Cut{Arr{-1.0, 1.0}, 0.0};
 
     auto x = z[0];
     auto y = z[1];
@@ -45,7 +45,7 @@ auto my_oracle2(const Arr& z) -> Cut* {
 }
 
 TEST_CASE("Example 2") {
-    ell_stable E{10., Arr{0., 0.}};
+    ell_stable E{10.0, Arr{0.0, 0.0}};
 
     const auto P = my_oracle2;
     auto ell_info = cutting_plane_feas(P, E);
