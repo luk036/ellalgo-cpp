@@ -50,7 +50,7 @@ TEST_CASE("Quasiconvex 1, test feasible") {
     ell E{10.0, Arr{0.0, 0.0}};
 
     const auto P = my_quasicvx_oracle;
-    auto t = 0.;
+    auto t = 0.0;
     const auto result = cutting_plane_dc(P, E, t);
     const auto& x = std::get<0>(result);
     const auto& ell_info = std::get<1>(result);
@@ -63,7 +63,7 @@ TEST_CASE("Quasiconvex 1, test feasible") {
 TEST_CASE("Quasiconvex 1, test feasible (stable)") {
     ell_stable E{10.0, Arr{0.0, 0.0}};
     const auto P = my_quasicvx_oracle;
-    auto t = 0.;
+    auto t = 0.0;
     const auto result = cutting_plane_dc(P, E, t);
     const auto& ell_info = std::get<1>(result);
     CHECK(ell_info.feasible);

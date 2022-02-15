@@ -28,14 +28,14 @@ auto my_oracle2(const Arr& z) -> Cut* {
     auto y = z[1];
 
     // constraint 1: x + y <= 3
-    auto fj = x + y - 3.;
+    auto fj = x + y - 3.0;
     if (fj > 0.0) {
         std::get<1>(cut1) = fj;
         return &cut1;
     }
 
     // constraint 2: x - y >= 1
-    fj = -x + y + 1.;
+    fj = -x + y + 1.0;
     if (fj > 0.0) {
         std::get<1>(cut2) = fj;
         return &cut2;

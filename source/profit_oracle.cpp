@@ -49,10 +49,10 @@ auto profit_q_oracle::operator()(const Arr& y, double& t, bool retry)
     if (!retry) {
         Arr x = xt::round(xt::exp(y));
         if (x[0] == 0.0) {
-            x[0] = 1.;  // nearest integer than 0
+            x[0] = 1.0;  // nearest integer than 0
         }
         if (x[1] == 0.0) {
-            x[1] = 1.;
+            x[1] = 1.0;
         }
         this->_yd = xt::log(x);
     }

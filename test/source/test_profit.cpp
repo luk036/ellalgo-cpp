@@ -22,8 +22,8 @@
 TEST_CASE("Profit Test") {
     using Vec = xt::xarray<double, xt::layout_type::row_major>;
 
-    const auto p = 20.;
-    const auto A = 40.;
+    const auto p = 20.0;
+    const auto A = 40.0;
     const auto k = 30.5;
     const auto a = Vec{0.1, 0.4};
     const auto v = Vec{10.0, 35.0};
@@ -63,8 +63,8 @@ TEST_CASE("Profit Test") {
 TEST_CASE("Profit Test (Stable)") {
     using Vec = xt::xarray<double, xt::layout_type::row_major>;
 
-    const auto p = 20.;
-    const auto A = 40.;
+    const auto p = 20.0;
+    const auto A = 40.0;
     const auto k = 30.5;
     const auto a = Vec{0.1, 0.4};
     const auto v = Vec{10.0, 35.0};

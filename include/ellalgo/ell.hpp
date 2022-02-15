@@ -5,6 +5,7 @@
 #include <ellalgo/utility.hpp>
 #include <tuple>
 #include <xtensor/xarray.hpp>
+#include "ell_calc.hpp"
 
 // forward declaration
 enum class CUTStatus;
@@ -22,29 +23,11 @@ class ell {
     // using params_t = std::tuple<double, double, double>;
     // using return_t = std::tuple<int, params_t>;
 
-    bool use_parallel_cut = true;
     bool no_defer_trick = false;
 
-  protected:
-    double _mu{};
-    double _rho{};
-    double _sigma{};
-    double _delta{};
-    double _tsq{};
-
+  private:
     const int _n;
-
-    const double _nFloat;
-    const double _nPlus1;
-    const double _nMinus1;
-    const double _halfN;
-    const double _halfNplus1;
-    const double _halfNminus1;
-    const double _nSq;
-    const double _c1;
-    const double _c2;
-    const double _c3;
-
+    ell_calc _helper;
     double _kappa;
     Arr _Q;
     Arr _xc;
@@ -67,16 +50,7 @@ class ell {
      */
     template <typename V, typename U> ell(V&& kappa, Arr&& Q, U&& x) noexcept
         : _n{int(x.size())},
-          _nFloat{double(_n)},
-          _nPlus1{_nFloat + 1.0},
-          _nMinus1{_nFloat - 1.0},
-          _halfN{_nFloat / 2.0},
-          _halfNplus1{_nPlus1 / 2.0},
-          _halfNminus1{_nMinus1 / 2.0},
-          _nSq{_nFloat * _nFloat},
-          _c1{_nSq / (_nSq - 1.0)},
-          _c2{2.0 / _nPlus1},
-          _c3{_nFloat / _nPlus1},
+          _helper{double(_n)},
           _kappa{std::forward<V>(kappa)},
           _Q{std::move(Q)},
           _xc{std::forward<U>(x)} {}
@@ -141,6 +115,8 @@ class ell {
      */
     void set_xc(const Arr& xc) { _xc = xc; }
 
+    void set_use_parallel_cut(bool value) { this->_helper.use_parallel_cut = value; }
+
     /**
      * @brief Update ellipsoid core function using the cut(s)
      *
@@ -152,53 +128,12 @@ class ell {
         -> std::tuple<CUTStatus, double>;
 
   protected:
-    auto _update_cut(const double& beta) -> CUTStatus { return this->_calc_dc(beta); }
+    auto _update_cut(const double& beta) -> CUTStatus { return this->_helper._calc_dc(beta); }
 
-    CUTStatus _update_cut(const Arr& beta) {  // parallel cut
+    auto _update_cut(const Arr& beta) -> CUTStatus {  // parallel cut
         if (beta.shape()[0] < 2) {
-            return this->_calc_dc(beta[0]);
+            return this->_helper._calc_dc(beta[0]);
         }
-        return this->_calc_ll_core(beta[0], beta[1]);
+        return this->_helper._calc_ll_core(beta[0], beta[1]);
     }
-
-    /**
-     * @brief Calculate new ellipsoid under Parallel Cut
-     *
-     *        g' (x - xc) + beta0 \le 0
-     *        g' (x - xc) + beta1 \ge 0
-     *
-     * @param[in] b0
-     * @param[in] b1
-     * @return int
-     */
-    auto _calc_ll_core(const double& b0, const double& b1) -> CUTStatus;
-
-    /**
-     * @brief Calculate new ellipsoid under Parallel Cut, one of them is central
-     *
-     *        g' (x - xc) \le 0
-     *        g' (x - xc) + beta1 \ge 0
-     *
-     * @param[in] b1
-     * @param[in] b1sq
-     */
-    auto _calc_ll_cc(const double& b1, const double& b1sq) -> void;
-
-    /**
-     * @brief Calculate new ellipsoid under Deep Cut
-     *
-     *        g' (x - xc) + beta \le 0
-     *
-     * @param[in] beta
-     */
-    auto _calc_dc(const double& beta) noexcept -> CUTStatus;
-
-    /**
-     * @brief Calculate new ellipsoid under Central Cut
-     *
-     *        g' (x - xc) \le 0
-     *
-     * @param[in] tau
-     */
-    auto _calc_cc(const double& tau) noexcept -> void;
 };  // } ell

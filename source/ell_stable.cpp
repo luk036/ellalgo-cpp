@@ -1,5 +1,7 @@
+#include <cmath>                        // for sqrt
 #include <ellalgo/cut_config.hpp>       // for CUTStatus, CUTStatus::success
-#include <ellalgo/ell_stable.hpp>       // for ell_stable, ell_stable::Arr
+#include <ellalgo/ell_stable.hpp>              // for ell_stable, ell_stable::Arr
+#include <ellalgo/ell_assert.hpp>       // for ELL_UNLIKELY
 #include <tuple>                        // for tuple
 #include <xtensor/xarray.hpp>           // for xarray_container
 #include <xtensor/xcontainer.hpp>       // for xcontainer
@@ -8,7 +10,7 @@
 #include <xtensor/xsemantic.hpp>        // for xsemantic_base
 #include <xtensor/xtensor_forward.hpp>  // for xarray
 
-#include "ellalgo/ell.hpp"  // for ell::Arr
+#include "ellalgo/utility.hpp"  // for zeros
 // #include <xtensor-blas/xlinalg.hpp>
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
@@ -16,7 +18,7 @@ using Arr = xt::xarray<double, xt::layout_type::row_major>;
 /**
  * @brief Update ellipsoid core function using the cut
  *
- *        g' * (x - xc) + beta <= 0
+ *        grad' * (x - xc) + beta <= 0
  *
  * @tparam T
  * @param[in] cut
@@ -24,7 +26,7 @@ using Arr = xt::xarray<double, xt::layout_type::row_major>;
  */
 template <typename T> auto ell_stable::update(const std::tuple<Arr, T>& cut)
     -> std::tuple<CUTStatus, double> {
-    // const auto& [g, beta] = cut;
+    // const auto& [grad, beta] = cut;
     const auto& grad = std::get<0>(cut);
     const auto& beta = std::get<1>(cut);
     // calculate inv(L)*grad: (n-1)*n/2 multiplications
@@ -45,16 +47,16 @@ template <typename T> auto ell_stable::update(const std::tuple<Arr, T>& cut)
 
     // calculate omega: n
     Arr gQg{invDinvLg};  // initially
-    auto omega = 0.;     // initially
+    auto omega = 0.0;     // initially
     for (auto i = 0; i != this->_n; ++i) {
         gQg(i) *= invLg(i);
         omega += gQg(i);
     }
 
-    this->_tsq = this->_kappa * omega;
+    this->_helper._tsq = this->_kappa * omega;
     auto status = this->_update_cut(beta);
     if (status != CUTStatus::success) {
-        return {status, this->_tsq};
+        return {status, this->_helper._tsq};
     }
 
     // calculate Q*grad = inv(L')*inv(D)*inv(L)*grad : (n-1)*n/2
@@ -66,11 +68,11 @@ template <typename T> auto ell_stable::update(const std::tuple<Arr, T>& cut)
     }
 
     // calculate xc: n
-    this->_xc -= (this->_rho / omega) * Qg;
+    this->_xc -= (this->_helper._rho / omega) * Qg;
 
     // rank-one update: 3*n + (n-1)*n/2
     // const auto r = this->_sigma / omega;
-    const auto mu = this->_sigma / (1.0 - this->_sigma);
+    const auto mu = this->_helper._sigma / (1.0 - this->_helper._sigma);
     auto oldt = omega / mu;  // initially
     const auto m = this->_n - 1;
     for (auto j = 0; j != m; ++j) {
@@ -93,14 +95,14 @@ template <typename T> auto ell_stable::update(const std::tuple<Arr, T>& cut)
     const auto t = oldt + gQg(m);
     this->_Q(m, m) *= oldt / t;  // update invD
 
-    this->_kappa *= this->_delta;
+    this->_kappa *= this->_helper._delta;
 
     // if (this->no_defer_trick)
     // {
     //     this->_Q *= this->_kappa;
-    //     this->_kappa = 1.;
+    //     this->_kappa = 1.0;
     // }
-    return {status, this->_tsq};  // g++-7 is ok
+    return {status, this->_helper._tsq};  // g++-7 is ok
 }
 
 // Instantiation

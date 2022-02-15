@@ -26,13 +26,13 @@ auto my_oracle(const Arr& z, double& t) -> std::tuple<Cut, bool> {
     auto y = z[1];
 
     // constraint 1: x + y <= 3
-    auto fj = x + y - 3.;
+    auto fj = x + y - 3.0;
     if (fj > 0.0) {
         return {{Arr{1.0, 1.0}, fj}, false};
     }
 
     // constraint 2: x - y >= 1
-    fj = -x + y + 1.;
+    fj = -x + y + 1.0;
     if (fj > 0.0) {
         return {{Arr{-1.0, 1.0}, fj}, false};
     }

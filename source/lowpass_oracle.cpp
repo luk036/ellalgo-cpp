@@ -26,7 +26,7 @@ auto lowpass_oracle::operator()(const Arr& x, double& Spsq) const -> std::tuple<
     // case 1,
     if (x[0] < 0) {
         Arr g = xt::zeros<double>({x.size()});
-        g[0] = -1.;
+        g[0] = -1.0;
         Arr f = -x[0];
         return {{std::move(g), std::move(f)}, false};
     }
