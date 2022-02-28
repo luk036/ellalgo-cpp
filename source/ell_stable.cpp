@@ -76,22 +76,15 @@ template <typename T> auto ell_stable::update(const std::tuple<Arr, T>& cut)
     auto oldt = omega / mu;  // initially
     const auto m = this->_n - 1;
     for (auto j = 0; j != m; ++j) {
-        // p=sqrt(k)*vv(j);
-        // const auto p = invLg(j);
-        // const auto mup = mu * p;
         const auto t = oldt + gQg(j);
-        // this->_Q(j, j) /= t; // update invD
         const auto beta2 = invDinvLg(j) / t;
         this->_Q(j, j) *= oldt / t;  // update invD
         for (auto l = j + 1; l != this->_n; ++l) {
-            // v(l) -= p * this->_Q(j, l);
             this->_Q(j, l) += beta2 * this->_Q(l, j);
         }
         oldt = t;
     }
 
-    // const auto p = invLg(n1);
-    // const auto mup = mu * p;
     const auto t = oldt + gQg(m);
     this->_Q(m, m) *= oldt / t;  // update invD
 

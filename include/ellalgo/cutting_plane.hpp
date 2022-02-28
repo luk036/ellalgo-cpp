@@ -26,19 +26,19 @@
  *
  * @tparam Oracle
  * @tparam Space
- * @param[in,out] Omega perform assessment on x0
+ * @param[in,out] omega perform assessment on x0
  * @param[in,out] S     search Space containing x*
  * @param[in] options   maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
 template <typename Oracle, typename Space>
-auto cutting_plane_feas(Oracle&& Omega, Space&& S, const Options& options = Options()) -> CInfo {
+auto cutting_plane_feas(Oracle&& omega, Space&& S, const Options& options = Options()) -> CInfo {
     auto feasible = false;
-    auto status = CUTStatus::success;
+    auto status = CUTStatus::nosoln;
 
     auto niter = 0U;
     while (++niter != options.max_it) {
-        const auto cut = Omega(S.xc());  // query the oracle at S.xc()
+        const auto cut = omega(S.xc());  // query the oracle at S.xc()
         if (!cut) {                      // feasible sol'n obtained
             feasible = true;
             break;
@@ -65,21 +65,21 @@ auto cutting_plane_feas(Oracle&& Omega, Space&& S, const Options& options = Opti
  * @tparam Oracle
  * @tparam Space
  * @tparam opt_type
- * @param[in,out] Omega perform assessment on x0
+ * @param[in,out] omega perform assessment on x0
  * @param[in,out] S     search Space containing x*
  * @param[in,out] t     best-so-far optimal sol'n
  * @param[in] options   maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
 template <typename Oracle, typename Space, typename opt_type>
-auto cutting_plane_dc(Oracle&& Omega, Space&& S, opt_type&& t, const Options& options = Options()) {
+auto cutting_plane_dc(Oracle&& omega, Space&& S, opt_type&& t, const Options& options = Options()) {
     const auto t_orig = t;
     decltype(S.xc()) x_best;
     auto status = CUTStatus::success;
 
     auto niter = 0U;
     while (++niter != options.max_it) {
-        const auto result1 = Omega(S.xc(), t);
+        const auto result1 = omega(S.xc(), t);
         const auto& cut = std::get<0>(result1);
         const auto& shrunk = std::get<1>(result1);
         if (shrunk) {  // best t obtained
@@ -124,14 +124,14 @@ auto cutting_plane_dc(Oracle&& Omega, Space&& S, opt_type&& t, const Options& op
  *
  * @tparam Oracle
  * @tparam Space
- * @param[in,out] Omega perform assessment on x0
+ * @param[in,out] omega perform assessment on x0
  * @param[in,out] S     search Space containing x*
  * @param[in,out] t     best-so-far optimal sol'n
  * @param[in] options   maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
 template <typename Oracle, typename Space, typename opt_type>
-auto cutting_plane_q(Oracle&& Omega, Space&& S, opt_type&& t, const Options& options = Options()) {
+auto cutting_plane_q(Oracle&& omega, Space&& S, opt_type&& t, const Options& options = Options()) {
     const auto t_orig = t;
     decltype(S.xc()) x_best;
     auto status = CUTStatus::nosoln;  // note!!!
@@ -140,7 +140,7 @@ auto cutting_plane_q(Oracle&& Omega, Space&& S, opt_type&& t, const Options& opt
     auto niter = 0U;
     while (++niter != options.max_it) {
         // auto retry = (status == CUTStatus::noeffect);
-        const auto result1 = Omega(S.xc(), t, retry);
+        const auto result1 = omega(S.xc(), t, retry);
         const auto& cut = std::get<0>(result1);
         const auto& shrunk = std::get<1>(result1);
         const auto& x0 = std::get<2>(result1);
@@ -177,13 +177,13 @@ auto cutting_plane_q(Oracle&& Omega, Space&& S, opt_type&& t, const Options& opt
  *
  * @tparam Oracle
  * @tparam Space
- * @param[in,out] Omega    perform assessment on x0
+ * @param[in,out] omega    perform assessment on x0
  * @param[in,out] I        interval containing x*
  * @param[in]     options  maximum iteration and error tolerance etc.
  * @return CInfo
  */
 template <typename Oracle, typename Space>
-auto bsearch(Oracle&& Omega, Space&& I, const Options& options = Options()) -> CInfo {
+auto bsearch(Oracle&& omega, Space&& I, const Options& options = Options()) -> CInfo {
     // assume monotone
     // auto& [lower, upper] = I;
     auto& lower = I.first;
@@ -202,7 +202,7 @@ auto bsearch(Oracle&& Omega, Space&& I, const Options& options = Options()) -> C
 
         auto t = lower;  // l may be `int` or `Fraction`
         t += tau;
-        if (Omega(t)) {  // feasible sol'n obtained
+        if (omega(t)) {  // feasible sol'n obtained
             upper = t;
         } else {
             lower = t;
