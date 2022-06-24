@@ -1,5 +1,5 @@
 // -*- coding: utf-8 -*-
-#include <doctest/doctest.h>  // for ResultBuilder, Approx, CHECK
+#include <doctest/doctest.h>  // for ResultBuilder, Approx, CHECK_EQ
 
 #include <cmath>                        // for exp
 #include <ellalgo/cutting_plane.hpp>    // for cutting_plane_dc
@@ -55,9 +55,9 @@ TEST_CASE("Quasiconvex 1, test feasible") {
     const auto& x = std::get<0>(result);
     const auto& ell_info = std::get<1>(result);
     CHECK(ell_info.feasible);
-    CHECK(-t == doctest::Approx(-0.4288673397));
-    CHECK(x[0] * x[0] == doctest::Approx(0.5029823096));
-    CHECK(std::exp(x[1]) == doctest::Approx(1.6536872635));
+    CHECK_EQ(-t, doctest::Approx(-0.4288673397));
+    CHECK_EQ(x[0] * x[0], doctest::Approx(0.5029823096));
+    CHECK_EQ(std::exp(x[1]), doctest::Approx(1.6536872635));
 }
 
 TEST_CASE("Quasiconvex 1, test feasible (stable)") {
@@ -67,7 +67,7 @@ TEST_CASE("Quasiconvex 1, test feasible (stable)") {
     const auto result = cutting_plane_dc(P, E, t);
     const auto& ell_info = std::get<1>(result);
     CHECK(ell_info.feasible);
-    // CHECK(-t == doctest::Approx(-0.4288673397));
-    // CHECK(x[0] * x[0] == doctest::Approx(0.5029823096));
-    // CHECK(std::exp(x[1]) == doctest::Approx(1.6536872635));
+    // CHECK_EQ(-t, doctest::Approx(-0.4288673397));
+    // CHECK_EQ(x[0] * x[0], doctest::Approx(0.5029823096));
+    // CHECK_EQ(std::exp(x[1]), doctest::Approx(1.6536872635));
 }
