@@ -11,7 +11,7 @@
 
 # ellalgo-cpp
 
-Ellipsoid method for modern C++
+🏉 Ellipsoid method for modern C++
 
 - This library requires C++14 or above.
 - This library depends on Xtensor.
