@@ -59,24 +59,18 @@
             <li>
               Reference
               <ul>
-                <li><a href="#base-classes">Base classes</a></li>
                 <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
               </ul>
             </li>
           </ul>
         </div>
-<p><a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a> = {x | (x - xc)&#x27; M^-1 (x - xc) \le \kappa} = {x | (x - xc)&#x27; L D^-1 L&#x27; (x - xc) \le \kappa}</p><p>Store $M$ in the form of Lg \ D^-1 \ L&#x27; in an n x n array <code>Q</code>, and hence keep $M$ symmetric positive definite. More stable but slightly more computation.</p>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classell.html" class="m-doc">ell</a>
-            </dt>
-            <dd>Ellipsoid Search Space.</dd>
-          </dl>
-        </section>
+<pre>   ell_stable = {x | (x - xc)&#x27; Q^-1 (x - xc) \le \kappa}
+</pre><p>Keep $Q$ symmetric but no promise of positive definite</p>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
@@ -90,27 +84,34 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a38dbef42eaa463753cc7a6b9bd25b752" class="m-doc">ell_stable</a>(</span><span class="m-doc-wrap">const <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp; val,
-              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a> x) <span class="m-label m-flat m-success">noexcept</span></span>
+              <div class="m-doc-template">template&lt;typename V, typename U&gt;</div>
+              <span class="m-doc-wrap-bumper"><a href="#acf767cedfeb141d7dbf486bf5da104d9" class="m-doc">ell_stable</a>(</span><span class="m-doc-wrap">V&amp;&amp; kappa,
+              <a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a>&amp;&amp; Q,
+              U&amp;&amp; x) <span class="m-label m-flat m-warning">protected</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Construct a new <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a> object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a38dbef42eaa463753cc7a6b9bd25b752" class="m-doc">ell_stable</a>(</span><span class="m-doc-wrap">const <a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a>&amp; val,
+              <a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a> x) <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd>Construct a new <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a> object.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a3238b9fd99565d350175971983bdd1fd" class="m-doc">ell_stable</a>(</span><span class="m-doc-wrap">const double&amp; alpha,
-              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a> x) <span class="m-label m-flat m-success">noexcept</span></span>
+              <a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a> x) <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd>Construct a new <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a> object.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a63d0d8bc1c232f15125cfba98464fb9d" class="m-doc">ell_stable</a>(</span><span class="m-doc-wrap"><a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a>&amp;&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Construct a new <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a> object.</dd>
+            <dt id="a0aa7b38f98da9595494fdfe4386d9a60">
+              <span class="m-doc-wrap-bumper"><a href="#a0aa7b38f98da9595494fdfe4386d9a60" class="m-doc-self">~ell_stable</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Destroy the <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a> object.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a3910f9f558dec29d40385e75e0681782" class="m-doc">ell_stable</a>(</span><span class="m-doc-wrap">const <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-info">explicit</span> </span>
             </dt>
             <dd>Construct a new <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a> object.</dd>
-            <dt id="a0aa7b38f98da9595494fdfe4386d9a60">
-              <span class="m-doc-wrap-bumper"><a href="#a0aa7b38f98da9595494fdfe4386d9a60" class="m-doc-self">~ell_stable</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>Destroy the ell stable object.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -121,18 +122,124 @@
             </dt>
             <dd>explicitly copy</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5cfe3c1186943b137fb32a6c8c0c798b" class="m-doc">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr -&gt; auto</span>
+            </dt>
+            <dd>copy the whole array anyway</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a89e15ed1462b46fd4388a15d2788d99c" class="m-doc">set_xc</a>(</span><span class="m-doc-wrap">const <a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a>&amp; xc)</span>
+            </dt>
+            <dd>Set the xc object.</dd>
+            <dt id="af44f1e10fa16c024b0362f56560ead90">
+              <span class="m-doc-wrap-bumper">void <a href="#af44f1e10fa16c024b0362f56560ead90" class="m-doc-self">set_use_parallel_cut</a>(</span><span class="m-doc-wrap">bool value)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a28d8ece44eddf5ba51f172b8d1be64ee" class="m-doc">update</a>(</span><span class="m-doc-wrap">const std::tuple&lt;<a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; std::tuple&lt; CUTStatus, double &gt; -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a28d8ece44eddf5ba51f172b8d1be64ee" class="m-doc">update</a>(</span><span class="m-doc-wrap">const std::tuple&lt;<a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; std::tuple&lt; CUTStatus, double &gt; -&gt; auto</span>
             </dt>
             <dd>Update ellipsoid core function using the cut(s)</dd>
           </dl>
         </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a0f704780211f6c693a34c1435bf5865a">
+              bool <a href="#a0f704780211f6c693a34c1435bf5865a" class="m-doc-self">no_defer_trick</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pro-methods">
+          <h2><a href="#pro-methods">Protected functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a433903b816ca2a7a8b91232e79cd1949" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a>&amp; E) -&gt; ell_stable &amp; -&gt; auto <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd>Construct a new <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a> object.</dd>
+            <dt id="adb9ceacb0d913e26c13af8306341e408">
+              <span class="m-doc-wrap-bumper">auto <a href="#adb9ceacb0d913e26c13af8306341e408" class="m-doc-self">_update_cut</a>(</span><span class="m-doc-wrap">const double&amp; beta) -&gt; CUTStatus -&gt; auto</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2c8eb4f374fd14fb91201f306b4840e1">
+              <span class="m-doc-wrap-bumper">auto <a href="#a2c8eb4f374fd14fb91201f306b4840e1" class="m-doc-self">_update_cut</a>(</span><span class="m-doc-wrap">const <a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a>&amp; beta) -&gt; CUTStatus -&gt; auto</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a348af5901996f3e945900b1e470c68d7">
+              const int <a href="#a348af5901996f3e945900b1e470c68d7" class="m-doc-self">_n</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a09f5a51b1c74ddea27f4d3a1fb5297c7">
+              <a href="classell__calc.html" class="m-doc">ell_<wbr />calc</a> <a href="#a09f5a51b1c74ddea27f4d3a1fb5297c7" class="m-doc-self">_helper</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a398b9e426eadc0b1a80ce0bc1eaab43a">
+              double <a href="#a398b9e426eadc0b1a80ce0bc1eaab43a" class="m-doc-self">_kappa</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="acbef9116acf2ec6a95030004cf315365">
+              <a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a> <a href="#acbef9116acf2ec6a95030004cf315365" class="m-doc-self">_Q</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abab4f37b2c5e7638c0db9cf810410859">
+              <a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a> <a href="#abab4f37b2c5e7638c0db9cf810410859" class="m-doc-self">_xc</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="acf767cedfeb141d7dbf486bf5da104d9"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename V, typename U&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> ell_<wbr />stable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acf767cedfeb141d7dbf486bf5da104d9" class="m-doc-self">ell_stable</a>(</span><span class="m-doc-wrap">V&amp;&amp; kappa,
+              <a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a>&amp;&amp; Q,
+              U&amp;&amp; x) <span class="m-label m-warning">protected</span> <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Construct a new <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a> object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">V</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>U</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>kappa</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Q</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a38dbef42eaa463753cc7a6b9bd25b752"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> ell_<wbr />stable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38dbef42eaa463753cc7a6b9bd25b752" class="m-doc-self">ell_stable</a>(</span><span class="m-doc-wrap">const <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp; val,
-              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a> x) <span class="m-label m-success">noexcept</span></span></span>
+              <span class="m-doc-wrap-bumper"> ell_<wbr />stable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38dbef42eaa463753cc7a6b9bd25b752" class="m-doc-self">ell_stable</a>(</span><span class="m-doc-wrap">const <a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a>&amp; val,
+              <a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a> x) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
             <p>Construct a new <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -154,7 +261,7 @@
           <section class="m-doc-details" id="a3238b9fd99565d350175971983bdd1fd"><div>
             <h3>
               <span class="m-doc-wrap-bumper"> ell_<wbr />stable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3238b9fd99565d350175971983bdd1fd" class="m-doc-self">ell_stable</a>(</span><span class="m-doc-wrap">const double&amp; alpha,
-              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a> x) <span class="m-label m-success">noexcept</span></span></span>
+              <a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a> x) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
             <p>Construct a new <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -222,12 +329,43 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="a5cfe3c1186943b137fb32a6c8c0c798b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto ell_<wbr />stable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5cfe3c1186943b137fb32a6c8c0c798b" class="m-doc-self">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr</span></span>
+            </h3>
+            <p>copy the whole array anyway</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Arr</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a89e15ed1462b46fd4388a15d2788d99c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void ell_<wbr />stable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a89e15ed1462b46fd4388a15d2788d99c" class="m-doc-self">set_xc</a>(</span><span class="m-doc-wrap">const <a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a>&amp; xc)</span></span>
+            </h3>
+            <p>Set the xc object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">xc&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a28d8ece44eddf5ba51f172b8d1be64ee"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto ell_<wbr />stable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28d8ece44eddf5ba51f172b8d1be64ee" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">const std::tuple&lt;<a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; std::tuple&lt; CUTStatus, double &gt;</span></span>
+              <span class="m-doc-wrap-bumper">auto ell_<wbr />stable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28d8ece44eddf5ba51f172b8d1be64ee" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">const std::tuple&lt;<a href="classell__stable.html#a2147e190480e4de7b972aad3caba3681" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; std::tuple&lt; CUTStatus, double &gt;</span></span>
             </h3>
             <p>Update ellipsoid core function using the cut(s)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -256,7 +394,23 @@
                 </tr>
               </tfoot>
             </table>
-<p>Overwrite the base class. Store Q^-1 in the form of LDLT decomposition, and hence guarantee Q is symmetric positive definite.</p>
+          </div></section>
+          <section class="m-doc-details" id="a433903b816ca2a7a8b91232e79cd1949"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto ell_<wbr />stable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a433903b816ca2a7a8b91232e79cd1949" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a>&amp; E) -&gt; ell_stable &amp; <span class="m-label m-warning">protected</span> <span class="m-label m-danger">deleted</span></span></span>
+            </h3>
+            <p>Construct a new <a href="classell__stable.html" class="m-doc">ell_<wbr />stable</a> object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">E&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
           </div></section>
         </section>
       </div>

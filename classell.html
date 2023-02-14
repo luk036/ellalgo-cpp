@@ -59,28 +59,17 @@
             <li>
               Reference
               <ul>
-                <li><a href="#derived-classes">Derived classes</a></li>
                 <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
                 <li><a href="#pro-methods">Protected functions</a></li>
-                <li><a href="#pro-attribs">Protected variables</a></li>
               </ul>
             </li>
           </ul>
         </div>
 <pre>   ell = {x | (x - xc)&#x27; Q^-1 (x - xc) \le \kappa}
 </pre><p>Keep $Q$ symmetric but no promise of positive definite</p>
-        <section id="derived-classes">
-          <h2><a href="#derived-classes">Derived classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classell__stable.html" class="m-doc">ell_stable</a>
-            </dt>
-            <dd>Ellipsoid Search Space.</dd>
-          </dl>
-        </section>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
@@ -93,13 +82,6 @@
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;typename V, typename U&gt;</div>
-              <span class="m-doc-wrap-bumper"><a href="#a1cc6cd66b04c9baabb55816b53e84197" class="m-doc">ell</a>(</span><span class="m-doc-wrap">V&amp;&amp; kappa,
-              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp;&amp; Q,
-              U&amp;&amp; x) <span class="m-label m-flat m-warning">protected</span> <span class="m-label m-flat m-success">noexcept</span></span>
-            </dt>
-            <dd>Construct a new ell object.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a68db079f6a8c35cc1bd6e9794ba67df5" class="m-doc">ell</a>(</span><span class="m-doc-wrap">const <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp; val,
               <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a> x) <span class="m-label m-flat m-success">noexcept</span></span>
@@ -139,6 +121,10 @@
               <span class="m-doc-wrap-bumper">void <a href="#a76f0b8a8760f4c26c8ea32afaec71abf" class="m-doc">set_xc</a>(</span><span class="m-doc-wrap">const <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp; xc)</span>
             </dt>
             <dd>Set the xc object.</dd>
+            <dt id="a4a37a38a5c783386cc42dee00956a297">
+              <span class="m-doc-wrap-bumper">void <a href="#a4a37a38a5c783386cc42dee00956a297" class="m-doc-self">set_use_parallel_cut</a>(</span><span class="m-doc-wrap">bool value)</span>
+            </dt>
+            <dd><span></span></dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a0630ca2734c05caf402085dc1fe83729" class="m-doc">update</a>(</span><span class="m-doc-wrap">const std::tuple&lt;<a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; std::tuple&lt; CUTStatus, double &gt; -&gt; auto</span>
@@ -149,10 +135,6 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="ab03801ec2e234a1bf708c8f3f34e91f5">
-              bool <a href="#ab03801ec2e234a1bf708c8f3f34e91f5" class="m-doc-self">use_parallel_cut</a>
-            </dt>
-            <dd><span></span></dd>
             <dt id="a41a355d399e8a1b1ecc3abd3c973568c">
               bool <a href="#a41a355d399e8a1b1ecc3abd3c973568c" class="m-doc-self">no_defer_trick</a>
             </dt>
@@ -162,151 +144,18 @@
         <section id="pro-methods">
           <h2><a href="#pro-methods">Protected functions</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3cb0b723ca57b2a8114daf63f0c5fa0e" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classell.html" class="m-doc">ell</a>&amp; E) -&gt; ell &amp; -&gt; auto <span class="m-label m-flat m-danger">deleted</span></span>
-            </dt>
-            <dd>Construct a new ell object.</dd>
             <dt id="a78a3d8a825cdf90f86fc85e74b2da090">
               <span class="m-doc-wrap-bumper">auto <a href="#a78a3d8a825cdf90f86fc85e74b2da090" class="m-doc-self">_update_cut</a>(</span><span class="m-doc-wrap">const double&amp; beta) -&gt; CUTStatus -&gt; auto</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a7e6f53084df022960639efa9fa18f6ad">
-              <span class="m-doc-wrap-bumper">auto <a href="#a7e6f53084df022960639efa9fa18f6ad" class="m-doc-self">_update_cut</a>(</span><span class="m-doc-wrap">const <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp; beta) -&gt; <a href="cut__config_8hpp.html#a3a18232e74bd4bdc089ea0a6e17407e4" class="m-doc">CUTStatus</a></span>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a71b5d8821924c42417edd70ef76e74d6" class="m-doc">_calc_ll_core</a>(</span><span class="m-doc-wrap">const double&amp; b0,
-              const double&amp; b1) -&gt; CUTStatus -&gt; auto</span>
-            </dt>
-            <dd>Calculate new ellipsoid under Parallel Cut.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aadf6cda1ffc33dd74bd4fc5c0eff9603" class="m-doc">_calc_ll_cc</a>(</span><span class="m-doc-wrap">const double&amp; b1,
-              const double&amp; b1sq) -&gt; void -&gt; auto</span>
-            </dt>
-            <dd>Calculate new ellipsoid under Parallel Cut, one of them is central.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1998443b8c74bcd11f0b62ffbaf9fba8" class="m-doc">_calc_dc</a>(</span><span class="m-doc-wrap">const double&amp; beta) noexcept -&gt; CUTStatus -&gt; auto</span>
-            </dt>
-            <dd>Calculate new ellipsoid under Deep Cut.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad206b1df12e970f54de5cd9c38127d26" class="m-doc">_calc_cc</a>(</span><span class="m-doc-wrap">const double&amp; tau) noexcept -&gt; void -&gt; auto</span>
-            </dt>
-            <dd>Calculate new ellipsoid under Central Cut.</dd>
-          </dl>
-        </section>
-        <section id="pro-attribs">
-          <h2><a href="#pro-attribs">Protected variables</a></h2>
-          <dl class="m-doc">
-            <dt id="afd6a2ba7c573d6bfb2b46c92d167db68">
-              double <a href="#afd6a2ba7c573d6bfb2b46c92d167db68" class="m-doc-self">_mu</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a8f2c3e14158398e332f4484cf7cacb80">
-              double <a href="#a8f2c3e14158398e332f4484cf7cacb80" class="m-doc-self">_rho</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="af543616bed30b80c3ad49e063b96e79a">
-              double <a href="#af543616bed30b80c3ad49e063b96e79a" class="m-doc-self">_sigma</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a8eecc0d3dce5c107cd2cab7556a7b731">
-              double <a href="#a8eecc0d3dce5c107cd2cab7556a7b731" class="m-doc-self">_delta</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="ab32cb2e2f17d8b08c387ffc2586e372b">
-              double <a href="#ab32cb2e2f17d8b08c387ffc2586e372b" class="m-doc-self">_tsq</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a173d78b3d6d9547f2ec8be61cb5c340c">
-              const int <a href="#a173d78b3d6d9547f2ec8be61cb5c340c" class="m-doc-self">_n</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a3ecd540f60c12564682c31bde6a2a0ca">
-              const double <a href="#a3ecd540f60c12564682c31bde6a2a0ca" class="m-doc-self">_nFloat</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a1c6cfa0957e2a91211cee211c4a58aff">
-              const double <a href="#a1c6cfa0957e2a91211cee211c4a58aff" class="m-doc-self">_nPlus1</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="ab09c71762d66a7bc4203dac034946d70">
-              const double <a href="#ab09c71762d66a7bc4203dac034946d70" class="m-doc-self">_nMinus1</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a4feb4a3c6e057ae617d71dcc87910a7d">
-              const double <a href="#a4feb4a3c6e057ae617d71dcc87910a7d" class="m-doc-self">_halfN</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a3adc64b1bd4e395518f605ca57464d1a">
-              const double <a href="#a3adc64b1bd4e395518f605ca57464d1a" class="m-doc-self">_halfNplus1</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="aa19a36cbbeba697ec19761e7e711fc6e">
-              const double <a href="#aa19a36cbbeba697ec19761e7e711fc6e" class="m-doc-self">_halfNminus1</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="aa65236e8e3d2d9b9a1b78cd78152f928">
-              const double <a href="#aa65236e8e3d2d9b9a1b78cd78152f928" class="m-doc-self">_nSq</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a84e9d57308acca4e09621d6b2eaf8781">
-              const double <a href="#a84e9d57308acca4e09621d6b2eaf8781" class="m-doc-self">_c1</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a8fa8743872084690c4dc345008572373">
-              const double <a href="#a8fa8743872084690c4dc345008572373" class="m-doc-self">_c2</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a147cabee9c2e8fd0eaa903789ed768c5">
-              const double <a href="#a147cabee9c2e8fd0eaa903789ed768c5" class="m-doc-self">_c3</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="ae5397eea0443552ed31fd804e8301ea0">
-              double <a href="#ae5397eea0443552ed31fd804e8301ea0" class="m-doc-self">_kappa</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="af85577b463ef8a88cc539d6f9d431412">
-              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a> <a href="#af85577b463ef8a88cc539d6f9d431412" class="m-doc-self">_Q</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a292090810a6339fffafdcbbca4e752c3">
-              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a> <a href="#a292090810a6339fffafdcbbca4e752c3" class="m-doc-self">_xc</a>
+            <dt id="a205be8d0f634c9169b4461b39c999d82">
+              <span class="m-doc-wrap-bumper">auto <a href="#a205be8d0f634c9169b4461b39c999d82" class="m-doc-self">_update_cut</a>(</span><span class="m-doc-wrap">const <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp; beta) -&gt; CUTStatus -&gt; auto</span>
             </dt>
             <dd><span></span></dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a1cc6cd66b04c9baabb55816b53e84197"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename V, typename U&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1cc6cd66b04c9baabb55816b53e84197" class="m-doc-self">ell</a>(</span><span class="m-doc-wrap">V&amp;&amp; kappa,
-              <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp;&amp; Q,
-              U&amp;&amp; x) <span class="m-label m-warning">protected</span> <span class="m-label m-success">noexcept</span></span></span>
-            </h3>
-            <p>Construct a new ell object.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">kappa</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Q</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>x&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
           <section class="m-doc-details" id="a68db079f6a8c35cc1bd6e9794ba67df5"><div>
             <h3>
               <span class="m-doc-wrap-bumper"> ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a68db079f6a8c35cc1bd6e9794ba67df5" class="m-doc-self">ell</a>(</span><span class="m-doc-wrap">const <a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>&amp; val,
@@ -465,117 +314,6 @@
                 </tr>
               </tfoot>
             </table>
-          </div></section>
-          <section class="m-doc-details" id="a3cb0b723ca57b2a8114daf63f0c5fa0e"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3cb0b723ca57b2a8114daf63f0c5fa0e" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classell.html" class="m-doc">ell</a>&amp; E) -&gt; ell &amp; <span class="m-label m-warning">protected</span> <span class="m-label m-danger">deleted</span></span></span>
-            </h3>
-            <p>Construct a new ell object.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">E&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a71b5d8821924c42417edd70ef76e74d6"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a71b5d8821924c42417edd70ef76e74d6" class="m-doc-self">_calc_ll_core</a>(</span><span class="m-doc-wrap">const double&amp; b0,
-              const double&amp; b1) -&gt; CUTStatus <span class="m-label m-warning">protected</span></span></span>
-            </h3>
-            <p>Calculate new ellipsoid under Parallel Cut.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">b0&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>b1&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>int</td>
-                </tr>
-              </tfoot>
-            </table>
-<pre>   g&#x27; (x - xc) + beta0 \le 0
-   g&#x27; (x - xc) + beta1 \ge 0
-</pre>
-          </div></section>
-          <section class="m-doc-details" id="aadf6cda1ffc33dd74bd4fc5c0eff9603"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aadf6cda1ffc33dd74bd4fc5c0eff9603" class="m-doc-self">_calc_ll_cc</a>(</span><span class="m-doc-wrap">const double&amp; b1,
-              const double&amp; b1sq) -&gt; void <span class="m-label m-warning">protected</span></span></span>
-            </h3>
-            <p>Calculate new ellipsoid under Parallel Cut, one of them is central.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">b1&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>b1sq&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-<pre>   g&#x27; (x - xc) \le 0
-   g&#x27; (x - xc) + beta1 \ge 0
-</pre>
-          </div></section>
-          <section class="m-doc-details" id="a1998443b8c74bcd11f0b62ffbaf9fba8"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1998443b8c74bcd11f0b62ffbaf9fba8" class="m-doc-self">_calc_dc</a>(</span><span class="m-doc-wrap">const double&amp; beta) noexcept -&gt; CUTStatus <span class="m-label m-warning">protected</span></span></span>
-            </h3>
-            <p>Calculate new ellipsoid under Deep Cut.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">beta&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-<pre>   g&#x27; (x - xc) + beta \le 0
-</pre>
-          </div></section>
-          <section class="m-doc-details" id="ad206b1df12e970f54de5cd9c38127d26"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad206b1df12e970f54de5cd9c38127d26" class="m-doc-self">_calc_cc</a>(</span><span class="m-doc-wrap">const double&amp; tau) noexcept -&gt; void <span class="m-label m-warning">protected</span></span></span>
-            </h3>
-            <p>Calculate new ellipsoid under Central Cut.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">tau&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-<pre>   g&#x27; (x - xc) \le 0
-</pre>
           </div></section>
         </section>
       </div>

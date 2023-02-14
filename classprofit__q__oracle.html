@@ -92,11 +92,11 @@ k: a given constant that restricts the quantity of x1
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a61bfc24d070126b24866625c8a6d96bb" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const Arr&amp; y,
+              <span class="m-doc-wrap-bumper">auto <a href="#ad0309db11054d6b858982a2fce3c1e0c" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const Arr&amp; y,
               double&amp; t,
-              bool retry) -&gt; std::tuple&lt; Cut, Arr, bool, bool &gt; -&gt; auto</span>
+              bool retry) -&gt; std::tuple&lt; Cut, bool, Arr, bool &gt; -&gt; auto</span>
             </dt>
-            <dd>Make object callable for <a href="cutting__plane_8hpp.html#a7472af3015553a62a3b03025cf3455c1" class="m-doc">cutting_<wbr />plane_<wbr />q()</a></dd>
+            <dd>Make object callable for <a href="cutting__plane_8hpp.html#abbbac0ac20ed7b5312ba162fad45489b" class="m-doc">cutting_<wbr />plane_<wbr />q()</a></dd>
           </dl>
         </section>
         <section>
@@ -138,13 +138,13 @@ k: a given constant that restricts the quantity of x1
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a61bfc24d070126b24866625c8a6d96bb"><div>
+          <section class="m-doc-details" id="ad0309db11054d6b858982a2fce3c1e0c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto profit_<wbr />q_<wbr />oracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a61bfc24d070126b24866625c8a6d96bb" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const Arr&amp; y,
+              <span class="m-doc-wrap-bumper">auto profit_<wbr />q_<wbr />oracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad0309db11054d6b858982a2fce3c1e0c" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const Arr&amp; y,
               double&amp; t,
-              bool retry) -&gt; std::tuple&lt; Cut, Arr, bool, bool &gt;</span></span>
+              bool retry) -&gt; std::tuple&lt; Cut, bool, Arr, bool &gt;</span></span>
             </h3>
-            <p>Make object callable for <a href="cutting__plane_8hpp.html#a7472af3015553a62a3b03025cf3455c1" class="m-doc">cutting_<wbr />plane_<wbr />q()</a></p>
+            <p>Make object callable for <a href="cutting__plane_8hpp.html#abbbac0ac20ed7b5312ba162fad45489b" class="m-doc">cutting_<wbr />plane_<wbr />q()</a></p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -155,12 +155,12 @@ k: a given constant that restricts the quantity of x1
                   <td>input quantity (in log scale)</td>
                 </tr>
                 <tr>
-                  <td>t&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>t&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
                   <td>the best-so-far optimal value</td>
                 </tr>
                 <tr>
-                  <td>retry</td>
-                  <td></td>
+                  <td>retry&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>whether it is a retry</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -170,7 +170,7 @@ k: a given constant that restricts the quantity of x1
                 </tr>
               </tfoot>
             </table>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="cutting__plane_8hpp.html#a7472af3015553a62a3b03025cf3455c1" class="m-doc">cutting_<wbr />plane_<wbr />q</a></p></aside>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="cutting__plane_8hpp.html#abbbac0ac20ed7b5312ba162fad45489b" class="m-doc">cutting_<wbr />plane_<wbr />q</a></p></aside>
           </div></section>
         </section>
       </div>
