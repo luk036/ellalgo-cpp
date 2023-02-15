@@ -1,8 +1,8 @@
-#include <cmath>                        // for sqrt
-#include <ellalgo/cut_config.hpp>       // for CUTStatus, CUTStatus::success
-#include <ellalgo/ell_calc.hpp>         // for ell_calc
-#include <ellalgo/ell_assert.hpp>       // for ELL_UNLIKELY
-#include <tuple>                        // for tuple
+#include <cmath>                   // for sqrt
+#include <ellalgo/cut_config.hpp>  // for CUTStatus, CUTStatus::success
+#include <ellalgo/ell_assert.hpp>  // for ELL_UNLIKELY
+#include <ellalgo/ell_calc.hpp>    // for ell_calc
+#include <tuple>                   // for tuple
 
 /**
  * @brief
@@ -108,4 +108,3 @@ void ell_calc::_calc_cc(const double& tau) noexcept {
     this->_rho = tau / this->_nPlus1;
     this->_delta = this->_c1;
 }
-

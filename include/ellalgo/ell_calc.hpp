@@ -63,8 +63,7 @@ class ell_calc {
           _nSq{_nFloat * _nFloat},
           _c1{_nSq / (_nSq - 1.0)},
           _c2{2.0 / _nPlus1},
-          _c3{_nFloat / _nPlus1}
-        {}
+          _c3{_nFloat / _nPlus1} {}
 
   public:
     /**

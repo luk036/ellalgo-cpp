@@ -1,7 +1,7 @@
 #include <cmath>                        // for sqrt
 #include <ellalgo/cut_config.hpp>       // for CUTStatus, CUTStatus::success
-#include <ellalgo/ell_stable.hpp>              // for ell_stable, ell_stable::Arr
 #include <ellalgo/ell_assert.hpp>       // for ELL_UNLIKELY
+#include <ellalgo/ell_stable.hpp>       // for ell_stable, ell_stable::Arr
 #include <tuple>                        // for tuple
 #include <xtensor/xarray.hpp>           // for xarray_container
 #include <xtensor/xcontainer.hpp>       // for xcontainer
@@ -47,7 +47,7 @@ template <typename T> auto ell_stable::update(const std::tuple<Arr, T>& cut)
 
     // calculate omega: n
     Arr gQg{invDinvLg};  // initially
-    auto omega = 0.0;     // initially
+    auto omega = 0.0;    // initially
     for (auto i = 0; i != this->_n; ++i) {
         gQg(i) *= invLg(i);
         omega += gQg(i);

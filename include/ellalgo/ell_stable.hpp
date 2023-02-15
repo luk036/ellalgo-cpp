@@ -5,6 +5,7 @@
 #include <ellalgo/utility.hpp>
 #include <tuple>
 #include <xtensor/xarray.hpp>
+
 #include "ell_calc.hpp"
 
 // forward declaration
@@ -70,7 +71,8 @@ class ell_stable {
      * @param[in] alpha
      * @param[in] x
      */
-    ell_stable(const double& alpha, Arr x) noexcept : ell_stable{alpha, xt::eye(x.size()), std::move(x)} {}
+    ell_stable(const double& alpha, Arr x) noexcept
+        : ell_stable{alpha, xt::eye(x.size()), std::move(x)} {}
 
     /**
      * @brief Construct a new ell_stable object
