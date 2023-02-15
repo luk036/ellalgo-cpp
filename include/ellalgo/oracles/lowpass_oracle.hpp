@@ -1,10 +1,10 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include <stddef.h>  // for size_t
+#include <stddef.h> // for size_t
 
-#include <tuple>               // for tuple
-#include <xtensor/xarray.hpp>  // for xarray
+#include <tuple>              // for tuple
+#include <xtensor/xarray.hpp> // for xarray
 // from itertools import chain
 
 /**
@@ -17,47 +17,49 @@
  * [0, \pi] R(\omega) > 0, \forall \omega \in [0, \pi]
  */
 class lowpass_oracle {
-    using Arr = xt::xarray<double, xt::layout_type::row_major>;
-    using ParallelCut = std::tuple<Arr, Arr>;
+  using Arr = xt::xarray<double, xt::layout_type::row_major>;
+  using ParallelCut = std::tuple<Arr, Arr>;
 
-  private:
-    mutable size_t _i_Anr{};
-    mutable size_t _i_As{};
-    mutable size_t _i_Ap{};
-    // mutable unsigned int _count{};
+private:
+  mutable size_t _i_Anr{};
+  mutable size_t _i_As{};
+  mutable size_t _i_Ap{};
+  // mutable unsigned int _count{};
 
-    const Arr& _Ap;
-    const Arr& _As;
-    const Arr& _Anr;
-    double _Lpsq;
-    double _Upsq;
+  const Arr &_Ap;
+  const Arr &_As;
+  const Arr &_Anr;
+  double _Lpsq;
+  double _Upsq;
 
-  public:
-    /**
-     * @brief Construct a new lowpass oracle object
-     *
-     * @param[in] Ap
-     * @param[in] As
-     * @param[in] Anr
-     * @param[in] Lpsq
-     * @param[in] Upsq
-     */
-    lowpass_oracle(const Arr& Ap, const Arr& As, const Arr& Anr, double Lpsq, double Upsq)
-        : _Ap{Ap}, _As{As}, _Anr{Anr}, _Lpsq{Lpsq}, _Upsq{Upsq} {}
+public:
+  /**
+   * @brief Construct a new lowpass oracle object
+   *
+   * @param[in] Ap
+   * @param[in] As
+   * @param[in] Anr
+   * @param[in] Lpsq
+   * @param[in] Upsq
+   */
+  lowpass_oracle(const Arr &Ap, const Arr &As, const Arr &Anr, double Lpsq,
+                 double Upsq)
+      : _Ap{Ap}, _As{As}, _Anr{Anr}, _Lpsq{Lpsq}, _Upsq{Upsq} {}
 
-    /**
-     * @brief Construct a new lowpass oracle object (deleted)
-     * Avoid accidential created
-     *
-     */
-    lowpass_oracle(const lowpass_oracle&) = delete;
+  /**
+   * @brief Construct a new lowpass oracle object (deleted)
+   * Avoid accidential created
+   *
+   */
+  lowpass_oracle(const lowpass_oracle &) = delete;
 
-    /**
-     * @brief
-     *
-     * @param[in] x
-     * @param[in] Spsq
-     * @return auto
-     */
-    auto operator()(const Arr& x, double& Spsq) const -> std::tuple<ParallelCut, bool>;
+  /**
+   * @brief
+   *
+   * @param[in] x
+   * @param[in] Spsq
+   * @return auto
+   */
+  auto operator()(const Arr &x, double &Spsq) const
+      -> std::tuple<ParallelCut, bool>;
 };

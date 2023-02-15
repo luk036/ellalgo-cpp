@@ -1,13 +1,13 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include <cmath>                        // for log
-#include <tuple>                        // for tuple
-#include <xtensor/xaccessible.hpp>      // for xconst_accessible, xaccessible
-#include <xtensor/xarray.hpp>           // for xarray_container
-#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
-#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator+
-#include <xtensor/xtensor_forward.hpp>  // for xarray
+#include <cmath>                       // for log
+#include <tuple>                       // for tuple
+#include <xtensor/xaccessible.hpp>     // for xconst_accessible, xaccessible
+#include <xtensor/xarray.hpp>          // for xarray_container
+#include <xtensor/xlayout.hpp>         // for layout_type, layout_type::row...
+#include <xtensor/xoperation.hpp>      // for xfunction_type_t, operator+
+#include <xtensor/xtensor_forward.hpp> // for xarray
 
 /**
  * @brief Oracle for a profit maximization problem.
@@ -28,43 +28,43 @@
  *        k: a given constant that restricts the quantity of x1
  */
 class profit_oracle {
-    using Arr = xt::xarray<double, xt::layout_type::row_major>;
-    using Cut = std::tuple<Arr, double>;
+  using Arr = xt::xarray<double, xt::layout_type::row_major>;
+  using Cut = std::tuple<Arr, double>;
 
-  private:
-    const double _log_pA;
-    const double _log_k;
-    const Arr _v;
+private:
+  const double _log_pA;
+  const double _log_k;
+  const Arr _v;
 
-  public:
-    Arr _a;
+public:
+  Arr _a;
 
-    /**
-     * @brief Construct a new profit oracle object
-     *
-     * @param[in] p the market price per unit
-     * @param[in] A the scale of production
-     * @param[in] k a given constant that restricts the quantity of x1
-     * @param[in] a the output elasticities
-     * @param[in] v output price
-     */
-    profit_oracle(double p, double A, double k, const Arr& a, const Arr& v)
-        : _log_pA{std::log(p * A)}, _log_k{std::log(k)}, _v{v}, _a{a} {}
+  /**
+   * @brief Construct a new profit oracle object
+   *
+   * @param[in] p the market price per unit
+   * @param[in] A the scale of production
+   * @param[in] k a given constant that restricts the quantity of x1
+   * @param[in] a the output elasticities
+   * @param[in] v output price
+   */
+  profit_oracle(double p, double A, double k, const Arr &a, const Arr &v)
+      : _log_pA{std::log(p * A)}, _log_k{std::log(k)}, _v{v}, _a{a} {}
 
-    /**
-     * @brief Construct a new profit oracle object (only explicitly)
-     *
-     */
-    profit_oracle(const profit_oracle&) = delete;
+  /**
+   * @brief Construct a new profit oracle object (only explicitly)
+   *
+   */
+  profit_oracle(const profit_oracle &) = delete;
 
-    /**
-     * @brief
-     *
-     * @param[in] y input quantity (in log scale)
-     * @param[in,out] t the best-so-far optimal value
-     * @return std::tuple<Cut, double> Cut and the updated best-so-far value
-     */
-    auto operator()(const Arr& y, double& t) const -> std::tuple<Cut, bool>;
+  /**
+   * @brief
+   *
+   * @param[in] y input quantity (in log scale)
+   * @param[in,out] t the best-so-far optimal value
+   * @return std::tuple<Cut, double> Cut and the updated best-so-far value
+   */
+  auto operator()(const Arr &y, double &t) const -> std::tuple<Cut, bool>;
 };
 
 /**
@@ -85,45 +85,45 @@ class profit_oracle {
  * @see profit_oracle
  */
 class profit_rb_oracle {
-    using Arr = xt::xarray<double, xt::layout_type::row_major>;
+  using Arr = xt::xarray<double, xt::layout_type::row_major>;
 
-  private:
-    const Arr _uie;
-    Arr _a;
-    profit_oracle _P;
+private:
+  const Arr _uie;
+  Arr _a;
+  profit_oracle _P;
 
-  public:
-    /**
-     * @brief Construct a new profit rb oracle object
-     *
-     * @param[in] p the market price per unit
-     * @param[in] A the scale of production
-     * @param[in] k a given constant that restricts the quantity of x1
-     * @param[in] a the output elasticities
-     * @param[in] v output price
-     * @param[in] e paramters for uncertainty
-     * @param[in] e3 paramters for uncertainty
-     */
-    profit_rb_oracle(double p, double A, double k, const Arr& a, const Arr& v, const Arr& e,
-                     double e3)
-        : _uie{e}, _a{a}, _P(p - e3, A, k - e3, a, v + e3) {}
+public:
+  /**
+   * @brief Construct a new profit rb oracle object
+   *
+   * @param[in] p the market price per unit
+   * @param[in] A the scale of production
+   * @param[in] k a given constant that restricts the quantity of x1
+   * @param[in] a the output elasticities
+   * @param[in] v output price
+   * @param[in] e paramters for uncertainty
+   * @param[in] e3 paramters for uncertainty
+   */
+  profit_rb_oracle(double p, double A, double k, const Arr &a, const Arr &v,
+                   const Arr &e, double e3)
+      : _uie{e}, _a{a}, _P(p - e3, A, k - e3, a, v + e3) {}
 
-    /**
-     * @brief Make object callable for cutting_plane_dc()
-     *
-     * @param[in] y input quantity (in log scale)
-     * @param[in,out] t the best-so-far optimal value
-     * @return Cut and the updated best-so-far value
-     *
-     * @see cutting_plane_dc
-     */
-    auto operator()(const Arr& y, double& t) {
-        auto a_rb = this->_a;
-        a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
-        a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
-        this->_P._a = a_rb;
-        return this->_P(y, t);
-    }
+  /**
+   * @brief Make object callable for cutting_plane_dc()
+   *
+   * @param[in] y input quantity (in log scale)
+   * @param[in,out] t the best-so-far optimal value
+   * @return Cut and the updated best-so-far value
+   *
+   * @see cutting_plane_dc
+   */
+  auto operator()(const Arr &y, double &t) {
+    auto a_rb = this->_a;
+    a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
+    a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
+    this->_P._a = a_rb;
+    return this->_P(y, t);
+  }
 };
 
 /**
@@ -147,34 +147,36 @@ class profit_rb_oracle {
  * @see profit_oracle
  */
 class profit_q_oracle {
-    using Arr = xt::xarray<double, xt::layout_type::row_major>;
-    using Cut = std::tuple<Arr, double>;
+  using Arr = xt::xarray<double, xt::layout_type::row_major>;
+  using Cut = std::tuple<Arr, double>;
 
-  private:
-    profit_oracle _P;
-    Arr _yd;
+private:
+  profit_oracle _P;
+  Arr _yd;
 
-  public:
-    /**
-     * @brief Construct a new profit q oracle object
-     *
-     * @param[in] p the market price per unit
-     * @param[in] A the scale of production
-     * @param[in] k a given constant that restricts the quantity of x1
-     * @param[in] a the output elasticities
-     * @param[in] v output price
-     */
-    profit_q_oracle(double p, double A, double k, const Arr& a, const Arr& v) : _P{p, A, k, a, v} {}
+public:
+  /**
+   * @brief Construct a new profit q oracle object
+   *
+   * @param[in] p the market price per unit
+   * @param[in] A the scale of production
+   * @param[in] k a given constant that restricts the quantity of x1
+   * @param[in] a the output elasticities
+   * @param[in] v output price
+   */
+  profit_q_oracle(double p, double A, double k, const Arr &a, const Arr &v)
+      : _P{p, A, k, a, v} {}
 
-    /**
-     * @brief Make object callable for cutting_plane_q()
-     *
-     * @param[in] y input quantity (in log scale)
-     * @param[in,out] t the best-so-far optimal value
-     * @param[in] retry whether it is a retry
-     * @return Cut and the updated best-so-far value
-     *
-     * @see cutting_plane_q
-     */
-    auto operator()(const Arr& y, double& t, bool retry) -> std::tuple<Cut, bool, Arr, bool>;
+  /**
+   * @brief Make object callable for cutting_plane_q()
+   *
+   * @param[in] y input quantity (in log scale)
+   * @param[in,out] t the best-so-far optimal value
+   * @param[in] retry whether it is a retry
+   * @return Cut and the updated best-so-far value
+   *
+   * @see cutting_plane_q
+   */
+  auto operator()(const Arr &y, double &t, bool retry)
+      -> std::tuple<Cut, bool, Arr, bool>;
 };
