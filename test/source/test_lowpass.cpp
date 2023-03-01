@@ -139,7 +139,7 @@ auto run_lowpass(bool use_parallel_cut) {
   lowpass_oracle P(Fdc.Ap, Fdc.As, Fdc.Anr, Fdc.Lpsq, Fdc.Upsq);
   auto options = Options();
 
-  options.max_it = 50000;
+  options.max_iter = 50000;
   E.set_use_parallel_cut(use_parallel_cut);
   // options.tol = 1e-8;
 

@@ -36,7 +36,7 @@ TEST_CASE("Profit Test") {
     const auto &y = std::get<0>(result);
     const auto &ell_info = std::get<1>(result);
     CHECK(y[0] <= std::log(k));
-    CHECK(ell_info.num_iters == 37);
+    CHECK_EQ(ell_info.num_iters, 36);
   }
 
   {
@@ -46,7 +46,7 @@ TEST_CASE("Profit Test") {
     const auto &y = std::get<0>(result);
     const auto &ell_info = std::get<1>(result);
     CHECK(y[0] <= std::log(k));
-    CHECK(ell_info.num_iters == 42);
+    CHECK_EQ(ell_info.num_iters, 41);
   }
 
   {
@@ -56,7 +56,7 @@ TEST_CASE("Profit Test") {
     const auto &y = std::get<0>(result);
     const auto &ell_info = std::get<1>(result);
     CHECK(y[0] <= std::log(k));
-    CHECK(ell_info.num_iters == 28);
+    CHECK_EQ(ell_info.num_iters, 27);
   }
 }
 
@@ -77,7 +77,7 @@ TEST_CASE("Profit Test (Stable)") {
     const auto &y = std::get<0>(result);
     const auto &ell_info = std::get<1>(result);
     CHECK(y[0] <= std::log(k));
-    CHECK(ell_info.num_iters == 42);
+    CHECK_EQ(ell_info.num_iters, 41);
   }
 
   {
@@ -87,7 +87,7 @@ TEST_CASE("Profit Test (Stable)") {
     const auto &y = std::get<0>(result);
     const auto &ell_info = std::get<1>(result);
     CHECK(y[0] <= std::log(k));
-    CHECK(ell_info.num_iters == 38);
+    CHECK_EQ(ell_info.num_iters, 37);
   }
 
   {
@@ -97,6 +97,6 @@ TEST_CASE("Profit Test (Stable)") {
     const auto &y = std::get<0>(result);
     const auto &ell_info = std::get<1>(result);
     CHECK(y[0] <= std::log(k));
-    CHECK(ell_info.num_iters == 30);
+    CHECK_EQ(ell_info.num_iters, 29);
   }
 }

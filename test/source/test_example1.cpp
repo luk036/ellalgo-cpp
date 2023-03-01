@@ -66,7 +66,7 @@ TEST_CASE("Example 1, test infeasible 1") {
   const auto result = cutting_plane_dc(P, E, t);
   const auto &ell_info = std::get<1>(result);
   CHECK(!ell_info.feasible);
-  CHECK(ell_info.status == CUTStatus::nosoln); // no sol'n
+  CHECK_EQ(ell_info.status, CUTStatus::nosoln); // no sol'n
 }
 
 TEST_CASE("Example 1, test infeasible 2") {

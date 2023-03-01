@@ -37,27 +37,23 @@ auto cutting_plane_feas(Oracle &&omega, Space &&S,
   auto feasible = false;
   auto status = CUTStatus::nosoln;
 
-  auto niter = 0U;
-  while (++niter != options.max_it) {
+  for (auto niter = 0U; niter < options.max_iter; ++niter) {
     const auto cut = omega(S.xc()); // query the oracle at S.xc()
     if (!cut) {                     // feasible sol'n obtained
-      feasible = true;
-      break;
+      return {true, niter, CUTStatus::success};
     }
     const auto result = S.update(*cut); // update S
 
     const auto &cutstatus = std::get<0>(result);
     const auto &tsq = std::get<1>(result);
     if (cutstatus != CUTStatus::success) {
-      status = cutstatus;
-      break;
+      return {false, niter, cutstatus};
     }
     if (tsq < options.tol) { // no more
-      status = CUTStatus::smallenough;
-      break;
+      return {false, niter, CUTStatus::smallenough};
     }
   }
-  return {feasible, niter, status};
+  return {false, options.max_iter, CUTStatus::nosoln};
 }
 
 /**
@@ -79,8 +75,7 @@ auto cutting_plane_dc(Oracle &&omega, Space &&S, opt_type &&t,
   decltype(S.xc()) x_best;
   auto status = CUTStatus::success;
 
-  auto niter = 0U;
-  while (++niter != options.max_it) {
+  for (auto niter = 0U; niter < options.max_iter; ++niter) {
     const auto result1 = omega(S.xc(), t);
     const auto &cut = std::get<0>(result1);
     const auto &shrunk = std::get<1>(result1);
@@ -93,15 +88,16 @@ auto cutting_plane_dc(Oracle &&omega, Space &&S, opt_type &&t,
     const auto &tsq = std::get<1>(result2);
     if (cutstatus != CUTStatus::success) // ???
     {
-      status = cutstatus;
-      break;
+      return std::make_tuple(std::move(x_best),
+                             CInfo{t != t_orig, niter, cutstatus});
     }
     if (tsq < options.tol) { // no more
-      status = CUTStatus::smallenough;
-      break;
+      return std::make_tuple(std::move(x_best),
+                             CInfo{t != t_orig, niter, CUTStatus::smallenough});
     }
   }
-  return std::make_tuple(std::move(x_best), CInfo{t != t_orig, niter, status});
+  return std::make_tuple(std::move(x_best),
+                         CInfo{t != t_orig, options.max_iter, status});
 } // END
 
 /**
@@ -110,7 +106,7 @@ auto cutting_plane_dc(Oracle &&omega, Space &&S, opt_type &&t,
              oracle        perform assessment on x0
              S(xc)         Search space containing x*
              t             best-so-far optimal sol'n
-             max_it        maximum number of iterations
+             max_iter        maximum number of iterations
              tol           error tolerance
     output
              x             solution vector
@@ -140,8 +136,7 @@ auto cutting_plane_q(Oracle &&omega, Space &&S, opt_type &&t,
   auto status = CUTStatus::nosoln; // note!!!
   auto retry = (status == CUTStatus::noeffect);
 
-  auto niter = 0U;
-  while (++niter != options.max_it) {
+  for (auto niter = 0U; niter < options.max_iter; ++niter) {
     // auto retry = (status == CUTStatus::noeffect);
     const auto result1 = omega(S.xc(), t, retry);
     const auto &cut = std::get<0>(result1);
@@ -164,15 +159,16 @@ auto cutting_plane_q(Oracle &&omega, Space &&S, opt_type &&t,
       retry = true;
     }
     if (cutstatus == CUTStatus::nosoln) {
-      status = cutstatus;
-      break;
+      return std::make_tuple(std::move(x_best),
+                             CInfo{t != t_orig, niter, cutstatus});
     }
-    if (tsq < options.tol) {
-      status = CUTStatus::smallenough;
-      break;
+    if (tsq < options.tol) { // no more
+      return std::make_tuple(std::move(x_best),
+                             CInfo{t != t_orig, niter, CUTStatus::smallenough});
     }
   }
-  return std::make_tuple(std::move(x_best), CInfo{t != t_orig, niter, status});
+  return std::make_tuple(std::move(x_best),
+                         CInfo{t != t_orig, options.max_iter, status});
 } // END
 
 /**
@@ -194,14 +190,12 @@ auto bsearch(Oracle &&omega, Space &&I, const Options &options = Options())
   auto &upper = I.second;
   assert(lower <= upper);
   const auto u_orig = upper;
-  auto niter = 0U;
   auto status = CUTStatus::success;
 
-  for (; niter != options.max_it; ++niter) {
+  for (auto niter = 0U; niter < options.max_iter; ++niter) {
     auto tau = algo::half_nonnegative(upper - lower);
-    if (tau < options.tol) {
-      status = CUTStatus::smallenough;
-      break;
+    if (tau < options.tol) { // no more
+      return {upper != u_orig, niter, CUTStatus::smallenough};
     }
 
     auto t = lower; // l may be `int` or `Fraction`
@@ -212,7 +206,7 @@ auto bsearch(Oracle &&omega, Space &&I, const Options &options = Options())
       lower = t;
     }
   }
-  return {upper != u_orig, niter + 1, status};
+  return {upper != u_orig, options.max_iter, status};
 }
 
 /**
