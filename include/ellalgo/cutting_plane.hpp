@@ -34,8 +34,8 @@
 template <typename Oracle, typename Space>
 auto cutting_plane_feas(Oracle &&omega, Space &&S,
                         const Options &options = Options()) -> CInfo {
-  auto feasible = false;
-  auto status = CUTStatus::nosoln;
+  // auto feasible = false;
+  // auto status = CUTStatus::nosoln;
 
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
     const auto cut = omega(S.xc()); // query the oracle at S.xc()
@@ -72,7 +72,7 @@ template <typename Oracle, typename Space, typename opt_type>
 auto cutting_plane_dc(Oracle &&omega, Space &&S, opt_type &&t,
                       const Options &options = Options()) {
   const auto t_orig = t;
-  decltype(S.xc()) x_best;
+  decltype(S.xc()) x_best{};
   auto status = CUTStatus::success;
 
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
