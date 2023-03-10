@@ -53,7 +53,7 @@
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ell_8hpp.html">&lt;ellalgo/ell.hpp&gt;</a></div>
         </h1>
         <p>Ellipsoid Search Space.</p>
-        <div class="m-block m-default">
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
@@ -67,7 +67,7 @@
               </ul>
             </li>
           </ul>
-        </div>
+        </nav>
 <pre>   ell = {x | (x - xc)&#x27; Q^-1 (x - xc) \le \kappa}
 </pre><p>Keep $Q$ symmetric but no promise of positive definite</p>
         <section id="pub-types">
@@ -127,7 +127,7 @@
             <dd><span></span></dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0630ca2734c05caf402085dc1fe83729" class="m-doc">update</a>(</span><span class="m-doc-wrap">const std::tuple&lt;<a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; std::tuple&lt; CUTStatus, double &gt; -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5aa4b081e475f077aed0aab685bb9b1e" class="m-doc">update</a>(</span><span class="m-doc-wrap">const std::pair&lt;<a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; std::tuple&lt; CUTStatus, double &gt; -&gt; auto</span>
             </dt>
             <dd>Update ellipsoid core function using the cut(s)</dd>
           </dl>
@@ -280,12 +280,12 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a0630ca2734c05caf402085dc1fe83729"><div>
+          <section class="m-doc-details" id="a5aa4b081e475f077aed0aab685bb9b1e"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0630ca2734c05caf402085dc1fe83729" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">const std::tuple&lt;<a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; std::tuple&lt; CUTStatus, double &gt;</span></span>
+              <span class="m-doc-wrap-bumper">auto ell::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5aa4b081e475f077aed0aab685bb9b1e" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">const std::pair&lt;<a href="classell.html#a14b0f8c1df1f5a4aafc99fa694831904" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; std::tuple&lt; CUTStatus, double &gt;</span></span>
             </h3>
             <p>Update ellipsoid core function using the cut(s)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -354,8 +354,8 @@
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">
