@@ -127,7 +127,7 @@ public:
    * @return std::tuple<int, double>
    */
   template <typename T>
-  auto update(const std::tuple<Arr, T> &cut) -> std::tuple<CUTStatus, double>;
+  auto update(const std::pair<Arr, T> &cut) -> std::tuple<CUTStatus, double>;
 
 protected:
   auto _update_cut(const double &beta) -> CUTStatus {

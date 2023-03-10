@@ -26,11 +26,11 @@ using Arr = xt::xarray<double, xt::layout_type::row_major>;
  * @return std::tuple<int, double>
  */
 template <typename T>
-auto ell::update(const std::tuple<Arr, T> &cut)
+auto ell::update(const std::pair<Arr, T> &cut)
     -> std::tuple<CUTStatus, double> {
   // const auto& [grad, beta] = cut;
-  const auto &grad = std::get<0>(cut);
-  const auto &beta = std::get<1>(cut);
+  const auto &grad = cut.first;
+  const auto &beta = cut.second;
   // n^2
   // const auto Qg = Arr{xt::linalg::dot(this->_Q, grad)};  // n^2
   // const auto omega = xt::linalg::dot(grad, Qg)();        // n
@@ -74,6 +74,6 @@ auto ell::update(const std::tuple<Arr, T> &cut)
 
 // Instantiation
 template std::tuple<CUTStatus, double>
-ell::update(const std::tuple<Arr, double> &cut);
+ell::update(const std::pair<Arr, double> &cut);
 template std::tuple<CUTStatus, double>
-ell::update(const std::tuple<Arr, Arr> &cut);
+ell::update(const std::pair<Arr, Arr> &cut);

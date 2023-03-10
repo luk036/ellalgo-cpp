@@ -56,5 +56,5 @@ public:
    * @param[in] cut
    * @return return_t
    */
-  auto update(const std::tuple<double, double> &cut) noexcept -> return_t;
+  auto update(const std::pair<double, double> &cut) noexcept -> return_t;
 }; // } ell1d

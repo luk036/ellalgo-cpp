@@ -29,7 +29,7 @@
  */
 class profit_oracle {
   using Arr = xt::xarray<double, xt::layout_type::row_major>;
-  using Cut = std::tuple<Arr, double>;
+  using Cut = std::pair<Arr, double>;
 
 private:
   const double _log_pA;
@@ -148,7 +148,7 @@ public:
  */
 class profit_q_oracle {
   using Arr = xt::xarray<double, xt::layout_type::row_major>;
-  using Cut = std::tuple<Arr, double>;
+  using Cut = std::pair<Arr, double>;
 
 private:
   profit_oracle _P;

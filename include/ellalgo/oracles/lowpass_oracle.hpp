@@ -18,7 +18,7 @@
  */
 class lowpass_oracle {
   using Arr = xt::xarray<double, xt::layout_type::row_major>;
-  using ParallelCut = std::tuple<Arr, Arr>;
+  using ParallelCut = std::pair<Arr, Arr>;
 
 private:
   mutable size_t _i_Anr{};

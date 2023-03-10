@@ -14,7 +14,7 @@
 #include "ellalgo/cut_config.hpp" // for CInfo
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
-using Cut = std::tuple<Arr, double>;
+using Cut = std::pair<Arr, double>;
 
 /**
  * @brief
@@ -30,7 +30,7 @@ auto my_quasicvx_oracle(const Arr &z, double &t) -> std::tuple<Cut, bool> {
   // constraint 1: exp(x) <= y, or sqrtx**2 <= ly
   auto fj = sqrtx * sqrtx - ly;
   if (fj > 0.0) {
-    return {{Arr{2 * sqrtx, -1.0}, fj}, false};
+    return {std::make_pair(Arr{2 * sqrtx, -1.0}, fj), false};
   }
 
   // constraint 2: x - y >= 1
@@ -40,10 +40,10 @@ auto my_quasicvx_oracle(const Arr &z, double &t) -> std::tuple<Cut, bool> {
   if (fj < 0.0) // feasible
   {
     t = sqrtx / tmp2;
-    return {{Arr{-1.0, sqrtx}, 0}, true};
+    return {std::make_pair(Arr{-1.0, sqrtx}, 0.0), true};
   }
 
-  return {{Arr{-1.0, tmp3}, fj}, false};
+  return {std::make_pair(Arr{-1.0, tmp3}, fj), false};
 }
 
 TEST_CASE("Quasiconvex 1, test feasible") {

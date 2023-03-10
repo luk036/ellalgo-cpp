@@ -7,7 +7,7 @@
 // #include <xtensor-blas/xlinalg.hpp>
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
-using Cut = std::tuple<Arr, double>;
+using Cut = std::pair<Arr, double>;
 
 /**
  * @brief

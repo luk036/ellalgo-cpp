@@ -12,7 +12,7 @@
 // #include <optional>
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
-using Cut = std::tuple<Arr, double>;
+using Cut = std::pair<Arr, double>;
 
 /**
  * @brief
@@ -21,8 +21,8 @@ using Cut = std::tuple<Arr, double>;
  * @return std::optional<Cut>
  */
 auto my_oracle2(const Arr &z) -> Cut * {
-  static auto cut1 = Cut{Arr{1.0, 1.0}, 0.0};
-  static auto cut2 = Cut{Arr{-1.0, 1.0}, 0.0};
+  static auto cut1 = Cut{std::make_pair(Arr{1.0, 1.0}, 0.0)};
+  static auto cut2 = Cut{std::make_pair(Arr{-1.0, 1.0}, 0.0)};
 
   auto x = z[0];
   auto y = z[1];

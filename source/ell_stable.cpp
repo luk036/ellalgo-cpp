@@ -25,11 +25,11 @@ using Arr = xt::xarray<double, xt::layout_type::row_major>;
  * @return std::tuple<int, double>
  */
 template <typename T>
-auto ell_stable::update(const std::tuple<Arr, T> &cut)
+auto ell_stable::update(const std::pair<Arr, T> &cut)
     -> std::tuple<CUTStatus, double> {
   // const auto& [grad, beta] = cut;
-  const auto &grad = std::get<0>(cut);
-  const auto &beta = std::get<1>(cut);
+  const auto &grad = cut.first;
+  const auto &beta = cut.second;
   // calculate inv(L)*grad: (n-1)*n/2 multiplications
   Arr invLg{grad}; // initially
   for (auto i = 1; i != this->_n; ++i) {
@@ -101,6 +101,6 @@ auto ell_stable::update(const std::tuple<Arr, T> &cut)
 
 // Instantiation
 template std::tuple<CUTStatus, double>
-ell_stable::update(const std::tuple<Arr, double> &cut);
+ell_stable::update(const std::pair<Arr, double> &cut);
 template std::tuple<CUTStatus, double>
-ell_stable::update(const std::tuple<Arr, Arr> &cut);
+ell_stable::update(const std::pair<Arr, Arr> &cut);
