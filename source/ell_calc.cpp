@@ -1,7 +1,7 @@
 #include <cmath>                  // for sqrt
-#include <ellalgo/ell_config.hpp> // for CutStatus, CutStatus::Success
 #include <ellalgo/ell_assert.hpp> // for ELL_UNLIKELY
 #include <ellalgo/ell_calc.hpp>   // for EllCalc
+#include <ellalgo/ell_config.hpp> // for CutStatus, CutStatus::Success
 #include <tuple>                  // for tuple
 
 /**

@@ -1,8 +1,8 @@
 #include <cmath>                       // for sqrt
-#include <ellalgo/ell_config.hpp>      // for CutStatus, CutStatus::Success
 #include <ellalgo/ell.hpp>             // for Ell, Ell::Arr
 #include <ellalgo/ell_assert.hpp>      // for ELL_UNLIKELY
 #include <ellalgo/ell_calc.hpp>        // for Ell, Ell::Arr
+#include <ellalgo/ell_config.hpp>      // for CutStatus, CutStatus::Success
 #include <tuple>                       // for tuple
 #include <xtensor/xarray.hpp>          // for xarray_container
 #include <xtensor/xcontainer.hpp>      // for xcontainer

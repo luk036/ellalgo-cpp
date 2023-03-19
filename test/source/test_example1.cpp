@@ -79,7 +79,6 @@ TEST_CASE("Example 1, test infeasible1") {
   const auto &ell_info = std::get<1>(result);
   CHECK(!ell_info.feasible);
   CHECK_EQ(ell_info.status, CutStatus::NoSoln); // no sol'n
-
 }
 
 TEST_CASE("Example 1, test infeasible22") {

@@ -71,5 +71,7 @@ public:
    * @return auto
    */
   auto operator()(const Arr &x, double &Spsq) const
-      -> std::tuple<ParallelCut, bool> { return this->assess_optim(x, Spsq); }
+      -> std::tuple<ParallelCut, bool> {
+    return this->assess_optim(x, Spsq);
+  }
 };

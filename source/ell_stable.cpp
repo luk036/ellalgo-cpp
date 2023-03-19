@@ -1,6 +1,6 @@
 #include <cmath>                       // for sqrt
-#include <ellalgo/ell_config.hpp>      // for CutStatus, CutStatus::Success
 #include <ellalgo/ell_assert.hpp>      // for ELL_UNLIKELY
+#include <ellalgo/ell_config.hpp>      // for CutStatus, CutStatus::Success
 #include <ellalgo/ell_stable.hpp>      // for EllStable, EllStable::Arr
 #include <tuple>                       // for tuple
 #include <xtensor/xarray.hpp>          // for xarray_container

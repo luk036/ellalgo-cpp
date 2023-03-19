@@ -39,7 +39,7 @@ auto cutting_plane_feas(Oracle &&omega, Space &&ss,
 
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
     const auto cut = omega.assess_feas(ss.xc()); // query the oracle at ss.xc()
-    if (!cut) {                     // feasible sol'n obtained
+    if (!cut) {                                  // feasible sol'n obtained
       return {true, niter, CutStatus::Success};
     }
     const auto result = ss.update(*cut); // update ss
@@ -229,7 +229,8 @@ public:
    * @param[in,out] omega perform assessment on x0
    * @param[in,out] ss search Space containing x*
    */
-  bsearch_adaptor(Oracle &omega, Space &ss) : bsearch_adaptor{omega, ss, Options()} {}
+  bsearch_adaptor(Oracle &omega, Space &ss)
+      : bsearch_adaptor{omega, ss, Options()} {}
 
   /**
    * @brief Construct a new bsearch adaptor object
