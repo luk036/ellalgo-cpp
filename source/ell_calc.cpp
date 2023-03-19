@@ -1,7 +1,7 @@
 #include <cmath>                  // for sqrt
 #include <ellalgo/cut_config.hpp> // for CUTStatus, CUTStatus::success
 #include <ellalgo/ell_assert.hpp> // for ELL_UNLIKELY
-#include <ellalgo/ell_calc.hpp>   // for ell_calc
+#include <ellalgo/ell_calc.hpp>   // for EllCalc
 #include <tuple>                  // for tuple
 
 /**
@@ -11,7 +11,7 @@
  * @param[in] b1
  * @return int
  */
-auto ell_calc::_calc_ll_core(const double &b0, const double &b1) -> CUTStatus {
+auto EllCalc::_calc_ll_core(const double &b0, const double &b1) -> CUTStatus {
   // const auto b1sq = b1 * b1;
   const auto b1sqn = b1 * (b1 / this->_tsq);
   const auto t1n = 1.0 - b1sqn;
@@ -56,7 +56,7 @@ auto ell_calc::_calc_ll_core(const double &b0, const double &b1) -> CUTStatus {
  * @param[in] b1sq
  * @return void
  */
-void ell_calc::_calc_ll_cc(const double &b1, const double &b1sqn) {
+void EllCalc::_calc_ll_cc(const double &b1, const double &b1sqn) {
   const auto temp = this->_halfN * b1sqn;
   const auto xi = std::sqrt(1.0 - b1sqn + temp * temp);
   this->_sigma = this->_c3 + this->_c2 * (1.0 - xi) / b1sqn;
@@ -71,7 +71,7 @@ void ell_calc::_calc_ll_cc(const double &b1, const double &b1sqn) {
  * @param[in] beta
  * @return int
  */
-auto ell_calc::_calc_dc(const double &beta) noexcept -> CUTStatus {
+auto EllCalc::_calc_dc(const double &beta) noexcept -> CUTStatus {
   const auto tau = std::sqrt(this->_tsq);
 
   const auto bdiff = tau - beta;
@@ -102,7 +102,7 @@ auto ell_calc::_calc_dc(const double &beta) noexcept -> CUTStatus {
  * @param[in] tau
  * @return int
  */
-void ell_calc::_calc_cc(const double &tau) noexcept {
+void EllCalc::_calc_cc(const double &tau) noexcept {
   // this->_mu = this->_halfNminus1;
   this->_sigma = this->_c2;
   this->_rho = tau / this->_nPlus1;

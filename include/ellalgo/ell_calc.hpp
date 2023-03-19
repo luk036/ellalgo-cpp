@@ -10,11 +10,11 @@ enum class CUTStatus;
 /**
  * @brief Ellipsoid Search Space
  *
- *        ell_calc = {x | (x - xc)' Q^-1 (x - xc) \le \kappa}
+ *        EllCalc= {x | (x - xc)' Q^-1 (x - xc) \le \kappa}
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */
-class ell_calc {
+class EllCalc{
 public:
   bool use_parallel_cut = true;
   double _tsq{};
@@ -37,15 +37,15 @@ private:
   const double _c3;
 
   /**
-   * @brief Construct a new ell_calc object
+   * @brief Construct a new EllCalcobject
    *
    * @param[in] E
    */
-  // auto operator=(const ell_calc& E) -> ell_calc& = delete;
+  // auto operator=(const EllCalc& E) -> EllCalc& = delete;
 
 public:
   /**
-   * @brief Construct a new ell_calc object
+   * @brief Construct a new EllCalcobject
    *
    * @tparam V
    * @tparam U
@@ -53,7 +53,7 @@ public:
    * @param Q
    * @param x
    */
-  ell_calc(double nFloat) noexcept
+  EllCalc(double nFloat) noexcept
       : _nFloat{nFloat}, _nPlus1{_nFloat + 1.0}, _nMinus1{_nFloat - 1.0},
         _halfN{_nFloat / 2.0}, _halfNplus1{_nPlus1 / 2.0},
         _halfNminus1{_nMinus1 / 2.0}, _nSq{_nFloat * _nFloat},
@@ -61,26 +61,26 @@ public:
 
 public:
   /**
-   * @brief Construct a new ell_calc object
+   * @brief Construct a new EllCalcobject
    *
    * @param[in] E (move)
    */
-  ell_calc(ell_calc &&E) = default;
+  EllCalc(EllCalc&&E) = default;
 
   /**
-   * @brief Destroy the ell_calc object
+   * @brief Destroy the EllCalcobject
    *
    */
-  ~ell_calc() {}
+  ~EllCalc() {}
 
   /**
-   * @brief Construct a new ell_calc object
+   * @brief Construct a new EllCalcobject
    *
    * To avoid accidentally copying, only explicit copy is allowed
    *
    * @param E
    */
-  ell_calc(const ell_calc &E) = default;
+  EllCalc(const EllCalc&E) = default;
 
   /**
    * @brief Calculate new ellipsoid under Parallel Cut
@@ -123,4 +123,4 @@ public:
    */
   auto _calc_cc(const double &tau) noexcept -> void;
 
-}; // } ell_calc
+}; // } EllCalc

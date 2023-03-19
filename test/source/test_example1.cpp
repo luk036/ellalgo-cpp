@@ -1,8 +1,8 @@
 // -*- coding: utf-8 -*-
 #include <doctest/doctest.h> // for ResultBuilder, TestCase, CHECK
 
-#include <ellalgo/cutting_plane.hpp>   // for cutting_plane_dc
-#include <ellalgo/ell_stable.hpp>      // for ell_stable
+#include <ellalgo/cutting_plane.hpp>   // for cutting_plane_optim
+#include <ellalgo/ell_stable.hpp>      // for EllStable
 #include <tuple>                       // for get, tuple
 #include <xtensor/xaccessible.hpp>     // for xconst_accessible
 #include <xtensor/xarray.hpp>          // for xarray_container
@@ -48,10 +48,10 @@ auto my_oracle(const Arr &z, double &t) -> std::tuple<Cut, bool> {
 }
 
 TEST_CASE("Example 1, test feasible") {
-  ell_stable E{10.0, Arr{0.0, 0.0}};
+  EllStable E{10.0, Arr{0.0, 0.0}};
   const auto P = my_oracle;
   auto t = -1.e100; // std::numeric_limits<double>::min()
-  const auto result = cutting_plane_dc(P, E, t);
+  const auto result = cutting_plane_optim(P, E, t);
   const auto &x = std::get<0>(result);
   const auto &ell_info = std::get<1>(result);
   CHECK(x[0] >= 0.0);
@@ -59,20 +59,20 @@ TEST_CASE("Example 1, test feasible") {
 }
 
 TEST_CASE("Example 1, test infeasible 1") {
-  ell_stable E{10.0, Arr{100.0, 100.0}}; // wrong initial guess
+  EllStable E{10.0, Arr{100.0, 100.0}}; // wrong initial guess
                                          // or ellipsoid is too small
   const auto P = my_oracle;
   auto t = -1.e100; // std::numeric_limits<double>::min()
-  const auto result = cutting_plane_dc(P, E, t);
+  const auto result = cutting_plane_optim(P, E, t);
   const auto &ell_info = std::get<1>(result);
   CHECK(!ell_info.feasible);
   CHECK_EQ(ell_info.status, CUTStatus::nosoln); // no sol'n
 }
 
 TEST_CASE("Example 1, test infeasible 2") {
-  ell_stable E{10.0, Arr{0.0, 0.0}};
+  EllStable E{10.0, Arr{0.0, 0.0}};
   const auto P = my_oracle;
-  const auto result = cutting_plane_dc(P, E, 100.0); // wrong initial guess
+  const auto result = cutting_plane_optim(P, E, 100.0); // wrong initial guess
   const auto &ell_info = std::get<1>(result);
   CHECK(!ell_info.feasible);
 }

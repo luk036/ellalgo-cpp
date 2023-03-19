@@ -1,6 +1,6 @@
 // -*- coding: utf-8 -*-
-#include <ellalgo/cutting_plane.hpp>          // for cutting_plane_dc
-#include <ellalgo/ell.hpp>                    // for ell
+#include <ellalgo/cutting_plane.hpp>          // for cutting_plane_optim
+#include <ellalgo/ell.hpp>                    // for Ell
 #include <ellalgo/oracles/lowpass_oracle.hpp> // for lowpass_oracle
 #include <ellalgo/utility.hpp>                // for zeros
 // #include <xtensor-blas/xlinalg.hpp>
@@ -134,7 +134,7 @@ auto run_lowpass(bool use_parallel_cut) {
   static const filter_design_construct Fdc{};
 
   auto r0 = zeros({Fdc.N}); // initial x0
-  ell E(40.0, r0);
+  Ell E(40.0, r0);
   lowpass_oracle P(Fdc.Ap, Fdc.As, Fdc.Anr, Fdc.Lpsq, Fdc.Upsq);
   Options options{};
 
@@ -143,7 +143,7 @@ auto run_lowpass(bool use_parallel_cut) {
   // options.tol = 1e-8;
 
   auto t = Fdc.Spsq;
-  const auto result = cutting_plane_dc(P, E, t, options);
+  const auto result = cutting_plane_optim(P, E, t, options);
   const auto &ell_info = std::get<1>(result);
   // std::cout << "lowpass r: " << r << '\n';
   // auto Ustop = 20 * std::log10(std::sqrt(Spsq_new));

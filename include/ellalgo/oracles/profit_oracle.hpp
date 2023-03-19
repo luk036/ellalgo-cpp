@@ -109,13 +109,13 @@ public:
       : _uie{e}, _a{a}, _P(p - e3, A, k - e3, a, v + e3) {}
 
   /**
-   * @brief Make object callable for cutting_plane_dc()
+   * @brief Make object callable for cutting_plane_optim()
    *
    * @param[in] y input quantity (in log scale)
    * @param[in,out] t the best-so-far optimal value
    * @return Cut and the updated best-so-far value
    *
-   * @see cutting_plane_dc
+   * @see cutting_plane_optim
    */
   auto operator()(const Arr &y, double &t) {
     auto a_rb = this->_a;

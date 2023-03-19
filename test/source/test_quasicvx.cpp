@@ -2,9 +2,9 @@
 #include <doctest/doctest.h> // for ResultBuilder, Approx, CHECK_EQ
 
 #include <cmath>                       // for exp
-#include <ellalgo/cutting_plane.hpp>   // for cutting_plane_dc
-#include <ellalgo/ell.hpp>             // for ell
-#include <ellalgo/ell_stable.hpp>      // for ell_stable
+#include <ellalgo/cutting_plane.hpp>   // for cutting_plane_optim
+#include <ellalgo/ell.hpp>             // for Ell
+#include <ellalgo/ell_stable.hpp>      // for EllStable
 #include <tuple>                       // for get, tuple
 #include <xtensor/xaccessible.hpp>     // for xconst_accessible
 #include <xtensor/xarray.hpp>          // for xarray_container
@@ -47,11 +47,11 @@ auto my_quasicvx_oracle(const Arr &z, double &t) -> std::tuple<Cut, bool> {
 }
 
 TEST_CASE("Quasiconvex 1, test feasible") {
-  ell E{10.0, Arr{0.0, 0.0}};
+  Ell E{10.0, Arr{0.0, 0.0}};
 
   const auto P = my_quasicvx_oracle;
   auto t = 0.0;
-  const auto result = cutting_plane_dc(P, E, t);
+  const auto result = cutting_plane_optim(P, E, t);
   const auto &x = std::get<0>(result);
   const auto &ell_info = std::get<1>(result);
   CHECK(ell_info.feasible);
@@ -61,10 +61,10 @@ TEST_CASE("Quasiconvex 1, test feasible") {
 }
 
 TEST_CASE("Quasiconvex 1, test feasible (stable)") {
-  ell_stable E{10.0, Arr{0.0, 0.0}};
+  EllStable E{10.0, Arr{0.0, 0.0}};
   const auto P = my_quasicvx_oracle;
   auto t = 0.0;
-  const auto result = cutting_plane_dc(P, E, t);
+  const auto result = cutting_plane_optim(P, E, t);
   const auto &ell_info = std::get<1>(result);
   CHECK(ell_info.feasible);
   // CHECK_EQ(-t, doctest::Approx(-0.4288673397));

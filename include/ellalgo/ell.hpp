@@ -14,11 +14,11 @@ enum class CUTStatus;
 /**
  * @brief Ellipsoid Search Space
  *
- *        ell = {x | (x - xc)' Q^-1 (x - xc) \le \kappa}
+ *        ell_ss {x | (x - xc)' Q^-1 (x - xc) \le \kappa}
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */
-class ell {
+class Ell {
 public:
   using Arr = xt::xarray<double, xt::layout_type::row_major>;
   // using params_t = std::tuple<double, double, double>;
@@ -28,20 +28,20 @@ public:
 
 private:
   const int _n;
-  ell_calc _helper;
+  EllCalc _helper;
   double _kappa;
   Arr _Q;
   Arr _xc;
 
   /**
-   * @brief Construct a new ell object
+   * @brief Construct a new Ell object
    *
    * @param[in] E
    */
-  auto operator=(const ell &E) -> ell & = delete;
+  auto operator=(const Ell &E) -> Ell & = delete;
 
   /**
-   * @brief Construct a new ell object
+   * @brief Construct a new Ell object
    *
    * @tparam V
    * @tparam U
@@ -50,56 +50,56 @@ private:
    * @param x
    */
   template <typename V, typename U>
-  ell(V &&kappa, Arr &&Q, U &&x) noexcept
+  Ell(V &&kappa, Arr &&Q, U &&x) noexcept
       : _n{int(x.size())}, _helper{double(_n)}, _kappa{std::forward<V>(kappa)},
         _Q{std::move(Q)}, _xc{std::forward<U>(x)} {}
 
 public:
   /**
-   * @brief Construct a new ell object
+   * @brief Construct a new Ell object
    *
    * @param[in] val
    * @param[in] x
    */
-  ell(const Arr &val, Arr x) noexcept : ell{1.0, xt::diag(val), std::move(x)} {}
+  Ell(const Arr &val, Arr x) noexcept : Ell{1.0, xt::diag(val), std::move(x)} {}
 
   /**
-   * @brief Construct a new ell object
+   * @brief Construct a new Ell object
    *
    * @param[in] alpha
    * @param[in] x
    */
-  ell(const double &alpha, Arr x) noexcept
-      : ell{alpha, xt::eye(x.size()), std::move(x)} {}
+  Ell(const double &alpha, Arr x) noexcept
+      : Ell{alpha, xt::eye(x.size()), std::move(x)} {}
 
   /**
-   * @brief Construct a new ell object
+   * @brief Construct a new Ell object
    *
    * @param[in] E (move)
    */
-  ell(ell &&E) = default;
+  Ell(Ell &&E) = default;
 
   /**
-   * @brief Destroy the ell object
+   * @brief Destroy the Ell object
    *
    */
-  ~ell() {}
+  ~Ell() {}
 
   /**
-   * @brief Construct a new ell object
+   * @brief Construct a new Ell object
    *
    * To avoid accidentally copying, only explicit copy is allowed
    *
    * @param E
    */
-  explicit ell(const ell &E) = default;
+  explicit Ell(const Ell &E) = default;
 
   /**
    * @brief explicitly copy
    *
-   * @return ell
+   * @return Ell
    */
-  auto copy() const -> ell { return ell(*this); }
+  auto copy() const -> Ell { return Ell(*this); }
 
   /**
    * @brief copy the whole array anyway
@@ -140,4 +140,4 @@ protected:
     }
     return this->_helper._calc_ll_core(beta[0], beta[1]);
   }
-}; // } ell
+}; // } Ell

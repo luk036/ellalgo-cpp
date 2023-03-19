@@ -2,7 +2,7 @@
 #include <doctest/doctest.h> // for ResultBuilder, TestCase, CHECK
 
 #include <ellalgo/cutting_plane.hpp>   // for cutting_plane_feas
-#include <ellalgo/ell_stable.hpp>      // for ell_stable
+#include <ellalgo/ell_stable.hpp>      // for EllStable
 #include <tuple>                       // for get, tuple
 #include <xtensor/xaccessible.hpp>     // for xconst_accessible
 #include <xtensor/xlayout.hpp>         // for layout_type, layout_type::row...
@@ -45,7 +45,7 @@ auto my_oracle2(const Arr &z) -> Cut * {
 }
 
 TEST_CASE("Example 2") {
-  ell_stable E{10.0, Arr{0.0, 0.0}};
+  EllStable E{10.0, Arr{0.0, 0.0}};
 
   const auto P = my_oracle2;
   auto ell_info = cutting_plane_feas(P, E);

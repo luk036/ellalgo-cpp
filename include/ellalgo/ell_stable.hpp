@@ -14,11 +14,11 @@ enum class CUTStatus;
 /**
  * @brief Ellipsoid Search Space
  *
- *        ell_stable = {x | (x - xc)' Q^-1 (x - xc) \le \kappa}
+ *        EllStable = {x | (x - xc)' Q^-1 (x - xc) \le \kappa}
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */
-class ell_stable {
+class EllStable {
 public:
   using Arr = xt::xarray<double, xt::layout_type::row_major>;
   // using params_t = std::tuple<double, double, double>;
@@ -28,20 +28,20 @@ public:
 
 protected:
   const int _n;
-  ell_calc _helper;
+  EllCalc _helper;
   double _kappa;
   Arr _Q;
   Arr _xc;
 
   /**
-   * @brief Construct a new ell_stable object
+   * @brief Construct a new EllStable object
    *
    * @param[in] E
    */
-  auto operator=(const ell_stable &E) -> ell_stable & = delete;
+  auto operator=(const EllStable &E) -> EllStable & = delete;
 
   /**
-   * @brief Construct a new ell_stable object
+   * @brief Construct a new EllStable object
    *
    * @tparam V
    * @tparam U
@@ -50,57 +50,57 @@ protected:
    * @param x
    */
   template <typename V, typename U>
-  ell_stable(V &&kappa, Arr &&Q, U &&x) noexcept
+  EllStable(V &&kappa, Arr &&Q, U &&x) noexcept
       : _n{int(x.size())}, _helper{double(_n)}, _kappa{std::forward<V>(kappa)},
         _Q{std::move(Q)}, _xc{std::forward<U>(x)} {}
 
 public:
   /**
-   * @brief Construct a new ell_stable object
+   * @brief Construct a new EllStable object
    *
    * @param[in] val
    * @param[in] x
    */
-  ell_stable(const Arr &val, Arr x) noexcept
-      : ell_stable{1.0, xt::diag(val), std::move(x)} {}
+  EllStable(const Arr &val, Arr x) noexcept
+      : EllStable{1.0, xt::diag(val), std::move(x)} {}
 
   /**
-   * @brief Construct a new ell_stable object
+   * @brief Construct a new EllStable object
    *
    * @param[in] alpha
    * @param[in] x
    */
-  ell_stable(const double &alpha, Arr x) noexcept
-      : ell_stable{alpha, xt::eye(x.size()), std::move(x)} {}
+  EllStable(const double &alpha, Arr x) noexcept
+      : EllStable{alpha, xt::eye(x.size()), std::move(x)} {}
 
   /**
-   * @brief Construct a new ell_stable object
+   * @brief Construct a new EllStable object
    *
    * @param[in] E (move)
    */
-  ell_stable(ell_stable &&E) = default;
+  EllStable(EllStable &&E) = default;
 
   /**
-   * @brief Destroy the ell_stable object
+   * @brief Destroy the EllStable object
    *
    */
-  ~ell_stable() {}
+  ~EllStable() {}
 
   /**
-   * @brief Construct a new ell_stable object
+   * @brief Construct a new EllStable object
    *
    * To avoid accidentally copying, only explicit copy is allowed
    *
    * @param E
    */
-  explicit ell_stable(const ell_stable &E) = default;
+  explicit EllStable(const EllStable &E) = default;
 
   /**
    * @brief explicitly copy
    *
-   * @return ell_stable
+   * @return EllStable
    */
-  auto copy() const -> ell_stable { return ell_stable(*this); }
+  auto copy() const -> EllStable { return EllStable(*this); }
 
   /**
    * @brief copy the whole array anyway
@@ -141,4 +141,4 @@ protected:
     }
     return this->_helper._calc_ll_core(beta[0], beta[1]);
   }
-}; // } ell_stable
+}; // } EllStable

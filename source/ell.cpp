@@ -1,8 +1,8 @@
 #include <cmath>                       // for sqrt
 #include <ellalgo/cut_config.hpp>      // for CUTStatus, CUTStatus::success
-#include <ellalgo/ell.hpp>             // for ell, ell::Arr
+#include <ellalgo/ell.hpp>             // for Ell, Ell::Arr
 #include <ellalgo/ell_assert.hpp>      // for ELL_UNLIKELY
-#include <ellalgo/ell_calc.hpp>        // for ell, ell::Arr
+#include <ellalgo/ell_calc.hpp>        // for Ell, Ell::Arr
 #include <tuple>                       // for tuple
 #include <xtensor/xarray.hpp>          // for xarray_container
 #include <xtensor/xcontainer.hpp>      // for xcontainer
@@ -26,7 +26,7 @@ using Arr = xt::xarray<double, xt::layout_type::row_major>;
  * @return std::tuple<int, double>
  */
 template <typename T>
-auto ell::update(const std::pair<Arr, T> &cut)
+auto Ell::update(const std::pair<Arr, T> &cut)
     -> std::tuple<CUTStatus, double> {
   // const auto& [grad, beta] = cut;
   const auto &grad = cut.first;
@@ -74,6 +74,6 @@ auto ell::update(const std::pair<Arr, T> &cut)
 
 // Instantiation
 template std::tuple<CUTStatus, double>
-ell::update(const std::pair<Arr, double> &cut);
+Ell::update(const std::pair<Arr, double> &cut);
 template std::tuple<CUTStatus, double>
-ell::update(const std::pair<Arr, Arr> &cut);
+Ell::update(const std::pair<Arr, Arr> &cut);
