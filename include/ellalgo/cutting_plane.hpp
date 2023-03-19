@@ -70,7 +70,7 @@ auto cutting_plane_feas(Oracle &&omega, Space &&S,
  */
 template <typename Oracle, typename Space, typename opt_type>
 auto cutting_plane_optim(Oracle &&omega, Space &&S, opt_type &&t,
-                      const Options &options = Options()) {
+                         const Options &options = Options()) {
   const auto t_orig = t;
   decltype(S.xc()) x_best{};
   auto status = CUTStatus::success;

@@ -14,7 +14,7 @@ enum class CUTStatus;
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */
-class EllCalc{
+class EllCalc {
 public:
   bool use_parallel_cut = true;
   double _tsq{};
@@ -65,7 +65,7 @@ public:
    *
    * @param[in] E (move)
    */
-  EllCalc(EllCalc&&E) = default;
+  EllCalc(EllCalc &&E) = default;
 
   /**
    * @brief Destroy the EllCalcobject
@@ -80,7 +80,7 @@ public:
    *
    * @param E
    */
-  EllCalc(const EllCalc&E) = default;
+  EllCalc(const EllCalc &E) = default;
 
   /**
    * @brief Calculate new ellipsoid under Parallel Cut

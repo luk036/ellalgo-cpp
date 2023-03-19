@@ -3,10 +3,10 @@
  */
 #include <doctest/doctest.h> // for ResultBuilder, CHECK
 
-#include <cmath>                             // for log
-#include <ellalgo/cutting_plane.hpp>         // for cutting_plane_optim, cutti...
-#include <ellalgo/ell.hpp>                   // for Ell
-#include <ellalgo/ell_stable.hpp>            // for EllStable
+#include <cmath>                     // for log
+#include <ellalgo/cutting_plane.hpp> // for cutting_plane_optim, cutti...
+#include <ellalgo/ell.hpp>           // for Ell
+#include <ellalgo/ell_stable.hpp>    // for EllStable
 #include <ellalgo/oracles/profit_oracle.hpp> // for profit_oracle, profit_r...
 #include <tuple>                             // for get
 #include <type_traits>                       // for move, remove_reference<...
