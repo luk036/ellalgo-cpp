@@ -84,13 +84,13 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a3d82af6b6cef1f6821b6a9bc49fa6043" class="m-doc">bsearch_adaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; P,
-              Space&amp; S)</span>
+              <span class="m-doc-wrap-bumper"><a href="#ae0ac1e4344b727e537667b5acb65ba4e" class="m-doc">bsearch_adaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; omega,
+              Space&amp; ss)</span>
             </dt>
             <dd>Construct a new bsearch adaptor object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ad855fc6ab463900c0b1a4f3cb3703df4" class="m-doc">bsearch_adaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; P,
-              Space&amp; S,
+              <span class="m-doc-wrap-bumper"><a href="#a04484af28050c4f3f3b470e89ea12899" class="m-doc">bsearch_adaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; omega,
+              Space&amp; ss,
               const <a href="structOptions.html" class="m-doc">Options</a>&amp; options)</span>
             </dt>
             <dd>Construct a new bsearch adaptor object.</dd>
@@ -104,21 +104,21 @@
             </dt>
             <dd>get best x</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename opt_type&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a30af92d18c5a4a4650cd8a0c51c2a34c" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const opt_type&amp; t) -&gt; bool -&gt; auto</span>
+              <div class="m-doc-template">template&lt;typename BestSoFar&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1a02a33333e5db6fa5c039c4aa102602" class="m-doc">assess_bs</a>(</span><span class="m-doc-wrap">const BestSoFar&amp; t) -&gt; bool -&gt; auto</span>
             </dt>
             <dd></dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a3d82af6b6cef1f6821b6a9bc49fa6043"><div>
+          <section class="m-doc-details" id="ae0ac1e4344b727e537667b5acb65ba4e"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename Oracle, typename Space&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> bsearch_<wbr />adaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3d82af6b6cef1f6821b6a9bc49fa6043" class="m-doc-self">bsearch_adaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; P,
-              Space&amp; S)</span></span>
+              <span class="m-doc-wrap-bumper"> bsearch_<wbr />adaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae0ac1e4344b727e537667b5acb65ba4e" class="m-doc-self">bsearch_adaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; omega,
+              Space&amp; ss)</span></span>
             </h3>
             <p>Construct a new bsearch adaptor object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -127,23 +127,23 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">P&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td style="width: 1%">omega&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
                   <td>perform assessment on x0</td>
                 </tr>
                 <tr>
-                  <td>S&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>ss&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
                   <td>search Space containing x*</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ad855fc6ab463900c0b1a4f3cb3703df4"><div>
+          <section class="m-doc-details" id="a04484af28050c4f3f3b470e89ea12899"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename Oracle, typename Space&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> bsearch_<wbr />adaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad855fc6ab463900c0b1a4f3cb3703df4" class="m-doc-self">bsearch_adaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; P,
-              Space&amp; S,
+              <span class="m-doc-wrap-bumper"> bsearch_<wbr />adaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a04484af28050c4f3f3b470e89ea12899" class="m-doc-self">bsearch_adaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; omega,
+              Space&amp; ss,
               const <a href="structOptions.html" class="m-doc">Options</a>&amp; options)</span></span>
             </h3>
             <p>Construct a new bsearch adaptor object.</p>
@@ -153,11 +153,11 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">P&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td style="width: 1%">omega&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
                   <td>perform assessment on x0</td>
                 </tr>
                 <tr>
-                  <td>S&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>ss&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
                   <td>search Space containing x*</td>
                 </tr>
                 <tr>
@@ -184,21 +184,30 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a30af92d18c5a4a4650cd8a0c51c2a34c"><div>
+          <section class="m-doc-details" id="a1a02a33333e5db6fa5c039c4aa102602"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename Oracle, typename Space&gt;
-                template&lt;typename opt_type&gt;
+                template&lt;typename BestSoFar&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto bsearch_<wbr />adaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a30af92d18c5a4a4650cd8a0c51c2a34c" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const opt_type&amp; t) -&gt; bool</span></span>
+              <span class="m-doc-wrap-bumper">auto bsearch_<wbr />adaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1a02a33333e5db6fa5c039c4aa102602" class="m-doc-self">assess_bs</a>(</span><span class="m-doc-wrap">const BestSoFar&amp; t) -&gt; bool</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">BestSoFar</td>
+                  <td>Could be integer or floating point</td>
+                </tr>
+              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">t&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>t&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
                   <td>the best-so-far optimal value</td>
                 </tr>
               </tbody>

@@ -97,6 +97,11 @@ k: a given constant that restricts the quantity of x1
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2dd90ff48fcf0854a942c186a0e26cb5" class="m-doc">assess_optim</a>(</span><span class="m-doc-wrap">const Arr&amp; y,
+              double&amp; t) const -&gt; std::tuple&lt; Cut, bool &gt; -&gt; auto</span>
+            </dt>
+            <dd></dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a165d838c4446ff86c5877b3dde807cd5" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const Arr&amp; y,
               double&amp; t) const -&gt; std::tuple&lt; Cut, bool &gt; -&gt; auto</span>
             </dt>
@@ -149,6 +154,33 @@ k: a given constant that restricts the quantity of x1
                   <td>output price</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2dd90ff48fcf0854a942c186a0e26cb5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto profit_<wbr />oracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2dd90ff48fcf0854a942c186a0e26cb5" class="m-doc-self">assess_optim</a>(</span><span class="m-doc-wrap">const Arr&amp; y,
+              double&amp; t) const -&gt; std::tuple&lt; Cut, bool &gt;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">y&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>input quantity (in log scale)</td>
+                </tr>
+                <tr>
+                  <td>t&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>the best-so-far optimal value</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::tuple&lt;Cut, double&gt; Cut and the updated best-so-far value</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a165d838c4446ff86c5877b3dde807cd5"><div>

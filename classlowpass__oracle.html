@@ -89,10 +89,15 @@ s.t.  L^2(\omega) \le R(\omega) \le U^2(\omega), \forall \omega \in
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a912d5b5f53428bcdabe45a4c67101436" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const Arr&amp; x,
+              <span class="m-doc-wrap-bumper">auto <a href="#ad57d17dcc91c151ec649fda86d89fd92" class="m-doc">assess_optim</a>(</span><span class="m-doc-wrap">const Arr&amp; x,
               double&amp; Spsq) const -&gt; std::tuple&lt; ParallelCut, bool &gt; -&gt; auto</span>
             </dt>
             <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a912d5b5f53428bcdabe45a4c67101436" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const Arr&amp; x,
+              double&amp; Spsq) const -&gt; std::tuple&lt; ParallelCut, bool &gt; -&gt; auto</span>
+            </dt>
+            <dd>deprecated</dd>
           </dl>
         </section>
         <section>
@@ -134,11 +139,39 @@ s.t.  L^2(\omega) \le R(\omega) \le U^2(\omega), \forall \omega \in
               </tbody>
             </table>
           </div></section>
+          <section class="m-doc-details" id="ad57d17dcc91c151ec649fda86d89fd92"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto lowpass_<wbr />oracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad57d17dcc91c151ec649fda86d89fd92" class="m-doc-self">assess_optim</a>(</span><span class="m-doc-wrap">const Arr&amp; x,
+              double&amp; Spsq) const -&gt; std::tuple&lt; ParallelCut, bool &gt;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">x&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Spsq&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>auto</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a912d5b5f53428bcdabe45a4c67101436"><div>
             <h3>
               <span class="m-doc-wrap-bumper">auto lowpass_<wbr />oracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a912d5b5f53428bcdabe45a4c67101436" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const Arr&amp; x,
               double&amp; Spsq) const -&gt; std::tuple&lt; ParallelCut, bool &gt;</span></span>
             </h3>
+            <p>deprecated</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
