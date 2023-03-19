@@ -21,7 +21,7 @@
 #include <xtensor/xview.hpp>           // for view, xview
 
 #include "benchmark/benchmark.h"  // for BENCHMARK, State, BENC...
-#include "ellalgo/cut_config.hpp" // for CInfo, Options
+#include "ellalgo/ell_config.hpp" // for CInfo, Options
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 

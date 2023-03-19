@@ -9,7 +9,7 @@
 #include "ell_calc.hpp"
 
 // forward declaration
-enum class CUTStatus;
+enum class CutStatus;
 
 /**
  * @brief Ellipsoid Search Space
@@ -127,14 +127,14 @@ public:
    * @return std::tuple<int, double>
    */
   template <typename T>
-  auto update(const std::pair<Arr, T> &cut) -> std::tuple<CUTStatus, double>;
+  auto update(const std::pair<Arr, T> &cut) -> std::tuple<CutStatus, double>;
 
 protected:
-  auto _update_cut(const double &beta) -> CUTStatus {
+  auto _update_cut(const double &beta) -> CutStatus {
     return this->_helper._calc_dc(beta);
   }
 
-  auto _update_cut(const Arr &beta) -> CUTStatus { // parallel cut
+  auto _update_cut(const Arr &beta) -> CutStatus { // parallel cut
     if (beta.shape()[0] < 2) {
       return this->_helper._calc_dc(beta[0]);
     }

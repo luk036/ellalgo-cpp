@@ -21,7 +21,7 @@ using ParallelCut = std::pair<Arr, Arr>;
  * @param[in] Spsq
  * @return auto
  */
-auto lowpass_oracle::operator()(const Arr &x, double &Spsq) const
+auto lowpass_oracle::assess_optim(const Arr &x, double &Spsq) const
     -> std::tuple<ParallelCut, bool> {
   // 1. nonnegative-real constraint
   // case 1,

@@ -1,5 +1,5 @@
 #include <cmath>                  // for sqrt
-#include <ellalgo/cut_config.hpp> // for CUTStatus, CUTStatus::success
+#include <ellalgo/ell_config.hpp> // for CutStatus, CutStatus::Success
 #include <ellalgo/ell_assert.hpp> // for ELL_UNLIKELY
 #include <ellalgo/ell_calc.hpp>   // for EllCalc
 #include <tuple>                  // for tuple
@@ -11,7 +11,7 @@
  * @param[in] b1
  * @return int
  */
-auto EllCalc::_calc_ll_core(const double &b0, const double &b1) -> CUTStatus {
+auto EllCalc::_calc_ll_core(const double &b0, const double &b1) -> CutStatus {
   // const auto b1sq = b1 * b1;
   const auto b1sqn = b1 * (b1 / this->_tsq);
   const auto t1n = 1.0 - b1sqn;
@@ -21,18 +21,18 @@ auto EllCalc::_calc_ll_core(const double &b0, const double &b1) -> CUTStatus {
 
   const auto bdiff = b1 - b0;
   if (bdiff < 0.0) {
-    return CUTStatus::nosoln; // no sol'n
+    return CutStatus::NoSoln; // no sol'n
   }
 
   if (b0 == 0.0) // central cut
   {
     this->_calc_ll_cc(b1, b1sqn);
-    return CUTStatus::success;
+    return CutStatus::Success;
   }
 
   const auto b0b1n = b0 * (b1 / this->_tsq);
   if (ELL_UNLIKELY(this->_nFloat * b0b1n < -1.0)) {
-    return CUTStatus::noeffect; // no effect
+    return CutStatus::NoEffect; // no effect
   }
 
   // const auto t0 = this->_tsq - b0 * b0;
@@ -46,7 +46,7 @@ auto EllCalc::_calc_ll_core(const double &b0, const double &b1) -> CUTStatus {
   this->_sigma = this->_c3 + (1.0 - b0b1n - xi) / (bsumn * bav) / this->_nPlus1;
   this->_rho = this->_sigma * bav;
   this->_delta = this->_c1 * ((t0n + t1n) / 2.0 + xi / this->_nFloat);
-  return CUTStatus::success;
+  return CutStatus::Success;
 }
 
 /**
@@ -71,29 +71,29 @@ void EllCalc::_calc_ll_cc(const double &b1, const double &b1sqn) {
  * @param[in] beta
  * @return int
  */
-auto EllCalc::_calc_dc(const double &beta) noexcept -> CUTStatus {
+auto EllCalc::_calc_dc(const double &beta) noexcept -> CutStatus {
   const auto tau = std::sqrt(this->_tsq);
 
   const auto bdiff = tau - beta;
   if (bdiff < 0.0) {
-    return CUTStatus::nosoln; // no sol'n
+    return CutStatus::NoSoln; // no sol'n
   }
 
   if (beta == 0.0) {
     this->_calc_cc(tau);
-    return CUTStatus::success;
+    return CutStatus::Success;
   }
 
   const auto gamma = tau + this->_nFloat * beta;
   if (ELL_UNLIKELY(gamma < 0)) {
-    return CUTStatus::noeffect; // no effect
+    return CutStatus::NoEffect; // no effect
   }
 
   // this->_mu = (bdiff / gamma) * this->_halfNminus1;
   this->_rho = gamma / this->_nPlus1;
   this->_sigma = 2.0 * this->_rho / (tau + beta);
   this->_delta = this->_c1 * (1.0 - beta * (beta / this->_tsq));
-  return CUTStatus::success;
+  return CutStatus::Success;
 }
 
 /**

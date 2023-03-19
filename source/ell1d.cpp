@@ -1,4 +1,4 @@
-#include <ellalgo/cut_config.hpp>       // for CUTStatus, CUTStatus::success
+#include <ellalgo/ell_config.hpp>       // for CutStatus, CutStatus::Success
 #include <ellalgo/ell1d.hpp>            // for ell1d, ell1d::return_t
 #include <ellalgo/ell_assert.hpp>       // for ELL_UNLIKELY
 #include <ellalgo/half_nonnegative.hpp> // for half_nonnegative
@@ -24,13 +24,13 @@ auto ell1d::update(const std::pair<double, double> &cut) noexcept
   if (beta == 0.0) {
     this->_r /= 2;
     this->_xc += g > 0.0 ? -this->_r : this->_r;
-    return {CUTStatus::success, tsq};
+    return {CutStatus::Success, tsq};
   }
   if (beta > tau) {
-    return {CUTStatus::nosoln, tsq}; // no sol'n
+    return {CutStatus::NoSoln, tsq}; // no sol'n
   }
   if (ELL_UNLIKELY(beta < -tau)) {
-    return {CUTStatus::noeffect, tsq}; // no effect
+    return {CutStatus::NoEffect, tsq}; // no effect
   }
 
   const auto bound = this->_xc - beta / g;
@@ -39,5 +39,5 @@ auto ell1d::update(const std::pair<double, double> &cut) noexcept
 
   this->_r = algo::half_nonnegative(u - l);
   this->_xc = l + this->_r;
-  return {CUTStatus::success, tsq};
+  return {CutStatus::Success, tsq};
 }

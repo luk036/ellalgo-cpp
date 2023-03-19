@@ -1,0 +1,43 @@
+#pragma once
+
+#include <cstddef>
+#include <utility> // for pair
+
+/**
+ * @brief Options
+ *
+ */
+struct Options {
+  size_t max_iter = 2000;
+  double tol = 1e-8;
+};
+
+/**
+ * @brief Cut Status
+ *
+ */
+enum class CutStatus {
+  Success,
+  NoSoln,
+  NoEffect,
+  SmallEnough,
+};
+
+/**
+ * @brief CInfo
+ *
+ */
+struct CInfo {
+  bool feasible;
+  size_t num_iters;
+  CutStatus status;
+};
+
+template <typename T> using ArrayType = typename T::ArrayType;
+template <typename T> using CutChoices = typename T::CutChoices;
+template <typename T> using CutConcept = std::pair<ArrayType<T>, CutChoices<T>>;
+template <typename T> using RetQ = std::tuple<CutConcept<T>, bool, ArrayType<T>, bool>;
+
+#if __cpp_concepts >= 201907L
+#include "ell_concepts.hpp"
+#endif

@@ -5,7 +5,7 @@
 #include <tuple>
 
 // forward declaration
-enum class CUTStatus;
+enum class CutStatus;
 
 /**
  * @brief Ellipsoid Method for special 1D case
@@ -13,7 +13,7 @@ enum class CUTStatus;
  */
 class ell1d {
 public:
-  using return_t = std::tuple<CUTStatus, double>;
+  using return_t = std::tuple<CutStatus, double>;
 
 private:
   double _r;

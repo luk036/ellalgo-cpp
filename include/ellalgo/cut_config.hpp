@@ -2,7 +2,7 @@
 
 #include <cstddef>
 
-enum class CUTStatus { success, nosoln, smallenough, noeffect };
+enum class CutStatus { Success, NoSoln, SmallEnough, NoEffect };
 
 /**
  * @brief Options
@@ -20,5 +20,5 @@ struct Options {
 struct CInfo {
   bool feasible;
   size_t num_iters;
-  CUTStatus status;
+  CutStatus status;
 };

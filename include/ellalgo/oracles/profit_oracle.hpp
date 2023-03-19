@@ -64,7 +64,18 @@ public:
    * @param[in,out] t the best-so-far optimal value
    * @return std::tuple<Cut, double> Cut and the updated best-so-far value
    */
-  auto operator()(const Arr &y, double &t) const -> std::tuple<Cut, bool>;
+  auto assess_optim(const Arr &y, double &t) const -> std::tuple<Cut, bool>;
+
+  /**
+   * @brief
+   *
+   * @param[in] y input quantity (in log scale)
+   * @param[in,out] t the best-so-far optimal value
+   * @return std::tuple<Cut, double> Cut and the updated best-so-far value
+   */
+  auto operator()(const Arr &y, double &t) const -> std::tuple<Cut, bool> {
+    return this->assess_optim(y, t);
+  }
 };
 
 /**
@@ -86,6 +97,7 @@ public:
  */
 class profit_rb_oracle {
   using Arr = xt::xarray<double, xt::layout_type::row_major>;
+  using Cut = std::pair<Arr, double>;
 
 private:
   const Arr _uie;
@@ -117,12 +129,25 @@ public:
    *
    * @see cutting_plane_optim
    */
-  auto operator()(const Arr &y, double &t) {
+  auto assess_optim(const Arr &y, double &t) -> std::tuple<Cut, bool> {
     auto a_rb = this->_a;
     a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
     a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
     this->_P._a = a_rb;
     return this->_P(y, t);
+  }
+
+  /**
+   * @brief Make object callable for cutting_plane_optim()
+   *
+   * @param[in] y input quantity (in log scale)
+   * @param[in,out] t the best-so-far optimal value
+   * @return Cut and the updated best-so-far value
+   *
+   * @see cutting_plane_optim
+   */
+  auto operator()(const Arr &y, double &t) -> std::tuple<Cut, bool> {
+    return this->assess_optim(y, t);
   }
 };
 
@@ -177,6 +202,20 @@ public:
    *
    * @see cutting_plane_q
    */
-  auto operator()(const Arr &y, double &t, bool retry)
+  auto assess_q(const Arr &y, double &t, bool retry)
       -> std::tuple<Cut, bool, Arr, bool>;
+
+  /**
+   * @brief Make object callable for cutting_plane_q()
+   *
+   * @param[in] y input quantity (in log scale)
+   * @param[in,out] t the best-so-far optimal value
+   * @param[in] retry whether it is a retry
+   * @return Cut and the updated best-so-far value
+   *
+   * @see cutting_plane_q
+   */
+  auto operator()(const Arr &y, double &t, bool retry) {
+    return this->assess_q(y, t, retry);
+  }
 };

@@ -22,7 +22,7 @@
 #include <xtensor/xutils.hpp>          // for accumulate
 #include <xtensor/xview.hpp>           // for view, xview
 
-#include "ellalgo/cut_config.hpp" // for CInfo, Options
+#include "ellalgo/ell_config.hpp" // for CInfo, Options
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 

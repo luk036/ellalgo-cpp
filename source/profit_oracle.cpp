@@ -16,7 +16,7 @@ using Cut = std::pair<Arr, double>;
  * @param[in,out] t the best-so-far optimal value
  * @return std::tuple<Cut, double>
  */
-auto profit_oracle::operator()(const Arr &y, double &t) const
+auto profit_oracle::assess_optim(const Arr &y, double &t) const
     -> std::tuple<Cut, bool> {
   // y0 <= log k
   const auto f1 = y[0] - this->_log_k;
@@ -45,7 +45,7 @@ auto profit_oracle::operator()(const Arr &y, double &t) const
  * @param[in,out] t the best-so-far optimal value
  * @return std::tuple<Cut, double, Arr, int>
  */
-auto profit_q_oracle::operator()(const Arr &y, double &t, bool retry)
+auto profit_q_oracle::assess_q(const Arr &y, double &t, bool retry)
     -> std::tuple<Cut, bool, Arr, bool> {
   if (!retry) {
     Arr x = xt::round(xt::exp(y));

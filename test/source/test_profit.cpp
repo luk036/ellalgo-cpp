@@ -15,7 +15,7 @@
 #include <xtensor/xlayout.hpp>               // for layout_type, layout_typ...
 #include <xtensor/xtensor_forward.hpp>       // for xarray
 
-#include "ellalgo/cut_config.hpp" // for CInfo
+#include "ellalgo/ell_config.hpp" // for CInfo
 
 // using namespace fun;
 

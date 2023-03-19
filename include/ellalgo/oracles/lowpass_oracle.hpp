@@ -60,6 +60,16 @@ public:
    * @param[in] Spsq
    * @return auto
    */
-  auto operator()(const Arr &x, double &Spsq) const
+  auto assess_optim(const Arr &x, double &Spsq) const
       -> std::tuple<ParallelCut, bool>;
+
+  /**
+   * @brief deprecated
+   *
+   * @param[in] x
+   * @param[in] Spsq
+   * @return auto
+   */
+  auto operator()(const Arr &x, double &Spsq) const
+      -> std::tuple<ParallelCut, bool> { return this->assess_optim(x, Spsq); }
 };

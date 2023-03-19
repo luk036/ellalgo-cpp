@@ -5,7 +5,7 @@
 #include <tuple>
 
 // forward declaration
-enum class CUTStatus;
+enum class CutStatus;
 
 /**
  * @brief Ellipsoid Search Space
@@ -92,7 +92,7 @@ public:
    * @param[in] b1
    * @return int
    */
-  auto _calc_ll_core(const double &b0, const double &b1) -> CUTStatus;
+  auto _calc_ll_core(const double &b0, const double &b1) -> CutStatus;
 
   /**
    * @brief Calculate new ellipsoid under Parallel Cut, one of them is central
@@ -112,7 +112,7 @@ public:
    *
    * @param[in] beta
    */
-  auto _calc_dc(const double &beta) noexcept -> CUTStatus;
+  auto _calc_dc(const double &beta) noexcept -> CutStatus;
 
   /**
    * @brief Calculate new ellipsoid under Central Cut
