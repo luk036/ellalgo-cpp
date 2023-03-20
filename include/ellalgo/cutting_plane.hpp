@@ -112,10 +112,6 @@ auto cutting_plane_optim(Oracle &&omega, Space &&ss, opt_type &&t,
              x             solution vector
              niter          number of iterations performed
 **/
-// #include <boost/numeric/ublas/symmetric.hpp>
-// namespace bnu = boost::numeric::ublas;
-// #include <xtensor-blas/xlinalg.hpp>
-// #include <xtensor/xarray.hpp>
 
 /**
  * @brief Cutting-plane method for solving convex discrete optimization problem

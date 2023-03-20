@@ -4,7 +4,7 @@
 #include <cmath>                       // for exp
 #include <ellalgo/cutting_plane.hpp>   // for cutting_plane_dc
 #include <ellalgo/ell.hpp>             // for ell
-#include <ellalgo/ell_stable.hpp>      // for ell_stable
+#include <ellalgo/ell_stable.hpp>      // for EllStable
 #include <tuple>                       // for get, tuple
 #include <xtensor/xaccessible.hpp>     // for xconst_accessible
 #include <xtensor/xarray.hpp>          // for xarray_container

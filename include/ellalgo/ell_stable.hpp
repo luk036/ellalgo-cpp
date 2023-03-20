@@ -7,6 +7,7 @@
 #include <xtensor/xarray.hpp>
 
 #include "ell_calc.hpp"
+#include "ell_matrix.hpp"
 
 // forward declaration
 enum class CutStatus;
@@ -30,7 +31,7 @@ protected:
   const int _n;
   EllCalc _helper;
   double _kappa;
-  Arr _Q;
+  Matrix _Q;
   Arr _xc;
 
   /**
@@ -50,7 +51,7 @@ protected:
    * @param x
    */
   template <typename V, typename U>
-  EllStable(V &&kappa, Arr &&Q, U &&x) noexcept
+  EllStable(V &&kappa, Matrix &&Q, U &&x) noexcept
       : _n{int(x.size())}, _helper{double(_n)}, _kappa{std::forward<V>(kappa)},
         _Q{std::move(Q)}, _xc{std::forward<U>(x)} {}
 
@@ -61,17 +62,23 @@ public:
    * @param[in] val
    * @param[in] x
    */
-  EllStable(const Arr &val, Arr x) noexcept
-      : EllStable{1.0, xt::diag(val), std::move(x)} {}
+  EllStable(const Arr &val, Arr x)
+      : EllStable{1.0, Matrix(int(x.size())), std::move(x)} {
+    for (auto i = 0; i != this->_n; ++i) {
+      this->_Q(i, i) = val[i];
+    }
+  }
 
   /**
-   * @brief Construct a new EllStable object
+   * @brief Construct a new Ell object
    *
    * @param[in] alpha
    * @param[in] x
    */
-  EllStable(const double &alpha, Arr x) noexcept
-      : EllStable{alpha, xt::eye(x.size()), std::move(x)} {}
+  EllStable(const double &alpha, Arr x)
+      : EllStable{alpha, Matrix(int(x.size())), std::move(x)} {
+    this->_Q.identity();
+  }
 
   /**
    * @brief Construct a new EllStable object

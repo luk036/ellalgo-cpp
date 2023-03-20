@@ -50,7 +50,6 @@ auto Ell::update(const std::pair<Arr, T> &cut)
     return {status, this->_helper._tsq};
   }
 
-  this->_xc -= (this->_helper._rho / omega) * Qg; // n
   // n*(n+1)/2 + n
   // this->_Q -= (this->_sigma / omega) * xt::linalg::outer(Qg, Qg);
   const auto r = this->_helper._sigma / omega;
@@ -69,7 +68,9 @@ auto Ell::update(const std::pair<Arr, T> &cut)
     this->_Q *= this->_kappa;
     this->_kappa = 1.0;
   }
-  return {status, this->_helper._tsq}; // g++-7 is ok
+
+  this->_xc -= (this->_helper._rho / omega) * Qg; // n
+  return {status, this->_helper._tsq};            // g++-7 is ok
 }
 
 // Instantiation

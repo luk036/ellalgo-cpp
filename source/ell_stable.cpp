@@ -68,9 +68,6 @@ auto EllStable::update(const std::pair<Arr, T> &cut)
     }
   }
 
-  // calculate xc: n
-  this->_xc -= (this->_helper._rho / omega) * Qg;
-
   // rank-one update: 3*n + (n-1)*n/2
   // const auto r = this->_sigma / omega;
   const auto mu = this->_helper._sigma / (1.0 - this->_helper._sigma);
@@ -96,6 +93,9 @@ auto EllStable::update(const std::pair<Arr, T> &cut)
   //     this->_Q *= this->_kappa;
   //     this->_kappa = 1.0;
   // }
+
+  // calculate xc: n
+  this->_xc -= (this->_helper._rho / omega) * Qg;
   return {status, this->_helper._tsq}; // g++-7 is ok
 }
 

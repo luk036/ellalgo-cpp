@@ -7,7 +7,7 @@
 #include <xtensor/xarray.hpp>
 
 #include "ell_calc.hpp"
-
+#include "ell_matrix.hpp"
 // forward declaration
 enum class CutStatus;
 
@@ -30,7 +30,7 @@ private:
   const int _n;
   EllCalc _helper;
   double _kappa;
-  Arr _Q;
+  Matrix _Q;
   Arr _xc;
 
   /**
@@ -50,7 +50,7 @@ private:
    * @param x
    */
   template <typename V, typename U>
-  Ell(V &&kappa, Arr &&Q, U &&x) noexcept
+  Ell(V &&kappa, Matrix &&Q, U &&x) noexcept
       : _n{int(x.size())}, _helper{double(_n)}, _kappa{std::forward<V>(kappa)},
         _Q{std::move(Q)}, _xc{std::forward<U>(x)} {}
 
@@ -61,7 +61,11 @@ public:
    * @param[in] val
    * @param[in] x
    */
-  Ell(const Arr &val, Arr x) noexcept : Ell{1.0, xt::diag(val), std::move(x)} {}
+  Ell(const Arr &val, Arr x) : Ell{1.0, Matrix(int(x.size())), std::move(x)} {
+    for (auto i = 0; i != this->_n; ++i) {
+      this->_Q(i, i) = val[i];
+    }
+  }
 
   /**
    * @brief Construct a new Ell object
@@ -69,8 +73,10 @@ public:
    * @param[in] alpha
    * @param[in] x
    */
-  Ell(const double &alpha, Arr x) noexcept
-      : Ell{alpha, xt::eye(x.size()), std::move(x)} {}
+  Ell(const double &alpha, Arr x)
+      : Ell{alpha, Matrix(int(x.size())), std::move(x)} {
+    this->_Q.identity();
+  }
 
   /**
    * @brief Construct a new Ell object
@@ -129,7 +135,7 @@ public:
   template <typename T>
   auto update(const std::pair<Arr, T> &cut) -> std::tuple<CutStatus, double>;
 
-protected:
+private:
   auto _update_cut(const double &beta) -> CutStatus {
     return this->_helper._calc_dc(beta);
   }
