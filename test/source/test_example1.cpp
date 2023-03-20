@@ -56,12 +56,12 @@ TEST_CASE("Example 1, test feasible") {
   const auto options = Options{2000, 1e-10};
   const auto result = cutting_plane_optim(oracle, ell, t, options);
   // const auto x = std::get<0>(result); // make clang compiler happy
-  // REQUIRE(x != Arr1{});
   // CHECK(x[0] >= 0.0);
   const auto &x = std::get<0>(result);
+  REQUIRE(x != Arr1{});
   const auto &ell_info = std::get<1>(result);
+  REQUIRE(ell_info.feasible);
   CHECK(x[0] >= 0.0);
-  CHECK(ell_info.feasible);
 }
 
 TEST_CASE("Example 1, test infeasible1") {
@@ -72,13 +72,13 @@ TEST_CASE("Example 1, test infeasible1") {
   auto t = -1.0e100; // std::numeric_limits<double>::min()
   const auto options = Options{2000, 1e-12};
   const auto result = cutting_plane_optim(oracle, ell, t, options);
-  // const auto x = std::get<0>(result);
+  const auto x = std::get<0>(result);
   // const auto s1 = std::get<2>(result);
-  // REQUIRE(x == Arr1{});
+  REQUIRE(x == Arr1{});
   // CHECK_EQ(s1, CutStatus::NoSoln); // no sol'n
-  const auto &ell_info = std::get<1>(result);
-  CHECK(!ell_info.feasible);
-  CHECK_EQ(ell_info.status, CutStatus::NoSoln); // no sol'n
+  // const auto &ell_info = std::get<1>(result);
+  // CHECK(!ell_info.feasible);
+  // CHECK_EQ(ell_info.status, CutStatus::NoSoln); // no sol'n
 }
 
 TEST_CASE("Example 1, test infeasible22") {
@@ -88,10 +88,10 @@ TEST_CASE("Example 1, test infeasible22") {
   // wrong initial guess
   const auto options = Options{2000, 1e-12};
   const auto result = cutting_plane_optim(oracle, ell, t, options);
-  // const auto x = std::get<0>(result);
+  const auto x = std::get<0>(result);
   // const auto s1 = std::get<2>(result);
-  // REQUIRE(x == Arr1{});
+  REQUIRE(x == Arr1{});
   // CHECK_EQ(s1, CutStatus::NoSoln); // no sol'n
-  const auto &ell_info = std::get<1>(result);
-  CHECK(!ell_info.feasible);
+  // const auto &ell_info = std::get<1>(result);
+  // CHECK(!ell_info.feasible);
 }

@@ -76,5 +76,9 @@ auto Ell::update(const std::pair<Arr, T> &cut)
 // Instantiation
 template std::tuple<CutStatus, double>
 Ell::update(const std::pair<Arr, double> &cut);
+
 template std::tuple<CutStatus, double>
 Ell::update(const std::pair<Arr, Arr> &cut);
+
+template std::tuple<CutStatus, double>
+Ell::update(const std::pair<Arr, std::valarray<double>> &cut);

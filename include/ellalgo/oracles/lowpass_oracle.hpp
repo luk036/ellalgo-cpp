@@ -3,8 +3,10 @@
 
 #include <stddef.h> // for size_t
 
-#include <tuple>              // for tuple
+#include <tuple> // for tuple
+#include <valarray>
 #include <xtensor/xarray.hpp> // for xarray
+
 // from itertools import chain
 
 /**
@@ -18,7 +20,8 @@
  */
 class lowpass_oracle {
   using Arr = xt::xarray<double, xt::layout_type::row_major>;
-  using ParallelCut = std::pair<Arr, Arr>;
+  using Vec = std::valarray<double>;
+  using ParallelCut = std::pair<Arr, Vec>;
 
 private:
   mutable size_t _i_Anr{};

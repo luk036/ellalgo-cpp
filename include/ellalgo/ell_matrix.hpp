@@ -4,11 +4,11 @@
 
 /** Square matrix */
 class Matrix {
-  int dim;
+  size_t dim;
   std::valarray<double> data;
 
 public:
-  explicit Matrix(int dim, double init = 0.0)
+  explicit Matrix(size_t dim, double init = 0.0)
       : dim{dim}, data(init, dim * dim) {}
 
   void clear(double value = 0.0) { data = value; }

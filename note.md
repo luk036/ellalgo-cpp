@@ -1,5 +1,4 @@
 # @todo
 
-Make new release:
-
-remove lmi-solver and hence gsl dependence
+- Make x_best == Arr{} indicates no feasible sol'n
+- make ellalgo independent of xtensor

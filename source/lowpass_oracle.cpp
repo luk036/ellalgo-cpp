@@ -12,7 +12,8 @@
 #include <xtensor/xview.hpp>       // for xview, view
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
-using ParallelCut = std::pair<Arr, Arr>;
+using Vec = std::valarray<double>;
+using ParallelCut = std::pair<Arr, Vec>;
 
 /**
  * @brief
@@ -28,7 +29,7 @@ auto lowpass_oracle::assess_optim(const Arr &x, double &Spsq) const
   if (x[0] < 0) {
     Arr g = xt::zeros<double>({x.size()});
     g[0] = -1.0;
-    Arr f = -x[0];
+    Vec f = {-x[0]};
     return {{std::move(g), std::move(f)}, false};
   }
 
@@ -46,14 +47,14 @@ auto lowpass_oracle::assess_optim(const Arr &x, double &Spsq) const
     if (v > this->_Upsq) {
       // f = v - Upsq;
       Arr g = xt::view(this->_Ap, k, xt::all());
-      Arr f{v - this->_Upsq, v - this->_Lpsq};
+      Vec f{v - this->_Upsq, v - this->_Lpsq};
       this->_i_Ap = k + 1;
       return {{std::move(g), std::move(f)}, false};
     }
     if (v < this->_Lpsq) {
       // f = Lpsq - v;
       Arr g = -xt::view(this->_Ap, k, xt::all());
-      Arr f{-v + this->_Lpsq, -v + this->_Upsq};
+      Vec f{-v + this->_Lpsq, -v + this->_Upsq};
       this->_i_Ap = k + 1;
       return {{std::move(g), std::move(f)}, false};
     }
@@ -76,14 +77,14 @@ auto lowpass_oracle::assess_optim(const Arr &x, double &Spsq) const
       // f = v - Spsq;
       Arr g = xt::view(this->_As, k, xt::all());
       // f = (v - Spsq, v);
-      Arr f{v - Spsq, v};
+      Vec f{v - Spsq, v};
       this->_i_As = k + 1; // k or k+1
       return {{std::move(g), std::move(f)}, false};
     }
     if (v < 0) {
       // f = v - Spsq;
       Arr g = -xt::view(this->_As, k, xt::all());
-      Arr f{-v, -v + Spsq};
+      Vec f{-v, -v + Spsq};
       this->_i_As = k + 1;
       return {{std::move(g), std::move(f)}, false};
     }
@@ -103,7 +104,7 @@ auto lowpass_oracle::assess_optim(const Arr &x, double &Spsq) const
     }
     auto v = xt::sum(xt::view(this->_Anr, k, xt::all()) * x)();
     if (v < 0.0) {
-      Arr f{-v};
+      Vec f{-v};
       Arr g = -xt::view(this->_Anr, k, xt::all());
       this->_i_Anr = k + 1;
       return {{std::move(g), std::move(f)}, false};
@@ -113,7 +114,7 @@ auto lowpass_oracle::assess_optim(const Arr &x, double &Spsq) const
   // Begin objective function
   // Spsq, imax = w.max(), w.argmax(); // update best so far Spsq
   Spsq = fmax;
-  Arr f{0.0, fmax}; // ???
+  Vec f{0.0, fmax}; // ???
   // f = 0
   Arr g = xt::view(this->_As, imax, xt::all());
   return {{std::move(g), std::move(f)}, true};

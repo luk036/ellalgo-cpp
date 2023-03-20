@@ -8,6 +8,8 @@
 
 #include "ell_calc.hpp"
 #include "ell_matrix.hpp"
+#include <valarray>
+
 // forward declaration
 enum class CutStatus;
 
@@ -61,7 +63,7 @@ public:
    * @param[in] val
    * @param[in] x
    */
-  Ell(const Arr &val, Arr x) : Ell{1.0, Matrix(int(x.size())), std::move(x)} {
+  Ell(const Arr &val, Arr x) : Ell{1.0, Matrix(x.size()), std::move(x)} {
     for (auto i = 0; i != this->_n; ++i) {
       this->_Q(i, i) = val[i];
     }
@@ -74,7 +76,7 @@ public:
    * @param[in] x
    */
   Ell(const double &alpha, Arr x)
-      : Ell{alpha, Matrix(int(x.size())), std::move(x)} {
+      : Ell{alpha, Matrix(x.size()), std::move(x)} {
     this->_Q.identity();
   }
 
@@ -138,6 +140,14 @@ public:
 private:
   auto _update_cut(const double &beta) -> CutStatus {
     return this->_helper._calc_dc(beta);
+  }
+
+  auto _update_cut(const std::valarray<double> &beta)
+      -> CutStatus { // parallel cut
+    if (beta.size() < 2) {
+      return this->_helper._calc_dc(beta[0]);
+    }
+    return this->_helper._calc_ll_core(beta[0], beta[1]);
   }
 
   auto _update_cut(const Arr &beta) -> CutStatus { // parallel cut

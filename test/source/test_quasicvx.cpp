@@ -69,12 +69,12 @@ TEST_CASE("Quasiconvex 1, test feasible") {
   auto t = 0.0;
   const auto options = Options{2000, 1e-8};
   const auto result = cutting_plane_optim(P, E, t, options);
-  // const auto x = std::get<0>(result);
-  // REQUIRE(x != Arr1{});
+  const auto x = std::get<0>(result);
+  REQUIRE(x != Arr1{});
   // CHECK_EQ(-t, doctest::Approx(-0.4288673397));
   // CHECK_EQ(x[0] * x[0], doctest::Approx(0.499876));
   // CHECK_EQ(std::exp(x[1]), doctest::Approx(1.64852));
-  const auto &x = std::get<0>(result);
+  // const auto &x = std::get<0>(result);
   const auto &ell_info = std::get<1>(result);
   CHECK(ell_info.feasible);
   CHECK_EQ(-t, doctest::Approx(-0.4288673397));
