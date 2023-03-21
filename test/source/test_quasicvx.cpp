@@ -63,7 +63,7 @@ TEST_CASE("xtensor") {
 }
 
 TEST_CASE("Quasiconvex 1, test feasible") {
-  Ell E{10.0, Arr1{0.0, 0.0}};
+  Ell<Arr> E{10.0, Arr1{0.0, 0.0}};
 
   auto P = MyQuasicCvxOracle{};
   auto t = 0.0;
@@ -83,7 +83,7 @@ TEST_CASE("Quasiconvex 1, test feasible") {
 }
 
 TEST_CASE("Quasiconvex 1, test feasible (stable)") {
-  EllStable E{10.0, Arr1{0.0, 0.0}};
+  EllStable<Arr> E{10.0, Arr1{0.0, 0.0}};
   auto P = MyQuasicCvxOracle{};
   auto t = 0.0;
   const auto options = Options{2000, 1e-8};

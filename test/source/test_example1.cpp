@@ -50,7 +50,7 @@ struct MyOracle {
 };
 
 TEST_CASE("Example 1, test feasible") {
-  auto ell = Ell(Arr1{10.0, 10.0}, Arr1{0.0, 0.0});
+  auto ell = Ell<Arr1>(Arr1{10.0, 10.0}, Arr1{0.0, 0.0});
   auto oracle = MyOracle{};
   auto t = -1.0e100; // std::numeric_limits<double>::min()
   const auto options = Options{2000, 1e-10};
@@ -65,9 +65,9 @@ TEST_CASE("Example 1, test feasible") {
 }
 
 TEST_CASE("Example 1, test infeasible1") {
-  auto ell =
-      Ell(Arr1{10.0, 10.0}, Arr1{100.0, 100.0}); // wrong initial guess
-                                                 // or ellipsoid is too small
+  auto ell = Ell<Arr1>(Arr1{10.0, 10.0},
+                       Arr1{100.0, 100.0}); // wrong initial guess
+                                            // or ellipsoid is too small
   auto oracle = MyOracle{};
   auto t = -1.0e100; // std::numeric_limits<double>::min()
   const auto options = Options{2000, 1e-12};
@@ -82,7 +82,7 @@ TEST_CASE("Example 1, test infeasible1") {
 }
 
 TEST_CASE("Example 1, test infeasible22") {
-  auto ell = Ell(Arr1{10.0, 10.0}, Arr1{0.0, 0.0});
+  auto ell = Ell<Arr1>(Arr1{10.0, 10.0}, Arr1{0.0, 0.0});
   auto oracle = MyOracle{};
   auto t = 100.0;
   // wrong initial guess

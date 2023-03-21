@@ -20,9 +20,9 @@ enum class CutStatus;
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */
-class Ell {
+template <typename Arr> class Ell {
 public:
-  using Arr = xt::xarray<double, xt::layout_type::row_major>;
+  // using Arr = xt::xarray<double, xt::layout_type::row_major>;
   // using params_t = std::tuple<double, double, double>;
   // using return_t = std::tuple<int, params_t>;
 
@@ -75,8 +75,7 @@ public:
    * @param[in] alpha
    * @param[in] x
    */
-  Ell(const double &alpha, Arr x)
-      : Ell{alpha, Matrix(x.size()), std::move(x)} {
+  Ell(const double &alpha, Arr x) : Ell{alpha, Matrix(x.size()), std::move(x)} {
     this->_Q.identity();
   }
 
@@ -138,6 +137,8 @@ public:
   auto update(const std::pair<Arr, T> &cut) -> std::tuple<CutStatus, double>;
 
 private:
+  auto update_core() -> std::tuple<CutStatus, double>;
+
   auto _update_cut(const double &beta) -> CutStatus {
     return this->_helper._calc_dc(beta);
   }

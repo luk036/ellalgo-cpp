@@ -20,9 +20,9 @@ enum class CutStatus;
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */
-class EllStable {
+template <typename Arr> class EllStable {
 public:
-  using Arr = xt::xarray<double, xt::layout_type::row_major>;
+  // using Arr = xt::xarray<double, xt::layout_type::row_major>;
   // using params_t = std::tuple<double, double, double>;
   // using return_t = std::tuple<int, params_t>;
 

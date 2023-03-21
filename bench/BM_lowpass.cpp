@@ -134,7 +134,7 @@ auto run_lowpass(bool use_parallel_cut) {
   static const filter_design_construct Fdc{};
 
   auto r0 = zeros({Fdc.N}); // initial x0
-  Ell E(40.0, r0);
+  Ell<Arr> E(40.0, r0);
   lowpass_oracle P(Fdc.Ap, Fdc.As, Fdc.Anr, Fdc.Lpsq, Fdc.Upsq);
   Options options{};
 
