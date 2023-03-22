@@ -13,9 +13,9 @@ public:
 
   void clear(double value = 0.0) { data = value; }
 
-  double &operator()(int r, int c) { return this->data[r * dim + c]; }
+  double &operator()(size_t r, size_t c) { return this->data[r * dim + c]; }
 
-  const double &operator()(int r, int c) const {
+  const double &operator()(size_t r, size_t c) const {
     return this->data[r * dim + c];
   }
 
