@@ -1,21 +1,18 @@
 #include <doctest/doctest.h> // for ResultBuilder, TestCase, CHECK
 
-#include <ellalgo/cutting_plane.hpp>   // for cutting_plane_optim
-#include <ellalgo/ell.hpp>             // for ell
-#include <utility>                     // for pair
-#include <xtensor/xaccessible.hpp>     // for xconst_accessible
-#include <xtensor/xarray.hpp>          // for xarray_container
-#include <xtensor/xlayout.hpp>         // for layout_type, layout_type::row...
-#include <xtensor/xtensor_forward.hpp> // for xarray
+#include <ellalgo/cutting_plane.hpp> // for cutting_plane_optim
+#include <ellalgo/ell.hpp>           // for ell
+#include <ellalgo/ell_config.hpp>    // for CInfo, CutStatus, CutStatus::...
 
-#include "ellalgo/ell_config.hpp" // for CInfo, CutStatus, CutStatus::...
+#include <utility> // for pair
 
-using Arr1 = xt::xarray<double, xt::layout_type::row_major>;
+// using Arr1 = xt::xarray<double, xt::layout_type::row_major>;
+using Vec = std::valarray<double>;
 
 struct MyOracle {
-  using ArrayType = Arr1;
+  using ArrayType = Vec;
   using CutChoices = double;
-  using Cut = std::pair<Arr1, double>;
+  using Cut = std::pair<Vec, double>;
 
   /**
    * @brief
@@ -23,9 +20,9 @@ struct MyOracle {
    * @param[in] z
    * @return std::optional<Cut>
    */
-  auto assess_feas(const Arr1 &z) -> Cut * {
-    static auto cut1 = Cut{Arr1{1.0, 1.0}, 0.0};
-    static auto cut2 = Cut{Arr1{-1.0, 1.0}, 0.0};
+  auto assess_feas(const Vec &z) -> Cut * {
+    static auto cut1 = Cut{Vec{1.0, 1.0}, 0.0};
+    static auto cut2 = Cut{Vec{-1.0, 1.0}, 0.0};
 
     const auto x = z[0];
     const auto y = z[1];
@@ -47,7 +44,7 @@ struct MyOracle {
 };
 
 TEST_CASE("Example 2, test feasible") {
-  auto ell = Ell<Arr1>(Arr1{10.0, 10.0}, Arr1{0.0, 0.0});
+  auto ell = Ell<Vec>(Vec{10.0, 10.0}, Vec{0.0, 0.0});
   auto oracle = MyOracle{};
   const auto options = Options{2000, 1e-12};
   const auto cinfo = cutting_plane_feas(oracle, ell, options);

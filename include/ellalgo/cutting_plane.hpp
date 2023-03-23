@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cmath>
 #include <tuple>
+#include <type_traits>
 
 #include "ell_config.hpp"
 #include "half_nonnegative.hpp"
@@ -67,9 +68,12 @@ auto cutting_plane_feas(Oracle &&omega, Space &&ss,
  */
 template <typename Oracle, typename Space, typename opt_type>
 auto cutting_plane_optim(Oracle &&omega, Space &&ss, opt_type &&t,
-                         const Options &options = Options()) {
+                         const Options &options = Options())
+    -> std::tuple<typename std::remove_reference<Space>::type::ArrayType,
+                  CInfo> {
   const auto t_orig = t;
-  decltype(ss.xc()) x_best{};
+  using S = typename std::remove_reference<Space>::type;
+  typename S::ArrayType x_best{};
   auto status = CutStatus::Success;
 
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
@@ -123,9 +127,12 @@ auto cutting_plane_optim(Oracle &&omega, Space &&ss, opt_type &&t,
  */
 template <typename Oracle, typename Space, typename opt_type>
 auto cutting_plane_q(Oracle &&omega, Space &&ss, opt_type &&t,
-                     const Options &options = Options()) {
+                     const Options &options = Options())
+    -> std::tuple<typename std::remove_reference<Space>::type::ArrayType,
+                  CInfo> {
   const auto t_orig = t;
-  decltype(ss.xc()) x_best{};
+  using S = typename std::remove_reference<Space>::type;
+  typename S::ArrayType x_best{};
   auto status = CutStatus::NoSoln; // note!!!
   auto retry = (status == CutStatus::NoEffect);
 
@@ -210,6 +217,8 @@ auto bsearch(Oracle &&omega, Space &&I, const Options &options = Options())
  */
 template <typename Oracle, typename Space> //
 class bsearch_adaptor {
+  using ArrayType = typename Space::ArrayType;
+
 private:
   Oracle &_omega;
   Space &_ss;
@@ -240,7 +249,7 @@ public:
    *
    * @return auto
    */
-  auto x_best() const { return this->_ss.xc(); }
+  auto x_best() const -> ArrayType { return this->_ss.xc(); }
 
   /**
    * @brief

@@ -8,8 +8,11 @@
  *
  */
 struct Options {
-  size_t max_iter = 2000;
-  double tol = 1e-8;
+  size_t max_iter;
+  double tol;
+
+  Options() : max_iter{2000}, tol{1e-8} {}
+  Options(size_t max_iter, double tol) : max_iter{max_iter}, tol{tol} {}
 };
 
 /**

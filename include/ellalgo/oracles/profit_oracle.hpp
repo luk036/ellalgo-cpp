@@ -1,13 +1,15 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include <cmath>                       // for log
-#include <tuple>                       // for tuple
-#include <xtensor/xaccessible.hpp>     // for xconst_accessible, xaccessible
-#include <xtensor/xarray.hpp>          // for xarray_container
-#include <xtensor/xlayout.hpp>         // for layout_type, layout_type::row...
-#include <xtensor/xoperation.hpp>      // for xfunction_type_t, operator+
-#include <xtensor/xtensor_forward.hpp> // for xarray
+#include <cmath> // for log
+#include <tuple> // for tuple
+#include <valarray>
+// #include <xtensor/xaccessible.hpp>     // for xconst_accessible, xaccessible
+// #include <xtensor/xarray.hpp>          // for xarray_container
+// #include <xtensor/xlayout.hpp>         // for layout_type,
+// layout_type::row... #include <xtensor/xoperation.hpp>      // for
+// xfunction_type_t, operator+ #include <xtensor/xtensor_forward.hpp> // for
+// xarray
 
 /**
  * @brief Oracle for a profit maximization problem.
@@ -28,16 +30,17 @@
  *        k: a given constant that restricts the quantity of x1
  */
 class profit_oracle {
-  using Arr = xt::xarray<double, xt::layout_type::row_major>;
-  using Cut = std::pair<Arr, double>;
+  // using Arr = xt::xarray<double, xt::layout_type::row_major>;
+  using Vec = std::valarray<double>;
+  using Cut = std::pair<Vec, double>;
 
 private:
   const double _log_pA;
   const double _log_k;
-  const Arr _v;
+  const Vec _v;
 
 public:
-  Arr _a;
+  Vec _a;
 
   /**
    * @brief Construct a new profit oracle object
@@ -48,7 +51,7 @@ public:
    * @param[in] a the output elasticities
    * @param[in] v output price
    */
-  profit_oracle(double p, double A, double k, const Arr &a, const Arr &v)
+  profit_oracle(double p, double A, double k, const Vec &a, const Vec &v)
       : _log_pA{std::log(p * A)}, _log_k{std::log(k)}, _v{v}, _a{a} {}
 
   /**
@@ -64,7 +67,7 @@ public:
    * @param[in,out] t the best-so-far optimal value
    * @return std::tuple<Cut, double> Cut and the updated best-so-far value
    */
-  auto assess_optim(const Arr &y, double &t) const -> std::tuple<Cut, bool>;
+  auto assess_optim(const Vec &y, double &t) const -> std::tuple<Cut, bool>;
 
   /**
    * @brief
@@ -73,7 +76,7 @@ public:
    * @param[in,out] t the best-so-far optimal value
    * @return std::tuple<Cut, double> Cut and the updated best-so-far value
    */
-  auto operator()(const Arr &y, double &t) const -> std::tuple<Cut, bool> {
+  auto operator()(const Vec &y, double &t) const -> std::tuple<Cut, bool> {
     return this->assess_optim(y, t);
   }
 };
@@ -96,12 +99,13 @@ public:
  * @see profit_oracle
  */
 class profit_rb_oracle {
-  using Arr = xt::xarray<double, xt::layout_type::row_major>;
-  using Cut = std::pair<Arr, double>;
+  // using Arr = xt::xarray<double, xt::layout_type::row_major>;
+  using Vec = std::valarray<double>;
+  using Cut = std::pair<Vec, double>;
 
 private:
-  const Arr _uie;
-  Arr _a;
+  const Vec _uie;
+  Vec _a;
   profit_oracle _P;
 
 public:
@@ -116,8 +120,8 @@ public:
    * @param[in] e paramters for uncertainty
    * @param[in] e3 paramters for uncertainty
    */
-  profit_rb_oracle(double p, double A, double k, const Arr &a, const Arr &v,
-                   const Arr &e, double e3)
+  profit_rb_oracle(double p, double A, double k, const Vec &a, const Vec &v,
+                   const Vec &e, double e3)
       : _uie{e}, _a{a}, _P(p - e3, A, k - e3, a, v + e3) {}
 
   /**
@@ -129,7 +133,7 @@ public:
    *
    * @see cutting_plane_optim
    */
-  auto assess_optim(const Arr &y, double &t) -> std::tuple<Cut, bool> {
+  auto assess_optim(const Vec &y, double &t) -> std::tuple<Cut, bool> {
     auto a_rb = this->_a;
     a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
     a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
@@ -146,7 +150,7 @@ public:
    *
    * @see cutting_plane_optim
    */
-  auto operator()(const Arr &y, double &t) -> std::tuple<Cut, bool> {
+  auto operator()(const Vec &y, double &t) -> std::tuple<Cut, bool> {
     return this->assess_optim(y, t);
   }
 };
@@ -172,12 +176,13 @@ public:
  * @see profit_oracle
  */
 class profit_q_oracle {
-  using Arr = xt::xarray<double, xt::layout_type::row_major>;
-  using Cut = std::pair<Arr, double>;
+  // using Arr = xt::xarray<double, xt::layout_type::row_major>;
+  using Vec = std::valarray<double>;
+  using Cut = std::pair<Vec, double>;
 
 private:
   profit_oracle _P;
-  Arr _yd;
+  Vec _yd;
 
 public:
   /**
@@ -189,7 +194,7 @@ public:
    * @param[in] a the output elasticities
    * @param[in] v output price
    */
-  profit_q_oracle(double p, double A, double k, const Arr &a, const Arr &v)
+  profit_q_oracle(double p, double A, double k, const Vec &a, const Vec &v)
       : _P{p, A, k, a, v} {}
 
   /**
@@ -202,8 +207,8 @@ public:
    *
    * @see cutting_plane_q
    */
-  auto assess_q(const Arr &y, double &t, bool retry)
-      -> std::tuple<Cut, bool, Arr, bool>;
+  auto assess_q(const Vec &y, double &t, bool retry)
+      -> std::tuple<Cut, bool, Vec, bool>;
 
   /**
    * @brief Make object callable for cutting_plane_q()
@@ -215,7 +220,8 @@ public:
    *
    * @see cutting_plane_q
    */
-  auto operator()(const Arr &y, double &t, bool retry) {
+  auto operator()(const Vec &y, double &t, bool retry)
+      -> std::tuple<Cut, bool, Vec, bool> {
     return this->assess_q(y, t, retry);
   }
 };

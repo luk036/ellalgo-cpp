@@ -14,6 +14,7 @@ enum class CutStatus;
 class ell1d {
 public:
   using return_t = std::tuple<CutStatus, double>;
+  using ArrayType = double;
 
 private:
   double _r;

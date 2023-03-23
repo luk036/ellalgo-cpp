@@ -1,24 +1,21 @@
 // -*- coding: utf-8 -*-
 #include <doctest/doctest.h> // for ResultBuilder, Approx, CHECK_EQ
 
-#include <cmath>                       // for exp
-#include <ellalgo/cutting_plane.hpp>   // for cutting_plane_dc
-#include <ellalgo/ell.hpp>             // for ell
-#include <ellalgo/ell_stable.hpp>      // for EllStable
-#include <tuple>                       // for get, tuple
-#include <xtensor/xaccessible.hpp>     // for xconst_accessible
-#include <xtensor/xarray.hpp>          // for xarray_container
-#include <xtensor/xlayout.hpp>         // for layout_type, layout_type::row...
-#include <xtensor/xtensor_forward.hpp> // for xarray
+#include <ellalgo/cutting_plane.hpp> // for cutting_plane_dc
+#include <ellalgo/ell.hpp>           // for Ell
+#include <ellalgo/ell_config.hpp>    // for CInfo, CutStatus, CutStatus::...
+#include <ellalgo/ell_stable.hpp>    // for EllStable
 
-#include <ellalgo/ell_config.hpp> // for CInfo, CutStatus, CutStatus::...
+#include <cmath> // for exp
+#include <tuple> // for get, tuple
 
-using Arr1 = xt::xarray<double, xt::layout_type::row_major>;
+// using Arr = xt::xarray<double, xt::layout_type::row_major>;
+using Vec = std::valarray<double>;
 
 struct MyQuasicCvxOracle {
-  using ArrayType = Arr1;
+  using ArrayType = Vec;
   using CutChoices = double; // single cut
-  using Cut = std::pair<Arr1, double>;
+  using Cut = std::pair<Vec, double>;
 
   /**
    * @brief
@@ -27,7 +24,7 @@ struct MyQuasicCvxOracle {
    * @param[in,out] t
    * @return std::tuple<Cut, double>
    */
-  auto assess_optim(const Arr1 &z, double &t) -> std::tuple<Cut, bool> {
+  auto assess_optim(const Vec &z, double &t) -> std::tuple<Cut, bool> {
 
     double sqrtx = z[0];
     double ly = z[1];
@@ -35,7 +32,7 @@ struct MyQuasicCvxOracle {
     // constraint 1: exp(x) <= y, or sqrtx**2 <= ly
     double fj = sqrtx * sqrtx - ly;
     if (fj > 0.0) {
-      return std::make_tuple(std::make_pair(Arr1{2 * sqrtx, -1.0}, fj), false);
+      return std::make_tuple(std::make_pair(Vec{2 * sqrtx, -1.0}, fj), false);
     }
 
     // constraint 2: x - y >= 1
@@ -45,37 +42,35 @@ struct MyQuasicCvxOracle {
     if (fj < 0.0) // feasible
     {
       t = sqrtx / tmp2;
-      return std::make_tuple(std::make_pair(Arr1{-1.0, sqrtx}, 0), true);
+      return std::make_tuple(std::make_pair(Vec{-1.0, sqrtx}, 0), true);
     }
 
-    return std::make_tuple(std::make_pair(Arr1{-1.0, tmp3}, fj), false);
+    return std::make_tuple(std::make_pair(Vec{-1.0, tmp3}, fj), false);
   }
 };
 
 TEST_CASE("xtensor") {
-  auto x = Arr1{};
-  CHECK(x == Arr1{});
-  CHECK_EQ(x, Arr1{});
+  auto x = Vec{};
+  CHECK_EQ(x.size(), 0U);
 
-  x = Arr1{1.0, 2.0};
-  CHECK(x != Arr1{});
-  CHECK_NE(x, Arr1{});
+  x = Vec{1.0, 2.0};
+  CHECK_NE(x.size(), 0U);
 }
 
 TEST_CASE("Quasiconvex 1, test feasible") {
-  Ell<Arr> E{10.0, Arr1{0.0, 0.0}};
+  Ell<Vec> E{10.0, Vec{0.0, 0.0}};
 
   auto P = MyQuasicCvxOracle{};
   auto t = 0.0;
   const auto options = Options{2000, 1e-8};
   const auto result = cutting_plane_optim(P, E, t, options);
-  const auto x = std::get<0>(result);
-  REQUIRE(x != Arr1{});
+  const Vec &x = std::get<0>(result);
+  REQUIRE_EQ(x.size(), 2U);
   // CHECK_EQ(-t, doctest::Approx(-0.4288673397));
   // CHECK_EQ(x[0] * x[0], doctest::Approx(0.499876));
   // CHECK_EQ(std::exp(x[1]), doctest::Approx(1.64852));
   // const auto &x = std::get<0>(result);
-  const auto &ell_info = std::get<1>(result);
+  const CInfo &ell_info = std::get<1>(result);
   CHECK(ell_info.feasible);
   CHECK_EQ(-t, doctest::Approx(-0.4288673397));
   CHECK_EQ(x[0] * x[0], doctest::Approx(0.5029823096));
@@ -83,13 +78,13 @@ TEST_CASE("Quasiconvex 1, test feasible") {
 }
 
 TEST_CASE("Quasiconvex 1, test feasible (stable)") {
-  EllStable<Arr> E{10.0, Arr1{0.0, 0.0}};
+  EllStable<Vec> E{10.0, Vec{0.0, 0.0}};
   auto P = MyQuasicCvxOracle{};
   auto t = 0.0;
   const auto options = Options{2000, 1e-8};
   const auto result = cutting_plane_optim(P, E, t, options);
-  // const auto x = std::get<0>(result);
-  // REQUIRE(x != Arr1{});
+  const auto x = std::get<0>(result);
+  REQUIRE_EQ(x.size(), 2U);
   const auto &ell_info = std::get<1>(result);
   CHECK(ell_info.feasible);
 

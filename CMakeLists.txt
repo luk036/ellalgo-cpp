@@ -10,7 +10,7 @@ option(INSTALL_ONLY "Enable for installation only" OFF)
 # Note: update this to your new project's name and version
 project(
   EllAlgo
-  VERSION 1.3.5
+  VERSION 1.3.6
   LANGUAGES CXX
 )
 
@@ -83,12 +83,11 @@ packageProject(
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
   COMPATIBILITY SameMajorVersion
-  DEPENDENCIES "xtensor 0.22"
 )
 
 if(NOT INSTALL_ONLY)
   add_subdirectory(test)
-  add_subdirectory(bench)
+  # add_subdirectory(bench)
   add_subdirectory(standalone)
   add_subdirectory(documentation)
 endif()
