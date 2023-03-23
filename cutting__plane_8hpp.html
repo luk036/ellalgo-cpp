@@ -86,18 +86,18 @@
             <dd>Find a point in a convex set (defined through a cutting-plane oracle).</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename Oracle, typename Space, typename opt_type&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a35ec88401a02a66a5a043c6efbc5300e" class="m-doc">cutting_plane_optim</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
+              <span class="m-doc-wrap-bumper">auto <a href="#afd4c86f9522a91374a028baacf50b32c" class="m-doc">cutting_plane_optim</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
               Space&amp;&amp; ss,
               opt_type&amp;&amp; t,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; auto</span>
+              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; typename std::remove_reference&lt; Space &gt;::type::ArrayType, CInfo &gt; -&gt; auto</span>
             </dt>
             <dd>Cutting-plane method for solving convex problem.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename Oracle, typename Space, typename opt_type&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#af5fd509e7b967c5e4b4d5326075cca97" class="m-doc">cutting_plane_q</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
+              <span class="m-doc-wrap-bumper">auto <a href="#a253258911e2c4909854228238a159a56" class="m-doc">cutting_plane_q</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
               Space&amp;&amp; ss,
               opt_type&amp;&amp; t,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; auto</span>
+              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; typename std::remove_reference&lt; Space &gt;::type::ArrayType, CInfo &gt; -&gt; auto</span>
             </dt>
             <dd>Cutting-plane method for solving convex discrete optimization problem.</dd>
             <dt>
@@ -173,15 +173,15 @@ A *separation oracle* asserts that an evalution point x0 is feasible,
 or provide a cut that separates the feasible region and x0.
 </pre>
           </div></section>
-          <section class="m-doc-details" id="a35ec88401a02a66a5a043c6efbc5300e"><div>
+          <section class="m-doc-details" id="afd4c86f9522a91374a028baacf50b32c"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename Oracle, typename Space, typename opt_type&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a35ec88401a02a66a5a043c6efbc5300e" class="m-doc-self">cutting_plane_optim</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afd4c86f9522a91374a028baacf50b32c" class="m-doc-self">cutting_plane_optim</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
               Space&amp;&amp; ss,
               opt_type&amp;&amp; t,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>())</span></span>
+              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; typename std::remove_reference&lt; Space &gt;::type::ArrayType, CInfo &gt;</span></span>
             </h3>
             <p>Cutting-plane method for solving convex problem.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -231,15 +231,15 @@ or provide a cut that separates the feasible region and x0.
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="af5fd509e7b967c5e4b4d5326075cca97"><div>
+          <section class="m-doc-details" id="a253258911e2c4909854228238a159a56"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename Oracle, typename Space, typename opt_type&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af5fd509e7b967c5e4b4d5326075cca97" class="m-doc-self">cutting_plane_q</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a253258911e2c4909854228238a159a56" class="m-doc-self">cutting_plane_q</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
               Space&amp;&amp; ss,
               opt_type&amp;&amp; t,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>())</span></span>
+              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; typename std::remove_reference&lt; Space &gt;::type::ArrayType, CInfo &gt;</span></span>
             </h3>
             <p>Cutting-plane method for solving convex discrete optimization problem.</p>
             <table class="m-table m-fullwidth m-flat">
