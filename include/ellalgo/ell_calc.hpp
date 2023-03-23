@@ -29,8 +29,6 @@ private:
   const double _nPlus1;
   const double _nMinus1;
   const double _halfN;
-  const double _halfNplus1;
-  const double _halfNminus1;
   const double _nSq;
   const double _c1;
   const double _c2;
@@ -55,8 +53,7 @@ public:
    */
   EllCalc(double nFloat) noexcept
       : _nFloat{nFloat}, _nPlus1{_nFloat + 1.0}, _nMinus1{_nFloat - 1.0},
-        _halfN{_nFloat / 2.0}, _halfNplus1{_nPlus1 / 2.0},
-        _halfNminus1{_nMinus1 / 2.0}, _nSq{_nFloat * _nFloat},
+        _halfN{_nFloat / 2.0}, _nSq{_nFloat * _nFloat},
         _c1{_nSq / (_nSq - 1.0)}, _c2{2.0 / _nPlus1}, _c3{_nFloat / _nPlus1} {}
 
 public:

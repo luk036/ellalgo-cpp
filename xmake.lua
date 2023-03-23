@@ -1,7 +1,6 @@
 add_rules("mode.debug", "mode.release", "mode.coverage")
 add_requires("fmt", {alias = "fmt"})
 add_requires("doctest", {alias = "doctest"})
-add_requires("xtensor", {alias = "xtensor"})
 add_requires("range-v3", {alias = "range-v3"})
 -- add_requires("conan::range-v3/0.11.0", {alias = "range-v3"})
 
@@ -23,14 +22,14 @@ target("EllAlgo")
     set_kind("static")
     add_includedirs("include", {public = true})
     add_files("source/*.cpp")
-    add_packages("xtensor", "range-v3")
+    add_packages("range-v3")
 
 target("test_ellalgo")
     set_kind("binary")
     add_deps("EllAlgo")
     add_includedirs("include", {public = true})
     add_files("test/source/*.cpp")
-    add_packages("fmt", "doctest", "xtensor", "range-v3")
+    add_packages("fmt", "doctest", "range-v3")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

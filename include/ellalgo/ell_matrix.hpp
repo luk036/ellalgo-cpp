@@ -24,6 +24,11 @@ public:
     return *this;
   }
 
+  Matrix operator*(double alpha) const {
+    Matrix res(*this);
+    return res *= alpha;
+  }
+
   void identity() {
     this->clear();
     this->diagonal() = 1;
