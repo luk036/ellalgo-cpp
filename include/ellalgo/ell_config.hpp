@@ -43,5 +43,5 @@ template <typename T>
 using RetQ = std::tuple<CutConcept<T>, bool, ArrayType<T>, bool>;
 
 #if __cpp_concepts >= 201907L
-#include "ell_concepts.hpp"
+// #include "ell_concepts.hpp"
 #endif
