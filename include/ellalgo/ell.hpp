@@ -89,14 +89,21 @@ public:
    *
    * @return Arr
    */
-  auto xc() const -> Arr { return _xc; }
+  auto xc() const -> Arr { return this->_xc; }
 
   /**
    * @brief Set the xc object
    *
    * @param[in] xc
    */
-  void set_xc(const Arr &xc) { _xc = xc; }
+  void set_xc(const Arr &xc) { this->_xc = xc; }
+
+  /**
+   * @brief
+   *
+   * @return Arr
+   */
+  auto tsq() const -> double { return this->_mgr.tsq(); }
 
   void set_use_parallel_cut(bool value) {
     this->_mgr.set_use_parallel_cut(value);
@@ -109,8 +116,7 @@ public:
    * @param[in] cut cutting-plane
    * @return std::tuple<int, double>
    */
-  template <typename T>
-  auto update(const std::pair<Arr, T> &cut) -> std::tuple<CutStatus, double> {
+  template <typename T> auto update(const std::pair<Arr, T> &cut) -> CutStatus {
     const auto &grad = cut.first;
     const auto &beta = cut.second;
     std::valarray<double> g(this->_n);
@@ -119,7 +125,7 @@ public:
     }
 
     auto result = this->_mgr.update(g, beta);
-    if (std::get<0>(result) == CutStatus::Success) {
+    if (result == CutStatus::Success) {
       for (auto i = 0U; i != this->_n; ++i) {
         this->_xc[i] -= g[i];
       }

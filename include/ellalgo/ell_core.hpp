@@ -109,6 +109,13 @@ public:
    * @return Vec
    */
 
+  /**
+   * @brief
+   *
+   * @return Arr
+   */
+  auto tsq() const -> double { return this->_helper._tsq; }
+
   void set_use_parallel_cut(bool value) {
     this->_helper.use_parallel_cut = value;
   }
@@ -120,8 +127,7 @@ public:
    * @param[in] cut cutting-plane
    * @return std::tuple<int, double>
    */
-  template <typename T>
-  auto update(Vec &grad, const T &beta) -> std::tuple<CutStatus, double>;
+  template <typename T> auto update(Vec &grad, const T &beta) -> CutStatus;
 
   /**
    * @brief Update ellipsoid core function using the cut(s)
@@ -131,7 +137,7 @@ public:
    * @return std::tuple<int, double>
    */
   template <typename T>
-  auto update_stable(Vec &grad, const T &beta) -> std::tuple<CutStatus, double>;
+  auto update_stable(Vec &grad, const T &beta) -> CutStatus;
 
 private:
   auto _update_cut(const double &beta) -> CutStatus {

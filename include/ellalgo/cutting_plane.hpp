@@ -12,23 +12,23 @@
 /**
  * @brief Find a point in a convex set (defined through a cutting-plane oracle).
  *
- *     A function f(x) is *convex* if there always exist a g(x)
- *     such that f(z) >= f(x) + g(x)' * (z - x), forall z, x in dom f.
- *     Note that dom f does not need to be a convex set in our definition.
- *     The affine function g' (x - xc) + beta is called a cutting-plane,
- *     or a ``cut'' for short.
- *     This algorithm solves the following feasibility problem:
+ * A function f(x) is *convex* if there always exist a g(x)
+ * such that f(z) >= f(x) + g(x)' * (z - x), forall z, x in dom f.
+ * Note that dom f does not need to be a convex set in our definition.
+ * The affine function g' (x - xc) + beta is called a cutting-plane,
+ * or a ``cut'' for short.
+ * This algorithm solves the following feasibility problem:
  *
- *             find x
- *             s.t. f(x) <= 0,
+ *   find x
+ *   s.t. f(x) <= 0,
  *
- *     A *separation oracle* asserts that an evalution point x0 is feasible,
- *     or provide a cut that separates the feasible region and x0.
+ * A *separation oracle* asserts that an evalution point x0 is feasible,
+ * or provide a cut that separates the feasible region and x0.
  *
  * @tparam Oracle
  * @tparam Space
  * @param[in,out] omega perform assessment on x0
- * @param[in,out] ss     search Space containing x*
+ * @param[in,out] ss    search Space containing x*
  * @param[in] options   maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
@@ -40,14 +40,11 @@ auto cutting_plane_feas(Oracle &&omega, Space &&ss,
     if (!cut) {                                  // feasible sol'n obtained
       return {true, niter, CutStatus::Success};
     }
-    const auto result = ss.update(*cut); // update ss
-
-    const auto &cutstatus = std::get<0>(result);
-    const auto &tsq = std::get<1>(result);
+    const auto cutstatus = ss.update(*cut); // update ss
     if (cutstatus != CutStatus::Success) {
       return {false, niter, cutstatus};
     }
-    if (tsq < options.tol) { // no more
+    if (ss.tsq() < options.tol) { // no more
       return {false, niter, CutStatus::SmallEnough};
     }
   }
@@ -83,16 +80,13 @@ auto cutting_plane_optim(Oracle &&omega, Space &&ss, opt_type &&t,
     if (shrunk) { // best t obtained
       x_best = ss.xc();
     }
-    const auto result2 = ss.update(cut);
-
-    const auto &cutstatus = std::get<0>(result2);
-    const auto &tsq = std::get<1>(result2);
+    const auto cutstatus = ss.update(cut);
     if (cutstatus != CutStatus::Success) // ???
     {
       return std::make_tuple(std::move(x_best),
                              CInfo{t != t_orig, niter, cutstatus});
     }
-    if (tsq < options.tol) { // no more
+    if (ss.tsq() < options.tol) { // no more
       return std::make_tuple(std::move(x_best),
                              CInfo{t != t_orig, niter, CutStatus::SmallEnough});
     }
@@ -147,9 +141,7 @@ auto cutting_plane_q(Oracle &&omega, Space &&ss, opt_type &&t,
       // t = t1;
       x_best = x0; // x0
     }
-    const auto result2 = ss.update(cut);
-    const auto &cutstatus = std::get<0>(result2);
-    const auto &tsq = std::get<1>(result2);
+    const auto cutstatus = ss.update(cut);
 
     if (cutstatus == CutStatus::NoEffect) {
       if (!more_alt) { // more alt?
@@ -162,7 +154,7 @@ auto cutting_plane_q(Oracle &&omega, Space &&ss, opt_type &&t,
       return std::make_tuple(std::move(x_best),
                              CInfo{t != t_orig, niter, cutstatus});
     }
-    if (tsq < options.tol) { // no more
+    if (ss.tsq() < options.tol) { // no more
       return std::make_tuple(std::move(x_best),
                              CInfo{t != t_orig, niter, CutStatus::SmallEnough});
     }

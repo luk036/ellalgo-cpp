@@ -17,8 +17,7 @@
 using Vec = std::valarray<double>;
 
 template <typename T>
-auto EllCore::update(Vec &grad, const T &beta)
-    -> std::tuple<CutStatus, double> {
+auto EllCore::update(Vec &grad, const T &beta) -> CutStatus {
   // const auto& [grad, beta] = cut;
   // auto Qg = zeros({this->_n}); // initial x0
   std::valarray<double> Qg(0.0, this->_n);
@@ -33,7 +32,7 @@ auto EllCore::update(Vec &grad, const T &beta)
   this->_helper._tsq = this->_kappa * omega;
   auto status = this->_update_cut(beta);
   if (status != CutStatus::Success) {
-    return {status, this->_helper._tsq};
+    return status;
   }
 
   // n*(n+1)/2 + n
@@ -56,12 +55,11 @@ auto EllCore::update(Vec &grad, const T &beta)
   }
 
   grad = Qg * (this->_helper._rho / omega);
-  return {status, this->_helper._tsq}; // g++-7 is ok
+  return status; // g++-7 is ok
 }
 
 template <typename T>
-auto EllCore::update_stable(Vec &g, const T &beta)
-    -> std::tuple<CutStatus, double> {
+auto EllCore::update_stable(Vec &g, const T &beta) -> CutStatus {
   // calculate inv(L)*grad: (n-1)*n/2 multiplications
   auto invLg{g}; // initially
   for (auto i = 1U; i != this->_n; ++i) {
@@ -89,7 +87,7 @@ auto EllCore::update_stable(Vec &g, const T &beta)
   this->_helper._tsq = this->_kappa * omega;
   auto status = this->_update_cut(beta);
   if (status != CutStatus::Success) {
-    return {status, this->_helper._tsq};
+    return status;
   }
 
   // calculate Q*grad = inv(L')*inv(D)*inv(L)*grad : (n-1)*n/2
@@ -128,18 +126,14 @@ auto EllCore::update_stable(Vec &g, const T &beta)
 
   // calculate xc: n
   g = Qg * (this->_helper._rho / omega);
-  return {status, this->_helper._tsq};
+  return status;
 }
 
 // Instantiation
-template std::tuple<CutStatus, double> //
-EllCore::update(Vec &grad, const double &beta);
+template CutStatus EllCore::update(Vec &grad, const double &beta);
 
-template std::tuple<CutStatus, double> //
-EllCore::update(Vec &grad, const Vec &beta);
+template CutStatus EllCore::update(Vec &grad, const Vec &beta);
 
-template std::tuple<CutStatus, double> //
-EllCore::update_stable(Vec &grad, const double &beta);
+template CutStatus EllCore::update_stable(Vec &grad, const double &beta);
 
-template std::tuple<CutStatus, double> //
-EllCore::update_stable(Vec &grad, const Vec &beta);
+template CutStatus EllCore::update_stable(Vec &grad, const Vec &beta);
