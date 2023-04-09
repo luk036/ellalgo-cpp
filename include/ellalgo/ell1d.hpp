@@ -13,12 +13,12 @@ enum class CutStatus;
  */
 class ell1d {
 public:
-  using return_t = std::tuple<CutStatus, double>;
   using ArrayType = double;
 
 private:
   double _r;
   double _xc;
+  double _tsq;
 
 public:
   /**
@@ -28,7 +28,7 @@ public:
    * @param[in] u
    */
   ell1d(const double &l, const double &u) noexcept
-      : _r{(u - l) / 2}, _xc{l + _r} {}
+      : _r{(u - l) / 2}, _xc{l + _r}, _tsq{0.0} {}
 
   /**
    * @brief Construct a new ell1d object
@@ -54,8 +54,15 @@ public:
   /**
    * @brief
    *
+   * @return double
+   */
+  auto tsq() const -> double { return this->_tsq; }
+
+  /**
+   * @brief
+   *
    * @param[in] cut
    * @return return_t
    */
-  auto update(const std::pair<double, double> &cut) noexcept -> return_t;
+  auto update(const std::pair<double, double> &cut) noexcept -> CutStatus;
 }; // } ell1d

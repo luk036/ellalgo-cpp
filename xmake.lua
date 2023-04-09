@@ -4,7 +4,7 @@ add_requires("doctest", {alias = "doctest"})
 add_requires("range-v3", {alias = "range-v3"})
 -- add_requires("conan::range-v3/0.11.0", {alias = "range-v3"})
 
-set_languages("c++11")
+set_languages("c++23")
 
 if is_plat("linux") then
     set_warnings("all", "error")

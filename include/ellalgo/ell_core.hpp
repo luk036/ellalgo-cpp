@@ -139,6 +139,25 @@ public:
   template <typename T>
   auto update_stable(Vec &grad, const T &beta) -> CutStatus;
 
+  /**
+   * @brief Update ellipsoid core function using the cut(s)
+   *
+   * @tparam T
+   * @param[in] cut cutting-plane
+   * @return std::tuple<int, double>
+   */
+  template <typename T> auto update_cc(Vec &grad, const T &beta) -> CutStatus;
+
+  /**
+   * @brief Update ellipsoid core function using the cut(s)
+   *
+   * @tparam T
+   * @param[in] cut cutting-plane
+   * @return std::tuple<int, double>
+   */
+  template <typename T>
+  auto update_stable_cc(Vec &grad, const T &beta) -> CutStatus;
+
 private:
   auto _update_cut(const double &beta) -> CutStatus {
     return this->_helper._calc_dc(beta);

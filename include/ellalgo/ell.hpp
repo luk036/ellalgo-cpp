@@ -101,7 +101,7 @@ public:
   /**
    * @brief
    *
-   * @return Arr
+   * @return double
    */
   auto tsq() const -> double { return this->_mgr.tsq(); }
 

@@ -35,9 +35,9 @@
 template <typename Oracle, typename Space>
 auto cutting_plane_feas(Oracle &&omega, Space &&ss,
                         const Options &options = Options()) -> CInfo {
-  for (auto niter = 0U; niter < options.max_iter; ++niter) {
-    const auto cut = omega.assess_feas(ss.xc()); // query the oracle at ss.xc()
-    if (!cut) {                                  // feasible sol'n obtained
+  for (auto niter = 0U; niter != options.max_iter; ++niter) {
+    const auto cut = omega.assess_feas(ss.xc());
+    if (!cut) { // feasible sol'n obtained
       return {true, niter, CutStatus::Success};
     }
     const auto cutstatus = ss.update(*cut); // update ss
@@ -71,7 +71,7 @@ auto cutting_plane_optim(Oracle &&omega, Space &&ss, opt_type &&t,
   const auto t_orig = t;
   using S = typename std::remove_reference<Space>::type;
   typename S::ArrayType x_best{};
-  auto status = CutStatus::Success;
+  auto cutstatus = CutStatus::Success;
 
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
     const auto result1 = omega.assess_optim(ss.xc(), t);
@@ -79,20 +79,19 @@ auto cutting_plane_optim(Oracle &&omega, Space &&ss, opt_type &&t,
     const auto &shrunk = std::get<1>(result1);
     if (shrunk) { // best t obtained
       x_best = ss.xc();
+      cutstatus = ss.update(cut); // should update_cc
+    } else {
+      cutstatus = ss.update(cut);
     }
-    const auto cutstatus = ss.update(cut);
-    if (cutstatus != CutStatus::Success) // ???
-    {
-      return std::make_tuple(std::move(x_best),
-                             CInfo{t != t_orig, niter, cutstatus});
+    if (cutstatus != CutStatus::Success) {
+      return {std::move(x_best), CInfo{t != t_orig, niter, cutstatus}};
     }
     if (ss.tsq() < options.tol) { // no more
-      return std::make_tuple(std::move(x_best),
-                             CInfo{t != t_orig, niter, CutStatus::SmallEnough});
+      return {std::move(x_best),
+              CInfo{t != t_orig, niter, CutStatus::SmallEnough}};
     }
   }
-  return std::make_tuple(std::move(x_best),
-                         CInfo{t != t_orig, options.max_iter, status});
+  return {std::move(x_best), CInfo{t != t_orig, options.max_iter, cutstatus}};
 } // END
 
 /**
