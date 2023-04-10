@@ -69,10 +69,6 @@
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt id="a7476028ea4add461f0cdc863f4ef0c93">
-              using <a href="#a7476028ea4add461f0cdc863f4ef0c93" class="m-doc-self">return_t</a> = std::tuple&lt;<a href="cut__config_8hpp.html#af6c5aa64702e88776265c19b9df2d5c3" class="m-doc">CutStatus</a>, double&gt;
-            </dt>
-            <dd><span></span></dd>
             <dt id="a4b25ccd9182d25914d62776c573af519">
               using <a href="#a4b25ccd9182d25914d62776c573af519" class="m-doc-self">ArrayType</a> = double
             </dt>
@@ -105,7 +101,11 @@
             </dt>
             <dd>Set the xc object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a13639e30714a76c28c3429f7b4949297" class="m-doc">update</a>(</span><span class="m-doc-wrap">const std::pair&lt;double, double&gt;&amp; cut) noexcept -&gt; return_t -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7cbec19c23b0bce2e4f00de0e51dee0e" class="m-doc">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double -&gt; auto</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab37f075ea3f753751869749ed8137e0f" class="m-doc">update</a>(</span><span class="m-doc-wrap">const std::pair&lt;double, double&gt;&amp; cut) noexcept -&gt; CutStatus -&gt; auto</span>
             </dt>
             <dd></dd>
           </dl>
@@ -181,9 +181,22 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a13639e30714a76c28c3429f7b4949297"><div>
+          <section class="m-doc-details" id="a7cbec19c23b0bce2e4f00de0e51dee0e"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto ell1d::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a13639e30714a76c28c3429f7b4949297" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">const std::pair&lt;double, double&gt;&amp; cut) noexcept -&gt; return_t</span></span>
+              <span class="m-doc-wrap-bumper">auto ell1d::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7cbec19c23b0bce2e4f00de0e51dee0e" class="m-doc-self">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>double</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab37f075ea3f753751869749ed8137e0f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto ell1d::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab37f075ea3f753751869749ed8137e0f" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">const std::pair&lt;double, double&gt;&amp; cut) noexcept -&gt; CutStatus</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
