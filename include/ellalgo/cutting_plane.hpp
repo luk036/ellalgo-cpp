@@ -27,24 +27,24 @@
  *
  * @tparam Oracle
  * @tparam Space
- * @param[in,out] omega perform assessment on x0
- * @param[in,out] ss    search Space containing x*
- * @param[in] options   maximum iteration and error tolerance etc.
+ * @param[in,out] omega   perform assessment on x0
+ * @param[in,out] space   search Space containing x*
+ * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
 template <typename Oracle, typename Space>
-auto cutting_plane_feas(Oracle &&omega, Space &&ss,
+auto cutting_plane_feas(Oracle &&omega, Space &&space,
                         const Options &options = Options()) -> CInfo {
   for (auto niter = 0U; niter != options.max_iter; ++niter) {
-    const auto cut = omega.assess_feas(ss.xc());
+    const auto cut = omega.assess_feas(space.xc());
     if (!cut) { // feasible sol'n obtained
       return {true, niter, CutStatus::Success};
     }
-    const auto cutstatus = ss.update(*cut); // update ss
+    const auto cutstatus = space.update(*cut); // update space
     if (cutstatus != CutStatus::Success) {
       return {false, niter, cutstatus};
     }
-    if (ss.tsq() < options.tol) { // no more
+    if (space.tsq() < options.tol) { // no more
       return {false, niter, CutStatus::SmallEnough};
     }
   }
@@ -56,91 +56,77 @@ auto cutting_plane_feas(Oracle &&omega, Space &&ss,
  *
  * @tparam Oracle
  * @tparam Space
- * @tparam opt_type
- * @param[in,out] omega perform assessment on x0
- * @param[in,out] ss     search Space containing x*
- * @param[in,out] t     best-so-far optimal sol'n
- * @param[in] options   maximum iteration and error tolerance etc.
+ * @tparam Num
+ * @param[in,out] omega   perform assessment on x0
+ * @param[in,out] space   search Space containing x*
+ * @param[in,out] target  best-so-far optimal sol'n
+ * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
-template <typename Oracle, typename Space, typename opt_type>
-auto cutting_plane_optim(Oracle &&omega, Space &&ss, opt_type &&t,
+template <typename Oracle, typename Space, typename Num>
+auto cutting_plane_optim(Oracle &&omega, Space &&space, Num &&target,
                          const Options &options = Options())
     -> std::tuple<typename std::remove_reference<Space>::type::ArrayType,
                   CInfo> {
-  const auto t_orig = t;
-  using S = typename std::remove_reference<Space>::type;
-  typename S::ArrayType x_best{};
+  typename std::remove_reference<Space>::type::ArrayType x_best{};
+  const auto t_orig = target;
   auto cutstatus = CutStatus::Success;
 
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
-    const auto result1 = omega.assess_optim(ss.xc(), t);
-    const auto &cut = std::get<0>(result1);
-    const auto &shrunk = std::get<1>(result1);
-    if (shrunk) { // best t obtained
-      x_best = ss.xc();
-      cutstatus = ss.update(cut); // should update_cc
+    const auto __result1 = omega.assess_optim(space.xc(), target);
+    const auto &cut = std::get<0>(__result1);
+    const auto &shrunk = std::get<1>(__result1);
+    if (shrunk) { // best target obtained
+      x_best = space.xc();
+      cutstatus = space.update(cut); // should update_cc
     } else {
-      cutstatus = ss.update(cut);
+      cutstatus = space.update(cut);
     }
     if (cutstatus != CutStatus::Success) {
-      return {std::move(x_best), CInfo{t != t_orig, niter, cutstatus}};
+      return {std::move(x_best), CInfo{target != t_orig, niter, cutstatus}};
     }
-    if (ss.tsq() < options.tol) { // no more
+    if (space.tsq() < options.tol) { // no more
       return {std::move(x_best),
-              CInfo{t != t_orig, niter, CutStatus::SmallEnough}};
+              CInfo{target != t_orig, niter, CutStatus::SmallEnough}};
     }
   }
-  return {std::move(x_best), CInfo{t != t_orig, options.max_iter, cutstatus}};
+  return {std::move(x_best),
+          CInfo{target != t_orig, options.max_iter, cutstatus}};
 } // END
-
-/**
-    Cutting-plane method for solving convex discrete optimization problem
-    input
-             oracle        perform assessment on x0
-             ss(xc)         Search space containing x*
-             t             best-so-far optimal sol'n
-             max_iter        maximum number of iterations
-             tol           error tolerance
-    output
-             x             solution vector
-             niter          number of iterations performed
-**/
 
 /**
  * @brief Cutting-plane method for solving convex discrete optimization problem
  *
  * @tparam Oracle
  * @tparam Space
- * @param[in,out] omega perform assessment on x0
- * @param[in,out] ss     search Space containing x*
- * @param[in,out] t     best-so-far optimal sol'n
- * @param[in] options   maximum iteration and error tolerance etc.
+ * @param[in,out] omega   perform assessment on x0
+ * @param[in,out] space   search Space containing x*
+ * @param[in,out] target  best-so-far optimal sol'n
+ * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
 template <typename Oracle, typename Space, typename opt_type>
-auto cutting_plane_q(Oracle &&omega, Space &&ss, opt_type &&t,
+auto cutting_plane_q(Oracle &&omega, Space &&space, opt_type &&target,
                      const Options &options = Options())
     -> std::tuple<typename std::remove_reference<Space>::type::ArrayType,
                   CInfo> {
-  const auto t_orig = t;
-  using S = typename std::remove_reference<Space>::type;
-  typename S::ArrayType x_best{};
+  typename std::remove_reference<Space>::type::ArrayType x_best{};
+  const auto t_orig = target;
   auto status = CutStatus::NoSoln; // note!!!
   auto retry = (status == CutStatus::NoEffect);
 
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
     // auto retry = (status == CutStatus::NoEffect);
-    const auto result1 = omega.assess_q(ss.xc(), t, retry);
+    const auto result1 = omega.assess_q(space.xc(), target, retry);
     const auto &cut = std::get<0>(result1);
     const auto &shrunk = std::get<1>(result1);
     const auto &x0 = std::get<2>(result1);
     const auto &more_alt = std::get<3>(result1);
-    if (shrunk) { // best t obtained
-      // t = t1;
+    if (shrunk) { // best target obtained
+      // target = t1;
       x_best = x0; // x0
     }
-    const auto cutstatus = ss.update(cut);
+    const auto cutstatus = space.update(cut);
 
     if (cutstatus == CutStatus::NoEffect) {
       if (!more_alt) { // more alt?
@@ -151,15 +137,15 @@ auto cutting_plane_q(Oracle &&omega, Space &&ss, opt_type &&t,
     }
     if (cutstatus == CutStatus::NoSoln) {
       return std::make_tuple(std::move(x_best),
-                             CInfo{t != t_orig, niter, cutstatus});
+                             CInfo{target != t_orig, niter, cutstatus});
     }
-    if (ss.tsq() < options.tol) { // no more
-      return std::make_tuple(std::move(x_best),
-                             CInfo{t != t_orig, niter, CutStatus::SmallEnough});
+    if (space.tsq() < options.tol) { // no more
+      return std::make_tuple(std::move(x_best), CInfo{target != t_orig, niter,
+                                                      CutStatus::SmallEnough});
     }
   }
   return std::make_tuple(std::move(x_best),
-                         CInfo{t != t_orig, options.max_iter, status});
+                         CInfo{target != t_orig, options.max_iter, status});
 } // END
 
 /**
@@ -167,18 +153,18 @@ auto cutting_plane_q(Oracle &&omega, Space &&ss, opt_type &&t,
  *
  * @tparam Oracle
  * @tparam Space
- * @param[in,out] omega    perform assessment on x0
- * @param[in,out] I        interval containing x*
- * @param[in]     options  maximum iteration and error tolerance etc.
+ * @param[in,out] omega   perform assessment on x0
+ * @param[in,out] intvl   interval containing x*
+ * @param[in]     options maximum iteration and error tolerance etc.
  * @return CInfo
  */
 template <typename Oracle, typename Space>
-auto bsearch(Oracle &&omega, Space &&I, const Options &options = Options())
+auto bsearch(Oracle &&omega, Space &&intvl, const Options &options = Options())
     -> CInfo {
   // assume monotone
-  // auto& [lower, upper] = I;
-  auto &lower = I.first;
-  auto &upper = I.second;
+  // auto& [lower, upper] = intvl;
+  auto &lower = intvl.first;
+  auto &upper = intvl.second;
   assert(lower <= upper);
   const auto u_orig = upper;
   auto status = CutStatus::Success;
@@ -189,12 +175,12 @@ auto bsearch(Oracle &&omega, Space &&I, const Options &options = Options())
       return {upper != u_orig, niter, CutStatus::SmallEnough};
     }
 
-    auto t = lower; // l may be `int` or `Fraction`
-    t += tau;
-    if (omega.assess_bs(t)) { // feasible sol'n obtained
-      upper = t;
+    auto target = lower; // l may be `int` or `Fraction`
+    target += tau;
+    if (omega.assess_bs(target)) { // feasible sol'n obtained
+      upper = target;
     } else {
-      lower = t;
+      lower = target;
     }
   }
   return {upper != u_orig, options.max_iter, status};
@@ -212,7 +198,7 @@ class bsearch_adaptor {
 
 private:
   Oracle &_omega;
-  Space &_ss;
+  Space &_space;
   const Options _options;
 
 public:
@@ -220,41 +206,42 @@ public:
    * @brief Construct a new bsearch adaptor object
    *
    * @param[in,out] omega perform assessment on x0
-   * @param[in,out] ss search Space containing x*
+   * @param[in,out] space search Space containing x*
    */
-  bsearch_adaptor(Oracle &omega, Space &ss)
-      : bsearch_adaptor{omega, ss, Options()} {}
+  bsearch_adaptor(Oracle &omega, Space &space)
+      : bsearch_adaptor{omega, space, Options()} {}
 
   /**
    * @brief Construct a new bsearch adaptor object
    *
-   * @param[in,out] omega perform assessment on x0
-   * @param[in,out] ss search Space containing x*
-   * @param[in] options maximum iteration and error tolerance etc.
+   * @param[in,out] omega   perform assessment on x0
+   * @param[in,out] space   search space containing x*
+   * @param[in]     options maximum iteration and error tolerance etc.
    */
-  bsearch_adaptor(Oracle &omega, Space &ss, const Options &options)
-      : _omega{omega}, _ss{ss}, _options{options} {}
+  bsearch_adaptor(Oracle &omega, Space &space, const Options &options)
+      : _omega{omega}, _space{space}, _options{options} {}
 
   /**
    * @brief get best x
    *
    * @return auto
    */
-  auto x_best() const -> ArrayType { return this->_ss.xc(); }
+  auto x_best() const -> ArrayType { return this->_space.xc(); }
 
   /**
    * @brief
    *
-   * @tparam BestSoFar Could be integer or floating point
-   * @param[in,out] t the best-so-far optimal value
+   * @tparam Num
+   * @param[in,out] target the best-so-far optimal value
    * @return bool
    */
-  template <typename BestSoFar> auto assess_bs(const BestSoFar &t) -> bool {
-    Space ss = this->_ss.copy();
-    this->_omega.update(t);
-    const auto ell_info = cutting_plane_feas(this->_omega, ss, this->_options);
+  template <typename Num> auto assess_bs(const Num &target) -> bool {
+    Space space = this->_space.copy();
+    this->_omega.update(target);
+    const auto ell_info =
+        cutting_plane_feas(this->_omega, space, this->_options);
     if (ell_info.feasible) {
-      this->_ss.set_xc(ss.xc());
+      this->_space.set_xc(space.xc());
     }
     return ell_info.feasible;
   }
