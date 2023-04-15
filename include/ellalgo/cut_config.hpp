@@ -20,5 +20,4 @@ struct Options {
 struct CInfo {
   bool feasible;
   size_t num_iters;
-  CutStatus status;
 };

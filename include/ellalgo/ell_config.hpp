@@ -33,7 +33,6 @@ enum class CutStatus {
 struct CInfo {
   bool feasible;
   size_t num_iters;
-  CutStatus status;
 };
 
 template <typename T> using ArrayType = typename T::ArrayType;

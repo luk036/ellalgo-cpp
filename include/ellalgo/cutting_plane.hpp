@@ -9,6 +9,10 @@
 #include "ell_config.hpp"
 #include "half_nonnegative.hpp"
 
+template <typename Space>
+using CuttingPlaneArrayType =
+    typename std::remove_reference<Space>::type::ArrayType;
+
 /**
  * @brief Find a point in a convex set (defined through a cutting-plane oracle).
  *
@@ -38,17 +42,14 @@ auto cutting_plane_feas(Oracle &&omega, Space &&space,
   for (auto niter = 0U; niter != options.max_iter; ++niter) {
     const auto cut = omega.assess_feas(space.xc());
     if (!cut) { // feasible sol'n obtained
-      return {true, niter, CutStatus::Success};
+      return {true, niter};
     }
     const auto cutstatus = space.update(*cut); // update space
-    if (cutstatus != CutStatus::Success) {
-      return {false, niter, cutstatus};
-    }
-    if (space.tsq() < options.tol) { // no more
-      return {false, niter, CutStatus::SmallEnough};
+    if (cutstatus != CutStatus::Success || space.tsq() < options.tol) {
+      return {false, niter};
     }
   }
-  return {false, options.max_iter, CutStatus::NoSoln};
+  return {false, options.max_iter};
 }
 
 /**
@@ -66,32 +67,30 @@ auto cutting_plane_feas(Oracle &&omega, Space &&space,
 template <typename Oracle, typename Space, typename Num>
 auto cutting_plane_optim(Oracle &&omega, Space &&space, Num &&target,
                          const Options &options = Options())
-    -> std::tuple<typename std::remove_reference<Space>::type::ArrayType,
-                  CInfo> {
-  typename std::remove_reference<Space>::type::ArrayType x_best{};
+    -> std::tuple<CuttingPlaneArrayType<Space>, CInfo> {
+  CuttingPlaneArrayType<Space> x_best{};
   const auto t_orig = target;
-  auto cutstatus = CutStatus::Success;
 
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
     const auto __result1 = omega.assess_optim(space.xc(), target);
     const auto &cut = std::get<0>(__result1);
     const auto &shrunk = std::get<1>(__result1);
-    if (shrunk) { // best target obtained
-      x_best = space.xc();
-      cutstatus = space.update(cut); // should update_cc
-    } else {
-      cutstatus = space.update(cut);
-    }
+    const auto cutstatus = [&]() {
+      if (shrunk) { // best target obtained
+        x_best = space.xc();
+        return space.update(cut); // should update_cc
+      } else {
+        return space.update(cut);
+      }
+    }();
     if (cutstatus != CutStatus::Success) {
-      return {std::move(x_best), CInfo{target != t_orig, niter, cutstatus}};
+      return {std::move(x_best), CInfo{target != t_orig, niter}};
     }
     if (space.tsq() < options.tol) { // no more
-      return {std::move(x_best),
-              CInfo{target != t_orig, niter, CutStatus::SmallEnough}};
+      return {std::move(x_best), CInfo{target != t_orig, niter}};
     }
   }
-  return {std::move(x_best),
-          CInfo{target != t_orig, options.max_iter, cutstatus}};
+  return {std::move(x_best), CInfo{target != t_orig, options.max_iter}};
 } // END
 
 /**
@@ -108,9 +107,8 @@ auto cutting_plane_optim(Oracle &&omega, Space &&space, Num &&target,
 template <typename Oracle, typename Space, typename opt_type>
 auto cutting_plane_q(Oracle &&omega, Space &&space, opt_type &&target,
                      const Options &options = Options())
-    -> std::tuple<typename std::remove_reference<Space>::type::ArrayType,
-                  CInfo> {
-  typename std::remove_reference<Space>::type::ArrayType x_best{};
+    -> std::tuple<CuttingPlaneArrayType<Space>, CInfo> {
+  CuttingPlaneArrayType<Space> x_best{};
   const auto t_orig = target;
   auto status = CutStatus::NoSoln; // note!!!
   auto retry = (status == CutStatus::NoEffect);
@@ -134,18 +132,14 @@ auto cutting_plane_q(Oracle &&omega, Space &&space, opt_type &&target,
       }
       status = cutstatus;
       retry = true;
-    }
-    if (cutstatus == CutStatus::NoSoln) {
-      return std::make_tuple(std::move(x_best),
-                             CInfo{target != t_orig, niter, cutstatus});
+    } else if (cutstatus == CutStatus::NoSoln) {
+      return {std::move(x_best), CInfo{target != t_orig, niter}};
     }
     if (space.tsq() < options.tol) { // no more
-      return std::make_tuple(std::move(x_best), CInfo{target != t_orig, niter,
-                                                      CutStatus::SmallEnough});
+      return {std::move(x_best), CInfo{target != t_orig, niter}};
     }
   }
-  return std::make_tuple(std::move(x_best),
-                         CInfo{target != t_orig, options.max_iter, status});
+  return {std::move(x_best), CInfo{target != t_orig, options.max_iter}};
 } // END
 
 /**
@@ -167,14 +161,12 @@ auto bsearch(Oracle &&omega, Space &&intvl, const Options &options = Options())
   auto &upper = intvl.second;
   assert(lower <= upper);
   const auto u_orig = upper;
-  auto status = CutStatus::Success;
 
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
     auto tau = algo::half_nonnegative(upper - lower);
     if (tau < options.tol) { // no more
-      return {upper != u_orig, niter, CutStatus::SmallEnough};
+      return {upper != u_orig, niter};
     }
-
     auto target = lower; // l may be `int` or `Fraction`
     target += tau;
     if (omega.assess_bs(target)) { // feasible sol'n obtained
@@ -183,7 +175,7 @@ auto bsearch(Oracle &&omega, Space &&intvl, const Options &options = Options())
       lower = target;
     }
   }
-  return {upper != u_orig, options.max_iter, status};
+  return {upper != u_orig, options.max_iter};
 }
 
 /**

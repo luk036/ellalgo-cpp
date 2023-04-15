@@ -24,10 +24,11 @@ TEST_CASE("Profit Test") {
   const auto v = Vec{10.0, 35.0};
 
   {
-    Ell<Vec> E{100.0, Vec{0.0, 0.0}};
-    profit_oracle P{p, A, k, a, v};
+    Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
+    profit_oracle omega{p, A, k, a, v};
 
-    const auto result = cutting_plane_optim(std::move(P), std::move(E), 0.0);
+    const auto result =
+        cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
     const auto &ell_info = std::get<1>(result);
     REQUIRE_EQ(y.size(), 2U);
@@ -36,9 +37,10 @@ TEST_CASE("Profit Test") {
   }
 
   {
-    Ell<Vec> E{100.0, Vec{0.0, 0.0}};
-    profit_rb_oracle P{p, A, k, a, v, Vec{0.003, 0.007}, 1.0};
-    const auto result = cutting_plane_optim(std::move(P), std::move(E), 0.0);
+    Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
+    profit_rb_oracle omega{p, A, k, a, v, Vec{0.003, 0.007}, 1.0};
+    const auto result =
+        cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
     const auto &ell_info = std::get<1>(result);
     // CHECK(y != Vec{});
@@ -48,9 +50,10 @@ TEST_CASE("Profit Test") {
   }
 
   {
-    Ell<Vec> E{100.0, Vec{2.0, 0.0}};
-    profit_q_oracle P{p, A, k, a, v};
-    const auto result = cutting_plane_q(std::move(P), std::move(E), 0.0);
+    Ell<Vec> ellip{100.0, Vec{2.0, 0.0}};
+    profit_q_oracle omega{p, A, k, a, v};
+    const auto result =
+        cutting_plane_q(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
     const auto &ell_info = std::get<1>(result);
     REQUIRE_EQ(y.size(), 2U);
@@ -71,10 +74,11 @@ TEST_CASE("Profit Test (Stable)") {
   const auto v = Vec{10.0, 35.0};
 
   {
-    EllStable<Vec> E{100.0, Vec{0.0, 0.0}};
-    profit_oracle P{p, A, k, a, v};
+    EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
+    profit_oracle omega{p, A, k, a, v};
 
-    const auto result = cutting_plane_optim(std::move(P), std::move(E), 0.0);
+    const auto result =
+        cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
     const auto &ell_info = std::get<1>(result);
     // CHECK(y != Vec{});
@@ -84,9 +88,10 @@ TEST_CASE("Profit Test (Stable)") {
   }
 
   {
-    EllStable<Vec> E{100.0, Vec{0.0, 0.0}};
-    profit_rb_oracle P{p, A, k, a, v, Vec{0.003, 0.007}, 1.0};
-    const auto result = cutting_plane_optim(std::move(P), std::move(E), 0.0);
+    EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
+    profit_rb_oracle omega{p, A, k, a, v, Vec{0.003, 0.007}, 1.0};
+    const auto result =
+        cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
     const auto &ell_info = std::get<1>(result);
     // CHECK(y != Vec{});
@@ -96,9 +101,10 @@ TEST_CASE("Profit Test (Stable)") {
   }
 
   {
-    EllStable<Vec> E{100.0, Vec{2.0, 0.0}};
-    profit_q_oracle P{p, A, k, a, v};
-    const auto result = cutting_plane_q(std::move(P), std::move(E), 0.0);
+    EllStable<Vec> ellip{100.0, Vec{2.0, 0.0}};
+    profit_q_oracle omega{p, A, k, a, v};
+    const auto result =
+        cutting_plane_q(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
     const auto &ell_info = std::get<1>(result);
     // CHECK(y != Vec{});

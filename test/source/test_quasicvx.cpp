@@ -58,12 +58,12 @@ TEST_CASE("xtensor") {
 }
 
 TEST_CASE("Quasiconvex 1, test feasible") {
-  Ell<Vec> E{10.0, Vec{0.0, 0.0}};
+  Ell<Vec> ellip{10.0, Vec{0.0, 0.0}};
 
-  auto P = MyQuasicCvxOracle{};
+  auto omega = MyQuasicCvxOracle{};
   auto t = 0.0;
   const auto options = Options{2000, 1e-8};
-  const auto result = cutting_plane_optim(P, E, t, options);
+  const auto result = cutting_plane_optim(omega, ellip, t, options);
   const Vec &x = std::get<0>(result);
   REQUIRE_EQ(x.size(), 2U);
   // CHECK_EQ(-t, doctest::Approx(-0.4288673397));
@@ -78,11 +78,11 @@ TEST_CASE("Quasiconvex 1, test feasible") {
 }
 
 TEST_CASE("Quasiconvex 1, test feasible (stable)") {
-  EllStable<Vec> E{10.0, Vec{0.0, 0.0}};
-  auto P = MyQuasicCvxOracle{};
+  EllStable<Vec> ellip{10.0, Vec{0.0, 0.0}};
+  auto omega = MyQuasicCvxOracle{};
   auto t = 0.0;
   const auto options = Options{2000, 1e-8};
-  const auto result = cutting_plane_optim(P, E, t, options);
+  const auto result = cutting_plane_optim(omega, ellip, t, options);
   const auto x = std::get<0>(result);
   REQUIRE_EQ(x.size(), 2U);
   const auto &ell_info = std::get<1>(result);

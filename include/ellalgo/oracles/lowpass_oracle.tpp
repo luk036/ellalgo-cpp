@@ -18,7 +18,7 @@
  *        s.t.  L^2(\omega) \le R(\omega) \le U^2(\omega), \forall \omega \in
  * [0, \pi] R(\omega) > 0, \forall \omega \in [0, \pi]
  */
-class lowpass_oracle {
+class LowpassOracle {
   using Arr = xt::xarray<double, xt::layout_type::row_major>;
   using Vec = std::valarray<double>;
   using ParallelCut = std::pair<Arr, Vec>;
@@ -45,7 +45,7 @@ public:
    * @param[in] Lpsq
    * @param[in] Upsq
    */
-  lowpass_oracle(const Arr &Ap, const Arr &As, const Arr &Anr, double Lpsq,
+  LowpassOracle(const Arr &Ap, const Arr &As, const Arr &Anr, double Lpsq,
                  double Upsq)
       : _Ap{Ap}, _As{As}, _Anr{Anr}, _Lpsq{Lpsq}, _Upsq{Upsq} {}
 
@@ -54,7 +54,7 @@ public:
    * Avoid accidential created
    *
    */
-  lowpass_oracle(const lowpass_oracle &) = delete;
+  LowpassOracle(const LowpassOracle &) = delete;
 
   /**
    * @brief
