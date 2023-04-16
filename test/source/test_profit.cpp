@@ -7,7 +7,7 @@
 #include <ellalgo/ell.hpp>           // for Ell
 #include <ellalgo/ell_config.hpp>    // for CInfo
 #include <ellalgo/ell_stable.hpp>    // for EllStable
-#include <ellalgo/oracles/profit_oracle.hpp> // for profit_oracle, profit_r...
+#include <ellalgo/oracles/profit_oracle.hpp> // for ProfitOracle, profit_r...
 
 #include <cmath>       // for log
 #include <tuple>       // for get
@@ -25,7 +25,7 @@ TEST_CASE("Profit Test") {
 
   {
     Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
-    profit_oracle omega{p, A, k, a, v};
+    ProfitOracle omega{p, A, k, a, v};
 
     const auto result =
         cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
@@ -38,7 +38,7 @@ TEST_CASE("Profit Test") {
 
   {
     Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
-    profit_rb_oracle omega{p, A, k, a, v, Vec{0.003, 0.007}, 1.0};
+    ProfitOracleRb omega{p, A, k, a, v, Vec{0.003, 0.007}, 1.0};
     const auto result =
         cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
@@ -51,7 +51,7 @@ TEST_CASE("Profit Test") {
 
   {
     Ell<Vec> ellip{100.0, Vec{2.0, 0.0}};
-    profit_q_oracle omega{p, A, k, a, v};
+    ProfitOracleQ omega{p, A, k, a, v};
     const auto result =
         cutting_plane_q(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
@@ -75,7 +75,7 @@ TEST_CASE("Profit Test (Stable)") {
 
   {
     EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
-    profit_oracle omega{p, A, k, a, v};
+    ProfitOracle omega{p, A, k, a, v};
 
     const auto result =
         cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
@@ -89,7 +89,7 @@ TEST_CASE("Profit Test (Stable)") {
 
   {
     EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
-    profit_rb_oracle omega{p, A, k, a, v, Vec{0.003, 0.007}, 1.0};
+    ProfitOracleRb omega{p, A, k, a, v, Vec{0.003, 0.007}, 1.0};
     const auto result =
         cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
@@ -102,7 +102,7 @@ TEST_CASE("Profit Test (Stable)") {
 
   {
     EllStable<Vec> ellip{100.0, Vec{2.0, 0.0}};
-    profit_q_oracle omega{p, A, k, a, v};
+    ProfitOracleQ omega{p, A, k, a, v};
     const auto result =
         cutting_plane_q(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);

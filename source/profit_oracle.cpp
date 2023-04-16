@@ -12,7 +12,7 @@ using Cut = std::pair<Vec, double>;
  * @param[in,out] t the best-so-far optimal value
  * @return std::tuple<Cut, double>
  */
-auto profit_oracle::assess_optim(const Vec &y, double &t) const
+auto ProfitOracle::assess_optim(const Vec &y, double &t) const
     -> std::tuple<Cut, bool> {
   // y0 <= log k
   const auto f1 = y[0] - this->_log_k;
@@ -41,7 +41,7 @@ auto profit_oracle::assess_optim(const Vec &y, double &t) const
  * @param[in,out] t the best-so-far optimal value
  * @return std::tuple<Cut, double, Vec, int>
  */
-auto profit_q_oracle::assess_q(const Vec &y, double &t, bool retry)
+auto ProfitOracleQ::assess_q(const Vec &y, double &t, bool retry)
     -> std::tuple<Cut, bool, Vec, bool> {
   if (!retry) {
     Vec x = std::exp(y);

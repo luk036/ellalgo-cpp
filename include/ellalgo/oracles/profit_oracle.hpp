@@ -29,7 +29,7 @@
  *        v: output price
  *        k: a given constant that restricts the quantity of x1
  */
-class profit_oracle {
+class ProfitOracle {
   // using Arr = xt::xarray<double, xt::layout_type::row_major>;
   using Vec = std::valarray<double>;
   using Cut = std::pair<Vec, double>;
@@ -51,14 +51,14 @@ public:
    * @param[in] a the output elasticities
    * @param[in] v output price
    */
-  profit_oracle(double p, double A, double k, const Vec &a, const Vec &v)
+  ProfitOracle(double p, double A, double k, const Vec &a, const Vec &v)
       : _log_pA{std::log(p * A)}, _log_k{std::log(k)}, _v{v}, _a{a} {}
 
   /**
    * @brief Construct a new profit oracle object (only explicitly)
    *
    */
-  profit_oracle(const profit_oracle &) = delete;
+  ProfitOracle(const ProfitOracle &) = delete;
 
   /**
    * @brief
@@ -96,9 +96,9 @@ public:
  *        k' = k \pm e4
  *        v' = v \pm e5
  *
- * @see profit_oracle
+ * @see ProfitOracle
  */
-class profit_rb_oracle {
+class ProfitOracleRb {
   // using Arr = xt::xarray<double, xt::layout_type::row_major>;
   using Vec = std::valarray<double>;
   using Cut = std::pair<Vec, double>;
@@ -106,7 +106,7 @@ class profit_rb_oracle {
 private:
   const Vec _uie;
   Vec _a;
-  profit_oracle _P;
+  ProfitOracle _P;
 
 public:
   /**
@@ -120,7 +120,7 @@ public:
    * @param[in] e paramters for uncertainty
    * @param[in] e3 paramters for uncertainty
    */
-  profit_rb_oracle(double p, double A, double k, const Vec &a, const Vec &v,
+  ProfitOracleRb(double p, double A, double k, const Vec &a, const Vec &v,
                    const Vec &e, double e3)
       : _uie{e}, _a{a}, _P(p - e3, A, k - e3, a, v + e3) {}
 
@@ -173,15 +173,15 @@ public:
  *        v: output price
  *        k: a given constant that restricts the quantity of x1
  *
- * @see profit_oracle
+ * @see ProfitOracle
  */
-class profit_q_oracle {
+class ProfitOracleQ {
   // using Arr = xt::xarray<double, xt::layout_type::row_major>;
   using Vec = std::valarray<double>;
   using Cut = std::pair<Vec, double>;
 
 private:
-  profit_oracle _P;
+  ProfitOracle _P;
   Vec _yd;
 
 public:
@@ -194,7 +194,7 @@ public:
    * @param[in] a the output elasticities
    * @param[in] v output price
    */
-  profit_q_oracle(double p, double A, double k, const Vec &a, const Vec &v)
+  ProfitOracleQ(double p, double A, double k, const Vec &a, const Vec &v)
       : _P{p, A, k, a, v} {}
 
   /**

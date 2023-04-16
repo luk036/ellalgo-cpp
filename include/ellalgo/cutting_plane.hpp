@@ -104,8 +104,8 @@ auto cutting_plane_optim(Oracle &&omega, Space &&space, Num &&target,
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
-template <typename Oracle, typename Space, typename opt_type>
-auto cutting_plane_q(Oracle &&omega, Space &&space, opt_type &&target,
+template <typename Oracle, typename Space, typename Num>
+auto cutting_plane_q(Oracle &&omega, Space &&space, Num &&target,
                      const Options &options = Options())
     -> std::tuple<CuttingPlaneArrayType<Space>, CInfo> {
   CuttingPlaneArrayType<Space> x_best{};

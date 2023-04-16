@@ -46,7 +46,7 @@ using Arr = xt::xarray<double, xt::layout_type::row_major>;
 //
 // where R(w) is squared magnitude frequency response
 // (and Fourier transform of autocorrelation coefficients r).
-// Variables are coeffients r and G = hh' where h is impulse response.
+// Variables are coeffients r and gra = hh' where h is impulse response.
 // delta is allowed passband ripple.
 // This is a convex problem (can be formulated as an SDP after sampling).
 
