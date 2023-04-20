@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>profit_q_oracle class | EllAlgo</title>
+  <title>ProfitOracleQ class | EllAlgo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -49,7 +49,7 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          profit_q_oracle <span class="m-thin">class</span>
+          ProfitOracleQ <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="profit__oracle_8hpp.html">&lt;ellalgo/oracles/profit_oracle.hpp&gt;</a></div>
         </h1>
         <p>Oracle for profit maximization problem (discrete version)</p>
@@ -74,12 +74,12 @@ alpha, beta: the output elasticities
 x: input quantity (must be integer value)
 v: output price
 k: a given constant that restricts the quantity of x1
-</pre><aside class="m-note m-default"><h4>See also</h4><p><a href="classprofit__oracle.html" class="m-doc">profit_<wbr />oracle</a></p></aside>
+</pre><aside class="m-note m-default"><h4>See also</h4><p><a href="classProfitOracle.html" class="m-doc">ProfitOracle</a></p></aside>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ad37c98831aaf5ed495f38525df1b2093" class="m-doc">profit_q_oracle</a>(</span><span class="m-doc-wrap">double p,
+              <span class="m-doc-wrap-bumper"><a href="#a6848fe2aaae2853611d1ae5342d327e2" class="m-doc">ProfitOracleQ</a>(</span><span class="m-doc-wrap">double p,
               double A,
               double k,
               const Vec&amp; a,
@@ -92,24 +92,24 @@ k: a given constant that restricts the quantity of x1
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aa57c523867e67de4600f8587bbebfa71" class="m-doc">assess_q</a>(</span><span class="m-doc-wrap">const Vec&amp; y,
+              <span class="m-doc-wrap-bumper">auto <a href="#a20683592a17e4e722f23284ce321c393" class="m-doc">assess_q</a>(</span><span class="m-doc-wrap">const Vec&amp; y,
               double&amp; t,
               bool retry) -&gt; std::tuple&lt; Cut, bool, Vec, bool &gt; -&gt; auto</span>
             </dt>
-            <dd>Make object callable for <a href="cutting__plane_8hpp.html#a8a14e3c5837937b51094e3f25eb2e33a" class="m-doc">cutting_<wbr />plane_<wbr />q()</a></dd>
+            <dd>Make object callable for <a href="cutting__plane_8hpp.html#ac34eb35f6ee46b87ab1427b49916d2a3" class="m-doc">cutting_<wbr />plane_<wbr />q()</a></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab748c31e17ef7f810a400cb35bd1d755" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const Vec&amp; y,
+              <span class="m-doc-wrap-bumper">auto <a href="#a0e8b015b420639445eebcacebdeda0d2" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const Vec&amp; y,
               double&amp; t,
               bool retry) -&gt; std::tuple&lt; Cut, bool, Vec, bool &gt; -&gt; auto</span>
             </dt>
-            <dd>Make object callable for <a href="cutting__plane_8hpp.html#a8a14e3c5837937b51094e3f25eb2e33a" class="m-doc">cutting_<wbr />plane_<wbr />q()</a></dd>
+            <dd>Make object callable for <a href="cutting__plane_8hpp.html#ac34eb35f6ee46b87ab1427b49916d2a3" class="m-doc">cutting_<wbr />plane_<wbr />q()</a></dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ad37c98831aaf5ed495f38525df1b2093"><div>
+          <section class="m-doc-details" id="a6848fe2aaae2853611d1ae5342d327e2"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> profit_<wbr />q_<wbr />oracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad37c98831aaf5ed495f38525df1b2093" class="m-doc-self">profit_q_oracle</a>(</span><span class="m-doc-wrap">double p,
+              <span class="m-doc-wrap-bumper"> ProfitOracleQ::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6848fe2aaae2853611d1ae5342d327e2" class="m-doc-self">ProfitOracleQ</a>(</span><span class="m-doc-wrap">double p,
               double A,
               double k,
               const Vec&amp; a,
@@ -144,13 +144,13 @@ k: a given constant that restricts the quantity of x1
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aa57c523867e67de4600f8587bbebfa71"><div>
+          <section class="m-doc-details" id="a20683592a17e4e722f23284ce321c393"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto profit_<wbr />q_<wbr />oracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa57c523867e67de4600f8587bbebfa71" class="m-doc-self">assess_q</a>(</span><span class="m-doc-wrap">const Vec&amp; y,
+              <span class="m-doc-wrap-bumper">auto ProfitOracleQ::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a20683592a17e4e722f23284ce321c393" class="m-doc-self">assess_q</a>(</span><span class="m-doc-wrap">const Vec&amp; y,
               double&amp; t,
               bool retry) -&gt; std::tuple&lt; Cut, bool, Vec, bool &gt;</span></span>
             </h3>
-            <p>Make object callable for <a href="cutting__plane_8hpp.html#a8a14e3c5837937b51094e3f25eb2e33a" class="m-doc">cutting_<wbr />plane_<wbr />q()</a></p>
+            <p>Make object callable for <a href="cutting__plane_8hpp.html#ac34eb35f6ee46b87ab1427b49916d2a3" class="m-doc">cutting_<wbr />plane_<wbr />q()</a></p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -176,15 +176,15 @@ k: a given constant that restricts the quantity of x1
                 </tr>
               </tfoot>
             </table>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="cutting__plane_8hpp.html#a8a14e3c5837937b51094e3f25eb2e33a" class="m-doc">cutting_<wbr />plane_<wbr />q</a></p></aside>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="cutting__plane_8hpp.html#ac34eb35f6ee46b87ab1427b49916d2a3" class="m-doc">cutting_<wbr />plane_<wbr />q</a></p></aside>
           </div></section>
-          <section class="m-doc-details" id="ab748c31e17ef7f810a400cb35bd1d755"><div>
+          <section class="m-doc-details" id="a0e8b015b420639445eebcacebdeda0d2"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto profit_<wbr />q_<wbr />oracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab748c31e17ef7f810a400cb35bd1d755" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const Vec&amp; y,
+              <span class="m-doc-wrap-bumper">auto ProfitOracleQ::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0e8b015b420639445eebcacebdeda0d2" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const Vec&amp; y,
               double&amp; t,
               bool retry) -&gt; std::tuple&lt; Cut, bool, Vec, bool &gt;</span></span>
             </h3>
-            <p>Make object callable for <a href="cutting__plane_8hpp.html#a8a14e3c5837937b51094e3f25eb2e33a" class="m-doc">cutting_<wbr />plane_<wbr />q()</a></p>
+            <p>Make object callable for <a href="cutting__plane_8hpp.html#ac34eb35f6ee46b87ab1427b49916d2a3" class="m-doc">cutting_<wbr />plane_<wbr />q()</a></p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -210,7 +210,7 @@ k: a given constant that restricts the quantity of x1
                 </tr>
               </tfoot>
             </table>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="cutting__plane_8hpp.html#a8a14e3c5837937b51094e3f25eb2e33a" class="m-doc">cutting_<wbr />plane_<wbr />q</a></p></aside>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="cutting__plane_8hpp.html#ac34eb35f6ee46b87ab1427b49916d2a3" class="m-doc">cutting_<wbr />plane_<wbr />q</a></p></aside>
           </div></section>
         </section>
       </div>
