@@ -143,13 +143,14 @@ auto run_lowpass(bool use_parallel_cut) {
   // options.tol = 1e-8;
 
   auto t = Fdc.Spsq;
-  const auto result = cutting_plane_optim(omega, ellip, t, options);
-  const auto &ell_info = std::get<1>(result);
+  const auto __result = cutting_plane_optim(omega, ellip, t, options);
+  const auto &r = std::get<0>(__result);
+  const auto &num_iters = std::get<1>(__result);
   // std::cout << "lowpass r: " << r << '\n';
   // auto Ustop = 20 * std::log10(std::sqrt(Spsq_new));
   // std::cout << "Min attenuation in the stopband is " << Ustop << " dB.\n";
   // CHECK(r[0] >= 0.0);
-  return std::make_tuple(ell_info.feasible, ell_info.num_iters);
+  return std::make_tuple(ell_info.feasible, r.size() != 0U);
 }
 
 /**

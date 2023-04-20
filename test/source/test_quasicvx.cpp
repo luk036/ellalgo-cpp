@@ -70,8 +70,8 @@ TEST_CASE("Quasiconvex 1, test feasible") {
   // CHECK_EQ(x[0] * x[0], doctest::Approx(0.499876));
   // CHECK_EQ(std::exp(x[1]), doctest::Approx(1.64852));
   // const auto &x = std::get<0>(result);
-  const CInfo &ell_info = std::get<1>(result);
-  CHECK(ell_info.feasible);
+  // const CInfo &num_iters = std::get<1>(result);
+  // CHECK(ell_info.feasible);
   CHECK_EQ(-t, doctest::Approx(-0.4288673397));
   CHECK_EQ(x[0] * x[0], doctest::Approx(0.5029823096));
   CHECK_EQ(std::exp(x[1]), doctest::Approx(1.6536872635));
@@ -85,8 +85,8 @@ TEST_CASE("Quasiconvex 1, test feasible (stable)") {
   const auto result = cutting_plane_optim(omega, ellip, t, options);
   const auto x = std::get<0>(result);
   REQUIRE_EQ(x.size(), 2U);
-  const auto &ell_info = std::get<1>(result);
-  CHECK(ell_info.feasible);
+  // const auto &num_iters = std::get<1>(result);
+  // CHECK(ell_info.feasible);
 
   // const auto x = *x_opt;
   // CHECK_EQ(-t, doctest::Approx(-0.4288673397));

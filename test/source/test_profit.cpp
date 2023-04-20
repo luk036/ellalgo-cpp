@@ -30,10 +30,10 @@ TEST_CASE("Profit Test") {
     const auto result =
         cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
-    const auto &ell_info = std::get<1>(result);
+    const auto &num_iters = std::get<1>(result);
     REQUIRE_EQ(y.size(), 2U);
     CHECK(y[0] <= std::log(k));
-    CHECK_EQ(ell_info.num_iters, 36);
+    CHECK_EQ(num_iters, 36);
   }
 
   {
@@ -42,11 +42,11 @@ TEST_CASE("Profit Test") {
     const auto result =
         cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
-    const auto &ell_info = std::get<1>(result);
+    const auto &num_iters = std::get<1>(result);
     // CHECK(y != Vec{});
     REQUIRE_EQ(y.size(), 2U);
     CHECK(y[0] <= std::log(k));
-    CHECK_EQ(ell_info.num_iters, 41);
+    CHECK_EQ(num_iters, 41);
   }
 
   {
@@ -55,11 +55,11 @@ TEST_CASE("Profit Test") {
     const auto result =
         cutting_plane_q(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
-    const auto &ell_info = std::get<1>(result);
+    const auto &num_iters = std::get<1>(result);
     REQUIRE_EQ(y.size(), 2U);
     // CHECK(y != Vec{});
     CHECK(y[0] <= std::log(k));
-    CHECK_EQ(ell_info.num_iters, 27);
+    CHECK_EQ(num_iters, 27);
   }
 }
 
@@ -80,11 +80,11 @@ TEST_CASE("Profit Test (Stable)") {
     const auto result =
         cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
-    const auto &ell_info = std::get<1>(result);
+    const auto &num_iters = std::get<1>(result);
     // CHECK(y != Vec{});
     REQUIRE_EQ(y.size(), 2U);
     CHECK(y[0] <= std::log(k));
-    CHECK_EQ(ell_info.num_iters, 41);
+    CHECK_EQ(num_iters, 41);
   }
 
   {
@@ -93,11 +93,11 @@ TEST_CASE("Profit Test (Stable)") {
     const auto result =
         cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
-    const auto &ell_info = std::get<1>(result);
+    const auto &num_iters = std::get<1>(result);
     // CHECK(y != Vec{});
     REQUIRE_EQ(y.size(), 2U);
     CHECK(y[0] <= std::log(k));
-    CHECK_EQ(ell_info.num_iters, 37);
+    CHECK_EQ(num_iters, 37);
   }
 
   {
@@ -106,10 +106,10 @@ TEST_CASE("Profit Test (Stable)") {
     const auto result =
         cutting_plane_q(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
-    const auto &ell_info = std::get<1>(result);
+    const auto &num_iters = std::get<1>(result);
     // CHECK(y != Vec{});
     REQUIRE_EQ(y.size(), 2U);
     CHECK(y[0] <= std::log(k));
-    CHECK_EQ(ell_info.num_iters, 29);
+    CHECK_EQ(num_iters, 29);
   }
 }

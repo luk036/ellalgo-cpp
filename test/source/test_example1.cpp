@@ -56,8 +56,8 @@ TEST_CASE("Example 1, test feasible") {
   // CHECK(x[0] >= 0.0);
   const auto &x = std::get<0>(result);
   REQUIRE_NE(x.size(), 0U);
-  const auto &ell_info = std::get<1>(result);
-  REQUIRE(ell_info.feasible);
+  // const auto &num_iters = std::get<1>(result);
+  // REQUIRE(ell_info.feasible);
   CHECK(x[0] >= 0.0);
 }
 
@@ -73,7 +73,7 @@ TEST_CASE("Example 1, test infeasible1") {
   // const auto s1 = std::get<2>(result);
   REQUIRE_EQ(x.size(), 0U);
   // CHECK_EQ(s1, CutStatus::NoSoln); // no sol'n
-  // const auto &ell_info = std::get<1>(result);
+  // const auto &num_iters = std::get<1>(result);
   // CHECK(!ell_info.feasible);
   // CHECK_EQ(ell_info.status, CutStatus::NoSoln); // no sol'n
 }
@@ -89,6 +89,6 @@ TEST_CASE("Example 1, test infeasible22") {
   // const auto s1 = std::get<2>(result);
   REQUIRE_EQ(x.size(), 0U);
   // CHECK_EQ(s1, CutStatus::NoSoln); // no sol'n
-  // const auto &ell_info = std::get<1>(result);
+  // const auto &num_iters = std::get<1>(result);
   // CHECK(!ell_info.feasible);
 }

@@ -37,8 +37,8 @@ using CuttingPlaneArrayType =
  * @return Information of Cutting-plane method
  */
 template <typename Oracle, typename Space>
-auto cutting_plane_feas(Oracle &&omega, Space &&space,
-                        const Options &options = Options()) -> CInfo {
+inline auto cutting_plane_feas(Oracle &&omega, Space &&space,
+                               const Options &options = Options()) -> CInfo {
   for (auto niter = 0U; niter != options.max_iter; ++niter) {
     const auto cut = omega.assess_feas(space.xc());
     if (!cut) { // feasible sol'n obtained
@@ -60,37 +60,33 @@ auto cutting_plane_feas(Oracle &&omega, Space &&space,
  * @tparam Num
  * @param[in,out] omega   perform assessment on x0
  * @param[in,out] space   search Space containing x*
- * @param[in,out] target  best-so-far optimal sol'n
+ * @param[in,out] tea     best-so-far optimal sol'n
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
 template <typename Oracle, typename Space, typename Num>
-auto cutting_plane_optim(Oracle &&omega, Space &&space, Num &&target,
-                         const Options &options = Options())
-    -> std::tuple<CuttingPlaneArrayType<Space>, CInfo> {
+inline auto cutting_plane_optim(Oracle &&omega, Space &&space, Num &&tea,
+                                const Options &options = Options())
+    -> std::tuple<CuttingPlaneArrayType<Space>, size_t> {
   CuttingPlaneArrayType<Space> x_best{};
-  const auto t_orig = target;
-
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
-    const auto __result1 = omega.assess_optim(space.xc(), target);
+    const auto __result1 = omega.assess_optim(space.xc(), tea);
     const auto &cut = std::get<0>(__result1);
     const auto &shrunk = std::get<1>(__result1);
     const auto cutstatus = [&]() {
-      if (shrunk) { // best target obtained
+      if (shrunk) { // best tea obtained
         x_best = space.xc();
         return space.update(cut); // should update_cc
       } else {
         return space.update(cut);
       }
     }();
-    if (cutstatus != CutStatus::Success) {
-      return {std::move(x_best), CInfo{target != t_orig, niter}};
-    }
-    if (space.tsq() < options.tol) { // no more
-      return {std::move(x_best), CInfo{target != t_orig, niter}};
+    if (cutstatus != CutStatus::Success ||
+        space.tsq() < options.tol) { // no more
+      return {std::move(x_best), niter};
     }
   }
-  return {std::move(x_best), CInfo{target != t_orig, options.max_iter}};
+  return {std::move(x_best), options.max_iter};
 } // END
 
 /**
@@ -100,28 +96,27 @@ auto cutting_plane_optim(Oracle &&omega, Space &&space, Num &&target,
  * @tparam Space
  * @param[in,out] omega   perform assessment on x0
  * @param[in,out] space   search Space containing x*
- * @param[in,out] target  best-so-far optimal sol'n
+ * @param[in,out] tea  best-so-far optimal sol'n
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
 template <typename Oracle, typename Space, typename Num>
-auto cutting_plane_q(Oracle &&omega, Space &&space, Num &&target,
-                     const Options &options = Options())
-    -> std::tuple<CuttingPlaneArrayType<Space>, CInfo> {
+inline auto cutting_plane_q(Oracle &&omega, Space &&space, Num &&tea,
+                            const Options &options = Options())
+    -> std::tuple<CuttingPlaneArrayType<Space>, size_t> {
   CuttingPlaneArrayType<Space> x_best{};
-  const auto t_orig = target;
   auto status = CutStatus::NoSoln; // note!!!
   auto retry = (status == CutStatus::NoEffect);
 
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
     // auto retry = (status == CutStatus::NoEffect);
-    const auto result1 = omega.assess_q(space.xc(), target, retry);
+    const auto result1 = omega.assess_q(space.xc(), tea, retry);
     const auto &cut = std::get<0>(result1);
     const auto &shrunk = std::get<1>(result1);
     const auto &x0 = std::get<2>(result1);
     const auto &more_alt = std::get<3>(result1);
-    if (shrunk) { // best target obtained
-      // target = t1;
+    if (shrunk) { // best tea obtained
+      // tea = t1;
       x_best = x0; // x0
     }
     const auto cutstatus = space.update(cut);
@@ -133,13 +128,13 @@ auto cutting_plane_q(Oracle &&omega, Space &&space, Num &&target,
       status = cutstatus;
       retry = true;
     } else if (cutstatus == CutStatus::NoSoln) {
-      return {std::move(x_best), CInfo{target != t_orig, niter}};
+      return {std::move(x_best), niter};
     }
     if (space.tsq() < options.tol) { // no more
-      return {std::move(x_best), CInfo{target != t_orig, niter}};
+      return {std::move(x_best), niter};
     }
   }
-  return {std::move(x_best), CInfo{target != t_orig, options.max_iter}};
+  return {std::move(x_best), options.max_iter};
 } // END
 
 /**
@@ -153,8 +148,8 @@ auto cutting_plane_q(Oracle &&omega, Space &&space, Num &&target,
  * @return CInfo
  */
 template <typename Oracle, typename Space>
-auto bsearch(Oracle &&omega, Space &&intvl, const Options &options = Options())
-    -> CInfo {
+inline auto bsearch(Oracle &&omega, Space &&intvl,
+                    const Options &options = Options()) -> CInfo {
   // assume monotone
   // auto& [lower, upper] = intvl;
   auto &lower = intvl.first;
@@ -167,12 +162,12 @@ auto bsearch(Oracle &&omega, Space &&intvl, const Options &options = Options())
     if (tau < options.tol) { // no more
       return {upper != u_orig, niter};
     }
-    auto target = lower; // l may be `int` or `Fraction`
-    target += tau;
-    if (omega.assess_bs(target)) { // feasible sol'n obtained
-      upper = target;
+    auto tea = lower; // l may be `int` or `Fraction`
+    tea += tau;
+    if (omega.assess_bs(tea)) { // feasible sol'n obtained
+      upper = tea;
     } else {
-      lower = target;
+      lower = tea;
     }
   }
   return {upper != u_orig, options.max_iter};
@@ -224,12 +219,12 @@ public:
    * @brief
    *
    * @tparam Num
-   * @param[in,out] target the best-so-far optimal value
+   * @param[in,out] tea the best-so-far optimal value
    * @return bool
    */
-  template <typename Num> auto assess_bs(const Num &target) -> bool {
+  template <typename Num> auto assess_bs(const Num &tea) -> bool {
     Space space = this->_space.copy();
-    this->_omega.update(target);
+    this->_omega.update(tea);
     const auto ell_info =
         cutting_plane_feas(this->_omega, space, this->_options);
     if (ell_info.feasible) {

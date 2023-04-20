@@ -145,13 +145,13 @@ auto run_lowpass(bool use_parallel_cut) {
 
   auto t = Fdc.Spsq;
   const auto result = cutting_plane_optim(omega, ellip, t, options);
-  const auto &ell_info = std::get<1>(result);
+  const auto &num_iters = std::get<1>(result);
   // std::cout << "lowpass r: " << r << '\n';
   // auto Ustop = 20 * std::log10(std::sqrt(Spsq_new));
   // std::cout << "Min attenuation in the stopband is " << Ustop << " dB.\n";
   // CHECK(r[0] >= 0.0);
   const auto &r = std::get<0>(result);
-  return std::make_tuple(r != Arr{}, ell_info.num_iters);
+  return std::make_tuple(r != Arr{}, num_iters);
 }
 
 TEST_CASE("Lowpass Filter (w/ parallel cut)") {

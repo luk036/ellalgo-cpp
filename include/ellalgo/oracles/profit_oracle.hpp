@@ -121,7 +121,7 @@ public:
    * @param[in] e3 paramters for uncertainty
    */
   ProfitOracleRb(double p, double A, double k, const Vec &a, const Vec &v,
-                   const Vec &e, double e3)
+                 const Vec &e, double e3)
       : _uie{e}, _a{a}, _P(p - e3, A, k - e3, a, v + e3) {}
 
   /**
