@@ -14,6 +14,12 @@
 auto EllCalc::_calc_ll_core(const double &b0, const double &b1) -> CutStatus {
   // const auto b1sq = b1 * b1;
   const auto b1sqn = b1 * (b1 / this->_tsq);
+  if (b0 == 0.0) // central cut
+  {
+    this->_calc_ll_cc(b1, b1sqn);
+    return CutStatus::Success;
+  }
+
   const auto t1n = 1.0 - b1sqn;
   if (t1n < 0.0 || !this->use_parallel_cut) {
     return this->_calc_dc(b0);
@@ -22,12 +28,6 @@ auto EllCalc::_calc_ll_core(const double &b0, const double &b1) -> CutStatus {
   const auto bdiff = b1 - b0;
   if (bdiff < 0.0) {
     return CutStatus::NoSoln; // no sol'n
-  }
-
-  if (b0 == 0.0) // central cut
-  {
-    this->_calc_ll_cc(b1, b1sqn);
-    return CutStatus::Success;
   }
 
   const auto b0b1n = b0 * (b1 / this->_tsq);
@@ -73,15 +73,14 @@ void EllCalc::_calc_ll_cc(const double &b1, const double &b1sqn) {
  */
 auto EllCalc::_calc_dc(const double &beta) noexcept -> CutStatus {
   const auto tau = std::sqrt(this->_tsq);
+  if (beta == 0.0) {
+    this->_calc_cc(tau);
+    return CutStatus::Success;
+  }
 
   const auto bdiff = tau - beta;
   if (bdiff < 0.0) {
     return CutStatus::NoSoln; // no sol'n
-  }
-
-  if (beta == 0.0) {
-    this->_calc_cc(tau);
-    return CutStatus::Success;
   }
 
   const auto gamma = tau + this->_nFloat * beta;

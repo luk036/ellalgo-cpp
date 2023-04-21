@@ -44,10 +44,10 @@ struct MyOracle {
 };
 
 TEST_CASE("Example 2, test feasible") {
-  auto ell = Ell<Vec>(Vec{10.0, 10.0}, Vec{0.0, 0.0});
-  auto oracle = MyOracle{};
+  auto ellip = Ell<Vec>(Vec{10.0, 10.0}, Vec{0.0, 0.0});
+  auto omega = MyOracle{};
   const auto options = Options{2000, 1e-12};
-  const auto cinfo = cutting_plane_feas(oracle, ell, options);
-  const auto f1 = cinfo.feasible;
-  CHECK(f1);
+  const auto result = cutting_plane_feas(omega, ellip, options);
+  const auto x_feas = std::get<0>(result);
+  CHECK(x_feas.size() != 0U);
 }

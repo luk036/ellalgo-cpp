@@ -38,18 +38,19 @@ using CuttingPlaneArrayType =
  */
 template <typename Oracle, typename Space>
 inline auto cutting_plane_feas(Oracle &&omega, Space &&space,
-                               const Options &options = Options()) -> CInfo {
+                               const Options &options = Options())
+    -> std::tuple<CuttingPlaneArrayType<Space>, size_t> {
   for (auto niter = 0U; niter != options.max_iter; ++niter) {
     const auto cut = omega.assess_feas(space.xc());
     if (!cut) { // feasible sol'n obtained
-      return {true, niter};
+      return {space.xc(), niter};
     }
     const auto cutstatus = space.update(*cut); // update space
     if (cutstatus != CutStatus::Success || space.tsq() < options.tol) {
-      return {false, niter};
+      return {CuttingPlaneArrayType<Space>{}, niter};
     }
   }
-  return {false, options.max_iter};
+  return {CuttingPlaneArrayType<Space>{}, options.max_iter};
 }
 
 /**
@@ -113,11 +114,11 @@ inline auto cutting_plane_q(Oracle &&omega, Space &&space, Num &&tea,
     const auto result1 = omega.assess_q(space.xc(), tea, retry);
     const auto &cut = std::get<0>(result1);
     const auto &shrunk = std::get<1>(result1);
-    const auto &x0 = std::get<2>(result1);
+    const auto &x_q = std::get<2>(result1);
     const auto &more_alt = std::get<3>(result1);
     if (shrunk) { // best tea obtained
       // tea = t1;
-      x_best = x0; // x0
+      x_best = x_q; // x_q
     }
     const auto cutstatus = space.update(cut);
 
@@ -147,20 +148,20 @@ inline auto cutting_plane_q(Oracle &&omega, Space &&space, Num &&tea,
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return CInfo
  */
-template <typename Oracle, typename Space>
-inline auto bsearch(Oracle &&omega, Space &&intvl,
-                    const Options &options = Options()) -> CInfo {
+template <typename Oracle, typename T>
+inline auto bsearch(Oracle &&omega, const std::pair<T, T> &intvl,
+                    const Options &options = Options())
+    -> std::tuple<T, size_t> {
   // assume monotone
   // auto& [lower, upper] = intvl;
-  auto &lower = intvl.first;
-  auto &upper = intvl.second;
+  auto lower = intvl.first;
+  auto upper = intvl.second;
   assert(lower <= upper);
-  const auto u_orig = upper;
 
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
     auto tau = algo::half_nonnegative(upper - lower);
     if (tau < options.tol) { // no more
-      return {upper != u_orig, niter};
+      return {upper, niter};
     }
     auto tea = lower; // l may be `int` or `Fraction`
     tea += tau;
@@ -170,7 +171,7 @@ inline auto bsearch(Oracle &&omega, Space &&intvl,
       lower = tea;
     }
   }
-  return {upper != u_orig, options.max_iter};
+  return {upper, options.max_iter};
 }
 
 /**
@@ -225,11 +226,12 @@ public:
   template <typename Num> auto assess_bs(const Num &tea) -> bool {
     Space space = this->_space.copy();
     this->_omega.update(tea);
-    const auto ell_info =
-        cutting_plane_feas(this->_omega, space, this->_options);
-    if (ell_info.feasible) {
-      this->_space.set_xc(space.xc());
+    const auto result = cutting_plane_feas(this->_omega, space, this->_options);
+    auto x_feas = std::get<0>(result);
+    if (x_feas.size() != 0U) {
+      this->_space.set_xc(x_feas);
+      return true;
     }
-    return ell_info.feasible;
+    return false;
   }
 };
