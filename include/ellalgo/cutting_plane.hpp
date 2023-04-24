@@ -106,8 +106,7 @@ inline auto cutting_plane_q(Oracle &&omega, Space &&space, Num &&tea,
                             const Options &options = Options())
     -> std::tuple<CuttingPlaneArrayType<Space>, size_t> {
   CuttingPlaneArrayType<Space> x_best{};
-  auto status = CutStatus::NoSoln; // note!!!
-  auto retry = (status == CutStatus::NoEffect);
+  auto retry = false;
 
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
     // auto retry = (status == CutStatus::NoEffect);
@@ -126,7 +125,6 @@ inline auto cutting_plane_q(Oracle &&omega, Space &&space, Num &&tea,
       if (!more_alt) { // more alt?
         break;         // no more alternative cut
       }
-      status = cutstatus;
       retry = true;
     } else if (cutstatus == CutStatus::NoSoln) {
       return {std::move(x_best), niter};
