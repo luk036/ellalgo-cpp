@@ -20,11 +20,11 @@ auto ell1d::update(const std::pair<double, double> &cut) noexcept -> CutStatus {
   const auto tau = ::my_abs(this->_r * g);
   this->_tsq = tau * tau;
 
-  if (beta == 0.0) {
-    this->_r /= 2;
-    this->_xc += g > 0.0 ? -this->_r : this->_r;
-    return CutStatus::Success;
-  }
+  // if (beta == 0.0) {
+  //   this->_r /= 2;
+  //   this->_xc += g > 0.0 ? -this->_r : this->_r;
+  //   return CutStatus::Success;
+  // }
   if (beta > tau) {
     return CutStatus::NoSoln; // no sol'n
   }
@@ -38,5 +38,21 @@ auto ell1d::update(const std::pair<double, double> &cut) noexcept -> CutStatus {
 
   this->_r = algo::half_nonnegative(u - l);
   this->_xc = l + this->_r;
+  return CutStatus::Success;
+}
+
+/**
+ * @brief
+ *
+ * @param[in] cut
+ * @return ell1d::return_t
+ */
+auto ell1d::update_cc(const std::pair<double, double> &cut) noexcept
+    -> CutStatus {
+  const auto &g = cut.first;
+  const auto tau = ::my_abs(this->_r * g);
+  this->_tsq = tau * tau;
+  this->_r /= 2;
+  this->_xc += g > 0.0 ? -this->_r : this->_r;
   return CutStatus::Success;
 }

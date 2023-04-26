@@ -65,4 +65,12 @@ public:
    * @return return_t
    */
   auto update(const std::pair<double, double> &cut) noexcept -> CutStatus;
+
+  /**
+   * @brief
+   *
+   * @param[in] cut
+   * @return return_t
+   */
+  auto update_cc(const std::pair<double, double> &cut) noexcept -> CutStatus;
 }; // } ell1d

@@ -13,6 +13,18 @@ template <typename Space>
 using CuttingPlaneArrayType =
     typename std::remove_reference<Space>::type::ArrayType;
 
+template <typename T>
+inline auto invalid_value() ->
+    typename std::enable_if<std::is_floating_point<T>::value, T>::type {
+  return std::nan("1");
+}
+
+template <typename T>
+inline auto invalid_value() ->
+    typename std::enable_if<!std::is_floating_point<T>::value, T>::type {
+  return T{};
+}
+
 /**
  * @brief Find a point in a convex set (defined through a cutting-plane oracle).
  *
@@ -45,12 +57,14 @@ inline auto cutting_plane_feas(Oracle &&omega, Space &&space,
     if (!cut) { // feasible sol'n obtained
       return {space.xc(), niter};
     }
-    const auto cutstatus = space.update(*cut); // update space
-    if (cutstatus != CutStatus::Success || space.tsq() < options.tol) {
-      return {CuttingPlaneArrayType<Space>{}, niter};
+    const auto status = space.update(*cut); // update space
+    if (status != CutStatus::Success || space.tsq() < options.tol) {
+      auto res = invalid_value<CuttingPlaneArrayType<Space>>();
+      return {std::move(res), niter};
     }
   }
-  return {CuttingPlaneArrayType<Space>{}, options.max_iter};
+  auto res = invalid_value<CuttingPlaneArrayType<Space>>();
+  return {std::move(res), options.max_iter};
 }
 
 /**
@@ -69,21 +83,21 @@ template <typename Oracle, typename Space, typename Num>
 inline auto cutting_plane_optim(Oracle &&omega, Space &&space, Num &&tea,
                                 const Options &options = Options())
     -> std::tuple<CuttingPlaneArrayType<Space>, size_t> {
-  CuttingPlaneArrayType<Space> x_best{};
+  // CuttingPlaneArrayType<Space> x_best{};
+  auto x_best = invalid_value<CuttingPlaneArrayType<Space>>();
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
     const auto __result1 = omega.assess_optim(space.xc(), tea);
     const auto &cut = std::get<0>(__result1);
     const auto &shrunk = std::get<1>(__result1);
-    const auto cutstatus = [&]() {
+    const auto status = [&]() {
       if (shrunk) { // best tea obtained
         x_best = space.xc();
-        return space.update(cut); // should update_cc
+        return space.update_cc(cut); // should update_cc
       } else {
         return space.update(cut);
       }
     }();
-    if (cutstatus != CutStatus::Success ||
-        space.tsq() < options.tol) { // no more
+    if (status != CutStatus::Success || space.tsq() < options.tol) { // no more
       return {std::move(x_best), niter};
     }
   }
@@ -105,7 +119,8 @@ template <typename Oracle, typename Space, typename Num>
 inline auto cutting_plane_q(Oracle &&omega, Space &&space, Num &&tea,
                             const Options &options = Options())
     -> std::tuple<CuttingPlaneArrayType<Space>, size_t> {
-  CuttingPlaneArrayType<Space> x_best{};
+  // CuttingPlaneArrayType<Space> x_best{};
+  auto x_best = invalid_value<CuttingPlaneArrayType<Space>>();
   auto retry = false;
 
   for (auto niter = 0U; niter < options.max_iter; ++niter) {
@@ -115,18 +130,21 @@ inline auto cutting_plane_q(Oracle &&omega, Space &&space, Num &&tea,
     const auto &shrunk = std::get<1>(result1);
     const auto &x_q = std::get<2>(result1);
     const auto &more_alt = std::get<3>(result1);
-    if (shrunk) { // best tea obtained
-      // tea = t1;
-      x_best = x_q; // x_q
-    }
-    const auto cutstatus = space.update(cut);
+    const auto status = [&]() {
+      if (shrunk) { // best tea obtained
+        x_best = x_q;
+        return space.update_cc(cut); // should update_cc
+      } else {
+        return space.update(cut);
+      }
+    }();
 
-    if (cutstatus == CutStatus::NoEffect) {
+    if (status == CutStatus::NoEffect) {
       if (!more_alt) { // more alt?
         break;         // no more alternative cut
       }
       retry = true;
-    } else if (cutstatus == CutStatus::NoSoln) {
+    } else if (status == CutStatus::NoSoln) {
       return {std::move(x_best), niter};
     }
     if (space.tsq() < options.tol) { // no more

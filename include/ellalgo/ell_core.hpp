@@ -170,4 +170,16 @@ private:
     }
     return this->_helper._calc_ll_core(beta[0], beta[1]);
   }
+
+  auto _update_cut_cc(const double &) -> CutStatus {
+    return this->_helper._calc_cc();
+  }
+
+  auto _update_cut_cc(const std::valarray<double> &beta)
+      -> CutStatus { // parallel cut
+    if (beta.size() < 2) {
+      return this->_helper._calc_cc();
+    }
+    return this->_helper._calc_ll_cc(beta[1]);
+  }
 }; // } EllCore

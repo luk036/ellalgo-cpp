@@ -134,4 +134,30 @@ public:
 
     return result;
   }
+
+  /**
+   * @brief Update ellipsoid core function using the cut(s)
+   *
+   * @tparam T
+   * @param[in] cut cutting-plane
+   * @return std::tuple<int, double>
+   */
+  template <typename T>
+  auto update_cc(const std::pair<Arr, T> &cut) -> CutStatus {
+    const auto &grad = cut.first;
+    const auto &beta = cut.second;
+    std::valarray<double> g(this->_n);
+    for (auto i = 0U; i != this->_n; ++i) {
+      g[i] = grad[i];
+    }
+
+    auto result = this->_mgr.update_stable_cc(g, beta);
+    if (result == CutStatus::Success) {
+      for (auto i = 0U; i != this->_n; ++i) {
+        this->_xc[i] -= g[i];
+      }
+    }
+
+    return result;
+  }
 }; // } EllStable

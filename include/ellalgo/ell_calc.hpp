@@ -99,7 +99,7 @@ public:
    * @param[in] b1
    * @param[in] b1sq
    */
-  auto _calc_ll_cc(const double &b1, const double &b1sq) -> void;
+  auto _calc_ll_cc(const double &b1) -> CutStatus;
 
   /**
    * @brief Calculate new ellipsoid under Deep Cut
@@ -108,7 +108,7 @@ public:
    *
    * @param[in] beta
    */
-  auto _calc_dc(const double &beta) noexcept -> CutStatus;
+  auto _calc_dc(const double &beta) -> CutStatus;
 
   /**
    * @brief Calculate new ellipsoid under Central Cut
@@ -117,6 +117,6 @@ public:
    *
    * @param[in] tau
    */
-  auto _calc_cc(const double &tau) noexcept -> void;
+  auto _calc_cc() -> CutStatus;
 
 }; // } EllCalc
