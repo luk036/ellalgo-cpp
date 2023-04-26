@@ -137,6 +137,11 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a3943ea4636eb915c57c6201928ba55bc" class="m-doc">update</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus -&gt; auto</span>
             </dt>
             <dd>Update ellipsoid core function using the cut(s)</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a64bb32ffbdb2a91ebc9afde9fa300137" class="m-doc">update_cc</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus -&gt; auto</span>
+            </dt>
+            <dd>Update ellipsoid core function using the cut(s)</dd>
           </dl>
         </section>
         <section>
@@ -309,6 +314,42 @@
                 template&lt;typename T&gt;
               </div>
               <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3943ea4636eb915c57c6201928ba55bc" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus</span></span>
+            </h3>
+            <p>Update ellipsoid core function using the cut(s)</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>cut&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>cutting-plane</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::tuple&lt;int, double&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a64bb32ffbdb2a91ebc9afde9fa300137"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr&gt;
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a64bb32ffbdb2a91ebc9afde9fa300137" class="m-doc-self">update_cc</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus</span></span>
             </h3>
             <p>Update ellipsoid core function using the cut(s)</p>
             <table class="m-table m-fullwidth m-flat">
