@@ -197,7 +197,7 @@ inline auto bsearch(Oracle &&omega, const std::pair<T, T> &intvl,
  * @tparam Space
  */
 template <typename Oracle, typename Space> //
-class bsearch_adaptor {
+class BSearchAdaptor {
   using ArrayType = typename Space::ArrayType;
 
 private:
@@ -212,8 +212,8 @@ public:
    * @param[in,out] omega perform assessment on x0
    * @param[in,out] space search Space containing x*
    */
-  bsearch_adaptor(Oracle &omega, Space &space)
-      : bsearch_adaptor{omega, space, Options()} {}
+  BSearchAdaptor(Oracle &omega, Space &space)
+      : BSearchAdaptor{omega, space, Options()} {}
 
   /**
    * @brief Construct a new bsearch adaptor object
@@ -222,7 +222,7 @@ public:
    * @param[in,out] space   search space containing x*
    * @param[in]     options maximum iteration and error tolerance etc.
    */
-  bsearch_adaptor(Oracle &omega, Space &space, const Options &options)
+  BSearchAdaptor(Oracle &omega, Space &space, const Options &options)
       : _omega{omega}, _space{space}, _options{options} {}
 
   /**

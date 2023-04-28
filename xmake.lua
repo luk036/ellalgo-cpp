@@ -1,6 +1,7 @@
 add_rules("mode.debug", "mode.release", "mode.coverage")
 add_requires("fmt", {alias = "fmt"})
 add_requires("doctest", {alias = "doctest"})
+add_requires("benchmark", {alias = "benchmark"})
 -- add_requires("microsoft-gsl 3.1", {alias = "ms-gsl"})
 -- add_requires("range-v3", {alias = "range-v3"})
 -- add_requires("conan::range-v3/0.11.0", {alias = "range-v3"})
@@ -31,6 +32,13 @@ target("test_ellalgo")
     add_includedirs("include", {public = true})
     add_files("test/source/*.cpp")
     add_packages("fmt", "doctest", "range-v3")
+
+target("test_stable")
+    set_kind("binary")
+    add_deps("EllAlgo")
+    add_includedirs("include", {public = true})
+    add_files("bench/*.cpp")
+    add_packages("benchmark")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

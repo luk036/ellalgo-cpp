@@ -10,7 +10,7 @@ option(INSTALL_ONLY "Enable for installation only" OFF)
 # Note: update this to your new project's name and version
 project(
   EllAlgo
-  VERSION 1.4.2
+  VERSION 1.4.3
   LANGUAGES CXX
 )
 
@@ -87,7 +87,7 @@ packageProject(
 
 if(NOT INSTALL_ONLY)
   add_subdirectory(test)
-  # add_subdirectory(bench)
+  add_subdirectory(bench)
   add_subdirectory(standalone)
   add_subdirectory(documentation)
 endif()
