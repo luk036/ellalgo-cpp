@@ -131,7 +131,8 @@ static void LMI_Lazy(benchmark::State &state) {
                                                   Vec{1.0, -1.0, 1.0});
     auto ellip = Ell<Vec>(10.0, Vec{0.0, 0.0, 0.0});
     auto t = 1e100; // std::numeric_limits<double>::max()
-    [[maybe_unused]] const auto rslt = cutting_plane_optim(omega, ellip, t);
+    auto result = cutting_plane_optim(omega, ellip, t);
+    benchmark::DoNotOptimize(result);
   }
 }
 
@@ -196,7 +197,8 @@ static void LMI_old(benchmark::State &state) {
                                                      Vec{1.0, -1.0, 1.0});
     auto ellip = Ell<Vec>(10.0, Vec{0.0, 0.0, 0.0});
     auto t = 1e100; // std::numeric_limits<double>::max()
-    [[maybe_unused]] const auto rslt = cutting_plane_optim(omega, ellip, t);
+    auto result = cutting_plane_optim(omega, ellip, t);
+    benchmark::DoNotOptimize(result);
   }
 }
 BENCHMARK(LMI_old);

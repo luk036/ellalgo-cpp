@@ -22,7 +22,7 @@
  * @brief MyOracle
  *
  */
-class MyOracle {
+class MyLMIOracle {
   // using Arr = xt::xarray<double, xt::layout_type::row_major>;
   using Vec = std::valarray<double>;
   using M_t = std::vector<Matrix>;
@@ -43,8 +43,8 @@ public:
    * @param[in] B2
    * @param[in] c
    */
-  MyOracle(size_t m1, const std::vector<Matrix> &F1, const Matrix &B1,
-           size_t m2, const std::vector<Matrix> &F2, const Matrix &B2, Vec c)
+  MyLMIOracle(size_t m1, const std::vector<Matrix> &F1, const Matrix &B1,
+              size_t m2, const std::vector<Matrix> &F2, const Matrix &B2, Vec c)
       : lmi1{m1, F1, B1}, lmi2{m2, F2, B2}, c{std::move(c)} {}
 
   /**
@@ -131,10 +131,11 @@ TEST_CASE("LMI test (stable)") {
   B2.row(1) = Vec{9.0, 91.0, 10.0};
   B2.row(2) = Vec{40.0, 10.0, 15.0};
 
-  auto omega = MyOracle(2, F1, B1, 3, F2, B2, std::move(c));
+  auto omega = MyLMIOracle(2, F1, B1, 3, F2, B2, std::move(c));
   auto ellip = Ell<Vec>(10.0, Vec{0.0, 0.0, 0.0});
 
   auto t = 1e100; // std::numeric_limits<double>::max()
+  // const auto [x, num_iters] = cutting_plane_optim(omega, ellip, t);
   const auto result = cutting_plane_optim(omega, ellip, t);
   auto x = std::get<0>(result);
   auto num_iters = std::get<1>(result);
@@ -202,13 +203,14 @@ TEST_CASE("LMI test ") {
   B2.row(1) = Vec{9.0, 91.0, 10.0};
   B2.row(2) = Vec{40.0, 10.0, 15.0};
 
-  auto omega = MyOracle(2, F1, B1, 3, F2, B2, std::move(c));
+  auto omega = MyLMIOracle(2, F1, B1, 3, F2, B2, std::move(c));
   auto ellip = EllStable<Vec>(10.0, Vec{0.0, 0.0, 0.0});
 
   auto t = 1e100; // std::numeric_limits<double>::max()
-  const auto __result = cutting_plane_optim(omega, ellip, t);
-  const auto &x = std::get<0>(__result);
-  const auto &num_iters = std::get<1>(__result);
+  // const auto [x, num_iters] = cutting_plane_optim(omega, ellip, t);
+  const auto result = cutting_plane_optim(omega, ellip, t);
+  const auto &x = std::get<0>(result);
+  const auto &num_iters = std::get<1>(result);
 
   CHECK(x.size() != 0U);
   CHECK(num_iters == 111);

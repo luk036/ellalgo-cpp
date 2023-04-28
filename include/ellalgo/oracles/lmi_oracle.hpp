@@ -50,17 +50,18 @@ public:
       return a;
     };
 
-    if (this->_Q.factor(getA))
+    if (this->_Q.factor(getA)) {
       return nullptr;
+    }
+
     auto ep = this->_Q.witness(); // call before sym_quad() !!!
-    Arr036 g = x;
-    // auto g = Arr036(x.size(), 0.0);
+    Arr036 g{x};
     for (auto i = 0U; i != n; ++i) {
       g[i] = this->_Q.sym_quad(this->_F[i]);
     }
-    cut->first = std::move(g);
-    cut->second = std::move(ep);
-    return cut.get();
+    this->cut->first = std::move(g);
+    this->cut->second = std::move(ep);
+    return this->cut.get();
   }
 
   /**

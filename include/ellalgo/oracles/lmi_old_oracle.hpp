@@ -17,7 +17,6 @@ template <typename Arr036, typename Mat = Arr036> class LmiOldOracle {
   using Cut = std::pair<Arr036, double>;
 
 private:
-  size_t _m;
   LDLTMgr _Q;
   const std::vector<Mat> &_F;
   const Mat _F0;
@@ -31,8 +30,8 @@ public:
    * @param[in] B
    */
   LmiOldOracle(size_t dim, const std::vector<Mat> &F, Mat B)
-      : _m{dim}, _Q{dim}, _F{F}, _F0{std::move(B)}, cut{std::unique_ptr<Cut>(
-                                                        new Cut{})} {}
+      : _Q{dim}, _F{F}, _F0{std::move(B)}, cut{std::unique_ptr<Cut>(
+                                               new Cut{})} {}
 
   /**
    * @brief
@@ -45,8 +44,8 @@ public:
 
     Mat A{this->_F0};
     for (auto k = 0U; k != n; ++k) {
-      for (auto i = 0U; i != this->_m; ++i) {
-        for (auto j = 0U; j != this->_m; ++j) {
+      for (auto i = 0U; i != this->_Q._n; ++i) {
+        for (auto j = 0U; j != this->_Q._n; ++j) {
           A(i, j) -= this->_F[k](i, j) * x[k];
         }
       }
@@ -61,9 +60,9 @@ public:
     for (auto i = 0U; i != n; ++i) {
       g[i] = this->_Q.sym_quad(this->_F[i]);
     }
-    cut->first = std::move(g);
-    cut->second = std::move(ep);
-    return cut.get();
+    this->cut->first = std::move(g);
+    this->cut->second = std::move(ep);
+    return this->cut.get();
   }
 
   /**
