@@ -33,11 +33,18 @@ target("test_ellalgo")
     add_files("test/source/*.cpp")
     add_packages("fmt", "doctest", "range-v3")
 
-target("test_stable")
+target("test_ell")
     set_kind("binary")
     add_deps("EllAlgo")
     add_includedirs("include", {public = true})
-    add_files("bench/*.cpp")
+    add_files("bench/BM_ell.cpp")
+    add_packages("benchmark")
+
+target("test_lmi")
+    set_kind("binary")
+    add_deps("EllAlgo")
+    add_includedirs("include", {public = true})
+    add_files("bench/BM_lmi.cpp")
     add_packages("benchmark")
 
 --

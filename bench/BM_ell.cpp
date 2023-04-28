@@ -13,7 +13,7 @@
 #include <tuple>       // for get
 #include <type_traits> // for move, remove_reference<...
 
-static void bm_ell_normal(benchmark::State &state) {
+static void ELL_normal(benchmark::State &state) {
   // using Arr = xt::xarray<double, xt::layout_type::row_major>;
   using Vec = std::valarray<double>;
 
@@ -34,9 +34,9 @@ static void bm_ell_normal(benchmark::State &state) {
   }
 }
 // Register the function as a benchmark
-BENCHMARK(bm_ell_normal);
+BENCHMARK(ELL_normal);
 
-static void bm_ell_stable(benchmark::State &state) {
+static void ELL_stable(benchmark::State &state) {
   // using Arr = xt::xarray<double, xt::layout_type::row_major>;
   using Vec = std::valarray<double>;
 
@@ -57,6 +57,6 @@ static void bm_ell_stable(benchmark::State &state) {
   }
 }
 // Register the function as a benchmark
-BENCHMARK(bm_ell_stable);
+BENCHMARK(ELL_stable);
 
 BENCHMARK_MAIN();
