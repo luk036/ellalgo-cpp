@@ -50,5 +50,7 @@ public:
     return this->data[std::slice(col, ndim, ndim)];
   }
 
-  double trace() const { return this->data[std::slice(0, ndim, ndim + 1)].sum(); }
+  double trace() const {
+    return this->data[std::slice(0, ndim, ndim + 1)].sum();
+  }
 };

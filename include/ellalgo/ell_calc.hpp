@@ -50,7 +50,7 @@ public:
    * @param mq
    * @param x
    */
-  EllCalc(size_t ndim) noexcept
+  EllCalc(size_t ndim)
       : _nFloat{double(ndim)}, _nPlus1{_nFloat + 1.0}, _halfN{_nFloat / 2.0},
         _nSq{_nFloat * _nFloat}, _c1{_nSq / (_nSq - 1.0)}, _c2{2.0 / _nPlus1},
         _c3{_nFloat / _nPlus1} {}
@@ -177,17 +177,6 @@ public:
   auto _calc_ll_core(const double &b0, const double &b1) -> CutStatus;
 
   /**
-   * @brief Calculate new ellipsoid under Parallel Cut, one of them is central
-   *
-   *        g' (x - xc) \le 0
-   *        g' (x - xc) + beta1 \ge 0
-   *
-   * @param[in] b1
-   * @param[in] b1sq
-   */
-  auto _calc_ll_cc(const double &b1) -> CutStatus;
-
-  /**
    * @brief Calculate new ellipsoid under Deep Cut
    *
    *        g' (x - xc) + beta \le 0
@@ -195,14 +184,5 @@ public:
    * @param[in] beta
    */
   auto _calc_dc(const double &beta) -> CutStatus;
-
-  /**
-   * @brief Calculate new ellipsoid under Central Cut
-   *
-   *        g' (x - xc) \le 0
-   *
-   * @param[in] tau
-   */
-  auto _calc_cc() -> CutStatus;
 
 }; // } EllCalc

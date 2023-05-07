@@ -15,7 +15,7 @@
  *
  *  \mathcal{E} {x | (x - xc)' mq^-1 (x - xc) \le \kappa}
  */
-class EllCore {
+template <typename Calc = EllCalc> class EllCore {
 public:
   using Vec = std::valarray<double>;
   bool no_defer_trick = false;
@@ -24,7 +24,7 @@ private:
   size_t _n;
   double _kappa;
   Matrix _mq;
-  EllCalc _helper;
+  Calc _helper;
 
   /**
    * @brief Construct a new EllCore object

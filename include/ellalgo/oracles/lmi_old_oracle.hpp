@@ -31,7 +31,7 @@ public:
    */
   LmiOldOracle(size_t ndim, const std::vector<Mat> &F, Mat B)
       : _mq{ndim}, _F{F}, _F0{std::move(B)}, cut{std::unique_ptr<Cut>(
-                                               new Cut{})} {}
+                                                 new Cut{})} {}
 
   /**
    * @brief

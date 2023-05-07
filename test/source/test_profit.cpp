@@ -50,7 +50,7 @@ TEST_CASE("Profit Test") {
   }
 
   {
-    Ell<Vec> ellip{100.0, Vec{2.0, 0.0}};
+    Ell<Vec, EllCalcQ> ellip{100.0, Vec{2.0, 0.0}};
     ProfitOracleQ omega{p, A, k, a, v};
     const auto result =
         cutting_plane_q(std::move(omega), std::move(ellip), 0.0);
@@ -101,7 +101,7 @@ TEST_CASE("Profit Test (Stable)") {
   }
 
   {
-    EllStable<Vec> ellip{100.0, Vec{2.0, 0.0}};
+    EllStable<Vec, EllCalcQ> ellip{100.0, Vec{2.0, 0.0}};
     ProfitOracleQ omega{p, A, k, a, v};
     const auto result =
         cutting_plane_q(std::move(omega), std::move(ellip), 0.0);
