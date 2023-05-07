@@ -19,12 +19,7 @@ struct Options {
  * @brief Cut Status
  *
  */
-enum class CutStatus {
-  Success,
-  NoSoln,
-  NoEffect,
-  SmallEnough,
-};
+enum class CutStatus { Success, NoSoln, NoEffect, Unknown };
 
 /**
  * @brief CInfo

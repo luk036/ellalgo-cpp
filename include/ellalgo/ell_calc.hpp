@@ -22,7 +22,7 @@ public:
   double _sigma{};
   double _delta{};
 
-private:
+protected:
   // const int _n;
 
   const double _nFloat;
@@ -77,6 +77,92 @@ public:
    * @param E
    */
   EllCalc(const EllCalc &E) = default;
+
+  /**
+   * @brief Calculate new ellipsoid under Parallel Cut
+   *
+   *        g' (x - xc) + beta0 \le 0
+   *        g' (x - xc) + beta1 \ge 0
+   *
+   * @param[in] b0
+   * @param[in] b1
+   * @return int
+   */
+  auto _calc_ll_core(const double &b0, const double &b1) -> CutStatus;
+
+  /**
+   * @brief Calculate new ellipsoid under Parallel Cut, one of them is central
+   *
+   *        g' (x - xc) \le 0
+   *        g' (x - xc) + beta1 \ge 0
+   *
+   * @param[in] b1
+   * @param[in] b1sq
+   */
+  auto _calc_ll_cc(const double &b1) -> CutStatus;
+
+  /**
+   * @brief Calculate new ellipsoid under Deep Cut
+   *
+   *        g' (x - xc) + beta \le 0
+   *
+   * @param[in] beta
+   */
+  auto _calc_dc(const double &beta) -> CutStatus;
+
+  /**
+   * @brief Calculate new ellipsoid under Central Cut
+   *
+   *        g' (x - xc) \le 0
+   *
+   * @param[in] tau
+   */
+  auto _calc_cc() -> CutStatus;
+
+}; // } EllCalc
+
+/**
+ * @brief Ellipsoid Search Space
+ *
+ *        EllCalc= {x | (x - xc)' Q^-1 (x - xc) \le \kappa}
+ *
+ * Keep $Q$ symmetric but no promise of positive definite
+ */
+class EllCalcQ : public EllCalc {
+public:
+  /**
+   * @brief Construct a new EllCalcobject
+   *
+   * @tparam V
+   * @tparam U
+   * @param kappa
+   * @param Q
+   * @param x
+   */
+  EllCalcQ(double nFloat) : EllCalc(nFloat) {}
+
+public:
+  /**
+   * @brief Construct a new EllCalcobject
+   *
+   * @param[in] E (move)
+   */
+  EllCalcQ(EllCalcQ &&E) = default;
+
+  /**
+   * @brief Destroy the EllCalcobject
+   *
+   */
+  ~EllCalcQ() {}
+
+  /**
+   * @brief Construct a new EllCalcobject
+   *
+   * To avoid accidentally copying, only explicit copy is allowed
+   *
+   * @param E
+   */
+  EllCalcQ(const EllCalcQ &E) = default;
 
   /**
    * @brief Calculate new ellipsoid under Parallel Cut
