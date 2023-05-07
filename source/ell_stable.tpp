@@ -32,16 +32,16 @@ auto EllStable<Arr>::update(const std::pair<Arr, T> &cut)
   auto invLg{g}; // initially
   for (auto i = 1; i != this->_n; ++i) {
     for (auto j = 0; j != i; ++j) {
-      this->_Q(i, j) = this->_Q(j, i) * invLg[j];
+      this->_mq(i, j) = this->_mq(j, i) * invLg[j];
       // keep for rank-one update
-      invLg[i] -= this->_Q(i, j);
+      invLg[i] -= this->_mq(i, j);
     }
   }
 
   // calculate inv(D)*inv(L)*grad: n
   auto invDinvLg{invLg}; // initially
   for (auto i = 0; i != this->_n; ++i) {
-    invDinvLg[i] *= this->_Q(i, i);
+    invDinvLg[i] *= this->_mq(i, i);
   }
 
   // calculate omega: n
@@ -58,11 +58,11 @@ auto EllStable<Arr>::update(const std::pair<Arr, T> &cut)
     return {status, this->_helper._tsq};
   }
 
-  // calculate Q*grad = inv(L')*inv(D)*inv(L)*grad : (n-1)*n/2
+  // calculate mq*grad = inv(L')*inv(D)*inv(L)*grad : (n-1)*n/2
   auto Qg{invDinvLg};                        // initially
   for (auto i = this->_n - 1; i != 0; --i) { // backward subsituition
     for (auto j = i; j != this->_n; ++j) {
-      Qg[i - 1] -= this->_Q(i, j) * Qg[j]; // ???
+      Qg[i - 1] -= this->_mq(i, j) * Qg[j]; // ???
     }
   }
 
@@ -74,21 +74,21 @@ auto EllStable<Arr>::update(const std::pair<Arr, T> &cut)
   for (auto j = 0; j != m; ++j) {
     const auto t = oldt + gQg[j];
     const auto beta2 = invDinvLg[j] / t;
-    this->_Q(j, j) *= oldt / t; // update invD
+    this->_mq(j, j) *= oldt / t; // update invD
     for (auto l = j + 1; l != this->_n; ++l) {
-      this->_Q(j, l) += beta2 * this->_Q(l, j);
+      this->_mq(j, l) += beta2 * this->_mq(l, j);
     }
     oldt = t;
   }
 
   const auto t = oldt + gQg[m];
-  this->_Q(m, m) *= oldt / t; // update invD
+  this->_mq(m, m) *= oldt / t; // update invD
 
   this->_kappa *= this->_helper._delta;
 
   // if (this->no_defer_trick)
   // {
-  //     this->_Q *= this->_kappa;
+  //     this->_mq *= this->_kappa;
   //     this->_kappa = 1.0;
   // }
 

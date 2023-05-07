@@ -15,7 +15,7 @@ enum class CutStatus;
 /**
  * @brief Ellipsoid Search Space
  *
- *        ell_ss {x | (x - xc)' Q^-1 (x - xc) \le \kappa}
+ *        ell_ss {x | (x - xc)' mq^-1 (x - xc) \le \kappa}
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */
@@ -117,7 +117,8 @@ public:
    * @param[in] cut cutting-plane
    * @return std::tuple<int, double>
    */
-  template <typename T> auto update(const std::pair<Arr, T> &cut) -> CutStatus {
+  template <typename T, typename Fn>
+  auto update_core(const std::pair<Arr, T> &cut, Fn &&f_core) -> CutStatus {
     const auto &grad = cut.first;
     const auto &beta = cut.second;
     std::valarray<double> g(this->_n);
@@ -125,7 +126,7 @@ public:
       g[i] = grad[i];
     }
 
-    auto result = this->_mgr.update_stable(g, beta);
+    auto result = f_core(g, beta);
     if (result == CutStatus::Success) {
       for (auto i = 0U; i != this->_n; ++i) {
         this->_xc[i] -= g[i];
@@ -142,22 +143,23 @@ public:
    * @param[in] cut cutting-plane
    * @return std::tuple<int, double>
    */
+  template <typename T> auto update(const std::pair<Arr, T> &cut) -> CutStatus {
+    return this->update_core(cut, [&](Vec &grad, const T &beta) {
+      return this->_mgr.update_stable(grad, beta);
+    });
+  }
+
+  /**
+   * @brief Update ellipsoid core function using the cut(s)
+   *
+   * @tparam T
+   * @param[in] cut cutting-plane
+   * @return std::tuple<int, double>
+   */
   template <typename T>
   auto update_cc(const std::pair<Arr, T> &cut) -> CutStatus {
-    const auto &grad = cut.first;
-    const auto &beta = cut.second;
-    std::valarray<double> g(this->_n);
-    for (auto i = 0U; i != this->_n; ++i) {
-      g[i] = grad[i];
-    }
-
-    auto result = this->_mgr.update_stable_cc(g, beta);
-    if (result == CutStatus::Success) {
-      for (auto i = 0U; i != this->_n; ++i) {
-        this->_xc[i] -= g[i];
-      }
-    }
-
-    return result;
+    return this->update_core(cut, [&](Vec &grad, const T &beta) {
+      return this->_mgr.update_stable_cc(grad, beta);
+    });
   }
 }; // } EllStable

@@ -4,19 +4,19 @@
 
 /** Square matrix */
 class Matrix {
-  size_t dim;
+  size_t ndim;
   std::valarray<double> data;
 
 public:
-  explicit Matrix(size_t dim, double init = 0.0)
-      : dim{dim}, data(init, dim * dim) {}
+  explicit Matrix(size_t ndim, double init = 0.0)
+      : ndim{ndim}, data(init, ndim * ndim) {}
 
   void clear(double value = 0.0) { data = value; }
 
-  double &operator()(size_t r, size_t c) { return this->data[r * dim + c]; }
+  double &operator()(size_t r, size_t c) { return this->data[r * ndim + c]; }
 
   const double &operator()(size_t r, size_t c) const {
-    return this->data[r * dim + c];
+    return this->data[r * ndim + c];
   }
 
   Matrix &operator*=(double alpha) {
@@ -35,20 +35,20 @@ public:
   }
 
   std::slice_array<double> diagonal() {
-    return this->data[std::slice(0, dim, dim + 1)];
+    return this->data[std::slice(0, ndim, ndim + 1)];
   }
 
   std::slice_array<double> secondary_diagonal() {
-    return this->data[std::slice(dim - 1, dim, dim - 1)];
+    return this->data[std::slice(ndim - 1, ndim, ndim - 1)];
   }
 
   std::slice_array<double> row(std::size_t row) {
-    return this->data[std::slice(dim * row, dim, 1)];
+    return this->data[std::slice(ndim * row, ndim, 1)];
   }
 
   std::slice_array<double> column(std::size_t col) {
-    return this->data[std::slice(col, dim, dim)];
+    return this->data[std::slice(col, ndim, ndim)];
   }
 
-  double trace() const { return this->data[std::slice(0, dim, dim + 1)].sum(); }
+  double trace() const { return this->data[std::slice(0, ndim, ndim + 1)].sum(); }
 };

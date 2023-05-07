@@ -17,7 +17,7 @@ template <typename Arr036, typename Mat = Arr036> class LmiOldOracle {
   using Cut = std::pair<Arr036, double>;
 
 private:
-  LDLTMgr _Q;
+  LDLTMgr _mq;
   const std::vector<Mat> &_F;
   const Mat _F0;
   std::unique_ptr<Cut> cut;
@@ -29,8 +29,8 @@ public:
    * @param[in] F
    * @param[in] B
    */
-  LmiOldOracle(size_t dim, const std::vector<Mat> &F, Mat B)
-      : _Q{dim}, _F{F}, _F0{std::move(B)}, cut{std::unique_ptr<Cut>(
+  LmiOldOracle(size_t ndim, const std::vector<Mat> &F, Mat B)
+      : _mq{ndim}, _F{F}, _F0{std::move(B)}, cut{std::unique_ptr<Cut>(
                                                new Cut{})} {}
 
   /**
@@ -44,21 +44,21 @@ public:
 
     Mat A{this->_F0};
     for (auto k = 0U; k != n; ++k) {
-      for (auto i = 0U; i != this->_Q._n; ++i) {
-        for (auto j = 0U; j != this->_Q._n; ++j) {
+      for (auto i = 0U; i != this->_mq._n; ++i) {
+        for (auto j = 0U; j != this->_mq._n; ++j) {
           A(i, j) -= this->_F[k](i, j) * x[k];
         }
       }
     }
 
-    if (this->_Q.factorize(A)) {
+    if (this->_mq.factorize(A)) {
       return nullptr;
     }
 
-    auto ep = this->_Q.witness(); // call before sym_quad() !!!
+    auto ep = this->_mq.witness(); // call before sym_quad() !!!
     Arr036 g{x};
     for (auto i = 0U; i != n; ++i) {
-      g[i] = this->_Q.sym_quad(this->_F[i]);
+      g[i] = this->_mq.sym_quad(this->_F[i]);
     }
     this->cut->first = std::move(g);
     this->cut->second = std::move(ep);

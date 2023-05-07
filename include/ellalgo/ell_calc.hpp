@@ -10,7 +10,7 @@ enum class CutStatus;
 /**
  * @brief Ellipsoid Search Space
  *
- *        EllCalc= {x | (x - xc)' Q^-1 (x - xc) \le \kappa}
+ *        EllCalc= {x | (x - xc)' mq^-1 (x - xc) \le \kappa}
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */
@@ -47,11 +47,11 @@ public:
    * @tparam V
    * @tparam U
    * @param kappa
-   * @param Q
+   * @param mq
    * @param x
    */
-  EllCalc(double nFloat) noexcept
-      : _nFloat{nFloat}, _nPlus1{_nFloat + 1.0}, _halfN{_nFloat / 2.0},
+  EllCalc(size_t ndim) noexcept
+      : _nFloat{double(ndim)}, _nPlus1{_nFloat + 1.0}, _halfN{_nFloat / 2.0},
         _nSq{_nFloat * _nFloat}, _c1{_nSq / (_nSq - 1.0)}, _c2{2.0 / _nPlus1},
         _c3{_nFloat / _nPlus1} {}
 
@@ -124,7 +124,7 @@ public:
 /**
  * @brief Ellipsoid Search Space
  *
- *        EllCalc= {x | (x - xc)' Q^-1 (x - xc) \le \kappa}
+ *        EllCalc= {x | (x - xc)' mq^-1 (x - xc) \le \kappa}
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */
@@ -136,10 +136,10 @@ public:
    * @tparam V
    * @tparam U
    * @param kappa
-   * @param Q
+   * @param mq
    * @param x
    */
-  EllCalcQ(double nFloat) : EllCalc(nFloat) {}
+  EllCalcQ(size_t ndim) : EllCalc(ndim) {}
 
 public:
   /**
