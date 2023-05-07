@@ -50,7 +50,7 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="ell_8hpp.html">&lt;ellalgo/ell.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename Arr&gt;</div>
+          <div class="m-doc-template">template&lt;typename Arr, typename Calc = <a href="classEllCalc.html" class="m-doc">EllCalc</a>&gt;</div>
           Ell <span class="m-thin">class</span>
         </h1>
         <p>Ellipsoid Search Space.</p>
@@ -67,17 +67,17 @@
             </li>
           </ul>
         </nav>
-<pre>   ell_ss {x | (x - xc)&#x27; Q^-1 (x - xc) \le \kappa}
+<pre>   ell_ss {x | (x - xc)&#x27; mq^-1 (x - xc) \le \kappa}
 </pre><p>Keep $Q$ symmetric but no promise of positive definite</p>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt id="a653f7393457f75395661ff0e36a4a886">
-              using <a href="#a653f7393457f75395661ff0e36a4a886" class="m-doc-self">Vec</a> = std::valarray&lt;double&gt;
+            <dt id="af96f2e7752ad0c0288c9b48e5cbcaf7e">
+              using <a href="#af96f2e7752ad0c0288c9b48e5cbcaf7e" class="m-doc-self">Vec</a> = std::valarray&lt;double&gt;
             </dt>
             <dd><span></span></dd>
-            <dt id="a1cc10a81d7afcbaca55ca013f28f2e06">
-              using <a href="#a1cc10a81d7afcbaca55ca013f28f2e06" class="m-doc-self">ArrayType</a> = Arr
+            <dt id="ae83050dc7f0b2504e14ab719662fabf1">
+              using <a href="#ae83050dc7f0b2504e14ab719662fabf1" class="m-doc-self">ArrayType</a> = Arr
             </dt>
             <dd><span></span></dd>
           </dl>
@@ -86,25 +86,25 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#aecd757c5896f1d07e4f8c03449145953" class="m-doc">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html#a653f7393457f75395661ff0e36a4a886" class="m-doc">Vec</a>&amp; val,
+              <span class="m-doc-wrap-bumper"><a href="#a188f6eaa34dd1b7ad6d90a44e5b83670" class="m-doc">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html#af96f2e7752ad0c0288c9b48e5cbcaf7e" class="m-doc">Vec</a>&amp; val,
               Arr x)</span>
             </dt>
             <dd>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#abbc34a907867d226667f083d5eeabb01" class="m-doc">Ell</a>(</span><span class="m-doc-wrap">const double&amp; alpha,
+              <span class="m-doc-wrap-bumper"><a href="#a0b7172c08cae84318be0da1bf724d040" class="m-doc">Ell</a>(</span><span class="m-doc-wrap">const double&amp; alpha,
               Arr x)</span>
             </dt>
             <dd>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a3d18ea96d421e4f213aa96d17ebab746" class="m-doc">Ell</a>(</span><span class="m-doc-wrap"><a href="classEll.html" class="m-doc">Ell</a>&amp;&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#a420acfb93e66a3a9061e14487115121d" class="m-doc">Ell</a>(</span><span class="m-doc-wrap"><a href="classEll.html" class="m-doc">Ell</a>&amp;&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
-            <dt id="a4d9324be500dffa3a6fd0b8438f0a0fc">
-              <span class="m-doc-wrap-bumper"><a href="#a4d9324be500dffa3a6fd0b8438f0a0fc" class="m-doc-self">~Ell</a>(</span><span class="m-doc-wrap">)</span>
+            <dt id="a5b240bd06a4e5505a58943c45f47ff99">
+              <span class="m-doc-wrap-bumper"><a href="#a5b240bd06a4e5505a58943c45f47ff99" class="m-doc-self">~Ell</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Destroy the <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#aef6ee25c1ef09b0dac6a2e588c6180c3" class="m-doc">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html" class="m-doc">Ell</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-info">explicit</span> </span>
+              <span class="m-doc-wrap-bumper"><a href="#ad970bf7bfe9fff8fe055ddcf8f63ebcf" class="m-doc">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html" class="m-doc">Ell</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-info">explicit</span> </span>
             </dt>
             <dd>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
           </dl>
@@ -113,45 +113,45 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af8bd99281e3b3bf4dfec6501e64c8511" class="m-doc">copy</a>(</span><span class="m-doc-wrap">) const -&gt; Ell -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#acc24e7c91426190d2eaa068c18765bb6" class="m-doc">copy</a>(</span><span class="m-doc-wrap">) const -&gt; Ell -&gt; auto</span>
             </dt>
             <dd>explicitly copy</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#adf1bf44dddc4842f80d6b9ed72981b8b" class="m-doc">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a73d19992f196ded07e2d6bdaae7bb192" class="m-doc">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr -&gt; auto</span>
             </dt>
             <dd>copy the whole array anyway</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a64cc652c04ac21f955b8f7b201202822" class="m-doc">set_xc</a>(</span><span class="m-doc-wrap">const Arr&amp; xc)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a1c6a63896b15e49031fc0618cff19f3f" class="m-doc">set_xc</a>(</span><span class="m-doc-wrap">const Arr&amp; xc)</span>
             </dt>
             <dd>Set the xc object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a26f2ad81981553f2033b2079f3888be1" class="m-doc">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#afc61987a1e12bc2085d8b7a1ffffcca0" class="m-doc">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double -&gt; auto</span>
             </dt>
             <dd></dd>
-            <dt id="af3355e44f6d0d83aa94fa6eedaa794de">
-              <span class="m-doc-wrap-bumper">void <a href="#af3355e44f6d0d83aa94fa6eedaa794de" class="m-doc-self">set_use_parallel_cut</a>(</span><span class="m-doc-wrap">bool value)</span>
+            <dt id="a04616cbb4abf68dfdc157234da618378">
+              <span class="m-doc-wrap-bumper">void <a href="#a04616cbb4abf68dfdc157234da618378" class="m-doc-self">set_use_parallel_cut</a>(</span><span class="m-doc-wrap">bool value)</span>
             </dt>
             <dd><span></span></dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3943ea4636eb915c57c6201928ba55bc" class="m-doc">update</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9926132cc6fbf73f22a7e032bf2f84a4" class="m-doc">update</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus -&gt; auto</span>
             </dt>
             <dd>Update ellipsoid core function using the cut(s)</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a64bb32ffbdb2a91ebc9afde9fa300137" class="m-doc">update_cc</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1a2de7a65b9b0680f664f31df1522b13" class="m-doc">update_cc</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus -&gt; auto</span>
             </dt>
             <dd>Update ellipsoid core function using the cut(s)</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="aecd757c5896f1d07e4f8c03449145953"><div>
+          <section class="m-doc-details" id="a188f6eaa34dd1b7ad6d90a44e5b83670"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;typename Arr, typename Calc&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aecd757c5896f1d07e4f8c03449145953" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html#a653f7393457f75395661ff0e36a4a886" class="m-doc">Vec</a>&amp; val,
+              <span class="m-doc-wrap-bumper"> Ell&lt;Arr, Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a188f6eaa34dd1b7ad6d90a44e5b83670" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html#af96f2e7752ad0c0288c9b48e5cbcaf7e" class="m-doc">Vec</a>&amp; val,
               Arr x)</span></span>
             </h3>
             <p>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</p>
@@ -171,12 +171,12 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="abbc34a907867d226667f083d5eeabb01"><div>
+          <section class="m-doc-details" id="a0b7172c08cae84318be0da1bf724d040"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;typename Arr, typename Calc&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abbc34a907867d226667f083d5eeabb01" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap">const double&amp; alpha,
+              <span class="m-doc-wrap-bumper"> Ell&lt;Arr, Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b7172c08cae84318be0da1bf724d040" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap">const double&amp; alpha,
               Arr x)</span></span>
             </h3>
             <p>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</p>
@@ -196,12 +196,12 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a3d18ea96d421e4f213aa96d17ebab746"><div>
+          <section class="m-doc-details" id="a420acfb93e66a3a9061e14487115121d"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;typename Arr, typename Calc&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3d18ea96d421e4f213aa96d17ebab746" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap"><a href="classEll.html" class="m-doc">Ell</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper"> Ell&lt;Arr, Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a420acfb93e66a3a9061e14487115121d" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap"><a href="classEll.html" class="m-doc">Ell</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span></span></span>
             </h3>
             <p>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -216,12 +216,12 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aef6ee25c1ef09b0dac6a2e588c6180c3"><div>
+          <section class="m-doc-details" id="ad970bf7bfe9fff8fe055ddcf8f63ebcf"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;typename Arr, typename Calc&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aef6ee25c1ef09b0dac6a2e588c6180c3" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html" class="m-doc">Ell</a>&amp; E) <span class="m-label m-info">explicit</span>  <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper"> Ell&lt;Arr, Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad970bf7bfe9fff8fe055ddcf8f63ebcf" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html" class="m-doc">Ell</a>&amp; E) <span class="m-label m-info">explicit</span>  <span class="m-label m-info">defaulted</span></span></span>
             </h3>
             <p>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -237,12 +237,12 @@
             </table>
 <p>To avoid accidentally copying, only explicit copy is allowed</p>
           </div></section>
-          <section class="m-doc-details" id="af8bd99281e3b3bf4dfec6501e64c8511"><div>
+          <section class="m-doc-details" id="acc24e7c91426190d2eaa068c18765bb6"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;typename Arr, typename Calc&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8bd99281e3b3bf4dfec6501e64c8511" class="m-doc-self">copy</a>(</span><span class="m-doc-wrap">) const -&gt; Ell</span></span>
+              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr, Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acc24e7c91426190d2eaa068c18765bb6" class="m-doc-self">copy</a>(</span><span class="m-doc-wrap">) const -&gt; Ell</span></span>
             </h3>
             <p>explicitly copy</p>
             <table class="m-table m-fullwidth m-flat">
@@ -254,12 +254,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="adf1bf44dddc4842f80d6b9ed72981b8b"><div>
+          <section class="m-doc-details" id="a73d19992f196ded07e2d6bdaae7bb192"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;typename Arr, typename Calc&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adf1bf44dddc4842f80d6b9ed72981b8b" class="m-doc-self">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr</span></span>
+              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr, Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a73d19992f196ded07e2d6bdaae7bb192" class="m-doc-self">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr</span></span>
             </h3>
             <p>copy the whole array anyway</p>
             <table class="m-table m-fullwidth m-flat">
@@ -271,12 +271,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a64cc652c04ac21f955b8f7b201202822"><div>
+          <section class="m-doc-details" id="a1c6a63896b15e49031fc0618cff19f3f"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;typename Arr, typename Calc&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a64cc652c04ac21f955b8f7b201202822" class="m-doc-self">set_xc</a>(</span><span class="m-doc-wrap">const Arr&amp; xc)</span></span>
+              <span class="m-doc-wrap-bumper">void Ell&lt;Arr, Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1c6a63896b15e49031fc0618cff19f3f" class="m-doc-self">set_xc</a>(</span><span class="m-doc-wrap">const Arr&amp; xc)</span></span>
             </h3>
             <p>Set the xc object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -291,12 +291,12 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a26f2ad81981553f2033b2079f3888be1"><div>
+          <section class="m-doc-details" id="afc61987a1e12bc2085d8b7a1ffffcca0"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;typename Arr, typename Calc&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a26f2ad81981553f2033b2079f3888be1" class="m-doc-self">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double</span></span>
+              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr, Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afc61987a1e12bc2085d8b7a1ffffcca0" class="m-doc-self">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
@@ -307,13 +307,13 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a3943ea4636eb915c57c6201928ba55bc"><div>
+          <section class="m-doc-details" id="a9926132cc6fbf73f22a7e032bf2f84a4"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;typename Arr, typename Calc&gt;
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3943ea4636eb915c57c6201928ba55bc" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus</span></span>
+              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr, Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9926132cc6fbf73f22a7e032bf2f84a4" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus</span></span>
             </h3>
             <p>Update ellipsoid core function using the cut(s)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -343,13 +343,13 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a64bb32ffbdb2a91ebc9afde9fa300137"><div>
+          <section class="m-doc-details" id="a1a2de7a65b9b0680f664f31df1522b13"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;typename Arr, typename Calc&gt;
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a64bb32ffbdb2a91ebc9afde9fa300137" class="m-doc-self">update_cc</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus</span></span>
+              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr, Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1a2de7a65b9b0680f664f31df1522b13" class="m-doc-self">update_cc</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus</span></span>
             </h3>
             <p>Update ellipsoid core function using the cut(s)</p>
             <table class="m-table m-fullwidth m-flat">

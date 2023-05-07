@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>EllCalc class | EllAlgo</title>
+  <title>EllCalcQ class | EllAlgo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -49,7 +49,7 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          EllCalc <span class="m-thin">class</span>
+          EllCalcQ <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ell__calc_8hpp.html">&lt;ellalgo/ell_calc.hpp&gt;</a></div>
         </h1>
         <p>Ellipsoid Search Space.</p>
@@ -59,22 +59,20 @@
             <li>
               Reference
               <ul>
-                <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#base-classes">Base classes</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
-                <li><a href="#pub-attribs">Public variables</a></li>
-                <li><a href="#pro-attribs">Protected variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
 <pre>   EllCalc= {x | (x - xc)&#x27; mq^-1 (x - xc) \le \kappa}
 </pre><p>Keep $Q$ symmetric but no promise of positive definite</p>
-        <section id="derived-classes">
-          <h2><a href="#derived-classes">Derived classes</a></h2>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classEllCalcQ.html" class="m-doc">EllCalcQ</a>
+              class <a href="classEllCalc.html" class="m-doc">EllCalc</a>
             </dt>
             <dd>Ellipsoid Search Space.</dd>
           </dl>
@@ -82,20 +80,20 @@
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="a93ed95a72b841fabd425f88901e33744">
-              <span class="m-doc-wrap-bumper"><a href="#a93ed95a72b841fabd425f88901e33744" class="m-doc-self">EllCalc</a>(</span><span class="m-doc-wrap">size_t ndim)</span>
+            <dt id="adb073500fadfed87ae9a20f25dfe1574">
+              <span class="m-doc-wrap-bumper"><a href="#adb073500fadfed87ae9a20f25dfe1574" class="m-doc-self">EllCalcQ</a>(</span><span class="m-doc-wrap">size_t ndim)</span>
             </dt>
             <dd>Construct a new EllCalcobject.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a7d0ca31ce3e65df8bb2ed647e2f709ae" class="m-doc">EllCalc</a>(</span><span class="m-doc-wrap"><a href="classEllCalc.html" class="m-doc">EllCalc</a>&amp;&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#adeeaeac82007433bf23f3563fd355ea2" class="m-doc">EllCalcQ</a>(</span><span class="m-doc-wrap"><a href="classEllCalcQ.html" class="m-doc">EllCalcQ</a>&amp;&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Construct a new EllCalcobject.</dd>
-            <dt id="a05337f470ccb0fde19bc43a1cbe74fe7">
-              <span class="m-doc-wrap-bumper"><a href="#a05337f470ccb0fde19bc43a1cbe74fe7" class="m-doc-self">~EllCalc</a>(</span><span class="m-doc-wrap">)</span>
+            <dt id="a2ad18431018a27edbea599e80cbbb16f">
+              <span class="m-doc-wrap-bumper"><a href="#a2ad18431018a27edbea599e80cbbb16f" class="m-doc-self">~EllCalcQ</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Destroy the EllCalcobject.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a20ba0538b001d311db271d1b5c803cc7" class="m-doc">EllCalc</a>(</span><span class="m-doc-wrap">const <a href="classEllCalc.html" class="m-doc">EllCalc</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#a75eaa2bcbdc0ce9acff48f2726ac9d3f" class="m-doc">EllCalcQ</a>(</span><span class="m-doc-wrap">const <a href="classEllCalcQ.html" class="m-doc">EllCalcQ</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Construct a new EllCalcobject.</dd>
           </dl>
@@ -104,87 +102,21 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a10f7e431d4c05c0a1abe8d7bae20b3ab" class="m-doc">_calc_ll_core</a>(</span><span class="m-doc-wrap">const double&amp; b0,
+              <span class="m-doc-wrap-bumper">auto <a href="#a0c2b7aaedeabc448cf114686ab5971cc" class="m-doc">_calc_ll_core</a>(</span><span class="m-doc-wrap">const double&amp; b0,
               const double&amp; b1) -&gt; CutStatus -&gt; auto</span>
             </dt>
             <dd>Calculate new ellipsoid under Parallel Cut.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad0f59b388d0bb38a570fe55390683f8d" class="m-doc">_calc_ll_cc</a>(</span><span class="m-doc-wrap">const double&amp; b1) -&gt; CutStatus -&gt; auto</span>
-            </dt>
-            <dd>Calculate new ellipsoid under Parallel Cut, one of them is central.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aecb10054f0389e55ebd2e18a919bf184" class="m-doc">_calc_dc</a>(</span><span class="m-doc-wrap">const double&amp; beta) -&gt; CutStatus -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a95f4a38dea0760f15b46b5b4e1d47392" class="m-doc">_calc_dc</a>(</span><span class="m-doc-wrap">const double&amp; beta) -&gt; CutStatus -&gt; auto</span>
             </dt>
             <dd>Calculate new ellipsoid under Deep Cut.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac4e8d347333827135d2ccf5a4550b996" class="m-doc">_calc_cc</a>(</span><span class="m-doc-wrap">) -&gt; CutStatus -&gt; auto</span>
-            </dt>
-            <dd>Calculate new ellipsoid under Central Cut.</dd>
-          </dl>
-        </section>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
-          <dl class="m-doc">
-            <dt id="a4d15638034e564ffef654b7fc4fb5df5">
-              bool <a href="#a4d15638034e564ffef654b7fc4fb5df5" class="m-doc-self">use_parallel_cut</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a664f6c95524941cf87961355ffa12fb4">
-              double <a href="#a664f6c95524941cf87961355ffa12fb4" class="m-doc-self">_tsq</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="aa2567e2b8fd42d0638842dbca8d22464">
-              double <a href="#aa2567e2b8fd42d0638842dbca8d22464" class="m-doc-self">_rho</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a0e2564d06094d5a294c69960da4d006f">
-              double <a href="#a0e2564d06094d5a294c69960da4d006f" class="m-doc-self">_sigma</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a8bbcc7c9544bc80f9f907d0cdefbb156">
-              double <a href="#a8bbcc7c9544bc80f9f907d0cdefbb156" class="m-doc-self">_delta</a>
-            </dt>
-            <dd><span></span></dd>
-          </dl>
-        </section>
-        <section id="pro-attribs">
-          <h2><a href="#pro-attribs">Protected variables</a></h2>
-          <dl class="m-doc">
-            <dt id="a9c47836ab1f9a3c462790dd4e666ae35">
-              const double <a href="#a9c47836ab1f9a3c462790dd4e666ae35" class="m-doc-self">_nFloat</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="aac106210fc218459b523fcebe6f01692">
-              const double <a href="#aac106210fc218459b523fcebe6f01692" class="m-doc-self">_nPlus1</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a60cf2b0a82bb681f6f3fdf97e93a80a5">
-              const double <a href="#a60cf2b0a82bb681f6f3fdf97e93a80a5" class="m-doc-self">_halfN</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a3d0cdbd31a4633a7ad8b36b94c96291c">
-              const double <a href="#a3d0cdbd31a4633a7ad8b36b94c96291c" class="m-doc-self">_nSq</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="ade2f0e86fc6aca2249ced5f8bf5462db">
-              const double <a href="#ade2f0e86fc6aca2249ced5f8bf5462db" class="m-doc-self">_c1</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a629041faccaf64168bed1a9b75fcc6a0">
-              const double <a href="#a629041faccaf64168bed1a9b75fcc6a0" class="m-doc-self">_c2</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a4583942761ed3da1d77e4a3f0d2764e4">
-              const double <a href="#a4583942761ed3da1d77e4a3f0d2764e4" class="m-doc-self">_c3</a>
-            </dt>
-            <dd><span></span></dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a7d0ca31ce3e65df8bb2ed647e2f709ae"><div>
+          <section class="m-doc-details" id="adeeaeac82007433bf23f3563fd355ea2"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> EllCalc::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7d0ca31ce3e65df8bb2ed647e2f709ae" class="m-doc-self">EllCalc</a>(</span><span class="m-doc-wrap"><a href="classEllCalc.html" class="m-doc">EllCalc</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper"> EllCalcQ::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adeeaeac82007433bf23f3563fd355ea2" class="m-doc-self">EllCalcQ</a>(</span><span class="m-doc-wrap"><a href="classEllCalcQ.html" class="m-doc">EllCalcQ</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span></span></span>
             </h3>
             <p>Construct a new EllCalcobject.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -199,9 +131,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a20ba0538b001d311db271d1b5c803cc7"><div>
+          <section class="m-doc-details" id="a75eaa2bcbdc0ce9acff48f2726ac9d3f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> EllCalc::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a20ba0538b001d311db271d1b5c803cc7" class="m-doc-self">EllCalc</a>(</span><span class="m-doc-wrap">const <a href="classEllCalc.html" class="m-doc">EllCalc</a>&amp; E) <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper"> EllCalcQ::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a75eaa2bcbdc0ce9acff48f2726ac9d3f" class="m-doc-self">EllCalcQ</a>(</span><span class="m-doc-wrap">const <a href="classEllCalcQ.html" class="m-doc">EllCalcQ</a>&amp; E) <span class="m-label m-info">defaulted</span></span></span>
             </h3>
             <p>Construct a new EllCalcobject.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -217,9 +149,9 @@
             </table>
 <p>To avoid accidentally copying, only explicit copy is allowed</p>
           </div></section>
-          <section class="m-doc-details" id="a10f7e431d4c05c0a1abe8d7bae20b3ab"><div>
+          <section class="m-doc-details" id="a0c2b7aaedeabc448cf114686ab5971cc"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto EllCalc::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a10f7e431d4c05c0a1abe8d7bae20b3ab" class="m-doc-self">_calc_ll_core</a>(</span><span class="m-doc-wrap">const double&amp; b0,
+              <span class="m-doc-wrap-bumper">auto EllCalcQ::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c2b7aaedeabc448cf114686ab5971cc" class="m-doc-self">_calc_ll_core</a>(</span><span class="m-doc-wrap">const double&amp; b0,
               const double&amp; b1) -&gt; CutStatus</span></span>
             </h3>
             <p>Calculate new ellipsoid under Parallel Cut.</p>
@@ -248,29 +180,9 @@
    g&#x27; (x - xc) + beta1 \ge 0
 </pre>
           </div></section>
-          <section class="m-doc-details" id="ad0f59b388d0bb38a570fe55390683f8d"><div>
+          <section class="m-doc-details" id="a95f4a38dea0760f15b46b5b4e1d47392"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto EllCalc::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad0f59b388d0bb38a570fe55390683f8d" class="m-doc-self">_calc_ll_cc</a>(</span><span class="m-doc-wrap">const double&amp; b1) -&gt; CutStatus</span></span>
-            </h3>
-            <p>Calculate new ellipsoid under Parallel Cut, one of them is central.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">b1&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-<pre>   g&#x27; (x - xc) \le 0
-   g&#x27; (x - xc) + beta1 \ge 0
-</pre>
-          </div></section>
-          <section class="m-doc-details" id="aecb10054f0389e55ebd2e18a919bf184"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">auto EllCalc::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aecb10054f0389e55ebd2e18a919bf184" class="m-doc-self">_calc_dc</a>(</span><span class="m-doc-wrap">const double&amp; beta) -&gt; CutStatus</span></span>
+              <span class="m-doc-wrap-bumper">auto EllCalcQ::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a95f4a38dea0760f15b46b5b4e1d47392" class="m-doc-self">_calc_dc</a>(</span><span class="m-doc-wrap">const double&amp; beta) -&gt; CutStatus</span></span>
             </h3>
             <p>Calculate new ellipsoid under Deep Cut.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -285,14 +197,6 @@
               </tbody>
             </table>
 <pre>   g&#x27; (x - xc) + beta \le 0
-</pre>
-          </div></section>
-          <section class="m-doc-details" id="ac4e8d347333827135d2ccf5a4550b996"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">auto EllCalc::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac4e8d347333827135d2ccf5a4550b996" class="m-doc-self">_calc_cc</a>(</span><span class="m-doc-wrap">) -&gt; CutStatus</span></span>
-            </h3>
-            <p>Calculate new ellipsoid under Central Cut.</p>
-<pre>   g&#x27; (x - xc) \le 0
 </pre>
           </div></section>
         </section>
