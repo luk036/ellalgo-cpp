@@ -52,7 +52,7 @@ template <typename Oracle, typename Space>
 inline auto cutting_plane_feas(Oracle &&omega, Space &&space,
                                const Options &options = Options())
     -> std::tuple<CuttingPlaneArrayType<Space>, size_t> {
-  for (auto niter = 0U; niter != options.max_iter; ++niter) {
+  for (auto niter = 0U; niter != options.max_iters; ++niter) {
     const auto cut = omega.assess_feas(space.xc());
     if (!cut) { // feasible sol'n obtained
       return {space.xc(), niter};
@@ -64,7 +64,7 @@ inline auto cutting_plane_feas(Oracle &&omega, Space &&space,
     }
   }
   auto res = invalid_value<CuttingPlaneArrayType<Space>>();
-  return {std::move(res), options.max_iter};
+  return {std::move(res), options.max_iters};
 }
 
 /**
@@ -85,7 +85,7 @@ inline auto cutting_plane_optim(Oracle &&omega, Space &&space, Num &&tea,
     -> std::tuple<CuttingPlaneArrayType<Space>, size_t> {
   // CuttingPlaneArrayType<Space> x_best{};
   auto x_best = invalid_value<CuttingPlaneArrayType<Space>>();
-  for (auto niter = 0U; niter < options.max_iter; ++niter) {
+  for (auto niter = 0U; niter < options.max_iters; ++niter) {
     const auto __result1 = omega.assess_optim(space.xc(), tea);
     const auto &cut = std::get<0>(__result1);
     const auto &shrunk = std::get<1>(__result1);
@@ -101,7 +101,7 @@ inline auto cutting_plane_optim(Oracle &&omega, Space &&space, Num &&tea,
       return {std::move(x_best), niter};
     }
   }
-  return {std::move(x_best), options.max_iter};
+  return {std::move(x_best), options.max_iters};
 } // END
 
 /**
@@ -123,9 +123,9 @@ inline auto cutting_plane_q(OracleQ &&omega, Space &&space, Num &&tea,
   auto x_best = invalid_value<CuttingPlaneArrayType<Space>>();
   auto retry = false;
 
-  for (auto niter = 0U; niter < options.max_iter; ++niter) {
+  for (auto niter = 0U; niter < options.max_iters; ++niter) {
     // auto retry = (status == CutStatus::NoEffect);
-    const auto result1 = omega.assess_q(space.xc(), tea, retry);
+    const auto result1 = omega.assess_optim_q(space.xc(), tea, retry);
     const auto &cut = std::get<0>(result1);
     const auto &shrunk = std::get<1>(result1);
     const auto &x_q = std::get<2>(result1);
@@ -152,7 +152,7 @@ inline auto cutting_plane_q(OracleQ &&omega, Space &&space, Num &&tea,
       return {std::move(x_best), niter};
     }
   }
-  return {std::move(x_best), options.max_iter};
+  return {std::move(x_best), options.max_iters};
 } // END
 
 /**
@@ -175,7 +175,7 @@ inline auto bsearch(Oracle &&omega, const std::pair<T, T> &intvl,
   auto upper = intvl.second;
   assert(lower <= upper);
 
-  for (auto niter = 0U; niter < options.max_iter; ++niter) {
+  for (auto niter = 0U; niter < options.max_iters; ++niter) {
     auto tau = algo::half_nonnegative(upper - lower);
     if (tau < options.tol) { // no more
       return {upper, niter};
@@ -188,7 +188,7 @@ inline auto bsearch(Oracle &&omega, const std::pair<T, T> &intvl,
       lower = tea;
     }
   }
-  return {upper, options.max_iter};
+  return {upper, options.max_iters};
 }
 
 /**

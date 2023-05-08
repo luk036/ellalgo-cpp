@@ -41,7 +41,7 @@ auto ProfitOracle::assess_optim(const Vec &y, double &t) const
  * @param[in,out] t the best-so-far optimal value
  * @return std::tuple<Cut, double, Vec, int>
  */
-auto ProfitOracleQ::assess_q(const Vec &y, double &t, bool retry)
+auto ProfitOracleQ::assess_optim_q(const Vec &y, double &t, bool retry)
     -> std::tuple<Cut, bool, Vec, bool> {
   if (!retry) {
     Vec x = std::exp(y);

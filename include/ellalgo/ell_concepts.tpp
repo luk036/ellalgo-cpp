@@ -57,7 +57,7 @@ concept OracleQ = requires(Oracle omega, const ArrayType<Oracle> &x, double &t,
   typename Oracle::ArrayType;  // double for 1D; ndarray::Arr1 for general
   typename Oracle::CutChoices; // double for single cut; (double, double)
                                // for parallel cut
-  { omega.assess_q(x, t, retry) } -> STD_ALT::convertible_to<RetQ<Oracle>>;
+  { omega.assess_optim_q(x, t, retry) } -> STD_ALT::convertible_to<RetQ<Oracle>>;
 };
 
 /**

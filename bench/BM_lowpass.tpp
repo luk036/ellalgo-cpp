@@ -138,7 +138,7 @@ auto run_lowpass(bool use_parallel_cut) {
   LowpassOracle omega(Fdc.Ap, Fdc.As, Fdc.Anr, Fdc.Lpsq, Fdc.Upsq);
   Options options{};
 
-  options.max_iter = 50000;
+  options.max_iters = 50000;
   ellip.set_use_parallel_cut(use_parallel_cut);
   // options.tol = 1e-8;
 

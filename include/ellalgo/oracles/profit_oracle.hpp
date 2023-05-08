@@ -207,7 +207,7 @@ public:
    *
    * @see cutting_plane_q
    */
-  auto assess_q(const Vec &y, double &t, bool retry)
+  auto assess_optim_q(const Vec &y, double &t, bool retry)
       -> std::tuple<Cut, bool, Vec, bool>;
 
   /**
@@ -222,6 +222,6 @@ public:
    */
   auto operator()(const Vec &y, double &t, bool retry)
       -> std::tuple<Cut, bool, Vec, bool> {
-    return this->assess_q(y, t, retry);
+    return this->assess_optim_q(y, t, retry);
   }
 };
