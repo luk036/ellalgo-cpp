@@ -17,10 +17,10 @@ enum class CutStatus;
 class EllCalc {
 public:
   bool use_parallel_cut = true;
-  double _tsq{};
-  double _rho{};
-  double _sigma{};
-  double _delta{};
+  // double _tsq{};
+  // double _rho{};
+  // double _sigma{};
+  // double _delta{};
 
 protected:
   // const int _n;
@@ -38,7 +38,7 @@ protected:
    *
    * @param[in] E
    */
-  // auto operator=(const EllCalc& E) -> EllCalc& = delete;
+  // auto operator=(const EllCalc& E) const -> EllCalc& = delete;
 
 public:
   /**
@@ -88,7 +88,9 @@ public:
    * @param[in] b1
    * @return int
    */
-  auto _calc_ll_core(const double &b0, const double &b1) -> CutStatus;
+  auto _calc_ll_core(const double &b0, const double &b1,
+                     const double &tsq) const
+      -> std::tuple<CutStatus, double, double, double>;
 
   /**
    * @brief Calculate new ellipsoid under Parallel Cut, one of them is central
@@ -99,7 +101,8 @@ public:
    * @param[in] b1
    * @param[in] b1sq
    */
-  auto _calc_ll_cc(const double &b1) -> CutStatus;
+  auto _calc_ll_cc(const double &b1, const double &tsq) const
+      -> std::tuple<CutStatus, double, double, double>;
 
   /**
    * @brief Calculate new ellipsoid under Deep Cut
@@ -108,7 +111,8 @@ public:
    *
    * @param[in] beta
    */
-  auto _calc_dc(const double &beta) -> CutStatus;
+  auto _calc_dc(const double &beta, const double &tsq) const
+      -> std::tuple<CutStatus, double, double, double>;
 
   /**
    * @brief Calculate new ellipsoid under Central Cut
@@ -117,7 +121,8 @@ public:
    *
    * @param[in] tau
    */
-  auto _calc_cc() -> CutStatus;
+  auto _calc_cc(const double &tsq) const
+      -> std::tuple<CutStatus, double, double, double>;
 
 }; // } EllCalc
 
@@ -174,7 +179,9 @@ public:
    * @param[in] b1
    * @return int
    */
-  auto _calc_ll_core(const double &b0, const double &b1) -> CutStatus;
+  auto _calc_ll_core(const double &b0, const double &b1,
+                     const double &tsq) const
+      -> std::tuple<CutStatus, double, double, double>;
 
   /**
    * @brief Calculate new ellipsoid under Deep Cut
@@ -183,6 +190,7 @@ public:
    *
    * @param[in] beta
    */
-  auto _calc_dc(const double &beta) -> CutStatus;
+  auto _calc_dc(const double &beta, const double &tsq) const
+      -> std::tuple<CutStatus, double, double, double>;
 
 }; // } EllCalc

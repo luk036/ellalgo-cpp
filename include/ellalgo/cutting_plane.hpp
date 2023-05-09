@@ -57,7 +57,7 @@ inline auto cutting_plane_feas(Oracle &&omega, Space &&space,
     if (!cut) { // feasible sol'n obtained
       return {space.xc(), niter};
     }
-    const auto status = space.update(*cut); // update space
+    const auto status = space.update_dc(*cut); // update space
     if (status != CutStatus::Success || space.tsq() < options.tol) {
       auto res = invalid_value<CuttingPlaneArrayType<Space>>();
       return {std::move(res), niter};
@@ -94,7 +94,7 @@ inline auto cutting_plane_optim(Oracle &&omega, Space &&space, Num &&tea,
         x_best = space.xc();
         return space.update_cc(cut); // should update_cc
       } else {
-        return space.update(cut);
+        return space.update_dc(cut);
       }
     }();
     if (status != CutStatus::Success || space.tsq() < options.tol) { // no more
@@ -116,7 +116,7 @@ inline auto cutting_plane_optim(Oracle &&omega, Space &&space, Num &&tea,
  * @return Information of Cutting-plane method
  */
 template <typename OracleQ, typename Space, typename Num>
-inline auto cutting_plane_q(OracleQ &&omega, Space &&space, Num &&tea,
+inline auto cutting_plane_q(OracleQ &&omega, Space &&space_q, Num &&tea,
                             const Options &options = Options())
     -> std::tuple<CuttingPlaneArrayType<Space>, size_t> {
   // CuttingPlaneArrayType<Space> x_best{};
@@ -125,19 +125,16 @@ inline auto cutting_plane_q(OracleQ &&omega, Space &&space, Num &&tea,
 
   for (auto niter = 0U; niter < options.max_iters; ++niter) {
     // auto retry = (status == CutStatus::NoEffect);
-    const auto result1 = omega.assess_optim_q(space.xc(), tea, retry);
+    const auto result1 = omega.assess_optim_q(space_q.xc(), tea, retry);
     const auto &cut = std::get<0>(result1);
     const auto &shrunk = std::get<1>(result1);
     const auto &x_q = std::get<2>(result1);
     const auto &more_alt = std::get<3>(result1);
-    const auto status = [&]() {
-      if (shrunk) { // best tea obtained
-        x_best = x_q;
-        return space.update_cc(cut); // should update_cc
-      } else {
-        return space.update(cut);
-      }
-    }();
+    if (shrunk) { // best tea obtained
+      x_best = x_q;
+      retry = false;
+    }
+    auto status = space_q.update_dc(cut);
     if (status == CutStatus::Success) {
       retry = false;
     } else if (status == CutStatus::NoSoln) {
@@ -148,7 +145,7 @@ inline auto cutting_plane_q(OracleQ &&omega, Space &&space, Num &&tea,
       }
       retry = true;
     }
-    if (space.tsq() < options.tol) { // no more
+    if (space_q.tsq() < options.tol) { // no more
       return {std::move(x_best), niter};
     }
   }

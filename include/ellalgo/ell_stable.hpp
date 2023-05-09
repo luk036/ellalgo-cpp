@@ -118,7 +118,7 @@ public:
    * @return std::tuple<int, double>
    */
   template <typename T, typename Fn>
-  auto update_core(const std::pair<Arr, T> &cut, Fn &&f_core) -> CutStatus {
+  auto update_core(const std::pair<Arr, T> &cut, Fn &&dc_or_cc_strategy) -> CutStatus {
     const auto &grad = cut.first;
     const auto &beta = cut.second;
     std::valarray<double> g(this->_n);
@@ -126,7 +126,7 @@ public:
       g[i] = grad[i];
     }
 
-    auto result = f_core(g, beta);
+    auto result = dc_or_cc_strategy(g, beta);
     if (result == CutStatus::Success) {
       for (auto i = 0U; i != this->_n; ++i) {
         this->_xc[i] -= g[i];
@@ -143,9 +143,9 @@ public:
    * @param[in] cut cutting-plane
    * @return std::tuple<int, double>
    */
-  template <typename T> auto update(const std::pair<Arr, T> &cut) -> CutStatus {
+  template <typename T> auto update_dc(const std::pair<Arr, T> &cut) -> CutStatus {
     return this->update_core(cut, [&](Vec &grad, const T &beta) {
-      return this->_mgr.update_stable(grad, beta);
+      return this->_mgr.update_stable_dc(grad, beta);
     });
   }
 

@@ -1,5 +1,8 @@
-# @todo
+# Ellipsoid method
 
-- single vs. parallel
-- continuous vs. discrete
-- normal vs. stable
+- continuous vs. discrete (strategy)
+- deep-cut vs. central-cut (functional strategy)
+- single vs. parallel (functional strategy)
+- normal vs. stable (Copy & Paste)
+
+python: mixins
