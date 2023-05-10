@@ -116,59 +116,6 @@ public:
   auto calc_cc(const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
 
-protected:
-  auto _calc_ll_core(const double &b0, const double &b1, const double &b1sq,
-                     const double &b0b1, const double &tsq) const
-      -> std::tuple<CutStatus, double, double, double>;
-
-  auto _calc_dc_core(const double &beta, const double &tau,
-                     const double &gamma) const
-      -> std::tuple<CutStatus, double, double, double>;
-}; // } EllCalc
-
-/**
- * @brief Ellipsoid Search Space
- *
- *        EllCalc= {x | (x - xc)' mq^-1 (x - xc) \le \kappa}
- *
- * Keep $Q$ symmetric but no promise of positive definite
- */
-class EllCalcQ : public EllCalc {
-public:
-  /**
-   * @brief Construct a new EllCalcobject
-   *
-   * @tparam V
-   * @tparam U
-   * @param kappa
-   * @param mq
-   * @param x
-   */
-  EllCalcQ(size_t ndim) : EllCalc(ndim) {}
-
-public:
-  /**
-   * @brief Construct a new EllCalcobject
-   *
-   * @param[in] E (move)
-   */
-  EllCalcQ(EllCalcQ &&E) = default;
-
-  /**
-   * @brief Destroy the EllCalcobject
-   *
-   */
-  ~EllCalcQ() {}
-
-  /**
-   * @brief Construct a new EllCalcobject
-   *
-   * To avoid accidentally copying, only explicit copy is allowed
-   *
-   * @param E
-   */
-  EllCalcQ(const EllCalcQ &E) = default;
-
   /**
    * @brief Calculate new ellipsoid under Parallel Cut
    *
@@ -192,4 +139,12 @@ public:
   auto calc_dc_q(const double &beta, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
 
+private:
+  auto _calc_ll_core(const double &b0, const double &b1, const double &b1sq,
+                     const double &b0b1, const double &tsq) const
+      -> std::tuple<CutStatus, double, double, double>;
+
+  auto _calc_dc_core(const double &beta, const double &tau,
+                     const double &gamma) const
+      -> std::tuple<CutStatus, double, double, double>;
 }; // } EllCalc

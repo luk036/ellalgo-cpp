@@ -127,8 +127,8 @@ auto EllCalc::calc_cc(const double &tsq) const
  * @param[in] b1
  * @return int
  */
-auto EllCalcQ::calc_ll_dc_q(const double &b0, const double &b1,
-                            const double &tsq) const
+auto EllCalc::calc_ll_dc_q(const double &b0, const double &b1,
+                           const double &tsq) const
     -> std::tuple<CutStatus, double, double, double> {
   if (b1 < b0) {
     return {CutStatus::NoSoln, 0.0, 0.0, 0.0}; // no sol'n
@@ -152,7 +152,7 @@ auto EllCalcQ::calc_ll_dc_q(const double &b0, const double &b1,
  * @param[in] beta
  * @return int
  */
-auto EllCalcQ::calc_dc_q(const double &beta, const double &tsq) const
+auto EllCalc::calc_dc_q(const double &beta, const double &tsq) const
     -> std::tuple<CutStatus, double, double, double> {
   const auto tau = std::sqrt(tsq);
   if (tau < beta) {

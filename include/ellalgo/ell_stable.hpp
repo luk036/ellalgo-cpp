@@ -19,7 +19,7 @@ enum class CutStatus;
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */
-template <typename Arr, typename Calc = EllCalc> class EllStable {
+template <typename Arr> class EllStable {
 public:
   // bool no_defer_trick = false;
   using Vec = std::valarray<double>;
@@ -28,7 +28,7 @@ public:
 private:
   const size_t _n;
   Arr _xc;
-  EllCore<Calc> _mgr;
+  EllCore _mgr;
 
   /**
    * @brief Construct a new EllStable object

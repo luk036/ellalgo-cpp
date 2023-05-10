@@ -15,7 +15,7 @@
  *
  *  \mathcal{E} {x | (x - xc)' mq^-1 (x - xc) \le \kappa}
  */
-template <typename CalcStrategy = EllCalc> class EllCore {
+class EllCore {
 public:
   using Vec = std::valarray<double>;
   bool no_defer_trick = false;
@@ -24,7 +24,7 @@ private:
   size_t _n;
   double _kappa;
   Matrix _mq;
-  CalcStrategy _helper;
+  EllCalc _helper;
   double _tsq{};
 
   /**
@@ -122,10 +122,10 @@ public:
    * @return std::tuple<int, double>
    */
   template <typename T> auto update_dc(Vec &grad, const T &beta) -> CutStatus {
-    return this->_update_single_or_ll(grad, beta,
-                                      [&](const T &beta, const double &tsq) {
-                                        return this->_update_cut_dc(beta, tsq);
-                                      });
+    return this->_update_core(grad, beta,
+                              [&](const T &beta, const double &tsq) {
+                                return this->_update_cut_dc(beta, tsq);
+                              });
   }
 
   /**
@@ -136,10 +136,10 @@ public:
    * @return std::tuple<int, double>
    */
   template <typename T> auto update_cc(Vec &grad, const T &beta) -> CutStatus {
-    return this->_update_single_or_ll(grad, beta,
-                                      [&](const T &beta, const double &tsq) {
-                                        return this->_update_cut_cc(beta, tsq);
-                                      });
+    return this->_update_core(grad, beta,
+                              [&](const T &beta, const double &tsq) {
+                                return this->_update_cut_cc(beta, tsq);
+                              });
   }
 
   /**
@@ -150,10 +150,10 @@ public:
    * @return std::tuple<int, double>
    */
   template <typename T> auto update_q(Vec &grad, const T &beta) -> CutStatus {
-    return this->_update_single_or_ll(grad, beta,
-                                      [&](const T &beta, const double &tsq) {
-                                        return this->_update_cut_q(beta, tsq);
-                                      });
+    return this->_update_core(grad, beta,
+                              [&](const T &beta, const double &tsq) {
+                                return this->_update_cut_q(beta, tsq);
+                              });
   }
 
   /**
@@ -165,10 +165,10 @@ public:
    */
   template <typename T>
   auto update_stable_dc(Vec &grad, const T &beta) -> CutStatus {
-    return this->_update_stable_single_or_ll(
-        grad, beta, [&](const T &beta, const double &tsq) {
-          return this->_update_cut_dc(beta, tsq);
-        });
+    return this->_update_stable_core(grad, beta,
+                                     [&](const T &beta, const double &tsq) {
+                                       return this->_update_cut_dc(beta, tsq);
+                                     });
   }
 
   /**
@@ -180,10 +180,10 @@ public:
    */
   template <typename T>
   auto update_stable_cc(Vec &grad, const T &beta) -> CutStatus {
-    return this->_update_stable_single_or_ll(
-        grad, beta, [&](const T &beta, const double &tsq) {
-          return this->_update_cut_cc(beta, tsq);
-        });
+    return this->_update_stable_core(grad, beta,
+                                     [&](const T &beta, const double &tsq) {
+                                       return this->_update_cut_cc(beta, tsq);
+                                     });
   }
 
   /**
@@ -195,16 +195,15 @@ public:
    */
   template <typename T>
   auto update_stable_q(Vec &grad, const T &beta) -> CutStatus {
-    return this->_update_stable_single_or_ll(
-        grad, beta, [&](const T &beta, const double &tsq) {
-          return this->_update_cut_q(beta, tsq);
-        });
+    return this->_update_stable_core(grad, beta,
+                                     [&](const T &beta, const double &tsq) {
+                                       return this->_update_cut_q(beta, tsq);
+                                     });
   }
 
 private:
   template <typename T, typename Fn>
-  auto _update_single_or_ll(Vec &grad, const T &beta, Fn &&f_core)
-      -> CutStatus {
+  auto _update_core(Vec &grad, const T &beta, Fn &&cut_strategy) -> CutStatus {
     std::valarray<double> Qg(0.0, this->_n);
     auto omega = 0.0;
     for (auto i = 0U; i != this->_n; ++i) {
@@ -216,7 +215,7 @@ private:
 
     this->_tsq = this->_kappa * omega;
 
-    auto __result = f_core(beta, this->_tsq);
+    auto __result = cut_strategy(beta, this->_tsq);
     auto status = std::get<0>(__result);
     if (status != CutStatus::Success) {
       return status;
@@ -249,7 +248,7 @@ private:
   }
 
   template <typename T, typename Fn>
-  auto _update_stable_single_or_ll(Vec &g, const T &beta, Fn &&f_core)
+  auto _update_stable_core(Vec &g, const T &beta, Fn &&cut_strategy)
       -> CutStatus {
     // calculate inv(L)*grad: (n-1)*n/2 multiplications
     auto invLg{g}; // initially
@@ -277,7 +276,7 @@ private:
 
     this->_tsq = this->_kappa * omega;
 
-    auto __result = f_core(beta, this->_tsq);
+    auto __result = cut_strategy(beta, this->_tsq);
     auto status = std::get<0>(__result);
     if (status != CutStatus::Success) {
       return status;
