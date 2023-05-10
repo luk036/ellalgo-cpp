@@ -49,9 +49,8 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="ell__core_8hpp.html">&lt;ellalgo/ell_core.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename Calc = <a href="classEllCalc.html" class="m-doc">EllCalc</a>&gt;</div>
           EllCore <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ell__core_8hpp.html">&lt;ellalgo/ell_core.hpp&gt;</a></div>
         </h1>
         <p>Ellipsoid Search Space Core.</p>
         <nav class="m-block m-default">
@@ -72,8 +71,8 @@
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt id="aa50437450803008befdd62ffc13c5276">
-              using <a href="#aa50437450803008befdd62ffc13c5276" class="m-doc-self">Vec</a> = std::valarray&lt;double&gt;
+            <dt id="a84df6a48b6ee456228c1bfa645db977e">
+              using <a href="#a84df6a48b6ee456228c1bfa645db977e" class="m-doc-self">Vec</a> = std::valarray&lt;double&gt;
             </dt>
             <dd><span></span></dd>
           </dl>
@@ -82,25 +81,25 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#aa300a3a7edfc6cef4361859816bb8196" class="m-doc">EllCore</a>(</span><span class="m-doc-wrap">const <a href="classEllCore.html#aa50437450803008befdd62ffc13c5276" class="m-doc">Vec</a>&amp; val,
+              <span class="m-doc-wrap-bumper"><a href="#a004880c1fe0b0de4f0c7899616938731" class="m-doc">EllCore</a>(</span><span class="m-doc-wrap">const <a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; val,
               size_t ndim)</span>
             </dt>
             <dd>Construct a new <a href="classEllCore.html" class="m-doc">EllCore</a> object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ac8ab4d99ef368aad017457ecb409a1bc" class="m-doc">EllCore</a>(</span><span class="m-doc-wrap">double alpha,
+              <span class="m-doc-wrap-bumper"><a href="#ad3281918ec8c3d5df99a1ba420f0b640" class="m-doc">EllCore</a>(</span><span class="m-doc-wrap">double alpha,
               size_t ndim)</span>
             </dt>
             <dd>Construct a new <a href="classEllCore.html" class="m-doc">EllCore</a> object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a56d90d0610f3ef70b62dceeb5b229577" class="m-doc">EllCore</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html" class="m-doc">EllCore</a>&amp;&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#a9a4ed6b24f4bb2a1dd56197c8c658110" class="m-doc">EllCore</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html" class="m-doc">EllCore</a>&amp;&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Construct a new <a href="classEllCore.html" class="m-doc">EllCore</a> object.</dd>
-            <dt id="ae35b8990793652a90ab19307ce35169a">
-              <span class="m-doc-wrap-bumper"><a href="#ae35b8990793652a90ab19307ce35169a" class="m-doc-self">~EllCore</a>(</span><span class="m-doc-wrap">)</span>
+            <dt id="a810d30bdf4d3fa062348dc5edc1ded90">
+              <span class="m-doc-wrap-bumper"><a href="#a810d30bdf4d3fa062348dc5edc1ded90" class="m-doc-self">~EllCore</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Destroy the <a href="classEllCore.html" class="m-doc">EllCore</a> object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a840201a001ded80b4407a035eefe6071" class="m-doc">EllCore</a>(</span><span class="m-doc-wrap">const <a href="classEllCore.html" class="m-doc">EllCore</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-info">explicit</span> </span>
+              <span class="m-doc-wrap-bumper"><a href="#aee85acb6192ebd5d38b68106654f2e60" class="m-doc">EllCore</a>(</span><span class="m-doc-wrap">const <a href="classEllCore.html" class="m-doc">EllCore</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-info">explicit</span> </span>
             </dt>
             <dd>Construct a new <a href="classEllCore.html" class="m-doc">EllCore</a> object.</dd>
           </dl>
@@ -109,38 +108,50 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a610b08b9744ef0665da3797a2b74d4c7" class="m-doc">copy</a>(</span><span class="m-doc-wrap">) const -&gt; EllCore -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab37bd62c8263202b3c65dc74d03361e9" class="m-doc">copy</a>(</span><span class="m-doc-wrap">) const -&gt; EllCore -&gt; auto</span>
             </dt>
             <dd>explicitly copy</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9bd4f4a3c183ef1968392007e8776656" class="m-doc">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aabaf7131bd0b595fc3203bc88cbf370c" class="m-doc">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double -&gt; auto</span>
             </dt>
             <dd>copy the whole array anyway</dd>
-            <dt id="a6268d3ecde42a883816fbd87d7574449">
-              <span class="m-doc-wrap-bumper">void <a href="#a6268d3ecde42a883816fbd87d7574449" class="m-doc-self">set_use_parallel_cut</a>(</span><span class="m-doc-wrap">bool value)</span>
+            <dt id="abb746a1fc15354055138fb8abbb90432">
+              <span class="m-doc-wrap-bumper">void <a href="#abb746a1fc15354055138fb8abbb90432" class="m-doc-self">set_use_parallel_cut</a>(</span><span class="m-doc-wrap">bool value)</span>
             </dt>
             <dd><span></span></dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#af1c0711955f8a6b45d65dfb68e24963a" class="m-doc">update</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#aa50437450803008befdd62ffc13c5276" class="m-doc">Vec</a>&amp; grad,
+              <span class="m-doc-wrap-bumper">auto <a href="#a4b55ec5c63f9069fe999ef43eeb728b7" class="m-doc">update_dc</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; grad,
               const T&amp; beta) -&gt; CutStatus -&gt; auto</span>
             </dt>
             <dd>Update ellipsoid core function using the cut(s)</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a16105740d886201e3ef0ee09eb920485" class="m-doc">update_cc</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#aa50437450803008befdd62ffc13c5276" class="m-doc">Vec</a>&amp; grad,
+              <span class="m-doc-wrap-bumper">auto <a href="#a1508a4206a575de3036f874567e17720" class="m-doc">update_cc</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; grad,
               const T&amp; beta) -&gt; CutStatus -&gt; auto</span>
             </dt>
             <dd>Update ellipsoid core function using the cut(s)</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1819a39dfbb8610ccc9346f2d5baa7b0" class="m-doc">update_stable</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#aa50437450803008befdd62ffc13c5276" class="m-doc">Vec</a>&amp; grad,
+              <span class="m-doc-wrap-bumper">auto <a href="#a1e9742a77dbbdb8d585b7532c554ad2c" class="m-doc">update_q</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; grad,
               const T&amp; beta) -&gt; CutStatus -&gt; auto</span>
             </dt>
             <dd>Update ellipsoid core function using the cut(s)</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae8b777c22f965d53621a5769403a9351" class="m-doc">update_stable_cc</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#aa50437450803008befdd62ffc13c5276" class="m-doc">Vec</a>&amp; grad,
+              <span class="m-doc-wrap-bumper">auto <a href="#a287b4bc85eb99f3dfba2945470e25fb1" class="m-doc">update_stable_dc</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; grad,
+              const T&amp; beta) -&gt; CutStatus -&gt; auto</span>
+            </dt>
+            <dd>Update ellipsoid core function using the cut(s)</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a728532affcfb9d6f93a965d05f6362f6" class="m-doc">update_stable_cc</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; grad,
+              const T&amp; beta) -&gt; CutStatus -&gt; auto</span>
+            </dt>
+            <dd>Update ellipsoid core function using the cut(s)</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a84601c516434b87a54c66a06bf4a8593" class="m-doc">update_stable_q</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; grad,
               const T&amp; beta) -&gt; CutStatus -&gt; auto</span>
             </dt>
             <dd>Update ellipsoid core function using the cut(s)</dd>
@@ -149,20 +160,17 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a7a48338b79e7c093538acc4c20949b14">
-              bool <a href="#a7a48338b79e7c093538acc4c20949b14" class="m-doc-self">no_defer_trick</a>
+            <dt id="aa8ac7a71a7e8e0289a193a6f893b9e6e">
+              bool <a href="#aa8ac7a71a7e8e0289a193a6f893b9e6e" class="m-doc-self">no_defer_trick</a>
             </dt>
             <dd><span></span></dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="aa300a3a7edfc6cef4361859816bb8196"><div>
+          <section class="m-doc-details" id="a004880c1fe0b0de4f0c7899616938731"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename Calc&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> EllCore&lt;Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa300a3a7edfc6cef4361859816bb8196" class="m-doc-self">EllCore</a>(</span><span class="m-doc-wrap">const <a href="classEllCore.html#aa50437450803008befdd62ffc13c5276" class="m-doc">Vec</a>&amp; val,
+              <span class="m-doc-wrap-bumper"> EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a004880c1fe0b0de4f0c7899616938731" class="m-doc-self">EllCore</a>(</span><span class="m-doc-wrap">const <a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; val,
               size_t ndim)</span></span>
             </h3>
             <p>Construct a new <a href="classEllCore.html" class="m-doc">EllCore</a> object.</p>
@@ -182,12 +190,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ac8ab4d99ef368aad017457ecb409a1bc"><div>
+          <section class="m-doc-details" id="ad3281918ec8c3d5df99a1ba420f0b640"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename Calc&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> EllCore&lt;Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac8ab4d99ef368aad017457ecb409a1bc" class="m-doc-self">EllCore</a>(</span><span class="m-doc-wrap">double alpha,
+              <span class="m-doc-wrap-bumper"> EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad3281918ec8c3d5df99a1ba420f0b640" class="m-doc-self">EllCore</a>(</span><span class="m-doc-wrap">double alpha,
               size_t ndim)</span></span>
             </h3>
             <p>Construct a new <a href="classEllCore.html" class="m-doc">EllCore</a> object.</p>
@@ -207,12 +212,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a56d90d0610f3ef70b62dceeb5b229577"><div>
+          <section class="m-doc-details" id="a9a4ed6b24f4bb2a1dd56197c8c658110"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename Calc&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> EllCore&lt;Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a56d90d0610f3ef70b62dceeb5b229577" class="m-doc-self">EllCore</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html" class="m-doc">EllCore</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper"> EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9a4ed6b24f4bb2a1dd56197c8c658110" class="m-doc-self">EllCore</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html" class="m-doc">EllCore</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span></span></span>
             </h3>
             <p>Construct a new <a href="classEllCore.html" class="m-doc">EllCore</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -227,12 +229,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a840201a001ded80b4407a035eefe6071"><div>
+          <section class="m-doc-details" id="aee85acb6192ebd5d38b68106654f2e60"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename Calc&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> EllCore&lt;Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a840201a001ded80b4407a035eefe6071" class="m-doc-self">EllCore</a>(</span><span class="m-doc-wrap">const <a href="classEllCore.html" class="m-doc">EllCore</a>&amp; E) <span class="m-label m-info">explicit</span>  <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper"> EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aee85acb6192ebd5d38b68106654f2e60" class="m-doc-self">EllCore</a>(</span><span class="m-doc-wrap">const <a href="classEllCore.html" class="m-doc">EllCore</a>&amp; E) <span class="m-label m-info">explicit</span>  <span class="m-label m-info">defaulted</span></span></span>
             </h3>
             <p>Construct a new <a href="classEllCore.html" class="m-doc">EllCore</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -248,12 +247,9 @@
             </table>
 <p>To avoid accidentally copying, only explicit copy is allowed</p>
           </div></section>
-          <section class="m-doc-details" id="a610b08b9744ef0665da3797a2b74d4c7"><div>
+          <section class="m-doc-details" id="ab37bd62c8263202b3c65dc74d03361e9"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename Calc&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">auto EllCore&lt;Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a610b08b9744ef0665da3797a2b74d4c7" class="m-doc-self">copy</a>(</span><span class="m-doc-wrap">) const -&gt; EllCore</span></span>
+              <span class="m-doc-wrap-bumper">auto EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab37bd62c8263202b3c65dc74d03361e9" class="m-doc-self">copy</a>(</span><span class="m-doc-wrap">) const -&gt; EllCore</span></span>
             </h3>
             <p>explicitly copy</p>
             <table class="m-table m-fullwidth m-flat">
@@ -265,12 +261,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a9bd4f4a3c183ef1968392007e8776656"><div>
+          <section class="m-doc-details" id="aabaf7131bd0b595fc3203bc88cbf370c"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename Calc&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">auto EllCore&lt;Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9bd4f4a3c183ef1968392007e8776656" class="m-doc-self">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double</span></span>
+              <span class="m-doc-wrap-bumper">auto EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aabaf7131bd0b595fc3203bc88cbf370c" class="m-doc-self">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double</span></span>
             </h3>
             <p>copy the whole array anyway</p>
             <table class="m-table m-fullwidth m-flat">
@@ -282,13 +275,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="af1c0711955f8a6b45d65dfb68e24963a"><div>
+          <section class="m-doc-details" id="a4b55ec5c63f9069fe999ef43eeb728b7"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Calc&gt;
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto EllCore&lt;Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af1c0711955f8a6b45d65dfb68e24963a" class="m-doc-self">update</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#aa50437450803008befdd62ffc13c5276" class="m-doc">Vec</a>&amp; grad,
+              <span class="m-doc-wrap-bumper">auto EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4b55ec5c63f9069fe999ef43eeb728b7" class="m-doc-self">update_dc</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; grad,
               const T&amp; beta) -&gt; CutStatus</span></span>
             </h3>
             <p>Update ellipsoid core function using the cut(s)</p>
@@ -310,13 +302,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a16105740d886201e3ef0ee09eb920485"><div>
+          <section class="m-doc-details" id="a1508a4206a575de3036f874567e17720"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Calc&gt;
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto EllCore&lt;Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a16105740d886201e3ef0ee09eb920485" class="m-doc-self">update_cc</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#aa50437450803008befdd62ffc13c5276" class="m-doc">Vec</a>&amp; grad,
+              <span class="m-doc-wrap-bumper">auto EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1508a4206a575de3036f874567e17720" class="m-doc-self">update_cc</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; grad,
               const T&amp; beta) -&gt; CutStatus</span></span>
             </h3>
             <p>Update ellipsoid core function using the cut(s)</p>
@@ -338,13 +329,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a1819a39dfbb8610ccc9346f2d5baa7b0"><div>
+          <section class="m-doc-details" id="a1e9742a77dbbdb8d585b7532c554ad2c"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Calc&gt;
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto EllCore&lt;Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1819a39dfbb8610ccc9346f2d5baa7b0" class="m-doc-self">update_stable</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#aa50437450803008befdd62ffc13c5276" class="m-doc">Vec</a>&amp; grad,
+              <span class="m-doc-wrap-bumper">auto EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1e9742a77dbbdb8d585b7532c554ad2c" class="m-doc-self">update_q</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; grad,
               const T&amp; beta) -&gt; CutStatus</span></span>
             </h3>
             <p>Update ellipsoid core function using the cut(s)</p>
@@ -366,13 +356,66 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ae8b777c22f965d53621a5769403a9351"><div>
+          <section class="m-doc-details" id="a287b4bc85eb99f3dfba2945470e25fb1"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Calc&gt;
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto EllCore&lt;Calc&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8b777c22f965d53621a5769403a9351" class="m-doc-self">update_stable_cc</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#aa50437450803008befdd62ffc13c5276" class="m-doc">Vec</a>&amp; grad,
+              <span class="m-doc-wrap-bumper">auto EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a287b4bc85eb99f3dfba2945470e25fb1" class="m-doc-self">update_stable_dc</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; grad,
+              const T&amp; beta) -&gt; CutStatus</span></span>
+            </h3>
+            <p>Update ellipsoid core function using the cut(s)</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::tuple&lt;int, double&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a728532affcfb9d6f93a965d05f6362f6"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a728532affcfb9d6f93a965d05f6362f6" class="m-doc-self">update_stable_cc</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; grad,
+              const T&amp; beta) -&gt; CutStatus</span></span>
+            </h3>
+            <p>Update ellipsoid core function using the cut(s)</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::tuple&lt;int, double&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a84601c516434b87a54c66a06bf4a8593"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a84601c516434b87a54c66a06bf4a8593" class="m-doc-self">update_stable_q</a>(</span><span class="m-doc-wrap"><a href="classEllCore.html#a84df6a48b6ee456228c1bfa645db977e" class="m-doc">Vec</a>&amp; grad,
               const T&amp; beta) -&gt; CutStatus</span></span>
             </h3>
             <p>Update ellipsoid core function using the cut(s)</p>
