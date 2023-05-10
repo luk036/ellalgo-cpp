@@ -149,6 +149,20 @@ public:
    * @param[in] cut cutting-plane
    * @return std::tuple<int, double>
    */
+  template <typename T> auto update_q(Vec &grad, const T &beta) -> CutStatus {
+    return this->_update_single_or_ll(grad, beta,
+                                      [&](const T &beta, const double &tsq) {
+                                        return this->_update_cut_q(beta, tsq);
+                                      });
+  }
+
+  /**
+   * @brief Update ellipsoid core function using the cut(s)
+   *
+   * @tparam T
+   * @param[in] cut cutting-plane
+   * @return std::tuple<int, double>
+   */
   template <typename T>
   auto update_stable_dc(Vec &grad, const T &beta) -> CutStatus {
     return this->_update_stable_single_or_ll(
@@ -169,6 +183,21 @@ public:
     return this->_update_stable_single_or_ll(
         grad, beta, [&](const T &beta, const double &tsq) {
           return this->_update_cut_cc(beta, tsq);
+        });
+  }
+
+  /**
+   * @brief Update ellipsoid core function using the cut(s)
+   *
+   * @tparam T
+   * @param[in] cut cutting-plane
+   * @return std::tuple<int, double>
+   */
+  template <typename T>
+  auto update_stable_q(Vec &grad, const T &beta) -> CutStatus {
+    return this->_update_stable_single_or_ll(
+        grad, beta, [&](const T &beta, const double &tsq) {
+          return this->_update_cut_q(beta, tsq);
         });
   }
 
@@ -290,28 +319,43 @@ private:
 
   auto _update_cut_dc(const double &beta, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> {
-    return this->_helper._calc_dc(beta, tsq);
+    return this->_helper.calc_dc(beta, tsq);
   }
 
-  auto _update_cut_dc(const std::valarray<double> &beta, const double &tsq) const
+  auto _update_cut_dc(const std::valarray<double> &beta,
+                      const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> { // parallel cut
     if (beta.size() < 2) {
-      return this->_helper._calc_dc(beta[0], tsq);
+      return this->_helper.calc_dc(beta[0], tsq);
     }
-    return this->_helper._calc_ll_core(beta[0], beta[1], tsq);
+    return this->_helper.calc_ll_dc(beta[0], beta[1], tsq);
   }
 
   auto _update_cut_cc(const double &, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> {
-    return this->_helper._calc_cc(tsq);
+    return this->_helper.calc_cc(tsq);
   }
 
   auto _update_cut_cc(const std::valarray<double> &beta,
                       const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> { // parallel cut
     if (beta.size() < 2) {
-      return this->_helper._calc_cc(tsq);
+      return this->_helper.calc_cc(tsq);
     }
-    return this->_helper._calc_ll_cc(beta[1], tsq);
+    return this->_helper.calc_ll_cc(beta[1], tsq);
   }
+
+  auto _update_cut_q(const double &beta, const double &tsq) const
+      -> std::tuple<CutStatus, double, double, double> {
+    return this->_helper.calc_dc_q(beta, tsq);
+  }
+
+  auto _update_cut_q(const std::valarray<double> &beta, const double &tsq) const
+      -> std::tuple<CutStatus, double, double, double> { // parallel cut
+    if (beta.size() < 2) {
+      return this->_helper.calc_dc_q(beta[0], tsq);
+    }
+    return this->_helper.calc_ll_dc_q(beta[0], beta[1], tsq);
+  }
+
 }; // } EllCore

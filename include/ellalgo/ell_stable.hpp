@@ -117,8 +117,52 @@ public:
    * @param[in] cut cutting-plane
    * @return std::tuple<int, double>
    */
+  template <typename T>
+  auto update_dc(const std::pair<Arr, T> &cut) -> CutStatus {
+    return this->_update_core(cut, [&](Vec &grad, const T &beta) {
+      return this->_mgr.update_stable_dc(grad, beta);
+    });
+  }
+
+  /**
+   * @brief Update ellipsoid core function using the cut(s)
+   *
+   * @tparam T
+   * @param[in] cut cutting-plane
+   * @return std::tuple<int, double>
+   */
+  template <typename T>
+  auto update_cc(const std::pair<Arr, T> &cut) -> CutStatus {
+    return this->_update_core(cut, [&](Vec &grad, const T &beta) {
+      return this->_mgr.update_stable_cc(grad, beta);
+    });
+  }
+
+  /**
+   * @brief Update ellipsoid core function using the cut(s)
+   *
+   * @tparam T
+   * @param[in] cut cutting-plane
+   * @return std::tuple<int, double>
+   */
+  template <typename T>
+  auto update_q(const std::pair<Arr, T> &cut) -> CutStatus {
+    return this->_update_core(cut, [&](Vec &grad, const T &beta) {
+      return this->_mgr.update_stable_q(grad, beta);
+    });
+  }
+
+private:
+  /**
+   * @brief Update ellipsoid core function using the cut(s)
+   *
+   * @tparam T
+   * @param[in] cut cutting-plane
+   * @return std::tuple<int, double>
+   */
   template <typename T, typename Fn>
-  auto update_core(const std::pair<Arr, T> &cut, Fn &&dc_or_cc_strategy) -> CutStatus {
+  auto _update_core(const std::pair<Arr, T> &cut, Fn &&dc_or_cc_strategy)
+      -> CutStatus {
     const auto &grad = cut.first;
     const auto &beta = cut.second;
     std::valarray<double> g(this->_n);
@@ -134,32 +178,5 @@ public:
     }
 
     return result;
-  }
-
-  /**
-   * @brief Update ellipsoid core function using the cut(s)
-   *
-   * @tparam T
-   * @param[in] cut cutting-plane
-   * @return std::tuple<int, double>
-   */
-  template <typename T> auto update_dc(const std::pair<Arr, T> &cut) -> CutStatus {
-    return this->update_core(cut, [&](Vec &grad, const T &beta) {
-      return this->_mgr.update_stable_dc(grad, beta);
-    });
-  }
-
-  /**
-   * @brief Update ellipsoid core function using the cut(s)
-   *
-   * @tparam T
-   * @param[in] cut cutting-plane
-   * @return std::tuple<int, double>
-   */
-  template <typename T>
-  auto update_cc(const std::pair<Arr, T> &cut) -> CutStatus {
-    return this->update_core(cut, [&](Vec &grad, const T &beta) {
-      return this->_mgr.update_stable_cc(grad, beta);
-    });
   }
 }; // } EllStable

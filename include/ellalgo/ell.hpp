@@ -116,7 +116,8 @@ public:
    * @param[in] cut cutting-plane
    * @return std::tuple<int, double>
    */
-  template <typename T> auto update_dc(const std::pair<Arr, T> &cut) -> CutStatus {
+  template <typename T>
+  auto update_dc(const std::pair<Arr, T> &cut) -> CutStatus {
     return this->_update_core(cut, [&](Vec &grad, const T &beta) {
       return this->_mgr.update_dc(grad, beta);
     });
@@ -136,6 +137,20 @@ public:
     });
   }
 
+  /**
+   * @brief Update ellipsoid core function using the cut(s)
+   *
+   * @tparam T
+   * @param[in] cut cutting-plane
+   * @return std::tuple<int, double>
+   */
+  template <typename T>
+  auto update_q(const std::pair<Arr, T> &cut) -> CutStatus {
+    return this->_update_core(cut, [&](Vec &grad, const T &beta) {
+      return this->_mgr.update_q(grad, beta);
+    });
+  }
+
 private:
   /**
    * @brief Update ellipsoid core function using the cut(s)
@@ -145,7 +160,8 @@ private:
    * @return std::tuple<int, double>
    */
   template <typename T, typename Fn>
-  auto _update_core(const std::pair<Arr, T> &cut, Fn &&dc_or_cc_strategy) -> CutStatus {
+  auto _update_core(const std::pair<Arr, T> &cut, Fn &&dc_or_cc_strategy)
+      -> CutStatus {
     const auto &grad = cut.first;
     const auto &beta = cut.second;
     std::valarray<double> g(this->_n);

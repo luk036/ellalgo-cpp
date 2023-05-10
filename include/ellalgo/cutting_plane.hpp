@@ -115,12 +115,12 @@ inline auto cutting_plane_optim(Oracle &&omega, Space &&space, Num &&tea,
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
-template <typename OracleQ, typename Space, typename Num>
-inline auto cutting_plane_q(OracleQ &&omega, Space &&space_q, Num &&tea,
+template <typename OracleQ, typename SpaceQ, typename Num>
+inline auto cutting_plane_q(OracleQ &&omega, SpaceQ &&space_q, Num &&tea,
                             const Options &options = Options())
-    -> std::tuple<CuttingPlaneArrayType<Space>, size_t> {
+    -> std::tuple<CuttingPlaneArrayType<SpaceQ>, size_t> {
   // CuttingPlaneArrayType<Space> x_best{};
-  auto x_best = invalid_value<CuttingPlaneArrayType<Space>>();
+  auto x_best = invalid_value<CuttingPlaneArrayType<SpaceQ>>();
   auto retry = false;
 
   for (auto niter = 0U; niter < options.max_iters; ++niter) {
@@ -134,7 +134,7 @@ inline auto cutting_plane_q(OracleQ &&omega, Space &&space_q, Num &&tea,
       x_best = x_q;
       retry = false;
     }
-    auto status = space_q.update_dc(cut);
+    auto status = space_q.update_q(cut);
     if (status == CutStatus::Success) {
       retry = false;
     } else if (status == CutStatus::NoSoln) {

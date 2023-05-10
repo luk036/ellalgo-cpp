@@ -1,4 +1,3 @@
-// -*- coding: utf-8 -*-
 #pragma once
 
 #include <cmath>
@@ -17,14 +16,8 @@ enum class CutStatus;
 class EllCalc {
 public:
   bool use_parallel_cut = true;
-  // double _tsq{};
-  // double _rho{};
-  // double _sigma{};
-  // double _delta{};
 
 protected:
-  // const int _n;
-
   const double _nFloat;
   const double _nPlus1;
   const double _halfN;
@@ -88,8 +81,7 @@ public:
    * @param[in] b1
    * @return int
    */
-  auto _calc_ll_core(const double &b0, const double &b1,
-                     const double &tsq) const
+  auto calc_ll_dc(const double &b0, const double &b1, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
 
   /**
@@ -101,7 +93,7 @@ public:
    * @param[in] b1
    * @param[in] b1sq
    */
-  auto _calc_ll_cc(const double &b1, const double &tsq) const
+  auto calc_ll_cc(const double &b1, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
 
   /**
@@ -111,7 +103,7 @@ public:
    *
    * @param[in] beta
    */
-  auto _calc_dc(const double &beta, const double &tsq) const
+  auto calc_dc(const double &beta, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
 
   /**
@@ -121,9 +113,17 @@ public:
    *
    * @param[in] tau
    */
-  auto _calc_cc(const double &tsq) const
+  auto calc_cc(const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
 
+protected:
+  auto _calc_ll_core(const double &b0, const double &b1, const double &b1sq,
+                     const double &b0b1, const double &tsq) const
+      -> std::tuple<CutStatus, double, double, double>;
+
+  auto _calc_dc_core(const double &beta, const double &tau,
+                     const double &gamma) const
+      -> std::tuple<CutStatus, double, double, double>;
 }; // } EllCalc
 
 /**
@@ -179,8 +179,7 @@ public:
    * @param[in] b1
    * @return int
    */
-  auto _calc_ll_core(const double &b0, const double &b1,
-                     const double &tsq) const
+  auto calc_ll_dc_q(const double &b0, const double &b1, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
 
   /**
@@ -190,7 +189,7 @@ public:
    *
    * @param[in] beta
    */
-  auto _calc_dc(const double &beta, const double &tsq) const
+  auto calc_dc_q(const double &beta, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
 
 }; // } EllCalc
