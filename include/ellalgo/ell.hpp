@@ -160,7 +160,7 @@ private:
    * @return std::tuple<int, double>
    */
   template <typename T, typename Fn>
-  auto _update_core(const std::pair<Arr, T> &cut, Fn &&dc_or_cc_strategy)
+  auto _update_core(const std::pair<Arr, T> &cut, Fn &&cut_strategy)
       -> CutStatus {
     const auto &grad = cut.first;
     const auto &beta = cut.second;
@@ -169,7 +169,7 @@ private:
       g[i] = grad[i];
     }
 
-    auto result = dc_or_cc_strategy(g, beta);
+    auto result = cut_strategy(g, beta);
 
     if (result == CutStatus::Success) {
       for (auto i = 0U; i != this->_n; ++i) {

@@ -84,7 +84,7 @@ TEST_CASE("Profit Test (Stable)") {
     // CHECK(y != Vec{});
     REQUIRE_EQ(y.size(), 2U);
     CHECK(y[0] <= std::log(k));
-    CHECK_EQ(num_iters, 41);
+    CHECK_EQ(num_iters, 36);
   }
 
   {
@@ -97,7 +97,7 @@ TEST_CASE("Profit Test (Stable)") {
     // CHECK(y != Vec{});
     REQUIRE_EQ(y.size(), 2U);
     CHECK(y[0] <= std::log(k));
-    CHECK_EQ(num_iters, 37);
+    CHECK_EQ(num_iters, 41);
   }
 
   {
@@ -110,6 +110,6 @@ TEST_CASE("Profit Test (Stable)") {
     // CHECK(y != Vec{});
     REQUIRE_EQ(y.size(), 2U);
     CHECK(y[0] <= std::log(k));
-    CHECK_EQ(num_iters, 29);
+    CHECK_EQ(num_iters, 27);
   }
 }

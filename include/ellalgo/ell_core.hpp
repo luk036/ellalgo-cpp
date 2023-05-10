@@ -204,13 +204,13 @@ public:
 private:
   template <typename T, typename Fn>
   auto _update_core(Vec &grad, const T &beta, Fn &&cut_strategy) -> CutStatus {
-    std::valarray<double> Qg(0.0, this->_n);
+    std::valarray<double> grad_t(0.0, this->_n);
     auto omega = 0.0;
     for (auto i = 0U; i != this->_n; ++i) {
       for (auto j = 0U; j != this->_n; ++j) {
-        Qg[i] += this->_mq(i, j) * grad[j];
+        grad_t[i] += this->_mq(i, j) * grad[j];
       }
-      omega += Qg[i] * grad[i];
+      omega += grad_t[i] * grad[i];
     }
 
     this->_tsq = this->_kappa * omega;
@@ -225,15 +225,15 @@ private:
     auto sigma = std::get<2>(__result);
     auto delta = std::get<3>(__result);
     // n*(n+1)/2 + n
-    // this->_mq -= (this->_sigma / omega) * xt::linalg::outer(Qg, Qg);
+    // this->_mq -= (this->_sigma / omega) * xt::linalg::outer(grad_t, grad_t);
     const auto r = sigma / omega;
     for (auto i = 0U; i != this->_n; ++i) {
-      const auto rQg = r * Qg[i];
+      const auto rQg = r * grad_t[i];
       for (auto j = 0U; j != i; ++j) {
-        this->_mq(i, j) -= rQg * Qg[j];
+        this->_mq(i, j) -= rQg * grad_t[j];
         this->_mq(j, i) = this->_mq(i, j);
       }
-      this->_mq(i, i) -= rQg * Qg[i];
+      this->_mq(i, i) -= rQg * grad_t[i];
     }
 
     this->_kappa *= delta;
@@ -243,7 +243,7 @@ private:
       this->_kappa = 1.0;
     }
 
-    grad = Qg * (rho / omega);
+    grad = grad_t * (rho / omega);
     return status; // g++-7 is ok
   }
 
@@ -252,11 +252,11 @@ private:
       -> CutStatus {
     // calculate inv(L)*grad: (n-1)*n/2 multiplications
     auto invLg{g}; // initially
-    for (auto i = 1U; i != this->_n; ++i) {
-      for (auto j = 0U; j != i; ++j) {
-        this->_mq(i, j) = this->_mq(j, i) * invLg[j];
+    for (auto j = 0U; j != this->_n - 1; ++j) {
+      for (auto i = j + 1; i != this->_n; ++i) {
+        this->_mq(j, i) = this->_mq(i, j) * invLg[j];
         // keep for rank-one update
-        invLg[i] -= this->_mq(i, j);
+        invLg[i] -= this->_mq(j, i);
       }
     }
 
@@ -267,11 +267,11 @@ private:
     }
 
     // calculate omega: n
-    auto gQg{invDinvLg}; // initially
-    auto omega = 0.0;    // initially
+    auto gg_t{invDinvLg}; // initially
+    auto omega = 0.0;     // initially
     for (auto i = 0U; i != this->_n; ++i) {
-      gQg[i] *= invLg[i];
-      omega += gQg[i];
+      gg_t[i] *= invLg[i];
+      omega += gg_t[i];
     }
 
     this->_tsq = this->_kappa * omega;
@@ -287,10 +287,10 @@ private:
     auto delta = std::get<3>(__result);
 
     // calculate mq*grad = inv(L')*inv(D)*inv(L)*grad : (n-1)*n/2
-    auto Qg{invDinvLg};                        // initially
+    auto grad_t{invDinvLg};                    // initially
     for (auto i = this->_n - 1; i != 0; --i) { // backward subsituition
       for (auto j = i; j != this->_n; ++j) {
-        Qg[i - 1] -= this->_mq(i, j) * Qg[j]; // ???
+        grad_t[i - 1] -= this->_mq(j, i - 1) * grad_t[j]; // ???
       }
     }
 
@@ -298,21 +298,25 @@ private:
     // const auto r = this->_sigma / omega;
     const auto mu = sigma / (1.0 - sigma);
     auto oldt = omega / mu; // initially
-    const auto m = this->_n - 1;
-    for (auto j = 0U; j != m; ++j) {
-      const auto t = oldt + gQg[j];
-      const auto beta2 = invDinvLg[j] / t;
-      this->_mq(j, j) *= oldt / t; // update invD
-      for (auto l = j + 1; l != this->_n; ++l) {
-        this->_mq(j, l) += beta2 * this->_mq(l, j);
+    // const auto m = this->_n - 1;
+    auto v{g};
+    for (auto j = 0U; j != this->_n; ++j) {
+      const auto p = v[j];
+      const auto temp = invDinvLg[j];
+      const auto newt = oldt + p * temp;
+      const auto beta2 = temp / newt;
+      this->_mq(j, j) *= oldt / newt; // update invD
+      for (auto k = j + 1; k != this->_n; ++k) {
+        v[k] -= this->_mq(j, k);
+        this->_mq(k, j) += beta2 * v[k];
       }
-      oldt = t;
+      oldt = newt;
     }
-    const auto t = oldt + gQg[m];
-    this->_mq(m, m) *= oldt / t; // update invD
+    // const auto t = oldt + gg_t[m];
+    // this->_mq(m, m) *= oldt / t; // update invD
     //
     this->_kappa *= delta;
-    g = Qg * (rho / omega);
+    g = grad_t * (rho / omega);
     return status;
   }
 

@@ -59,10 +59,10 @@ auto EllStable<Arr>::update(const std::pair<Arr, T> &cut)
   }
 
   // calculate mq*grad = inv(L')*inv(D)*inv(L)*grad : (n-1)*n/2
-  auto Qg{invDinvLg};                        // initially
+  auto grad_t{invDinvLg};                        // initially
   for (auto i = this->_n - 1; i != 0; --i) { // backward subsituition
     for (auto j = i; j != this->_n; ++j) {
-      Qg[i - 1] -= this->_mq(i, j) * Qg[j]; // ???
+      grad_t[i - 1] -= this->_mq(i, j) * grad_t[j]; // ???
     }
   }
 
@@ -93,10 +93,10 @@ auto EllStable<Arr>::update(const std::pair<Arr, T> &cut)
   // }
 
   // calculate xc: n
-  Qg *= (this->_helper._rho / omega);
+  grad_t *= (this->_helper._rho / omega);
 
   for (auto i = 0; i != this->_n; ++i) {
-    this->_xc[i] -= Qg[i];
+    this->_xc[i] -= grad_t[i];
   }
   return {status, this->_helper._tsq}; // g++-7 is ok
 }

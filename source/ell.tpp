@@ -27,22 +27,22 @@ auto Ell<Arr>::update(const std::pair<Arr, T> &cut)
   const auto &grad = cut.first;
   const auto &beta = cut.second;
   // n^2
-  // const auto Qg = Arr{xt::linalg::dot(this->_mq, grad)};  // n^2
-  // const auto omega = xt::linalg::dot(grad, Qg)();        // n
+  // const auto grad_t = Arr{xt::linalg::dot(this->_mq, grad)};  // n^2
+  // const auto omega = xt::linalg::dot(grad, grad_t)();        // n
 
   std::valarray<double> g(this->_n);
   for (auto i = 0; i != this->_n; ++i) {
     g[i] = grad[i];
   }
 
-  // auto Qg = zeros({this->_n}); // initial x0
-  std::valarray<double> Qg(0.0, this->_n);
+  // auto grad_t = zeros({this->_n}); // initial x0
+  std::valarray<double> grad_t(0.0, this->_n);
   auto omega = 0.0;
   for (auto i = 0; i != this->_n; ++i) {
     for (auto j = 0; j != this->_n; ++j) {
-      Qg[i] += this->_mq(i, j) * g[j];
+      grad_t[i] += this->_mq(i, j) * g[j];
     }
-    omega += Qg[i] * g[i];
+    omega += grad_t[i] * g[i];
   }
 
   this->_helper._tsq = this->_kappa * omega;
@@ -52,15 +52,15 @@ auto Ell<Arr>::update(const std::pair<Arr, T> &cut)
   }
 
   // n*(n+1)/2 + n
-  // this->_mq -= (this->_sigma / omega) * xt::linalg::outer(Qg, Qg);
+  // this->_mq -= (this->_sigma / omega) * xt::linalg::outer(grad_t, grad_t);
   const auto r = this->_helper._sigma / omega;
   for (auto i = 0; i != this->_n; ++i) {
-    const auto rQg = r * Qg[i];
+    const auto rQg = r * grad_t[i];
     for (auto j = 0; j != i; ++j) {
-      this->_mq(i, j) -= rQg * Qg[j];
+      this->_mq(i, j) -= rQg * grad_t[j];
       this->_mq(j, i) = this->_mq(i, j);
     }
-    this->_mq(i, i) -= rQg * Qg[i];
+    this->_mq(i, i) -= rQg * grad_t[i];
   }
 
   this->_kappa *= this->_helper._delta;
@@ -70,7 +70,7 @@ auto Ell<Arr>::update(const std::pair<Arr, T> &cut)
     this->_kappa = 1.0;
   }
 
-  g = Qg * (this->_helper._rho / omega);
+  g = grad_t * (this->_helper._rho / omega);
 
   for (auto i = 0; i != this->_n; ++i) {
     this->_xc[i] -= g[i];
