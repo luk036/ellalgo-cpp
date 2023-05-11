@@ -16,9 +16,9 @@
 // using Arr = xt::xarray<double, xt::layout_type::row_major>;
 using Vec = std::valarray<double>;
 
-static const auto p = 20.0;
+static const auto unit_price = 20.0;
 static const auto A = 40.0;
-static const auto k = 30.5;
+static const auto limit = 30.5;
 static const auto a = Vec{0.1, 0.4};
 static const auto v = Vec{10.0, 35.0};
 
@@ -26,7 +26,7 @@ static void ELL_normal(benchmark::State &state) {
   // Code inside this loop is measured repeatedly
   for (auto _ : state) {
     Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
-    ProfitOracle omega{p, A, k, a, v};
+    ProfitOracle omega{unit_price, A, limit, a, v};
 
     auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     // CHECK_EQ(num_iters, 36);
@@ -40,7 +40,7 @@ static void ELL_stable(benchmark::State &state) {
   // Code inside this loop is measured repeatedly
   for (auto _ : state) {
     EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
-    ProfitOracle omega{p, A, k, a, v};
+    ProfitOracle omega{unit_price, A, limit, a, v};
 
     auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     // CHECK_EQ(num_iters, 41);
@@ -54,7 +54,7 @@ static void ELL_normal_rb(benchmark::State &state) {
   // Code inside this loop is measured repeatedly
   for (auto _ : state) {
     Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
-    ProfitOracleRb omega{p, A, k, a, v, Vec{0.003, 0.007}, 1.0};
+    ProfitOracleRb omega{unit_price, A, limit, a, v, Vec{0.003, 0.007}, 1.0};
 
     auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     // CHECK_EQ(num_iters, 36);
@@ -68,7 +68,7 @@ static void ELL_stable_rb(benchmark::State &state) {
   // Code inside this loop is measured repeatedly
   for (auto _ : state) {
     EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
-    ProfitOracleRb omega{p, A, k, a, v, Vec{0.003, 0.007}, 1.0};
+    ProfitOracleRb omega{unit_price, A, limit, a, v, Vec{0.003, 0.007}, 1.0};
 
     auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
     // CHECK_EQ(num_iters, 41);
@@ -82,7 +82,7 @@ static void ELL_normal_q(benchmark::State &state) {
   // Code inside this loop is measured repeatedly
   for (auto _ : state) {
     Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
-    ProfitOracleQ omega{p, A, k, a, v};
+    ProfitOracleQ omega{unit_price, A, limit, a, v};
 
     auto result = cutting_plane_q(std::move(omega), std::move(ellip), 0.0);
     // CHECK_EQ(num_iters, 36);
@@ -96,7 +96,7 @@ static void ELL_stable_q(benchmark::State &state) {
   // Code inside this loop is measured repeatedly
   for (auto _ : state) {
     EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
-    ProfitOracleQ omega{p, A, k, a, v};
+    ProfitOracleQ omega{unit_price, A, limit, a, v};
 
     auto result = cutting_plane_q(std::move(omega), std::move(ellip), 0.0);
     // CHECK_EQ(num_iters, 41);

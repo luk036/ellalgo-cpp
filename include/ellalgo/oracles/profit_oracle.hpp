@@ -64,20 +64,20 @@ public:
    * @brief
    *
    * @param[in] y input quantity (in log scale)
-   * @param[in,out] t the best-so-far optimal value
+   * @param[in,out] tea the best-so-far optimal value
    * @return std::tuple<Cut, double> Cut and the updated best-so-far value
    */
-  auto assess_optim(const Vec &y, double &t) const -> std::tuple<Cut, bool>;
+  auto assess_optim(const Vec &y, double &tea) const -> std::tuple<Cut, bool>;
 
   /**
    * @brief
    *
    * @param[in] y input quantity (in log scale)
-   * @param[in,out] t the best-so-far optimal value
+   * @param[in,out] tea the best-so-far optimal value
    * @return std::tuple<Cut, double> Cut and the updated best-so-far value
    */
-  auto operator()(const Vec &y, double &t) const -> std::tuple<Cut, bool> {
-    return this->assess_optim(y, t);
+  auto operator()(const Vec &y, double &tea) const -> std::tuple<Cut, bool> {
+    return this->assess_optim(y, tea);
   }
 };
 
@@ -122,36 +122,36 @@ public:
    */
   ProfitOracleRb(double p, double A, double k, const Vec &a, const Vec &v,
                  const Vec &e, double e3)
-      : _uie{e}, _a{a}, _P(p - e3, A, k - e3, a, v + e3) {}
+      : _uie{e}, _a{a}, _P(p - e3, A, k - e3, a, v + Vec{e3, e3}) {}
 
   /**
    * @brief Make object callable for cutting_plane_optim()
    *
    * @param[in] y input quantity (in log scale)
-   * @param[in,out] t the best-so-far optimal value
+   * @param[in,out] tea the best-so-far optimal value
    * @return Cut and the updated best-so-far value
    *
    * @see cutting_plane_optim
    */
-  auto assess_optim(const Vec &y, double &t) -> std::tuple<Cut, bool> {
+  auto assess_optim(const Vec &y, double &tea) -> std::tuple<Cut, bool> {
     auto a_rb = this->_a;
     a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
     a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
     this->_P._a = a_rb;
-    return this->_P(y, t);
+    return this->_P(y, tea);
   }
 
   /**
    * @brief Make object callable for cutting_plane_optim()
    *
    * @param[in] y input quantity (in log scale)
-   * @param[in,out] t the best-so-far optimal value
+   * @param[in,out] tea the best-so-far optimal value
    * @return Cut and the updated best-so-far value
    *
    * @see cutting_plane_optim
    */
-  auto operator()(const Vec &y, double &t) -> std::tuple<Cut, bool> {
-    return this->assess_optim(y, t);
+  auto operator()(const Vec &y, double &tea) -> std::tuple<Cut, bool> {
+    return this->assess_optim(y, tea);
   }
 };
 
@@ -182,7 +182,7 @@ class ProfitOracleQ {
 
 private:
   ProfitOracle _P;
-  Vec _yd;
+  Vec _yd{};
 
 public:
   /**
@@ -201,27 +201,27 @@ public:
    * @brief Make object callable for cutting_plane_q()
    *
    * @param[in] y input quantity (in log scale)
-   * @param[in,out] t the best-so-far optimal value
+   * @param[in,out] tea the best-so-far optimal value
    * @param[in] retry whether it is a retry
    * @return Cut and the updated best-so-far value
    *
    * @see cutting_plane_q
    */
-  auto assess_optim_q(const Vec &y, double &t, bool retry)
+  auto assess_optim_q(const Vec &y, double &tea, bool retry)
       -> std::tuple<Cut, bool, Vec, bool>;
 
   /**
    * @brief Make object callable for cutting_plane_q()
    *
    * @param[in] y input quantity (in log scale)
-   * @param[in,out] t the best-so-far optimal value
+   * @param[in,out] tea the best-so-far optimal value
    * @param[in] retry whether it is a retry
    * @return Cut and the updated best-so-far value
    *
    * @see cutting_plane_q
    */
-  auto operator()(const Vec &y, double &t, bool retry)
+  auto operator()(const Vec &y, double &tea, bool retry)
       -> std::tuple<Cut, bool, Vec, bool> {
-    return this->assess_optim_q(y, t, retry);
+    return this->assess_optim_q(y, tea, retry);
   }
 };
