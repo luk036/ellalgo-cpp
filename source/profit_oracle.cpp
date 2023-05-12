@@ -54,7 +54,7 @@ auto ProfitOracleQ::assess_optim_q(const Vec &y, double &tea, bool retry)
     }
     this->_yd = std::log(x);
   }
-  auto result1 = this->_P(this->_yd, tea);
+  auto result1 = this->_P.assess_optim(this->_yd, tea);
   auto &cut = std::get<0>(result1);
   auto &shrunk = std::get<1>(result1);
   auto &g = std::get<0>(cut);

@@ -81,8 +81,7 @@ auto EllCalc::calc_ll_cc(const double &b1, const double &tsq) const
 auto EllCalc::calc_dc(const double &beta, const double &tsq) const
     -> std::tuple<CutStatus, double, double, double> {
   assert(beta >= 0.0);
-  auto bsq = beta * beta;
-  if (tsq < bsq) {
+  if (tsq < beta * beta) {
     return {CutStatus::NoSoln, 0.0, 0.0, 0.0}; // no sol'n
   }
   auto tau = std::sqrt(tsq);

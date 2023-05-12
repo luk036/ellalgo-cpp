@@ -24,7 +24,7 @@ TEST_CASE("Profit Test") {
   const auto v = Vec{10.0, 35.0};
 
   {
-    Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
+    Ell<Vec> ellip{Vec{100.0, 100.0}, Vec{0.0, 0.0}};
     ProfitOracle omega{unit_price, A, limit, a, v};
 
     const auto result =

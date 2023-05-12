@@ -4,12 +4,6 @@
 #include <cmath> // for log
 #include <tuple> // for tuple
 #include <valarray>
-// #include <xtensor/xaccessible.hpp>     // for xconst_accessible, xaccessible
-// #include <xtensor/xarray.hpp>          // for xarray_container
-// #include <xtensor/xlayout.hpp>         // for layout_type,
-// layout_type::row... #include <xtensor/xoperation.hpp>      // for
-// xfunction_type_t, operator+ #include <xtensor/xtensor_forward.hpp> // for
-// xarray
 
 /**
  * @brief Oracle for a profit maximization problem.
@@ -30,7 +24,6 @@
  *        k: a given constant that restricts the quantity of x1
  */
 class ProfitOracle {
-  // using Arr = xt::xarray<double, xt::layout_type::row_major>;
   using Vec = std::valarray<double>;
   using Cut = std::pair<Vec, double>;
 
@@ -68,17 +61,6 @@ public:
    * @return std::tuple<Cut, double> Cut and the updated best-so-far value
    */
   auto assess_optim(const Vec &y, double &tea) const -> std::tuple<Cut, bool>;
-
-  /**
-   * @brief
-   *
-   * @param[in] y input quantity (in log scale)
-   * @param[in,out] tea the best-so-far optimal value
-   * @return std::tuple<Cut, double> Cut and the updated best-so-far value
-   */
-  auto operator()(const Vec &y, double &tea) const -> std::tuple<Cut, bool> {
-    return this->assess_optim(y, tea);
-  }
 };
 
 /**
@@ -138,20 +120,7 @@ public:
     a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
     a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
     this->_P._a = a_rb;
-    return this->_P(y, tea);
-  }
-
-  /**
-   * @brief Make object callable for cutting_plane_optim()
-   *
-   * @param[in] y input quantity (in log scale)
-   * @param[in,out] tea the best-so-far optimal value
-   * @return Cut and the updated best-so-far value
-   *
-   * @see cutting_plane_optim
-   */
-  auto operator()(const Vec &y, double &tea) -> std::tuple<Cut, bool> {
-    return this->assess_optim(y, tea);
+    return this->_P.assess_optim(y, tea);
   }
 };
 
@@ -209,19 +178,4 @@ public:
    */
   auto assess_optim_q(const Vec &y, double &tea, bool retry)
       -> std::tuple<Cut, bool, Vec, bool>;
-
-  /**
-   * @brief Make object callable for cutting_plane_q()
-   *
-   * @param[in] y input quantity (in log scale)
-   * @param[in,out] tea the best-so-far optimal value
-   * @param[in] retry whether it is a retry
-   * @return Cut and the updated best-so-far value
-   *
-   * @see cutting_plane_q
-   */
-  auto operator()(const Vec &y, double &tea, bool retry)
-      -> std::tuple<Cut, bool, Vec, bool> {
-    return this->assess_optim_q(y, tea, retry);
-  }
 };

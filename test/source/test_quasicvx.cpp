@@ -32,7 +32,7 @@ struct MyQuasicCvxOracle {
     // constraint 1: exp(x) <= y, or sqrtx**2 <= ly
     double fj = sqrtx * sqrtx - ly;
     if (fj > 0.0) {
-      return std::make_tuple(std::make_pair(Vec{2 * sqrtx, -1.0}, fj), false);
+      return {{Vec{2 * sqrtx, -1.0}, fj}, false};
     }
 
     // constraint 2: x - y >= 1
@@ -42,10 +42,10 @@ struct MyQuasicCvxOracle {
     if (fj < 0.0) // feasible
     {
       t = sqrtx / tmp2;
-      return std::make_tuple(std::make_pair(Vec{-1.0, sqrtx}, 0), true);
+      return {{Vec{-1.0, sqrtx}, 0}, true};
     }
 
-    return std::make_tuple(std::make_pair(Vec{-1.0, tmp3}, fj), false);
+    return {{Vec{-1.0, tmp3}, fj}, false};
   }
 };
 
