@@ -53,7 +53,7 @@ TEST_CASE("Profit Test") {
     Ell<Vec> ellip{100.0, Vec{2.0, 0.0}};
     ProfitOracleQ omega{unit_price, A, limit, a, v};
     const auto result =
-        cutting_plane_q(std::move(omega), std::move(ellip), 0.0);
+        cutting_plane_optim_q(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
     const auto &num_iters = std::get<1>(result);
     REQUIRE_EQ(y.size(), 2U);
@@ -104,7 +104,7 @@ TEST_CASE("Profit Test (Stable)") {
     EllStable<Vec> ellip{100.0, Vec{2.0, 0.0}};
     ProfitOracleQ omega{unit_price, A, limit, a, v};
     const auto result =
-        cutting_plane_q(std::move(omega), std::move(ellip), 0.0);
+        cutting_plane_optim_q(std::move(omega), std::move(ellip), 0.0);
     const auto &y = std::get<0>(result);
     const auto &num_iters = std::get<1>(result);
     // CHECK(y != Vec{});

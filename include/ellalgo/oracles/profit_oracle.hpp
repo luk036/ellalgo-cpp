@@ -167,14 +167,14 @@ public:
       : _P{p, A, k, a, v} {}
 
   /**
-   * @brief Make object callable for cutting_plane_q()
+   * @brief Make object callable for cutting_plane_optim_q()
    *
    * @param[in] y input quantity (in log scale)
    * @param[in,out] tea the best-so-far optimal value
    * @param[in] retry whether it is a retry
    * @return Cut and the updated best-so-far value
    *
-   * @see cutting_plane_q
+   * @see cutting_plane_optim_q
    */
   auto assess_optim_q(const Vec &y, double &tea, bool retry)
       -> std::tuple<Cut, bool, Vec, bool>;
