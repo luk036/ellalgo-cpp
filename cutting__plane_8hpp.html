@@ -78,9 +78,9 @@
         <section id="typedef-members">
           <h2><a href="#typedef-members">Typedefs</a></h2>
           <dl class="m-doc">
-            <dt id="a2c12181ceb9810d192902d45eb06c23b">
-              <div class="m-doc-template">template&lt;typename Space&gt;</div>
-              using <a href="#a2c12181ceb9810d192902d45eb06c23b" class="m-doc-self">CuttingPlaneArrayType</a> = typename std::remove_reference&lt;Space&gt;::<a href="ell__config_8hpp.html#ac22991ee7a4279dc2449ab7658409beb" class="m-doc">type::<wbr />ArrayType</a>
+            <dt id="a64b5afb0b895e3a4eb09bd1847745e56">
+              <div class="m-doc-template">template&lt;typename SearchSpace&gt;</div>
+              using <a href="#a64b5afb0b895e3a4eb09bd1847745e56" class="m-doc-self">CuttingPlaneArrayType</a> = typename std::remove_reference&lt;SearchSpace&gt;::<a href="ell__config_8hpp.html#ac22991ee7a4279dc2449ab7658409beb" class="m-doc">type::<wbr />ArrayType</a>
             </dt>
             <dd><span></span></dd>
           </dl>
@@ -94,26 +94,26 @@
             </dt>
             <dd><span></span></dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename Oracle, typename Space&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a04a78b8ee44b210d744b01eca18a0f9b" class="m-doc">cutting_plane_feas</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
-              Space&amp;&amp; space,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; Space &gt;, size_t &gt; -&gt; auto</span>
+              <div class="m-doc-template">template&lt;typename OracleFeas, typename SearchSpace&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a878b90d5e6c180c4ddcebf1e9df2f50f" class="m-doc">cutting_plane_feas</a>(</span><span class="m-doc-wrap">OracleFeas&amp;&amp; omega,
+              SearchSpace&amp;&amp; space,
+              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpace &gt;, size_t &gt; -&gt; auto</span>
             </dt>
             <dd>Find a point in a convex set (defined through a cutting-plane oracle).</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename Oracle, typename Space, typename Num&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1f6cc4cc4a47125ee0d3fa2be6c8aca4" class="m-doc">cutting_plane_optim</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
-              Space&amp;&amp; space,
+              <div class="m-doc-template">template&lt;typename OracleOptim, typename SearchSpace, typename Num&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#af3884137d71cc1d972e324945c18c10a" class="m-doc">cutting_plane_optim</a>(</span><span class="m-doc-wrap">OracleOptim&amp;&amp; omega,
+              SearchSpace&amp;&amp; space,
               Num&amp;&amp; tea,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; Space &gt;, size_t &gt; -&gt; auto</span>
+              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpace &gt;, size_t &gt; -&gt; auto</span>
             </dt>
             <dd>Cutting-plane method for solving convex problem.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename OracleQ, typename SpaceQ, typename Num&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#aefca789e5fd0fcec10ff08e5e7332b67" class="m-doc">cutting_plane_q</a>(</span><span class="m-doc-wrap">OracleQ&amp;&amp; omega,
-              SpaceQ&amp;&amp; space_q,
+              <div class="m-doc-template">template&lt;typename OracleOptimQ, typename SearchSpaceQ, typename Num&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa1929f2439b2d833b55485e89f70892b" class="m-doc">cutting_plane_optim_q</a>(</span><span class="m-doc-wrap">OracleOptimQ&amp;&amp; omega,
+              SearchSpaceQ&amp;&amp; space_q,
               Num&amp;&amp; tea,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SpaceQ &gt;, size_t &gt; -&gt; auto</span>
+              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpaceQ &gt;, size_t &gt; -&gt; auto</span>
             </dt>
             <dd>Cutting-plane method for solving convex discrete optimization problem.</dd>
             <dt>
@@ -127,14 +127,14 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a04a78b8ee44b210d744b01eca18a0f9b"><div>
+          <section class="m-doc-details" id="a878b90d5e6c180c4ddcebf1e9df2f50f"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Oracle, typename Space&gt;
+                template&lt;typename OracleFeas, typename SearchSpace&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a04a78b8ee44b210d744b01eca18a0f9b" class="m-doc-self">cutting_plane_feas</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
-              Space&amp;&amp; space,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; Space &gt;, size_t &gt;</span></span>
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a878b90d5e6c180c4ddcebf1e9df2f50f" class="m-doc-self">cutting_plane_feas</a>(</span><span class="m-doc-wrap">OracleFeas&amp;&amp; omega,
+              SearchSpace&amp;&amp; space,
+              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpace &gt;, size_t &gt;</span></span>
             </h3>
             <p>Find a point in a convex set (defined through a cutting-plane oracle).</p>
             <table class="m-table m-fullwidth m-flat">
@@ -143,11 +143,11 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">Oracle</td>
+                  <td style="width: 1%">OracleFeas</td>
                   <td></td>
                 </tr>
                 <tr>
-                  <td>Space</td>
+                  <td>SearchSpace</td>
                   <td></td>
                 </tr>
               </tbody>
@@ -177,15 +177,15 @@
             </table>
 <p>A function f(x) is <em>convex</em> if there always exist a g(x) such that f(z) &gt;= f(x) + g(x)&#x27; * (z - x), forall z, x in dom f. Note that dom f does not need to be a convex set in our definition. The affine function g&#x27; (x - xc) + beta is called a cutting-plane, or a `&lsquo;cut&rsquo;&#x27; for short. This algorithm solves the following feasibility problem:</p><p>find x s.t. f(x) &lt;= 0,</p><p>A <em>separation oracle</em> asserts that an evalution point x0 is feasible, or provide a cut that separates the feasible region and x0.</p>
           </div></section>
-          <section class="m-doc-details" id="a1f6cc4cc4a47125ee0d3fa2be6c8aca4"><div>
+          <section class="m-doc-details" id="af3884137d71cc1d972e324945c18c10a"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Oracle, typename Space, typename Num&gt;
+                template&lt;typename OracleOptim, typename SearchSpace, typename Num&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1f6cc4cc4a47125ee0d3fa2be6c8aca4" class="m-doc-self">cutting_plane_optim</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
-              Space&amp;&amp; space,
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3884137d71cc1d972e324945c18c10a" class="m-doc-self">cutting_plane_optim</a>(</span><span class="m-doc-wrap">OracleOptim&amp;&amp; omega,
+              SearchSpace&amp;&amp; space,
               Num&amp;&amp; tea,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; Space &gt;, size_t &gt;</span></span>
+              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpace &gt;, size_t &gt;</span></span>
             </h3>
             <p>Cutting-plane method for solving convex problem.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -194,11 +194,11 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">Oracle</td>
+                  <td style="width: 1%">OracleOptim</td>
                   <td></td>
                 </tr>
                 <tr>
-                  <td>Space</td>
+                  <td>SearchSpace</td>
                   <td></td>
                 </tr>
                 <tr>
@@ -235,24 +235,41 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aefca789e5fd0fcec10ff08e5e7332b67"><div>
+          <section class="m-doc-details" id="aa1929f2439b2d833b55485e89f70892b"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename OracleQ, typename SpaceQ, typename Num&gt;
+                template&lt;typename OracleOptimQ, typename SearchSpaceQ, typename Num&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aefca789e5fd0fcec10ff08e5e7332b67" class="m-doc-self">cutting_plane_q</a>(</span><span class="m-doc-wrap">OracleQ&amp;&amp; omega,
-              SpaceQ&amp;&amp; space_q,
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa1929f2439b2d833b55485e89f70892b" class="m-doc-self">cutting_plane_optim_q</a>(</span><span class="m-doc-wrap">OracleOptimQ&amp;&amp; omega,
+              SearchSpaceQ&amp;&amp; space_q,
               Num&amp;&amp; tea,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SpaceQ &gt;, size_t &gt;</span></span>
+              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpaceQ &gt;, size_t &gt;</span></span>
             </h3>
             <p>Cutting-plane method for solving convex discrete optimization problem.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">OracleOptimQ</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>SearchSpaceQ</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Num</td>
+                  <td></td>
+                </tr>
+              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">omega&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>omega&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
                   <td>perform assessment on x0</td>
                 </tr>
                 <tr>
