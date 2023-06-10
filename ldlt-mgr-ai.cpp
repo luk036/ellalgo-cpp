@@ -1,6 +1,8 @@
 #include <cmath>
 #include <functional>
 #include <vector>
+#include <numeric>
+
 
 class LDLTMgr {
 private:
