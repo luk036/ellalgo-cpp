@@ -90,7 +90,8 @@ public:
    *
    * See also: factorize()
    */
-  auto factor_with_allow_semidefinte(std::function<double(size_t, size_t)> get_matrix_elem) -> bool;
+  auto factor_with_allow_semidefinte(
+      std::function<double(size_t, size_t)> get_matrix_elem) -> bool;
 
   /**
    * @brief Is $A$ symmetric positive definite (spd)
