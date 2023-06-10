@@ -20,19 +20,20 @@ auto ProfitOracle::assess_optim(const Vec &y, double &tea) const
     return {{Vec{1.0, 0.0}, f1}, false};
   }
 
-  const auto log_Cobb = this->_log_pA + this->_a[0] * y[0] + this->_a[1] * y[1];
+  const auto log_Cobb = this->_log_pA + this->_elasticities[0] * y[0] +
+                        this->_elasticities[1] * y[1];
   const Vec x = std::exp(y);
-  const auto vx = this->_v[0] * x[0] + this->_v[1] * x[1];
+  const auto vx = this->_price_out[0] * x[0] + this->_price_out[1] * x[1];
   auto te = tea + vx;
 
   auto fj = std::log(te) - log_Cobb;
   if (fj < 0.0) {
     te = std::exp(log_Cobb);
     tea = te - vx;
-    Vec g = (this->_v * x) / te - this->_a;
+    Vec g = (this->_price_out * x) / te - this->_elasticities;
     return {{std::move(g), 0.0}, true};
   }
-  Vec g = (this->_v * x) / te - this->_a;
+  Vec g = (this->_price_out * x) / te - this->_elasticities;
   return {{std::move(g), fj}, false};
 }
 

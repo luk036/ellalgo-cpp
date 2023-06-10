@@ -30,10 +30,10 @@ class ProfitOracle {
 private:
   const double _log_pA;
   const double _log_k;
-  const Vec _v;
+  const Vec _price_out;
 
 public:
-  Vec _a;
+  Vec _elasticities;
 
   /**
    * @brief Construct a new profit oracle object
@@ -45,7 +45,8 @@ public:
    * @param[in] v output price
    */
   ProfitOracle(double p, double A, double k, const Vec &a, const Vec &v)
-      : _log_pA{std::log(p * A)}, _log_k{std::log(k)}, _v{v}, _a{a} {}
+      : _log_pA{std::log(p * A)}, _log_k{std::log(k)}, _price_out{v},
+        _elasticities{a} {}
 
   /**
    * @brief Construct a new profit oracle object (only explicitly)
@@ -87,7 +88,7 @@ class ProfitOracleRb {
 
 private:
   const Vec _uie;
-  Vec _a;
+  Vec _elasticities;
   ProfitOracle _P;
 
 public:
@@ -104,7 +105,7 @@ public:
    */
   ProfitOracleRb(double p, double A, double k, const Vec &a, const Vec &v,
                  const Vec &e, double e3)
-      : _uie{e}, _a{a}, _P(p - e3, A, k - e3, a, v + Vec{e3, e3}) {}
+      : _uie{e}, _elasticities{a}, _P(p - e3, A, k - e3, a, v + Vec{e3, e3}) {}
 
   /**
    * @brief Make object callable for cutting_plane_optim()
@@ -116,10 +117,10 @@ public:
    * @see cutting_plane_optim
    */
   auto assess_optim(const Vec &y, double &tea) -> std::tuple<Cut, bool> {
-    auto a_rb = this->_a;
+    auto a_rb = this->_elasticities;
     a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
     a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
-    this->_P._a = a_rb;
+    this->_P._elasticities = a_rb;
     return this->_P.assess_optim(y, tea);
   }
 };
