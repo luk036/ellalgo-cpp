@@ -79,8 +79,8 @@ public:
    *
    * @param[in] b0
    * @param[in] b1
-   * @param[in] tsq 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @param[in] tsq
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto calc_ll_dc(const double &b0, const double &b1, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
@@ -93,8 +93,8 @@ public:
    *
    * @param[in] b1
    * @param[in] b1sq
-   * @param[in] tsq 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @param[in] tsq
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto calc_ll_cc(const double &b1, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
@@ -105,8 +105,8 @@ public:
    *        g' (x - xc) + beta \le 0
    *
    * @param[in] beta
-   * @param[in] tsq 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @param[in] tsq
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto calc_dc(const double &beta, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
@@ -116,8 +116,8 @@ public:
    *
    *        g' (x - xc) \le 0
    *
-   * @param[in] tsq 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @param[in] tsq
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto calc_cc(const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
@@ -130,8 +130,8 @@ public:
    *
    * @param[in] b0
    * @param[in] b1
-   * @param[in] tsq 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @param[in] tsq
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto calc_ll_dc_q(const double &b0, const double &b1, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
@@ -142,34 +142,34 @@ public:
    *        g' (x - xc) + beta \le 0
    *
    * @param[in] beta
-   * @param[in] tsq 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @param[in] tsq
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto calc_dc_q(const double &beta, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
 
 private:
   /**
-   * @brief 
-   * 
-   * @param b0 
-   * @param b1 
-   * @param b1sq 
-   * @param b0b1 
-   * @param tsq 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @brief
+   *
+   * @param b0
+   * @param b1
+   * @param b1sq
+   * @param b0b1
+   * @param tsq
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto _calc_ll_core(const double &b0, const double &b1, const double &b1sq,
                      const double &b0b1, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double>;
 
   /**
-   * @brief 
-   * 
-   * @param beta 
-   * @param tau 
-   * @param gamma 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @brief
+   *
+   * @param beta
+   * @param tau
+   * @param gamma
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto _calc_dc_core(const double &beta, const double &tau,
                      const double &gamma) const

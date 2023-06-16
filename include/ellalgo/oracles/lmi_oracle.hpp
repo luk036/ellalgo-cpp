@@ -31,14 +31,14 @@ public:
    * @param[in] B
    */
   LmiOracle(size_t ndim, const std::vector<Mat> &F, Mat B)
-      : _mq{ndim}, _F{F}, _F0{std::move(B)},
-        cut{std::unique_ptr<Cut>(new Cut{})} {}
+      : _mq{ndim}, _F{F}, _F0{std::move(B)}, cut{std::unique_ptr<Cut>(
+                                                 new Cut{})} {}
 
   /**
    * @brief
    *
    * @param[in] x
-   * @return Cut* 
+   * @return Cut*
    */
   auto assess_feas(const Arr036 &x) -> Cut * {
     const auto n = x.size();
@@ -69,7 +69,7 @@ public:
    * @brief
    *
    * @param[in] x
-   * @return Cut* 
+   * @return Cut*
    */
   auto operator()(const Arr036 &x) -> Cut * { return assess_feas(x); }
 };

@@ -26,7 +26,7 @@ private:
 public:
   /**
    * @brief Construct a new Lmi 0 Oracle object
-   * 
+   *
    * @param[in] ndim
    * @param[in] F
    */
@@ -37,7 +37,7 @@ public:
    * @brief
    *
    * @param[in] x
-   * @return Cut* 
+   * @return Cut*
    */
   auto assess_feas(const Arr036 &x) -> Cut * {
     const auto n = x.size();
@@ -68,7 +68,7 @@ public:
    * @brief
    *
    * @param[in] x
-   * @return Cut* 
+   * @return Cut*
    */
   auto operator()(const Arr036 &x) -> Cut * { return assess_feas(x); }
 };

@@ -174,10 +174,10 @@ public:
   /**
    * @brief Update ellipsoid core function using the cut(s)
    *
-   * @tparam T 
-   * @param grad 
-   * @param beta 
-   * @return CutStatus 
+   * @tparam T
+   * @param grad
+   * @param beta
+   * @return CutStatus
    */
   template <typename T>
   auto update_stable_cc(Vec &grad, const T &beta) -> CutStatus {
@@ -190,10 +190,10 @@ public:
   /**
    * @brief Update ellipsoid core function using the cut(s)
    *
-   * @tparam T 
-   * @param grad 
-   * @param beta 
-   * @return CutStatus 
+   * @tparam T
+   * @param grad
+   * @param beta
+   * @return CutStatus
    */
   template <typename T>
   auto update_stable_q(Vec &grad, const T &beta) -> CutStatus {
@@ -205,14 +205,14 @@ public:
 
 private:
   /**
-   * @brief 
-   * 
-   * @tparam T 
-   * @tparam Fn 
-   * @param grad 
-   * @param beta 
-   * @param cut_strategy 
-   * @return CutStatus 
+   * @brief
+   *
+   * @tparam T
+   * @tparam Fn
+   * @param grad
+   * @param beta
+   * @param cut_strategy
+   * @return CutStatus
    */
   template <typename T, typename Fn>
   auto _update_core(Vec &grad, const T &beta, Fn &&cut_strategy) -> CutStatus {
@@ -260,14 +260,14 @@ private:
   }
 
   /**
-   * @brief 
-   * 
-   * @tparam T 
-   * @tparam Fn 
-   * @param g 
-   * @param beta 
-   * @param cut_strategy 
-   * @return CutStatus 
+   * @brief
+   *
+   * @tparam T
+   * @tparam Fn
+   * @param g
+   * @param beta
+   * @param cut_strategy
+   * @return CutStatus
    */
   template <typename T, typename Fn>
   auto _update_stable_core(Vec &g, const T &beta, Fn &&cut_strategy)
@@ -343,11 +343,11 @@ private:
   }
 
   /**
-   * @brief 
-   * 
-   * @param beta 
-   * @param tsq 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @brief
+   *
+   * @param beta
+   * @param tsq
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto _update_cut_dc(const double &beta, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> {
@@ -355,11 +355,11 @@ private:
   }
 
   /**
-   * @brief 
-   * 
-   * @param beta 
-   * @param tsq 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @brief
+   *
+   * @param beta
+   * @param tsq
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto _update_cut_dc(const std::valarray<double> &beta,
                       const double &tsq) const
@@ -371,10 +371,10 @@ private:
   }
 
   /**
-   * @brief 
-   * 
-   * @param tsq 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @brief
+   *
+   * @param tsq
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto _update_cut_cc(const double &, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> {
@@ -382,11 +382,11 @@ private:
   }
 
   /**
-   * @brief 
-   * 
-   * @param beta 
-   * @param tsq 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @brief
+   *
+   * @param beta
+   * @param tsq
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto _update_cut_cc(const std::valarray<double> &beta,
                       const double &tsq) const
@@ -398,11 +398,11 @@ private:
   }
 
   /**
-   * @brief 
-   * 
-   * @param beta 
-   * @param tsq 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @brief
+   *
+   * @param beta
+   * @param tsq
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto _update_cut_q(const double &beta, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> {
@@ -410,11 +410,11 @@ private:
   }
 
   /**
-   * @brief 
-   * 
-   * @param beta 
-   * @param tsq 
-   * @return std::tuple<CutStatus, double, double, double> 
+   * @brief
+   *
+   * @param beta
+   * @param tsq
+   * @return std::tuple<CutStatus, double, double, double>
    */
   auto _update_cut_q(const std::valarray<double> &beta, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> { // parallel cut

@@ -76,8 +76,8 @@ public:
    * @brief Perform LDLT Factorization (Lazy evaluation)
    *
    * @param[in] get_matrix_elem function to access the elements of A
-   * @return true 
-   * @return false 
+   * @return true
+   * @return false
    *
    * See also: factorize()
    */
@@ -87,8 +87,8 @@ public:
    * @brief Perform LDLT Factorization (Lazy evaluation)
    *
    * @param[in] get_matrix_elem function to access the elements of A
-   * @return true 
-   * @return false 
+   * @return true
+   * @return false
    *
    * See also: factorize()
    */
@@ -113,9 +113,9 @@ public:
 
   /**
    * @brief Set the witness vec object
-   * 
-   * @tparam Arr036 
-   * @param v 
+   *
+   * @tparam Arr036
+   * @param v
    */
   template <typename Arr036> auto set_witness_vec(Arr036 &v) const -> void {
     for (auto i = 0U; i != this->_n; ++i) {
@@ -126,9 +126,9 @@ public:
   /**
    * @brief Calculate v'*{A}(p,p)*v
    *
-   * @tparam Mat 
+   * @tparam Mat
    * @param[in] A
-   * @return double 
+   * @return double
    */
   template <typename Mat> auto sym_quad(const Mat &A) const -> double {
     auto res = double{};
@@ -154,10 +154,10 @@ public:
    */
 
   /**
-   * @brief 
-   * 
-   * @tparam Mat 
-   * @param[in,out] M 
+   * @brief
+   *
+   * @tparam Mat
+   * @param[in,out] M
    */
   template <typename Mat> auto sqrt(Mat &M) -> void {
     assert(this->is_spd());

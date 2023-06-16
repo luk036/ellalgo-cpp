@@ -7,8 +7,8 @@ using Arr = std::vector<double>;
 using Cut = std::tuple<Arr, double>;
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  */
 class ProfitOracle {
   double log_pA;
@@ -19,10 +19,10 @@ class ProfitOracle {
 public:
   /**
    * @brief Construct a new Profit Oracle object
-   * 
-   * @param params 
-   * @param elasticities 
-   * @param price_out 
+   *
+   * @param params
+   * @param elasticities
+   * @param price_out
    */
   ProfitOracle(std::tuple<double, double, double> params, Arr elasticities,
                Arr price_out) {
@@ -35,11 +35,11 @@ public:
   }
 
   /**
-   * @brief 
-   * 
-   * @param y 
-   * @param tea 
-   * @return std::tuple<Cut, std::optional<double>> 
+   * @brief
+   *
+   * @param y
+   * @param tea
+   * @return std::tuple<Cut, std::optional<double>>
    */
   std::tuple<Cut, std::optional<double>> assess_optim(Arr y, double tea) {
     double fj;

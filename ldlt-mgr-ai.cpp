@@ -4,8 +4,8 @@
 #include <vector>
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  */
 class LDLTMgr {
 private:
@@ -17,8 +17,8 @@ private:
 public:
   /**
    * @brief Construct a new LDLTMgr object
-   * 
-   * @param N 
+   *
+   * @param N
    */
   LDLTMgr(int N) {
     p = std::make_pair(0, 0);
@@ -28,22 +28,22 @@ public:
   }
 
   /**
-   * @brief 
-   * 
-   * @param A 
-   * @return true 
-   * @return false 
+   * @brief
+   *
+   * @param A
+   * @return true
+   * @return false
    */
   bool factorize(std::vector<std::vector<double>> A) {
     return factor([&A](int i, int j) { return A[i][j]; });
   }
 
   /**
-   * @brief 
-   * 
-   * @param get_elem 
-   * @return true 
-   * @return false 
+   * @brief
+   *
+   * @param get_elem
+   * @return true
+   * @return false
    */
   bool factor(std::function<double(int, int)> get_elem) {
     int start = 0;
@@ -68,17 +68,17 @@ public:
   }
 
   /**
-   * @brief 
-   * 
-   * @return true 
-   * @return false 
+   * @brief
+   *
+   * @return true
+   * @return false
    */
   bool is_spd() { return p.second == 0; }
 
   /**
-   * @brief 
-   * 
-   * @return double 
+   * @brief
+   *
+   * @return double
    */
   double witness() {
     if (is_spd()) {
@@ -95,10 +95,10 @@ public:
   }
 
   /**
-   * @brief 
-   * 
-   * @param A 
-   * @return double 
+   * @brief
+   *
+   * @param A
+   * @return double
    */
   double sym_quad(std::vector<std::vector<double>> A) {
     int s = p.first, n = p.second;
