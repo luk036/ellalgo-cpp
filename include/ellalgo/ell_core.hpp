@@ -174,9 +174,10 @@ public:
   /**
    * @brief Update ellipsoid core function using the cut(s)
    *
-   * @tparam T
-   * @param[in] cut cutting-plane
-   * @return std::tuple<int, double>
+   * @tparam T 
+   * @param grad 
+   * @param beta 
+   * @return CutStatus 
    */
   template <typename T>
   auto update_stable_cc(Vec &grad, const T &beta) -> CutStatus {
@@ -189,9 +190,10 @@ public:
   /**
    * @brief Update ellipsoid core function using the cut(s)
    *
-   * @tparam T
-   * @param[in] cut cutting-plane
-   * @return std::tuple<int, double>
+   * @tparam T 
+   * @param grad 
+   * @param beta 
+   * @return CutStatus 
    */
   template <typename T>
   auto update_stable_q(Vec &grad, const T &beta) -> CutStatus {
@@ -202,6 +204,16 @@ public:
   }
 
 private:
+  /**
+   * @brief 
+   * 
+   * @tparam T 
+   * @tparam Fn 
+   * @param grad 
+   * @param beta 
+   * @param cut_strategy 
+   * @return CutStatus 
+   */
   template <typename T, typename Fn>
   auto _update_core(Vec &grad, const T &beta, Fn &&cut_strategy) -> CutStatus {
     std::valarray<double> grad_t(0.0, this->_n);
@@ -247,6 +259,16 @@ private:
     return status; // g++-7 is ok
   }
 
+  /**
+   * @brief 
+   * 
+   * @tparam T 
+   * @tparam Fn 
+   * @param g 
+   * @param beta 
+   * @param cut_strategy 
+   * @return CutStatus 
+   */
   template <typename T, typename Fn>
   auto _update_stable_core(Vec &g, const T &beta, Fn &&cut_strategy)
       -> CutStatus {
@@ -320,11 +342,25 @@ private:
     return status;
   }
 
+  /**
+   * @brief 
+   * 
+   * @param beta 
+   * @param tsq 
+   * @return std::tuple<CutStatus, double, double, double> 
+   */
   auto _update_cut_dc(const double &beta, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> {
     return this->_helper.calc_dc(beta, tsq);
   }
 
+  /**
+   * @brief 
+   * 
+   * @param beta 
+   * @param tsq 
+   * @return std::tuple<CutStatus, double, double, double> 
+   */
   auto _update_cut_dc(const std::valarray<double> &beta,
                       const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> { // parallel cut
@@ -334,11 +370,24 @@ private:
     return this->_helper.calc_ll_dc(beta[0], beta[1], tsq);
   }
 
+  /**
+   * @brief 
+   * 
+   * @param tsq 
+   * @return std::tuple<CutStatus, double, double, double> 
+   */
   auto _update_cut_cc(const double &, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> {
     return this->_helper.calc_cc(tsq);
   }
 
+  /**
+   * @brief 
+   * 
+   * @param beta 
+   * @param tsq 
+   * @return std::tuple<CutStatus, double, double, double> 
+   */
   auto _update_cut_cc(const std::valarray<double> &beta,
                       const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> { // parallel cut
@@ -348,11 +397,25 @@ private:
     return this->_helper.calc_ll_cc(beta[1], tsq);
   }
 
+  /**
+   * @brief 
+   * 
+   * @param beta 
+   * @param tsq 
+   * @return std::tuple<CutStatus, double, double, double> 
+   */
   auto _update_cut_q(const double &beta, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> {
     return this->_helper.calc_dc_q(beta, tsq);
   }
 
+  /**
+   * @brief 
+   * 
+   * @param beta 
+   * @param tsq 
+   * @return std::tuple<CutStatus, double, double, double> 
+   */
   auto _update_cut_q(const std::valarray<double> &beta, const double &tsq) const
       -> std::tuple<CutStatus, double, double, double> { // parallel cut
     if (beta.size() < 2) {

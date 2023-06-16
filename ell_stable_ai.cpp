@@ -8,6 +8,10 @@ using ArrayType = std::vector<double>;
 using CutChoice = std::variant<double, ArrayType>;
 using Cut = std::pair<ArrayType, CutChoice>;
 
+/**
+ * @brief 
+ * 
+ */
 class EllCalc {
     public:
         static double sum(const ArrayType& arr) {
@@ -19,12 +23,20 @@ class EllCalc {
         }
 };
 
+/**
+ * @brief 
+ * 
+ */
 enum class CutStatus {
     Success,
     Infeasible,
     Unbounded
 };
 
+/**
+ * @brief 
+ * 
+ */
 class EllStable {
     public:
         bool no_defer_trick = false;
@@ -35,6 +47,13 @@ class EllStable {
         int n;
         EllCalc helper;
 
+        /**
+         * @brief 
+         * 
+         * @param cut 
+         * @param cut_strategy 
+         * @return CutStatus 
+         */
         CutStatus update_core(Cut cut, std::function<CutStatus(double, double)> cut_strategy) {
             ArrayType g = cut.first;
             CutChoice beta = cut.second;

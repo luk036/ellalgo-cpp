@@ -26,6 +26,7 @@ public:
   /**
    * @brief Construct a new lmi oracle object
    *
+   * @param[in] ndim
    * @param[in] F
    * @param[in] B
    */
@@ -37,7 +38,7 @@ public:
    * @brief
    *
    * @param[in] x
-   * @return std::optional<Cut>
+   * @return Cut* 
    */
   auto assess_feas(const Arr036 &x) -> Cut * {
     const auto n = x.size();
@@ -68,7 +69,7 @@ public:
    * @brief
    *
    * @param[in] x
-   * @return std::optional<Cut>
+   * @return Cut* 
    */
   auto operator()(const Arr036 &x) -> Cut * { return assess_feas(x); }
 };

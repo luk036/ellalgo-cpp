@@ -3,6 +3,10 @@
 #include <numeric>
 #include <vector>
 
+/**
+ * @brief 
+ * 
+ */
 class LDLTMgr {
 private:
   std::pair<int, int> p;
@@ -11,15 +15,36 @@ private:
   std::vector<std::vector<double>> _T;
 
 public:
+  /**
+   * @brief Construct a new LDLTMgr object
+   * 
+   * @param N 
+   */
   LDLTMgr(int N) {
     p = std::make_pair(0, 0);
     v = std::vector<double>(N, 0);
     _n = N;
     _T = std::vector<std::vector<double>>(N, std::vector<double>(N, 0));
   }
+
+  /**
+   * @brief 
+   * 
+   * @param A 
+   * @return true 
+   * @return false 
+   */
   bool factorize(std::vector<std::vector<double>> A) {
     return factor([&A](int i, int j) { return A[i][j]; });
   }
+
+  /**
+   * @brief 
+   * 
+   * @param get_elem 
+   * @return true 
+   * @return false 
+   */
   bool factor(std::function<double(int, int)> get_elem) {
     int start = 0;
     p = std::make_pair(0, 0);
@@ -41,7 +66,20 @@ public:
     }
     return is_spd();
   }
+
+  /**
+   * @brief 
+   * 
+   * @return true 
+   * @return false 
+   */
   bool is_spd() { return p.second == 0; }
+
+  /**
+   * @brief 
+   * 
+   * @return double 
+   */
   double witness() {
     if (is_spd()) {
       throw std::runtime_error("Matrix is SPD");
@@ -55,6 +93,13 @@ public:
     }
     return -_T[m][m];
   }
+
+  /**
+   * @brief 
+   * 
+   * @param A 
+   * @return double 
+   */
   double sym_quad(std::vector<std::vector<double>> A) {
     int s = p.first, n = p.second;
     std::vector<double> v =

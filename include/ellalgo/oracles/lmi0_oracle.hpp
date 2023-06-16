@@ -25,10 +25,10 @@ private:
 
 public:
   /**
-   * @brief Construct a new lmi oracle object
-   *
-   * @param[in] F
+   * @brief Construct a new Lmi 0 Oracle object
+   * 
    * @param[in] ndim
+   * @param[in] F
    */
   Lmi0Oracle(size_t ndim, const std::vector<Mat> &F)
       : _mq(ndim), _F{F}, cut{std::unique_ptr<Cut>(new Cut{})} {}
@@ -37,7 +37,7 @@ public:
    * @brief
    *
    * @param[in] x
-   * @return std::optional<Cut>
+   * @return Cut* 
    */
   auto assess_feas(const Arr036 &x) -> Cut * {
     const auto n = x.size();
@@ -68,7 +68,7 @@ public:
    * @brief
    *
    * @param[in] x
-   * @return std::optional<Cut>
+   * @return Cut* 
    */
   auto operator()(const Arr036 &x) -> Cut * { return assess_feas(x); }
 };

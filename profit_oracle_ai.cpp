@@ -6,6 +6,10 @@
 using Arr = std::vector<double>;
 using Cut = std::tuple<Arr, double>;
 
+/**
+ * @brief 
+ * 
+ */
 class ProfitOracle {
   double log_pA;
   double log_k;
@@ -13,6 +17,13 @@ class ProfitOracle {
   Arr elasticities;
 
 public:
+  /**
+   * @brief Construct a new Profit Oracle object
+   * 
+   * @param params 
+   * @param elasticities 
+   * @param price_out 
+   */
   ProfitOracle(std::tuple<double, double, double> params, Arr elasticities,
                Arr price_out) {
     double unit_price, scale, limit;
@@ -22,6 +33,14 @@ public:
     this->price_out = price_out;
     this->elasticities = elasticities;
   }
+
+  /**
+   * @brief 
+   * 
+   * @param y 
+   * @param tea 
+   * @return std::tuple<Cut, std::optional<double>> 
+   */
   std::tuple<Cut, std::optional<double>> assess_optim(Arr y, double tea) {
     double fj;
     if ((fj = y[0] - log_k) > 0.0) {

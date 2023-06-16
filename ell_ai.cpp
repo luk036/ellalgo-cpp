@@ -9,8 +9,16 @@ using ArrayType = std::vector<double>;
 using CutChoice = std::variant<double, ArrayType>;
 using Cut = std::tuple<ArrayType, CutChoice>;
 
+/**
+ * @brief 
+ * 
+ */
 enum class CutStatus { Success, Infeasible, Unbounded };
 
+/**
+ * @brief 
+ * 
+ */
 class Ell {
     public:
         bool no_defer_trick = false;
@@ -19,6 +27,13 @@ class Ell {
         double _kappa;
         double _tsq;
         // EllCalc _helper;
+
+        /**
+         * @brief Construct a new Ell object
+         * 
+         * @param val 
+         * @param xc 
+         */
         Ell(int val, ArrayType xc) {
             int ndim = xc.size();
             // _helper = EllCalc(ndim);
@@ -38,6 +53,14 @@ class Ell {
                 }
             }
         }
+
+        /**
+         * @brief 
+         * 
+         * @param cut 
+         * @param cut_strategy 
+         * @return CutStatus 
+         */
         CutStatus _update_core(Cut cut, std::function<CutStatus(CutChoice, double)> cut_strategy) {
             ArrayType grad = std::get<0>(cut);
             CutChoice beta = std::get<1>(cut);

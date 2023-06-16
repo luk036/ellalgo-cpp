@@ -75,8 +75,9 @@ public:
   /**
    * @brief Perform LDLT Factorization (Lazy evaluation)
    *
-   * @tparam Fn
    * @param[in] get_matrix_elem function to access the elements of A
+   * @return true 
+   * @return false 
    *
    * See also: factorize()
    */
@@ -85,8 +86,9 @@ public:
   /**
    * @brief Perform LDLT Factorization (Lazy evaluation)
    *
-   * @tparam Fn
    * @param[in] get_matrix_elem function to access the elements of A
+   * @return true 
+   * @return false 
    *
    * See also: factorize()
    */
@@ -105,10 +107,16 @@ public:
    * @brief witness that certifies $A$ is not
    * symmetric positive definite (spd)
    *
-   * @return auto
+   * @return double
    */
   auto witness() -> double;
 
+  /**
+   * @brief Set the witness vec object
+   * 
+   * @tparam Arr036 
+   * @param v 
+   */
   template <typename Arr036> auto set_witness_vec(Arr036 &v) const -> void {
     for (auto i = 0U; i != this->_n; ++i) {
       v[i] = this->witness_vec[i];
@@ -118,8 +126,9 @@ public:
   /**
    * @brief Calculate v'*{A}(p,p)*v
    *
+   * @tparam Mat 
    * @param[in] A
-   * @return double
+   * @return double 
    */
   template <typename Mat> auto sym_quad(const Mat &A) const -> double {
     auto res = double{};
@@ -142,6 +151,13 @@ public:
    *
    * Note: must input a zero matrix
    * @return typename LDLTMgr<Arr036>::Mat
+   */
+
+  /**
+   * @brief 
+   * 
+   * @tparam Mat 
+   * @param[in,out] M 
    */
   template <typename Mat> auto sqrt(Mat &M) -> void {
     assert(this->is_spd());
