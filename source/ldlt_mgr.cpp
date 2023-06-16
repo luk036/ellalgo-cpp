@@ -31,7 +31,7 @@ auto LDLTMgr::factor(std::function<double(size_t, size_t)> get_matrix_elem)
   return this->is_spd();
 }
 
-auto LDLTMgr::factor_with_allow_semidefinte(
+auto LDLTMgr::factor_with_allow_semidefinite(
     std::function<double(size_t, size_t)> get_matrix_elem) -> bool {
   this->p = {0U, 0U};
   // auto &[start, stop] = this->p;

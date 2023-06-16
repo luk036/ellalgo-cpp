@@ -90,7 +90,7 @@ public:
    *
    * See also: factorize()
    */
-  auto factor_with_allow_semidefinte(
+  auto factor_with_allow_semidefinite(
       std::function<double(size_t, size_t)> get_matrix_elem) -> bool;
 
   /**
