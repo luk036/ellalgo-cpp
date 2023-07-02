@@ -72,7 +72,7 @@ public:
   EllCalc(const EllCalc &E) = default;
 
   /**
-   * @brief Calculate new ellipsoid under Parallel Cut
+   * @brief Calculate a new ellipsoid under a parallel cut
    *
    *        g' (x - xc) + beta0 \le 0
    *        g' (x - xc) + beta1 \ge 0

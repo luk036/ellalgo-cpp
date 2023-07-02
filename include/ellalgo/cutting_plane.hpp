@@ -28,18 +28,21 @@ inline auto invalid_value() ->
 /**
  * @brief Find a point in a convex set (defined through a cutting-plane oracle).
  *
- * A function f(x) is *convex* if there always exist a g(x)
- * such that f(z) >= f(x) + g(x)' * (z - x), forall z, x in dom f.
- * Note that dom f does not need to be a convex set in our definition.
- * The affine function g' (x - xc) + beta is called a cutting-plane,
- * or a ``cut'' for short.
- * This algorithm solves the following feasibility problem:
+ * The `cutting_plane_feas` function implements the cutting-plane method for
+ * solving a convex feasibility problem:
  *
  *   find x
  *   s.t. f(x) <= 0,
  *
- * A *separation oracle* asserts that an evalution point x0 is feasible,
- * or provide a cut that separates the feasible region and x0.
+ * It takes a cutting-plane oracle `omega`, a search space `space`, and an
+ * options object as input. A function f(x) is *convex* if there always exist a
+ * g(x) such that f(z) >= f(x) + g(x)' * (z - x), forall z, x in dom f. Note
+ * that dom f does not need to be a convex set in our definition. The affine
+ * function g' (x - xc) + beta is called a cutting-plane, or a ``cut'' for
+ * short.
+ *
+ * A *separation oracle* asserts that an evalution point xc is feasible,
+ * or provide a cut that separates the feasible region and xc.
  *
  * @tparam OracleFeas
  * @tparam SearchSpace
@@ -69,6 +72,19 @@ inline auto cutting_plane_feas(OracleFeas &&omega, SearchSpace &&space,
 
 /**
  * @brief Cutting-plane method for solving convex problem
+ *
+ * The `cutting_plane_optim` function implements the cutting-plane method for
+ * solving a convex optimization problem:
+ *
+ *   min  t
+ *   s.t. f(x, t) <= 0, x \in R
+ *
+ * It takes a cutting-plane oracle `omega`, a search space `space`, and an
+ * options object as input. A function f(x) is *convex* if there always exist a
+ * g(x) such that f(z) >= f(x) + g(x)' * (z - x), forall z, x in dom f. Note
+ * that dom f does not need to be a convex set in our definition. The affine
+ * function g' (x - xc) + beta is called a cutting-plane, or a ``cut'' for
+ * short.
  *
  * @tparam OracleOptim
  * @tparam SearchSpace
@@ -105,6 +121,19 @@ inline auto cutting_plane_optim(OracleOptim &&omega, SearchSpace &&space,
 
 /**
  * @brief Cutting-plane method for solving convex discrete optimization problem
+ *
+ * The `cutting_plane_optim_q` function implements the cutting-plane method for
+ * solving a discrete convex optimization problem:
+ *
+ *   min  t
+ *   s.t. f(x, t) <= 0, x \in D
+ *
+ * It takes a cutting-plane oracle `omega`, a search space `space`, and an
+ * options object as input. A function f(x) is *convex* if there always exist a
+ * g(x) such that f(z) >= f(x) + g(x)' * (z - x), forall z, x in dom f. Note
+ * that dom f does not need to be a convex set in our definition. The affine
+ * function g' (x - xc) + beta is called a cutting-plane, or a ``cut'' for
+ * short.
  *
  * @tparam OracleOptimQ
  * @tparam Space

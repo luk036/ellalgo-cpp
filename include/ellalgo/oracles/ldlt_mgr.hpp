@@ -9,7 +9,15 @@
 #include <valarray>
 
 /**
- * @brief LDLT factorization for LMI
+ * @brief LDLT factorization
+ *
+ * `LDLTMgr` is a class that performs the LDLT factorization for a given
+ * symmetric matrix. The LDLT factorization decomposes a symmetric matrix A into
+ * the product of a lower triangular matrix L, a diagonal matrix D, and the
+ * transpose of L. This factorization is useful for solving linear systems and
+ * eigenvalue problems. The class provides methods to perform the factorization,
+ * check if the matrix is positive definite, calculate a witness vector if it is
+ * not positive definite, and calculate the symmetric quadratic form.
  *
  *  - LDL^T square-root-free version
  *  - Option allow semidefinite
@@ -47,26 +55,15 @@ public:
   /**
    * @brief Perform LDLT Factorization
    *
-   * @param[in] A Symmetric Matrix
-   *
-   * If $A$ is positive definite, then $p$ is zero.
-   * If it is not, then $p$ is a positive integer,
-   * such that $v = R^-1 e_p$ is a certificate vector
-   * to make $v'*A[:p,:p]*v < 0$
-   */
-  // auto factorize(const Arr036 &A) -> bool {
-  //   return this->factor([&](size_t i, size_t j) { return A(i, j); });
-  // }
-
-  /**
-   * @brief Perform LDLT Factorization
+   * The `factorize` function is a template function that takes a symmetric
+   * matrix `A` as input and performs the LDLT factorization on it. It calls the
+   * `factor` function with a lambda function as an argument. The lambda
+   * function takes the indices `i` and `j` and returns the element `A(i, j)` of
+   * the matrix `A`. The `factor` function performs the actual factorization
+   * using the provided lambda function. The `factorize` function returns a
+   * boolean value indicating whether the factorization was successful or not.
    *
    * @param[in] A Symmetric Matrix
-   *
-   * If $A$ is positive definite, then $p$ is zero.
-   * If it is not, then $p$ is a positive integer,
-   * such that $v = R^-1 e_p$ is a certificate vector
-   * to make $v'*A[:p,:p]*v < 0$
    */
   template <typename Mat> auto factorize(const Mat &A) -> bool {
     return this->factor([&](size_t i, size_t j) { return A(i, j); });
@@ -104,8 +101,11 @@ public:
   auto is_spd() const noexcept -> bool { return this->p.second == 0; }
 
   /**
-   * @brief witness that certifies $A$ is not
-   * symmetric positive definite (spd)
+   * @brief witness that certifies $A$ is not symmetric positive definite (spd)
+   *
+   * The `witness()` function calculates a witness that certifies that the
+   * matrix `A` is not symmetric positive definite (spd). It returns a `double`
+   * value that represents the witness.
    *
    * @return double
    */
@@ -149,12 +149,9 @@ public:
   /**
    * @brief Return upper triangular matrix $R$ where $A = R^T R$
    *
-   * Note: must input a zero matrix
-   * @return typename LDLTMgr<Arr036>::Mat
-   */
-
-  /**
-   * @brief
+   * The `sqrt` function calculates the square root of a symmetric positive
+   * definite matrix `M`. It assumes that `M` is a zero matrix and calculates
+   * the upper triangular matrix `R` such that `M = R^T * R`.
    *
    * @tparam Mat
    * @param[in,out] M
