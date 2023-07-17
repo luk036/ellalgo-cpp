@@ -20,11 +20,11 @@ enum class CutStatus;
  *        ell = {x | (x - xc)' mq^-1 (x - xc) \le \kappa}
  *
  * It is used to define and manipulate ellipsoids in a multidimensional space.
- * The ellipsoid is defined by a center point (`_xc`) and a core function (`_mgr`).
- * The core function is responsible for updating the ellipsoid based on cutting planes.
- * The `Ell` class provides methods to update the ellipsoid using different
- * types of cutting planes and to retrieve information about the ellipsoid, such
- * as the center point and the squared radius.
+ * The ellipsoid is defined by a center point (`_xc`) and a core function
+ * (`_mgr`). The core function is responsible for updating the ellipsoid based
+ * on cutting planes. The `Ell` class provides methods to update the ellipsoid
+ * using different types of cutting planes and to retrieve information about the
+ * ellipsoid, such as the center point and the squared radius.
  *
  * This version keeps $Q$ symmetric but no promise of positive definite
  */

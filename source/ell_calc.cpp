@@ -13,8 +13,8 @@
  *
  * @param[in] beta0 The parameter `beta0` represents a double value.
  * @param[in] beta1 The parameter `beta1` represents a double value.
- * @param[in] tsq tsq is a constant value of type double. It represents the square
- * of the variable tau.
+ * @param[in] tsq tsq is a constant value of type double. It represents the
+ * square of the variable tau.
  *
  * @return a tuple containing the following values:
  * 1. CutStatus: An enum value indicating the status of the calculation.
@@ -46,10 +46,12 @@ auto EllCalc::calc_ll_dc(const double &beta0, const double &beta1,
  *
  * @param[in] beta0 The parameter `beta0` represents a double value.
  * @param[in] beta1 The parameter `beta1` represents a double value.
- * @param[in] b1sq The parameter `b1sq` represents the square of the value `beta1`.
- * @param[in] b0b1 The parameter `b0b1` represents the product of `beta0` and `beta1`.
- * @param[in] tsq tsq is a constant value of type double. It represents the square
- * of the variable tau.
+ * @param[in] b1sq The parameter `b1sq` represents the square of the value
+ * `beta1`.
+ * @param[in] b0b1 The parameter `b0b1` represents the product of `beta0` and
+ * `beta1`.
+ * @param[in] tsq tsq is a constant value of type double. It represents the
+ * square of the variable tau.
  *
  * @return a tuple containing the following values:
  * 1. CutStatus: An enum value indicating the status of the calculation.
@@ -119,8 +121,8 @@ auto EllCalc::calc_ll_cc(const double &beta1, const double &tsq) const
  * @param[in] beta The parameter "beta" represents a value that needs to be
  * greater than or equal to 0.0. It is used in the calculation of "gamma" and is
  * compared with "tsq" in the if statement.
- * @param[in] tsq tsq is a variable of type double, which represents the square of
- * the value tau.
+ * @param[in] tsq tsq is a variable of type double, which represents the square
+ * of the value tau.
  *
  * @return The function `calc_dc` returns a tuple containing four values:
  * `CutStatus`, `double`, `double`, `double`.
@@ -180,8 +182,8 @@ auto EllCalc::_calc_dc_core(const double &beta, const double &tau,
  *
  *        g' (x - xc) \le 0
  *
- * @param[in] tsq tsq is a constant value of type double. It represents the square
- * of the variable tau.
+ * @param[in] tsq tsq is a constant value of type double. It represents the
+ * square of the variable tau.
  *
  * @return A tuple containing the following values:
  * 1. CutStatus::Success

@@ -13,7 +13,7 @@
 
 🏉 Ellipsoid method for modern C++
 
-The Ellipsoid Method is a linear programming algorithm that was first introduced by L. G. Khachiyan in 1979. It is a polynomial-time algorithm that uses ellipsoids to iteratively reduce the feasible region of a linear program until an optimal solution is found. The method works by starting with an initial ellipsoid that contains the feasible region, and then successively shrinking the ellipsoid until it contains the optimal solution. The algorithm is guaranteed to converge to an optimal solution in a finite number of steps.
+The Ellipsoid Method as a linear programming algorithm was first introduced by L. G. Khachiyan in 1979. It is a polynomial-time algorithm that uses ellipsoids to iteratively reduce the feasible region of a linear program until an optimal solution is found. The method works by starting with an initial ellipsoid that contains the feasible region, and then successively shrinking the ellipsoid until it contains the optimal solution. The algorithm is guaranteed to converge to an optimal solution in a finite number of steps.
 
 The method has a wide range of practical applications in operations research. It can be used to solve linear programming problems, as well as more general convex optimization problems. The method has been applied to a variety of fields, including economics, engineering, and computer science. Some specific applications of the Ellipsoid Method include portfolio optimization, network flow problems, and the design of control systems. The method has also been used to solve problems in combinatorial optimization, such as the traveling salesman problem.
 
