@@ -1,7 +1,6 @@
 [![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/MacOS/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
 [![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/Windows/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
 [![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/Ubuntu/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
-[![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/Style/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
 [![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/Install/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
 [![codecov](https://codecov.io/gh/luk036/ellalgo-cpp/branch/master/graph/badge.svg)](https://codecov.io/gh/luk036/ellalgo-cpp)
 
