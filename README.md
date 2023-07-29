@@ -8,9 +8,9 @@
   <img src="./ellipsoid-method-for-convex-optimization.svg"/>
 </p>
 
-# ellalgo-cpp
+# 🏉 ellalgo-cpp
 
-🏉 Ellipsoid method for modern C++
+Ellipsoid method for modern C++
 
 The Ellipsoid Method as a linear programming algorithm was first introduced by L. G. Khachiyan in 1979. It is a polynomial-time algorithm that uses ellipsoids to iteratively reduce the feasible region of a linear program until an optimal solution is found. The method works by starting with an initial ellipsoid that contains the feasible region, and then successively shrinking the ellipsoid until it contains the optimal solution. The algorithm is guaranteed to converge to an optimal solution in a finite number of steps.
 
