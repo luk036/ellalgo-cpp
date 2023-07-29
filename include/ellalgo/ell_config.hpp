@@ -8,11 +8,11 @@
  *
  */
 struct Options {
-  size_t max_iters;
-  double tol;
+    size_t max_iters;
+    double tol;
 
-  Options() : max_iters{2000}, tol{1e-8} {}
-  Options(size_t max_iters, double tol) : max_iters{max_iters}, tol{tol} {}
+    Options() : max_iters{2000}, tol{1e-8} {}
+    Options(size_t max_iters, double tol) : max_iters{max_iters}, tol{tol} {}
 };
 
 /**
@@ -26,8 +26,8 @@ enum class CutStatus { Success, NoSoln, NoEffect, Unknown };
  *
  */
 struct CInfo {
-  bool feasible;
-  size_t num_iters;
+    bool feasible;
+    size_t num_iters;
 };
 
 template <typename T> using ArrayType = typename T::ArrayType;

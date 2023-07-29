@@ -20,163 +20,163 @@ enum class CutStatus;
  * Keep $Q$ symmetric but no promise of positive definite
  */
 template <typename Arr> class EllStable {
-public:
-  // bool no_defer_trick = false;
-  using Vec = std::valarray<double>;
-  using ArrayType = Arr;
+  public:
+    // bool no_defer_trick = false;
+    using Vec = std::valarray<double>;
+    using ArrayType = Arr;
 
-private:
-  const size_t _n;
-  Arr _xc;
-  EllCore _mgr;
+  private:
+    const size_t _n;
+    Arr _xc;
+    EllCore _mgr;
 
-  /**
-   * @brief Construct a new EllStable object
-   *
-   * @param[in] E
-   */
-  auto operator=(const EllStable &E) -> EllStable & = delete;
+    /**
+     * @brief Construct a new EllStable object
+     *
+     * @param[in] E
+     */
+    auto operator=(const EllStable &E) -> EllStable & = delete;
 
-public:
-  /**
-   * @brief Construct a new EllStable object
-   *
-   * @param[in] val
-   * @param[in] x
-   */
-  EllStable(const Vec &val, Arr x)
-      : _n{x.size()}, _xc{std::move(x)}, _mgr(val, _n) {}
+  public:
+    /**
+     * @brief Construct a new EllStable object
+     *
+     * @param[in] val
+     * @param[in] x
+     */
+    EllStable(const Vec &val, Arr x)
+        : _n{x.size()}, _xc{std::move(x)}, _mgr(val, _n) {}
 
-  /**
-   * @brief Construct a new EllStable object
-   *
-   * @param[in] alpha
-   * @param[in] x
-   */
-  EllStable(const double &alpha, Arr x)
-      : _n{x.size()}, _xc{std::move(x)}, _mgr(alpha, _n) {}
+    /**
+     * @brief Construct a new EllStable object
+     *
+     * @param[in] alpha
+     * @param[in] x
+     */
+    EllStable(const double &alpha, Arr x)
+        : _n{x.size()}, _xc{std::move(x)}, _mgr(alpha, _n) {}
 
-  /**
-   * @brief Construct a new EllStable object
-   *
-   * @param[in] E (move)
-   */
-  EllStable(EllStable &&E) = default;
+    /**
+     * @brief Construct a new EllStable object
+     *
+     * @param[in] E (move)
+     */
+    EllStable(EllStable &&E) = default;
 
-  /**
-   * @brief Destroy the EllStable object
-   *
-   */
-  ~EllStable() {}
+    /**
+     * @brief Destroy the EllStable object
+     *
+     */
+    ~EllStable() {}
 
-  /**
-   * @brief Construct a new EllStable object
-   *
-   * To avoid accidentally copying, only explicit copy is allowed
-   *
-   * @param E
-   */
-  explicit EllStable(const EllStable &E) = default;
+    /**
+     * @brief Construct a new EllStable object
+     *
+     * To avoid accidentally copying, only explicit copy is allowed
+     *
+     * @param E
+     */
+    explicit EllStable(const EllStable &E) = default;
 
-  /**
-   * @brief explicitly copy
-   *
-   * @return EllStable
-   */
-  auto copy() const -> EllStable { return EllStable(*this); }
+    /**
+     * @brief explicitly copy
+     *
+     * @return EllStable
+     */
+    auto copy() const -> EllStable { return EllStable(*this); }
 
-  /**
-   * @brief copy the whole array anyway
-   *
-   * @return Arr
-   */
-  auto xc() const -> Arr { return this->_xc; }
+    /**
+     * @brief copy the whole array anyway
+     *
+     * @return Arr
+     */
+    auto xc() const -> Arr { return this->_xc; }
 
-  /**
-   * @brief Set the xc object
-   *
-   * @param[in] xc
-   */
-  void set_xc(const Arr &xc) { this->_xc = xc; }
+    /**
+     * @brief Set the xc object
+     *
+     * @param[in] xc
+     */
+    void set_xc(const Arr &xc) { this->_xc = xc; }
 
-  /**
-   * @brief
-   *
-   * @return Arr
-   */
-  auto tsq() const -> double { return this->_mgr.tsq(); }
+    /**
+     * @brief
+     *
+     * @return Arr
+     */
+    auto tsq() const -> double { return this->_mgr.tsq(); }
 
-  void set_use_parallel_cut(bool value) {
-    this->_mgr.set_use_parallel_cut(value);
-  }
-
-  /**
-   * @brief Update ellipsoid core function using the cut(s)
-   *
-   * @tparam T
-   * @param[in] cut cutting-plane
-   * @return std::tuple<int, double>
-   */
-  template <typename T>
-  auto update_dc(const std::pair<Arr, T> &cut) -> CutStatus {
-    return this->_update_core(cut, [&](Vec &grad, const T &beta) {
-      return this->_mgr.update_stable_dc(grad, beta);
-    });
-  }
-
-  /**
-   * @brief Update ellipsoid core function using the cut(s)
-   *
-   * @tparam T
-   * @param[in] cut cutting-plane
-   * @return std::tuple<int, double>
-   */
-  template <typename T>
-  auto update_cc(const std::pair<Arr, T> &cut) -> CutStatus {
-    return this->_update_core(cut, [&](Vec &grad, const T &beta) {
-      return this->_mgr.update_stable_cc(grad, beta);
-    });
-  }
-
-  /**
-   * @brief Update ellipsoid core function using the cut(s)
-   *
-   * @tparam T
-   * @param[in] cut cutting-plane
-   * @return std::tuple<int, double>
-   */
-  template <typename T>
-  auto update_q(const std::pair<Arr, T> &cut) -> CutStatus {
-    return this->_update_core(cut, [&](Vec &grad, const T &beta) {
-      return this->_mgr.update_stable_q(grad, beta);
-    });
-  }
-
-private:
-  /**
-   * @brief Update ellipsoid core function using the cut(s)
-   *
-   * @tparam T
-   * @param[in] cut cutting-plane
-   * @return std::tuple<int, double>
-   */
-  template <typename T, typename Fn>
-  auto _update_core(const std::pair<Arr, T> &cut, Fn &&cut_strategy)
-      -> CutStatus {
-    const auto &grad = cut.first;
-    const auto &beta = cut.second;
-    std::valarray<double> g(this->_n);
-    for (auto i = 0U; i != this->_n; ++i) {
-      g[i] = grad[i];
+    void set_use_parallel_cut(bool value) {
+        this->_mgr.set_use_parallel_cut(value);
     }
 
-    auto result = cut_strategy(g, beta);
-    if (result == CutStatus::Success) {
-      for (auto i = 0U; i != this->_n; ++i) {
-        this->_xc[i] -= g[i];
-      }
+    /**
+     * @brief Update ellipsoid core function using the cut(s)
+     *
+     * @tparam T
+     * @param[in] cut cutting-plane
+     * @return std::tuple<int, double>
+     */
+    template <typename T>
+    auto update_dc(const std::pair<Arr, T> &cut) -> CutStatus {
+        return this->_update_core(cut, [&](Vec &grad, const T &beta) {
+            return this->_mgr.update_stable_dc(grad, beta);
+        });
     }
 
-    return result;
-  }
+    /**
+     * @brief Update ellipsoid core function using the cut(s)
+     *
+     * @tparam T
+     * @param[in] cut cutting-plane
+     * @return std::tuple<int, double>
+     */
+    template <typename T>
+    auto update_cc(const std::pair<Arr, T> &cut) -> CutStatus {
+        return this->_update_core(cut, [&](Vec &grad, const T &beta) {
+            return this->_mgr.update_stable_cc(grad, beta);
+        });
+    }
+
+    /**
+     * @brief Update ellipsoid core function using the cut(s)
+     *
+     * @tparam T
+     * @param[in] cut cutting-plane
+     * @return std::tuple<int, double>
+     */
+    template <typename T>
+    auto update_q(const std::pair<Arr, T> &cut) -> CutStatus {
+        return this->_update_core(cut, [&](Vec &grad, const T &beta) {
+            return this->_mgr.update_stable_q(grad, beta);
+        });
+    }
+
+  private:
+    /**
+     * @brief Update ellipsoid core function using the cut(s)
+     *
+     * @tparam T
+     * @param[in] cut cutting-plane
+     * @return std::tuple<int, double>
+     */
+    template <typename T, typename Fn>
+    auto _update_core(const std::pair<Arr, T> &cut, Fn &&cut_strategy)
+        -> CutStatus {
+        const auto &grad = cut.first;
+        const auto &beta = cut.second;
+        std::valarray<double> g(this->_n);
+        for (auto i = 0U; i != this->_n; ++i) {
+            g[i] = grad[i];
+        }
+
+        auto result = cut_strategy(g, beta);
+        if (result == CutStatus::Success) {
+            for (auto i = 0U; i != this->_n; ++i) {
+                this->_xc[i] -= g[i];
+            }
+        }
+
+        return result;
+    }
 }; // } EllStable

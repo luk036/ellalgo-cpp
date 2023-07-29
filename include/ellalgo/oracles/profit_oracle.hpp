@@ -24,44 +24,44 @@
  *        k: a given constant that restricts the quantity of x1
  */
 class ProfitOracle {
-  using Vec = std::valarray<double>;
-  using Cut = std::pair<Vec, double>;
+    using Vec = std::valarray<double>;
+    using Cut = std::pair<Vec, double>;
 
-private:
-  const double _log_pA;
-  const double _log_k;
-  const Vec _price_out;
+  private:
+    const double _log_pA;
+    const double _log_k;
+    const Vec _price_out;
 
-public:
-  Vec _elasticities;
+  public:
+    Vec _elasticities;
 
-  /**
-   * @brief Construct a new profit oracle object
-   *
-   * @param[in] p the market price per unit
-   * @param[in] A the scale of production
-   * @param[in] k a given constant that restricts the quantity of x1
-   * @param[in] a the output elasticities
-   * @param[in] v output price
-   */
-  ProfitOracle(double p, double A, double k, const Vec &a, const Vec &v)
-      : _log_pA{std::log(p * A)}, _log_k{std::log(k)}, _price_out{v},
-        _elasticities{a} {}
+    /**
+     * @brief Construct a new profit oracle object
+     *
+     * @param[in] p the market price per unit
+     * @param[in] A the scale of production
+     * @param[in] k a given constant that restricts the quantity of x1
+     * @param[in] a the output elasticities
+     * @param[in] v output price
+     */
+    ProfitOracle(double p, double A, double k, const Vec &a, const Vec &v)
+        : _log_pA{std::log(p * A)}, _log_k{std::log(k)}, _price_out{v},
+          _elasticities{a} {}
 
-  /**
-   * @brief Construct a new profit oracle object (only explicitly)
-   *
-   */
-  ProfitOracle(const ProfitOracle &) = delete;
+    /**
+     * @brief Construct a new profit oracle object (only explicitly)
+     *
+     */
+    ProfitOracle(const ProfitOracle &) = delete;
 
-  /**
-   * @brief
-   *
-   * @param[in] y input quantity (in log scale)
-   * @param[in,out] tea the best-so-far optimal value
-   * @return std::tuple<Cut, double> Cut and the updated best-so-far value
-   */
-  auto assess_optim(const Vec &y, double &tea) const -> std::tuple<Cut, bool>;
+    /**
+     * @brief
+     *
+     * @param[in] y input quantity (in log scale)
+     * @param[in,out] tea the best-so-far optimal value
+     * @return std::tuple<Cut, double> Cut and the updated best-so-far value
+     */
+    auto assess_optim(const Vec &y, double &tea) const -> std::tuple<Cut, bool>;
 };
 
 /**
@@ -82,47 +82,48 @@ public:
  * @see ProfitOracle
  */
 class ProfitOracleRb {
-  // using Arr = xt::xarray<double, xt::layout_type::row_major>;
-  using Vec = std::valarray<double>;
-  using Cut = std::pair<Vec, double>;
+    // using Arr = xt::xarray<double, xt::layout_type::row_major>;
+    using Vec = std::valarray<double>;
+    using Cut = std::pair<Vec, double>;
 
-private:
-  const Vec _uie;
-  Vec _elasticities;
-  ProfitOracle _P;
+  private:
+    const Vec _uie;
+    Vec _elasticities;
+    ProfitOracle _P;
 
-public:
-  /**
-   * @brief Construct a new profit rb oracle object
-   *
-   * @param[in] p the market price per unit
-   * @param[in] A the scale of production
-   * @param[in] k a given constant that restricts the quantity of x1
-   * @param[in] a the output elasticities
-   * @param[in] v output price
-   * @param[in] e paramters for uncertainty
-   * @param[in] e3 paramters for uncertainty
-   */
-  ProfitOracleRb(double p, double A, double k, const Vec &a, const Vec &v,
-                 const Vec &e, double e3)
-      : _uie{e}, _elasticities{a}, _P(p - e3, A, k - e3, a, v + Vec{e3, e3}) {}
+  public:
+    /**
+     * @brief Construct a new profit rb oracle object
+     *
+     * @param[in] p the market price per unit
+     * @param[in] A the scale of production
+     * @param[in] k a given constant that restricts the quantity of x1
+     * @param[in] a the output elasticities
+     * @param[in] v output price
+     * @param[in] e paramters for uncertainty
+     * @param[in] e3 paramters for uncertainty
+     */
+    ProfitOracleRb(double p, double A, double k, const Vec &a, const Vec &v,
+                   const Vec &e, double e3)
+        : _uie{e}, _elasticities{a}, _P(p - e3, A, k - e3, a, v + Vec{e3, e3}) {
+    }
 
-  /**
-   * @brief Make object callable for cutting_plane_optim()
-   *
-   * @param[in] y input quantity (in log scale)
-   * @param[in,out] tea the best-so-far optimal value
-   * @return Cut and the updated best-so-far value
-   *
-   * @see cutting_plane_optim
-   */
-  auto assess_optim(const Vec &y, double &tea) -> std::tuple<Cut, bool> {
-    auto a_rb = this->_elasticities;
-    a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
-    a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
-    this->_P._elasticities = a_rb;
-    return this->_P.assess_optim(y, tea);
-  }
+    /**
+     * @brief Make object callable for cutting_plane_optim()
+     *
+     * @param[in] y input quantity (in log scale)
+     * @param[in,out] tea the best-so-far optimal value
+     * @return Cut and the updated best-so-far value
+     *
+     * @see cutting_plane_optim
+     */
+    auto assess_optim(const Vec &y, double &tea) -> std::tuple<Cut, bool> {
+        auto a_rb = this->_elasticities;
+        a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
+        a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
+        this->_P._elasticities = a_rb;
+        return this->_P.assess_optim(y, tea);
+    }
 };
 
 /**
@@ -146,37 +147,37 @@ public:
  * @see ProfitOracle
  */
 class ProfitOracleQ {
-  // using Arr = xt::xarray<double, xt::layout_type::row_major>;
-  using Vec = std::valarray<double>;
-  using Cut = std::pair<Vec, double>;
+    // using Arr = xt::xarray<double, xt::layout_type::row_major>;
+    using Vec = std::valarray<double>;
+    using Cut = std::pair<Vec, double>;
 
-private:
-  ProfitOracle _P;
-  Vec _yd{};
+  private:
+    ProfitOracle _P;
+    Vec _yd{};
 
-public:
-  /**
-   * @brief Construct a new profit q oracle object
-   *
-   * @param[in] p the market price per unit
-   * @param[in] A the scale of production
-   * @param[in] k a given constant that restricts the quantity of x1
-   * @param[in] a the output elasticities
-   * @param[in] v output price
-   */
-  ProfitOracleQ(double p, double A, double k, const Vec &a, const Vec &v)
-      : _P{p, A, k, a, v} {}
+  public:
+    /**
+     * @brief Construct a new profit q oracle object
+     *
+     * @param[in] p the market price per unit
+     * @param[in] A the scale of production
+     * @param[in] k a given constant that restricts the quantity of x1
+     * @param[in] a the output elasticities
+     * @param[in] v output price
+     */
+    ProfitOracleQ(double p, double A, double k, const Vec &a, const Vec &v)
+        : _P{p, A, k, a, v} {}
 
-  /**
-   * @brief Make object callable for cutting_plane_optim_q()
-   *
-   * @param[in] y input quantity (in log scale)
-   * @param[in,out] tea the best-so-far optimal value
-   * @param[in] retry whether it is a retry
-   * @return Cut and the updated best-so-far value
-   *
-   * @see cutting_plane_optim_q
-   */
-  auto assess_optim_q(const Vec &y, double &tea, bool retry)
-      -> std::tuple<Cut, bool, Vec, bool>;
+    /**
+     * @brief Make object callable for cutting_plane_optim_q()
+     *
+     * @param[in] y input quantity (in log scale)
+     * @param[in,out] tea the best-so-far optimal value
+     * @param[in] retry whether it is a retry
+     * @return Cut and the updated best-so-far value
+     *
+     * @see cutting_plane_optim_q
+     */
+    auto assess_optim_q(const Vec &y, double &tea, bool retry)
+        -> std::tuple<Cut, bool, Vec, bool>;
 };

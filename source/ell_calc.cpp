@@ -25,14 +25,14 @@
 auto EllCalc::calc_ll_dc(const double &beta0, const double &beta1,
                          const double &tsq) const
     -> std::tuple<CutStatus, double, double, double> {
-  if (beta1 < beta0) {
-    return {CutStatus::NoSoln, 0.0, 0.0, 0.0}; // no sol'n
-  }
-  const auto b1sq = beta1 * beta1;
-  if (tsq < b1sq || !this->use_parallel_cut) {
-    return this->calc_dc(beta0, tsq);
-  }
-  return this->_calc_ll_core(beta0, beta1, b1sq, beta0 * beta1, tsq);
+    if (beta1 < beta0) {
+        return {CutStatus::NoSoln, 0.0, 0.0, 0.0}; // no sol'n
+    }
+    const auto b1sq = beta1 * beta1;
+    if (tsq < b1sq || !this->use_parallel_cut) {
+        return this->calc_dc(beta0, tsq);
+    }
+    return this->_calc_ll_core(beta0, beta1, b1sq, beta0 * beta1, tsq);
 }
 
 /**
@@ -63,20 +63,20 @@ auto EllCalc::_calc_ll_core(const double &beta0, const double &beta1,
                             const double &b1sq, const double &b0b1,
                             const double &tsq) const
     -> std::tuple<CutStatus, double, double, double> {
-  const auto b1sqn = b1sq / tsq;
-  const auto t1n = 1.0 - b1sqn;
-  const auto b0b1n = b0b1 / tsq;
-  const auto t0n = 1.0 - beta0 * (beta0 / tsq);
-  // const auto t1 = tsq - b1sq;
-  const auto bsum = beta0 + beta1;
-  const auto bsumn = bsum / tsq;
-  const auto bav = bsum / 2.0;
-  auto tempn = this->_halfN * bsumn * (beta1 - beta0);
-  const auto xi = std::sqrt(t0n * t1n + tempn * std::move(tempn));
-  auto sigma = this->_c3 + (1.0 - b0b1n - xi) / (bsumn * bav) / this->_nPlus1;
-  auto rho = sigma * bav;
-  auto delta = this->_c1 * ((t0n + t1n) / 2.0 + xi / this->_nFloat);
-  return {CutStatus::Success, rho, sigma, delta};
+    const auto b1sqn = b1sq / tsq;
+    const auto t1n = 1.0 - b1sqn;
+    const auto b0b1n = b0b1 / tsq;
+    const auto t0n = 1.0 - beta0 * (beta0 / tsq);
+    // const auto t1 = tsq - b1sq;
+    const auto bsum = beta0 + beta1;
+    const auto bsumn = bsum / tsq;
+    const auto bav = bsum / 2.0;
+    auto tempn = this->_halfN * bsumn * (beta1 - beta0);
+    const auto xi = std::sqrt(t0n * t1n + tempn * std::move(tempn));
+    auto sigma = this->_c3 + (1.0 - b0b1n - xi) / (bsumn * bav) / this->_nPlus1;
+    auto rho = sigma * bav;
+    auto delta = this->_c1 * ((t0n + t1n) / 2.0 + xi / this->_nFloat);
+    return {CutStatus::Success, rho, sigma, delta};
 }
 
 /**
@@ -88,22 +88,22 @@ auto EllCalc::_calc_ll_core(const double &beta0, const double &beta1,
  */
 auto EllCalc::calc_ll_cc(const double &beta1, const double &tsq) const
     -> std::tuple<CutStatus, double, double, double> {
-  if (beta1 < 0.0) {
-    return {CutStatus::NoSoln, 0.0, 0.0, 0.0}; // no sol'n
-  }
-  const auto b1sq = beta1 * beta1;
-  if (tsq < b1sq || !this->use_parallel_cut) {
-    return this->calc_cc(tsq);
-  }
-  const auto b1sqn = b1sq / tsq;
-  const auto temp = this->_halfN * b1sqn;
-  const auto xi = std::sqrt(1.0 - b1sqn + temp * std::move(temp));
-  auto delta = this->_c1 * (1.0 - b1sqn / 2.0 + xi / this->_nFloat);
-  auto sigma = this->_c3 + this->_c2 * (1.0 - std::move(xi)) / b1sqn;
-  auto rho = sigma * beta1 / 2;
-  return {CutStatus::Success, std::move(rho), std::move(sigma),
-          std::move(delta)};
-  // this->_mu ???
+    if (beta1 < 0.0) {
+        return {CutStatus::NoSoln, 0.0, 0.0, 0.0}; // no sol'n
+    }
+    const auto b1sq = beta1 * beta1;
+    if (tsq < b1sq || !this->use_parallel_cut) {
+        return this->calc_cc(tsq);
+    }
+    const auto b1sqn = b1sq / tsq;
+    const auto temp = this->_halfN * b1sqn;
+    const auto xi = std::sqrt(1.0 - b1sqn + temp * std::move(temp));
+    auto delta = this->_c1 * (1.0 - b1sqn / 2.0 + xi / this->_nFloat);
+    auto sigma = this->_c3 + this->_c2 * (1.0 - std::move(xi)) / b1sqn;
+    auto rho = sigma * beta1 / 2;
+    return {CutStatus::Success, std::move(rho), std::move(sigma),
+            std::move(delta)};
+    // this->_mu ???
 }
 
 /**
@@ -129,13 +129,13 @@ auto EllCalc::calc_ll_cc(const double &beta1, const double &tsq) const
  */
 auto EllCalc::calc_dc(const double &beta, const double &tsq) const
     -> std::tuple<CutStatus, double, double, double> {
-  assert(beta >= 0.0);
-  if (tsq < beta * beta) {
-    return {CutStatus::NoSoln, 0.0, 0.0, 0.0}; // no sol'n
-  }
-  auto tau = std::sqrt(tsq);
-  auto gamma = tau + this->_nFloat * beta;
-  return this->_calc_dc_core(beta, tau, gamma);
+    assert(beta >= 0.0);
+    if (tsq < beta * beta) {
+        return {CutStatus::NoSoln, 0.0, 0.0, 0.0}; // no sol'n
+    }
+    auto tau = std::sqrt(tsq);
+    auto gamma = tau + this->_nFloat * beta;
+    return this->_calc_dc_core(beta, tau, gamma);
 }
 
 /**
@@ -165,12 +165,12 @@ auto EllCalc::calc_dc(const double &beta, const double &tsq) const
 auto EllCalc::_calc_dc_core(const double &beta, const double &tau,
                             const double &gamma) const
     -> std::tuple<CutStatus, double, double, double> {
-  auto rho = gamma / this->_nPlus1;
-  auto sigma = 2.0 * rho / (tau + beta);
-  auto alpha = beta / tau;
-  auto delta = this->_c1 * (1.0 - alpha * std::move(alpha));
-  return {CutStatus::Success, std::move(rho), std::move(sigma),
-          std::move(delta)};
+    auto rho = gamma / this->_nPlus1;
+    auto sigma = 2.0 * rho / (tau + beta);
+    auto alpha = beta / tau;
+    auto delta = this->_c1 * (1.0 - alpha * std::move(alpha));
+    return {CutStatus::Success, std::move(rho), std::move(sigma),
+            std::move(delta)};
 }
 
 /**
@@ -193,11 +193,11 @@ auto EllCalc::_calc_dc_core(const double &beta, const double &tau,
  */
 auto EllCalc::calc_cc(const double &tsq) const
     -> std::tuple<CutStatus, double, double, double> {
-  auto sigma = this->_c2;
-  auto rho = std::sqrt(tsq) / this->_nPlus1;
-  auto delta = this->_c1;
-  return {CutStatus::Success, std::move(rho), std::move(sigma),
-          std::move(delta)};
+    auto sigma = this->_c2;
+    auto rho = std::sqrt(tsq) / this->_nPlus1;
+    auto delta = this->_c1;
+    return {CutStatus::Success, std::move(rho), std::move(sigma),
+            std::move(delta)};
 }
 
 /**
@@ -210,20 +210,20 @@ auto EllCalc::calc_cc(const double &tsq) const
 auto EllCalc::calc_ll_dc_q(const double &b0, const double &b1,
                            const double &tsq) const
     -> std::tuple<CutStatus, double, double, double> {
-  if (b1 < b0) {
-    return {CutStatus::NoSoln, 0.0, 0.0, 0.0}; // no sol'n
-  }
+    if (b1 < b0) {
+        return {CutStatus::NoSoln, 0.0, 0.0, 0.0}; // no sol'n
+    }
 
-  const auto b1sq = b1 * b1;
-  if (tsq < b1sq || !this->use_parallel_cut) {
-    return this->calc_dc_q(b0, tsq);
-  }
+    const auto b1sq = b1 * b1;
+    if (tsq < b1sq || !this->use_parallel_cut) {
+        return this->calc_dc_q(b0, tsq);
+    }
 
-  const auto b0b1 = b0 * b1;
-  if (ELL_UNLIKELY(this->_nFloat * b0b1 < -tsq)) {
-    return {CutStatus::NoEffect, 0.0, 0.0, 1.0}; // no effect
-  }
-  return this->_calc_ll_core(b0, b1, b1sq, b0b1, tsq);
+    const auto b0b1 = b0 * b1;
+    if (ELL_UNLIKELY(this->_nFloat * b0b1 < -tsq)) {
+        return {CutStatus::NoEffect, 0.0, 0.0, 1.0}; // no effect
+    }
+    return this->_calc_ll_core(b0, b1, b1sq, b0b1, tsq);
 }
 
 /**
@@ -234,13 +234,13 @@ auto EllCalc::calc_ll_dc_q(const double &b0, const double &b1,
  */
 auto EllCalc::calc_dc_q(const double &beta, const double &tsq) const
     -> std::tuple<CutStatus, double, double, double> {
-  const auto tau = std::sqrt(tsq);
-  if (tau < beta) {
-    return {CutStatus::NoSoln, 0.0, 0.0, 0.0}; // no sol'n
-  }
-  const auto gamma = tau + this->_nFloat * beta;
-  if (ELL_UNLIKELY(gamma <= 0.0)) {
-    return {CutStatus::NoEffect, 0.0, 0.0, 1.0}; // no effect
-  }
-  return this->_calc_dc_core(beta, tau, gamma);
+    const auto tau = std::sqrt(tsq);
+    if (tau < beta) {
+        return {CutStatus::NoSoln, 0.0, 0.0, 0.0}; // no sol'n
+    }
+    const auto gamma = tau + this->_nFloat * beta;
+    if (ELL_UNLIKELY(gamma <= 0.0)) {
+        return {CutStatus::NoEffect, 0.0, 0.0, 1.0}; // no effect
+    }
+    return this->_calc_dc_core(beta, tau, gamma);
 }

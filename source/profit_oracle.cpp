@@ -14,27 +14,27 @@ using Cut = std::pair<Vec, double>;
  */
 auto ProfitOracle::assess_optim(const Vec &y, double &tea) const
     -> std::tuple<Cut, bool> {
-  // y0 <= log k
-  const auto f1 = y[0] - this->_log_k;
-  if (f1 > 0.0) {
-    return {{Vec{1.0, 0.0}, f1}, false};
-  }
+    // y0 <= log k
+    const auto f1 = y[0] - this->_log_k;
+    if (f1 > 0.0) {
+        return {{Vec{1.0, 0.0}, f1}, false};
+    }
 
-  const auto log_Cobb = this->_log_pA + this->_elasticities[0] * y[0] +
-                        this->_elasticities[1] * y[1];
-  const Vec x = std::exp(y);
-  const auto vx = this->_price_out[0] * x[0] + this->_price_out[1] * x[1];
-  auto te = tea + vx;
+    const auto log_Cobb = this->_log_pA + this->_elasticities[0] * y[0] +
+                          this->_elasticities[1] * y[1];
+    const Vec x = std::exp(y);
+    const auto vx = this->_price_out[0] * x[0] + this->_price_out[1] * x[1];
+    auto te = tea + vx;
 
-  auto fj = std::log(te) - log_Cobb;
-  if (fj < 0.0) {
-    te = std::exp(log_Cobb);
-    tea = te - vx;
+    auto fj = std::log(te) - log_Cobb;
+    if (fj < 0.0) {
+        te = std::exp(log_Cobb);
+        tea = te - vx;
+        Vec g = (this->_price_out * x) / te - this->_elasticities;
+        return {{std::move(g), 0.0}, true};
+    }
     Vec g = (this->_price_out * x) / te - this->_elasticities;
-    return {{std::move(g), 0.0}, true};
-  }
-  Vec g = (this->_price_out * x) / te - this->_elasticities;
-  return {{std::move(g), fj}, false};
+    return {{std::move(g), fj}, false};
 }
 
 /**
@@ -44,24 +44,24 @@ auto ProfitOracle::assess_optim(const Vec &y, double &tea) const
  */
 auto ProfitOracleQ::assess_optim_q(const Vec &y, double &tea, bool retry)
     -> std::tuple<Cut, bool, Vec, bool> {
-  if (!retry) {
-    Vec x = std::exp(y);
-    x = x.apply([](double n) -> double { return std::round(n); });
-    if (x[0] == 0.0) {
-      x[0] = 1.0; // nearest integer than 0
+    if (!retry) {
+        Vec x = std::exp(y);
+        x = x.apply([](double n) -> double { return std::round(n); });
+        if (x[0] == 0.0) {
+            x[0] = 1.0; // nearest integer than 0
+        }
+        if (x[1] == 0.0) {
+            x[1] = 1.0;
+        }
+        this->_yd = std::log(x);
     }
-    if (x[1] == 0.0) {
-      x[1] = 1.0;
-    }
-    this->_yd = std::log(x);
-  }
-  auto result1 = this->_P.assess_optim(this->_yd, tea);
-  auto &cut = std::get<0>(result1);
-  auto &shrunk = std::get<1>(result1);
-  auto &g = std::get<0>(cut);
-  auto &h = std::get<1>(cut);
-  // h += std::linalg::dot(g, this->_yd - y)();
-  auto d = this->_yd - y;
-  h += g[0] * d[0] + g[1] * d[1];
-  return {std::move(cut), shrunk, this->_yd, false};
+    auto result1 = this->_P.assess_optim(this->_yd, tea);
+    auto &cut = std::get<0>(result1);
+    auto &shrunk = std::get<1>(result1);
+    auto &g = std::get<0>(cut);
+    auto &h = std::get<1>(cut);
+    // h += std::linalg::dot(g, this->_yd - y)();
+    auto d = this->_yd - y;
+    h += g[0] * d[0] + g[1] * d[1];
+    return {std::move(cut), shrunk, this->_yd, false};
 }
