@@ -1,0 +1,5 @@
+name: ellalgo-cpp
+channels:
+  - conda-forge
+dependencies:
+  - doxygen

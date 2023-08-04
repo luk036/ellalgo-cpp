@@ -33,10 +33,12 @@ jobs:
           rm -rf build
 
       - name: configure
-        run: cmake -Stest_installed -Bbuild
+        run: cmake -Stest -Bbuild -DTEST_INSTALLED_VERSION=1
 
       - name: build
         run: cmake --build build --config Debug -j4
 
-      - name: run
-        run: ./build/test_installed/EllAlgo
+      - name: test
+        run: |
+          cd build
+          ctest --build-config Debug

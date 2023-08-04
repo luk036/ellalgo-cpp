@@ -1,11 +1,10 @@
-#include <ellalgo/greeter.h> // for LanguageCode, LanguageCode::DE, Languag...
-#include <ellalgo/version.h> // for ELLALGO_VERSION
+#include <ellalgo/greeter.h>
+#include <ellalgo/version.h>
 
-#include <cxxopts.hpp>   // for value, OptionAdder, Options, OptionValue
-#include <iostream>      // for operator<<, endl, basic_ostream, ostream
-#include <memory>        // for shared_ptr, __shared_ptr_access
-#include <string>        // for string, hash, operator<<, operator==
-#include <unordered_map> // for operator==, unordered_map, _Node_const_...
+#include <cxxopts.hpp>
+#include <iostream>
+#include <string>
+#include <unordered_map>
 
 auto main(int argc, char **argv) -> int {
     const std::unordered_map<std::string, ellalgo::LanguageCode> languages{
@@ -47,8 +46,8 @@ auto main(int argc, char **argv) -> int {
         return 1;
     }
 
-    // ellalgo::EllAlgo ellalgo(name);
-    // std::cout << ellalgo.greet(langIt->second) << std::endl;
+    ellalgo::EllAlgo ellalgo(name);
+    std::cout << ellalgo.greet(langIt->second) << std::endl;
 
     return 0;
 }
