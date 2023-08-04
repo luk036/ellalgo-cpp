@@ -9,7 +9,7 @@ option(INSTALL_ONLY "Enable for installation only" OFF)
 # Note: update this to your new project's name and version
 project(
   EllAlgo
-  VERSION 1.4.8
+  VERSION 1.4.9
   LANGUAGES CXX
 )
 
