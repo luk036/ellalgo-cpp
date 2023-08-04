@@ -67,17 +67,16 @@
             </li>
           </ul>
         </nav>
-<pre>   EllCalc= {x | (x - xc)&#x27; mq^-1 (x - xc) \le \kappa}
-</pre><p>Keep $Q$ symmetric but no promise of positive definite</p>
+<p><a href="class_ell_calc.html" class="m-doc">EllCalc</a>= {x | (x - xc)&#x27; mq^-1 (x - xc) \le \kappa}</p><p>Keep $Q$ symmetric but no promise of positive definite</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="a93ed95a72b841fabd425f88901e33744">
-              <span class="m-doc-wrap-bumper"><a href="#a93ed95a72b841fabd425f88901e33744" class="m-doc-self">EllCalc</a>(</span><span class="m-doc-wrap">size_t ndim)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a93ed95a72b841fabd425f88901e33744" class="m-doc">EllCalc</a>(</span><span class="m-doc-wrap">size_t ndim)</span>
             </dt>
             <dd>Construct a new EllCalcobject.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a7d0ca31ce3e65df8bb2ed647e2f709ae" class="m-doc">EllCalc</a>(</span><span class="m-doc-wrap"><a href="classEllCalc.html" class="m-doc">EllCalc</a>&amp;&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#a7d0ca31ce3e65df8bb2ed647e2f709ae" class="m-doc">EllCalc</a>(</span><span class="m-doc-wrap"><a href="class_ell_calc.html" class="m-doc">EllCalc</a>&amp;&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Construct a new EllCalcobject.</dd>
             <dt id="a05337f470ccb0fde19bc43a1cbe74fe7">
@@ -85,7 +84,7 @@
             </dt>
             <dd>Destroy the EllCalcobject.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a20ba0538b001d311db271d1b5c803cc7" class="m-doc">EllCalc</a>(</span><span class="m-doc-wrap">const <a href="classEllCalc.html" class="m-doc">EllCalc</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#a20ba0538b001d311db271d1b5c803cc7" class="m-doc">EllCalc</a>(</span><span class="m-doc-wrap">const <a href="class_ell_calc.html" class="m-doc">EllCalc</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Construct a new EllCalcobject.</dd>
           </dl>
@@ -98,7 +97,7 @@
               const double&amp; b1,
               const double&amp; tsq) const -&gt; std::tuple&lt; CutStatus, double, double, double &gt; -&gt; auto</span>
             </dt>
-            <dd>Calculate new ellipsoid under Parallel Cut.</dd>
+            <dd>Calculate a new ellipsoid under a parallel cut.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#acfe755684c27a7d5c0e74be4ec88ec6c" class="m-doc">calc_ll_cc</a>(</span><span class="m-doc-wrap">const double&amp; b1,
               const double&amp; tsq) const -&gt; std::tuple&lt; CutStatus, double, double, double &gt; -&gt; auto</span>
@@ -170,9 +169,16 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a93ed95a72b841fabd425f88901e33744"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> EllCalc::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a93ed95a72b841fabd425f88901e33744" class="m-doc-self">EllCalc</a>(</span><span class="m-doc-wrap">size_t ndim)</span></span>
+            </h3>
+            <p>Construct a new EllCalcobject.</p>
+<p>Construct a new EllCalcobject</p>
+          </div></section>
           <section class="m-doc-details" id="a7d0ca31ce3e65df8bb2ed647e2f709ae"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> EllCalc::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7d0ca31ce3e65df8bb2ed647e2f709ae" class="m-doc-self">EllCalc</a>(</span><span class="m-doc-wrap"><a href="classEllCalc.html" class="m-doc">EllCalc</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper"> EllCalc::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7d0ca31ce3e65df8bb2ed647e2f709ae" class="m-doc-self">EllCalc</a>(</span><span class="m-doc-wrap"><a href="class_ell_calc.html" class="m-doc">EllCalc</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span></span></span>
             </h3>
             <p>Construct a new EllCalcobject.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -189,7 +195,7 @@
           </div></section>
           <section class="m-doc-details" id="a20ba0538b001d311db271d1b5c803cc7"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> EllCalc::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a20ba0538b001d311db271d1b5c803cc7" class="m-doc-self">EllCalc</a>(</span><span class="m-doc-wrap">const <a href="classEllCalc.html" class="m-doc">EllCalc</a>&amp; E) <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper"> EllCalc::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a20ba0538b001d311db271d1b5c803cc7" class="m-doc-self">EllCalc</a>(</span><span class="m-doc-wrap">const <a href="class_ell_calc.html" class="m-doc">EllCalc</a>&amp; E) <span class="m-label m-info">defaulted</span></span></span>
             </h3>
             <p>Construct a new EllCalcobject.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -211,7 +217,7 @@
               const double&amp; b1,
               const double&amp; tsq) const -&gt; std::tuple&lt; CutStatus, double, double, double &gt;</span></span>
             </h3>
-            <p>Calculate new ellipsoid under Parallel Cut.</p>
+            <p>Calculate a new ellipsoid under a parallel cut.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -226,14 +232,14 @@
                   <td></td>
                 </tr>
                 <tr>
-                  <td>tsq</td>
+                  <td>tsq&nbsp;<span class="m-label m-flat m-info">in</span></td>
                   <td></td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>int</td>
+                  <td>std::tuple&lt;CutStatus, double, double, double&gt;</td>
                 </tr>
               </tfoot>
             </table>
@@ -257,10 +263,16 @@
                   <td></td>
                 </tr>
                 <tr>
-                  <td>tsq</td>
+                  <td>tsq&nbsp;<span class="m-label m-flat m-info">in</span></td>
                   <td></td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::tuple&lt;CutStatus, double, double, double&gt;</td>
+                </tr>
+              </tfoot>
             </table>
 <pre>   g&#x27; (x - xc) \le 0
    g&#x27; (x - xc) + beta1 \ge 0
@@ -282,10 +294,16 @@
                   <td></td>
                 </tr>
                 <tr>
-                  <td>tsq</td>
+                  <td>tsq&nbsp;<span class="m-label m-flat m-info">in</span></td>
                   <td></td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::tuple&lt;CutStatus, double, double, double&gt;</td>
+                </tr>
+              </tfoot>
             </table>
 <pre>   g&#x27; (x - xc) + beta \le 0
 </pre>
@@ -295,6 +313,23 @@
               <span class="m-doc-wrap-bumper">auto EllCalc::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a607e2408c6184c066cd0f9eedf21ac7f" class="m-doc-self">calc_cc</a>(</span><span class="m-doc-wrap">const double&amp; tsq) const -&gt; std::tuple&lt; CutStatus, double, double, double &gt;</span></span>
             </h3>
             <p>Calculate new ellipsoid under Central Cut.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tsq&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::tuple&lt;CutStatus, double, double, double&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
 <pre>   g&#x27; (x - xc) \le 0
 </pre>
           </div></section>
@@ -319,14 +354,14 @@
                   <td></td>
                 </tr>
                 <tr>
-                  <td>tsq</td>
+                  <td>tsq&nbsp;<span class="m-label m-flat m-info">in</span></td>
                   <td></td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>int</td>
+                  <td>std::tuple&lt;CutStatus, double, double, double&gt;</td>
                 </tr>
               </tfoot>
             </table>
@@ -350,10 +385,16 @@
                   <td></td>
                 </tr>
                 <tr>
-                  <td>tsq</td>
+                  <td>tsq&nbsp;<span class="m-label m-flat m-info">in</span></td>
                   <td></td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::tuple&lt;CutStatus, double, double, double&gt;</td>
+                </tr>
+              </tfoot>
             </table>
 <pre>   g&#x27; (x - xc) + beta \le 0
 </pre>
@@ -403,7 +444,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.7 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

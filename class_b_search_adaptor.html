@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Lmi0Oracle class | EllAlgo</title>
+  <title>BSearchAdaptor class | EllAlgo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -49,11 +49,25 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="lmi0__oracle_8hpp.html">&lt;ellalgo/oracles/lmi0_oracle.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename Arr036, typename Mat = Arr036&gt;</div>
-          Lmi0Oracle <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="cutting__plane_8hpp.html">&lt;ellalgo/cutting_plane.hpp&gt;</a></div>
+          <div class="m-doc-template">template&lt;typename Oracle, typename Space&gt;</div>
+          BSearchAdaptor <span class="m-thin">class</span>
         </h1>
-        <p>Oracle for Linear <a href="classMatrix.html" class="m-doc">Matrix</a> Inequality.</p>
+        <table class="m-table m-fullwidth m-flat">
+          <thead>
+            <tr><th colspan="2">Template parameters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 1%">Oracle</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Space</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -62,119 +76,145 @@
               <ul>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
-                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>This oracle solves the following feasibility problem:</p><pre>find  x
-s.t.  F * x &lt;= 0
-</pre>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#afece9730a5a290fc68e0a9049fd3e5ef" class="m-doc">Lmi0Oracle</a>(</span><span class="m-doc-wrap">size_t ndim,
-              const std::vector&lt;Mat&gt;&amp; F)</span>
+              <span class="m-doc-wrap-bumper"><a href="#a2d40565c22dc20d2432e5b95801826c2" class="m-doc">BSearchAdaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; omega,
+              Space&amp; space)</span>
             </dt>
-            <dd>Construct a new lmi oracle object.</dd>
+            <dd>Construct a new bsearch adaptor object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a3dd20886e21dba25f8641bd85a13f2cd" class="m-doc">BSearchAdaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; omega,
+              Space&amp; space,
+              const <a href="struct_options.html" class="m-doc">Options</a>&amp; options)</span>
+            </dt>
+            <dd>Construct a new bsearch adaptor object.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a15ef17deae55d46d2f096cf4a2eb8532" class="m-doc">assess_feas</a>(</span><span class="m-doc-wrap">const Arr036&amp; x) -&gt; Cut * -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae9ed90c5a8bd2b8f8e4912621db74855" class="m-doc">x_best</a>(</span><span class="m-doc-wrap">) const -&gt; ArrayType -&gt; auto</span>
             </dt>
-            <dd></dd>
+            <dd>get best x</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2bc1d9133ba53bf330b7df887221998b" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const Arr036&amp; x) -&gt; Cut * -&gt; auto</span>
+              <div class="m-doc-template">template&lt;typename Num&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#aeacbe85d8bee2b900b9447f95b35e63c" class="m-doc">assess_bs</a>(</span><span class="m-doc-wrap">const Num&amp; tea) -&gt; bool -&gt; auto</span>
             </dt>
             <dd></dd>
-          </dl>
-        </section>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
-          <dl class="m-doc">
-            <dt id="a644142b050d23048c6073619d6c0367a">
-              <a href="classLDLTMgr.html" class="m-doc">LDLTMgr</a> <a href="#a644142b050d23048c6073619d6c0367a" class="m-doc-self">_mq</a>
-            </dt>
-            <dd><span></span></dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="afece9730a5a290fc68e0a9049fd3e5ef"><div>
+          <section class="m-doc-details" id="a2d40565c22dc20d2432e5b95801826c2"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr036, typename Mat&gt;
+                template&lt;typename Oracle, typename Space&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> Lmi0Oracle&lt;Arr036, Mat&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afece9730a5a290fc68e0a9049fd3e5ef" class="m-doc-self">Lmi0Oracle</a>(</span><span class="m-doc-wrap">size_t ndim,
-              const std::vector&lt;Mat&gt;&amp; F)</span></span>
+              <span class="m-doc-wrap-bumper"> BSearchAdaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2d40565c22dc20d2432e5b95801826c2" class="m-doc-self">BSearchAdaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; omega,
+              Space&amp; space)</span></span>
             </h3>
-            <p>Construct a new lmi oracle object.</p>
+            <p>Construct a new bsearch adaptor object.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">ndim&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
+                  <td style="width: 1%">omega&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>perform assessment on x0</td>
                 </tr>
                 <tr>
-                  <td>F&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
+                  <td>space&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>search Space containing x*</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a15ef17deae55d46d2f096cf4a2eb8532"><div>
+          <section class="m-doc-details" id="a3dd20886e21dba25f8641bd85a13f2cd"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr036, typename Mat&gt;
+                template&lt;typename Oracle, typename Space&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto Lmi0Oracle&lt;Arr036, Mat&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15ef17deae55d46d2f096cf4a2eb8532" class="m-doc-self">assess_feas</a>(</span><span class="m-doc-wrap">const Arr036&amp; x) -&gt; Cut *</span></span>
+              <span class="m-doc-wrap-bumper"> BSearchAdaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3dd20886e21dba25f8641bd85a13f2cd" class="m-doc-self">BSearchAdaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; omega,
+              Space&amp; space,
+              const <a href="struct_options.html" class="m-doc">Options</a>&amp; options)</span></span>
             </h3>
+            <p>Construct a new bsearch adaptor object.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">x&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
+                  <td style="width: 1%">omega&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>perform assessment on x0</td>
+                </tr>
+                <tr>
+                  <td>space&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>search space containing x*</td>
+                </tr>
+                <tr>
+                  <td>options&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>maximum iteration and error tolerance etc.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae9ed90c5a8bd2b8f8e4912621db74855"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Oracle, typename Space&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto BSearchAdaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae9ed90c5a8bd2b8f8e4912621db74855" class="m-doc-self">x_best</a>(</span><span class="m-doc-wrap">) const -&gt; ArrayType</span></span>
+            </h3>
+            <p>get best x</p>
+            <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
-                  <th>Returns</th>
-                  <td>std::optional&lt;Cut&gt;</td>
+                  <th style="width: 1%">Returns</th>
+                  <td>auto</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a2bc1d9133ba53bf330b7df887221998b"><div>
+          <section class="m-doc-details" id="aeacbe85d8bee2b900b9447f95b35e63c"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr036, typename Mat&gt;
+                template&lt;typename Oracle, typename Space&gt;
+                template&lt;typename Num&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto Lmi0Oracle&lt;Arr036, Mat&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2bc1d9133ba53bf330b7df887221998b" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const Arr036&amp; x) -&gt; Cut *</span></span>
+              <span class="m-doc-wrap-bumper">auto BSearchAdaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeacbe85d8bee2b900b9447f95b35e63c" class="m-doc-self">assess_bs</a>(</span><span class="m-doc-wrap">const Num&amp; tea) -&gt; bool</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">Num</td>
+                  <td></td>
+                </tr>
+              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">x&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
+                  <td>tea&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>the best-so-far optimal value</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>std::optional&lt;Cut&gt;</td>
+                  <td>bool</td>
                 </tr>
               </tfoot>
             </table>
@@ -224,7 +264,7 @@ s.t.  F * x &lt;= 0
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.7 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

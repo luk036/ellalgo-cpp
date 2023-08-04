@@ -52,7 +52,7 @@
           LDLTMgr <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ldlt__mgr_8hpp.html">&lt;ellalgo/oracles/ldlt_mgr.hpp&gt;</a></div>
         </h1>
-        <p>LDLT factorization for LMI.</p>
+        <p>LDLT factorization.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -66,7 +66,7 @@
             </li>
           </ul>
         </nav>
-<ul><li>LDL^T square-root-free version</li><li>Option allow semidefinite</li><li>A matrix A in R^{m x m} is positive definite iff v&#x27; A v &gt; 0 for all v in R^n.</li><li>O(p^2) per iteration, independent of N</li></ul>
+<p><code><a href="class_l_d_l_t_mgr.html" class="m-doc">LDLTMgr</a></code> is a class that performs the LDLT factorization for a given symmetric matrix. The LDLT factorization decomposes a symmetric matrix A into the product of a lower triangular matrix L, a diagonal matrix D, and the transpose of L. This factorization is useful for solving linear systems and eigenvalue problems. The class provides methods to perform the factorization, check if the matrix is positive definite, calculate a witness vector if it is not positive definite, and calculate the symmetric quadratic form.</p><ul><li>LDL^T square-root-free version</li><li>Option allow semidefinite</li><li>A matrix A in R^{m x m} is positive definite iff v&#x27; A v &gt; 0 for all v in R^n.</li><li>O(p^2) per iteration, independent of N</li></ul>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -75,11 +75,11 @@
             </dt>
             <dd>Construct a new ldlt ext object.</dd>
             <dt id="a2ce9d8ddc0b81c073037b545fae6e2e3">
-              <span class="m-doc-wrap-bumper"><a href="#a2ce9d8ddc0b81c073037b545fae6e2e3" class="m-doc-self">LDLTMgr</a>(</span><span class="m-doc-wrap">const <a href="classLDLTMgr.html" class="m-doc">LDLTMgr</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#a2ce9d8ddc0b81c073037b545fae6e2e3" class="m-doc-self">LDLTMgr</a>(</span><span class="m-doc-wrap">const <a href="class_l_d_l_t_mgr.html" class="m-doc">LDLTMgr</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
             </dt>
             <dd><span></span></dd>
             <dt id="a189af948cc280cea59674433317c1fca">
-              <span class="m-doc-wrap-bumper"><a href="#a189af948cc280cea59674433317c1fca" class="m-doc-self">LDLTMgr</a>(</span><span class="m-doc-wrap"><a href="classLDLTMgr.html" class="m-doc">LDLTMgr</a>&amp;&amp;) <span class="m-label m-flat m-info">defaulted</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#a189af948cc280cea59674433317c1fca" class="m-doc-self">LDLTMgr</a>(</span><span class="m-doc-wrap"><a href="class_l_d_l_t_mgr.html" class="m-doc">LDLTMgr</a>&amp;&amp;) <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd><span></span></dd>
           </dl>
@@ -87,8 +87,8 @@
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt id="a25b614972fb479492d0ff5190682f8e6">
-              <span class="m-doc-wrap-bumper">auto <a href="#a25b614972fb479492d0ff5190682f8e6" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classLDLTMgr.html" class="m-doc">LDLTMgr</a>&amp;) -&gt; <a href="classLDLTMgr.html" class="m-doc">LDLTMgr</a>&amp; <span class="m-label m-flat m-danger">deleted</span></span>
+            <dt id="a1b346173191ab42aa0360207391bb73d">
+              <span class="m-doc-wrap-bumper">auto <a href="#a1b346173191ab42aa0360207391bb73d" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="class_l_d_l_t_mgr.html" class="m-doc">LDLTMgr</a>&amp;) -&gt; <a href="class_l_d_l_t_mgr.html" class="m-doc">LDLTMgr</a>&amp; <span class="m-label m-flat m-danger">deleted</span></span>
             </dt>
             <dd><span></span></dd>
             <dt>
@@ -97,13 +97,11 @@
             </dt>
             <dd>Perform LDLT Factorization.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename Callable&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a6dc0f8c870c2ed8ca7d434c7cba0702e" class="m-doc">factor</a>(</span><span class="m-doc-wrap">Callable&amp;&amp; get_matrix_elem) -&gt; bool -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9a0315be1e868d82b607be9feb3c1f47" class="m-doc">factor</a>(</span><span class="m-doc-wrap">std::function&lt;double(size_t, size_t)&gt; get_matrix_elem) -&gt; bool -&gt; auto</span>
             </dt>
             <dd>Perform LDLT Factorization (Lazy evaluation)</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename Callable&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a169a1e8306ab14b20cfc0ecba331ec00" class="m-doc">factor_with_allow_semidefinte</a>(</span><span class="m-doc-wrap">Callable&amp;&amp; get_matrix_elem) -&gt; bool -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#afc994e7c46e9c9bd159ab066e8393c24" class="m-doc">factor_with_allow_semidefinite</a>(</span><span class="m-doc-wrap">std::function&lt;double(size_t, size_t)&gt; get_matrix_elem) -&gt; bool -&gt; auto</span>
             </dt>
             <dd>Perform LDLT Factorization (Lazy evaluation)</dd>
             <dt>
@@ -114,11 +112,11 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a0c2f0d8bd99e16c64103b5d1da966dcb" class="m-doc">witness</a>(</span><span class="m-doc-wrap">) -&gt; double -&gt; auto</span>
             </dt>
             <dd>witness that certifies $A$ is not symmetric positive definite (spd)</dd>
-            <dt id="a3a8724268ebae4c5a9183f8acb0742f1">
+            <dt>
               <div class="m-doc-template">template&lt;typename Arr036&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3a8724268ebae4c5a9183f8acb0742f1" class="m-doc-self">set_witness_vec</a>(</span><span class="m-doc-wrap">Arr036&amp; v) const -&gt; void -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3a8724268ebae4c5a9183f8acb0742f1" class="m-doc">set_witness_vec</a>(</span><span class="m-doc-wrap">Arr036&amp; v) const -&gt; void -&gt; auto</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Set the witness vec object.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename Mat&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#af67c2bccbf77125b4f7a2daa15a05024" class="m-doc">sym_quad</a>(</span><span class="m-doc-wrap">const Mat&amp; A) const -&gt; double -&gt; auto</span>
@@ -182,18 +180,15 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">A&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>Symmetric <a href="classMatrix.html" class="m-doc">Matrix</a></td>
+                  <td>Symmetric <a href="class_matrix.html" class="m-doc">Matrix</a></td>
                 </tr>
               </tbody>
             </table>
-<p>If $A$ is positive definite, then $p$ is zero. If it is not, then $p$ is a positive integer, such that $v = R^-1 e_p$ is a certificate vector to make $v&#x27;*A[:p,:p]*v &lt; 0$</p><p>Perform LDLT Factorization</p><p>If $A$ is positive definite, then $p$ is zero. If it is not, then $p$ is a positive integer, such that $v = R^-1 e_p$ is a certificate vector to make $v&#x27;*A[:p,:p]*v &lt; 0$</p>
+<p>The <code>factorize</code> function is a template function that takes a symmetric matrix <code>A</code> as input and performs the LDLT factorization on it. It calls the <code>factor</code> function with a lambda function as an argument. The lambda function takes the indices <code>i</code> and <code>j</code> and returns the element <code>A(i, j)</code> of the matrix <code>A</code>. The <code>factor</code> function performs the actual factorization using the provided lambda function. The <code>factorize</code> function returns a boolean value indicating whether the factorization was successful or not.</p>
           </div></section>
-          <section class="m-doc-details" id="a6dc0f8c870c2ed8ca7d434c7cba0702e"><div>
+          <section class="m-doc-details" id="a9a0315be1e868d82b607be9feb3c1f47"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename Callable&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">auto LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6dc0f8c870c2ed8ca7d434c7cba0702e" class="m-doc-self">factor</a>(</span><span class="m-doc-wrap">Callable&amp;&amp; get_matrix_elem) -&gt; bool</span></span>
+              <span class="m-doc-wrap-bumper">auto LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9a0315be1e868d82b607be9feb3c1f47" class="m-doc-self">factor</a>(</span><span class="m-doc-wrap">std::function&lt;double(size_t, size_t)&gt; get_matrix_elem) -&gt; bool</span></span>
             </h3>
             <p>Perform LDLT Factorization (Lazy evaluation)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -206,15 +201,18 @@
                   <td>function to access the elements of A</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true</td>
+                </tr>
+              </tfoot>
             </table>
-<p>See also: <a href="classLDLTMgr.html#a2af45dc9628f487ab821aff6f3fc0794" class="m-doc">factorize()</a></p>
+<p>See also: <a href="class_l_d_l_t_mgr.html#a2af45dc9628f487ab821aff6f3fc0794" class="m-doc">factorize()</a></p>
           </div></section>
-          <section class="m-doc-details" id="a169a1e8306ab14b20cfc0ecba331ec00"><div>
+          <section class="m-doc-details" id="afc994e7c46e9c9bd159ab066e8393c24"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename Callable&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">auto LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a169a1e8306ab14b20cfc0ecba331ec00" class="m-doc-self">factor_with_allow_semidefinte</a>(</span><span class="m-doc-wrap">Callable&amp;&amp; get_matrix_elem) -&gt; bool</span></span>
+              <span class="m-doc-wrap-bumper">auto LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afc994e7c46e9c9bd159ab066e8393c24" class="m-doc-self">factor_with_allow_semidefinite</a>(</span><span class="m-doc-wrap">std::function&lt;double(size_t, size_t)&gt; get_matrix_elem) -&gt; bool</span></span>
             </h3>
             <p>Perform LDLT Factorization (Lazy evaluation)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -227,8 +225,14 @@
                   <td>function to access the elements of A</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true</td>
+                </tr>
+              </tfoot>
             </table>
-<p>See also: <a href="classLDLTMgr.html#a2af45dc9628f487ab821aff6f3fc0794" class="m-doc">factorize()</a></p>
+<p>See also: <a href="class_l_d_l_t_mgr.html#a2af45dc9628f487ab821aff6f3fc0794" class="m-doc">factorize()</a></p>
           </div></section>
           <section class="m-doc-details" id="a0a2d047ce3d930da880474c9a4aff9f2"><div>
             <h3>
@@ -253,9 +257,39 @@
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>auto</td>
+                  <td>double</td>
                 </tr>
               </tfoot>
+            </table>
+<p>The <code><a href="class_l_d_l_t_mgr.html#a0c2f0d8bd99e16c64103b5d1da966dcb" class="m-doc">witness()</a></code> function calculates a witness that certifies that the matrix <code>A</code> is not symmetric positive definite (spd). It returns a <code>double</code> value that represents the witness.</p>
+          </div></section>
+          <section class="m-doc-details" id="a3a8724268ebae4c5a9183f8acb0742f1"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr036&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3a8724268ebae4c5a9183f8acb0742f1" class="m-doc-self">set_witness_vec</a>(</span><span class="m-doc-wrap">Arr036&amp; v) const -&gt; void</span></span>
+            </h3>
+            <p>Set the witness vec object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">Arr036</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>v</td>
+                  <td></td>
+                </tr>
+              </tbody>
             </table>
           </div></section>
           <section class="m-doc-details" id="af67c2bccbf77125b4f7a2daa15a05024"><div>
@@ -268,11 +302,20 @@
             <p>Calculate v&#x27;*{A}(p,p)*v.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">Mat</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">A&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>A&nbsp;<span class="m-label m-flat m-info">in</span></td>
                   <td></td>
                 </tr>
               </tbody>
@@ -293,14 +336,26 @@
             </h3>
             <p>Return upper triangular matrix $R$ where $A = R^T R$.</p>
             <table class="m-table m-fullwidth m-flat">
-              <tfoot>
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
                 <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>typename LDLTMgr&lt;Arr036&gt;::Mat</td>
+                  <td style="width: 1%">Mat</td>
+                  <td></td>
                 </tr>
-              </tfoot>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>M&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
             </table>
-<p>Note: must input a zero matrix</p>
+<p>The <code>sqrt</code> function calculates the square root of a symmetric positive definite matrix <code>M</code>. It assumes that <code>M</code> is a zero matrix and calculates the upper triangular matrix <code>R</code> such that <code>M = R^T * R</code>.</p>
           </div></section>
         </section>
       </div>
@@ -347,7 +402,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.7 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

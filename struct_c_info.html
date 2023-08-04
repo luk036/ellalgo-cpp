@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Matrix class | EllAlgo</title>
+  <title>CInfo struct | EllAlgo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -49,79 +49,30 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          Matrix <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ell__matrix_8hpp.html">&lt;ellalgo/ell_matrix.hpp&gt;</a></div>
+          CInfo <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="cut__config_8hpp.html">&lt;ellalgo/cut_config.hpp&gt;</a></div>
         </h1>
+        <p><a href="struct_c_info.html" class="m-doc">CInfo</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>Square matrix</p>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="ad3bbb84c0f82154354f09dd3fbedd203">
-              <span class="m-doc-wrap-bumper"><a href="#ad3bbb84c0f82154354f09dd3fbedd203" class="m-doc-self">Matrix</a>(</span><span class="m-doc-wrap">size_t ndim,
-              double init = 0.0) <span class="m-label m-flat m-info">explicit</span> </span>
+            <dt id="a4f2ece5c70a87ef1593618dac0d929a7">
+              bool <a href="#a4f2ece5c70a87ef1593618dac0d929a7" class="m-doc-self">feasible</a>
             </dt>
             <dd><span></span></dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt id="a9fe8ba81567a259d389d2f05d74848ff">
-              <span class="m-doc-wrap-bumper">void <a href="#a9fe8ba81567a259d389d2f05d74848ff" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">double value = 0.0)</span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a09bf94528622149ce29337306a5d216a">
-              <span class="m-doc-wrap-bumper">auto <a href="#a09bf94528622149ce29337306a5d216a" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">size_t r,
-              size_t c) -&gt; double&amp;</span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a07c787755627d391993129a8ae06e771">
-              <span class="m-doc-wrap-bumper">auto <a href="#a07c787755627d391993129a8ae06e771" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">size_t r,
-              size_t c) const -&gt; const double&amp;</span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="aff200db2f0820b4aa018ff0b422dfeb4">
-              <span class="m-doc-wrap-bumper">auto <a href="#aff200db2f0820b4aa018ff0b422dfeb4" class="m-doc-self">operator*=</a>(</span><span class="m-doc-wrap">double alpha) -&gt; <a href="classMatrix.html" class="m-doc">Matrix</a>&amp;</span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a9046133abcc3c3cd5f8bfd82637e2ab6">
-              <span class="m-doc-wrap-bumper">auto <a href="#a9046133abcc3c3cd5f8bfd82637e2ab6" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">double alpha) const -&gt; <a href="classMatrix.html" class="m-doc">Matrix</a></span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a80cb34cb249d96168c7f25ed1cc5c675">
-              <span class="m-doc-wrap-bumper">void <a href="#a80cb34cb249d96168c7f25ed1cc5c675" class="m-doc-self">identity</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a6c7188cae3ac95a21e2c4c65637520ea">
-              <span class="m-doc-wrap-bumper">auto <a href="#a6c7188cae3ac95a21e2c4c65637520ea" class="m-doc-self">diagonal</a>(</span><span class="m-doc-wrap">) -&gt; std::slice_array&lt;double&gt;</span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a42cce16bce56d0b254c1950cddaaa3a3">
-              <span class="m-doc-wrap-bumper">auto <a href="#a42cce16bce56d0b254c1950cddaaa3a3" class="m-doc-self">secondary_diagonal</a>(</span><span class="m-doc-wrap">) -&gt; std::slice_array&lt;double&gt;</span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a6f2f4c141d6b9e168ba7920eed1e62c2">
-              <span class="m-doc-wrap-bumper">auto <a href="#a6f2f4c141d6b9e168ba7920eed1e62c2" class="m-doc-self">row</a>(</span><span class="m-doc-wrap">std::size_t row) -&gt; std::slice_array&lt;double&gt;</span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a472ee985ab59cb1272fe5f23d72f8005">
-              <span class="m-doc-wrap-bumper">auto <a href="#a472ee985ab59cb1272fe5f23d72f8005" class="m-doc-self">column</a>(</span><span class="m-doc-wrap">std::size_t col) -&gt; std::slice_array&lt;double&gt;</span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="ab583aa60184abad002a2c2b72197a879">
-              <span class="m-doc-wrap-bumper">auto <a href="#ab583aa60184abad002a2c2b72197a879" class="m-doc-self">trace</a>(</span><span class="m-doc-wrap">) const -&gt; double</span>
+            <dt id="a65f06bfb2b6b11c488ef2d25f95b7e2b">
+              size_t <a href="#a65f06bfb2b6b11c488ef2d25f95b7e2b" class="m-doc-self">num_iters</a>
             </dt>
             <dd><span></span></dd>
           </dl>
@@ -170,7 +121,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.7 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

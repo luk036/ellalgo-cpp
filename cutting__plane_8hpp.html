@@ -70,7 +70,7 @@
           <dl class="m-doc">
             <dt>
               <div class="m-doc-template">template&lt;typename Oracle, typename Space&gt;</div>
-              class <a href="classBSearchAdaptor.html" class="m-doc">BSearchAdaptor</a>
+              class <a href="class_b_search_adaptor.html" class="m-doc">BSearchAdaptor</a>
             </dt>
             <dd></dd>
           </dl>
@@ -80,7 +80,7 @@
           <dl class="m-doc">
             <dt id="a64b5afb0b895e3a4eb09bd1847745e56">
               <div class="m-doc-template">template&lt;typename SearchSpace&gt;</div>
-              using <a href="#a64b5afb0b895e3a4eb09bd1847745e56" class="m-doc-self">CuttingPlaneArrayType</a> = typename std::remove_reference&lt;SearchSpace&gt;::<a href="ell__config_8hpp.html#ac22991ee7a4279dc2449ab7658409beb" class="m-doc">type::<wbr />ArrayType</a>
+              using <a href="#a64b5afb0b895e3a4eb09bd1847745e56" class="m-doc-self">CuttingPlaneArrayType</a> = typename std::remove_reference&lt;SearchSpace&gt;<a href="ell__config_8hpp.html#ac22991ee7a4279dc2449ab7658409beb" class="m-doc">::<wbr />type::<wbr />ArrayType</a>
             </dt>
             <dd><span></span></dd>
           </dl>
@@ -97,7 +97,7 @@
               <div class="m-doc-template">template&lt;typename OracleFeas, typename SearchSpace&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a878b90d5e6c180c4ddcebf1e9df2f50f" class="m-doc">cutting_plane_feas</a>(</span><span class="m-doc-wrap">OracleFeas&amp;&amp; omega,
               SearchSpace&amp;&amp; space,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpace &gt;, size_t &gt; -&gt; auto</span>
+              const <a href="struct_options.html" class="m-doc">Options</a>&amp; options = <a href="struct_options.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpace &gt;, size_t &gt; -&gt; auto</span>
             </dt>
             <dd>Find a point in a convex set (defined through a cutting-plane oracle).</dd>
             <dt>
@@ -105,7 +105,7 @@
               <span class="m-doc-wrap-bumper">auto <a href="#af3884137d71cc1d972e324945c18c10a" class="m-doc">cutting_plane_optim</a>(</span><span class="m-doc-wrap">OracleOptim&amp;&amp; omega,
               SearchSpace&amp;&amp; space,
               Num&amp;&amp; tea,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpace &gt;, size_t &gt; -&gt; auto</span>
+              const <a href="struct_options.html" class="m-doc">Options</a>&amp; options = <a href="struct_options.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpace &gt;, size_t &gt; -&gt; auto</span>
             </dt>
             <dd>Cutting-plane method for solving convex problem.</dd>
             <dt>
@@ -113,14 +113,14 @@
               <span class="m-doc-wrap-bumper">auto <a href="#aa1929f2439b2d833b55485e89f70892b" class="m-doc">cutting_plane_optim_q</a>(</span><span class="m-doc-wrap">OracleOptimQ&amp;&amp; omega,
               SearchSpaceQ&amp;&amp; space_q,
               Num&amp;&amp; tea,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpaceQ &gt;, size_t &gt; -&gt; auto</span>
+              const <a href="struct_options.html" class="m-doc">Options</a>&amp; options = <a href="struct_options.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpaceQ &gt;, size_t &gt; -&gt; auto</span>
             </dt>
             <dd>Cutting-plane method for solving convex discrete optimization problem.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename Oracle, typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a2d1175c7760195ca1af691702828074e" class="m-doc">bsearch</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
               const std::pair&lt;T, T&gt;&amp; intvl,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; T, size_t &gt; -&gt; auto</span>
+              const <a href="struct_options.html" class="m-doc">Options</a>&amp; options = <a href="struct_options.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; T, size_t &gt; -&gt; auto</span>
             </dt>
             <dd></dd>
           </dl>
@@ -134,7 +134,7 @@
               </div>
               <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a878b90d5e6c180c4ddcebf1e9df2f50f" class="m-doc-self">cutting_plane_feas</a>(</span><span class="m-doc-wrap">OracleFeas&amp;&amp; omega,
               SearchSpace&amp;&amp; space,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpace &gt;, size_t &gt;</span></span>
+              const <a href="struct_options.html" class="m-doc">Options</a>&amp; options = <a href="struct_options.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpace &gt;, size_t &gt;</span></span>
             </h3>
             <p>Find a point in a convex set (defined through a cutting-plane oracle).</p>
             <table class="m-table m-fullwidth m-flat">
@@ -175,7 +175,7 @@
                 </tr>
               </tfoot>
             </table>
-<p>A function f(x) is <em>convex</em> if there always exist a g(x) such that f(z) &gt;= f(x) + g(x)&#x27; * (z - x), forall z, x in dom f. Note that dom f does not need to be a convex set in our definition. The affine function g&#x27; (x - xc) + beta is called a cutting-plane, or a `&lsquo;cut&rsquo;&#x27; for short. This algorithm solves the following feasibility problem:</p><p>find x s.t. f(x) &lt;= 0,</p><p>A <em>separation oracle</em> asserts that an evalution point x0 is feasible, or provide a cut that separates the feasible region and x0.</p>
+<p>The <code>cutting_plane_feas</code> function implements the cutting-plane method for solving a convex feasibility problem:</p><p>find x s.t. f(x) &lt;= 0,</p><p>It takes a cutting-plane oracle <code>omega</code>, a search space <code>space</code>, and an options object as input. A function f(x) is <em>convex</em> if there always exist a g(x) such that f(z) &gt;= f(x) + g(x)&#x27; * (z - x), forall z, x in dom f. Note that dom f does not need to be a convex set in our definition. The affine function g&#x27; (x - xc) + beta is called a cutting-plane, or a `&lsquo;cut&rsquo;&#x27; for short.</p><p>A <em>separation oracle</em> asserts that an evalution point xc is feasible, or provide a cut that separates the feasible region and xc.</p>
           </div></section>
           <section class="m-doc-details" id="af3884137d71cc1d972e324945c18c10a"><div>
             <h3>
@@ -185,7 +185,7 @@
               <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3884137d71cc1d972e324945c18c10a" class="m-doc-self">cutting_plane_optim</a>(</span><span class="m-doc-wrap">OracleOptim&amp;&amp; omega,
               SearchSpace&amp;&amp; space,
               Num&amp;&amp; tea,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpace &gt;, size_t &gt;</span></span>
+              const <a href="struct_options.html" class="m-doc">Options</a>&amp; options = <a href="struct_options.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpace &gt;, size_t &gt;</span></span>
             </h3>
             <p>Cutting-plane method for solving convex problem.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -234,6 +234,7 @@
                 </tr>
               </tfoot>
             </table>
+<p>The <code>cutting_plane_optim</code> function implements the cutting-plane method for solving a convex optimization problem:</p><p>min t s.t. f(x, t) &lt;= 0, x \in R</p><p>It takes a cutting-plane oracle <code>omega</code>, a search space <code>space</code>, and an options object as input. A function f(x) is <em>convex</em> if there always exist a g(x) such that f(z) &gt;= f(x) + g(x)&#x27; * (z - x), forall z, x in dom f. Note that dom f does not need to be a convex set in our definition. The affine function g&#x27; (x - xc) + beta is called a cutting-plane, or a `&lsquo;cut&rsquo;&#x27; for short.</p>
           </div></section>
           <section class="m-doc-details" id="aa1929f2439b2d833b55485e89f70892b"><div>
             <h3>
@@ -243,7 +244,7 @@
               <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa1929f2439b2d833b55485e89f70892b" class="m-doc-self">cutting_plane_optim_q</a>(</span><span class="m-doc-wrap">OracleOptimQ&amp;&amp; omega,
               SearchSpaceQ&amp;&amp; space_q,
               Num&amp;&amp; tea,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpaceQ &gt;, size_t &gt;</span></span>
+              const <a href="struct_options.html" class="m-doc">Options</a>&amp; options = <a href="struct_options.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; CuttingPlaneArrayType&lt; SearchSpaceQ &gt;, size_t &gt;</span></span>
             </h3>
             <p>Cutting-plane method for solving convex discrete optimization problem.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -292,6 +293,7 @@
                 </tr>
               </tfoot>
             </table>
+<p>The <code>cutting_plane_optim_q</code> function implements the cutting-plane method for solving a discrete convex optimization problem:</p><p>min t s.t. f(x, t) &lt;= 0, x \in D</p><p>It takes a cutting-plane oracle <code>omega</code>, a search space <code>space</code>, and an options object as input. A function f(x) is <em>convex</em> if there always exist a g(x) such that f(z) &gt;= f(x) + g(x)&#x27; * (z - x), forall z, x in dom f. Note that dom f does not need to be a convex set in our definition. The affine function g&#x27; (x - xc) + beta is called a cutting-plane, or a `&lsquo;cut&rsquo;&#x27; for short.</p>
           </div></section>
           <section class="m-doc-details" id="a2d1175c7760195ca1af691702828074e"><div>
             <h3>
@@ -300,7 +302,7 @@
               </div>
               <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2d1175c7760195ca1af691702828074e" class="m-doc-self">bsearch</a>(</span><span class="m-doc-wrap">Oracle&amp;&amp; omega,
               const std::pair&lt;T, T&gt;&amp; intvl,
-              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options = <a href="structOptions.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; T, size_t &gt;</span></span>
+              const <a href="struct_options.html" class="m-doc">Options</a>&amp; options = <a href="struct_options.html" class="m-doc">Options</a>()) -&gt; std::tuple&lt; T, size_t &gt;</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -336,7 +338,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="structCInfo.html" class="m-doc">CInfo</a></td>
+                  <td><a href="struct_c_info.html" class="m-doc">CInfo</a></td>
                 </tr>
               </tfoot>
             </table>
@@ -386,7 +388,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.7 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
