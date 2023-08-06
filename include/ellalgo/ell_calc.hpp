@@ -44,8 +44,12 @@ class EllCalc {
      * @param x
      */
     EllCalc(size_t ndim)
-        : _nFloat{double(ndim)}, _nPlus1{_nFloat + 1.0}, _halfN{_nFloat / 2.0},
-          _nSq{_nFloat * _nFloat}, _c1{_nSq / (_nSq - 1.0)}, _c2{2.0 / _nPlus1},
+        : _nFloat{double(ndim)},
+          _nPlus1{_nFloat + 1.0},
+          _halfN{_nFloat / 2.0},
+          _nSq{_nFloat * _nFloat},
+          _c1{_nSq / (_nSq - 1.0)},
+          _c2{2.0 / _nPlus1},
           _c3{_nFloat / _nPlus1} {}
 
   public:
@@ -119,8 +123,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto calc_cc(const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double>;
+    auto calc_cc(const double &tsq) const -> std::tuple<CutStatus, double, double, double>;
 
     /**
      * @brief Calculate new ellipsoid under Parallel Cut
@@ -133,8 +136,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto calc_ll_dc_q(const double &b0, const double &b1,
-                      const double &tsq) const
+    auto calc_ll_dc_q(const double &b0, const double &b1, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double>;
 
     /**
@@ -160,9 +162,8 @@ class EllCalc {
      * @param tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto _calc_ll_core(const double &b0, const double &b1, const double &b1sq,
-                       const double &b0b1, const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double>;
+    auto _calc_ll_core(const double &b0, const double &b1, const double &b1sq, const double &b0b1,
+                       const double &tsq) const -> std::tuple<CutStatus, double, double, double>;
 
     /**
      * @brief
@@ -172,7 +173,6 @@ class EllCalc {
      * @param gamma
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto _calc_dc_core(const double &beta, const double &tau,
-                       const double &gamma) const
+    auto _calc_dc_core(const double &beta, const double &tau, const double &gamma) const
         -> std::tuple<CutStatus, double, double, double>;
-}; // } EllCalc
+};  // } EllCalc

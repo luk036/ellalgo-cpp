@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstddef>
-#include <utility> // for pair
+#include <utility>  // for pair
 
 /**
  * @brief Options
@@ -33,8 +33,7 @@ struct CInfo {
 template <typename T> using ArrayType = typename T::ArrayType;
 template <typename T> using CutChoices = typename T::CutChoices;
 template <typename T> using CutConcept = std::pair<ArrayType<T>, CutChoices<T>>;
-template <typename T>
-using RetQ = std::tuple<CutConcept<T>, bool, ArrayType<T>, bool>;
+template <typename T> using RetQ = std::tuple<CutConcept<T>, bool, ArrayType<T>, bool>;
 
 #if __cpp_concepts >= 201907L
 // #include "ell_concepts.hpp"

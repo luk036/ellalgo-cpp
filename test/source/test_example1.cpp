@@ -1,17 +1,16 @@
-#include <doctest/doctest.h> // for ResultBuilder, TestCase, CHECK_EQ
+#include <doctest/doctest.h>  // for ResultBuilder, TestCase, CHECK_EQ
 
-#include <ellalgo/cutting_plane.hpp> // for cutting_plane_optim
-#include <ellalgo/ell.hpp>           // for Ell
-#include <ellalgo/ell_config.hpp>    // for CInfo, CutStatus, CutStatus::...
-
-#include <tuple> // for get, tuple
+#include <ellalgo/cutting_plane.hpp>  // for cutting_plane_optim
+#include <ellalgo/ell.hpp>            // for Ell
+#include <ellalgo/ell_config.hpp>     // for CInfo, CutStatus, CutStatus::...
+#include <tuple>                      // for get, tuple
 
 // using Arr1 = xt::xarray<double, xt::layout_type::row_major>;
 using Vec = std::valarray<double>;
 
 struct MyOracle {
     using ArrayType = Vec;
-    using CutChoices = double; // single cut
+    using CutChoices = double;  // single cut
     using Cut = std::pair<Vec, double>;
 
     /**
@@ -49,7 +48,7 @@ struct MyOracle {
 TEST_CASE("Example 1, test feasible") {
     auto ell = Ell<Vec>(Vec{10.0, 10.0}, Vec{0.0, 0.0});
     auto oracle = MyOracle{};
-    auto t = -1.0e100; // std::numeric_limits<double>::min()
+    auto t = -1.0e100;  // std::numeric_limits<double>::min()
     const auto options = Options{2000, 1e-10};
     const auto result = cutting_plane_optim(oracle, ell, t, options);
     // const auto x = std::get<0>(result); // make clang compiler happy
@@ -62,11 +61,10 @@ TEST_CASE("Example 1, test feasible") {
 }
 
 TEST_CASE("Example 1, test infeasible1") {
-    auto ell = Ell<Vec>(Vec{10.0, 10.0},
-                        Vec{100.0, 100.0}); // wrong initial guess
-                                            // or ellipsoid is too small
+    auto ell = Ell<Vec>(Vec{10.0, 10.0}, Vec{100.0, 100.0});  // wrong initial guess
+                                                              // or ellipsoid is too small
     auto oracle = MyOracle{};
-    auto t = -1.0e100; // std::numeric_limits<double>::min()
+    auto t = -1.0e100;  // std::numeric_limits<double>::min()
     const auto options = Options{2000, 1e-12};
     const auto result = cutting_plane_optim(oracle, ell, t, options);
     const auto x = std::get<0>(result);

@@ -1,21 +1,21 @@
 /*
  *  Distributed under the MIT License (See accompanying file /LICENSE )
  */
-#include <doctest/doctest.h> // for ResultBuilder, CHECK, TestCase
+#include <doctest/doctest.h>  // for ResultBuilder, CHECK, TestCase
 
-#include <ellalgo/cutting_plane.hpp>      // for cutting_plane_optim
-#include <ellalgo/ell.hpp>                // for Ell
-#include <ellalgo/ell_matrix.hpp>         // for EllStable
-#include <ellalgo/ell_stable.hpp>         // for EllStable
-#include <ellalgo/oracles/lmi_oracle.hpp> // for LmiOracle
+#include <ellalgo/cutting_plane.hpp>       // for cutting_plane_optim
+#include <ellalgo/ell.hpp>                 // for Ell
+#include <ellalgo/ell_matrix.hpp>          // for EllStable
+#include <ellalgo/ell_stable.hpp>          // for EllStable
+#include <ellalgo/oracles/lmi_oracle.hpp>  // for LmiOracle
 // #include <gsl/span> // for span
 // #include <spdlog/sinks/stdout_sinks.h>
 // #include <spdlog/spdlog.h>
 // #include <optional>    // for optional
-#include <tuple>       // for tuple
-#include <type_traits> // for move, add_const<>::type
+#include <tuple>        // for tuple
+#include <type_traits>  // for move, add_const<>::type
 #include <valarray>
-#include <vector> // for vector
+#include <vector>  // for vector
 // #include <xtensor-blas/xlinalg.hpp>
 
 /**
@@ -43,9 +43,8 @@ class MyLMIOracle {
      * @param[in] B2
      * @param[in] c
      */
-    MyLMIOracle(size_t m1, const std::vector<Matrix> &F1, const Matrix &B1,
-                size_t m2, const std::vector<Matrix> &F2, const Matrix &B2,
-                Vec c)
+    MyLMIOracle(size_t m1, const std::vector<Matrix> &F1, const Matrix &B1, size_t m2,
+                const std::vector<Matrix> &F2, const Matrix &B2, Vec c)
         : lmi1{m1, F1, B1}, lmi2{m2, F2, B2}, c{std::move(c)} {}
 
     /**
@@ -135,7 +134,7 @@ TEST_CASE("LMI test (stable)") {
     auto omega = MyLMIOracle(2, F1, B1, 3, F2, B2, std::move(c));
     auto ellip = Ell<Vec>(10.0, Vec{0.0, 0.0, 0.0});
 
-    auto t = 1e100; // std::numeric_limits<double>::max()
+    auto t = 1e100;  // std::numeric_limits<double>::max()
     // const auto [x, num_iters] = cutting_plane_optim(omega, ellip, t);
     const auto result = cutting_plane_optim(omega, ellip, t);
     auto x = std::get<0>(result);
@@ -207,7 +206,7 @@ TEST_CASE("LMI test ") {
     auto omega = MyLMIOracle(2, F1, B1, 3, F2, B2, std::move(c));
     auto ellip = EllStable<Vec>(10.0, Vec{0.0, 0.0, 0.0});
 
-    auto t = 1e100; // std::numeric_limits<double>::max()
+    auto t = 1e100;  // std::numeric_limits<double>::max()
     // const auto [x, num_iters] = cutting_plane_optim(omega, ellip, t);
     const auto result = cutting_plane_optim(omega, ellip, t);
     const auto &x = std::get<0>(result);

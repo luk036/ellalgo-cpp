@@ -1,8 +1,8 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include <cmath> // for log
-#include <tuple> // for tuple
+#include <cmath>  // for log
+#include <tuple>  // for tuple
 #include <valarray>
 
 /**
@@ -45,8 +45,7 @@ class ProfitOracle {
      * @param[in] v output price
      */
     ProfitOracle(double p, double A, double k, const Vec &a, const Vec &v)
-        : _log_pA{std::log(p * A)}, _log_k{std::log(k)}, _price_out{v},
-          _elasticities{a} {}
+        : _log_pA{std::log(p * A)}, _log_k{std::log(k)}, _price_out{v}, _elasticities{a} {}
 
     /**
      * @brief Construct a new profit oracle object (only explicitly)
@@ -103,10 +102,9 @@ class ProfitOracleRb {
      * @param[in] e paramters for uncertainty
      * @param[in] e3 paramters for uncertainty
      */
-    ProfitOracleRb(double p, double A, double k, const Vec &a, const Vec &v,
-                   const Vec &e, double e3)
-        : _uie{e}, _elasticities{a}, _P(p - e3, A, k - e3, a, v + Vec{e3, e3}) {
-    }
+    ProfitOracleRb(double p, double A, double k, const Vec &a, const Vec &v, const Vec &e,
+                   double e3)
+        : _uie{e}, _elasticities{a}, _P(p - e3, A, k - e3, a, v + Vec{e3, e3}) {}
 
     /**
      * @brief Make object callable for cutting_plane_optim()
@@ -165,8 +163,7 @@ class ProfitOracleQ {
      * @param[in] a the output elasticities
      * @param[in] v output price
      */
-    ProfitOracleQ(double p, double A, double k, const Vec &a, const Vec &v)
-        : _P{p, A, k, a, v} {}
+    ProfitOracleQ(double p, double A, double k, const Vec &a, const Vec &v) : _P{p, A, k, a, v} {}
 
     /**
      * @brief Make object callable for cutting_plane_optim_q()
@@ -178,6 +175,5 @@ class ProfitOracleQ {
      *
      * @see cutting_plane_optim_q
      */
-    auto assess_optim_q(const Vec &y, double &tea, bool retry)
-        -> std::tuple<Cut, bool, Vec, bool>;
+    auto assess_optim_q(const Vec &y, double &tea, bool retry) -> std::tuple<Cut, bool, Vec, bool>;
 };

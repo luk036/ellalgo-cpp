@@ -61,9 +61,7 @@ class Ell {
      * @param cut_strategy
      * @return CutStatus
      */
-    CutStatus
-    _update_core(Cut cut,
-                 std::function<CutStatus(CutChoice, double)> cut_strategy) {
+    CutStatus _update_core(Cut cut, std::function<CutStatus(CutChoice, double)> cut_strategy) {
         ArrayType grad = std::get<0>(cut);
         CutChoice beta = std::get<1>(cut);
         ArrayType grad_t;

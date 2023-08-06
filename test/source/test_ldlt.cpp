@@ -1,6 +1,6 @@
-#include <doctest/doctest.h> // for ResultBuilder, TestCase, CHECK
+#include <doctest/doctest.h>  // for ResultBuilder, TestCase, CHECK
 
-#include <ellalgo/oracles/ldlt_mgr.hpp> // for LDLTMgr
+#include <ellalgo/oracles/ldlt_mgr.hpp>  // for LDLTMgr
 // #include <xtensor/xarray.hpp>          // for xarray_container
 // #include <xtensor/xcontainer.hpp>      // for xcontainer<>::inner_shape_type
 // #include <xtensor/xlayout.hpp>         // for layout_type,

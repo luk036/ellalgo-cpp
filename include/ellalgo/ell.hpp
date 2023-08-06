@@ -53,8 +53,7 @@ template <typename Arr> class Ell {
      * @param[in] val
      * @param[in] x
      */
-    Ell(const Vec &val, Arr x)
-        : _n{x.size()}, _xc{std::move(x)}, _mgr(val, _n) {}
+    Ell(const Vec &val, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(val, _n) {}
 
     /**
      * @brief Construct a new Ell object
@@ -62,8 +61,7 @@ template <typename Arr> class Ell {
      * @param[in] alpha
      * @param[in] x
      */
-    Ell(const double &alpha, Arr x)
-        : _n{x.size()}, _xc{std::move(x)}, _mgr(alpha, _n) {}
+    Ell(const double &alpha, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(alpha, _n) {}
 
     /**
      * @brief Construct a new Ell object
@@ -115,8 +113,18 @@ template <typename Arr> class Ell {
      */
     auto tsq() const -> double { return this->_mgr.tsq(); }
 
-    void set_use_parallel_cut(bool value) {
-        this->_mgr.set_use_parallel_cut(value);
+    void set_use_parallel_cut(bool value) { this->_mgr.set_use_parallel_cut(value); }
+
+    /**
+     * @brief Update ellipsoid core function using the cut(s)
+     *
+     * @tparam T
+     * @param[in] cut cutting-plane
+     * @return std::tuple<int, double>
+     */
+    template <typename T> auto update_dc(const std::pair<Arr, T> &cut) -> CutStatus {
+        return this->_update_core(
+            cut, [&](Vec &grad, const T &beta) { return this->_mgr.update_dc(grad, beta); });
     }
 
     /**
@@ -126,11 +134,9 @@ template <typename Arr> class Ell {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T>
-    auto update_dc(const std::pair<Arr, T> &cut) -> CutStatus {
-        return this->_update_core(cut, [&](Vec &grad, const T &beta) {
-            return this->_mgr.update_dc(grad, beta);
-        });
+    template <typename T> auto update_cc(const std::pair<Arr, T> &cut) -> CutStatus {
+        return this->_update_core(
+            cut, [&](Vec &grad, const T &beta) { return this->_mgr.update_cc(grad, beta); });
     }
 
     /**
@@ -140,25 +146,9 @@ template <typename Arr> class Ell {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T>
-    auto update_cc(const std::pair<Arr, T> &cut) -> CutStatus {
-        return this->_update_core(cut, [&](Vec &grad, const T &beta) {
-            return this->_mgr.update_cc(grad, beta);
-        });
-    }
-
-    /**
-     * @brief Update ellipsoid core function using the cut(s)
-     *
-     * @tparam T
-     * @param[in] cut cutting-plane
-     * @return std::tuple<int, double>
-     */
-    template <typename T>
-    auto update_q(const std::pair<Arr, T> &cut) -> CutStatus {
-        return this->_update_core(cut, [&](Vec &grad, const T &beta) {
-            return this->_mgr.update_q(grad, beta);
-        });
+    template <typename T> auto update_q(const std::pair<Arr, T> &cut) -> CutStatus {
+        return this->_update_core(
+            cut, [&](Vec &grad, const T &beta) { return this->_mgr.update_q(grad, beta); });
     }
 
   private:
@@ -170,8 +160,7 @@ template <typename Arr> class Ell {
      * @return std::tuple<int, double>
      */
     template <typename T, typename Fn>
-    auto _update_core(const std::pair<Arr, T> &cut, Fn &&cut_strategy)
-        -> CutStatus {
+    auto _update_core(const std::pair<Arr, T> &cut, Fn &&cut_strategy) -> CutStatus {
         const auto &grad = cut.first;
         const auto &beta = cut.second;
         std::valarray<double> g(this->_n);
@@ -189,4 +178,4 @@ template <typename Arr> class Ell {
 
         return result;
     }
-}; // } Ell
+};  // } Ell

@@ -54,9 +54,9 @@ class LDLTMgr {
                 _T[j][i] = d;
                 _T[i][j] = d / _T[j][j];
                 int s = j + 1;
-                d = get_elem(i, s) -
-                    std::inner_product(_T[i].begin() + start, _T[i].begin() + s,
-                                       _T[j].begin() + start, 0.0);
+                d = get_elem(i, s)
+                    - std::inner_product(_T[i].begin() + start, _T[i].begin() + s,
+                                         _T[j].begin() + start, 0.0);
             }
             _T[i][i] = d;
             if (d <= 0.0) {
@@ -88,8 +88,8 @@ class LDLTMgr {
         int m = n - 1;
         v[m] = 1.0;
         for (int i = m; i > start; i--) {
-            v[i - 1] = -std::inner_product(_T[i].begin() + i, _T[n].begin() + i,
-                                           v.begin() + i, 0.0);
+            v[i - 1]
+                = -std::inner_product(_T[i].begin() + i, _T[n].begin() + i, v.begin() + i, 0.0);
         }
         return -_T[m][m];
     }
@@ -102,8 +102,7 @@ class LDLTMgr {
      */
     double sym_quad(std::vector<std::vector<double>> A) {
         int s = p.first, n = p.second;
-        std::vector<double> v =
-            std::vector<double>(this->v.begin() + s, this->v.begin() + n);
+        std::vector<double> v = std::vector<double>(this->v.begin() + s, this->v.begin() + n);
         double result = 0.0;
         for (int i = s; i < n; i++) {
             double temp = 0.0;

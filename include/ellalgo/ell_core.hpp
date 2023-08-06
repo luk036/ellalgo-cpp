@@ -1,12 +1,13 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include "ell_calc.hpp"
-#include "ell_config.hpp"
-#include "ell_matrix.hpp"
 #include <cmath>
 #include <tuple>
 #include <valarray>
+
+#include "ell_calc.hpp"
+#include "ell_config.hpp"
+#include "ell_matrix.hpp"
 
 /**
  * @brief Ellipsoid Search Space Core
@@ -63,8 +64,7 @@ class EllCore {
      * @param[in] alpha
      * @param[in] x
      */
-    EllCore(double alpha, size_t ndim)
-        : EllCore{std::move(alpha), Matrix(ndim), ndim} {
+    EllCore(double alpha, size_t ndim) : EllCore{std::move(alpha), Matrix(ndim), ndim} {
         this->_mq.identity();
     }
 
@@ -110,8 +110,19 @@ class EllCore {
      */
     auto tsq() const -> double { return this->_tsq; }
 
-    void set_use_parallel_cut(bool value) {
-        this->_helper.use_parallel_cut = value;
+    void set_use_parallel_cut(bool value) { this->_helper.use_parallel_cut = value; }
+
+    /**
+     * @brief Update ellipsoid core function using the cut(s)
+     *
+     * @tparam T
+     * @param[in] cut cutting-plane
+     * @return std::tuple<int, double>
+     */
+    template <typename T> auto update_dc(Vec &grad, const T &beta) -> CutStatus {
+        return this->_update_core(grad, beta, [&](const T &beta, const double &tsq) {
+            return this->_update_cut_dc(beta, tsq);
+        });
     }
 
     /**
@@ -121,27 +132,10 @@ class EllCore {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T>
-    auto update_dc(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_core(grad, beta,
-                                  [&](const T &beta, const double &tsq) {
-                                      return this->_update_cut_dc(beta, tsq);
-                                  });
-    }
-
-    /**
-     * @brief Update ellipsoid core function using the cut(s)
-     *
-     * @tparam T
-     * @param[in] cut cutting-plane
-     * @return std::tuple<int, double>
-     */
-    template <typename T>
-    auto update_cc(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_core(grad, beta,
-                                  [&](const T &beta, const double &tsq) {
-                                      return this->_update_cut_cc(beta, tsq);
-                                  });
+    template <typename T> auto update_cc(Vec &grad, const T &beta) -> CutStatus {
+        return this->_update_core(grad, beta, [&](const T &beta, const double &tsq) {
+            return this->_update_cut_cc(beta, tsq);
+        });
     }
 
     /**
@@ -152,10 +146,9 @@ class EllCore {
      * @return std::tuple<int, double>
      */
     template <typename T> auto update_q(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_core(grad, beta,
-                                  [&](const T &beta, const double &tsq) {
-                                      return this->_update_cut_q(beta, tsq);
-                                  });
+        return this->_update_core(grad, beta, [&](const T &beta, const double &tsq) {
+            return this->_update_cut_q(beta, tsq);
+        });
     }
 
     /**
@@ -165,12 +158,10 @@ class EllCore {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T>
-    auto update_stable_dc(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_stable_core(
-            grad, beta, [&](const T &beta, const double &tsq) {
-                return this->_update_cut_dc(beta, tsq);
-            });
+    template <typename T> auto update_stable_dc(Vec &grad, const T &beta) -> CutStatus {
+        return this->_update_stable_core(grad, beta, [&](const T &beta, const double &tsq) {
+            return this->_update_cut_dc(beta, tsq);
+        });
     }
 
     /**
@@ -181,12 +172,10 @@ class EllCore {
      * @param beta
      * @return CutStatus
      */
-    template <typename T>
-    auto update_stable_cc(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_stable_core(
-            grad, beta, [&](const T &beta, const double &tsq) {
-                return this->_update_cut_cc(beta, tsq);
-            });
+    template <typename T> auto update_stable_cc(Vec &grad, const T &beta) -> CutStatus {
+        return this->_update_stable_core(grad, beta, [&](const T &beta, const double &tsq) {
+            return this->_update_cut_cc(beta, tsq);
+        });
     }
 
     /**
@@ -197,12 +186,10 @@ class EllCore {
      * @param beta
      * @return CutStatus
      */
-    template <typename T>
-    auto update_stable_q(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_stable_core(
-            grad, beta, [&](const T &beta, const double &tsq) {
-                return this->_update_cut_q(beta, tsq);
-            });
+    template <typename T> auto update_stable_q(Vec &grad, const T &beta) -> CutStatus {
+        return this->_update_stable_core(grad, beta, [&](const T &beta, const double &tsq) {
+            return this->_update_cut_q(beta, tsq);
+        });
     }
 
   private:
@@ -217,8 +204,7 @@ class EllCore {
      * @return CutStatus
      */
     template <typename T, typename Fn>
-    auto _update_core(Vec &grad, const T &beta, Fn &&cut_strategy)
-        -> CutStatus {
+    auto _update_core(Vec &grad, const T &beta, Fn &&cut_strategy) -> CutStatus {
         std::valarray<double> grad_t(0.0, this->_n);
         auto omega = 0.0;
         for (auto i = 0U; i != this->_n; ++i) {
@@ -260,7 +246,7 @@ class EllCore {
         }
 
         grad = grad_t * (rho / omega);
-        return status; // g++-7 is ok
+        return status;  // g++-7 is ok
     }
 
     /**
@@ -274,10 +260,9 @@ class EllCore {
      * @return CutStatus
      */
     template <typename T, typename Fn>
-    auto _update_stable_core(Vec &g, const T &beta, Fn &&cut_strategy)
-        -> CutStatus {
+    auto _update_stable_core(Vec &g, const T &beta, Fn &&cut_strategy) -> CutStatus {
         // calculate inv(L)*grad: (n-1)*n/2 multiplications
-        auto invLg{g}; // initially
+        auto invLg{g};  // initially
         for (auto j = 0U; j != this->_n - 1; ++j) {
             for (auto i = j + 1; i != this->_n; ++i) {
                 this->_mq(j, i) = this->_mq(i, j) * invLg[j];
@@ -287,14 +272,14 @@ class EllCore {
         }
 
         // calculate inv(D)*inv(L)*grad: n
-        auto invDinvLg{invLg}; // initially
+        auto invDinvLg{invLg};  // initially
         for (auto i = 0U; i != this->_n; ++i) {
             invDinvLg[i] *= this->_mq(i, i);
         }
 
         // calculate omega: n
-        auto gg_t{invDinvLg}; // initially
-        auto omega = 0.0;     // initially
+        auto gg_t{invDinvLg};  // initially
+        auto omega = 0.0;      // initially
         for (auto i = 0U; i != this->_n; ++i) {
             gg_t[i] *= invLg[i];
             omega += gg_t[i];
@@ -313,17 +298,17 @@ class EllCore {
         auto delta = std::get<3>(__result);
 
         // calculate mq*grad = inv(L')*inv(D)*inv(L)*grad : (n-1)*n/2
-        auto grad_t{invDinvLg};                    // initially
-        for (auto i = this->_n - 1; i != 0; --i) { // backward subsituition
+        auto grad_t{invDinvLg};                     // initially
+        for (auto i = this->_n - 1; i != 0; --i) {  // backward subsituition
             for (auto j = i; j != this->_n; ++j) {
-                grad_t[i - 1] -= this->_mq(j, i - 1) * grad_t[j]; // ???
+                grad_t[i - 1] -= this->_mq(j, i - 1) * grad_t[j];  // ???
             }
         }
 
         // rank-one update: 3*n + (n-1)*n/2
         // const auto r = this->_sigma / omega;
         const auto mu = sigma / (1.0 - sigma);
-        auto oldt = omega / mu; // initially
+        auto oldt = omega / mu;  // initially
         // const auto m = this->_n - 1;
         auto v{g};
         for (auto j = 0U; j != this->_n; ++j) {
@@ -331,7 +316,7 @@ class EllCore {
             const auto temp = invDinvLg[j];
             const auto newt = oldt + p * temp;
             const auto beta2 = temp / newt;
-            this->_mq(j, j) *= oldt / newt; // update invD
+            this->_mq(j, j) *= oldt / newt;  // update invD
             for (auto k = j + 1; k != this->_n; ++k) {
                 v[k] -= this->_mq(j, k);
                 this->_mq(k, j) += beta2 * v[k];
@@ -365,9 +350,8 @@ class EllCore {
      * @param tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto _update_cut_dc(const std::valarray<double> &beta,
-                        const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double> { // parallel cut
+    auto _update_cut_dc(const std::valarray<double> &beta, const double &tsq) const
+        -> std::tuple<CutStatus, double, double, double> {  // parallel cut
         if (beta.size() < 2) {
             return this->_helper.calc_dc(beta[0], tsq);
         }
@@ -392,9 +376,8 @@ class EllCore {
      * @param tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto _update_cut_cc(const std::valarray<double> &beta,
-                        const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double> { // parallel cut
+    auto _update_cut_cc(const std::valarray<double> &beta, const double &tsq) const
+        -> std::tuple<CutStatus, double, double, double> {  // parallel cut
         if (beta.size() < 2) {
             return this->_helper.calc_cc(tsq);
         }
@@ -420,13 +403,12 @@ class EllCore {
      * @param tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto _update_cut_q(const std::valarray<double> &beta,
-                       const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double> { // parallel cut
+    auto _update_cut_q(const std::valarray<double> &beta, const double &tsq) const
+        -> std::tuple<CutStatus, double, double, double> {  // parallel cut
         if (beta.size() < 2) {
             return this->_helper.calc_dc_q(beta[0], tsq);
         }
         return this->_helper.calc_ll_dc_q(beta[0], beta[1], tsq);
     }
 
-}; // } EllCore
+};  // } EllCore

@@ -1,20 +1,19 @@
 // -*- coding: utf-8 -*-
-#include <doctest/doctest.h> // for ResultBuilder, Approx, CHECK_EQ
+#include <doctest/doctest.h>  // for ResultBuilder, Approx, CHECK_EQ
 
-#include <ellalgo/cutting_plane.hpp> // for cutting_plane_dc
-#include <ellalgo/ell.hpp>           // for Ell
-#include <ellalgo/ell_config.hpp>    // for CInfo, CutStatus, CutStatus::...
-#include <ellalgo/ell_stable.hpp>    // for EllStable
-
-#include <cmath> // for exp
-#include <tuple> // for get, tuple
+#include <cmath>                      // for exp
+#include <ellalgo/cutting_plane.hpp>  // for cutting_plane_dc
+#include <ellalgo/ell.hpp>            // for Ell
+#include <ellalgo/ell_config.hpp>     // for CInfo, CutStatus, CutStatus::...
+#include <ellalgo/ell_stable.hpp>     // for EllStable
+#include <tuple>                      // for get, tuple
 
 // using Arr = xt::xarray<double, xt::layout_type::row_major>;
 using Vec = std::valarray<double>;
 
 struct MyQuasicCvxOracle {
     using ArrayType = Vec;
-    using CutChoices = double; // single cut
+    using CutChoices = double;  // single cut
     using Cut = std::pair<Vec, double>;
 
     /**
@@ -25,7 +24,6 @@ struct MyQuasicCvxOracle {
      * @return std::tuple<Cut, double>
      */
     auto assess_optim(const Vec &z, double &t) -> std::tuple<Cut, bool> {
-
         double sqrtx = z[0];
         double ly = z[1];
 
@@ -39,7 +37,7 @@ struct MyQuasicCvxOracle {
         double tmp2 = std::exp(ly);
         double tmp3 = t * tmp2;
         fj = -sqrtx + tmp3;
-        if (fj < 0.0) // feasible
+        if (fj < 0.0)  // feasible
         {
             t = sqrtx / tmp2;
             return {{Vec{-1.0, sqrtx}, 0}, true};

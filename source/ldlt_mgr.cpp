@@ -1,8 +1,7 @@
 #include <ellalgo/oracles/ldlt_mgr.hpp>
 #include <functional>
 
-auto LDLTMgr::factor(std::function<double(size_t, size_t)> get_matrix_elem)
-    -> bool {
+auto LDLTMgr::factor(std::function<double(size_t, size_t)> get_matrix_elem) -> bool {
     this->p = {0U, 0U};
     // auto &[start, stop] = this->p;
     auto &start = this->p.first;
@@ -13,7 +12,7 @@ auto LDLTMgr::factor(std::function<double(size_t, size_t)> get_matrix_elem)
         auto d = get_matrix_elem(i, start);
         for (auto j = start; j != i; ++j) {
             this->T(j, i) = d;
-            this->T(i, j) = d / this->T(j, j); // note: T(j, i) here!
+            this->T(i, j) = d / this->T(j, j);  // note: T(j, i) here!
             auto s = j + 1;
             d = get_matrix_elem(i, s);
             for (auto k = start; k != s; ++k) {
@@ -31,8 +30,8 @@ auto LDLTMgr::factor(std::function<double(size_t, size_t)> get_matrix_elem)
     return this->is_spd();
 }
 
-auto LDLTMgr::factor_with_allow_semidefinite(
-    std::function<double(size_t, size_t)> get_matrix_elem) -> bool {
+auto LDLTMgr::factor_with_allow_semidefinite(std::function<double(size_t, size_t)> get_matrix_elem)
+    -> bool {
     this->p = {0U, 0U};
     // auto &[start, stop] = this->p;
     auto &start = this->p.first;
@@ -43,7 +42,7 @@ auto LDLTMgr::factor_with_allow_semidefinite(
         auto d = get_matrix_elem(i, start);
         for (auto j = start; j != i; ++j) {
             this->T(j, i) = d;
-            this->T(i, j) = d / this->T(j, j); // note: T(j, i) here!
+            this->T(i, j) = d / this->T(j, j);  // note: T(j, i) here!
             auto s = j + 1;
             d = get_matrix_elem(i, s);
             for (auto k = start; k != s; ++k) {
@@ -71,13 +70,12 @@ auto LDLTMgr::witness() -> double {
     // const auto& [start, n] = this->p;
     const auto &start = this->p.first;
     const auto &n = this->p.second;
-    auto m = n - 1; // assume stop > 0
+    auto m = n - 1;  // assume stop > 0
     this->witness_vec[m] = 1.0;
     for (auto i = m; i > start; --i) {
         this->witness_vec[i - 1] = 0.0;
         for (auto k = i; k != n; ++k) {
-            this->witness_vec[i - 1] -=
-                this->T(k, i - 1) * this->witness_vec[k];
+            this->witness_vec[i - 1] -= this->T(k, i - 1) * this->witness_vec[k];
         }
     }
     return -this->T(m, m);

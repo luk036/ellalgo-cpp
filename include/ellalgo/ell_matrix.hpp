@@ -14,8 +14,7 @@ class Matrix {
      * @param ndim
      * @param init
      */
-    explicit Matrix(size_t ndim, double init = 0.0)
-        : ndim{ndim}, data(init, ndim * ndim) {}
+    explicit Matrix(size_t ndim, double init = 0.0) : ndim{ndim}, data(init, ndim * ndim) {}
 
     /**
      * @brief
@@ -31,9 +30,7 @@ class Matrix {
      * @param col
      * @return double&
      */
-    double &operator()(size_t row, size_t col) {
-        return this->data[row * ndim + col];
-    }
+    double &operator()(size_t row, size_t col) { return this->data[row * ndim + col]; }
 
     /**
      * @brief
@@ -42,9 +39,7 @@ class Matrix {
      * @param col
      * @return const double&
      */
-    const double &operator()(size_t row, size_t col) const {
-        return this->data[row * ndim + col];
-    }
+    const double &operator()(size_t row, size_t col) const { return this->data[row * ndim + col]; }
 
     /**
      * @brief
@@ -82,9 +77,7 @@ class Matrix {
      *
      * @return std::slice_array<double>
      */
-    std::slice_array<double> diagonal() {
-        return this->data[std::slice(0, ndim, ndim + 1)];
-    }
+    std::slice_array<double> diagonal() { return this->data[std::slice(0, ndim, ndim + 1)]; }
 
     /**
      * @brief
@@ -120,7 +113,5 @@ class Matrix {
      *
      * @return double
      */
-    double trace() const {
-        return this->data[std::slice(0, ndim, ndim + 1)].sum();
-    }
+    double trace() const { return this->data[std::slice(0, ndim, ndim + 1)].sum(); }
 };

@@ -1,8 +1,8 @@
-#include <ellalgo/ell1d.hpp>            // for ell1d, ell1d::return_t
-#include <ellalgo/ell_assert.hpp>       // for ELL_UNLIKELY
-#include <ellalgo/ell_config.hpp>       // for CutStatus, CutStatus::Success
-#include <ellalgo/half_nonnegative.hpp> // for half_nonnegative
-#include <tuple>                        // for get, tuple
+#include <ellalgo/ell1d.hpp>             // for ell1d, ell1d::return_t
+#include <ellalgo/ell_assert.hpp>        // for ELL_UNLIKELY
+#include <ellalgo/ell_config.hpp>        // for CutStatus, CutStatus::Success
+#include <ellalgo/half_nonnegative.hpp>  // for half_nonnegative
+#include <tuple>                         // for get, tuple
 
 inline double my_abs(const double &a) { return a > 0.0 ? a : -a; }
 
@@ -26,10 +26,10 @@ auto ell1d::update(const std::pair<double, double> &cut) noexcept -> CutStatus {
     //   return CutStatus::Success;
     // }
     if (beta > tau) {
-        return CutStatus::NoSoln; // no sol'n
+        return CutStatus::NoSoln;  // no sol'n
     }
     if (ELL_UNLIKELY(beta < -tau)) {
-        return CutStatus::NoEffect; // no effect
+        return CutStatus::NoEffect;  // no effect
     }
 
     const auto bound = this->_xc - beta / g;
@@ -47,8 +47,7 @@ auto ell1d::update(const std::pair<double, double> &cut) noexcept -> CutStatus {
  * @param[in] cut
  * @return ell1d::return_t
  */
-auto ell1d::update_cc(const std::pair<double, double> &cut) noexcept
-    -> CutStatus {
+auto ell1d::update_cc(const std::pair<double, double> &cut) noexcept -> CutStatus {
     const auto &g = cut.first;
     const auto tau = ::my_abs(this->_r * g);
     this->_tsq = tau * tau;

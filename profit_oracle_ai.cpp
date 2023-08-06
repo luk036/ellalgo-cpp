@@ -24,8 +24,7 @@ class ProfitOracle {
      * @param elasticities
      * @param price_out
      */
-    ProfitOracle(std::tuple<double, double, double> params, Arr elasticities,
-                 Arr price_out) {
+    ProfitOracle(std::tuple<double, double, double> params, Arr elasticities, Arr price_out) {
         double unit_price, scale, limit;
         std::tie(unit_price, scale, limit) = params;
         log_pA = std::log(unit_price * scale);

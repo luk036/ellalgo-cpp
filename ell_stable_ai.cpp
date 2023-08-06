@@ -50,9 +50,7 @@ class EllStable {
      * @param cut_strategy
      * @return CutStatus
      */
-    CutStatus
-    update_core(Cut cut,
-                std::function<CutStatus(double, double)> cut_strategy) {
+    CutStatus update_core(Cut cut, std::function<CutStatus(double, double)> cut_strategy) {
         ArrayType g = cut.first;
         CutChoice beta = cut.second;
         ArrayType invLg = g;
@@ -74,8 +72,7 @@ class EllStable {
         tsq = kappa * omega;
         CutStatus status;
         double rho, sigma, delta;
-        std::tie(status, rho, sigma, delta) =
-            cut_strategy(std::get<double>(beta), tsq);
+        std::tie(status, rho, sigma, delta) = cut_strategy(std::get<double>(beta), tsq);
         ArrayType g_t = invDinvLg;
         for (int i = n - 1; i > 0; i--) {
             for (int j = i; j < n; j++) {

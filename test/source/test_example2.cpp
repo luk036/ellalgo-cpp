@@ -1,10 +1,9 @@
-#include <doctest/doctest.h> // for ResultBuilder, TestCase, CHECK
+#include <doctest/doctest.h>  // for ResultBuilder, TestCase, CHECK
 
-#include <ellalgo/cutting_plane.hpp> // for cutting_plane_optim
-#include <ellalgo/ell.hpp>           // for ell
-#include <ellalgo/ell_config.hpp>    // for CInfo, CutStatus, CutStatus::...
-
-#include <utility> // for pair
+#include <ellalgo/cutting_plane.hpp>  // for cutting_plane_optim
+#include <ellalgo/ell.hpp>            // for ell
+#include <ellalgo/ell_config.hpp>     // for CInfo, CutStatus, CutStatus::...
+#include <utility>                    // for pair
 
 // using Arr1 = xt::xarray<double, xt::layout_type::row_major>;
 using Vec = std::valarray<double>;

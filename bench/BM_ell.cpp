@@ -1,17 +1,16 @@
 /*
  *  Distributed under the MIT License (See accompanying file /LICENSE )
  */
-#include "benchmark/benchmark.h" // for BENCHMARK, State, BENCHMARK_...
+#include <cmath>                              // for log
+#include <ellalgo/cutting_plane.hpp>          // for cutting_plane_optim, cutti...
+#include <ellalgo/ell.hpp>                    // for Ell
+#include <ellalgo/ell_config.hpp>             // for CInfo
+#include <ellalgo/ell_stable.hpp>             // for EllStable
+#include <ellalgo/oracles/profit_oracle.hpp>  // for ProfitOracle, profit_r...
+#include <tuple>                              // for get
+#include <type_traits>                        // for move, remove_reference<...
 
-#include <ellalgo/cutting_plane.hpp> // for cutting_plane_optim, cutti...
-#include <ellalgo/ell.hpp>           // for Ell
-#include <ellalgo/ell_config.hpp>    // for CInfo
-#include <ellalgo/ell_stable.hpp>    // for EllStable
-#include <ellalgo/oracles/profit_oracle.hpp> // for ProfitOracle, profit_r...
-
-#include <cmath>       // for log
-#include <tuple>       // for get
-#include <type_traits> // for move, remove_reference<...
+#include "benchmark/benchmark.h"  // for BENCHMARK, State, BENCHMARK_...
 
 // using Arr = xt::xarray<double, xt::layout_type::row_major>;
 using Vec = std::valarray<double>;
@@ -28,8 +27,7 @@ static void ELL_normal(benchmark::State &state) {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracle omega{unit_price, scale, limit, elasticities, price_out};
 
-        auto result =
-            cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
+        auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
         // CHECK_EQ(num_iters, 36);
         benchmark::DoNotOptimize(result);
     }
@@ -43,8 +41,7 @@ static void ELL_stable(benchmark::State &state) {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracle omega{unit_price, scale, limit, elasticities, price_out};
 
-        auto result =
-            cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
+        auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
         // CHECK_EQ(num_iters, 41);
         benchmark::DoNotOptimize(result);
     }
@@ -56,12 +53,10 @@ static void ELL_normal_rb(benchmark::State &state) {
     // Code inside this loop is measured repeatedly
     for (auto _ : state) {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
-        ProfitOracleRb omega{unit_price,   scale,     limit,
-                             elasticities, price_out, Vec{0.003, 0.007},
-                             1.0};
+        ProfitOracleRb omega{unit_price,        scale, limit, elasticities, price_out,
+                             Vec{0.003, 0.007}, 1.0};
 
-        auto result =
-            cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
+        auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
         // CHECK_EQ(num_iters, 36);
         benchmark::DoNotOptimize(result);
     }
@@ -73,12 +68,10 @@ static void ELL_stable_rb(benchmark::State &state) {
     // Code inside this loop is measured repeatedly
     for (auto _ : state) {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
-        ProfitOracleRb omega{unit_price,   scale,     limit,
-                             elasticities, price_out, Vec{0.003, 0.007},
-                             1.0};
+        ProfitOracleRb omega{unit_price,        scale, limit, elasticities, price_out,
+                             Vec{0.003, 0.007}, 1.0};
 
-        auto result =
-            cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
+        auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
         // CHECK_EQ(num_iters, 41);
         benchmark::DoNotOptimize(result);
     }
@@ -92,8 +85,7 @@ static void ELL_normal_q(benchmark::State &state) {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleQ omega{unit_price, scale, limit, elasticities, price_out};
 
-        auto result =
-            cutting_plane_optim_q(std::move(omega), std::move(ellip), 0.0);
+        auto result = cutting_plane_optim_q(std::move(omega), std::move(ellip), 0.0);
         // CHECK_EQ(num_iters, 36);
         benchmark::DoNotOptimize(result);
     }
@@ -107,8 +99,7 @@ static void ELL_stable_q(benchmark::State &state) {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleQ omega{unit_price, scale, limit, elasticities, price_out};
 
-        auto result =
-            cutting_plane_optim_q(std::move(omega), std::move(ellip), 0.0);
+        auto result = cutting_plane_optim_q(std::move(omega), std::move(ellip), 0.0);
         // CHECK_EQ(num_iters, 41);
         benchmark::DoNotOptimize(result);
     }

@@ -1,9 +1,10 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include "ldlt_mgr.hpp"
-#include <memory> // for unique_ptr
+#include <memory>  // for unique_ptr
 #include <vector>
+
+#include "ldlt_mgr.hpp"
 
 /**
  * @brief Oracle for Linear Matrix Inequality.
@@ -31,8 +32,7 @@ template <typename Arr036, typename Mat = Arr036> class LmiOracle {
      * @param[in] B
      */
     LmiOracle(size_t ndim, const std::vector<Mat> &F, Mat B)
-        : _mq{ndim}, _F{F}, _F0{std::move(B)},
-          cut{std::unique_ptr<Cut>(new Cut{})} {}
+        : _mq{ndim}, _F{F}, _F0{std::move(B)}, cut{std::unique_ptr<Cut>(new Cut{})} {}
     /**
      * @brief
      *
@@ -54,7 +54,7 @@ template <typename Arr036, typename Mat = Arr036> class LmiOracle {
             return nullptr;
         }
 
-        auto ep = this->_mq.witness(); // call before sym_quad() !!!
+        auto ep = this->_mq.witness();  // call before sym_quad() !!!
         Arr036 g{x};
         for (auto i = 0U; i != n; ++i) {
             g[i] = this->_mq.sym_quad(this->_F[i]);

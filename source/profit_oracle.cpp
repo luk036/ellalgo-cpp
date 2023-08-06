@@ -1,5 +1,5 @@
 #include <ellalgo/oracles/profit_oracle.hpp>
-#include <type_traits> // for move
+#include <type_traits>  // for move
 
 // using Arr = std::xarray<double, std::layout_type::row_major>;
 using Vec = std::valarray<double>;
@@ -12,16 +12,15 @@ using Cut = std::pair<Vec, double>;
  * @param[in,out] tea the best-so-far optimal value
  * @return std::tuple<Cut, double>
  */
-auto ProfitOracle::assess_optim(const Vec &y, double &tea) const
-    -> std::tuple<Cut, bool> {
+auto ProfitOracle::assess_optim(const Vec &y, double &tea) const -> std::tuple<Cut, bool> {
     // y0 <= log k
     const auto f1 = y[0] - this->_log_k;
     if (f1 > 0.0) {
         return {{Vec{1.0, 0.0}, f1}, false};
     }
 
-    const auto log_Cobb = this->_log_pA + this->_elasticities[0] * y[0] +
-                          this->_elasticities[1] * y[1];
+    const auto log_Cobb
+        = this->_log_pA + this->_elasticities[0] * y[0] + this->_elasticities[1] * y[1];
     const Vec x = std::exp(y);
     const auto vx = this->_price_out[0] * x[0] + this->_price_out[1] * x[1];
     auto te = tea + vx;
@@ -48,7 +47,7 @@ auto ProfitOracleQ::assess_optim_q(const Vec &y, double &tea, bool retry)
         Vec x = std::exp(y);
         x = x.apply([](double n) -> double { return std::round(n); });
         if (x[0] == 0.0) {
-            x[0] = 1.0; // nearest integer than 0
+            x[0] = 1.0;  // nearest integer than 0
         }
         if (x[1] == 0.0) {
             x[1] = 1.0;

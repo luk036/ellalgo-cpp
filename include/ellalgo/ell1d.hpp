@@ -27,8 +27,7 @@ class ell1d {
      * @param[in] l
      * @param[in] u
      */
-    ell1d(const double &l, const double &u) noexcept
-        : _r{(u - l) / 2}, _xc{l + _r}, _tsq{0.0} {}
+    ell1d(const double &l, const double &u) noexcept : _r{(u - l) / 2}, _xc{l + _r}, _tsq{0.0} {}
 
     /**
      * @brief Construct a new ell1d object
@@ -73,4 +72,4 @@ class ell1d {
      * @return return_t
      */
     auto update_cc(const std::pair<double, double> &cut) noexcept -> CutStatus;
-}; // } ell1d
+};  // } ell1d

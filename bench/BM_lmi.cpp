@@ -1,14 +1,13 @@
-#include "benchmark/benchmark.h" // for BENCHMARK, State, BENCHMARK_...
+#include <ellalgo/cutting_plane.hpp>           // for cutting_plane_optim
+#include <ellalgo/ell.hpp>                     // for Ell
+#include <ellalgo/ell_matrix.hpp>              // for Matrix
+#include <ellalgo/oracles/lmi_old_oracle.hpp>  // for LmiOldOracle
+#include <ellalgo/oracles/lmi_oracle.hpp>      // for LmiOracle
+#include <tuple>                               // for tuple
+#include <type_traits>                         // for move
+#include <vector>                              // for vector
 
-#include <ellalgo/cutting_plane.hpp>          // for cutting_plane_optim
-#include <ellalgo/ell.hpp>                    // for Ell
-#include <ellalgo/ell_matrix.hpp>             // for Matrix
-#include <ellalgo/oracles/lmi_old_oracle.hpp> // for LmiOldOracle
-#include <ellalgo/oracles/lmi_oracle.hpp>     // for LmiOracle
-
-#include <tuple>       // for tuple
-#include <type_traits> // for move
-#include <vector>      // for vector
+#include "benchmark/benchmark.h"  // for BENCHMARK, State, BENCHMARK_...
 
 /**
  * @brief
@@ -34,8 +33,8 @@ template <typename Oracle> class MyOracle {
      * @param[in] B2
      * @param[in] c
      */
-    MyOracle(size_t m1, const std::vector<Matrix> &F1, const Matrix &B1,
-             size_t m2, const std::vector<Matrix> &F2, const Matrix &B2, Vec c)
+    MyOracle(size_t m1, const std::vector<Matrix> &F1, const Matrix &B1, size_t m2,
+             const std::vector<Matrix> &F2, const Matrix &B2, Vec c)
         : lmi1{m1, F1, B1}, lmi2{m2, F2, B2}, c{std::move(c)} {}
 
     /**
@@ -70,9 +69,7 @@ template <typename Oracle> class MyOracle {
      * @param[in,out] t
      * @return std::tuple<Cut, double>
      */
-    std::tuple<Cut, bool> operator()(const Vec &x, double &t) {
-        return this->assess_optim(x, t);
-    }
+    std::tuple<Cut, bool> operator()(const Vec &x, double &t) { return this->assess_optim(x, t); }
 };
 
 /**
@@ -127,10 +124,9 @@ static void LMI_Lazy(benchmark::State &state) {
     B2.row(2) = Vec{40.0, 10.0, 15.0};
 
     while (state.KeepRunning()) {
-        auto omega = MyOracle<LmiOracle<Vec, Matrix>>(2, F1, B1, 3, F2, B2,
-                                                      Vec{1.0, -1.0, 1.0});
+        auto omega = MyOracle<LmiOracle<Vec, Matrix>>(2, F1, B1, 3, F2, B2, Vec{1.0, -1.0, 1.0});
         auto ellip = Ell<Vec>(10.0, Vec{0.0, 0.0, 0.0});
-        auto t = 1e100; // std::numeric_limits<double>::max()
+        auto t = 1e100;  // std::numeric_limits<double>::max()
         auto result = cutting_plane_optim(omega, ellip, t);
         benchmark::DoNotOptimize(result);
     }
@@ -193,10 +189,9 @@ static void LMI_old(benchmark::State &state) {
     B2.row(2) = Vec{40.0, 10.0, 15.0};
 
     while (state.KeepRunning()) {
-        auto omega = MyOracle<LmiOldOracle<Vec, Matrix>>(2, F1, B1, 3, F2, B2,
-                                                         Vec{1.0, -1.0, 1.0});
+        auto omega = MyOracle<LmiOldOracle<Vec, Matrix>>(2, F1, B1, 3, F2, B2, Vec{1.0, -1.0, 1.0});
         auto ellip = Ell<Vec>(10.0, Vec{0.0, 0.0, 0.0});
-        auto t = 1e100; // std::numeric_limits<double>::max()
+        auto t = 1e100;  // std::numeric_limits<double>::max()
         auto result = cutting_plane_optim(omega, ellip, t);
         benchmark::DoNotOptimize(result);
     }

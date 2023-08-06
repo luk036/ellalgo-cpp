@@ -1,12 +1,13 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include "../ell_matrix.hpp"
-#include <cassert> // for assert
-#include <cstddef> // for size_t
+#include <cassert>  // for assert
+#include <cstddef>  // for size_t
 #include <functional>
-#include <utility> // for pair
+#include <utility>  // for pair
 #include <valarray>
+
+#include "../ell_matrix.hpp"
 
 /**
  * @brief LDLT factorization
@@ -30,12 +31,12 @@ class LDLTMgr {
     using Rng = std::pair<size_t, size_t>;
 
   public:
-    Rng p{0U, 0U};   //!< the rows where the process starts and stops
-    Vec witness_vec; //!< witness vector
-    const size_t _n; //!< dimension
+    Rng p{0U, 0U};    //!< the rows where the process starts and stops
+    Vec witness_vec;  //!< witness vector
+    const size_t _n;  //!< dimension
 
   private:
-    Matrix T; //!< temporary storage
+    Matrix T;  //!< temporary storage
 
     // static Vec zeros_vec(size_t n);
     // static Mat zeros_mat(size_t n);
@@ -90,8 +91,8 @@ class LDLTMgr {
      *
      * See also: factorize()
      */
-    auto factor_with_allow_semidefinite(
-        std::function<double(size_t, size_t)> get_matrix_elem) -> bool;
+    auto factor_with_allow_semidefinite(std::function<double(size_t, size_t)> get_matrix_elem)
+        -> bool;
 
     /**
      * @brief Is $A$ symmetric positive definite (spd)
