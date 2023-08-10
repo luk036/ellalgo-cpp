@@ -71,7 +71,7 @@ auto EllCalc::_calc_ll_core(const double &beta0, const double &beta1, const doub
     const auto bav = bsum / 2.0;
     auto tempn = this->_halfN * bsumn * (beta1 - beta0);
     const auto xi = std::sqrt(t0n * t1n + tempn * std::move(tempn));
-    auto sigma = this->_c3 + (1.0 - b0b1n - xi) / (bsumn * bav) / this->_nPlus1;
+    auto sigma = this->_c3 + (1.0 + b0b1n - xi) / (bsumn * bav) / this->_nPlus1;
     auto rho = sigma * bav;
     auto delta = this->_c1 * ((t0n + t1n) / 2.0 + xi / this->_nFloat);
     return {CutStatus::Success, rho, sigma, delta};

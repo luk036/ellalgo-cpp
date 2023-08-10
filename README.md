@@ -20,7 +20,7 @@ The method has a wide range of practical applications in operations research. It
 
 In the context of the Ellipsoid Method, a parallel cut refers to a pair of linear constraints of the form aTx <= b and -aTx <= -b, where a is a vector of coefficients and b is a scalar constant. These constraints are said to be parallel because they have the same normal vector a, but opposite signs. When a parallel cut is encountered during the Ellipsoid Method, both constraints can be used simultaneously to generate a new ellipsoid. This can improve the convergence rate of the method, especially for problems with many parallel constraints. 
 
-## Features
+## ✨ Features
 
 - Support parallel cut.
 - Support discrete optimization.
