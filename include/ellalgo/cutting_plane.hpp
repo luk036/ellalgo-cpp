@@ -88,21 +88,21 @@ inline auto cutting_plane_feas(OracleFeas &&omega, SearchSpace &&space,
  * @tparam Num
  * @param[in,out] omega   perform assessment on x0
  * @param[in,out] space   search Space containing x*
- * @param[in,out] tea     best-so-far optimal sol'n
+ * @param[in,out] target  best-so-far optimal sol'n
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
 template <typename OracleOptim, typename SearchSpace, typename Num>
-inline auto cutting_plane_optim(OracleOptim &&omega, SearchSpace &&space, Num &&tea,
+inline auto cutting_plane_optim(OracleOptim &&omega, SearchSpace &&space, Num &&target,
                                 const Options &options = Options())
     -> std::tuple<CuttingPlaneArrayType<SearchSpace>, size_t> {
     auto x_best = invalid_value<CuttingPlaneArrayType<SearchSpace>>();
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
-        const auto __result1 = omega.assess_optim(space.xc(), tea);
+        const auto __result1 = omega.assess_optim(space.xc(), target);
         const auto &cut = std::get<0>(__result1);
         const auto &shrunk = std::get<1>(__result1);
         const auto status = [&]() {
-            if (shrunk) {  // best tea obtained
+            if (shrunk) {  // best target obtained
                 x_best = space.xc();
                 return space.update_cc(cut);  // should update_cc
             } else {
@@ -136,22 +136,22 @@ inline auto cutting_plane_optim(OracleOptim &&omega, SearchSpace &&space, Num &&
  * @tparam Space
  * @param[in,out] omega   perform assessment on x0
  * @param[in,out] space   search Space containing x*
- * @param[in,out] tea  best-so-far optimal sol'n
+ * @param[in,out] target  best-so-far optimal sol'n
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
 template <typename OracleOptimQ, typename SearchSpaceQ, typename Num>
-inline auto cutting_plane_optim_q(OracleOptimQ &&omega, SearchSpaceQ &&space_q, Num &&tea,
+inline auto cutting_plane_optim_q(OracleOptimQ &&omega, SearchSpaceQ &&space_q, Num &&target,
                                   const Options &options = Options())
     -> std::tuple<CuttingPlaneArrayType<SearchSpaceQ>, size_t> {
     auto x_best = invalid_value<CuttingPlaneArrayType<SearchSpaceQ>>();
     auto retry = false;
 
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
-        const auto result1 = omega.assess_optim_q(space_q.xc(), tea, retry);
+        const auto result1 = omega.assess_optim_q(space_q.xc(), target, retry);
         const auto &cut = std::get<0>(result1);
         const auto &shrunk = std::get<1>(result1);
-        if (shrunk) {  // best tea obtained
+        if (shrunk) {  // best target obtained
             auto x_q = std::get<2>(result1);
             x_best = std::move(x_q);
             retry = false;
@@ -199,12 +199,12 @@ inline auto bsearch(Oracle &&omega, const std::pair<T, T> &intvl,
         if (tau < options.tol) {  // no more
             return {upper, niter};
         }
-        auto tea = lower;  // l may be `int` or `Fraction`
-        tea += tau;
-        if (omega.assess_bs(tea)) {  // feasible sol'n obtained
-            upper = tea;
+        auto target = lower;  // l may be `int` or `Fraction`
+        target += tau;
+        if (omega.assess_bs(target)) {  // feasible sol'n obtained
+            upper = target;
         } else {
-            lower = tea;
+            lower = target;
         }
     }
     return {upper, options.max_iters};
@@ -255,12 +255,12 @@ class BSearchAdaptor {
      * @brief
      *
      * @tparam Num
-     * @param[in,out] tea the best-so-far optimal value
+     * @param[in,out] target the best-so-far optimal value
      * @return bool
      */
-    template <typename Num> auto assess_bs(const Num &tea) -> bool {
+    template <typename Num> auto assess_bs(const Num &target) -> bool {
         Space space = this->_space.copy();
-        this->_omega.update(tea);
+        this->_omega.update(target);
         const auto result = cutting_plane_feas(this->_omega, space, this->_options);
         auto x_feas = std::get<0>(result);
         if (x_feas.size() != 0U) {
