@@ -81,12 +81,12 @@ class EllCalc {
      *        g' (x - xc) + beta0 \le 0
      *        g' (x - xc) + beta1 \ge 0
      *
-     * @param[in] b0
-     * @param[in] b1
+     * @param[in] beta0
+     * @param[in] beta1
      * @param[in] tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto calc_ll_dc(const double &b0, const double &b1, const double &tsq) const
+    auto calc_ll_dc(const double &beta0, const double &beta1, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double>;
 
     /**
@@ -95,12 +95,12 @@ class EllCalc {
      *        g' (x - xc) \le 0
      *        g' (x - xc) + beta1 \ge 0
      *
-     * @param[in] b1
+     * @param[in] beta1
      * @param[in] b1sq
      * @param[in] tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto calc_ll_cc(const double &b1, const double &tsq) const
+    auto calc_ll_cc(const double &beta1, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double>;
 
     /**
@@ -131,12 +131,12 @@ class EllCalc {
      *        g' (x - xc) + beta0 \le 0
      *        g' (x - xc) + beta1 \ge 0
      *
-     * @param[in] b0
-     * @param[in] b1
+     * @param[in] beta0
+     * @param[in] beta1
      * @param[in] tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto calc_ll_dc_q(const double &b0, const double &b1, const double &tsq) const
+    auto calc_ll_dc_q(const double &beta0, const double &beta1, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double>;
 
     /**
@@ -155,14 +155,14 @@ class EllCalc {
     /**
      * @brief
      *
-     * @param b0
-     * @param b1
+     * @param beta0
+     * @param beta1
      * @param b1sq
      * @param b0b1
      * @param tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto _calc_ll_core(const double &b0, const double &b1, const double &b1sq, const double &b0b1,
+    auto _calc_ll_core(const double &beta0, const double &beta1, const double &b1sq, const double &b0b1,
                        const double &tsq) const -> std::tuple<CutStatus, double, double, double>;
 
     /**

@@ -80,7 +80,7 @@ auto EllCalc::_calc_ll_core(const double &beta0, const double &beta1, const doub
 /**
  * @brief
  *
- * @param[in] b1
+ * @param[in] beta1
  * @param[in] b1sq
  * @return void
  */
@@ -196,26 +196,26 @@ auto EllCalc::calc_cc(const double &tsq) const -> std::tuple<CutStatus, double, 
 /**
  * @brief
  *
- * @param[in] b0
- * @param[in] b1
+ * @param[in] beta0
+ * @param[in] beta1
  * @return int
  */
-auto EllCalc::calc_ll_dc_q(const double &b0, const double &b1, const double &tsq) const
+auto EllCalc::calc_ll_dc_q(const double &beta0, const double &beta1, const double &tsq) const
     -> std::tuple<CutStatus, double, double, double> {
-    if (b1 < b0) {
+    if (beta1 < beta0) {
         return {CutStatus::NoSoln, 0.0, 0.0, 0.0};  // no sol'n
     }
 
-    const auto b1sq = b1 * b1;
+    const auto b1sq = beta1 * beta1;
     if (tsq < b1sq || !this->use_parallel_cut) {
-        return this->calc_dc_q(b0, tsq);
+        return this->calc_dc_q(beta0, tsq);
     }
 
-    const auto b0b1 = b0 * b1;
+    const auto b0b1 = beta0 * beta1;
     if (ELL_UNLIKELY(this->_nFloat * b0b1 < -tsq)) {
         return {CutStatus::NoEffect, 0.0, 0.0, 1.0};  // no effect
     }
-    return this->_calc_ll_core(b0, b1, b1sq, b0b1, tsq);
+    return this->_calc_ll_core(beta0, beta1, b1sq, b0b1, tsq);
 }
 
 /**
