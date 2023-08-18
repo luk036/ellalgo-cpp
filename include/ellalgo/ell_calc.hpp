@@ -162,8 +162,9 @@ class EllCalc {
      * @param tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto _calc_ll_core(const double &beta0, const double &beta1, const double &b1sq, const double &b0b1,
-                       const double &tsq) const -> std::tuple<CutStatus, double, double, double>;
+    auto _calc_ll_core(const double &beta0, const double &beta1, const double &b1sq,
+                       const double &b0b1, const double &tsq) const
+        -> std::tuple<CutStatus, double, double, double>;
 
     /**
      * @brief
