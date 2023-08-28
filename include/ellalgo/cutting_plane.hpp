@@ -220,7 +220,6 @@ template <typename Oracle, typename Space>  //
 class BSearchAdaptor {
     using ArrayType = typename Space::ArrayType;
 
-  private:
     Oracle &_omega;
     Space &_space;
     const Options _options;

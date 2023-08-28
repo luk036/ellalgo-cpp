@@ -21,7 +21,7 @@ template <typename Arr036, typename Mat = Arr036> class LmiOldOracle {
     LDLTMgr _mq;
     const std::vector<Mat> &_F;
     const Mat _F0;
-    std::unique_ptr<Cut> cut;
+    std::unique_ptr<Cut> cut = std::make_unique<Cut>();
 
   public:
     /**
@@ -31,7 +31,7 @@ template <typename Arr036, typename Mat = Arr036> class LmiOldOracle {
      * @param[in] B
      */
     LmiOldOracle(size_t ndim, const std::vector<Mat> &F, Mat B)
-        : _mq{ndim}, _F{F}, _F0{std::move(B)}, cut{std::unique_ptr<Cut>(new Cut{})} {}
+        : _mq{ndim}, _F{F}, _F0{std::move(B)} {}
     /**
      * @brief
      *

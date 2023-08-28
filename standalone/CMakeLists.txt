@@ -25,6 +25,6 @@ file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 
 add_executable(${PROJECT_NAME} ${sources})
 
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 11 OUTPUT_NAME "EllAlgo")
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 14 OUTPUT_NAME "EllAlgo")
 
 target_link_libraries(${PROJECT_NAME} EllAlgo::EllAlgo cxxopts ${SPECIFIC_LIBS})

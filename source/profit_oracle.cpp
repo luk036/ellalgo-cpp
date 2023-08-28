@@ -1,7 +1,6 @@
 #include <ellalgo/oracles/profit_oracle.hpp>
 #include <type_traits>  // for move
 
-// using Arr = std::xarray<double, std::layout_type::row_major>;
 using Vec = std::valarray<double>;
 using Cut = std::pair<Vec, double>;
 
@@ -59,7 +58,6 @@ auto ProfitOracleQ::assess_optim_q(const Vec &y, double &target, bool retry)
     auto &shrunk = std::get<1>(result1);
     auto &g = std::get<0>(cut);
     auto &h = std::get<1>(cut);
-    // h += std::linalg::dot(g, this->_yd - y)();
     auto d = this->_yd - y;
     h += g[0] * d[0] + g[1] * d[1];
     return {std::move(cut), shrunk, this->_yd, false};

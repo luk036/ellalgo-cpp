@@ -18,7 +18,6 @@ template <typename Oracle> class MyOracle {
     using Vec = std::valarray<double>;
     using Cut = std::pair<Vec, double>;
 
-  private:
     Oracle lmi1;
     Oracle lmi2;
     const Vec c;
@@ -195,69 +194,6 @@ static void LMI_old(benchmark::State &state) {
     }
 }
 BENCHMARK(LMI_old);
-
-// /**
-//  * @brief
-//  *
-//  * @param[in,out] state
-//  */
-// static void LMI_No_Trick(benchmark::State &state) {
-//   using Vec = std::valarray<double>;
-//   using M_t = std::vector<Matrix>;
-//
-//   auto c = Vec{1.0, -1.0, 1.0};
-//
-//   auto m0F1 = Matrix(2);
-//   m0F1.row(0) = Vec{-7.0, -11.0};
-//   m0F1.row(1) = Vec{-11.0, 3.0};
-//
-//   auto m1F1 = Matrix(2);
-//   m1F1.row(0) = Vec{7.0, -18.0};
-//   m1F1.row(1) = Vec{-18.0, 8.0};
-//
-//   auto m2F1 = Matrix(2);
-//   m2F1.row(0) = Vec{-2.0, -8.0};
-//   m2F1.row(1) = Vec{-8.0, 1.0};
-//
-//   auto F1 = M_t{m0F1, m1F1, m2F1};
-//
-//   auto B1 = Matrix(2);
-//   B1.row(0) = Vec{33.0, -9.0};
-//   B1.row(1) = Vec{-9.0, 26.0};
-//
-//   auto m0F2 = Matrix(3);
-//   m0F2.row(0) = Vec{-21.0, -11.0, 0.0};
-//   m0F2.row(1) = Vec{-11.0, 10.0, 8.0};
-//   m0F2.row(2) = Vec{0.0, 8.0, 5.0};
-//
-//   auto m1F2 = Matrix(3);
-//   m1F2.row(0) = Vec{0.0, 10.0, 16.0};
-//   m1F2.row(1) = Vec{10.0, -10.0, -10.0};
-//   m1F2.row(2) = Vec{16.0, -10.0, 3.0};
-//
-//   auto m2F2 = Matrix(3);
-//   m2F2.row(0) = Vec{-5.0, 2.0, -17.0};
-//   m2F2.row(1) = Vec{2.0, -6.0, 8.0};
-//   m2F2.row(2) = Vec{-17.0, 8.0, 6.0};
-//
-//   auto F2 = M_t{m0F2, m1F2, m2F2};
-//
-//   auto B2 = Matrix(3);
-//   B2.row(0) = Vec{14.0, 9.0, 40.0};
-//   B2.row(1) = Vec{9.0, 91.0, 10.0};
-//   B2.row(2) = Vec{40.0, 10.0, 15.0};
-//
-//   while (state.KeepRunning()) {
-//     auto omega = MyOracle<LmiOracle<Matrix>>(2, F1, B1, 3, F2, B2, Vec{1.0,
-//     -1.0, 1.0}); auto ellip = Ell<Vec>(10.0, Vec{0.0, 0.0, 0.0});
-//     ellip.no_defer_trick = true;
-//     auto t = 1e100; // std::numeric_limits<double>::max()
-//     [[maybe_unused]] const auto rslt = cutting_plane_optim(omega, ellip, t);
-//   }
-// }
-//
-// // Register the function as a benchmark
-// BENCHMARK(LMI_No_Trick);
 
 BENCHMARK_MAIN();
 

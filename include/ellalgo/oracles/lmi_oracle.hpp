@@ -17,11 +17,10 @@
 template <typename Arr036, typename Mat = Arr036> class LmiOracle {
     using Cut = std::pair<Arr036, double>;
 
-  private:
     LDLTMgr _mq;
     const std::vector<Mat> &_F;
     const Mat _F0;
-    std::unique_ptr<Cut> cut;
+    std::unique_ptr<Cut> cut = std::make_unique<Cut>();
 
   public:
     /**
@@ -32,7 +31,8 @@ template <typename Arr036, typename Mat = Arr036> class LmiOracle {
      * @param[in] B
      */
     LmiOracle(size_t ndim, const std::vector<Mat> &F, Mat B)
-        : _mq{ndim}, _F{F}, _F0{std::move(B)}, cut{std::unique_ptr<Cut>(new Cut{})} {}
+        : _mq{ndim}, _F{F}, _F0{std::move(B)} {}
+
     /**
      * @brief
      *
@@ -42,7 +42,7 @@ template <typename Arr036, typename Mat = Arr036> class LmiOracle {
     auto assess_feas(const Arr036 &x) -> Cut * {
         const auto n = x.size();
 
-        auto getA = [&, this](size_t i, size_t j) -> double {
+        auto getA = [&n, &x, this](size_t i, size_t j) -> double {
             auto a = this->_F0(i, j);
             for (auto k = 0U; k != n; ++k) {
                 a -= this->_F[k](i, j) * x[k];

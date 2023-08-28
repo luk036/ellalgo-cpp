@@ -21,7 +21,8 @@ TEST_CASE("Profit Test") {
     const auto a = Vec{0.1, 0.4};
     const auto v = Vec{10.0, 35.0};
 
-    {
+    /* The code is performing a test case for the "Profit Test". */
+    [&](){
         Ell<Vec> ellip{Vec{100.0, 100.0}, Vec{0.0, 0.0}};
         ProfitOracle omega{unit_price, A, limit, a, v};
         double target = 0.0;
@@ -32,9 +33,9 @@ TEST_CASE("Profit Test") {
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
         CHECK_EQ(num_iters, 36);
-    }
+    }();
 
-    {
+    [&](){
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleRb omega{unit_price, A, limit, a, v, Vec{0.003, 0.007}, 1.0};
         double target = 0.0;
@@ -44,9 +45,9 @@ TEST_CASE("Profit Test") {
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
         CHECK_EQ(num_iters, 41);
-    }
+    }();
 
-    {
+    [&](){
         Ell<Vec> ellip{100.0, Vec{2.0, 0.0}};
         ProfitOracleQ omega{unit_price, A, limit, a, v};
         double target = 0.0;
@@ -56,7 +57,7 @@ TEST_CASE("Profit Test") {
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
         CHECK_EQ(num_iters, 27);
-    }
+    }();
 }
 
 TEST_CASE("Profit Test (Stable)") {
@@ -68,7 +69,7 @@ TEST_CASE("Profit Test (Stable)") {
     const auto a = Vec{0.1, 0.4};
     const auto v = Vec{10.0, 35.0};
 
-    {
+    [&](){
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracle omega{unit_price, A, limit, a, v};
         double target = 0.0;
@@ -79,9 +80,9 @@ TEST_CASE("Profit Test (Stable)") {
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
         CHECK_EQ(num_iters, 36);
-    }
+    }();
 
-    {
+    [&](){
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleRb omega{unit_price, A, limit, a, v, Vec{0.003, 0.007}, 1.0};
         double target = 0.0;
@@ -91,9 +92,9 @@ TEST_CASE("Profit Test (Stable)") {
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
         CHECK_EQ(num_iters, 41);
-    }
+    }();
 
-    {
+    [&]{
         EllStable<Vec> ellip{100.0, Vec{2.0, 0.0}};
         ProfitOracleQ omega{unit_price, A, limit, a, v};
         double target = 0.0;
@@ -103,5 +104,5 @@ TEST_CASE("Profit Test (Stable)") {
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
         CHECK_EQ(num_iters, 27);
-    }
+    }();
 }
