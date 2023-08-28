@@ -13,7 +13,6 @@
 #include <type_traits>                        // for move, remove_reference<...
 
 TEST_CASE("Profit Test") {
-    // using Arr = xt::xarray<double, xt::layout_type::row_major>;
     using Vec = std::valarray<double>;
 
     const auto unit_price = 20.0;
@@ -25,10 +24,11 @@ TEST_CASE("Profit Test") {
     {
         Ell<Vec> ellip{Vec{100.0, 100.0}, Vec{0.0, 0.0}};
         ProfitOracle omega{unit_price, A, limit, a, v};
+        double target = 0.0;
 
-        const auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
-        const auto &y = std::get<0>(result);
-        const auto &num_iters = std::get<1>(result);
+        const auto __result = cutting_plane_optim(omega, ellip, target);
+        const auto &y = std::get<0>(__result);
+        const auto &num_iters = std::get<1>(__result);
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
         CHECK_EQ(num_iters, 36);
@@ -37,10 +37,10 @@ TEST_CASE("Profit Test") {
     {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleRb omega{unit_price, A, limit, a, v, Vec{0.003, 0.007}, 1.0};
-        const auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
+        double target = 0.0;
+        const auto result = cutting_plane_optim(omega, ellip, target);
         const auto &y = std::get<0>(result);
         const auto &num_iters = std::get<1>(result);
-        // CHECK(y != Vec{});
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
         CHECK_EQ(num_iters, 41);
@@ -49,18 +49,17 @@ TEST_CASE("Profit Test") {
     {
         Ell<Vec> ellip{100.0, Vec{2.0, 0.0}};
         ProfitOracleQ omega{unit_price, A, limit, a, v};
-        const auto result = cutting_plane_optim_q(std::move(omega), std::move(ellip), 0.0);
+        double target = 0.0;
+        const auto result = cutting_plane_optim_q(omega, ellip, target);
         const auto &y = std::get<0>(result);
         const auto &num_iters = std::get<1>(result);
         REQUIRE_EQ(y.size(), 2U);
-        // CHECK(y != Vec{});
         CHECK(y[0] <= std::log(limit));
         CHECK_EQ(num_iters, 27);
     }
 }
 
 TEST_CASE("Profit Test (Stable)") {
-    // using Arr = xt::xarray<double, xt::layout_type::row_major>;
     using Vec = std::valarray<double>;
 
     const auto unit_price = 20.0;
@@ -72,11 +71,11 @@ TEST_CASE("Profit Test (Stable)") {
     {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracle omega{unit_price, A, limit, a, v};
+        double target = 0.0;
 
-        const auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
+        const auto result = cutting_plane_optim(omega, ellip, target);
         const auto &y = std::get<0>(result);
         const auto &num_iters = std::get<1>(result);
-        // CHECK(y != Vec{});
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
         CHECK_EQ(num_iters, 36);
@@ -85,10 +84,10 @@ TEST_CASE("Profit Test (Stable)") {
     {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleRb omega{unit_price, A, limit, a, v, Vec{0.003, 0.007}, 1.0};
-        const auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
+        double target = 0.0;
+        const auto result = cutting_plane_optim(omega, ellip, target);
         const auto &y = std::get<0>(result);
         const auto &num_iters = std::get<1>(result);
-        // CHECK(y != Vec{});
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
         CHECK_EQ(num_iters, 41);
@@ -97,10 +96,10 @@ TEST_CASE("Profit Test (Stable)") {
     {
         EllStable<Vec> ellip{100.0, Vec{2.0, 0.0}};
         ProfitOracleQ omega{unit_price, A, limit, a, v};
-        const auto result = cutting_plane_optim_q(std::move(omega), std::move(ellip), 0.0);
+        double target = 0.0;
+        const auto result = cutting_plane_optim_q(omega, ellip, target);
         const auto &y = std::get<0>(result);
         const auto &num_iters = std::get<1>(result);
-        // CHECK(y != Vec{});
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
         CHECK_EQ(num_iters, 27);

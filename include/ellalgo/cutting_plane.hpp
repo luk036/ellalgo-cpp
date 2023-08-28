@@ -49,7 +49,7 @@ template <typename T> inline auto invalid_value() ->
  * @return Information of Cutting-plane method
  */
 template <typename OracleFeas, typename SearchSpace>
-inline auto cutting_plane_feas(OracleFeas &&omega, SearchSpace &&space,
+inline auto cutting_plane_feas(OracleFeas &omega, SearchSpace &space,
                                const Options &options = Options())
     -> std::tuple<CuttingPlaneArrayType<SearchSpace>, size_t> {
     for (auto niter = 0U; niter != options.max_iters; ++niter) {
@@ -93,7 +93,7 @@ inline auto cutting_plane_feas(OracleFeas &&omega, SearchSpace &&space,
  * @return Information of Cutting-plane method
  */
 template <typename OracleOptim, typename SearchSpace, typename Num>
-inline auto cutting_plane_optim(OracleOptim &&omega, SearchSpace &&space, Num &&target,
+inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &target,
                                 const Options &options = Options())
     -> std::tuple<CuttingPlaneArrayType<SearchSpace>, size_t> {
     auto x_best = invalid_value<CuttingPlaneArrayType<SearchSpace>>();
@@ -141,7 +141,7 @@ inline auto cutting_plane_optim(OracleOptim &&omega, SearchSpace &&space, Num &&
  * @return Information of Cutting-plane method
  */
 template <typename OracleOptimQ, typename SearchSpaceQ, typename Num>
-inline auto cutting_plane_optim_q(OracleOptimQ &&omega, SearchSpaceQ &&space_q, Num &&target,
+inline auto cutting_plane_optim_q(OracleOptimQ &omega, SearchSpaceQ &space_q, Num &target,
                                   const Options &options = Options())
     -> std::tuple<CuttingPlaneArrayType<SearchSpaceQ>, size_t> {
     auto x_best = invalid_value<CuttingPlaneArrayType<SearchSpaceQ>>();
@@ -186,7 +186,7 @@ inline auto cutting_plane_optim_q(OracleOptimQ &&omega, SearchSpaceQ &&space_q, 
  * @return CInfo
  */
 template <typename Oracle, typename T>
-inline auto bsearch(Oracle &&omega, const std::pair<T, T> &intvl,
+inline auto bsearch(Oracle &omega, const std::pair<T, T> &intvl,
                     const Options &options = Options()) -> std::tuple<T, size_t> {
     // assume monotone
     // auto& [lower, upper] = intvl;
@@ -258,7 +258,7 @@ class BSearchAdaptor {
      * @param[in,out] target the best-so-far optimal value
      * @return bool
      */
-    template <typename Num> auto assess_bs(const Num &target) -> bool {
+    template <typename Num> auto assess_bs(Num &target) -> bool {
         Space space = this->_space.copy();
         this->_omega.update(target);
         const auto result = cutting_plane_feas(this->_omega, space, this->_options);

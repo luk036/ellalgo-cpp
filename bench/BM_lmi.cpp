@@ -50,12 +50,10 @@ template <typename Oracle> class MyOracle {
         if (f1 > 0.0) {
             return {{this->c, f1}, false};
         }
-        const auto cut1 = this->lmi1(x);
-        if (cut1) {
+        if (const auto cut1 = this->lmi1(x)) {
             return {*cut1, false};
         }
-        const auto cut2 = this->lmi2(x);
-        if (cut2) {
+        if (const auto cut2 = this->lmi2(x)) {
             return {*cut2, false};
         }
         t = f0;
@@ -191,8 +189,8 @@ static void LMI_old(benchmark::State &state) {
     while (state.KeepRunning()) {
         auto omega = MyOracle<LmiOldOracle<Vec, Matrix>>(2, F1, B1, 3, F2, B2, Vec{1.0, -1.0, 1.0});
         auto ellip = Ell<Vec>(10.0, Vec{0.0, 0.0, 0.0});
-        auto t = 1e100;  // std::numeric_limits<double>::max()
-        auto result = cutting_plane_optim(omega, ellip, t);
+        auto target = 1e100;  // std::numeric_limits<double>::max()
+        auto result = cutting_plane_optim(omega, ellip, target);
         benchmark::DoNotOptimize(result);
     }
 }

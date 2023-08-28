@@ -12,7 +12,6 @@
 
 #include "benchmark/benchmark.h"  // for BENCHMARK, State, BENCHMARK_...
 
-// using Arr = xt::xarray<double, xt::layout_type::row_major>;
 using Vec = std::valarray<double>;
 
 static const auto unit_price = 20.0;
@@ -23,12 +22,12 @@ static const auto price_out = Vec{10.0, 35.0};
 
 static void ELL_normal(benchmark::State &state) {
     // Code inside this loop is measured repeatedly
-    for (auto _ : state) {
+    while (state.KeepRunning()) {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracle omega{unit_price, scale, limit, elasticities, price_out};
+        double target = 0.0;
 
-        auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
-        // CHECK_EQ(num_iters, 36);
+        auto result = cutting_plane_optim(omega, ellip, target);
         benchmark::DoNotOptimize(result);
     }
 }
@@ -37,12 +36,12 @@ BENCHMARK(ELL_normal);
 
 static void ELL_stable(benchmark::State &state) {
     // Code inside this loop is measured repeatedly
-    for (auto _ : state) {
+    while (state.KeepRunning()) {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracle omega{unit_price, scale, limit, elasticities, price_out};
+        double target = 0.0;
 
-        auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
-        // CHECK_EQ(num_iters, 41);
+        auto result = cutting_plane_optim(omega, ellip, target);
         benchmark::DoNotOptimize(result);
     }
 }
@@ -51,13 +50,13 @@ BENCHMARK(ELL_stable);
 
 static void ELL_normal_rb(benchmark::State &state) {
     // Code inside this loop is measured repeatedly
-    for (auto _ : state) {
+    while (state.KeepRunning()) {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
-        ProfitOracleRb omega{unit_price,        scale, limit, elasticities, price_out,
+        ProfitOracleRb omega{unit_price, scale, limit, elasticities, price_out,
                              Vec{0.003, 0.007}, 1.0};
+        double target = 0.0;
 
-        auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
-        // CHECK_EQ(num_iters, 36);
+        auto result = cutting_plane_optim(omega, ellip, target);
         benchmark::DoNotOptimize(result);
     }
 }
@@ -66,13 +65,13 @@ BENCHMARK(ELL_normal_rb);
 
 static void ELL_stable_rb(benchmark::State &state) {
     // Code inside this loop is measured repeatedly
-    for (auto _ : state) {
+    while (state.KeepRunning()) {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
-        ProfitOracleRb omega{unit_price,        scale, limit, elasticities, price_out,
+        ProfitOracleRb omega{unit_price, scale, limit, elasticities, price_out,
                              Vec{0.003, 0.007}, 1.0};
+        double target = 0.0;
 
-        auto result = cutting_plane_optim(std::move(omega), std::move(ellip), 0.0);
-        // CHECK_EQ(num_iters, 41);
+        auto result = cutting_plane_optim(omega, ellip, target);
         benchmark::DoNotOptimize(result);
     }
 }
@@ -81,12 +80,12 @@ BENCHMARK(ELL_stable_rb);
 
 static void ELL_normal_q(benchmark::State &state) {
     // Code inside this loop is measured repeatedly
-    for (auto _ : state) {
+    while (state.KeepRunning()) {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleQ omega{unit_price, scale, limit, elasticities, price_out};
+        double target = 0.0;
 
-        auto result = cutting_plane_optim_q(std::move(omega), std::move(ellip), 0.0);
-        // CHECK_EQ(num_iters, 36);
+        auto result = cutting_plane_optim_q(omega, ellip, target);
         benchmark::DoNotOptimize(result);
     }
 }
@@ -95,12 +94,12 @@ BENCHMARK(ELL_normal_q);
 
 static void ELL_stable_q(benchmark::State &state) {
     // Code inside this loop is measured repeatedly
-    for (auto _ : state) {
+    while (state.KeepRunning()) {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleQ omega{unit_price, scale, limit, elasticities, price_out};
+        double target = 0.0;
 
-        auto result = cutting_plane_optim_q(std::move(omega), std::move(ellip), 0.0);
-        // CHECK_EQ(num_iters, 41);
+        auto result = cutting_plane_optim_q(omega, ellip, target);
         benchmark::DoNotOptimize(result);
     }
 }

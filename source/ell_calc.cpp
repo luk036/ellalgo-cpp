@@ -65,12 +65,11 @@ auto EllCalc::_calc_ll_core(const double &beta0, const double &beta1, const doub
     const auto t1n = 1.0 - b1sqn;
     const auto b0b1n = b0b1 / tsq;
     const auto t0n = 1.0 - beta0 * (beta0 / tsq);
-    // const auto t1 = tsq - b1sq;
     const auto bsum = beta0 + beta1;
     const auto bsumn = bsum / tsq;
     const auto bav = bsum / 2.0;
     auto tempn = this->_halfN * bsumn * (beta1 - beta0);
-    const auto xi = std::sqrt(t0n * t1n + tempn * std::move(tempn));
+    const auto xi = std::sqrt(t0n * t1n + tempn * tempn);
     auto sigma = this->_c3 + (1.0 + b0b1n - xi) / (bsumn * bav) / this->_nPlus1;
     auto rho = sigma * bav;
     auto delta = this->_c1 * ((t0n + t1n) / 2.0 + xi / this->_nFloat);
@@ -95,11 +94,11 @@ auto EllCalc::calc_ll_cc(const double &beta1, const double &tsq) const
     }
     const auto b1sqn = b1sq / tsq;
     const auto temp = this->_halfN * b1sqn;
-    const auto xi = std::sqrt(1.0 - b1sqn + temp * std::move(temp));
+    const auto xi = std::sqrt(1.0 - b1sqn + temp * temp);
     auto delta = this->_c1 * (1.0 - b1sqn / 2.0 + xi / this->_nFloat);
-    auto sigma = this->_c3 + this->_c2 * (1.0 - std::move(xi)) / b1sqn;
+    auto sigma = this->_c3 + this->_c2 * (1.0 - xi) / b1sqn;
     auto rho = sigma * beta1 / 2;
-    return {CutStatus::Success, std::move(rho), std::move(sigma), std::move(delta)};
+    return {CutStatus::Success, rho, sigma, delta};
     // this->_mu ???
 }
 
@@ -164,8 +163,8 @@ auto EllCalc::_calc_dc_core(const double &beta, const double &tau, const double 
     auto rho = gamma / this->_nPlus1;
     auto sigma = 2.0 * rho / (tau + beta);
     auto alpha = beta / tau;
-    auto delta = this->_c1 * (1.0 - alpha * std::move(alpha));
-    return {CutStatus::Success, std::move(rho), std::move(sigma), std::move(delta)};
+    auto delta = this->_c1 * (1.0 - alpha * alpha);
+    return {CutStatus::Success, rho, sigma, delta};
 }
 
 /**
@@ -190,7 +189,7 @@ auto EllCalc::calc_cc(const double &tsq) const -> std::tuple<CutStatus, double, 
     auto sigma = this->_c2;
     auto rho = std::sqrt(tsq) / this->_nPlus1;
     auto delta = this->_c1;
-    return {CutStatus::Success, std::move(rho), std::move(sigma), std::move(delta)};
+    return {CutStatus::Success, rho, sigma, delta};
 }
 
 /**
