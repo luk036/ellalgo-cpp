@@ -21,7 +21,6 @@ enum class CutStatus;
  */
 template <typename Arr> class EllStable {
   public:
-    // bool no_defer_trick = false;
     using Vec = std::valarray<double>;
     using ArrayType = Arr;
 
@@ -59,13 +58,13 @@ template <typename Arr> class EllStable {
      *
      * @param[in] E (move)
      */
-    EllStable(EllStable &&E) = default;
+    EllStable(EllStable &&E) noexcept = default;
 
     /**
      * @brief Destroy the EllStable object
      *
      */
-    ~EllStable() {}
+    ~EllStable() = default;
 
     /**
      * @brief Construct a new EllStable object
@@ -104,6 +103,10 @@ template <typename Arr> class EllStable {
      */
     auto tsq() const -> double { return this->_mgr.tsq(); }
 
+    /**
+     * @brief
+     *
+     */
     void set_use_parallel_cut(bool value) { this->_mgr.set_use_parallel_cut(value); }
 
     /**
@@ -113,9 +116,10 @@ template <typename Arr> class EllStable {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T> auto update_dc(const std::pair<Arr, T> &cut) -> CutStatus {
-        return this->_update_core(
-            cut, [&](Vec &grad, const T &beta) { return this->_mgr.update_stable_dc(grad, beta); });
+    template <typename T> auto update_deep_cut(const std::pair<Arr, T> &cut) -> CutStatus {
+        return this->_update_core(cut, [this](Vec &grad, const T &beta) {
+            return this->_mgr.update_stable_deep_cut(grad, beta);
+        });
     }
 
     /**
@@ -125,9 +129,10 @@ template <typename Arr> class EllStable {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T> auto update_cc(const std::pair<Arr, T> &cut) -> CutStatus {
-        return this->_update_core(
-            cut, [&](Vec &grad, const T &beta) { return this->_mgr.update_stable_cc(grad, beta); });
+    template <typename T> auto update_central_cut(const std::pair<Arr, T> &cut) -> CutStatus {
+        return this->_update_core(cut, [this](Vec &grad, const T &beta) {
+            return this->_mgr.update_stable_central_cut(grad, beta);
+        });
     }
 
     /**
@@ -138,8 +143,9 @@ template <typename Arr> class EllStable {
      * @return std::tuple<int, double>
      */
     template <typename T> auto update_q(const std::pair<Arr, T> &cut) -> CutStatus {
-        return this->_update_core(
-            cut, [&](Vec &grad, const T &beta) { return this->_mgr.update_stable_q(grad, beta); });
+        return this->_update_core(cut, [this](Vec &grad, const T &beta) {
+            return this->_mgr.update_stable_q(grad, beta);
+        });
     }
 
   private:

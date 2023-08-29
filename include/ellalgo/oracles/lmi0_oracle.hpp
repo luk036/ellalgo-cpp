@@ -31,8 +31,7 @@ template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle {
      * @param[in] ndim
      * @param[in] F
      */
-    Lmi0Oracle(size_t ndim, const std::vector<Mat> &F)
-        : _mq(ndim), _F{F} {}
+    Lmi0Oracle(size_t ndim, const std::vector<Mat> &F) : _mq(ndim), _F{F} {}
 
     /**
      * @brief

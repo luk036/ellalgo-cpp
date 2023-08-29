@@ -5,7 +5,6 @@
 #include <ellalgo/ell_config.hpp>     // for CInfo, CutStatus, CutStatus::...
 #include <utility>                    // for pair
 
-// using Arr1 = xt::xarray<double, xt::layout_type::row_major>;
 using Vec = std::valarray<double>;
 
 struct MyOracle {

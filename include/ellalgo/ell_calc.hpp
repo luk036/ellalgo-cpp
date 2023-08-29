@@ -26,13 +26,6 @@ class EllCalc {
     const double _c2;
     const double _c3;
 
-    /**
-     * @brief Construct a new EllCalcobject
-     *
-     * @param[in] E
-     */
-    // auto operator=(const EllCalc& E) const -> EllCalc& = delete;
-
   public:
     /**
      * @brief Construct a new EllCalcobject
@@ -43,7 +36,7 @@ class EllCalc {
      * @param mq
      * @param x
      */
-    EllCalc(size_t ndim)
+    explicit EllCalc(size_t ndim)
         : _nFloat{double(ndim)},
           _nPlus1{_nFloat + 1.0},
           _halfN{_nFloat / 2.0},
@@ -52,7 +45,6 @@ class EllCalc {
           _c2{2.0 / _nPlus1},
           _c3{_nFloat / _nPlus1} {}
 
-  public:
     /**
      * @brief Construct a new EllCalcobject
      *
@@ -64,7 +56,7 @@ class EllCalc {
      * @brief Destroy the EllCalcobject
      *
      */
-    ~EllCalc() {}
+    ~EllCalc() = default;
 
     /**
      * @brief Construct a new EllCalcobject
@@ -86,7 +78,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto calc_ll_dc(const double &beta0, const double &beta1, const double &tsq) const
+    auto calc_parallel_deep_cut(const double &beta0, const double &beta1, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double>;
 
     /**
@@ -100,7 +92,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto calc_ll_cc(const double &beta1, const double &tsq) const
+    auto calc_parallel_central_cut(const double &beta1, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double>;
 
     /**
@@ -112,7 +104,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto calc_dc(const double &beta, const double &tsq) const
+    auto calc_deep_cut(const double &beta, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double>;
 
     /**
@@ -123,7 +115,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto calc_cc(const double &tsq) const -> std::tuple<CutStatus, double, double, double>;
+    auto calc_central_cut(const double &tsq) const -> std::tuple<CutStatus, double, double, double>;
 
     /**
      * @brief Calculate new ellipsoid under Parallel Cut
@@ -136,7 +128,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto calc_ll_dc_q(const double &beta0, const double &beta1, const double &tsq) const
+    auto calc_parallel_deep_cut_q(const double &beta0, const double &beta1, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double>;
 
     /**
@@ -148,7 +140,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto calc_dc_q(const double &beta, const double &tsq) const
+    auto calc_deep_cut_q(const double &beta, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double>;
 
   private:
@@ -162,8 +154,8 @@ class EllCalc {
      * @param tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto _calc_ll_core(const double &beta0, const double &beta1, const double &b1sq,
-                       const double &b0b1, const double &tsq) const
+    auto _calc_parallel_core(const double &beta0, const double &beta1, const double &b1sq,
+                             const double &b0b1, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double>;
 
     /**
@@ -174,6 +166,6 @@ class EllCalc {
      * @param gamma
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto _calc_dc_core(const double &beta, const double &tau, const double &gamma) const
+    auto _calc_deep_cut_core(const double &beta, const double &tau, const double &gamma) const
         -> std::tuple<CutStatus, double, double, double>;
 };  // } EllCalc

@@ -8,7 +8,6 @@
 // #include <xtensor/xarray.hpp>
 #include <ellalgo/ell_matrix.hpp>
 
-// using Arr = xt::xarray<double, xt::layout_type::row_major>;
 using Vec = std::valarray<double>;
 
 TEST_CASE("Cholesky test 1") {
@@ -30,7 +29,6 @@ TEST_CASE("Cholesky test 2") {
     auto Q2 = LDLTMgr(4);
     Q2.factorize(m2);
     CHECK(!Q2.is_spd());
-    // CHECK(Q2.p.second == 2);
 }
 
 TEST_CASE("Cholesky test 3") {
@@ -46,7 +44,6 @@ TEST_CASE("Cholesky test 3") {
     Vec v(0.0, 3);
     Q3.set_witness_vec(v);
 
-    // CHECK(Q3.p.second == 1);
     CHECK_EQ(ep3, 0.0);
     CHECK_EQ(v[0], 1.0);
 }

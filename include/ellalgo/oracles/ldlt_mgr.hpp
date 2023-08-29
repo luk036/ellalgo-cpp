@@ -38,9 +38,6 @@ class LDLTMgr {
   private:
     Matrix T;  //!< temporary storage
 
-    // static Vec zeros_vec(size_t n);
-    // static Mat zeros_mat(size_t n);
-
   public:
     /**
      * @brief Construct a new ldlt ext object
@@ -68,7 +65,7 @@ class LDLTMgr {
      * @param[in] A Symmetric Matrix
      */
     template <typename Mat> auto factorize(const Mat &A) -> bool {
-        return this->factor([&](size_t i, size_t j) { return A(i, j); });
+        return this->factor([&A](size_t i, size_t j) { return A(i, j); });
     }
 
     /**
@@ -80,7 +77,7 @@ class LDLTMgr {
      *
      * See also: factorize()
      */
-    auto factor(std::function<double(size_t, size_t)> get_matrix_elem) -> bool;
+    auto factor(const std::function<double(size_t, size_t)> &get_matrix_elem) -> bool;
 
     /**
      * @brief Perform LDLT Factorization (Lazy evaluation)
@@ -91,8 +88,8 @@ class LDLTMgr {
      *
      * See also: factorize()
      */
-    auto factor_with_allow_semidefinite(std::function<double(size_t, size_t)> get_matrix_elem)
-        -> bool;
+    auto factor_with_allow_semidefinite(
+        const std::function<double(size_t, size_t)> &get_matrix_elem) -> bool;
 
     /**
      * @brief Is $A$ symmetric positive definite (spd)

@@ -5,11 +5,19 @@ using Vec = std::valarray<double>;
 using Cut = std::pair<Vec, double>;
 
 /**
- * @brief
+ * The function assess_optim assesses the optimality of a given solution based on certain conditions
+ * and returns a tuple containing a cut and a boolean value.
  *
- * @param[in] y
- * @param[in,out] target the best-so-far optimal value
- * @return std::tuple<Cut, double>
+ * @param[in] y The parameter `y` is a vector of values. It is used to calculate various values in
+ * the function. The specific meaning of each element in the vector depends on the context and the
+ * specific implementation of the `ProfitOracle` class.
+ * @param[in,out] target The `target` parameter is a reference to a `double` variable. It is used to
+ * store the best-so-far value for the optimization process. The function `assess_optim` assesses
+ * the optimality of a given solution and updates the `target` value if necessary.
+ *
+ * @return The function `assess_optim` returns a tuple containing two elements. The first element is
+ * of type `Cut`, which is a struct or class that contains a vector `g` and a double `fj`. The
+ * second element is of type `bool`.
  */
 auto ProfitOracle::assess_optim(const Vec &y, double &target) const -> std::tuple<Cut, bool> {
     // y0 <= log k
@@ -36,15 +44,21 @@ auto ProfitOracle::assess_optim(const Vec &y, double &target) const -> std::tupl
 }
 
 /**
- * @param[in] y
- * @param[in,out] target the best-so-far optimal value
- * @return std::tuple<Cut, double, Vec, int>
+ * The function assess_optim_q assesses the optimization of a given target value using a set of
+ * input parameters.
+ *
+ * @param[in] y A vector containing the input values.
+ * @param[in,out] target The "target" parameter is a reference to a double value. It is used to
+ * store the best-so-far value for optimization.
+ * @param retry A boolean flag indicating whether the function should retry the assessment or not.
+ *
+ * @return The function `assess_optim_q` returns a tuple containing the following elements:
  */
 auto ProfitOracleQ::assess_optim_q(const Vec &y, double &target, bool retry)
     -> std::tuple<Cut, bool, Vec, bool> {
     if (!retry) {
         Vec x = std::exp(y);
-        x = x.apply([](double n) -> double { return std::round(n); });
+        x = x.apply([](double n) { return std::round(n); });
         if (x[0] == 0.0) {
             x[0] = 1.0;  // nearest integer than 0
         }

@@ -57,7 +57,7 @@ inline auto cutting_plane_feas(OracleFeas &omega, SearchSpace &space,
         if (!cut) {  // feasible sol'n obtained
             return {space.xc(), niter};
         }
-        const auto status = space.update_dc(*cut);  // update space
+        const auto status = space.update_deep_cut(*cut);  // update space
         if (status != CutStatus::Success || space.tsq() < options.tol) {
             auto res = invalid_value<CuttingPlaneArrayType<SearchSpace>>();
             return {std::move(res), niter};
@@ -104,9 +104,9 @@ inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &tar
         const auto status = [&]() {
             if (shrunk) {  // best target obtained
                 x_best = space.xc();
-                return space.update_cc(cut);  // should update_cc
+                return space.update_central_cut(cut);  // should update_central_cut
             } else {
-                return space.update_dc(cut);
+                return space.update_deep_cut(cut);
             }
         }();
         if (status != CutStatus::Success || space.tsq() < options.tol) {  // no more
@@ -186,8 +186,8 @@ inline auto cutting_plane_optim_q(OracleOptimQ &omega, SearchSpaceQ &space_q, Nu
  * @return CInfo
  */
 template <typename Oracle, typename T>
-inline auto bsearch(Oracle &omega, const std::pair<T, T> &intvl,
-                    const Options &options = Options()) -> std::tuple<T, size_t> {
+inline auto bsearch(Oracle &omega, const std::pair<T, T> &intvl, const Options &options = Options())
+    -> std::tuple<T, size_t> {
     // assume monotone
     // auto& [lower, upper] = intvl;
     auto lower = intvl.first;

@@ -2,7 +2,7 @@
 #include <doctest/doctest.h>  // for ResultBuilder, Approx, CHECK_EQ
 
 #include <cmath>                      // for exp
-#include <ellalgo/cutting_plane.hpp>  // for cutting_plane_dc
+#include <ellalgo/cutting_plane.hpp>  // for cutting_plane_deep_cut
 #include <ellalgo/ell.hpp>            // for Ell
 #include <ellalgo/ell_config.hpp>     // for CInfo, CutStatus, CutStatus::...
 #include <ellalgo/ell_stable.hpp>     // for EllStable

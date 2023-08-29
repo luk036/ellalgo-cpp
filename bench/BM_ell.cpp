@@ -52,7 +52,7 @@ static void ELL_normal_rb(benchmark::State &state) {
     // Code inside this loop is measured repeatedly
     while (state.KeepRunning()) {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
-        ProfitOracleRb omega{unit_price, scale, limit, elasticities, price_out,
+        ProfitOracleRb omega{unit_price,        scale, limit, elasticities, price_out,
                              Vec{0.003, 0.007}, 1.0};
         double target = 0.0;
 
@@ -67,7 +67,7 @@ static void ELL_stable_rb(benchmark::State &state) {
     // Code inside this loop is measured repeatedly
     while (state.KeepRunning()) {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
-        ProfitOracleRb omega{unit_price, scale, limit, elasticities, price_out,
+        ProfitOracleRb omega{unit_price,        scale, limit, elasticities, price_out,
                              Vec{0.003, 0.007}, 1.0};
         double target = 0.0;
 

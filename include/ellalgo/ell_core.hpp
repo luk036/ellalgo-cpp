@@ -17,17 +17,18 @@
  *  \mathcal{E} {x | (x - xc)' mq^-1 (x - xc) \le \kappa}
  */
 class EllCore {
-  public:
     using Vec = std::valarray<double>;
-    bool no_defer_trick = false;
 
-  private:
     size_t _n;
     double _kappa;
     Matrix _mq;
     EllCalc _helper;
     double _tsq{};
 
+  public:
+    bool no_defer_trick = false;
+
+  private:
     /**
      * @brief Construct a new EllCore object
      *
@@ -44,8 +45,8 @@ class EllCore {
      * @param mq
      * @param x
      */
-    EllCore(double &&kappa, Matrix &&mq, size_t ndim)
-        : _n{ndim}, _kappa{std::move(kappa)}, _mq{std::move(mq)}, _helper{_n} {}
+    EllCore(const double &kappa, Matrix &&mq, size_t ndim)
+        : _n{ndim}, _kappa{kappa}, _mq{std::move(mq)}, _helper{_n} {}
 
   public:
     /**
@@ -64,7 +65,7 @@ class EllCore {
      * @param[in] alpha
      * @param[in] x
      */
-    EllCore(double alpha, size_t ndim) : EllCore{std::move(alpha), Matrix(ndim), ndim} {
+    EllCore(double alpha, size_t ndim) : EllCore{alpha, Matrix(ndim), ndim} {
         this->_mq.identity();
     }
 
@@ -79,7 +80,7 @@ class EllCore {
      * @brief Destroy the EllCore object
      *
      */
-    ~EllCore() {}
+    ~EllCore() = default;
 
     /**
      * @brief Construct a new EllCore object
@@ -98,15 +99,9 @@ class EllCore {
     auto copy() const -> EllCore { return EllCore(*this); }
 
     /**
-     * @brief copy the whole array anyway
-     *
-     * @return Vec
-     */
-
-    /**
      * @brief
      *
-     * @return Arr
+     * @return double
      */
     auto tsq() const -> double { return this->_tsq; }
 
@@ -119,9 +114,9 @@ class EllCore {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T> auto update_dc(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_core(grad, beta, [&](const T &beta, const double &tsq) {
-            return this->_update_cut_dc(beta, tsq);
+    template <typename T> auto update_deep_cut(Vec &grad, const T &beta) -> CutStatus {
+        return this->_update_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
+            return this->_update_cut_deep_cut(beta_l, tsq_l);
         });
     }
 
@@ -132,9 +127,9 @@ class EllCore {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T> auto update_cc(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_core(grad, beta, [&](const T &beta, const double &tsq) {
-            return this->_update_cut_cc(beta, tsq);
+    template <typename T> auto update_central_cut(Vec &grad, const T &beta) -> CutStatus {
+        return this->_update_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
+            return this->_update_cut_central_cut(beta_l, tsq_l);
         });
     }
 
@@ -146,8 +141,8 @@ class EllCore {
      * @return std::tuple<int, double>
      */
     template <typename T> auto update_q(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_core(grad, beta, [&](const T &beta, const double &tsq) {
-            return this->_update_cut_q(beta, tsq);
+        return this->_update_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
+            return this->_update_cut_q(beta_l, tsq_l);
         });
     }
 
@@ -158,9 +153,9 @@ class EllCore {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T> auto update_stable_dc(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_stable_core(grad, beta, [&](const T &beta, const double &tsq) {
-            return this->_update_cut_dc(beta, tsq);
+    template <typename T> auto update_stable_deep_cut(Vec &grad, const T &beta) -> CutStatus {
+        return this->_update_stable_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
+            return this->_update_cut_deep_cut(beta_l, tsq_l);
         });
     }
 
@@ -172,9 +167,9 @@ class EllCore {
      * @param beta
      * @return CutStatus
      */
-    template <typename T> auto update_stable_cc(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_stable_core(grad, beta, [&](const T &beta, const double &tsq) {
-            return this->_update_cut_cc(beta, tsq);
+    template <typename T> auto update_stable_central_cut(Vec &grad, const T &beta) -> CutStatus {
+        return this->_update_stable_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
+            return this->_update_cut_central_cut(beta_l, tsq_l);
         });
     }
 
@@ -187,8 +182,8 @@ class EllCore {
      * @return CutStatus
      */
     template <typename T> auto update_stable_q(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_stable_core(grad, beta, [&](const T &beta, const double &tsq) {
-            return this->_update_cut_q(beta, tsq);
+        return this->_update_stable_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
+            return this->_update_cut_q(beta_l, tsq_l);
         });
     }
 
@@ -225,9 +220,8 @@ class EllCore {
         auto rho = std::get<1>(__result);
         auto sigma = std::get<2>(__result);
         auto delta = std::get<3>(__result);
-        // n*(n+1)/2 + n
-        // this->_mq -= (this->_sigma / omega) * xt::linalg::outer(grad_t,
-        // grad_t);
+
+        // n (n+1) / 2 + n
         const auto r = sigma / omega;
         for (auto i = 0U; i != this->_n; ++i) {
             const auto rQg = r * grad_t[i];
@@ -261,7 +255,7 @@ class EllCore {
      */
     template <typename T, typename Fn>
     auto _update_stable_core(Vec &g, const T &beta, Fn &&cut_strategy) -> CutStatus {
-        // calculate inv(L)*grad: (n-1)*n/2 multiplications
+        // Calculate L^-1 * grad: (n-1)*n/2 multiplications
         auto invLg{g};  // initially
         for (auto j = 0U; j != this->_n - 1; ++j) {
             for (auto i = j + 1; i != this->_n; ++i) {
@@ -297,7 +291,7 @@ class EllCore {
         auto sigma = std::get<2>(__result);
         auto delta = std::get<3>(__result);
 
-        // calculate mq*grad = inv(L')*inv(D)*inv(L)*grad : (n-1)*n/2
+        // Calculate the (L')^-1 * D^-1 * L^-1 * grad : (n-1)n / 2
         auto grad_t{invDinvLg};                     // initially
         for (auto i = this->_n - 1; i != 0; --i) {  // backward subsituition
             for (auto j = i; j != this->_n; ++j) {
@@ -338,9 +332,9 @@ class EllCore {
      * @param tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto _update_cut_dc(const double &beta, const double &tsq) const
+    auto _update_cut_deep_cut(const double &beta, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double> {
-        return this->_helper.calc_dc(beta, tsq);
+        return this->_helper.calc_deep_cut(beta, tsq);
     }
 
     /**
@@ -350,12 +344,12 @@ class EllCore {
      * @param tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto _update_cut_dc(const std::valarray<double> &beta, const double &tsq) const
+    auto _update_cut_deep_cut(const std::valarray<double> &beta, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double> {  // parallel cut
         if (beta.size() < 2) {
-            return this->_helper.calc_dc(beta[0], tsq);
+            return this->_helper.calc_deep_cut(beta[0], tsq);
         }
-        return this->_helper.calc_ll_dc(beta[0], beta[1], tsq);
+        return this->_helper.calc_parallel_deep_cut(beta[0], beta[1], tsq);
     }
 
     /**
@@ -364,9 +358,9 @@ class EllCore {
      * @param tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto _update_cut_cc(const double &, const double &tsq) const
+    auto _update_cut_central_cut(const double &, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double> {
-        return this->_helper.calc_cc(tsq);
+        return this->_helper.calc_central_cut(tsq);
     }
 
     /**
@@ -376,12 +370,12 @@ class EllCore {
      * @param tsq
      * @return std::tuple<CutStatus, double, double, double>
      */
-    auto _update_cut_cc(const std::valarray<double> &beta, const double &tsq) const
+    auto _update_cut_central_cut(const std::valarray<double> &beta, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double> {  // parallel cut
         if (beta.size() < 2) {
-            return this->_helper.calc_cc(tsq);
+            return this->_helper.calc_central_cut(tsq);
         }
-        return this->_helper.calc_ll_cc(beta[1], tsq);
+        return this->_helper.calc_parallel_central_cut(beta[1], tsq);
     }
 
     /**
@@ -393,7 +387,7 @@ class EllCore {
      */
     auto _update_cut_q(const double &beta, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double> {
-        return this->_helper.calc_dc_q(beta, tsq);
+        return this->_helper.calc_deep_cut_q(beta, tsq);
     }
 
     /**
@@ -406,9 +400,9 @@ class EllCore {
     auto _update_cut_q(const std::valarray<double> &beta, const double &tsq) const
         -> std::tuple<CutStatus, double, double, double> {  // parallel cut
         if (beta.size() < 2) {
-            return this->_helper.calc_dc_q(beta[0], tsq);
+            return this->_helper.calc_deep_cut_q(beta[0], tsq);
         }
-        return this->_helper.calc_ll_dc_q(beta[0], beta[1], tsq);
+        return this->_helper.calc_parallel_deep_cut_q(beta[0], beta[1], tsq);
     }
 
 };  // } EllCore

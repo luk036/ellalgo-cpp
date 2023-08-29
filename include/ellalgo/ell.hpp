@@ -30,7 +30,6 @@ enum class CutStatus;
  */
 template <typename Arr> class Ell {
   public:
-    // bool no_defer_trick = false;
     using Vec = std::valarray<double>;
     using ArrayType = Arr;
 
@@ -68,13 +67,13 @@ template <typename Arr> class Ell {
      *
      * @param[in] E (move)
      */
-    Ell(Ell &&E) = default;
+    Ell(Ell &&E) noexcept = default;
 
     /**
      * @brief Destroy the Ell object
      *
      */
-    ~Ell() {}
+    ~Ell() = default;
 
     /**
      * @brief Construct a new Ell object
@@ -122,9 +121,10 @@ template <typename Arr> class Ell {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T> auto update_dc(const std::pair<Arr, T> &cut) -> CutStatus {
-        return this->_update_core(
-            cut, [&](Vec &grad, const T &beta) { return this->_mgr.update_dc(grad, beta); });
+    template <typename T> auto update_deep_cut(const std::pair<Arr, T> &cut) -> CutStatus {
+        return this->_update_core(cut, [this](Vec &grad, const T &beta) {
+            return this->_mgr.update_deep_cut(grad, beta);
+        });
     }
 
     /**
@@ -134,9 +134,10 @@ template <typename Arr> class Ell {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T> auto update_cc(const std::pair<Arr, T> &cut) -> CutStatus {
-        return this->_update_core(
-            cut, [&](Vec &grad, const T &beta) { return this->_mgr.update_cc(grad, beta); });
+    template <typename T> auto update_central_cut(const std::pair<Arr, T> &cut) -> CutStatus {
+        return this->_update_core(cut, [this](Vec &grad, const T &beta) {
+            return this->_mgr.update_central_cut(grad, beta);
+        });
     }
 
     /**
@@ -148,7 +149,7 @@ template <typename Arr> class Ell {
      */
     template <typename T> auto update_q(const std::pair<Arr, T> &cut) -> CutStatus {
         return this->_update_core(
-            cut, [&](Vec &grad, const T &beta) { return this->_mgr.update_q(grad, beta); });
+            cut, [this](Vec &grad, const T &beta) { return this->_mgr.update_q(grad, beta); });
     }
 
   private:

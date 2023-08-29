@@ -4,16 +4,25 @@
 #include <ellalgo/half_nonnegative.hpp>  // for half_nonnegative
 #include <tuple>                         // for get, tuple
 
-inline double my_abs(const double &a) { return a > 0.0 ? a : -a; }
+/**
+ * The function "my_abs" returns the absolute value of a given double number.
+ *
+ * @param[in] a a is a constant reference to a double value.
+ *
+ * @return The function `my_abs` returns the absolute value of the input `a`.
+ */
+inline double my_abs(const double &number) { return number > 0.0 ? number : -number; }
 
 /**
- * @brief
+ * The function updates the parameters of an ellipsoidal cut based on a given cut.
  *
- * @param[in] cut
- * @return ell1d::return_t
+ * @param[in] cut The `cut` parameter is a `std::pair<double, double>` representing a cut. The first
+ * element of the pair, `cut.first`, is the value of `g`, and the second element, `cut.second`, is
+ * the value of `beta`.
+ *
+ * @return The function `update` returns a value of type `CutStatus`.
  */
 auto ell1d::update(const std::pair<double, double> &cut) noexcept -> CutStatus {
-    // const auto& [g, beta] = cut;
     const auto &g = cut.first;
     const auto &beta = cut.second;
 
@@ -42,12 +51,15 @@ auto ell1d::update(const std::pair<double, double> &cut) noexcept -> CutStatus {
 }
 
 /**
- * @brief
+ * The function updates the central cut of an ellipsoid based on a given cut.
  *
- * @param[in] cut
- * @return ell1d::return_t
+ * @param[in] cut The parameter `cut` is a `std::pair<double, double>` which represents a cut in the
+ * form of a pair of values. The first value `cut.first` represents the gradient `g` of the cut, and
+ * the second value `cut.second` is not used in this function.
+ *
+ * @return a value of type `CutStatus`.
  */
-auto ell1d::update_cc(const std::pair<double, double> &cut) noexcept -> CutStatus {
+auto ell1d::update_central_cut(const std::pair<double, double> &cut) noexcept -> CutStatus {
     const auto &g = cut.first;
     const auto tau = ::my_abs(this->_r * g);
     this->_tsq = tau * tau;

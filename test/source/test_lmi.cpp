@@ -16,51 +16,58 @@
 #include <type_traits>  // for move, add_const<>::type
 #include <valarray>
 #include <vector>  // for vector
-// #include <xtensor-blas/xlinalg.hpp>
 
 /**
- * @brief MyOracle
+ * @brief MyLMIOracle
  *
+ * for Linear-Matrix-Inequality (LMI)
  */
 class MyLMIOracle {
-    // using Arr = xt::xarray<double, xt::layout_type::row_major>;
     using Vec = std::valarray<double>;
     using M_t = std::vector<Matrix>;
     using Cut = std::pair<Vec, double>;
 
-  private:
     LmiOracle<Vec, Matrix> lmi1;
     LmiOracle<Vec, Matrix> lmi2;
     const Vec c;
 
   public:
     /**
-     * @brief Construct a new my oracle object
+     * The function is a constructor for a class called MyLMIOracle that takes in several parameters
+     * and initializes member variables.
      *
-     * @param[in] F1
-     * @param[in] B1
-     * @param[in] F2
-     * @param[in] B2
-     * @param[in] c
+     * @param[in] m1 The parameter `m1` represents the number of constraints for the first
+     * Linear-Matrix-Inequality (LMI).
+     * @param[in] F1 F1 is a vector of matrices. It represents the matrices used in the first
+     * Linear-Matrix-Inequality (LMI) problem.
+     * @param[in] B1 B1 is a matrix.
+     * @param[in] m2 The parameter `m2` represents the number of constraints in the second
+     * Linear-Matrix-Inequality (LMI).
+     * @param[in] F2 F2 is a vector of matrices.
+     * @param[in] B2 The parameter B2 is a matrix.
+     * @param[in] c The parameter `c` is a vector of type `Vec`. It is being moved into the
+     * `MyLMIOracle` object.
      */
     MyLMIOracle(size_t m1, const std::vector<Matrix> &F1, const Matrix &B1, size_t m2,
                 const std::vector<Matrix> &F2, const Matrix &B2, Vec c)
         : lmi1{m1, F1, B1}, lmi2{m2, F2, B2}, c{std::move(c)} {}
 
     /**
-     * @brief
+     * The function assess_optim assesses the optimality of a given vector x by checking for certain
+     * conditions and returning a tuple containing a cut and a boolean value.
      *
-     * @param[in] x
-     * @param[in,out] t
-     * @return std::tuple<Cut, double>
+     * @param[in] x A vector representing the input values for the optimization problem.
+     * @param[in,out] t The parameter `t` is a reference to a `double` variable. It is used to store
+     * the value of `f0` in the last part of the function.
+     *
+     * @return The function `assess_optim` returns a tuple containing a `Cut` object and a boolean
+     * value.
      */
     auto assess_optim(const Vec &x, double &t) -> std::tuple<Cut, bool> {
-        const auto cut1 = this->lmi1(x);
-        if (cut1) {
+        if (const auto cut1 = this->lmi1(x)) {
             return {*cut1, false};
         }
-        const auto cut2 = this->lmi2(x);
-        if (cut2) {
+        if (const auto cut2 = this->lmi2(x)) {
             return {*cut2, false};
         }
         const auto f0 = (this->c * x).sum();
@@ -71,21 +78,9 @@ class MyLMIOracle {
         t = f0;
         return {{this->c, 0.0}, true};
     }
-
-    /**
-     * @brief
-     *
-     * @param[in] x
-     * @param[in,out] t the best-so-far optimal value
-     * @return std::tuple<Cut, double>
-     */
-    auto operator()(const Vec &x, double &t) -> std::tuple<Cut, bool> {
-        return this->assess_optim(x, t);
-    }
 };
 
 TEST_CASE("LMI test (stable)") {
-    // using Arr = xt::xarray<double, xt::layout_type::row_major>;
     using Vec = std::valarray<double>;
     using M_t = std::vector<Matrix>;
 
@@ -134,16 +129,10 @@ TEST_CASE("LMI test (stable)") {
     auto omega = MyLMIOracle(2, F1, B1, 3, F2, B2, std::move(c));
     auto ellip = Ell<Vec>(10.0, Vec{0.0, 0.0, 0.0});
 
-    auto t = 1e100;  // std::numeric_limits<double>::max()
-    // const auto [x, num_iters] = cutting_plane_optim(omega, ellip, t);
+    auto t = 1e100;  // should be std::numeric_limits<double>::max()
     const auto result = cutting_plane_optim(omega, ellip, t);
     auto x = std::get<0>(result);
     auto num_iters = std::get<1>(result);
-    // fmt::print("{:f} {} {} \n", t, num_iters, ell_info.feasible);
-    // std::cout << "LMI xbest: " << xb << "\n";
-    // std::cout << "LMI result: " << fb << ", " << niter << ", " << feasible <<
-    // ", " << status
-    //           << "\n";
 
     // create color multi threaded logger
     // auto console = spdlog::stdout_logger_mt("console");
@@ -157,7 +146,6 @@ TEST_CASE("LMI test (stable)") {
 }
 
 TEST_CASE("LMI test ") {
-    // using Arr = xt::xarray<double, xt::layout_type::row_major>;
     using Vec = std::valarray<double>;
     using M_t = std::vector<Matrix>;
 
@@ -206,8 +194,7 @@ TEST_CASE("LMI test ") {
     auto omega = MyLMIOracle(2, F1, B1, 3, F2, B2, std::move(c));
     auto ellip = EllStable<Vec>(10.0, Vec{0.0, 0.0, 0.0});
 
-    auto t = 1e100;  // std::numeric_limits<double>::max()
-    // const auto [x, num_iters] = cutting_plane_optim(omega, ellip, t);
+    auto t = 1e100;  // should be std::numeric_limits<double>::max()
     const auto result = cutting_plane_optim(omega, ellip, t);
     const auto &x = std::get<0>(result);
     const auto &num_iters = std::get<1>(result);

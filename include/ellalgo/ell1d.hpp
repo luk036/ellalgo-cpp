@@ -18,7 +18,7 @@ class ell1d {
   private:
     double _r;
     double _xc;
-    double _tsq;
+    double _tsq = 0.0;
 
   public:
     /**
@@ -27,7 +27,7 @@ class ell1d {
      * @param[in] l
      * @param[in] u
      */
-    ell1d(const double &l, const double &u) noexcept : _r{(u - l) / 2}, _xc{l + _r}, _tsq{0.0} {}
+    ell1d(const double &l, const double &u) noexcept : _r{(u - l) / 2}, _xc{l + _r} {}
 
     /**
      * @brief Construct a new ell1d object
@@ -71,5 +71,5 @@ class ell1d {
      * @param[in] cut
      * @return return_t
      */
-    auto update_cc(const std::pair<double, double> &cut) noexcept -> CutStatus;
+    auto update_central_cut(const std::pair<double, double> &cut) noexcept -> CutStatus;
 };  // } ell1d
