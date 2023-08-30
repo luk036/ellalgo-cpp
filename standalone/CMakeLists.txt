@@ -9,7 +9,7 @@ include(../cmake/tools.cmake)
 # ---- Dependencies ----
 
 include(../cmake/CPM.cmake)
-include(../specific.cmake)
+include(../cmake/specific.cmake)
 
 CPMAddPackage(
   GITHUB_REPOSITORY jarro2783/cxxopts

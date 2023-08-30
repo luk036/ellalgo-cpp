@@ -1,7 +1,6 @@
 #pragma once
 
-#include <iosfwd>  // for string
-#include <string>  // for basic_string
+#include <string>
 
 namespace ellalgo {
 

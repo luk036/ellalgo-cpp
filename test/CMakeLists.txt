@@ -14,7 +14,7 @@ include(../cmake/tools.cmake)
 # ---- Dependencies ----
 
 include(../cmake/CPM.cmake)
-include(../specific.cmake)
+include(../cmake/specific.cmake)
 
 CPMAddPackage("gh:doctest/doctest@2.4.9")
 CPMAddPackage("gh:TheLartians/Format.cmake@1.7.3")
@@ -37,7 +37,7 @@ if(NOT TEST_INSTALLED_VERSION)
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     target_compile_options(EllAlgo PUBLIC -Wall -Wpedantic -Wextra -Werror)
   elseif(MSVC)
-    target_compile_options(EllAlgo PUBLIC /W4 /WX)
+    target_compile_options(EllAlgo PUBLIC /W4 /WX /wd4819)
     target_compile_definitions(${PROJECT_NAME} PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
   endif()
 endif()

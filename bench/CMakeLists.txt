@@ -9,7 +9,7 @@ include(../cmake/tools.cmake)
 # ---- Dependencies ----
 
 include(../cmake/CPM.cmake)
-include(../specific.cmake)
+include(../cmake/specific.cmake)
 
 CPMAddPackage(
   NAME benchmark

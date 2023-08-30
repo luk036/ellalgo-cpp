@@ -1,8 +1,4 @@
 cmake_minimum_required(VERSION 3.14...3.22)
-# set(USE_STATIC_ANALYZER "iwyu")
-
-option(CPM_USE_LOCAL_PACKAGES "Use Local package" TRUE)
-option(INSTALL_ONLY "Enable for installation only" OFF)
 
 # ---- Project ----
 
@@ -26,18 +22,24 @@ endif()
 # see https://github.com/TheLartians/CPM.cmake for more info
 
 include(cmake/CPM.cmake)
+include(cmake/specific.cmake)
 
 # PackageProject.cmake will be used to make our target installable
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.8.0")
 
-include(specific.cmake)
+CPMAddPackage(
+  NAME fmt
+  GIT_TAG 9.1.0
+  GITHUB_REPOSITORY fmtlib/fmt
+  OPTIONS "FMT_INSTALL YES" # create an installable target
+)
 
 # ---- Add source files ----
 
 # Note: globbing sources is considered bad practice as CMake's generators may not detect new files
 # automatically. Keep that in mind when changing files, or explicitly mention them here.
-file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h"
-     "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp"
+file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp"
+     "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h"
 )
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
 

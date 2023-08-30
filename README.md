@@ -1,6 +1,7 @@
 [![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/MacOS/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
 [![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/Windows/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
 [![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/Ubuntu/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
+[![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/Style/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
 [![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/Install/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
 [![codecov](https://codecov.io/gh/luk036/ellalgo-cpp/branch/master/graph/badge.svg)](https://codecov.io/gh/luk036/ellalgo-cpp)
 
@@ -10,8 +11,7 @@
 
 # 🏉 ellalgo-cpp
 
-Ellipsoid method for modern C++
-
+Ellipsoid Algorithm in Modern C++
 The Ellipsoid Method as a linear programming algorithm was first introduced by L. G. Khachiyan in 1979. It is a polynomial-time algorithm that uses ellipsoids to iteratively reduce the feasible region of a linear program until an optimal solution is found. The method works by starting with an initial ellipsoid that contains the feasible region, and then successively shrinking the ellipsoid until it contains the optimal solution. The algorithm is guaranteed to converge to an optimal solution in a finite number of steps.
 
 The method has a wide range of practical applications in operations research. It can be used to solve linear programming problems, as well as more general convex optimization problems. The method has been applied to a variety of fields, including economics, engineering, and computer science. Some specific applications of the Ellipsoid Method include portfolio optimization, network flow problems, and the design of control systems. The method has also been used to solve problems in combinatorial optimization, such as the traveling salesman problem.
@@ -25,7 +25,6 @@ In the context of the Ellipsoid Method, a parallel cut refers to a pair of linea
 - Support parallel cut.
 - Support discrete optimization.
 - Support traditional or stable version.
-
 - [Modern CMake practices](https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/)
 - Suited for single header libraries and projects of any scale
 - Clean separation of library and executable code
@@ -215,4 +214,4 @@ Perhaps the [MiniCppStarter](https://github.com/TheLartians/MiniCppStarter) is s
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=TheLartians/ModernCppStarter,cpp-best-practices/gui_starter_template,filipdutescu/modern-cpp-template&type=Date)](https://star-history.com/#TheLartians/ModernCppStarter&cpp-best-practices/gui_starter_template&filipdutescu/modern-cpp-template&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=luk036/ellalgo-cpp,cpp-best-practices/gui_starter_template,filipdutescu/modern-cpp-template&type=Date)](https://star-history.com/#luk036/ellalgo-cpp&cpp-best-practices/gui_starter_template&filipdutescu/modern-cpp-template&Date)

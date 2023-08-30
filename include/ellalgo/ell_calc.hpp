@@ -76,10 +76,10 @@ class EllCalc {
      * @param[in] beta0
      * @param[in] beta1
      * @param[in] tsq
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
     auto calc_parallel_deep_cut(const double &beta0, const double &beta1, const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double>;
+        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
      * @brief Calculate new ellipsoid under Parallel Cut, one of them is central
@@ -90,10 +90,10 @@ class EllCalc {
      * @param[in] beta1
      * @param[in] b1sq
      * @param[in] tsq
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
     auto calc_parallel_central_cut(const double &beta1, const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double>;
+        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
      * @brief Calculate new ellipsoid under Deep Cut
@@ -102,10 +102,10 @@ class EllCalc {
      *
      * @param[in] beta
      * @param[in] tsq
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
     auto calc_deep_cut(const double &beta, const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double>;
+        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
      * @brief Calculate new ellipsoid under Central Cut
@@ -113,9 +113,10 @@ class EllCalc {
      *        g' (x - xc) \le 0
      *
      * @param[in] tsq
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
-    auto calc_central_cut(const double &tsq) const -> std::tuple<CutStatus, double, double, double>;
+    auto calc_central_cut(const double &tsq) const
+        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
      * @brief Calculate new ellipsoid under Parallel Cut
@@ -126,10 +127,10 @@ class EllCalc {
      * @param[in] beta0
      * @param[in] beta1
      * @param[in] tsq
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
     auto calc_parallel_deep_cut_q(const double &beta0, const double &beta1, const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double>;
+        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
      * @brief Calculate new ellipsoid under Deep Cut
@@ -138,10 +139,10 @@ class EllCalc {
      *
      * @param[in] beta
      * @param[in] tsq
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
     auto calc_deep_cut_q(const double &beta, const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double>;
+        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
   private:
     /**
@@ -152,11 +153,11 @@ class EllCalc {
      * @param b1sq
      * @param b0b1
      * @param tsq
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
     auto _calc_parallel_core(const double &beta0, const double &beta1, const double &b1sq,
                              const double &b0b1, const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double>;
+        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
      * @brief
@@ -164,8 +165,8 @@ class EllCalc {
      * @param beta
      * @param tau
      * @param gamma
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
     auto _calc_deep_cut_core(const double &beta, const double &tau, const double &gamma) const
-        -> std::tuple<CutStatus, double, double, double>;
+        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 };  // } EllCalc

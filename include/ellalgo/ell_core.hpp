@@ -217,9 +217,8 @@ class EllCore {
             return status;
         }
 
-        auto rho = std::get<1>(__result);
-        auto sigma = std::get<2>(__result);
-        auto delta = std::get<3>(__result);
+        double rho, sigma, delta;
+        std::tie(rho, sigma, delta) = std::get<1>(__result);
 
         // n (n+1) / 2 + n
         const auto r = sigma / omega;
@@ -287,9 +286,8 @@ class EllCore {
             return status;
         }
 
-        auto rho = std::get<1>(__result);
-        auto sigma = std::get<2>(__result);
-        auto delta = std::get<3>(__result);
+        double rho, sigma, delta;
+        std::tie(rho, sigma, delta) = std::get<1>(__result);
 
         // Calculate the (L')^-1 * D^-1 * L^-1 * grad : (n-1)n / 2
         auto grad_t{invDinvLg};                     // initially
@@ -330,10 +328,10 @@ class EllCore {
      *
      * @param beta
      * @param tsq
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
     auto _update_cut_deep_cut(const double &beta, const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double> {
+        -> std::tuple<CutStatus, std::tuple<double, double, double>> {
         return this->_helper.calc_deep_cut(beta, tsq);
     }
 
@@ -342,10 +340,10 @@ class EllCore {
      *
      * @param beta
      * @param tsq
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
     auto _update_cut_deep_cut(const std::valarray<double> &beta, const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double> {  // parallel cut
+        -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
         if (beta.size() < 2) {
             return this->_helper.calc_deep_cut(beta[0], tsq);
         }
@@ -356,10 +354,10 @@ class EllCore {
      * @brief
      *
      * @param tsq
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
     auto _update_cut_central_cut(const double &, const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double> {
+        -> std::tuple<CutStatus, std::tuple<double, double, double>> {
         return this->_helper.calc_central_cut(tsq);
     }
 
@@ -368,10 +366,10 @@ class EllCore {
      *
      * @param beta
      * @param tsq
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
     auto _update_cut_central_cut(const std::valarray<double> &beta, const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double> {  // parallel cut
+        -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
         if (beta.size() < 2) {
             return this->_helper.calc_central_cut(tsq);
         }
@@ -383,10 +381,10 @@ class EllCore {
      *
      * @param beta
      * @param tsq
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
     auto _update_cut_q(const double &beta, const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double> {
+        -> std::tuple<CutStatus, std::tuple<double, double, double>> {
         return this->_helper.calc_deep_cut_q(beta, tsq);
     }
 
@@ -395,10 +393,10 @@ class EllCore {
      *
      * @param beta
      * @param tsq
-     * @return std::tuple<CutStatus, double, double, double>
+     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
     auto _update_cut_q(const std::valarray<double> &beta, const double &tsq) const
-        -> std::tuple<CutStatus, double, double, double> {  // parallel cut
+        -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
         if (beta.size() < 2) {
             return this->_helper.calc_deep_cut_q(beta[0], tsq);
         }
