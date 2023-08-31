@@ -219,8 +219,7 @@ auto EllCalc::calc_parallel_deep_cut_q(const double &beta0, const double &beta1,
         return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
     }
 
-    const auto b1sq = beta1 * beta1;
-    if ((beta1 > 0.0 && tsq <= b1sq) || !this->use_parallel_cut) {
+    if ((beta1 > 0.0 && tsq <= beta1 * beta1) || !this->use_parallel_cut) {
         return this->calc_deep_cut_q(beta0, tsq);
     }
 

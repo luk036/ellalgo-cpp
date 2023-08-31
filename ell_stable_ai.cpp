@@ -71,7 +71,9 @@ class EllStable {
         double omega = helper.sum(gg_t);
         tsq = kappa * omega;
         CutStatus status;
-        double rho, sigma, delta;
+        double rho;
+        double sigma;
+        double delta;
         std::tie(status, rho, sigma, delta) = cut_strategy(std::get<double>(beta), tsq);
         ArrayType g_t = invDinvLg;
         for (int i = n - 1; i > 0; i--) {

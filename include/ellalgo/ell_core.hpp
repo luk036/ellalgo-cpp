@@ -217,7 +217,9 @@ class EllCore {
             return status;
         }
 
-        double rho, sigma, delta;
+        double rho;
+        double sigma;
+        double delta;
         std::tie(rho, sigma, delta) = std::get<1>(__result);
 
         // n (n+1) / 2 + n
@@ -286,7 +288,9 @@ class EllCore {
             return status;
         }
 
-        double rho, sigma, delta;
+        double rho;
+        double sigma;
+        double delta;
         std::tie(rho, sigma, delta) = std::get<1>(__result);
 
         // Calculate the (L')^-1 * D^-1 * L^-1 * grad : (n-1)n / 2

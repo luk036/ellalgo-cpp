@@ -78,7 +78,9 @@ class Ell {
         }
         _tsq = _kappa * omega;
         CutStatus status;
-        double rho, sigma, delta;
+        double rho;
+        double sigma;
+        double delta;
         std::tie(status, rho, sigma, delta) = cut_strategy(beta, _tsq);
         if (status != CutStatus::Success) {
             return status;
