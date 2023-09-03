@@ -81,7 +81,6 @@ class ProfitOracle {
  * @see ProfitOracle
  */
 class ProfitOracleRb {
-    // using Arr = xt::xarray<double, xt::layout_type::row_major>;
     using Vec = std::valarray<double>;
     using Cut = std::pair<Vec, double>;
 
