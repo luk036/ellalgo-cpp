@@ -16,11 +16,19 @@ using ParallelCut = std::pair<Vec, Vec>;
 #endif
 
 /**
- * The above function is a constructor for a filter design class that initializes various parameters
- * and matrices used in the filter design process.
- *
- * @param argN The parameter `argN` represents the value of N, which is the order of the filter. It
- * determines the number of filter coefficients and the complexity of the filter design.
+ * The above function is a constructor for a lowpass filter design class that initializes various
+ * parameters and matrices used in the filter design process.
+ * 
+ * @param N The parameter N represents the order of the filter. It determines the number of
+ * coefficients used in the filter design.
+ * @param Lpsq Lpsq is the squared lower passband edge frequency. It represents the frequency below
+ * which the filter allows all signals to pass through without attenuation.
+ * @param Upsq Upsq is the upper squared frequency limit for the lowpass filter. It represents the
+ * maximum frequency that the filter allows to pass through without significant attenuation.
+ * @param wpass The parameter "wpass" represents the normalized passband frequency. It is used in the
+ * filter design process to determine the number of frequency points within the passband.
+ * @param wstop The parameter "wstop" represents the stopband edge frequency in the filter design
+ * process. It is a value between 0 and 1, where 1 corresponds to the Nyquist frequency.
  */
 LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, double wstop)
     : Lpsq{Lpsq}, Upsq{Upsq}
@@ -32,7 +40,7 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
     const auto m = 15 * N;
     Vec w(m);
     for (size_t i = 0U; i != m; ++i) {
-        w[i] = i * M_PI / (m - 1);
+        w[i] = double(i) * M_PI / double(m - 1);
     }
 
     // A is the matrix used to compute the power spectrum
@@ -44,8 +52,8 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
             this->A[i][j] = 2.0 * std::cos(w[i] * j);
         }
     }
-    this->nwpass = std::floor(wpass * (m - 1)) + 1;
-    this->nwstop = std::floor(wstop * (m - 1)) + 1;
+    this->nwpass = size_t(std::floor(wpass * double(m - 1)) + 1);
+    this->nwstop = size_t(std::floor(wstop * double(m - 1)) + 1);
 }
 
 /**

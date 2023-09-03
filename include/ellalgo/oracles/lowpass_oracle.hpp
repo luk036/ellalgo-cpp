@@ -30,9 +30,6 @@
 // delta is allowed passband ripple.
 // This is a convex problem (can be formulated as an SDP after sampling).
 
-// rand('twister',sum(100*clock))
-// randn('state',sum(100*clock))
-
 // *********************************************************************
 // filter specs (for a low-pass filter)
 // *********************************************************************
@@ -64,20 +61,13 @@ class LowpassOracle {
     /*!
      * @brief Construct a new lowpass oracle object
      *
-     * @param[in] Ap
-     * @param[in] As
-     * @param[in] Anr
-     * @param[in] Lpsq
-     * @param[in] Upsq
+     * The constructor of the `LowpassOracle` class. It initializes an instance of the `LowpassOracle` class with the given parameters.
      */
     LowpassOracle(size_t N, double wpass, double wstop, double Lpsq, double Upsq); 
 
     /*!
      * @brief
      *
-     * @param[in] x
-     * @param[in] Spsq
-     * @return auto
      */
     auto assess_optim(const Vec &x, double &Spsq) -> std::tuple<ParallelCut, bool>;
 
