@@ -1,11 +1,11 @@
-#include <stddef.h>    // for size_t
-#include <cmath>       // for pow, log10, M_PI, cos
-#include <tuple>       // for tuple
-#include <type_traits> // for move
-#include <vector>      // for vector, vector<>::size_...
-#include <valarray>    // for valarray
+#include <stddef.h>  // for size_t
 
+#include <cmath>                               // for pow, log10, M_PI, cos
 #include <ellalgo/oracles/lowpass_oracle.hpp>  // for LowpassOracle, filter_...
+#include <tuple>                               // for tuple
+#include <type_traits>                         // for move
+#include <valarray>                            // for valarray
+#include <vector>                              // for vector, vector<>::size_...
 
 using Vec = std::valarray<double>;
 using Mat = std::valarray<Vec>;
@@ -18,21 +18,20 @@ using ParallelCut = std::pair<Vec, Vec>;
 /**
  * The above function is a constructor for a lowpass filter design class that initializes various
  * parameters and matrices used in the filter design process.
- * 
+ *
  * @param N The parameter N represents the order of the filter. It determines the number of
  * coefficients used in the filter design.
  * @param Lpsq Lpsq is the squared lower passband edge frequency. It represents the frequency below
  * which the filter allows all signals to pass through without attenuation.
  * @param Upsq Upsq is the upper squared frequency limit for the lowpass filter. It represents the
  * maximum frequency that the filter allows to pass through without significant attenuation.
- * @param wpass The parameter "wpass" represents the normalized passband frequency. It is used in the
- * filter design process to determine the number of frequency points within the passband.
+ * @param wpass The parameter "wpass" represents the normalized passband frequency. It is used in
+ * the filter design process to determine the number of frequency points within the passband.
  * @param wstop The parameter "wstop" represents the stopband edge frequency in the filter design
  * process. It is a value between 0 and 1, where 1 corresponds to the Nyquist frequency.
  */
 LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, double wstop)
-    : Lpsq{Lpsq}, Upsq{Upsq}
-{
+    : Lpsq{Lpsq}, Upsq{Upsq} {
     // *********************************************************************
     // optimization parameters
     // *********************************************************************

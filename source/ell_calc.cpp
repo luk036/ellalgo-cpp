@@ -33,10 +33,9 @@ auto EllCalc::calc_parallel_deep_cut(const double &beta0, const double &beta1,
     if ((beta1 > 0 && tsq <= b1sq) || !this->use_parallel_cut) {
         return this->calc_deep_cut(beta0, tsq);
     }
-    auto&& result = this->_helper.calc_parallel_cut(beta0, beta1, tsq);
+    auto &&result = this->_helper.calc_parallel_cut(beta0, beta1, tsq);
     return {CutStatus::Success, result};
 }
-
 
 /**
  * @brief
@@ -54,7 +53,7 @@ auto EllCalc::calc_parallel_central_cut(const double &beta1, const double &tsq) 
     if (tsq < b1sq || !this->use_parallel_cut) {
         return this->calc_central_cut(tsq);
     }
-    auto&& result = this->_helper.calc_central_cut(std::sqrt(tsq));
+    auto &&result = this->_helper.calc_central_cut(std::sqrt(tsq));
     return {CutStatus::Success, result};
     // this->_mu ???
 }
@@ -86,7 +85,7 @@ auto EllCalc::calc_deep_cut(const double &beta, const double &tsq) const
     if (tsq < beta * beta) {
         return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
     }
-    auto&& result = this->_helper.calc_bias_cut(beta, std::sqrt(tsq));
+    auto &&result = this->_helper.calc_bias_cut(beta, std::sqrt(tsq));
     return {CutStatus::Success, result};
 }
 
@@ -113,7 +112,7 @@ auto EllCalc::calc_central_cut(const double &tsq) const
     // auto sigma = this->_c2;
     // auto rho = std::sqrt(tsq) / this->_nPlus1;
     // auto delta = this->_c1;
-    auto&& result = this->_helper.calc_central_cut(std::sqrt(tsq));
+    auto &&result = this->_helper.calc_central_cut(std::sqrt(tsq));
     return {CutStatus::Success, result};
 }
 
@@ -147,7 +146,7 @@ auto EllCalc::calc_parallel_deep_cut_q(const double &beta0, const double &beta1,
     if (ELL_UNLIKELY(gamma <= 0.0)) {
         return {CutStatus::NoEffect, {0.0, 0.0, 1.0}};  // no effect
     }
-    auto&& result = this->_helper.calc_parallel_cut_fast(beta0, beta1, tsq, b0b1, gamma);
+    auto &&result = this->_helper.calc_parallel_cut_fast(beta0, beta1, tsq, b0b1, gamma);
     return {CutStatus::Success, result};
 }
 
@@ -172,6 +171,6 @@ auto EllCalc::calc_deep_cut_q(const double &beta, const double &tsq) const
     if (ELL_UNLIKELY(gamma <= 0.0)) {
         return {CutStatus::NoEffect, {0.0, 0.0, 1.0}};  // no effect
     }
-    auto&& result = this->_helper.calc_bias_cut_fast(beta, tau, gamma);
+    auto &&result = this->_helper.calc_bias_cut_fast(beta, tau, gamma);
     return {CutStatus::Success, result};
 }

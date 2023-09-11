@@ -1,11 +1,11 @@
 // -*- coding: utf-8 -*-
 #include <doctest/doctest.h>  // for ResultBuilder, CHECK
 
-#include <ellalgo/cutting_plane.hpp>          // for cutting_plane_optim
-#include <ellalgo/ell.hpp>                    // for Ell
+#include <ellalgo/cutting_plane.hpp>           // for cutting_plane_optim
+#include <ellalgo/ell.hpp>                     // for Ell
 #include <ellalgo/oracles/lowpass_oracle.hpp>  // for LowpassOracle, filter_...
-#include <tuple>                              // for make_tuple, tuple
-#include <type_traits>                        // for move, add_const<>::type
+#include <tuple>                               // for make_tuple, tuple
+#include <type_traits>                         // for move, add_const<>::type
 #include <valarray>
 
 using Vec = std::valarray<double>;
@@ -48,8 +48,7 @@ TEST_CASE("Lowpass Filter (w/ parallel cut)") {
     CHECK(num_iters <= 516);
 }
 
-TEST_CASE("Lowpass Filter (w/o parallel cut)")
-{
+TEST_CASE("Lowpass Filter (w/o parallel cut)") {
     const auto result = run_lowpass(false);
     const auto feasible = std::get<0>(result);
     const auto num_iters = std::get<1>(result);
