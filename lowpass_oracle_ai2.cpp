@@ -1,18 +1,16 @@
+#include <cmath>
 #include <iostream>
 #include <vector>
-#include <cmath>
 
 using namespace std;
 
 typedef vector<vector<double>> Arr;
 typedef pair<Arr, double> Cut;
 
-Arr ndarray(int rows, int cols) {
-    return vector<vector<double>>(rows, vector<double>(cols));
-}
+Arr ndarray(int rows, int cols) { return vector<vector<double>>(rows, vector<double>(cols)); }
 
 class LowpassOracle {
-private:
+  private:
     bool more_alt;
     Arr A;
     int nwpass;
@@ -20,7 +18,7 @@ private:
     double Lpsq;
     double Upsq;
 
-public:
+  public:
     LowpassOracle(Arr A, int nwpass, int nwstop, double Lpsq, double Upsq) {
         this->A = A;
         this->nwpass = nwpass;
@@ -87,7 +85,7 @@ public:
             if (v < 0) {
                 double f = -v;
                 Arr g = A[k];
-                return make_pair(make_pair(g, f), 0.0); // single cut
+                return make_pair(make_pair(g, f), 0.0);  // single cut
             }
         }
 

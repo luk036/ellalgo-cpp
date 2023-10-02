@@ -1,7 +1,7 @@
-#include <iostream>
-#include <vector>
 #include <cmath>
-#include <utility> // pair
+#include <iostream>
+#include <utility>  // pair
+#include <vector>
 
 using namespace std;
 
@@ -10,7 +10,7 @@ typedef vector<Vec> Mat;
 typedef pair<Vec, double> Cut;
 
 class LowpassOracle {
-private:
+  private:
     bool more_alt = true;
     int i_Anr = 0;
     int i_As = 0;
@@ -22,7 +22,7 @@ private:
     double Lpsq;
     double Upsq;
 
-public:
+  public:
     LowpassOracle(Mat Ap, Mat As, Mat Anr, double Lpsq, double Upsq) {
         this->Ap = Ap;
         this->As = As;
