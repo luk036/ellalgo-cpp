@@ -21,13 +21,10 @@ class EllCalcCore {
 
   public:
     /**
-     * @brief Construct a new EllCalcCore object
-     *
-     * @tparam V
-     * @tparam U
-     * @param kappa
-     * @param mq
-     * @param x
+     * The above code snippet defines the constructor for the EllCalcCore class in C++, which takes the
+     * number of dimensions as a parameter and initializes various member variables based on that value.
+     * 
+     * @param ndim The parameter `ndim` represents the number of dimensions for the EllCalcCore object.
      */
     explicit EllCalcCore(size_t ndim)
         : _n_f{double(ndim)},
@@ -38,24 +35,16 @@ class EllCalcCore {
           _cst2{2.0 / _n_plus_1} {}
 
     /**
-     * @brief Construct a new EllCalcCore object
-     *
-     * @param[in] E (move)
+     * The function is a move constructor for the EllCalcCore class.
+     * 
+     * @param E The parameter "E" is a reference to an object of type "EllCalcCore" that is being moved.
      */
     EllCalcCore(EllCalcCore &&E) = default;
 
     /**
-     * @brief Destroy the EllCalcCore object
-     *
-     */
-    ~EllCalcCore() = default;
-
-    /**
-     * @brief Construct a new EllCalcCore object
-     *
-     * To avoid accidentally copying, only explicit copy is allowed
-     *
-     * @param E
+     * The function is a constructor for the EllCalcCore class that allows explicit copying.
+     * 
+     * @param E The parameter "E" is a reference to an object of type "EllCalcCore".
      */
     EllCalcCore(const EllCalcCore &E) = default;
 
@@ -83,6 +72,13 @@ class EllCalcCore {
         return this->calc_parallel_cut_fast(beta0, beta1, tsq, b0b1, gamma);
     }
 
+    /** 
+     * The `calc_parallel_cut_fast` function is a public member function of the `EllCalcCore` class. It
+     * calculates and returns the values of `rho`, `sigma`, and `delta` based on the given input parameters
+     * `beta0`, `beta1`, `tsq`, `b0b1`, and `gamma`. These parameters are used in the calculation of the
+     * parallel cut under the equation `g' (x - xc) + beta0 <= 0` and `g' (x - xc) + beta1 >= 0`. The
+     * function returns a tuple containing the calculated values of `rho`, `sigma`, and `delta`.
+     */
     auto calc_parallel_cut_fast(const double &beta0, const double &beta1, const double &tsq,
                                 const double &b0b1, const double &gamma) const
         -> std::tuple<double, double, double>;
@@ -126,6 +122,12 @@ class EllCalcCore {
         return this->calc_bias_cut_fast(beta, tau, tau + this->_n_f * beta);
     }
 
+    /*
+     * The `calc_bias_cut_fast` function is a public member function of the `EllCalcCore` class. It
+     * calculates and returns the values of `rho`, `sigma`, and `delta` based on the given input parameters
+     * `beta`, `tau`, and `gamma`. These parameters are used in the calculation of the bias cut under the
+     * equation `g' (x - xc) + beta <= 0`. The function returns a tuple containing the calculated values of
+     * `rho`, `sigma`, and `delta`. */
     auto calc_bias_cut_fast(const double &beta, const double &tau, const double &gamma) const
         -> std::tuple<double, double, double>;
 
