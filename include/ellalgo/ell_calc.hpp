@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <cmath>
 #include <tuple>
 
@@ -33,7 +34,9 @@ class EllCalc {
      * @param mq
      * @param x
      */
-    explicit EllCalc(size_t ndim) : _n_f{double(ndim)}, _helper{ndim} {}
+    explicit EllCalc(size_t ndim) : _n_f{double(ndim)}, _helper{ndim} {
+        assert(ndim >= 2U); // do not accept one-dimensional
+    }
 
     /**
      * @brief Construct a new EllCalcobject

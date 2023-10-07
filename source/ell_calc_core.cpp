@@ -1,4 +1,3 @@
-#include <cassert>
 #include <cmath>                      // for sqrt
 #include <ellalgo/ell_calc_core.hpp>  // for EllCalcCore
 #include <tuple>                      // for tuple
