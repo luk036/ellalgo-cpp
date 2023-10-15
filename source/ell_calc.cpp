@@ -61,7 +61,7 @@ auto EllCalc::calc_parallel_central_cut(const double &beta1, const double &tsq) 
 /**
  * @brief Deep-Cut
  *
- * The function `calc_deep_cut` calculates the values of `tau`, `gamma` under the
+ * The function `calc_deep_cut` calculates the values of `tau`, `eta` under the
  * deep-cut:
  *
  *        g' (x - xc) + beta \le 0,
@@ -71,7 +71,7 @@ auto EllCalc::calc_parallel_central_cut(const double &beta1, const double &tsq) 
  * `beta` and `tsq`.
  *
  * @param[in] beta The parameter "beta" represents a value that needs to be
- * greater than or equal to 0.0. It is used in the calculation of "gamma" and is
+ * greater than or equal to 0.0. It is used in the calculation of "eta" and is
  * compared with "tsq" in the if statement.
  * @param[in] tsq tsq is a variable of type double, which represents the square
  * of the value tau.
@@ -93,7 +93,7 @@ auto EllCalc::calc_deep_cut(const double &beta, const double &tsq) const
  * @brief Central Cut
  *
  * The function `_calc_deep_cut_core` calculates and returns the values of rho, sigma,
- * and delta based on the given beta, tau, and gamma values under the
+ * and delta based on the given beta, tau, and eta values under the
  * central-cut:
  *
  *        g' (x - xc) \le 0
@@ -142,11 +142,11 @@ auto EllCalc::calc_parallel_deep_cut_q(const double &beta0, const double &beta1,
     }
 
     const auto b0b1 = beta0 * beta1;
-    const auto gamma = tsq + this->_n_f * b0b1;
-    if (ELL_UNLIKELY(gamma <= 0.0)) {
+    const auto eta = tsq + this->_n_f * b0b1;
+    if (ELL_UNLIKELY(eta <= 0.0)) {
         return {CutStatus::NoEffect, {0.0, 0.0, 1.0}};  // no effect
     }
-    auto &&result = this->_helper.calc_parallel_cut_fast(beta0, beta1, tsq, b0b1, gamma);
+    auto &&result = this->_helper.calc_parallel_cut_fast(beta0, beta1, tsq, b0b1, eta);
     return {CutStatus::Success, result};
 }
 
@@ -167,10 +167,10 @@ auto EllCalc::calc_deep_cut_q(const double &beta, const double &tsq) const
     if (tau < beta) {
         return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
     }
-    const auto gamma = tau + this->_n_f * beta;
-    if (ELL_UNLIKELY(gamma <= 0.0)) {
+    const auto eta = tau + this->_n_f * beta;
+    if (ELL_UNLIKELY(eta <= 0.0)) {
         return {CutStatus::NoEffect, {0.0, 0.0, 1.0}};  // no effect
     }
-    auto &&result = this->_helper.calc_bias_cut_fast(beta, tau, gamma);
+    auto &&result = this->_helper.calc_bias_cut_fast(beta, tau, eta);
     return {CutStatus::Success, result};
 }
