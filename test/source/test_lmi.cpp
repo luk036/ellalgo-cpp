@@ -57,13 +57,13 @@ class MyLMIOracle {
      * conditions and returning a tuple containing a cut and a boolean value.
      *
      * @param[in] x A vector representing the input values for the optimization problem.
-     * @param[in,out] t The parameter `t` is a reference to a `double` variable. It is used to store
+     * @param[in,out] gammaThe parameter `t` is a reference to a `double` variable. It is used to store
      * the value of `f0` in the last part of the function.
      *
      * @return The function `assess_optim` returns a tuple containing a `Cut` object and a boolean
      * value.
      */
-    auto assess_optim(const Vec &x, double &t) -> std::tuple<Cut, bool> {
+    auto assess_optim(const Vec &x, double &gamma) -> std::tuple<Cut, bool> {
         if (const auto cut1 = this->lmi1(x)) {
             return {*cut1, false};
         }
@@ -71,11 +71,11 @@ class MyLMIOracle {
             return {*cut2, false};
         }
         const auto f0 = (this->c * x).sum();
-        const auto f1 = f0 - t;
+        const auto f1 = f0 - gamma;
         if (f1 > 0.0) {
             return {{this->c, f1}, false};
         }
-        t = f0;
+        gamma = f0;
         return {{this->c, 0.0}, true};
     }
 };
@@ -129,8 +129,8 @@ TEST_CASE("LMI test (stable)") {
     auto omega = MyLMIOracle(2, F1, B1, 3, F2, B2, std::move(c));
     auto ellip = Ell<Vec>(10.0, Vec{0.0, 0.0, 0.0});
 
-    auto t = 1e100;  // should be std::numeric_limits<double>::max()
-    const auto result = cutting_plane_optim(omega, ellip, t);
+    auto gamma = 1e100;  // should be std::numeric_limits<double>::max()
+    const auto result = cutting_plane_optim(omega, ellip, gamma);
     auto x = std::get<0>(result);
     auto num_iters = std::get<1>(result);
 
@@ -194,8 +194,8 @@ TEST_CASE("LMI test ") {
     auto omega = MyLMIOracle(2, F1, B1, 3, F2, B2, std::move(c));
     auto ellip = EllStable<Vec>(10.0, Vec{0.0, 0.0, 0.0});
 
-    auto t = 1e100;  // should be std::numeric_limits<double>::max()
-    const auto result = cutting_plane_optim(omega, ellip, t);
+    auto gamma = 1e100;  // should be std::numeric_limits<double>::max()
+    const auto result = cutting_plane_optim(omega, ellip, gamma);
     const auto &x = std::get<0>(result);
     const auto &num_iters = std::get<1>(result);
 

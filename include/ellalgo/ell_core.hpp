@@ -319,8 +319,8 @@ class EllCore {
             }
             oldt = newt;
         }
-        // const auto t = oldt + gg_t[m];
-        // this->_mq(m, m) *= oldt / t; // update invD
+        // const auto gamma = oldt + gg_t[m];
+        // this->_mq(m, m) *= oldt / gamma; // update invD
         //
         this->_kappa *= delta;
         g = grad_t * (rho / omega);

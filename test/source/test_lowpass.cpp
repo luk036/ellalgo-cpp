@@ -23,12 +23,12 @@ auto run_lowpass(bool use_parallel_cut) {
     auto ellip = Ell<Vec>(40.0, r0);
     auto result = create_lowpass_case(N);
     auto omega = result.first;
-    auto t = result.second;
+    auto gamma = result.second;
     auto options = Options();
 
     options.max_iters = 50000;
     ellip.set_use_parallel_cut(use_parallel_cut);
-    const auto result2 = cutting_plane_optim(omega, ellip, t, options);
+    const auto result2 = cutting_plane_optim(omega, ellip, gamma, options);
     const auto r = std::get<0>(result2);
     const auto num_iters = std::get<1>(result2);
 

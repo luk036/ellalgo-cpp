@@ -51,7 +51,7 @@
  * @param[in] beta0 The parameter `beta0` represents the value of beta for the first variable.
  * @param[in] beta1 The parameter `beta1` represents a value used in the calculation.
  * @param[in] tsq tsq is a constant value of type double. It represents the square of the parameter
- * t.
+ * gamma.
  *
  * @return The function `calc_parallel_cut` returns a tuple containing three values: `rho`, `sigma`,
  * and `delta`.

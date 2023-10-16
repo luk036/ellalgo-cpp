@@ -57,10 +57,10 @@ class ProfitOracle {
      * @brief
      *
      * @param[in] y input quantity (in log scale)
-     * @param[in,out] target the best-so-far optimal value
+     * @param[in,out] gamma the best-so-far optimal value
      * @return std::tuple<Cut, double> Cut and the updated best-so-far value
      */
-    auto assess_optim(const Vec &y, double &target) const -> std::tuple<Cut, bool>;
+    auto assess_optim(const Vec &y, double &gamma) const -> std::tuple<Cut, bool>;
 };
 
 /**
@@ -109,17 +109,17 @@ class ProfitOracleRb {
      * @brief Make object callable for cutting_plane_optim()
      *
      * @param[in] y input quantity (in log scale)
-     * @param[in,out] target the best-so-far optimal value
+     * @param[in,out] gamma the best-so-far optimal value
      * @return Cut and the updated best-so-far value
      *
      * @see cutting_plane_optim
      */
-    auto assess_optim(const Vec &y, double &target) -> std::tuple<Cut, bool> {
+    auto assess_optim(const Vec &y, double &gamma) -> std::tuple<Cut, bool> {
         auto a_rb = this->_elasticities;
         a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
         a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
         this->_P._elasticities = a_rb;
-        return this->_P.assess_optim(y, target);
+        return this->_P.assess_optim(y, gamma);
     }
 };
 
@@ -168,12 +168,12 @@ class ProfitOracleQ {
      * @brief Make object callable for cutting_plane_optim_q()
      *
      * @param[in] y input quantity (in log scale)
-     * @param[in,out] target the best-so-far optimal value
+     * @param[in,out] gamma the best-so-far optimal value
      * @param[in] retry whether it is a retry
      * @return Cut and the updated best-so-far value
      *
      * @see cutting_plane_optim_q
      */
-    auto assess_optim_q(const Vec &y, double &target, bool retry)
+    auto assess_optim_q(const Vec &y, double &gamma, bool retry)
         -> std::tuple<Cut, bool, Vec, bool>;
 };

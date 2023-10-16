@@ -25,9 +25,9 @@ static void ELL_normal(benchmark::State &state) {
     while (state.KeepRunning()) {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracle omega{unit_price, scale, limit, elasticities, price_out};
-        double target = 0.0;
+        double gamma = 0.0;
 
-        auto result = cutting_plane_optim(omega, ellip, target);
+        auto result = cutting_plane_optim(omega, ellip, gamma);
         benchmark::DoNotOptimize(result);
     }
 }
@@ -39,9 +39,9 @@ static void ELL_stable(benchmark::State &state) {
     while (state.KeepRunning()) {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracle omega{unit_price, scale, limit, elasticities, price_out};
-        double target = 0.0;
+        double gamma = 0.0;
 
-        auto result = cutting_plane_optim(omega, ellip, target);
+        auto result = cutting_plane_optim(omega, ellip, gamma);
         benchmark::DoNotOptimize(result);
     }
 }
@@ -54,9 +54,9 @@ static void ELL_normal_rb(benchmark::State &state) {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleRb omega{unit_price,        scale, limit, elasticities, price_out,
                              Vec{0.003, 0.007}, 1.0};
-        double target = 0.0;
+        double gamma = 0.0;
 
-        auto result = cutting_plane_optim(omega, ellip, target);
+        auto result = cutting_plane_optim(omega, ellip, gamma);
         benchmark::DoNotOptimize(result);
     }
 }
@@ -69,9 +69,9 @@ static void ELL_stable_rb(benchmark::State &state) {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleRb omega{unit_price,        scale, limit, elasticities, price_out,
                              Vec{0.003, 0.007}, 1.0};
-        double target = 0.0;
+        double gamma = 0.0;
 
-        auto result = cutting_plane_optim(omega, ellip, target);
+        auto result = cutting_plane_optim(omega, ellip, gamma);
         benchmark::DoNotOptimize(result);
     }
 }
@@ -83,9 +83,9 @@ static void ELL_normal_q(benchmark::State &state) {
     while (state.KeepRunning()) {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleQ omega{unit_price, scale, limit, elasticities, price_out};
-        double target = 0.0;
+        double gamma = 0.0;
 
-        auto result = cutting_plane_optim_q(omega, ellip, target);
+        auto result = cutting_plane_optim_q(omega, ellip, gamma);
         benchmark::DoNotOptimize(result);
     }
 }
@@ -97,9 +97,9 @@ static void ELL_stable_q(benchmark::State &state) {
     while (state.KeepRunning()) {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleQ omega{unit_price, scale, limit, elasticities, price_out};
-        double target = 0.0;
+        double gamma = 0.0;
 
-        auto result = cutting_plane_optim_q(omega, ellip, target);
+        auto result = cutting_plane_optim_q(omega, ellip, gamma);
         benchmark::DoNotOptimize(result);
     }
 }

@@ -73,8 +73,8 @@ inline auto cutting_plane_feas(OracleFeas &omega, SearchSpace &space,
  * The `cutting_plane_optim` function implements the cutting-plane method for
  * solving a convex optimization problem:
  *
- *   min  t
- *   s.t. f(x, t) <= 0, x \in R
+ *   min  gamma
+ *   s.t. f(x, gamma) <= 0, x \in R
  *
  * It takes a cutting-plane oracle `omega`, a search space `space`, and an
  * options object as input. A function f(x) is *convex* if there always exist a
@@ -88,21 +88,21 @@ inline auto cutting_plane_feas(OracleFeas &omega, SearchSpace &space,
  * @tparam Num
  * @param[in,out] omega   perform assessment on x0
  * @param[in,out] space   search Space containing x*
- * @param[in,out] target  best-so-far optimal sol'n
+ * @param[in,out] gamma  best-so-far optimal sol'n
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
 template <typename OracleOptim, typename SearchSpace, typename Num>
-inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &target,
+inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &gamma,
                                 const Options &options = Options())
     -> std::tuple<CuttingPlaneArrayType<SearchSpace>, size_t> {
     auto x_best = invalid_value<CuttingPlaneArrayType<SearchSpace>>();
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
-        const auto __result1 = omega.assess_optim(space.xc(), target);
+        const auto __result1 = omega.assess_optim(space.xc(), gamma);
         const auto &cut = std::get<0>(__result1);
         const auto &shrunk = std::get<1>(__result1);
         const auto status = [&]() {
-            if (shrunk) {  // best target obtained
+            if (shrunk) {  // best gamma obtained
                 x_best = space.xc();
                 return space.update_central_cut(cut);  // should update_central_cut
             } else {
@@ -122,8 +122,8 @@ inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &tar
  * The `cutting_plane_optim_q` function implements the cutting-plane method for
  * solving a discrete convex optimization problem:
  *
- *   min  t
- *   s.t. f(x, t) <= 0, x \in D
+ *   min  gamma
+ *   s.t. f(x, gamma) <= 0, x \in D
  *
  * It takes a cutting-plane oracle `omega`, a search space `space`, and an
  * options object as input. A function f(x) is *convex* if there always exist a
@@ -136,22 +136,22 @@ inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &tar
  * @tparam Space
  * @param[in,out] omega   perform assessment on x0
  * @param[in,out] space   search Space containing x*
- * @param[in,out] target  best-so-far optimal sol'n
+ * @param[in,out] gamma  best-so-far optimal sol'n
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
 template <typename OracleOptimQ, typename SearchSpaceQ, typename Num>
-inline auto cutting_plane_optim_q(OracleOptimQ &omega, SearchSpaceQ &space_q, Num &target,
+inline auto cutting_plane_optim_q(OracleOptimQ &omega, SearchSpaceQ &space_q, Num &gamma,
                                   const Options &options = Options())
     -> std::tuple<CuttingPlaneArrayType<SearchSpaceQ>, size_t> {
     auto x_best = invalid_value<CuttingPlaneArrayType<SearchSpaceQ>>();
     auto retry = false;
 
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
-        const auto result1 = omega.assess_optim_q(space_q.xc(), target, retry);
+        const auto result1 = omega.assess_optim_q(space_q.xc(), gamma, retry);
         const auto &cut = std::get<0>(result1);
         const auto &shrunk = std::get<1>(result1);
-        if (shrunk) {  // best target obtained
+        if (shrunk) {  // best gamma obtained
             auto x_q = std::get<2>(result1);
             x_best = std::move(x_q);
             retry = false;
@@ -199,12 +199,12 @@ inline auto bsearch(Oracle &omega, const std::pair<T, T> &intvl, const Options &
         if (tau < options.tol) {  // no more
             return {upper, niter};
         }
-        auto target = lower;  // l may be `int` or `Fraction`
-        target += tau;
-        if (omega.assess_bs(target)) {  // feasible sol'n obtained
-            upper = target;
+        auto gamma = lower;  // l may be `int` or `Fraction`
+        gamma += tau;
+        if (omega.assess_bs(gamma)) {  // feasible sol'n obtained
+            upper = gamma;
         } else {
-            lower = target;
+            lower = gamma;
         }
     }
     return {upper, options.max_iters};
@@ -254,12 +254,12 @@ class BSearchAdaptor {
      * @brief
      *
      * @tparam Num
-     * @param[in,out] target the best-so-far optimal value
+     * @param[in,out] gamma the best-so-far optimal value
      * @return bool
      */
-    template <typename Num> auto assess_bs(Num &target) -> bool {
+    template <typename Num> auto assess_bs(Num &gamma) -> bool {
         Space space = this->_space.copy();
-        this->_omega.update(target);
+        this->_omega.update(gamma);
         const auto result = cutting_plane_feas(this->_omega, space, this->_options);
         auto x_feas = std::get<0>(result);
         if (x_feas.size() != 0U) {

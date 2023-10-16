@@ -37,10 +37,10 @@ class ProfitOracle {
      * @brief
      *
      * @param y
-     * @param target
+     * @param gamma
      * @return std::tuple<Cut, std::optional<double>>
      */
-    std::tuple<Cut, std::optional<double>> assess_optim(Arr y, double target) {
+    std::tuple<Cut, std::optional<double>> assess_optim(Arr y, double gamma) {
         double fj;
         if ((fj = y[0] - log_k) > 0.0) {
             Arr g = {1.0, 0.0};
@@ -55,18 +55,18 @@ class ProfitOracle {
             q.push_back(price_out[i] * std::exp(y[i]));
         }
         double vx = q[0] + q[1];
-        if ((fj = std::log(target + vx) - log_Cobb) >= 0.0) {
+        if ((fj = std::log(gamma + vx) - log_Cobb) >= 0.0) {
             Arr g;
             for (int i = 0; i < q.size(); i++) {
-                g.push_back(q[i] / (target + vx) - elasticities[i]);
+                g.push_back(q[i] / (gamma + vx) - elasticities[i]);
             }
             return std::make_tuple(g, fj), std::nullopt;
         }
-        target = std::exp(log_Cobb) - vx;
+        gamma = std::exp(log_Cobb) - vx;
         Arr g;
         for (int i = 0; i < q.size(); i++) {
-            g.push_back(q[i] / (target + vx) - elasticities[i]);
+            g.push_back(q[i] / (gamma + vx) - elasticities[i]);
         }
-        return std::make_tuple(g, 0.0), target;
+        return std::make_tuple(g, 0.0), gamma;
     }
 };

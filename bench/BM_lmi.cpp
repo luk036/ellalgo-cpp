@@ -40,12 +40,12 @@ template <typename Oracle> class MyOracle {
      * @brief
      *
      * @param[in] x
-     * @param[in,out] t
+     * @param[in,out] gamma
      * @return std::tuple<Cut, double>
      */
-    std::tuple<Cut, bool> assess_optim(const Vec &x, double &t) {
+    std::tuple<Cut, bool> assess_optim(const Vec &x, double &gamma) {
         const auto f0 = (this->c * x).sum();
-        const auto f1 = f0 - t;
+        const auto f1 = f0 - gamma;
         if (f1 > 0.0) {
             return {{this->c, f1}, false};
         }
@@ -55,7 +55,7 @@ template <typename Oracle> class MyOracle {
         if (const auto cut2 = this->lmi2(x)) {
             return {*cut2, false};
         }
-        t = f0;
+        gamma = f0;
         return {{this->c, 0.0}, true};
     }
 
@@ -63,10 +63,10 @@ template <typename Oracle> class MyOracle {
      * @brief
      *
      * @param[in] x
-     * @param[in,out] t
+     * @param[in,out] gamma
      * @return std::tuple<Cut, double>
      */
-    std::tuple<Cut, bool> operator()(const Vec &x, double &t) { return this->assess_optim(x, t); }
+    std::tuple<Cut, bool> operator()(const Vec &x, double &gamma) { return this->assess_optim(x, gamma); }
 };
 
 /**
@@ -123,8 +123,8 @@ static void LMI_Lazy(benchmark::State &state) {
     while (state.KeepRunning()) {
         auto omega = MyOracle<LmiOracle<Vec, Matrix>>(2, F1, B1, 3, F2, B2, Vec{1.0, -1.0, 1.0});
         auto ellip = Ell<Vec>(10.0, Vec{0.0, 0.0, 0.0});
-        auto t = 1e100;  // std::numeric_limits<double>::max()
-        auto result = cutting_plane_optim(omega, ellip, t);
+        auto gamma = 1e100;  // std::numeric_limits<double>::max()
+        auto result = cutting_plane_optim(omega, ellip, gamma);
         benchmark::DoNotOptimize(result);
     }
 }
@@ -188,8 +188,8 @@ static void LMI_old(benchmark::State &state) {
     while (state.KeepRunning()) {
         auto omega = MyOracle<LmiOldOracle<Vec, Matrix>>(2, F1, B1, 3, F2, B2, Vec{1.0, -1.0, 1.0});
         auto ellip = Ell<Vec>(10.0, Vec{0.0, 0.0, 0.0});
-        auto target = 1e100;  // std::numeric_limits<double>::max()
-        auto result = cutting_plane_optim(omega, ellip, target);
+        auto gamma = 1e100;  // std::numeric_limits<double>::max()
+        auto result = cutting_plane_optim(omega, ellip, gamma);
         benchmark::DoNotOptimize(result);
     }
 }

@@ -16,10 +16,10 @@ struct MyOracle {
      * @brief
      *
      * @param[in] z
-     * @param[in,out] t
+     * @param[in,out] gamma
      * @return std::pair<Cut, double>
      */
-    auto assess_optim(const Vec &z, double &t) const -> std::tuple<Cut, bool> {
+    auto assess_optim(const Vec &z, double &gamma) const -> std::tuple<Cut, bool> {
         const auto x = z[0];
         const auto y = z[1];
 
@@ -35,9 +35,9 @@ struct MyOracle {
         }
         // objective: maximize x + y
         const auto f0 = x + y;
-        const auto fj3 = t - f0;
+        const auto fj3 = gamma- f0;
         if (fj3 < 0.0) {
-            t = f0;
+            gamma = f0;
             return {{Vec{-1.0, -1.0}, 0.0}, true};
         }
         return {{Vec{-1.0, -1.0}, fj3}, false};
@@ -47,9 +47,9 @@ struct MyOracle {
 TEST_CASE("Example 1, test feasible") {
     auto ell = Ell<Vec>(Vec{10.0, 10.0}, Vec{0.0, 0.0});
     auto oracle = MyOracle{};
-    auto t = -1.0e100;  // std::numeric_limits<double>::min()
+    auto gamma = -1.0e100;  // std::numeric_limits<double>::min()
     const auto options = Options{2000, 1e-10};
-    const auto result = cutting_plane_optim(oracle, ell, t, options);
+    const auto result = cutting_plane_optim(oracle, ell, gamma, options);
     const auto &x = std::get<0>(result);
     REQUIRE_NE(x.size(), 0U);
     CHECK(x[0] >= 0.0);
@@ -59,9 +59,9 @@ TEST_CASE("Example 1, test infeasible1") {
     auto ell = Ell<Vec>(Vec{10.0, 10.0}, Vec{100.0, 100.0});  // wrong initial guess
                                                               // or ellipsoid is too small
     auto oracle = MyOracle{};
-    auto t = -1.0e100;  // std::numeric_limits<double>::min()
+    auto gamma = -1.0e100;  // std::numeric_limits<double>::min()
     const auto options = Options{2000, 1e-12};
-    const auto result = cutting_plane_optim(oracle, ell, t, options);
+    const auto result = cutting_plane_optim(oracle, ell, gamma, options);
     const auto x = std::get<0>(result);
     REQUIRE_EQ(x.size(), 0U);
 }
@@ -69,10 +69,10 @@ TEST_CASE("Example 1, test infeasible1") {
 TEST_CASE("Example 1, test infeasible22") {
     auto ell = Ell<Vec>(Vec{10.0, 10.0}, Vec{0.0, 0.0});
     auto oracle = MyOracle{};
-    auto t = 100.0;
+    auto gamma = 100.0;
     // wrong initial guess
     const auto options = Options{2000, 1e-12};
-    const auto result = cutting_plane_optim(oracle, ell, t, options);
+    const auto result = cutting_plane_optim(oracle, ell, gamma, options);
     const auto x = std::get<0>(result);
     REQUIRE_EQ(x.size(), 0U);
 }

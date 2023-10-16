@@ -125,7 +125,7 @@ auto EllCalc::calc_central_cut(const double &tsq) const
  * @param[in] beta1 The parameter `beta1` represents a value that is being compared to `beta0` in
  * the `if` statement on line 2. It is also used in calculations on lines 6 and 11. Without more
  * context, it is difficult to determine the exact meaning of `beta1`.
- * @param tsq tsq is a variable of type double, which represents the square of the parameter t.
+ * @param tsq tsq is a variable of type double, which represents the square of the parameter gamma.
  *
  * @return The function `calc_parallel_deep_cut_q` returns a tuple of type `std::tuple<CutStatus,
  * std::tuple<double, double, double>>`.

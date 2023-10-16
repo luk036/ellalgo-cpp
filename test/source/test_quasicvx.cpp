@@ -20,10 +20,10 @@ struct MyQuasicCvxOracle {
      * @brief
      *
      * @param[in] z
-     * @param[in,out] t
+     * @param[in,out] gamma
      * @return std::tuple<Cut, double>
      */
-    auto assess_optim(const Vec &z, double &t) -> std::tuple<Cut, bool> {
+    auto assess_optim(const Vec &z, double &gamma) -> std::tuple<Cut, bool> {
         double sqrtx = z[0];
         double ly = z[1];
 
@@ -35,11 +35,11 @@ struct MyQuasicCvxOracle {
 
         // constraint 2: x - y >= 1
         double tmp2 = std::exp(ly);
-        double tmp3 = t * tmp2;
+        double tmp3 = gamma* tmp2;
         fj = -sqrtx + tmp3;
         if (fj < 0.0)  // feasible
         {
-            t = sqrtx / tmp2;
+            gamma = sqrtx / tmp2;
             return {{Vec{-1.0, sqrtx}, 0}, true};
         }
 
@@ -59,18 +59,18 @@ TEST_CASE("Quasiconvex 1, test feasible") {
     Ell<Vec> ellip{10.0, Vec{0.0, 0.0}};
 
     auto omega = MyQuasicCvxOracle{};
-    auto t = 0.0;
+    auto gamma = 0.0;
     const auto options = Options{2000, 1e-8};
-    const auto result = cutting_plane_optim(omega, ellip, t, options);
+    const auto result = cutting_plane_optim(omega, ellip, gamma, options);
     const Vec &x = std::get<0>(result);
     REQUIRE_EQ(x.size(), 2U);
-    // CHECK_EQ(-t, doctest::Approx(-0.4288673397));
+    // CHECK_EQ(-gamma, doctest::Approx(-0.4288673397));
     // CHECK_EQ(x[0] * x[0], doctest::Approx(0.499876));
     // CHECK_EQ(std::exp(x[1]), doctest::Approx(1.64852));
     // const auto &x = std::get<0>(result);
     // const CInfo &num_iters = std::get<1>(result);
     // CHECK(ell_info.feasible);
-    CHECK_EQ(-t, doctest::Approx(-0.4288673397));
+    CHECK_EQ(-gamma, doctest::Approx(-0.4288673397));
     CHECK_EQ(x[0] * x[0], doctest::Approx(0.5029823096));
     CHECK_EQ(std::exp(x[1]), doctest::Approx(1.6536872635));
 }
@@ -78,16 +78,16 @@ TEST_CASE("Quasiconvex 1, test feasible") {
 TEST_CASE("Quasiconvex 1, test feasible (stable)") {
     EllStable<Vec> ellip{10.0, Vec{0.0, 0.0}};
     auto omega = MyQuasicCvxOracle{};
-    auto t = 0.0;
+    auto gamma = 0.0;
     const auto options = Options{2000, 1e-8};
-    const auto result = cutting_plane_optim(omega, ellip, t, options);
+    const auto result = cutting_plane_optim(omega, ellip, gamma, options);
     const auto x = std::get<0>(result);
     REQUIRE_EQ(x.size(), 2U);
     // const auto &num_iters = std::get<1>(result);
     // CHECK(ell_info.feasible);
 
     // const auto x = *x_opt;
-    // CHECK_EQ(-t, doctest::Approx(-0.4288673397));
+    // CHECK_EQ(-gamma, doctest::Approx(-0.4288673397));
     // CHECK_EQ(x[0] * x[0], doctest::Approx(0.5029823096));
     // CHECK_EQ(std::exp(x[1]), doctest::Approx(1.6536872635));
 }
