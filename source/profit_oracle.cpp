@@ -19,28 +19,48 @@ using Cut = std::pair<Vec, double>;
  * of type `Cut`, which is a struct or class that contains a vector `g` and a double `fj`. The
  * second element is of type `bool`.
  */
-auto ProfitOracle::assess_optim(const Vec &y, double &gamma) const -> std::tuple<Cut, bool> {
-    // y0 <= log k
-    const auto f1 = y[0] - this->_log_k;
-    if (f1 > 0.0) {
-        return {{Vec{1.0, 0.0}, f1}, false};
-    }
-
-    const auto log_Cobb
-        = this->_log_pA + this->_elasticities[0] * y[0] + this->_elasticities[1] * y[1];
+auto ProfitOracle::assess_optim(const Vec &y, double &gamma) -> std::tuple<Cut, bool> {
+    auto log_Cobb = 0.0;
     const Vec x = std::exp(y);
-    const auto vx = this->_price_out[0] * x[0] + this->_price_out[1] * x[1];
-    auto te = gamma + vx;
+    auto vx = 0.0;
+    auto te = 0.0;
 
-    auto fj = std::log(te) - log_Cobb;
-    if (fj < 0.0) {
-        te = std::exp(log_Cobb);
-        gamma = te - vx;
-        Vec g = (this->_price_out * x) / te - this->_elasticities;
-        return {{std::move(g), 0.0}, true};
+    for (int i = 0; i < 2; i++) {
+        this->idx++;
+        if (this->idx == 2) {
+            this->idx = 0;  // round robin
+        }
+        double fj = 0.0;
+        switch (this->idx) {
+            case 0:  // y0 <= log k
+                fj = y[0] - this->_log_k;
+                break;
+            case 1:
+                log_Cobb
+                    = this->_log_pA + this->_elasticities[0] * y[0] + this->_elasticities[1] * y[1];
+                vx = this->_price_out[0] * x[0] + this->_price_out[1] * x[1];
+                te = gamma + vx;
+                fj = std::log(te) - log_Cobb;
+                break;
+            default:
+                exit(0);
+        }
+        if (fj > 0.0) {
+            switch (this->idx) {
+                case 0:
+                    return {{Vec{1.0, 0.0}, fj}, false};
+                case 1:
+                    return {{(this->_price_out * x) / te - this->_elasticities, fj}, false};
+                default:
+                    exit(0);
+            }
+        }
     }
-    Vec g = (this->_price_out * x) / te - this->_elasticities;
-    return {{std::move(g), fj}, false};
+
+    te = std::exp(log_Cobb);
+    gamma = te - vx;
+    Vec grad = (this->_price_out * x) / te - this->_elasticities;
+    return {{std::move(grad), 0.0}, true};
 }
 
 /**

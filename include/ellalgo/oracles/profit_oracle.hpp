@@ -28,6 +28,7 @@ class ProfitOracle {
     using Cut = std::pair<Vec, double>;
 
   private:
+    int idx = 0;
     const double _log_pA;
     const double _log_k;
     const Vec _price_out;
@@ -60,7 +61,7 @@ class ProfitOracle {
      * @param[in,out] gamma the best-so-far optimal value
      * @return std::tuple<Cut, double> Cut and the updated best-so-far value
      */
-    auto assess_optim(const Vec &y, double &gamma) const -> std::tuple<Cut, bool>;
+    auto assess_optim(const Vec &y, double &gamma) -> std::tuple<Cut, bool>;
 };
 
 /**
