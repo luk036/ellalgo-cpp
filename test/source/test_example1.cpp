@@ -12,6 +12,8 @@ struct MyOracle {
     using CutChoices = double;  // single cut
     using Cut = std::pair<Vec, double>;
 
+    int idx = 0;
+
     /**
      * @brief
      *
@@ -19,28 +21,45 @@ struct MyOracle {
      * @param[in,out] gamma
      * @return std::pair<Cut, double>
      */
-    auto assess_optim(const Vec &z, double &gamma) const -> std::tuple<Cut, bool> {
+    auto assess_optim(const Vec &z, double &gamma) -> std::tuple<Cut, bool> {
         const auto x = z[0];
         const auto y = z[1];
-
-        // constraint 1: x + y <= 3
-        const auto fj = x + y - 3.0;
-        if (fj > 0.0) {
-            return {{Vec{1.0, 1.0}, fj}, false};
-        }
-        // constraint 2: x - y >= 1
-        const auto fj2 = -x + y + 1.0;
-        if (fj2 > 0.0) {
-            return {{Vec{-1.0, 1.0}, fj2}, false};
-        }
-        // objective: maximize x + y
         const auto f0 = x + y;
-        const auto fj3 = gamma- f0;
-        if (fj3 < 0.0) {
-            gamma = f0;
-            return {{Vec{-1.0, -1.0}, 0.0}, true};
+
+        for (int i = 0; i < 3; i++) {
+            this->idx++;
+            if (this->idx == 3) {
+                this->idx = 0;  // round robin
+            }
+            double fj = 0.0;
+            switch (this->idx) {
+                case 0:  // constraint 1: x + y <= 3
+                    fj = f0 - 3.0;
+                    break;
+                case 1:  // constraint 2: x - y >= 1
+                    fj = -x + y + 1.0;
+                    break;
+                case 2:  // objective: maximize x + y
+                    fj = gamma - f0;
+                    break;
+                default:
+                    exit(0);
+            }
+            if (fj > 0.0) {
+                switch (this->idx) {
+                    case 0:
+                        return {{Vec{1.0, 1.0}, fj}, false};
+                    case 1:
+                        return {{Vec{-1.0, 1.0}, fj}, false};
+                    case 2:
+                        return {{Vec{-1.0, -1.0}, fj}, false};
+                    default:
+                        exit(0);
+                }
+            }
         }
-        return {{Vec{-1.0, -1.0}, fj3}, false};
+        gamma = f0;
+        return {{Vec{-1.0, -1.0}, 0.0}, true};
     }
 };
 
