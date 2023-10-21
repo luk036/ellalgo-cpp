@@ -21,32 +21,32 @@
  *            "-τ" "-β" "-β"      +τ
  *                   1    0
  *
- *             β  + β                            
- *         _    0    1                           
- *         β = ───────                           
- *                2                              
- *                                               
- *             1   ⎛ 2          ⎞       _2       
- *         h = ─ ⋅ ⎜τ  + β  ⋅ β ⎟ + n ⋅ β        
- *             2   ⎝      0    1⎠                
- *                    _____________________      
- *                   ╱ 2                 _2      
- *         k = h + ╲╱ h  - (n + 1) ⋅ η ⋅ β       
- *                                               
- *               1     η                         
- *         σ = ───── = ─                         
- *             μ + 1   k                         
- *                                               
- *         1     η                               
- *         ─ = ─────                             
- *         μ   k - η                             
+ *             β  + β
+ *         _    0    1
+ *         β = ───────
+ *                2
  *
- *             _                                         
- *         ϱ = β ⋅ σ                            
- *                                               
- *              2    2   1   ⎛_2              ⎞  
- *         δ ⋅ τ  = τ  + ─ ⋅ ⎜β  ⋅ σ - β  ⋅ β ⎟  
- *                       μ   ⎝          0    1⎠   
+ *             1   ⎛ 2          ⎞       _2
+ *         h = ─ ⋅ ⎜τ  + β  ⋅ β ⎟ + n ⋅ β
+ *             2   ⎝      0    1⎠
+ *                    _____________________
+ *                   ╱ 2                 _2
+ *         k = h + ╲╱ h  - (n + 1) ⋅ η ⋅ β
+ *
+ *               1     η
+ *         σ = ───── = ─
+ *             μ + 1   k
+ *
+ *         1     η
+ *         ─ = ─────
+ *         μ   k - η
+ *
+ *             _
+ *         ϱ = β ⋅ σ
+ *
+ *              2    2   1   ⎛_2              ⎞
+ *         δ ⋅ τ  = τ  + ─ ⋅ ⎜β  ⋅ σ - β  ⋅ β ⎟
+ *                       μ   ⎝          0    1⎠
  *
  * @param[in] beta0 The parameter `beta0` represents the value of beta for the first variable.
  * @param[in] beta1 The parameter `beta1` represents a value used in the calculation.
@@ -68,7 +68,7 @@ auto EllCalcCore::calc_parallel_cut_fast(const double& beta0, const double& beta
     auto inv_mu = eta / (k - eta);
     auto&& rho = bavg * inv_mu_plus_1;
     auto&& sigma = inv_mu_plus_1;
-    auto&& delta = (tsq + inv_mu * (bavgsq * inv_mu_plus_1 - b0b1))  / tsq;
+    auto&& delta = (tsq + inv_mu * (bavgsq * inv_mu_plus_1 - b0b1)) / tsq;
     return {rho, sigma, delta};
 }
 
@@ -156,17 +156,17 @@ auto EllCalcCore::calc_parallel_central_cut(const double& beta1, const double& t
  *          |    '-.......-'    |
  *          |      |            |
  *         "-τ"     "-β"       +τ
- *       
+ *
  *          η = τ + n ⋅ β
- *       
+ *
  *                η
  *          ϱ = ─────
  *              n + 1
- *       
+ *
  *              2 ⋅ ϱ
  *          σ = ─────
  *              τ + β
- *       
+ *
  *                 2       2    2
  *                n       τ  - β
  *          δ = ────── ⋅  ───────
@@ -181,8 +181,7 @@ auto EllCalcCore::calc_parallel_central_cut(const double& beta1, const double& t
  *
  * @return The function `calc_bias_cut` returns a tuple containing the following values:
  */
-auto EllCalcCore::calc_bias_cut_fast(const double& beta, const double& tau,
-                                     const double& eta) const
+auto EllCalcCore::calc_bias_cut_fast(const double& beta, const double& tau, const double& eta) const
     -> std::tuple<double, double, double> {
     auto alpha = beta / tau;
     auto&& sigma = this->_cst2 * eta / (tau + beta);
@@ -211,15 +210,15 @@ auto EllCalcCore::calc_bias_cut_fast(const double& beta, const double& tau,
  *        |    '-.......-'    |
  *        |         |         |
  *       "-τ"       0        +τ
- *    
+ *
  *              2
  *        σ = ─────
  *            n + 1
- *    
+ *
  *              τ
  *        ϱ = ─────
  *            n + 1
- *    
+ *
  *               2
  *              n
  *        δ = ──────

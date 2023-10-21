@@ -12,6 +12,8 @@ struct MyOracle {
     using CutChoices = double;
     using Cut = std::pair<Vec, double>;
 
+    size_t idx = 0U;
+
     /**
      * @brief
      *
@@ -25,17 +27,38 @@ struct MyOracle {
         const auto x = z[0];
         const auto y = z[1];
 
-        // constraint 1: x + y <= 3
-        const auto fj = x + y - 3.0;
-        if (fj > 0.0) {
-            cut1.second = fj;
-            return &cut1;
-        }
-        // constraint 2: x - y >= 1
-        const auto fj2 = -x + y + 1.0;
-        if (fj2 > 0.0) {
-            cut2.second = fj2;
-            return &cut2;
+        for (int i = 0; i < 2; i++) {
+            idx++;
+            if (idx == 2) {
+                idx = 0;  // round robin
+            }
+            double fj = 0.0;
+            switch (idx) {
+                case 0: {
+                    fj = x + y - 3.0;
+                    break;
+                }
+                case 1: {
+                    fj = -x + y + 1.0;
+                    break;
+                }
+                default:
+                    exit(0);
+            }
+            if (fj > 0.0) {
+                switch (idx) {
+                    case 0: {
+                        cut1.second = fj;
+                        return &cut1;
+                    }
+                    case 1: {
+                        cut2.second = fj;
+                        return &cut2;
+                    }
+                    default:
+                        exit(0);
+                }
+            }
         }
         return nullptr;
     }
