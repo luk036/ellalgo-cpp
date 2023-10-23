@@ -32,6 +32,8 @@ class ProfitOracle {
     const double _log_pA;
     const double _log_k;
     const Vec _price_out;
+    double _log_Cobb = 0.0;
+    double _vx = 0.0;
 
   public:
     Vec _elasticities;
@@ -53,6 +55,15 @@ class ProfitOracle {
      *
      */
     ProfitOracle(const ProfitOracle &) = delete;
+
+    /**
+     * @brief
+     *
+     * @param[in] y input quantity (in log scale)
+     * @param[in,out] gamma the best-so-far optimal value
+     * @return std::tuple<Cut, double> Cut and the updated best-so-far value
+     */
+    auto assess_feas(const Vec &y, double &gamma) -> Cut *;
 
     /**
      * @brief

@@ -35,7 +35,7 @@ struct MyQuasicCvxOracle {
 
         // constraint 2: x - y >= 1
         double tmp2 = std::exp(ly);
-        double tmp3 = gamma* tmp2;
+        double tmp3 = gamma * tmp2;
         fj = -sqrtx + tmp3;
         if (fj < 0.0)  // feasible
         {

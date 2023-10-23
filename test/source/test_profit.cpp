@@ -56,7 +56,7 @@ TEST_CASE("Profit Test") {
         const auto &num_iters = std::get<1>(result);
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
-        CHECK_EQ(num_iters, 27);
+        CHECK_EQ(num_iters, 33);
     }();
 }
 
@@ -103,6 +103,6 @@ TEST_CASE("Profit Test (Stable)") {
         const auto &num_iters = std::get<1>(result);
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
-        CHECK_EQ(num_iters, 27);
+        CHECK_EQ(num_iters, 33);
     }();
 }

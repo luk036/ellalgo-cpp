@@ -155,7 +155,7 @@ auto EllCalc::calc_parallel_deep_cut_q(const double &beta0, const double &beta1,
  *
  * @param[in] beta The parameter `beta` represents a value used in the calculation. It is passed by
  * reference as a constant double.
- * @param[in] tsq The parameter `tsq` represents the square of the value `t`, which is a variable
+ * @param[in] tsq The parameter `tsq` represents the square of the value `tau`, which is a variable
  * used in the calculation.
  *
  * @return The function `calc_deep_cut_q` returns a tuple containing four values: `CutStatus`,

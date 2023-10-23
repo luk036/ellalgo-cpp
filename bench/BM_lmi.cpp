@@ -66,7 +66,9 @@ template <typename Oracle> class MyOracle {
      * @param[in,out] gamma
      * @return std::tuple<Cut, double>
      */
-    std::tuple<Cut, bool> operator()(const Vec &x, double &gamma) { return this->assess_optim(x, gamma); }
+    std::tuple<Cut, bool> operator()(const Vec &x, double &gamma) {
+        return this->assess_optim(x, gamma);
+    }
 };
 
 /**

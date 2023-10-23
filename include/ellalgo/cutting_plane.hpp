@@ -88,7 +88,7 @@ inline auto cutting_plane_feas(OracleFeas &omega, SearchSpace &space,
  * @tparam Num
  * @param[in,out] omega   perform assessment on x0
  * @param[in,out] space   search Space containing x*
- * @param[in,out] gamma  best-so-far optimal sol'n
+ * @param[in,out] gamma   best-so-far optimal sol'n
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
@@ -136,7 +136,7 @@ inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &gam
  * @tparam Space
  * @param[in,out] omega   perform assessment on x0
  * @param[in,out] space   search Space containing x*
- * @param[in,out] gamma  best-so-far optimal sol'n
+ * @param[in,out] gamma   best-so-far optimal sol'n
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */

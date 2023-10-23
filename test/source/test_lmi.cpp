@@ -57,8 +57,8 @@ class MyLMIOracle {
      * conditions and returning a tuple containing a cut and a boolean value.
      *
      * @param[in] x A vector representing the input values for the optimization problem.
-     * @param[in,out] gammaThe parameter `t` is a reference to a `double` variable. It is used to store
-     * the value of `f0` in the last part of the function.
+     * @param[in,out] gamma The parameter `gamma` is a reference to a `double` variable. It is used to
+     * store the value of `f0` in the last part of the function.
      *
      * @return The function `assess_optim` returns a tuple containing a `Cut` object and a boolean
      * value.
