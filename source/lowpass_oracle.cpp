@@ -72,7 +72,7 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
  * @return The function `assess_feas` returns a tuple containing a `ParallelCut` object and a
  * boolean value.
  */
-auto LowpassOracle::assess_feas(const Vec &x, double &Spsq) -> ParallelCut* {
+auto LowpassOracle::assess_feas(const Vec &x, double &Spsq) -> ParallelCut * {
     static ParallelCut cut = std::make_pair(Vec{0.0}, Vec{0.0});
 
     this->more_alt = true;
@@ -91,7 +91,7 @@ auto LowpassOracle::assess_feas(const Vec &x, double &Spsq) -> ParallelCut* {
     for (size_t __k = 0; __k != this->nwpass; ++__k) {
         ++this->idx1;
         if (this->idx1 == this->nwpass) {
-            this->idx1 = 0; // round robin
+            this->idx1 = 0;  // round robin
         }
         double v = matrix_vector(this->idx1);
         if (v > this->Upsq) {
@@ -114,7 +114,7 @@ auto LowpassOracle::assess_feas(const Vec &x, double &Spsq) -> ParallelCut* {
     for (size_t __k = this->nwstop; __k != N; ++__k) {
         ++this->idx3;
         if (this->idx3 == N) {
-            this->idx3 = this->nwstop; // round robin
+            this->idx3 = this->nwstop;  // round robin
         }
         double v = matrix_vector(this->idx3);
         if (v > Spsq) {
@@ -138,7 +138,7 @@ auto LowpassOracle::assess_feas(const Vec &x, double &Spsq) -> ParallelCut* {
     for (size_t __k = this->nwpass; __k != this->nwstop; ++__k) {
         ++this->idx2;
         if (this->idx2 == this->nwstop) {
-            this->idx2 = this->nwpass; // round robin
+            this->idx2 = this->nwpass;  // round robin
         }
         double v = matrix_vector(this->idx2);
         if (v < 0.0) {

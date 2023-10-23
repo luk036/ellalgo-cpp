@@ -20,7 +20,7 @@ target("EllAlgo")
     set_kind("static")
     add_includedirs("include", {public = true})
     add_files("source/*.cpp")
-    -- add_packages("fmt")
+    add_packages("fmt")
 
 target("test_ellalgo")
     set_kind("binary")

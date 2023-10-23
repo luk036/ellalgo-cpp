@@ -76,7 +76,7 @@ class LowpassOracle {
      * @brief
      *
      */
-    auto assess_feas(const Vec &x, double &Spsq) -> ParallelCut*;
+    auto assess_feas(const Vec &x, double &Spsq) -> ParallelCut *;
 
     /*!
      * @brief
