@@ -55,6 +55,11 @@ class LowpassOracle {
     double Upsq;
     size_t nwpass;
     size_t nwstop;
+    size_t idx1;
+    size_t idx2;
+    size_t idx3;
+    double _fmax = -1e100;
+    size_t _kmax = 0;
 
   public:
     bool more_alt{true};
@@ -66,6 +71,12 @@ class LowpassOracle {
      * `LowpassOracle` class with the given parameters.
      */
     LowpassOracle(size_t N, double wpass, double wstop, double Lpsq, double Upsq);
+
+    /*!
+     * @brief
+     *
+     */
+    auto assess_feas(const Vec &x, double &Spsq) -> ParallelCut*;
 
     /*!
      * @brief

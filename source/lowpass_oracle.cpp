@@ -53,6 +53,114 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
     }
     this->nwpass = size_t(std::floor(wpass * double(m - 1)) + 1);
     this->nwstop = size_t(std::floor(wstop * double(m - 1)) + 1);
+
+    // For round robin
+    this->idx1 = 0U;
+    this->idx2 = this->nwpass;
+    this->idx3 = this->nwstop;
+}
+
+/**
+ * The function assess_feas in the LowpassOracle class assesses the optimization of a given input
+ * vector x based on various constraints and returns a tuple containing the gradient and objective
+ * function values, along with a boolean indicating whether the optimization is complete.
+ *
+ * @param x A 1-dimensional array representing the optimization variables.
+ * @param Spsq Spsq is a reference to a double variable. It is used to store the maximum value of
+ * the stopband constraint.
+ *
+ * @return The function `assess_feas` returns a tuple containing a `ParallelCut` object and a
+ * boolean value.
+ */
+auto LowpassOracle::assess_feas(const Vec &x, double &Spsq) -> ParallelCut* {
+    static ParallelCut cut = std::make_pair(Vec{0.0}, Vec{0.0});
+
+    this->more_alt = true;
+    auto n = x.size();
+
+    auto matrix_vector = [this, &x](size_t k) {
+        double sum = 0.0;
+        for (size_t j = 0U; j != x.size(); ++j) {
+            sum += this->A[k][j] * x[j];
+        }
+        return sum;
+    };
+
+    // case 2,
+    // 2.0 passband constraints
+    for (size_t __k = 0; __k != this->nwpass; ++__k) {
+        ++this->idx1;
+        if (this->idx1 == this->nwpass) {
+            this->idx1 = 0; // round robin
+        }
+        double v = matrix_vector(this->idx1);
+        if (v > this->Upsq) {
+            cut.second = Vec{v - this->Upsq, v - this->Lpsq};
+            cut.first = this->A[this->idx1];
+            return &cut;
+        }
+        if (v < this->Lpsq) {
+            cut.second = Vec{-v + this->Lpsq, -v + this->Upsq};
+            cut.first = -this->A[this->idx1];
+            return &cut;
+        }
+    }
+
+    // case 3,
+    // 3.0 stopband constraint
+    auto N = A.size();
+    this->_fmax = -1e100;  // std::numeric_limits<double>::min()
+    this->_kmax = 0U;
+    for (size_t __k = this->nwstop; __k != N; ++__k) {
+        ++this->idx3;
+        if (this->idx3 == N) {
+            this->idx3 = this->nwstop; // round robin
+        }
+        double v = matrix_vector(this->idx3);
+        if (v > Spsq) {
+            cut.second = Vec{v - Spsq, v};
+            cut.first = this->A[this->idx3];
+            return &cut;
+        }
+        if (v < 0.0) {
+            cut.second = Vec{-v, -v + Spsq};
+            cut.first = -this->A[this->idx3];
+            return &cut;
+        }
+        if (v > this->_fmax) {
+            this->_fmax = v;
+            this->_kmax = this->idx3;
+        }
+    }
+
+    // case 4,
+    // 1.0 nonnegative-real constraint
+    for (size_t __k = this->nwpass; __k != this->nwstop; ++__k) {
+        ++this->idx2;
+        if (this->idx2 == this->nwstop) {
+            this->idx2 = this->nwpass; // round robin
+        }
+        double v = matrix_vector(this->idx2);
+        if (v < 0.0) {
+            cut.second = Vec{-v};
+            cut.first = -this->A[this->idx2];
+            return &cut;
+        }
+    }
+
+    this->more_alt = false;
+
+    // 1.0 nonnegative-real constraint
+    // case 1,
+    if (x[0] < 0.0) {
+        Vec g(0.0, n);
+        g[0] = -1.0;
+        cut.second = Vec{-x[0]};
+        cut.first = g;
+        return &cut;
+    }
+
+    return nullptr;
 }
 
 /**
@@ -68,70 +176,11 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
  * boolean value.
  */
 auto LowpassOracle::assess_optim(const Vec &x, double &Spsq) -> std::tuple<ParallelCut, bool> {
-    this->more_alt = true;
-    auto n = x.size();
-
-    auto matrix_vector = [this, &x](size_t k) {
-        double sum = 0.0;
-        for (size_t j = 0U; j != x.size(); ++j) {
-            sum += this->A[k][j] * x[j];
-        }
-        return sum;
-    };
-
-    // 1.0 nonnegative-real constraint
-    // case 1,
-    if (x[0] < 0.0) {
-        Vec g(0.0, n);
-        g[0] = -1.0;
-        return {{std::move(g), Vec{-x[0]}}, false};
+    auto cut = this->assess_feas(x, Spsq);
+    if (cut) {
+        return {*cut, false};
     }
-
-    // case 2,
-    // 2.0 passband constraints
-    auto N = A.size();
-    for (size_t k = 0; k != this->nwpass; ++k) {
-        double v = matrix_vector(k);
-        if (v > this->Upsq) {
-            Vec f{v - this->Upsq, v - this->Lpsq};
-            return {{this->A[k], std::move(f)}, false};
-        }
-        if (v < this->Lpsq) {
-            Vec f{-v + this->Lpsq, -v + this->Upsq};
-            return {{-this->A[k], std::move(f)}, false};
-        }
-    }
-
-    // case 3,
-    // 3.0 stopband constraint
-    auto fmax = -1.e100;  // std::numeric_limits<double>::min()
-    size_t kmax = 0U;
-    for (size_t k = this->nwstop; k != N; ++k) {
-        double v = matrix_vector(k);
-        if (v > Spsq) {
-            return {{this->A[k], Vec{v - Spsq, v}}, false};
-        }
-        if (v < 0.0) {
-            return {{-this->A[k], Vec{-v, -v + Spsq}}, false};
-        }
-        if (v > fmax) {
-            fmax = v;
-            kmax = k;
-        }
-    }
-
-    // case 4,
-    // 1.0 nonnegative-real constraint
-    for (size_t k = this->nwpass; k != nwstop; ++k) {
-        double v = matrix_vector(k);
-        if (v < 0.0) {
-            return {{-this->A[k], Vec{-v}}, false};
-        }
-    }
-
-    this->more_alt = false;
-
     // Begin objective function
-    Spsq = fmax;  // output
-    return {{this->A[kmax], Vec{0.0, fmax}}, true};
+    Spsq = this->_fmax;  // output
+    return {{this->A[this->_kmax], Vec{0.0, this->_fmax}}, true};
 }
