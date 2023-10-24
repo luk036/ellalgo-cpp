@@ -127,5 +127,5 @@ auto ProfitOracleQ::assess_optim_q(const Vec &y, double &gamma, bool retry)
     auto &beta = std::get<1>(cut);
     auto diff = this->_yd - y;
     beta += grad[0] * diff[0] + grad[1] * diff[1];
-    return {std::move(cut), shrunk, this->_yd, false};
+    return {std::move(cut), shrunk, this->_yd, !retry};
 }
