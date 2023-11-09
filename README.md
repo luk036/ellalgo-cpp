@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/luk036/ellalgo-cpp/branch/master/graph/badge.svg)](https://codecov.io/gh/luk036/ellalgo-cpp)
 
 <p align="center">
-  <img src="./ellipsoid-method-for-convex-optimization.svg"/>
+  <img src="./ellalgo.svg"/>
 </p>
 
 # 🏉 ellalgo-cpp
