@@ -29,8 +29,7 @@ auto EllCalc::calc_parallel_deep_cut(const double &beta0, const double &beta1,
     if (beta1 < beta0) {
         return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
     }
-    const auto b1sq = beta1 * beta1;
-    if ((beta1 > 0 && tsq <= b1sq) || !this->use_parallel_cut) {
+    if ((beta1 > 0 && tsq <= beta1 * beta1) || !this->use_parallel_cut) {
         return this->calc_deep_cut(beta0, tsq);
     }
     auto &&result = this->_helper.calc_parallel_cut(beta0, beta1, tsq);
@@ -38,19 +37,27 @@ auto EllCalc::calc_parallel_deep_cut(const double &beta0, const double &beta1,
 }
 
 /**
- * @brief
+ * @brief Parallel central cut
  *
- * @param[in] beta1
- * @param[in] b1sq
- * @return void
+ * The function `calc_parallel_central_cut` calculates and returns the values of rho, sigma,
+ * and delta based on the given input parameters.
+ *
+ * @param[in] beta1 The parameter `beta1` represents a double value.
+ * @param[in] tsq tsq is a constant value of type double. It represents the
+ * square of the variable tau.
+ *
+ * @return a tuple containing the following values:
+ * 1. CutStatus: An enum value indicating the status of the calculation.
+ * 2. rho: A double value representing the calculated rho.
+ * 3. sigma: A double value representing the calculated sigma.
+ * 4. delta: A double value representing the calculated delta.
  */
 auto EllCalc::calc_parallel_central_cut(const double &beta1, const double &tsq) const
     -> std::tuple<CutStatus, std::tuple<double, double, double>> {
     if (beta1 < 0.0) {
         return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
     }
-    const auto b1sq = beta1 * beta1;
-    if (tsq < b1sq || !this->use_parallel_cut) {
+    if (tsq < beta1 * beta1 || !this->use_parallel_cut) {
         return this->calc_central_cut(tsq);
     }
     auto &&result = this->_helper.calc_central_cut(std::sqrt(tsq));
