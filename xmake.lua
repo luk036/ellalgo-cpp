@@ -1,4 +1,4 @@
-set_languages("c++20")
+set_languages("c++14")
 
 add_rules("mode.debug", "mode.release", "mode.coverage")
 add_requires("doctest", {alias = "doctest"})
