@@ -17,7 +17,6 @@
 template <typename Arr036, typename Mat = Arr036> class LmiOldOracle {
     using Cut = std::pair<Arr036, double>;
 
-  private:
     LDLTMgr _mgr;
     const std::vector<Mat> &_F;
     const Mat _F0;

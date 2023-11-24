@@ -18,7 +18,7 @@ template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle {
     using Cut = std::pair<Arr036, double>;
 
   public:
-    LDLTMgr _mgr;
+    LDLTMgr _mq;
 
   private:
     const std::vector<Mat> &_F;
@@ -31,7 +31,7 @@ template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle {
      * @param[in] ndim
      * @param[in] F
      */
-    Lmi0Oracle(size_t ndim, const std::vector<Mat> &F) : _mgr(ndim), _F{F} {}
+    Lmi0Oracle(size_t ndim, const std::vector<Mat> &F) : _mq(ndim), _F{F} {}
 
     /**
      * @brief
@@ -50,14 +50,14 @@ template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle {
             return a;
         };
 
-        if (this->_mgr.factor(getA)) {
+        if (this->_mq.factor(getA)) {
             return nullptr;
         }
 
-        auto ep = this->_mgr.witness();  // call before sym_quad() !!!
+        auto ep = this->_mq.witness();  // call before sym_quad() !!!
         Arr036 g{x};
         for (auto i = 0U; i != n; ++i) {
-            g[i] = -this->_mgr.sym_quad(this->_F[i]);
+            g[i] = -this->_mq.sym_quad(this->_F[i]);
         }
         cut->first = std::move(g);
         cut->second = std::move(ep);
