@@ -45,7 +45,7 @@ template <typename Arr> class Ell {
      * is not allowed for objects of the `Ell` class. By deleting this function, the code prevents
      * objects of the `Ell` class from being assigned to each other.
      *
-     * @param[in] E
+     * @param[in] E The parameter "E" is a reference to an object of type "Ell".
      */
     auto operator=(const Ell &E) -> Ell & = delete;
 
@@ -95,7 +95,7 @@ template <typename Arr> class Ell {
      *
      * To avoid accidentally copying, only explicit copy is allowed
      *
-     * @param E
+     * @param[in] E The parameter "E" is a reference to an object of type "Ell".
      */
     explicit Ell(const Ell &E) = default;
 
@@ -130,7 +130,7 @@ template <typename Arr> class Ell {
     /**
      * The function sets the value of the use_parallel_cut property in the _mgr object.
      * 
-     * @param value The value parameter is a boolean value that determines whether or not to use
+     * @param[in] value The value parameter is a boolean value that determines whether or not to use
      * parallel cut.
      */
     void set_use_parallel_cut(bool value) { this->_mgr.set_use_parallel_cut(value); }
