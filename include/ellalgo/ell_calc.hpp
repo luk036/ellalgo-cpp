@@ -30,9 +30,9 @@ class EllCalc {
      *
      * @tparam V
      * @tparam U
-     * @param kappa
-     * @param mq
-     * @param x
+     * @param[in] kappa
+     * @param[in] mq
+     * @param[in] x
      */
     explicit EllCalc(size_t ndim) : _n_f{double(ndim)}, _helper{ndim} {
         assert(ndim >= 2U);  // do not accept one-dimensional
@@ -56,7 +56,7 @@ class EllCalc {
      *
      * To avoid accidentally copying, only explicit copy is allowed
      *
-     * @param E
+     * @param[in] E
      */
     EllCalc(const EllCalc &E) = default;
 

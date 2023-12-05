@@ -27,17 +27,15 @@ class ProfitOracle {
     using Vec = std::valarray<double>;
     using Cut = std::pair<Vec, double>;
 
-  private:
     int idx = 0;
     const double _log_pA;
     const double _log_k;
     const Vec _price_out;
     double _log_Cobb = 0.0;
     double _vx = 0.0;
-
-  public:
     Vec _elasticities;
 
+  public:
     /**
      * @brief Construct a new profit oracle object
      *
@@ -56,14 +54,23 @@ class ProfitOracle {
      */
     ProfitOracle(const ProfitOracle &) = delete;
 
+    /** The `set_elasticities` function is a member function of the `ProfitOracle` class.
+    It takes a `Vec` object `elasticities` as input and sets the `_elasticities` member variable
+    of the `ProfitOracle` object to the input value. This function allows you to update
+    the elasticities used by the profit oracle for assessing feasibility and optimization.
+    */
+    auto set_elasticities(const Vec &elasticities) {
+        this->_elasticities = elasticities;
+    }
+
     /**
      * @brief
      *
      * @param[in] y input quantity (in log scale)
-     * @param[in,out] gamma the best-so-far optimal value
+     * @param[in] gamma the best-so-far optimal value
      * @return std::tuple<Cut, double> Cut and the updated best-so-far value
      */
-    auto assess_feas(const Vec &y, double &gamma) -> Cut *;
+    auto assess_feas(const Vec &y, const double &gamma) -> Cut *;
 
     /**
      * @brief
@@ -96,7 +103,6 @@ class ProfitOracleRb {
     using Vec = std::valarray<double>;
     using Cut = std::pair<Vec, double>;
 
-  private:
     const Vec _uie;
     Vec _elasticities;
     ProfitOracle _P;
@@ -130,7 +136,7 @@ class ProfitOracleRb {
         auto a_rb = this->_elasticities;
         a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
         a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
-        this->_P._elasticities = a_rb;
+        this->_P.set_elasticities(a_rb);
         return this->_P.assess_optim(y, gamma);
     }
 };
@@ -156,11 +162,9 @@ class ProfitOracleRb {
  * @see ProfitOracle
  */
 class ProfitOracleQ {
-    // using Arr = xt::xarray<double, xt::layout_type::row_major>;
     using Vec = std::valarray<double>;
     using Cut = std::pair<Vec, double>;
 
-  private:
     ProfitOracle _P;
     Vec _yd{};
 

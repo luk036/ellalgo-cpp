@@ -60,9 +60,9 @@ class LowpassOracle {
     size_t idx3;
     double _fmax = -1e100;
     size_t _kmax = 0;
+    bool more_alt{true};
 
   public:
-    bool more_alt{true};
 
     /*!
      * @brief Construct a new lowpass oracle object
@@ -75,20 +75,24 @@ class LowpassOracle {
     /*!
      * @brief
      *
+     * @param[in] x
+     * @param[in] Spsq
      */
-    auto assess_feas(const Vec &x, double &Spsq) -> ParallelCut *;
+    auto assess_feas(const Vec &x, const double &Spsq) -> ParallelCut *;
 
     /*!
      * @brief
      *
+     * The `assess_optim` function is a member function of the `LowpassOracle` class. It takes a `Vec` object `x` and a reference to a `double` variable `Spsq` as input parameters.
+     *
+     * @param[in] x
+     * @param[in,out] Spsq
      */
     auto assess_optim(const Vec &x, double &Spsq) -> std::tuple<ParallelCut, bool>;
 
     /*!
      * @brief
      *
-     * @param[in] x
-     * @param[in] Spsq
      * @return auto
      */
     auto operator()(const Vec &x, double &Spsq) -> std::tuple<ParallelCut, bool> {
