@@ -18,7 +18,7 @@ using Cut = std::pair<Vec, double>;
  * of type `Cut`, which is a struct or class that contains a vector `g` and a double `fj`. The
  * second element is of type `bool`.
  */
-auto ProfitOracle::assess_feas(const Vec &y, double &gamma) -> Cut * {
+auto ProfitOracle::assess_feas(const Vec &y, const double &gamma) -> Cut * {
     static auto cut1 = Cut{Vec{1.0, 0.0}, 0.0};
     static auto cut2 = Cut{Vec{-1.0, 1.0}, 0.0};
 
@@ -98,7 +98,7 @@ auto ProfitOracle::assess_optim(const Vec &y, double &gamma) -> std::tuple<Cut, 
  * @param[in] y A vector containing the input values.
  * @param[in,out] gamma The "gamma" parameter is a reference to a double value. It is used to
  * store the best-so-far value for optimization.
- * @param retry A boolean flag indicating whether the function should retry the assessment or not.
+ * @param[in] retry A boolean flag indicating whether the function should retry the assessment or not.
  *
  * @return The function `assess_optim_q` returns a tuple containing the following elements:
  */

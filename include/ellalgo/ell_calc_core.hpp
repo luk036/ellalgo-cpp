@@ -26,7 +26,7 @@ class EllCalcCore {
      * the number of dimensions as a parameter and initializes various member variables based on
      * that value.
      *
-     * @param ndim The parameter `ndim` represents the number of dimensions for the EllCalcCore
+     * @param[in] ndim The parameter `ndim` represents the number of dimensions for the EllCalcCore
      * object.
      */
     explicit EllCalcCore(size_t ndim)
@@ -41,7 +41,7 @@ class EllCalcCore {
     /**
      * The function is a move constructor for the EllCalcCore class.
      *
-     * @param E The parameter "E" is a reference to an object of type "EllCalcCore" that is being
+     * @param[in] E The parameter "E" is a reference to an object of type "EllCalcCore" that is being
      * moved.
      */
     EllCalcCore(EllCalcCore &&E) = default;
@@ -49,7 +49,7 @@ class EllCalcCore {
     /**
      * The function is a constructor for the EllCalcCore class that allows explicit copying.
      *
-     * @param E The parameter "E" is a reference to an object of type "EllCalcCore".
+     * @param[in] E The parameter "E" is a reference to an object of type "EllCalcCore".
      */
     EllCalcCore(const EllCalcCore &E) = default;
 

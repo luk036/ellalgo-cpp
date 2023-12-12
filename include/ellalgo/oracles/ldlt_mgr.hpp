@@ -115,7 +115,7 @@ class LDLTMgr {
      * @brief Set the witness vec object
      *
      * @tparam Arr036
-     * @param v
+     * @param[in] v
      */
     template <typename Arr036> auto set_witness_vec(Arr036 &v) const -> void {
         for (auto i = 0U; i != this->_n; ++i) {
