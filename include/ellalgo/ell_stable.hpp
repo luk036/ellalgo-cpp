@@ -32,9 +32,9 @@ template <typename Arr> class EllStable {
     /**
      * @brief Construct a new EllStable object
      *
-     * The `operator=` function is being deleted in this code. This means that the assignment operator
-     * is not allowed for objects of the `EllStable` class. By deleting this function, the code prevents
-     * objects of the `EllStable` class from being assigned to each other.
+     * The `operator=` function is being deleted in this code. This means that the assignment
+     * operator is not allowed for objects of the `EllStable` class. By deleting this function, the
+     * code prevents objects of the `EllStable` class from being assigned to each other.
      *
      * @param[in] E The parameter "E" is a reference to an object of type "EllStable".
      */
@@ -44,33 +44,36 @@ template <typename Arr> class EllStable {
     /**
      * @brief Construct a new EllStable object
      *
-     * The function is a constructor for an EllStable object that takes a Vec and an Arr as parameters.
-     * 
-     * @param[in] val The parameter "val" is of type Vec, which is likely a vector or array-like data
-     * structure. It is being passed by reference to the constructor of the EllStable class.
-     * @param[in] x x is an object of type Arr, which is likely an array or vector. It is being passed by
-     * value to the constructor of the EllStable class.
+     * The function is a constructor for an EllStable object that takes a Vec and an Arr as
+     * parameters.
+     *
+     * @param[in] val The parameter "val" is of type Vec, which is likely a vector or array-like
+     * data structure. It is being passed by reference to the constructor of the EllStable class.
+     * @param[in] x x is an object of type Arr, which is likely an array or vector. It is being
+     * passed by value to the constructor of the EllStable class.
      */
     EllStable(const Vec &val, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(val, _n) {}
 
     /**
      * @brief Construct a new EllStable object
      *
-     * The function constructs a new EllStable object with a given alpha value and an array of x values.
-     * 
-     * @param[in] alpha The parameter `alpha` is a constant reference to a `double` value. It is used to
-     * initialize the `_mgr` member variable of the `EllStable` class.
-     * @param[in] x The parameter `x` is of type `Arr`, which is likely an array or vector of some kind. It is
-     * being passed by value, meaning a copy of the `x` object will be made and stored in the `_xc` member
-     * variable of the `EllStable` object being constructed.
+     * The function constructs a new EllStable object with a given alpha value and an array of x
+     * values.
+     *
+     * @param[in] alpha The parameter `alpha` is a constant reference to a `double` value. It is
+     * used to initialize the `_mgr` member variable of the `EllStable` class.
+     * @param[in] x The parameter `x` is of type `Arr`, which is likely an array or vector of some
+     * kind. It is being passed by value, meaning a copy of the `x` object will be made and stored
+     * in the `_xc` member variable of the `EllStable` object being constructed.
      */
     EllStable(const double &alpha, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(alpha, _n) {}
 
     /**
      * @brief Construct a new EllStable object
      *
-     * The function is a constructor for an EllStable object that takes an rvalue reference as a parameter.
-     * 
+     * The function is a constructor for an EllStable object that takes an rvalue reference as a
+     * parameter.
+     *
      * @param[in] E The parameter "E" is an rvalue reference to an object of type "EllStable".
      */
     EllStable(EllStable &&E) noexcept = default;
@@ -120,7 +123,7 @@ template <typename Arr> class EllStable {
 
     /**
      * The function sets the value of the use_parallel_cut property in the _mgr object.
-     * 
+     *
      * @param[in] value The value parameter is a boolean value that determines whether or not to use
      * parallel cut.
      */
@@ -129,8 +132,8 @@ template <typename Arr> class EllStable {
     /**
      * @brief Update ellipsoid core function using the deep cut(s)
      *
-     * The `update_deep_cut` function is a member function of the `EllStable` class. It is used to update the
-     * ellipsoid core function using a cutting plane.
+     * The `update_deep_cut` function is a member function of the `EllStable` class. It is used to
+     * update the ellipsoid core function using a cutting plane.
      *
      * @tparam T
      * @param[in] cut cutting-plane
@@ -145,8 +148,8 @@ template <typename Arr> class EllStable {
     /**
      * @brief Update ellipsoid core function using the central cut(s)
      *
-     * The `update_central_cut` function is a member function of the `EllStable` class. It is used to update the
-     * ellipsoid core function using a cutting plane.
+     * The `update_central_cut` function is a member function of the `EllStable` class. It is used
+     * to update the ellipsoid core function using a cutting plane.
      *
      * @tparam T
      * @param[in] cut cutting-plane
@@ -161,8 +164,8 @@ template <typename Arr> class EllStable {
     /**
      * @brief Update ellipsoid core function using the cut(s)
      *
-     * The `update_q` function is a member function of the `EllStable` class. It is used to update the
-     * ellipsoid core function using a cutting plane.
+     * The `update_q` function is a member function of the `EllStable` class. It is used to update
+     * the ellipsoid core function using a cutting plane.
      *
      * @tparam T
      * @param[in] cut cutting-plane
@@ -178,8 +181,8 @@ template <typename Arr> class EllStable {
     /**
      * @brief Update ellipsoid core function using the cut(s)
      *
-     * The `_update_core` function is a private member function of the `EllStable` class. It is used to
-     * update the ellipsoid core function using a cutting plane.
+     * The `_update_core` function is a private member function of the `EllStable` class. It is used
+     * to update the ellipsoid core function using a cutting plane.
      *
      * @tparam T
      * @param[in] cut cutting-plane

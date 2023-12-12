@@ -1,7 +1,6 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-
 #include <cmath>
 #include <tuple>
 #include <valarray>
@@ -33,9 +32,9 @@ class EllCore {
     /**
      * @brief Construct a new EllCore object
      *
-     * The `operator=` function is being deleted in this code. This means that the assignment operator
-     * is not allowed for objects of the `EllCore` class. By deleting this function, the code prevents
-     * objects of the `EllCore` class from being assigned to each other.
+     * The `operator=` function is being deleted in this code. This means that the assignment
+     * operator is not allowed for objects of the `EllCore` class. By deleting this function, the
+     * code prevents objects of the `EllCore` class from being assigned to each other.
      *
      * @param[in] E The parameter "E" is a reference to an object of type "EllCore".
      */
@@ -46,13 +45,14 @@ class EllCore {
      *
      * The function is a constructor for the EllCore class that takes in a kappa value, a Matrix
      * object, and a size_t value as parameters.
-     * 
+     *
      * @param[in] kappa The kappa parameter is a constant value of type double. It is used in the
      * construction of the EllCore object.
-     * @param[in] mq The parameter `mq` is a matrix of type `Matrix` that is being moved into the `_mq`
-     * member variable of the `EllCore` object. The type `Matrix` is not specified in the code snippet,
-     * so it would need to be defined elsewhere in the code.
-     * @param[in] ndim The parameter `ndim` represents the number of dimensions for the EllCore object.
+     * @param[in] mq The parameter `mq` is a matrix of type `Matrix` that is being moved into the
+     * `_mq` member variable of the `EllCore` object. The type `Matrix` is not specified in the code
+     * snippet, so it would need to be defined elsewhere in the code.
+     * @param[in] ndim The parameter `ndim` represents the number of dimensions for the EllCore
+     * object.
      */
     EllCore(const double &kappa, Matrix &&mq, size_t ndim)
         : _n{ndim}, _kappa{kappa}, _mq{std::move(mq)}, _helper{_n} {}
@@ -60,11 +60,12 @@ class EllCore {
   public:
     /**
      * The function constructs a new EllCore object with a given value and dimension.
-     * 
-     * @param[in] val The parameter `val` is a reference to a `Vec` object, which represents a vector of
-     * values. It is used to initialize the diagonal elements of the `_mq` matrix in the `EllCore`
+     *
+     * @param[in] val The parameter `val` is a reference to a `Vec` object, which represents a
+     * vector of values. It is used to initialize the diagonal elements of the `_mq` matrix in the
+     * `EllCore` object.
+     * @param[in] ndim The parameter `ndim` represents the number of dimensions for the `EllCore`
      * object.
-     * @param[in] ndim The parameter `ndim` represents the number of dimensions for the `EllCore` object.
      */
     EllCore(const Vec &val, size_t ndim) : EllCore{1.0, Matrix(ndim), ndim} {
         this->_mq.diagonal() = val;
@@ -75,11 +76,11 @@ class EllCore {
      *
      * The function constructs a new EllCore object with a given alpha and ndim, and initializes the
      * matrix _mq to an identity matrix.
-     * 
-     * @param[in] alpha The alpha parameter is a double value that represents the scaling factor for the
-     * EllCore object. It is used to adjust the size of the ellipsoid.
-     * @param[in] ndim The parameter `ndim` represents the number of dimensions for the EllCore object. It
-     * specifies the size of the matrix used in the construction of the object.
+     *
+     * @param[in] alpha The alpha parameter is a double value that represents the scaling factor for
+     * the EllCore object. It is used to adjust the size of the ellipsoid.
+     * @param[in] ndim The parameter `ndim` represents the number of dimensions for the EllCore
+     * object. It specifies the size of the matrix used in the construction of the object.
      */
     EllCore(double alpha, size_t ndim) : EllCore{alpha, Matrix(ndim), ndim} {
         this->_mq.identity();
@@ -88,8 +89,9 @@ class EllCore {
     /**
      * @brief Construct a new EllCore object
      *
-     * The function is a constructor for an EllCore object that takes an rvalue reference as a parameter.
-     * 
+     * The function is a constructor for an EllCore object that takes an rvalue reference as a
+     * parameter.
+     *
      * @param[in] E The parameter "E" is an rvalue reference to an object of type "EllCore".
      *
      */
@@ -126,7 +128,7 @@ class EllCore {
 
     /**
      * The function sets the value of the use_parallel_cut property in the _mgr object.
-     * 
+     *
      * @param[in] value The value parameter is a boolean value that determines whether or not to use
      * parallel cut.
      */
@@ -135,8 +137,8 @@ class EllCore {
     /**
      * @brief Update ellipsoid core function using the deep cut(s)
      *
-     * The `update_deep_cut` function is a member function of the `EllCore` class. It is used to update the
-     * ellipsoid core function using a cutting plane.
+     * The `update_deep_cut` function is a member function of the `EllCore` class. It is used to
+     * update the ellipsoid core function using a cutting plane.
      *
      * @tparam T
      * @param[in] grad gradient
@@ -152,8 +154,8 @@ class EllCore {
     /**
      * @brief Update ellipsoid core function using the central cut(s)
      *
-     * The `update_central_cut` function is a member function of the `EllCore` class. It is used to update the
-     * ellipsoid core function using a cutting plane.
+     * The `update_central_cut` function is a member function of the `EllCore` class. It is used to
+     * update the ellipsoid core function using a cutting plane.
      *
      * @tparam T
      * @param[in] grad gradient
@@ -186,8 +188,8 @@ class EllCore {
     /**
      * @brief Update ellipsoid core function using the deep cut(s)
      *
-     * The `update_stable_deep_cut` function is a member function of the `EllCore` class. It is used to update the
-     * ellipsoid core function using a cutting plane.
+     * The `update_stable_deep_cut` function is a member function of the `EllCore` class. It is used
+     * to update the ellipsoid core function using a cutting plane.
      *
      * @tparam T
      * @param[in] grad gradient
@@ -203,8 +205,8 @@ class EllCore {
     /**
      * @brief Update ellipsoid core function using the central cut(s)
      *
-     * The `update_stable_central_cut` function is a member function of the `EllCore` class. It is used to update the
-     * ellipsoid core function using a cutting plane.
+     * The `update_stable_central_cut` function is a member function of the `EllCore` class. It is
+     * used to update the ellipsoid core function using a cutting plane.
      *
      * @tparam T
      * @param[in] grad gradient
@@ -220,8 +222,8 @@ class EllCore {
     /**
      * @brief Update ellipsoid core function using the cut(s)
      *
-     * The `update_stable_q` function is a member function of the `EllCore` class. It is used to update the
-     * ellipsoid core function using a cutting plane.
+     * The `update_stable_q` function is a member function of the `EllCore` class. It is used to
+     * update the ellipsoid core function using a cutting plane.
      *
      * @tparam T
      * @param[in] grad gradient
@@ -238,8 +240,8 @@ class EllCore {
     /**
      * @brief Update ellipsoid core function using the cut(s)
      *
-     * The `_update_core` function is a private member function of the `EllCore` class. It is used to
-     * update the ellipsoid core function using a cutting plane.
+     * The `_update_core` function is a private member function of the `EllCore` class. It is used
+     * to update the ellipsoid core function using a cutting plane.
      *
      * @tparam T
      * @tparam Fn
@@ -297,8 +299,8 @@ class EllCore {
     /**
      * @brief Update ellipsoid core function using the cut(s)
      *
-     * The `_update_stable_core` function is a private member function of the `EllCore` class. It is used to
-     * update the ellipsoid core function using a cutting plane.
+     * The `_update_stable_core` function is a private member function of the `EllCore` class. It is
+     * used to update the ellipsoid core function using a cutting plane.
      *
      * @tparam T
      * @tparam Fn
@@ -383,12 +385,12 @@ class EllCore {
     /**
      * The function `_update_cut_deep_cut` calculates a deep cut using the `calc_deep_cut` function
      * from the `_helper` object.
-     * 
+     *
      * @param[in] beta The beta parameter is a constant value of type double.
      * @param[in] tsq tsq is a constant value of type double.
-     * 
-     * @return The function `_update_cut_deep_cut` returns a tuple containing a `CutStatus` enum value
-     * and another tuple containing three `double` values.
+     *
+     * @return The function `_update_cut_deep_cut` returns a tuple containing a `CutStatus` enum
+     * value and another tuple containing three `double` values.
      */
     auto _update_cut_deep_cut(const double &beta, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {
@@ -396,14 +398,14 @@ class EllCore {
     }
 
     /**
-     * The function `_update_cut_deep_cut` calculates the deep cut value based on the beta values and tsq
-     * parameter.
-     * 
+     * The function `_update_cut_deep_cut` calculates the deep cut value based on the beta values
+     * and tsq parameter.
+     *
      * @param[in] beta A valarray of double values representing the beta values.
      * @param[in] tsq tsq is a constant value of type double.
-     * 
-     * @return a tuple containing a `CutStatus` enum value and another tuple containing three `double`
-     * values.
+     *
+     * @return a tuple containing a `CutStatus` enum value and another tuple containing three
+     * `double` values.
      */
     auto _update_cut_deep_cut(const std::valarray<double> &beta, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
@@ -414,14 +416,14 @@ class EllCore {
     }
 
     /**
-     * The function `_update_cut_central_cut` calculates a central cut using the `calc_central_cut` function
-     * from the `_helper` object.
-     * 
+     * The function `_update_cut_central_cut` calculates a central cut using the `calc_central_cut`
+     * function from the `_helper` object.
+     *
      * @param[in] beta The beta parameter is a constant value of type double.
      * @param[in] tsq tsq is a constant value of type double.
-     * 
-     * @return The function `_update_cut_deep_cut` returns a tuple containing a `CutStatus` enum value
-     * and another tuple containing three `double` values.
+     *
+     * @return The function `_update_cut_deep_cut` returns a tuple containing a `CutStatus` enum
+     * value and another tuple containing three `double` values.
      */
     auto _update_cut_central_cut(const double &, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {
@@ -429,14 +431,14 @@ class EllCore {
     }
 
     /**
-     * The function `_update_cut_central_cut` calculates the central cut value based on the beta values and tsq
-     * parameter.
-     * 
+     * The function `_update_cut_central_cut` calculates the central cut value based on the beta
+     * values and tsq parameter.
+     *
      * @param[in] beta A valarray of double values representing the beta values.
      * @param[in] tsq tsq is a constant value of type double.
-     * 
-     * @return a tuple containing a `CutStatus` enum value and another tuple containing three `double`
-     * values.
+     *
+     * @return a tuple containing a `CutStatus` enum value and another tuple containing three
+     * `double` values.
      */
     auto _update_cut_central_cut(const std::valarray<double> &beta, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
@@ -449,12 +451,12 @@ class EllCore {
     /**
      * The function `_update_cut_q` calculates a deep cut q using the `calc_deep_cut_q` function
      * from the `_helper` object.
-     * 
+     *
      * @param[in] beta The beta parameter is a constant value of type double.
      * @param[in] tsq tsq is a constant value of type double.
-     * 
-     * @return The function `_update_cut_deep_cut` returns a tuple containing a `CutStatus` enum value
-     * and another tuple containing three `double` values.
+     *
+     * @return The function `_update_cut_deep_cut` returns a tuple containing a `CutStatus` enum
+     * value and another tuple containing three `double` values.
      */
     auto _update_cut_q(const double &beta, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {
@@ -464,12 +466,12 @@ class EllCore {
     /**
      * The function `_update_cut_q` calculates the deep cut q value based on the beta values and tsq
      * parameter.
-     * 
+     *
      * @param[in] beta A valarray of double values representing the beta values.
      * @param[in] tsq tsq is a constant value of type double.
-     * 
-     * @return a tuple containing a `CutStatus` enum value and another tuple containing three `double`
-     * values.
+     *
+     * @return a tuple containing a `CutStatus` enum value and another tuple containing three
+     * `double` values.
      */
     auto _update_cut_q(const std::valarray<double> &beta, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
