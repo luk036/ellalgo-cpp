@@ -98,7 +98,8 @@ auto ProfitOracle::assess_optim(const Vec &y, double &gamma) -> std::tuple<Cut, 
  * @param[in] y A vector containing the input values.
  * @param[in,out] gamma The "gamma" parameter is a reference to a double value. It is used to
  * store the best-so-far value for optimization.
- * @param[in] retry A boolean flag indicating whether the function should retry the assessment or not.
+ * @param[in] retry A boolean flag indicating whether the function should retry the assessment or
+ * not.
  *
  * @return The function `assess_optim_q` returns a tuple containing the following elements:
  */

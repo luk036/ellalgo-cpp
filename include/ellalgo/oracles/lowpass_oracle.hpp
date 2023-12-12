@@ -63,7 +63,6 @@ class LowpassOracle {
     bool more_alt{true};
 
   public:
-
     /*!
      * @brief Construct a new lowpass oracle object
      *
@@ -83,7 +82,8 @@ class LowpassOracle {
     /*!
      * @brief
      *
-     * The `assess_optim` function is a member function of the `LowpassOracle` class. It takes a `Vec` object `x` and a reference to a `double` variable `Spsq` as input parameters.
+     * The `assess_optim` function is a member function of the `LowpassOracle` class. It takes a
+     * `Vec` object `x` and a reference to a `double` variable `Spsq` as input parameters.
      *
      * @param[in] x
      * @param[in,out] Spsq

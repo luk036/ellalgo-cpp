@@ -21,14 +21,14 @@ using ParallelCut = std::pair<Vec, Vec>;
  *
  * @param[in] N The parameter N represents the order of the filter. It determines the number of
  * coefficients used in the filter design.
- * @param[in] Lpsq Lpsq is the squared lower passband edge frequency. It represents the frequency below
- * which the filter allows all signals to pass through without attenuation.
- * @param[in] Upsq Upsq is the upper squared frequency limit for the lowpass filter. It represents the
- * maximum frequency that the filter allows to pass through without significant attenuation.
- * @param[in] wpass The parameter "wpass" represents the normalized passband frequency. It is used in
- * the filter design process to determine the number of frequency points within the passband.
- * @param[in] wstop The parameter "wstop" represents the stopband edge frequency in the filter design
- * process. It is a value between 0 and 1, where 1 corresponds to the Nyquist frequency.
+ * @param[in] Lpsq Lpsq is the squared lower passband edge frequency. It represents the frequency
+ * below which the filter allows all signals to pass through without attenuation.
+ * @param[in] Upsq Upsq is the upper squared frequency limit for the lowpass filter. It represents
+ * the maximum frequency that the filter allows to pass through without significant attenuation.
+ * @param[in] wpass The parameter "wpass" represents the normalized passband frequency. It is used
+ * in the filter design process to determine the number of frequency points within the passband.
+ * @param[in] wstop The parameter "wstop" represents the stopband edge frequency in the filter
+ * design process. It is a value between 0 and 1, where 1 corresponds to the Nyquist frequency.
  */
 LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, double wstop)
     : Lpsq{Lpsq}, Upsq{Upsq} {
@@ -66,8 +66,8 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
  * function values, along with a boolean indicating whether the optimization is complete.
  *
  * @param[in] x A 1-dimensional array representing the optimization variables.
- * @param[in, out] Spsq Spsq is a reference to a double variable. It is used to store the maximum value of
- * the stopband constraint.
+ * @param[in, out] Spsq Spsq is a reference to a double variable. It is used to store the maximum
+ * value of the stopband constraint.
  *
  * @return The function `assess_feas` returns a tuple containing a `ParallelCut` object and a
  * boolean value.
@@ -169,8 +169,8 @@ auto LowpassOracle::assess_feas(const Vec &x, const double &Spsq) -> ParallelCut
  * function values, along with a boolean indicating whether the optimization is complete.
  *
  * @param[in] x A 1-dimensional array representing the optimization variables.
- * @param[in] Spsq Spsq is a reference to a double variable. It is used to store the maximum value of
- * the stopband constraint.
+ * @param[in] Spsq Spsq is a reference to a double variable. It is used to store the maximum value
+ * of the stopband constraint.
  *
  * @return The function `assess_optim` returns a tuple containing a `ParallelCut` object and a
  * boolean value.

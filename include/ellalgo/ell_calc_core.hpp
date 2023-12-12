@@ -41,8 +41,8 @@ class EllCalcCore {
     /**
      * The function is a move constructor for the EllCalcCore class.
      *
-     * @param[in] E The parameter "E" is a reference to an object of type "EllCalcCore" that is being
-     * moved.
+     * @param[in] E The parameter "E" is a reference to an object of type "EllCalcCore" that is
+     * being moved.
      */
     EllCalcCore(EllCalcCore &&E) = default;
 
