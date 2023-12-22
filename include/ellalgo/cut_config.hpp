@@ -10,7 +10,7 @@ enum class CutStatus { Success, NoSoln, SmallEnough, NoEffect };
  */
 struct Options {
     unsigned int max_iters = 2000;  //!< maximum number of iterations
-    double tol = 1e-8;              //!< error tolerance
+    double tol = 1e-20;              //!< error tolerance
 };
 
 /**
