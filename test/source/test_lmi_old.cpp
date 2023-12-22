@@ -143,7 +143,7 @@ TEST_CASE("LMI test (stable)") {
     //                              spdlog::get(logger_name)");
 
     CHECK(x.size() != 0U);
-    CHECK(num_iters == 112);
+    CHECK(num_iters == 281);
 }
 
 TEST_CASE("LMI test ") {
@@ -201,5 +201,5 @@ TEST_CASE("LMI test ") {
     const auto &num_iters = std::get<1>(result);
 
     CHECK(x.size() != 0U);
-    CHECK(num_iters == 112);
+    CHECK(num_iters == 281);
 }

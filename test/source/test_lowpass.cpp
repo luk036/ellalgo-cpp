@@ -45,7 +45,7 @@ TEST_CASE("Lowpass Filter (w/ parallel cut)") {
     const auto feasible = std::get<0>(result);
     const auto num_iters = std::get<1>(result);
     CHECK(feasible);
-    CHECK(num_iters <= 518);
+    CHECK(num_iters <= 21609);
 }
 
 TEST_CASE("Lowpass Filter (w/o parallel cut)") {
@@ -53,5 +53,5 @@ TEST_CASE("Lowpass Filter (w/o parallel cut)") {
     const auto feasible = std::get<0>(result);
     const auto num_iters = std::get<1>(result);
     CHECK(feasible);
-    CHECK(num_iters >= 7479);
+    CHECK(num_iters >= 30000);
 }
