@@ -59,9 +59,7 @@ class ProfitOracle {
     of the `ProfitOracle` object to the input value. This function allows you to update
     the elasticities used by the profit oracle for assessing feasibility and optimization.
     */
-    auto set_elasticities(const Vec &elasticities) {
-        this->_elasticities = elasticities;
-    }
+    auto set_elasticities(const Vec &elasticities) { this->_elasticities = elasticities; }
 
     /**
      * @brief
