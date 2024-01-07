@@ -9,59 +9,82 @@ class Matrix {
 
   public:
     /**
-     * @brief Construct a new Matrix object
+     * Constructor to create a new Matrix object.
      *
-     * The function is a constructor for a Matrix object that takes in the number of dimensions and
-     * an optional initialization value.
+     * Example:
+     * @code{.cpp}
+     * Matrix A(2, 2);
+     * @endcode
      *
-     * @param[in] ndim The parameter `ndim` represents the dimension of the matrix. It specifies the
-     * number of rows and columns in the matrix.
-     * @param[in] init The `init` parameter is used to specify the initial value for all elements of
-     * the matrix. By default, it is set to 0.0, which means that if no value is provided for `init`
-     * when creating a `Matrix` object, all elements of the matrix will be initialized to
+     * @param[in] ndim - The dimension of the matrix (number of rows/columns)
+     * @param[in] init - Optional initial value for all elements. Default is 0.0.
      */
     explicit Matrix(size_t ndim, double init = 0.0) : ndim{ndim}, data(init, ndim * ndim) {}
 
     /**
-     * The clear function sets the value of a variable to 0.0.
+     * Sets all elements of the matrix to the given value.
      *
-     * @param[in] value The value parameter is a double type and it has a default value of 0.0.
+     * Example:
+     * @code{.cpp}
+     * Matrix A(2, 2);
+     * A.clear(1.0);
+     * @endcode
+     *
+     * @param[in] value - The value to set all elements to. Defaults to 0.0.
      */
     void clear(double value = 0.0) { data = value; }
 
     /**
-     * The function is an overloaded operator that allows accessing and modifying elements of a 2D
-     * array using the () operator.
+     * Operator overload to access elements using 2D array syntax.
      *
-     * @param[in] row The parameter "row" is of type std::size_t and represents the index of the row
-     * that you want to access in the data array.
-     * @param[in] col The parameter "col" is of type std::size_t and represents the index of the
-     * column that you want to access in the data array.
+     * Allows modifying elements using matrix(row, col) = value.
      *
-     * @return a reference to a double value.
+     * Example:
+     * @code{.cpp}
+     * Matrix A(2, 2);
+     * A(0, 0) = 1.0;
+     * A(0, 1) = 2.0;
+     * A(1, 0) = 3.0;
+     * A(1, 1) = 4.0;
+     * @endcode
+     *
+     * @param[in] row - Row index to access
+     * @param[in] col - Column index to access
+     * @return Reference to the element at the given row and column.
      */
     double &operator()(size_t row, size_t col) { return this->data[row * ndim + col]; }
 
     /**
-     * The function is an overloaded operator that returns a constant reference to a double value in
-     * a 2D array-like structure.
+     * Read-only accessor for matrix elements using 2D array syntax.
      *
-     * @param[in] row The parameter "row" is of type std::size_t and represents the index of the row
-     * that you want to access in the data array.
-     * @param[in] col The parameter "col" is of type std::size_t and represents the index of the
-     * column that you want to access in the data array.
+     * Allows accessing elements using matrix(row, col).
      *
-     * @return a constant reference to a double value.
+     * Example:
+     * @code{.cpp}
+     * Matrix A(2, 2);
+     * A(0, 0) = 1.0;
+     * A(0, 1) = 2.0;
+     * A(1, 0) = 3.0;
+     * A(1, 1) = 4.0;
+     * @endcode
+     *
+     * @param[in] row - Row index
+     * @param[in] col - Column index
+     * @return Constant reference to element at (row, col)
      */
     const double &operator()(size_t row, size_t col) const { return this->data[row * ndim + col]; }
 
     /**
-     * The function multiplies each element of the matrix by a scalar value.
+     * Multiplies each element of the matrix by the given scalar value.
      *
-     * @param[in] alpha The parameter "alpha" is a double value that represents the scalar value by
-     * which each element of the matrix is multiplied.
+     * Example:
+     * @code{.cpp}
+     * Matrix A(2, 2);
+     * A *= 2.0;
+     * @endcode
      *
-     * @return a reference to the current object, which is of type Matrix.
+     * @param[in] alpha - The scalar value to multiply each element by.
+     * @return Reference to this matrix after multiplication.
      */
     Matrix &operator*=(double alpha) {
         this->data *= alpha;
@@ -69,12 +92,19 @@ class Matrix {
     }
 
     /**
-     * The function overloads the multiplication operator to multiply a matrix by a scalar value.
+     * Overloads the multiplication operator (*) to multiply the matrix by a scalar value.
      *
-     * @param[in] alpha The parameter "alpha" is a double value that represents the scalar value by
-     * which each element of the matrix is multiplied.
+     * This performs an element-wise multiplication of the matrix by the scalar value alpha.
      *
-     * @return a Matrix object.
+     * Example:
+     * >>> matrix = Matrix(3, 0.0)
+     * >>> matrix *= 2.0
+     * >>> matrix
+     * valarray([0., 0., 0., 0., 0., 0., 0., 0., 0.],
+     *          [3])
+     *
+     * @param[in] alpha - The scalar value to multiply the matrix by.
+     * @return A new Matrix object containing the result of the multiplication.
      */
     Matrix operator*(double alpha) const {
         Matrix res(*this);
@@ -82,8 +112,15 @@ class Matrix {
     }
 
     /**
-     * The identity function sets the matrix to be a diagonal matrix with all diagonal elements
-     * equal to 1.
+     * Sets the matrix to be an identity matrix by clearing it and then setting
+     * all diagonal elements to 1.
+     *
+     * Example:
+     * >>> matrix = Matrix(3, 0.0)
+     * >>> matrix.identity()
+     * >>> matrix
+     * valarray([1., 0., 0., 0., 1., 0., 0., 0., 1.],
+     *          [3])
      */
     void identity() {
         this->clear();
@@ -91,50 +128,108 @@ class Matrix {
     }
 
     /**
-     * The function "diagonal" returns a slice of the "data" array containing the diagonal elements.
+     * Returns a view representing the diagonal elements of the matrix.
      *
-     * @return a `std::slice_array<double>`.
+     * This slices the underlying data array to extract the elements
+     * where row index equals column index, corresponding to the diagonal.
+     *
+     * Example:
+     * >>> matrix = Matrix(3, 0.0)
+     * >>> matrix(0, 0) = 1.0
+     * >>> matrix(1, 1) = 2.0
+     * >>> matrix(2, 2) = 3.0
+     * >>> matrix.diagonal()
+     * valarray([1., 2., 3.], 3)
+     *
+     * @return View of the diagonal elements as a slice_array.
      */
     std::slice_array<double> diagonal() { return this->data[std::slice(0, ndim, ndim + 1)]; }
 
     /**
-     * The function "secondary_diagonal" returns a slice of the "data" array containing the elements
-     * on the secondary diagonal.
+     * Returns a view representing the secondary diagonal elements of the matrix.
      *
-     * @return a `std::slice_array<double>`.
+     * This slices the underlying data array to extract the elements
+     * where row index + column index equals ndim-1, corresponding to the secondary diagonal.
+     *
+     * Example:
+     * >>> matrix = Matrix(3, 0.0)
+     * >>> matrix(0, 0) = 1.0
+     * >>> matrix(1, 1) = 2.0
+     * >>> matrix(2, 2) = 3.0
+     * >>> matrix.secondary_diagonal()
+     * valarray([0., 0.], 2)
+     *
+     * @return View of the secondary diagonal elements as a slice_array.
      */
     std::slice_array<double> secondary_diagonal() {
         return this->data[std::slice(ndim - 1, ndim, ndim - 1)];
     }
 
     /**
-     * The function "row" returns a slice of a 2D array, representing a specific row.
+     * Returns a view representing a row of the matrix.
      *
-     * @param[in] row The parameter "row" is of type std::size_t and represents the index of the row
-     * that you want to access in the data array.
+     * This slices the underlying data array to extract the elements
+     * of the specified row index.
      *
-     * @return a `std::slice_array<double>`.
+     * Example:
+     * >>> matrix = Matrix(3, 0.0)
+     * >>> matrix(0, 0) = 1.0
+     * >>> matrix(1, 1) = 2.0
+     * >>> matrix(2, 2) = 3.0
+     * >>> matrix.row(0)
+     * valarray([1., 0., 0.], 3)
+     * >>> matrix.row(1)
+     * valarray([0., 2., 0.], 3)
+     * >>> matrix.row(2)
+     * valarray([0., 0., 3.], 3)
+     *
+     * @param[in] row - The index of the row to extract.
+     * @return View of the row elements as a slice_array.
      */
     std::slice_array<double> row(std::size_t row) {
         return this->data[std::slice(ndim * row, ndim, 1)];
     }
 
     /**
-     * The function "column" returns a slice of a 2D array, representing a specific column.
+     * Returns a view representing a column of the matrix.
      *
-     * @param[in] col The parameter "col" is of type std::size_t and represents the index of the
-     * column that you want to access in the data array.
+     * This slices the underlying data array to extract the elements
+     * of the specified column index.
      *
-     * @return a `std::slice_array<double>`.
+     * Example:
+     * >>> matrix = Matrix(3, 0.0)
+     * >>> matrix(0, 0) = 1.0
+     * >>> matrix(1, 1) = 2.0
+     * >>> matrix(2, 2) = 3.0
+     * >>> matrix.column(0)
+     * valarray([1., 0., 0.], 3)
+     * >>> matrix.column(1)
+     * valarray([0., 2., 0.], 3)
+     * >>> matrix.column(2)
+     * valarray([0., 0., 3.], 3)
+     *
+     * @param[in] col - The index of the column to extract.
+     * @return View of the column elements as a slice_array.
      */
     std::slice_array<double> column(std::size_t col) {
         return this->data[std::slice(col, ndim, ndim)];
     }
 
     /**
-     * The function calculates the trace of a matrix.
+     * Calculates the trace of the matrix, which is the sum of the diagonal elements.
      *
-     * @return a double value.
+     * The trace is computed by slicing the data array to extract just the diagonal
+     * elements, and then summing those elements.
+     *
+     * Example:
+     * >>> matrix = Matrix(3, 0.0)
+     * >>> matrix(0, 0) = 1.0
+     * >>> matrix(1, 1) = 2.0
+     * >>> matrix(2, 2) = 3.0
+     * >>> matrix.trace()
+     * 6.0
+     *
+     * @return The trace of the matrix as a double.
      */
     double trace() const { return this->data[std::slice(0, ndim, ndim + 1)].sum(); }
 };
