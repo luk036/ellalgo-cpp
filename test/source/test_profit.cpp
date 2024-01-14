@@ -48,7 +48,7 @@ TEST_CASE("Profit Test") {
     }();
 
     [&]() {
-        Ell<Vec> ellip{100.0, Vec{2.0, 0.0}};
+        Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleQ omega{unit_price, A, limit, a, v};
         double gamma = 0.0;
         const auto result = cutting_plane_optim_q(omega, ellip, gamma);
@@ -56,7 +56,7 @@ TEST_CASE("Profit Test") {
         const auto &num_iters = std::get<1>(result);
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
-        CHECK_EQ(num_iters, 33);
+        CHECK_EQ(num_iters, 29);
     }();
 }
 
