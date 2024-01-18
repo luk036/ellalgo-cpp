@@ -33,7 +33,6 @@ target("test_ellalgo")
 --     add_deps("EllAlgo")
 --     add_includedirs("include", {public = true})
 --     add_files("bench/BM_ell.cpp")
---     add_packages("range-v3")
 --     add_packages("benchmark")
 
 -- target("test_lmi")
