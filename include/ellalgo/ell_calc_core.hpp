@@ -28,6 +28,9 @@ class EllCalcCore {
      * Constructor for EllCalcCore class.
      * Initializes member variables based on input ndim.
      *
+     * Example:
+     * EllCalcCore E(2);
+     *
      * @param[in] ndim Number of dimensions for EllCalcCore object.
      */
     explicit EllCalcCore(size_t ndim)
@@ -73,6 +76,9 @@ class EllCalcCore {
      * value of tau. It computes intermediate values b0b1 and eta, then calls
      * calc_parallel_cut_fast() to calculate rho, sigma, delta which are
      * returned as a tuple.
+     *
+     * Example:
+     * auto [rho, sigma, delta] = E.calc_parallel_cut(beta0, beta1, tsq);
      *
      * @param[in] beta0 The parameter `beta0` represents the value of beta for the first variable.
      * @param[in] beta1 The parameter `beta1` represents a value used in the calculation.
