@@ -1,4 +1,5 @@
 // -*- coding: utf-8 -*-
+#define DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #include <doctest/doctest.h>  // for ResultBuilder, Approx, CHECK_EQ
 
 #include <cmath>                      // for exp

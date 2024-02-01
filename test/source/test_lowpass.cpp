@@ -1,4 +1,5 @@
 // -*- coding: utf-8 -*-
+#define DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #include <doctest/doctest.h>  // for ResultBuilder, CHECK
 
 #include <ellalgo/cutting_plane.hpp>           // for cutting_plane_optim

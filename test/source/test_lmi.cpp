@@ -1,6 +1,7 @@
 /*
  *  Distributed under the MIT License (See accompanying file /LICENSE )
  */
+#define DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #include <doctest/doctest.h>  // for ResultBuilder, CHECK, TestCase
 
 #include <ellalgo/cutting_plane.hpp>       // for cutting_plane_optim

@@ -1,3 +1,4 @@
+#define DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #include <doctest/doctest.h>  // for ResultBuilder, TestCase, CHECK
 
 #include <ellalgo/oracles/ldlt_mgr.hpp>  // for LDLTMgr
