@@ -35,7 +35,7 @@ enable_testing()
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   target_compile_options(EllAlgo PUBLIC -Wall -Wextra)
 elseif(MSVC)
-  target_compile_options(EllAlgo PUBLIC /W4 /WX /wd4819 /wd4146 /wd4127)
+  target_compile_options(EllAlgo PUBLIC /W4 /WX /wd4819 /wd4146 /wd4127 /wd4996)
   # target_compile_definitions(EllAlgoTests PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
 endif()
 
