@@ -42,7 +42,7 @@ auto run_lowpass(bool use_parallel_cut) {
 // TEST_CASE("Lowpass Filter (w/ parallel cut)") {
 static void lowpass_w_parallel_cut(benchmark::State &state) {
     while (state.KeepRunning()) {
-        const auto result = run_lowpass(true);
+        auto result = run_lowpass(true);
         benchmark::DoNotOptimize(result);
     }
 }
@@ -52,7 +52,7 @@ BENCHMARK(lowpass_w_parallel_cut);
 // TEST_CASE("Lowpass Filter (w/o parallel cut)") {
 static void lowpass_wo_parallel_cut(benchmark::State &state) {
     while (state.KeepRunning()) {
-        const auto result = run_lowpass(false);
+        auto result = run_lowpass(false);
         benchmark::DoNotOptimize(result);
     }
 }

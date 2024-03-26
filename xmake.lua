@@ -2,7 +2,7 @@ set_languages("c++14")
 
 add_rules("mode.debug", "mode.release", "mode.coverage")
 add_requires("doctest", {alias = "doctest"})
-add_requires("fmt 9.1.0", {alias = "fmt"})
+add_requires("fmt", {alias = "fmt"})
 add_requires("benchmark", {alias = "benchmark"})
 
 if is_mode("coverage") then
@@ -28,20 +28,26 @@ target("test_ellalgo")
     add_files("test/source/*.cpp")
     add_packages("doctest", "fmt")
 
--- target("test_ell")
---     set_kind("binary")
---     add_deps("EllAlgo")
---     add_includedirs("include", {public = true})
---     add_files("bench/BM_ell.cpp")
---     add_packages("benchmark")
+target("test_ell")
+    set_kind("binary")
+    add_deps("EllAlgo")
+    add_includedirs("include", {public = true})
+    add_files("bench/BM_ell.cpp")
+    add_packages("benchmark")
 
--- target("test_lmi")
---     set_kind("binary")
---     add_deps("EllAlgo")
---     add_includedirs("include", {public = true})
---     add_files("bench/BM_lmi.cpp")
---     add_packages("range-v3")
---     add_packages("benchmark")
+target("test_lmi")
+    set_kind("binary")
+    add_deps("EllAlgo")
+    add_includedirs("include", {public = true})
+    add_files("bench/BM_lmi.cpp")
+    add_packages("benchmark")
+
+target("test_lowpass")
+    set_kind("binary")
+    add_deps("EllAlgo")
+    add_includedirs("include", {public = true})
+    add_files("bench/BM_lowpass.cpp")
+    add_packages("benchmark")
 
 
 -- If you want to known more usage about xmake, please see https://xmake.io

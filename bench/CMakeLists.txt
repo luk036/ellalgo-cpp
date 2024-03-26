@@ -14,7 +14,7 @@ include(../cmake/specific.cmake)
 CPMAddPackage(
   NAME benchmark
   GITHUB_REPOSITORY google/benchmark
-  VERSION 1.7.1
+  VERSION 1.8.3
   OPTIONS "BENCHMARK_ENABLE_TESTING Off"
 )
 
