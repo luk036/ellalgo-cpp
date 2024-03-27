@@ -71,11 +71,11 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a43322b727396f7fbc3ef48eeac133096" class="m-doc">LDLTMgr</a>(</span><span class="m-doc-wrap">size_t N) <span class="m-label m-flat m-info">explicit</span> </span>
+              <span class="m-doc-wrap-bumper"><a href="#a43322b727396f7fbc3ef48eeac133096" class="m-doc">LDLTMgr</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> N) <span class="m-label m-flat m-info">explicit</span> </span>
             </dt>
             <dd>Construct a new ldlt ext object.</dd>
             <dt id="a2ce9d8ddc0b81c073037b545fae6e2e3">
-              <span class="m-doc-wrap-bumper"><a href="#a2ce9d8ddc0b81c073037b545fae6e2e3" class="m-doc-self">LDLTMgr</a>(</span><span class="m-doc-wrap">const <a href="class_l_d_l_t_mgr.html" class="m-doc">LDLTMgr</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#a2ce9d8ddc0b81c073037b545fae6e2e3" class="m-doc-self">LDLTMgr</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="class_l_d_l_t_mgr.html" class="m-doc">LDLTMgr</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
             </dt>
             <dd><span></span></dd>
             <dt id="a189af948cc280cea59674433317c1fca">
@@ -88,43 +88,43 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt id="a1b346173191ab42aa0360207391bb73d">
-              <span class="m-doc-wrap-bumper">auto <a href="#a1b346173191ab42aa0360207391bb73d" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="class_l_d_l_t_mgr.html" class="m-doc">LDLTMgr</a>&amp;) -&gt; <a href="class_l_d_l_t_mgr.html" class="m-doc">LDLTMgr</a>&amp; <span class="m-label m-flat m-danger">deleted</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1b346173191ab42aa0360207391bb73d" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="class_l_d_l_t_mgr.html" class="m-doc">LDLTMgr</a>&amp;) -&gt; <a href="class_l_d_l_t_mgr.html" class="m-doc">LDLTMgr</a>&amp; <span class="m-label m-flat m-danger">deleted</span></span>
             </dt>
             <dd><span></span></dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename Mat&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2af45dc9628f487ab821aff6f3fc0794" class="m-doc">factorize</a>(</span><span class="m-doc-wrap">const Mat&amp; A) -&gt; bool -&gt; auto</span>
+              <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> Mat&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2af45dc9628f487ab821aff6f3fc0794" class="m-doc">factorize</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Mat&amp; A) -&gt; bool -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>Perform LDLT Factorization.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9a0315be1e868d82b607be9feb3c1f47" class="m-doc">factor</a>(</span><span class="m-doc-wrap">std::function&lt;double(size_t, size_t)&gt; get_matrix_elem) -&gt; bool -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa15b2340f83c901f5f214bedbb07855f" class="m-doc">factor</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::function&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>(<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>, <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>)&gt;&amp; get_matrix_elem) -&gt; bool -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>Perform LDLT Factorization (Lazy evaluation)</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#afc994e7c46e9c9bd159ab066e8393c24" class="m-doc">factor_with_allow_semidefinite</a>(</span><span class="m-doc-wrap">std::function&lt;double(size_t, size_t)&gt; get_matrix_elem) -&gt; bool -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aee4caecda02beb560520a4a02ffb3444" class="m-doc">factor_with_allow_semidefinite</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::function&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>(<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>, <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>)&gt;&amp; get_matrix_elem) -&gt; bool -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>Perform LDLT Factorization (Lazy evaluation)</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0a2d047ce3d930da880474c9a4aff9f2" class="m-doc">is_spd</a>(</span><span class="m-doc-wrap">) const noexcept -&gt; bool -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0a2d047ce3d930da880474c9a4aff9f2" class="m-doc">is_spd</a>(</span><span class="m-doc-wrap">) const noexcept -&gt; bool -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>Is $A$ symmetric positive definite (spd)</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0c2f0d8bd99e16c64103b5d1da966dcb" class="m-doc">witness</a>(</span><span class="m-doc-wrap">) -&gt; double -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0c2f0d8bd99e16c64103b5d1da966dcb" class="m-doc">witness</a>(</span><span class="m-doc-wrap">) -&gt; double -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>witness that certifies $A$ is not symmetric positive definite (spd)</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename Arr036&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3a8724268ebae4c5a9183f8acb0742f1" class="m-doc">set_witness_vec</a>(</span><span class="m-doc-wrap">Arr036&amp; v) const -&gt; void -&gt; auto</span>
+              <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr036</a>&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3a8724268ebae4c5a9183f8acb0742f1" class="m-doc">set_witness_vec</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr036</a>&amp; v) const -&gt; void -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>Set the witness vec object.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename Mat&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#af67c2bccbf77125b4f7a2daa15a05024" class="m-doc">sym_quad</a>(</span><span class="m-doc-wrap">const Mat&amp; A) const -&gt; double -&gt; auto</span>
+              <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> Mat&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#af67c2bccbf77125b4f7a2daa15a05024" class="m-doc">sym_quad</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Mat&amp; A) const -&gt; double -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>Calculate v&#x27;*{A}(p,p)*v.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename Mat&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7bbba061b1b4ded4cdfca5bf55f3068b" class="m-doc">sqrt</a>(</span><span class="m-doc-wrap">Mat&amp; M) -&gt; void -&gt; auto</span>
+              <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> Mat&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7bbba061b1b4ded4cdfca5bf55f3068b" class="m-doc">sqrt</a>(</span><span class="m-doc-wrap">Mat&amp; M) -&gt; void -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>Return upper triangular matrix $R$ where $A = R^T R$.</dd>
           </dl>
@@ -141,7 +141,7 @@
             </dt>
             <dd>witness vector</dd>
             <dt id="ad30dd7a02d63bd650296fb0d23878103">
-              const size_t <a href="#ad30dd7a02d63bd650296fb0d23878103" class="m-doc-self">_n</a>
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> <a href="#ad30dd7a02d63bd650296fb0d23878103" class="m-doc-self">_n</a>
             </dt>
             <dd>dimension</dd>
           </dl>
@@ -150,7 +150,7 @@
           <h2>Function documentation</h2>
           <section class="m-doc-details" id="a43322b727396f7fbc3ef48eeac133096"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a43322b727396f7fbc3ef48eeac133096" class="m-doc-self">LDLTMgr</a>(</span><span class="m-doc-wrap">size_t N) <span class="m-label m-info">explicit</span> </span></span>
+              <span class="m-doc-wrap-bumper"> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a43322b727396f7fbc3ef48eeac133096" class="m-doc-self">LDLTMgr</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> N) <span class="m-label m-info">explicit</span> </span></span>
             </h3>
             <p>Construct a new ldlt ext object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -168,9 +168,9 @@
           <section class="m-doc-details" id="a2af45dc9628f487ab821aff6f3fc0794"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Mat&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> Mat&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2af45dc9628f487ab821aff6f3fc0794" class="m-doc-self">factorize</a>(</span><span class="m-doc-wrap">const Mat&amp; A) -&gt; bool</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2af45dc9628f487ab821aff6f3fc0794" class="m-doc-self">factorize</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Mat&amp; A) -&gt; bool</span></span>
             </h3>
             <p>Perform LDLT Factorization.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -186,9 +186,9 @@
             </table>
 <p>The <code>factorize</code> function is a template function that takes a symmetric matrix <code>A</code> as input and performs the LDLT factorization on it. It calls the <code>factor</code> function with a lambda function as an argument. The lambda function takes the indices <code>i</code> and <code>j</code> and returns the element <code>A(i, j)</code> of the matrix <code>A</code>. The <code>factor</code> function performs the actual factorization using the provided lambda function. The <code>factorize</code> function returns a boolean value indicating whether the factorization was successful or not.</p>
           </div></section>
-          <section class="m-doc-details" id="a9a0315be1e868d82b607be9feb3c1f47"><div>
+          <section class="m-doc-details" id="aa15b2340f83c901f5f214bedbb07855f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9a0315be1e868d82b607be9feb3c1f47" class="m-doc-self">factor</a>(</span><span class="m-doc-wrap">std::function&lt;double(size_t, size_t)&gt; get_matrix_elem) -&gt; bool</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa15b2340f83c901f5f214bedbb07855f" class="m-doc-self">factor</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::function&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>(<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>, <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>)&gt;&amp; get_matrix_elem) -&gt; bool</span></span>
             </h3>
             <p>Perform LDLT Factorization (Lazy evaluation)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -210,9 +210,9 @@
             </table>
 <p>See also: <a href="class_l_d_l_t_mgr.html#a2af45dc9628f487ab821aff6f3fc0794" class="m-doc">factorize()</a></p>
           </div></section>
-          <section class="m-doc-details" id="afc994e7c46e9c9bd159ab066e8393c24"><div>
+          <section class="m-doc-details" id="aee4caecda02beb560520a4a02ffb3444"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afc994e7c46e9c9bd159ab066e8393c24" class="m-doc-self">factor_with_allow_semidefinite</a>(</span><span class="m-doc-wrap">std::function&lt;double(size_t, size_t)&gt; get_matrix_elem) -&gt; bool</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aee4caecda02beb560520a4a02ffb3444" class="m-doc-self">factor_with_allow_semidefinite</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::function&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>(<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>, <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>)&gt;&amp; get_matrix_elem) -&gt; bool</span></span>
             </h3>
             <p>Perform LDLT Factorization (Lazy evaluation)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -236,7 +236,7 @@
           </div></section>
           <section class="m-doc-details" id="a0a2d047ce3d930da880474c9a4aff9f2"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0a2d047ce3d930da880474c9a4aff9f2" class="m-doc-self">is_spd</a>(</span><span class="m-doc-wrap">) const noexcept -&gt; bool</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0a2d047ce3d930da880474c9a4aff9f2" class="m-doc-self">is_spd</a>(</span><span class="m-doc-wrap">) const noexcept -&gt; bool</span></span>
             </h3>
             <p>Is $A$ symmetric positive definite (spd)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -250,7 +250,7 @@
           </div></section>
           <section class="m-doc-details" id="a0c2f0d8bd99e16c64103b5d1da966dcb"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c2f0d8bd99e16c64103b5d1da966dcb" class="m-doc-self">witness</a>(</span><span class="m-doc-wrap">) -&gt; double</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c2f0d8bd99e16c64103b5d1da966dcb" class="m-doc-self">witness</a>(</span><span class="m-doc-wrap">) -&gt; double</span></span>
             </h3>
             <p>witness that certifies $A$ is not symmetric positive definite (spd)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -266,27 +266,18 @@
           <section class="m-doc-details" id="a3a8724268ebae4c5a9183f8acb0742f1"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr036&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr036</a>&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3a8724268ebae4c5a9183f8acb0742f1" class="m-doc-self">set_witness_vec</a>(</span><span class="m-doc-wrap">Arr036&amp; v) const -&gt; void</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3a8724268ebae4c5a9183f8acb0742f1" class="m-doc-self">set_witness_vec</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr036</a>&amp; v) const -&gt; void</span></span>
             </h3>
             <p>Set the witness vec object.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">Arr036</td>
-                  <td></td>
-                </tr>
-              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>v</td>
+                  <td style="width: 1%">v&nbsp;<span class="m-label m-flat m-info">in</span></td>
                   <td></td>
                 </tr>
               </tbody>
@@ -295,9 +286,9 @@
           <section class="m-doc-details" id="af67c2bccbf77125b4f7a2daa15a05024"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Mat&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> Mat&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af67c2bccbf77125b4f7a2daa15a05024" class="m-doc-self">sym_quad</a>(</span><span class="m-doc-wrap">const Mat&amp; A) const -&gt; double</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af67c2bccbf77125b4f7a2daa15a05024" class="m-doc-self">sym_quad</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Mat&amp; A) const -&gt; double</span></span>
             </h3>
             <p>Calculate v&#x27;*{A}(p,p)*v.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -330,9 +321,9 @@
           <section class="m-doc-details" id="a7bbba061b1b4ded4cdfca5bf55f3068b"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Mat&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> Mat&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7bbba061b1b4ded4cdfca5bf55f3068b" class="m-doc-self">sqrt</a>(</span><span class="m-doc-wrap">Mat&amp; M) -&gt; void</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7bbba061b1b4ded4cdfca5bf55f3068b" class="m-doc-self">sqrt</a>(</span><span class="m-doc-wrap">Mat&amp; M) -&gt; void</span></span>
             </h3>
             <p>Return upper triangular matrix $R$ where $A = R^T R$.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -402,7 +393,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.7 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.10.0 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

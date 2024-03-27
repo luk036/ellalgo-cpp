@@ -84,10 +84,6 @@
             <dt id="af6c5aa64702e88776265c19b9df2d5c3">
               <span class="m-doc-wrap-bumper">enum class <a href="#af6c5aa64702e88776265c19b9df2d5c3" class="m-doc-self">CutStatus</a> { </span><span class="m-doc-wrap"><a href="#af6c5aa64702e88776265c19b9df2d5c3a505a83f220c02df2f85c3810cd9ceb38" class="m-doc">Success</a>,
               <a href="#af6c5aa64702e88776265c19b9df2d5c3a14cb334c2d094a7c51925522ad59094e" class="m-doc">NoSoln</a>,
-              <a href="#af6c5aa64702e88776265c19b9df2d5c3aee6f2379910f6e96217f09fec320774f" class="m-doc">SmallEnough</a>,
-              <a href="#af6c5aa64702e88776265c19b9df2d5c3adba5be1c82e01134af1d12735dd4432c" class="m-doc">NoEffect</a>,
-              <a href="#af6c5aa64702e88776265c19b9df2d5c3a505a83f220c02df2f85c3810cd9ceb38" class="m-doc">Success</a>,
-              <a href="#af6c5aa64702e88776265c19b9df2d5c3a14cb334c2d094a7c51925522ad59094e" class="m-doc">NoSoln</a>,
               <a href="#af6c5aa64702e88776265c19b9df2d5c3adba5be1c82e01134af1d12735dd4432c" class="m-doc">NoEffect</a>,
               <a href="#af6c5aa64702e88776265c19b9df2d5c3a88183b946cc5f0e8c96b2e66e1c74a7e" class="m-doc">Unknown</a> }</span>
             </dt>
@@ -98,23 +94,23 @@
           <h2><a href="#typedef-members">Typedefs</a></h2>
           <dl class="m-doc">
             <dt id="ac22991ee7a4279dc2449ab7658409beb">
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              using <a href="#ac22991ee7a4279dc2449ab7658409beb" class="m-doc-self">ArrayType</a> = typename T::ArrayType
+              <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> T&gt;</div>
+              using <a href="#ac22991ee7a4279dc2449ab7658409beb" class="m-doc-self">ArrayType</a> = <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> T::ArrayType
             </dt>
             <dd><span></span></dd>
             <dt id="ac13ba9f192534367fb76325f823606b7">
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              using <a href="#ac13ba9f192534367fb76325f823606b7" class="m-doc-self">CutChoices</a> = typename T::CutChoices
+              <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> T&gt;</div>
+              using <a href="#ac13ba9f192534367fb76325f823606b7" class="m-doc-self">CutChoices</a> = <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> T::CutChoices
             </dt>
             <dd><span></span></dd>
-            <dt id="a011b8b3b14b45b9e62159f862115fe9a">
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              using <a href="#a011b8b3b14b45b9e62159f862115fe9a" class="m-doc-self">CutConcept</a> = std::pair&lt;<a href="ell__config_8hpp.html#ac22991ee7a4279dc2449ab7658409beb" class="m-doc">ArrayType</a>&lt;T&gt;, <a href="ell__config_8hpp.html#ac13ba9f192534367fb76325f823606b7" class="m-doc">CutChoices</a>&lt;T&gt;&gt;
+            <dt id="a16aa5e7b6182113f6bc349543c847eb8">
+              <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> T&gt;</div>
+              using <a href="#a16aa5e7b6182113f6bc349543c847eb8" class="m-doc-self">CutConcept</a> = <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">std::<wbr />pair</a>&lt;<a href="ell__config_8hpp.html#ac22991ee7a4279dc2449ab7658409beb" class="m-doc">ArrayType</a>&lt;T&gt;, <a href="ell__config_8hpp.html#ac13ba9f192534367fb76325f823606b7" class="m-doc">CutChoices</a>&lt;T&gt;&gt;
             </dt>
             <dd><span></span></dd>
             <dt id="ad4c901df98c58d7d62f9923d8942072d">
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              using <a href="#ad4c901df98c58d7d62f9923d8942072d" class="m-doc-self">RetQ</a> = std::tuple&lt;<a href="ell__config_8hpp.html#a011b8b3b14b45b9e62159f862115fe9a" class="m-doc">CutConcept</a>&lt;T&gt;, bool, <a href="ell__config_8hpp.html#ac22991ee7a4279dc2449ab7658409beb" class="m-doc">ArrayType</a>&lt;T&gt;, bool&gt;
+              <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> T&gt;</div>
+              using <a href="#ad4c901df98c58d7d62f9923d8942072d" class="m-doc-self">RetQ</a> = <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">std::<wbr />tuple</a>&lt;<a href="ell__config_8hpp.html#a16aa5e7b6182113f6bc349543c847eb8" class="m-doc">CutConcept</a>&lt;T&gt;, <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">bool</a>, <a href="ell__config_8hpp.html#ac22991ee7a4279dc2449ab7658409beb" class="m-doc">ArrayType</a>&lt;T&gt;, <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">bool</a>&gt;
             </dt>
             <dd><span></span></dd>
           </dl>
@@ -163,7 +159,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.7 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.10.0 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
