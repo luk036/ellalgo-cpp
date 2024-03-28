@@ -1,4 +1,3 @@
-#include <cassert>
 #include <cmath>                      // for sqrt
 #include <ellalgo/ell_calc_core.hpp>  // for EllCalcCore
 #include <tuple>                      // for tuple
@@ -20,33 +19,6 @@
  *             |   |    |          |
  *            "-τ" "-β" "-β"      +τ
  *                   1    0
- *
- *             β  + β
- *         _    0    1
- *         β = ───────
- *                2
- *
- *             1   ⎛ 2          ⎞       _2
- *         h = ─ ⋅ ⎜τ  + β  ⋅ β ⎟ + n ⋅ β
- *             2   ⎝      0    1⎠
- *                    _____________________
- *                   ╱ 2                 _2
- *         k = h + ╲╱ h  - (n + 1) ⋅ η ⋅ β
- *
- *               1     η
- *         σ = ───── = ─
- *             μ + 1   k
- *
- *         1     η
- *         ─ = ─────
- *         μ   k - η
- *
- *             _
- *         ϱ = β ⋅ σ
- *
- *              2    2   1   ⎛_2              ⎞
- *         δ ⋅ τ  = τ  + ─ ⋅ ⎜β  ⋅ σ - β  ⋅ β ⎟
- *                       μ   ⎝          0    1⎠
  *
  * @param[in] beta0 The parameter `beta0` represents the value of beta for the first variable.
  * @param[in] beta1 The parameter `beta1` represents a value used in the calculation.
@@ -95,28 +67,6 @@ auto EllCalcCore::calc_parallel_cut_fast(const double& beta0, const double& beta
  *            "-τ" "-β"  0        +τ
  *                   1
  *
- *          2    2    2
- *         α  = β  / τ
- *
- *             n    2
- *         k = ─ ⋅ α
- *             2
- *                    ___________
- *                   ╱ 2        2
- *         r = k + ╲╱ k  + 1 - α
- *
- *               β
- *         ϱ = ─────
- *             r + 1
- *
- *               2
- *         σ = ─────
- *             r + 1
- *
- *                 r
- *         δ = ─────────
- *             r - 1 / n
- *
  * @param[in] beta1 The parameter `beta1` represents a double value.
  * @param[in] tsq tsq is a constant value representing the square of the variable tau.
  *
@@ -157,21 +107,6 @@ auto EllCalcCore::calc_parallel_central_cut(const double& beta1, const double& t
  *          |      |            |
  *         "-τ"     "-β"       +τ
  *
- *          η = τ + n ⋅ β
- *
- *                η
- *          ϱ = ─────
- *              n + 1
- *
- *              2 ⋅ ϱ
- *          σ = ─────
- *              τ + β
- *
- *                 2       2    2
- *                n       τ  - β
- *          δ = ────── ⋅  ───────
- *               2           2
- *              n  - 1      τ
  *
  * @param[in] beta The parameter "beta" represents a value used in the calculation. It is a double
  * value.
@@ -211,19 +146,6 @@ auto EllCalcCore::calc_bias_cut_fast(const double& beta, const double& tau, cons
  *        |         |         |
  *       "-τ"       0        +τ
  *
- *              2
- *        σ = ─────
- *            n + 1
- *
- *              τ
- *        ϱ = ─────
- *            n + 1
- *
- *               2
- *              n
- *        δ = ──────
- *             2
- *            n  - 1
  *
  * @param[in] tau tau is a constant value of type double. It represents the square of the variable
  * tau.

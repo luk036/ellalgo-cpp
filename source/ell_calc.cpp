@@ -60,7 +60,7 @@ auto EllCalc::calc_parallel_central_cut(const double &beta1, const double &tsq) 
     if (tsq < beta1 * beta1 || !this->use_parallel_cut) {
         return this->calc_central_cut(tsq);
     }
-    auto &&result = this->_helper.calc_central_cut(std::sqrt(tsq));
+    auto &&result = this->_helper.calc_parallel_central_cut(beta1, tsq);
     return {CutStatus::Success, result};
     // this->_mu ???
 }

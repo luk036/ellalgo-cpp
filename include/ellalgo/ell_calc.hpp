@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cassert>
-#include <cmath>
 #include <tuple>
 
 #include "ell_calc_core.hpp"
