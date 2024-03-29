@@ -3,7 +3,7 @@
 #include <doctest/doctest.h>  // for ResultBuilder, TestCase, CHECK_EQ
 
 #include <ellalgo/ell_core.hpp>  // for EllCore
-#include <tuple>                      // for get, tuple
+#include <tuple>                 // for get, tuple
 
 using Vec = std::valarray<double>;
 

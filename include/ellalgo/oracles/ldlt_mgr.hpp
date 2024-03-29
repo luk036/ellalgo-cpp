@@ -31,7 +31,7 @@ class LDLTMgr {
     using Rng = std::pair<size_t, size_t>;
 
   public:
-    Rng pos{0U, 0U};    //!< the rows where the process starts and stops
+    Rng pos{0U, 0U};  //!< the rows where the process starts and stops
     Vec witness_vec;  //!< witness vector
     const size_t _n;  //!< dimension
 

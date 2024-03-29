@@ -3,7 +3,7 @@
 #include <doctest/doctest.h>  // for ResultBuilder, TestCase, CHECK_EQ
 
 #include <ellalgo/ell_calc.hpp>  // for EllCalc
-#include <tuple>                      // for get, tuple
+#include <tuple>                 // for get, tuple
 
 TEST_CASE("EllCalc, test central cut") {
     auto ell_calc = EllCalc(4);
