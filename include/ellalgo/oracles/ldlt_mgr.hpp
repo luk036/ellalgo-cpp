@@ -24,14 +24,14 @@
  *  - Option allow semidefinite
  *  - A matrix A in R^{m x m} is positive definite iff v' A v > 0
  *      for all v in R^n.
- *  - O(p^2) per iteration, independent of N
+ *  - O(pos^2) per iteration, independent of N
  */
 class LDLTMgr {
     using Vec = std::valarray<double>;
     using Rng = std::pair<size_t, size_t>;
 
   public:
-    Rng p{0U, 0U};    //!< the rows where the process starts and stops
+    Rng pos{0U, 0U};    //!< the rows where the process starts and stops
     Vec witness_vec;  //!< witness vector
     const size_t _n;  //!< dimension
 
@@ -97,7 +97,7 @@ class LDLTMgr {
      * @return true
      * @return false
      */
-    auto is_spd() const noexcept -> bool { return this->p.second == 0; }
+    auto is_spd() const noexcept -> bool { return this->pos.second == 0; }
 
     /**
      * @brief witness that certifies $A$ is not symmetric positive definite
@@ -124,7 +124,7 @@ class LDLTMgr {
     }
 
     /**
-     * @brief Calculate v'*{A}(p,p)*v
+     * @brief Calculate v'*{A}(pos,pos)*v
      *
      * @tparam Mat
      * @param[in] A
@@ -133,9 +133,9 @@ class LDLTMgr {
     template <typename Mat> auto sym_quad(const Mat &A) const -> double {
         auto res = double{};
         const auto &v = this->witness_vec;
-        // const auto& [start, stop] = this->p;
-        const auto &start = this->p.first;
-        const auto &stop = this->p.second;
+        // const auto& [start, stop] = this->pos;
+        const auto &start = this->pos.first;
+        const auto &stop = this->pos.second;
         for (auto i = start; i != stop; ++i) {
             auto s = 0.0;
             for (auto j = i + 1; j != stop; ++j) {

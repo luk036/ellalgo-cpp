@@ -2,11 +2,6 @@
 #include <doctest/doctest.h>  // for ResultBuilder, TestCase, CHECK
 
 #include <ellalgo/oracles/ldlt_mgr.hpp>  // for LDLTMgr
-// #include <xtensor/xarray.hpp>          // for xarray_container
-// #include <xtensor/xcontainer.hpp>      // for xcontainer<>::inner_shape_type
-// #include <xtensor/xlayout.hpp>         // for layout_type,
-// layout_type::row... #include <xtensor/xtensor_forward.hpp> // for xarray
-// #include <xtensor/xarray.hpp>
 #include <ellalgo/ell_matrix.hpp>
 
 using Vec = std::valarray<double>;
@@ -16,8 +11,8 @@ TEST_CASE("Cholesky test 1") {
     m1.row(0) = Vec{25.0, 15.0, -5.0};
     m1.row(1) = Vec{15.0, 18.0, 0.0};
     m1.row(2) = Vec{-5.0, 0.0, 11.0};
-    auto Q1 = LDLTMgr(3);
-    CHECK(Q1.factorize(m1));
+    auto ldlt_mgr = LDLTMgr(3);
+    CHECK(ldlt_mgr.factorize(m1));
 }
 
 TEST_CASE("Cholesky test 2") {
@@ -27,9 +22,11 @@ TEST_CASE("Cholesky test 2") {
     m2.row(2) = Vec{54.0, 86.0, -174.0, 134.0};
     m2.row(3) = Vec{42.0, 62.0, 134.0, -106.0};
 
-    auto Q2 = LDLTMgr(4);
-    Q2.factorize(m2);
-    CHECK(!Q2.is_spd());
+    auto ldlt_mgr = LDLTMgr(4);
+    ldlt_mgr.factorize(m2);
+    CHECK(!ldlt_mgr.is_spd());
+    ldlt_mgr.witness();
+    CHECK_EQ(ldlt_mgr.pos, std::pair<size_t, size_t>{0, 2});
 }
 
 TEST_CASE("Cholesky test 3") {
@@ -38,13 +35,106 @@ TEST_CASE("Cholesky test 3") {
     m3.row(1) = Vec{15.0, 18.0, 0.0};
     m3.row(2) = Vec{-5.0, 0.0, 11.0};
 
-    auto Q3 = LDLTMgr(3);
-    Q3.factorize(m3);
-    CHECK(!Q3.is_spd());
-    const auto ep3 = Q3.witness();
+    auto ldlt_mgr = LDLTMgr(3);
+    ldlt_mgr.factorize(m3);
+    CHECK(!ldlt_mgr.is_spd());
+    const auto ep = ldlt_mgr.witness();
     Vec v(0.0, 3);
-    Q3.set_witness_vec(v);
+    ldlt_mgr.set_witness_vec(v);
 
-    CHECK_EQ(ep3, 0.0);
+    CHECK_EQ(ldlt_mgr.pos, std::pair<size_t, size_t>{0, 1});
     CHECK_EQ(v[0], 1.0);
+    CHECK_EQ(ep, 0.0);
+}
+
+TEST_CASE("Cholesky test 4") {
+    Matrix m1(3U);
+    m1.row(0) = Vec{25.0, 15.0, -5.0};
+    m1.row(1) = Vec{15.0, 18.0, 0.0};
+    m1.row(2) = Vec{-5.0, 0.0, 11.0};
+    auto ldlt_mgr = LDLTMgr(3);
+    ldlt_mgr.factor_with_allow_semidefinite([&m1](size_t i, size_t j) { return m1(i, j); });
+    CHECK(ldlt_mgr.is_spd());
+}
+
+TEST_CASE("Cholesky test 5") {
+    Matrix m2(4U);
+    m2.row(0) = Vec{18.0, 22.0, 54.0, 42.0};
+    m2.row(1) = Vec{22.0, -70.0, 86.0, 62.0};
+    m2.row(2) = Vec{54.0, 86.0, -174.0, 134.0};
+    m2.row(3) = Vec{42.0, 62.0, 134.0, -106.0};
+
+    auto ldlt_mgr = LDLTMgr(4);
+    ldlt_mgr.factor_with_allow_semidefinite([&m2](size_t i, size_t j) { return m2(i, j); });
+    CHECK(!ldlt_mgr.is_spd());
+    ldlt_mgr.witness();
+    CHECK_EQ(ldlt_mgr.pos, std::pair<size_t, size_t>{0, 2});
+}
+
+TEST_CASE("Cholesky test 6") {
+    Matrix m3(3U);
+    m3.row(0) = Vec{0.0, 15.0, -5.0};
+    m3.row(1) = Vec{15.0, 18.0, 0.0};
+    m3.row(2) = Vec{-5.0, 0.0, 11.0};
+
+    auto ldlt_mgr = LDLTMgr(3);
+    ldlt_mgr.factor_with_allow_semidefinite([&m3](size_t i, size_t j) { return m3(i, j); });
+    CHECK(ldlt_mgr.is_spd());
+}
+
+TEST_CASE("Cholesky test 7") {
+    Matrix m3(3U);
+    m3.row(0) = Vec{0.0, 15.0, -5.0};
+    m3.row(1) = Vec{15.0, 18.0, 0.0};
+    m3.row(2) = Vec{-5.0, 0.0, -20.0};
+
+    auto ldlt_mgr = LDLTMgr(3);
+    ldlt_mgr.factor_with_allow_semidefinite([&m3](size_t i, size_t j) { return m3(i, j); });
+    CHECK(!ldlt_mgr.is_spd());
+    const auto ep = ldlt_mgr.witness();
+    CHECK_EQ(ep, 20.0);
+}
+
+TEST_CASE("Cholesky test 8") {
+    Matrix m3(3U);
+    m3.row(0) = Vec{0.0, 15.0, -5.0};
+    m3.row(1) = Vec{15.0, 18.0, 0.0};
+    m3.row(2) = Vec{-5.0, 0.0, 20.0};
+
+    auto ldlt_mgr = LDLTMgr(3);
+    CHECK(!ldlt_mgr.factorize(m3));
+}
+
+TEST_CASE("Cholesky test 9") {
+    Matrix m3(3U);
+    m3.row(0) = Vec{0.0, 15.0, -5.0};
+    m3.row(1) = Vec{15.0, 18.0, 0.0};
+    m3.row(2) = Vec{-5.0, 0.0, 20.0};
+
+    auto ldlt_mgr = LDLTMgr(3);
+    ldlt_mgr.factor_with_allow_semidefinite([&m3](size_t i, size_t j) { return m3(i, j); });
+    CHECK(ldlt_mgr.is_spd());
+}
+
+TEST_CASE("Cholesky test sqrt") {
+    Matrix mat(3U);
+    mat.row(0) = Vec{1.0, 0.5, 0.5};
+    mat.row(1) = Vec{0.5, 1.25, 0.75};
+    mat.row(2) = Vec{0.5, 0.75, 1.5};
+
+    auto ldlt_mgr = LDLTMgr(3);
+    ldlt_mgr.factor([&mat](size_t i, size_t j) { return mat(i, j); });
+    CHECK(ldlt_mgr.is_spd());
+
+    Matrix R(3);
+    ldlt_mgr.sqrt(R);
+    CHECK_EQ(R(0, 0), doctest::Approx(1.0));
+    CHECK_EQ(R(0, 1), doctest::Approx(0.5));
+    CHECK_EQ(R(0, 2), doctest::Approx(0.5));
+    CHECK_EQ(R(1, 0), doctest::Approx(0.0));
+    CHECK_EQ(R(1, 1), doctest::Approx(1.0));
+    CHECK_EQ(R(1, 2), doctest::Approx(0.5));
+    CHECK_EQ(R(2, 0), doctest::Approx(0.0));
+    CHECK_EQ(R(2, 1), doctest::Approx(0.0));
+    CHECK_EQ(R(2, 2), doctest::Approx(1.0));
 }

@@ -1,7 +1,6 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include <cmath>
 #include <tuple>
 #include <valarray>
 
