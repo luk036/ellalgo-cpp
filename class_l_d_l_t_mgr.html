@@ -66,7 +66,7 @@
             </li>
           </ul>
         </nav>
-<p><code><a href="class_l_d_l_t_mgr.html" class="m-doc">LDLTMgr</a></code> is a class that performs the LDLT factorization for a given symmetric matrix. The LDLT factorization decomposes a symmetric matrix A into the product of a lower triangular matrix L, a diagonal matrix D, and the transpose of L. This factorization is useful for solving linear systems and eigenvalue problems. The class provides methods to perform the factorization, check if the matrix is positive definite, calculate a witness vector if it is not positive definite, and calculate the symmetric quadratic form.</p><ul><li>LDL^T square-root-free version</li><li>Option allow semidefinite</li><li>A matrix A in R^{m x m} is positive definite iff v&#x27; A v &gt; 0 for all v in R^n.</li><li>O(p^2) per iteration, independent of N</li></ul>
+<p><code><a href="class_l_d_l_t_mgr.html" class="m-doc">LDLTMgr</a></code> is a class that performs the LDLT factorization for a given symmetric matrix. The LDLT factorization decomposes a symmetric matrix A into the product of a lower triangular matrix L, a diagonal matrix D, and the transpose of L. This factorization is useful for solving linear systems and eigenvalue problems. The class provides methods to perform the factorization, check if the matrix is positive definite, calculate a witness vector if it is not positive definite, and calculate the symmetric quadratic form.</p><ul><li>LDL^T square-root-free version</li><li>Option allow semidefinite</li><li>A matrix A in R^{m x m} is positive definite iff v&#x27; A v &gt; 0 for all v in R^n.</li><li>O(pos^2) per iteration, independent of N</li></ul>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -121,7 +121,7 @@
               <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> Mat&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#af67c2bccbf77125b4f7a2daa15a05024" class="m-doc">sym_quad</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Mat&amp; A) const -&gt; double -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
-            <dd>Calculate v&#x27;*{A}(p,p)*v.</dd>
+            <dd>Calculate v&#x27;*{A}(pos,pos)*v.</dd>
             <dt>
               <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> Mat&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a7bbba061b1b4ded4cdfca5bf55f3068b" class="m-doc">sqrt</a>(</span><span class="m-doc-wrap">Mat&amp; M) -&gt; void -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
@@ -132,8 +132,8 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a84c05debb0d72d3513543aa0b7ff04f5">
-              Rng <a href="#a84c05debb0d72d3513543aa0b7ff04f5" class="m-doc-self">p</a>
+            <dt id="ab7b9fd5fdbf7830d965976022a22c469">
+              Rng <a href="#ab7b9fd5fdbf7830d965976022a22c469" class="m-doc-self">pos</a>
             </dt>
             <dd>the rows where the process starts and stops</dd>
             <dt id="ae5b03da1529a27964723627bceb43166">
@@ -290,7 +290,7 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af67c2bccbf77125b4f7a2daa15a05024" class="m-doc-self">sym_quad</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Mat&amp; A) const -&gt; double</span></span>
             </h3>
-            <p>Calculate v&#x27;*{A}(p,p)*v.</p>
+            <p>Calculate v&#x27;*{A}(pos,pos)*v.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
