@@ -6,7 +6,6 @@
 #include <ellalgo/ell.hpp>                     // for Ell
 #include <ellalgo/oracles/lowpass_oracle.hpp>  // for LowpassOracle, filter_...
 #include <tuple>                               // for make_tuple, tuple
-#include <type_traits>                         // for move, add_const<>::type
 #include <valarray>
 
 using Vec = std::valarray<double>;
@@ -24,12 +23,13 @@ auto run_lowpass(bool use_parallel_cut) {
     auto ellip = Ell<Vec>(40.0, r0);
     auto result = create_lowpass_case(N);
     auto omega = result.first;
-    auto gamma = result.second;
+    auto spsq = result.second;
     auto options = Options();
 
     options.max_iters = 50000;
+    options.tolerance = 1e-14;
     ellip.set_use_parallel_cut(use_parallel_cut);
-    const auto result2 = cutting_plane_optim(omega, ellip, gamma, options);
+    const auto result2 = cutting_plane_optim(omega, ellip, spsq, options);
     const auto r = std::get<0>(result2);
     const auto num_iters = std::get<1>(result2);
 
@@ -46,7 +46,7 @@ TEST_CASE("Lowpass Filter (w/ parallel cut)") {
     const auto feasible = std::get<0>(result);
     const auto num_iters = std::get<1>(result);
     CHECK(feasible);
-    CHECK(num_iters <= 21800);
+    CHECK(num_iters <= 12468);
 }
 
 TEST_CASE("Lowpass Filter (w/o parallel cut)") {
@@ -54,6 +54,6 @@ TEST_CASE("Lowpass Filter (w/o parallel cut)") {
     const auto feasible = std::get<0>(result);
     const auto num_iters = std::get<1>(result);
     CHECK(feasible);
-    CHECK(num_iters >= 30000);
-    CHECK(num_iters <= 40164);
+    CHECK(num_iters >= 26399);
+    CHECK(num_iters <= 30000);
 }

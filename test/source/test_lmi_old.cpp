@@ -143,8 +143,8 @@ TEST_CASE("LMI test (stable)") {
     //                              "registry using the
     //                              spdlog::get(logger_name)");
 
-    CHECK(x.size() != 0U);
-    CHECK(num_iters == 281);
+    CHECK_NE(x.size(), 0U);
+    CHECK_EQ(num_iters, 281);
 }
 
 TEST_CASE("LMI test ") {
@@ -201,6 +201,6 @@ TEST_CASE("LMI test ") {
     const auto &x = std::get<0>(result);
     const auto &num_iters = std::get<1>(result);
 
-    CHECK(x.size() != 0U);
-    CHECK(num_iters == 281);
+    CHECK_NE(x.size(), 0U);
+    CHECK_EQ(num_iters, 281);
 }

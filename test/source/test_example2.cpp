@@ -28,12 +28,12 @@ struct MyOracle {
         const auto x = z[0];
         const auto y = z[1];
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i != 2; ++i) {
             this->idx++;
             if (this->idx == 2) {
                 this->idx = 0;  // round robin
             }
-            double fj = 0.0;
+            double fj;
             switch (this->idx) {
                 case 0:  // constraint 1: x + y <= 3
                     fj = x + y - 3.0;
@@ -67,5 +67,14 @@ TEST_CASE("Example 2, test feasible") {
     const auto options = Options{2000, 1e-12};
     const auto result = cutting_plane_feas(omega, ellip, options);
     const auto x_feas = std::get<0>(result);
-    CHECK(x_feas.size() != 0U);
+    CHECK_NE(x_feas.size(), 0U);
+}
+
+TEST_CASE("Example 2, test infeasible") {
+    auto ellip = Ell<Vec>(Vec{10.0, 10.0}, Vec{100.0, 100.0});
+    auto omega = MyOracle{};
+    const auto options = Options{2000, 1e-12};
+    const auto result = cutting_plane_feas(omega, ellip, options);
+    const auto x_feas = std::get<0>(result);
+    CHECK_EQ(x_feas.size(),0U);
 }

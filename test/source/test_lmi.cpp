@@ -9,12 +9,7 @@
 #include <ellalgo/ell_matrix.hpp>          // for EllStable
 #include <ellalgo/ell_stable.hpp>          // for EllStable
 #include <ellalgo/oracles/lmi_oracle.hpp>  // for LmiOracle
-// #include <gsl/span> // for span
-// #include <spdlog/sinks/stdout_sinks.h>
-// #include <spdlog/spdlog.h>
-// #include <optional>    // for optional
 #include <tuple>        // for tuple
-#include <type_traits>  // for move, add_const<>::type
 #include <valarray>
 #include <vector>  // for vector
 
@@ -142,8 +137,8 @@ TEST_CASE("LMI test (stable)") {
     //                              "registry using the
     //                              spdlog::get(logger_name)");
 
-    CHECK(x.size() != 0U);
-    CHECK(num_iters == 281);
+    CHECK_NE(x.size(), 0U);
+    CHECK_EQ(num_iters, 281);
 }
 
 TEST_CASE("LMI test ") {
@@ -200,6 +195,6 @@ TEST_CASE("LMI test ") {
     const auto &x = std::get<0>(result);
     const auto &num_iters = std::get<1>(result);
 
-    CHECK(x.size() != 0U);
-    CHECK(num_iters == 281);
+    CHECK_NE(x.size(), 0U);
+    CHECK_EQ(num_iters, 281);
 }

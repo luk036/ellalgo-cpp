@@ -83,16 +83,15 @@ TEST_CASE("Example 1, test infeasible1") {
     const auto options = Options{2000, 1e-12};
     const auto result = cutting_plane_optim(oracle, ell, gamma, options);
     const auto x = std::get<0>(result);
-    REQUIRE_EQ(x.size(), 0U);
+    CHECK_EQ(x.size(), 0U);
 }
 
-TEST_CASE("Example 1, test infeasible22") {
+TEST_CASE("Example 1, test infeasible2") {
     auto ell = Ell<Vec>(Vec{10.0, 10.0}, Vec{0.0, 0.0});
     auto oracle = MyOracle{};
-    auto gamma = 100.0;
-    // wrong initial guess
+    auto gamma = 100.0;  // wrong initial best-so-far value
     const auto options = Options{2000, 1e-12};
     const auto result = cutting_plane_optim(oracle, ell, gamma, options);
     const auto x = std::get<0>(result);
-    REQUIRE_EQ(x.size(), 0U);
+    CHECK_EQ(x.size(), 0U);
 }

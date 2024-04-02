@@ -140,7 +140,7 @@ auto run_lowpass(bool use_parallel_cut) {
 
   options.max_iters = 50000;
   ellip.set_use_parallel_cut(use_parallel_cut);
-  // options.tol = 1e-8;
+  // options.tolerance = 1e-8;
 
   auto t = Fdc.Spsq;
   const auto __result = cutting_plane_optim(omega, ellip, t, options);

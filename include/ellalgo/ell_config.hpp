@@ -9,10 +9,10 @@
  */
 struct Options {
     size_t max_iters;
-    double tol;
+    double tolerance;
 
-    Options() : max_iters{2000}, tol{1e-20} {}
-    Options(size_t max_iters, double tol) : max_iters{max_iters}, tol{tol} {}
+    Options() : max_iters{2000}, tolerance{1e-20} {}
+    Options(size_t max_iters, double tol) : max_iters{max_iters}, tolerance{tol} {}
 };
 
 /**

@@ -11,7 +11,6 @@
 #include <ellalgo/ell_stable.hpp>             // for EllStable
 #include <ellalgo/oracles/profit_oracle.hpp>  // for ProfitOracle, profit_r...
 #include <tuple>                              // for get
-#include <type_traits>                        // for move, remove_reference<...
 
 TEST_CASE("Profit Test") {
     using Vec = std::valarray<double>;
@@ -96,7 +95,7 @@ TEST_CASE("Profit Test (Stable)") {
     }();
 
     [&] {
-        EllStable<Vec> ellip{100.0, Vec{2.0, 0.0}};
+        EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
         ProfitOracleQ omega{unit_price, A, limit, a, v};
         double gamma = 0.0;
         const auto result = cutting_plane_optim_q(omega, ellip, gamma);
@@ -104,6 +103,6 @@ TEST_CASE("Profit Test (Stable)") {
         const auto &num_iters = std::get<1>(result);
         REQUIRE_EQ(y.size(), 2U);
         CHECK(y[0] <= std::log(limit));
-        CHECK_EQ(num_iters, 33);
+        CHECK_EQ(num_iters, 29);
     }();
 }

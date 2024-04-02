@@ -57,7 +57,7 @@ inline auto cutting_plane_feas(OracleFeas &omega, SearchSpace &space,
             return {space.xc(), niter};
         }
         const auto status = space.update_deep_cut(*cut);  // update space
-        if (status != CutStatus::Success || space.tsq() < options.tol) {
+        if (status != CutStatus::Success || space.tsq() < options.tolerance) {
             auto res = invalid_value<CuttingPlaneArrayType<SearchSpace>>();
             return {std::move(res), niter};
         }
@@ -108,7 +108,7 @@ inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &gam
                 return space.update_deep_cut(cut);
             }
         }();
-        if (status != CutStatus::Success || space.tsq() < options.tol) {  // no more
+        if (status != CutStatus::Success || space.tsq() < options.tolerance) {  // no more
             return {std::move(x_best), niter};
         }
     }
@@ -167,7 +167,7 @@ inline auto cutting_plane_optim_q(OracleOptimQ &omega, SearchSpaceQ &space_q, Nu
             }
             retry = true;
         }
-        if (space_q.tsq() < options.tol) {  // no more
+        if (space_q.tsq() < options.tolerance) {  // no more
             return {std::move(x_best), niter};
         }
     }
@@ -195,7 +195,7 @@ inline auto bsearch(Oracle &omega, const std::pair<T, T> &intvl, const Options &
 
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
         auto tau = algo::half_nonnegative(upper - lower);
-        if (tau < options.tol) {  // no more
+        if (tau < options.tolerance) {  // no more
             return {upper, niter};
         }
         auto gamma = lower;  // l may be `int` or `Fraction`

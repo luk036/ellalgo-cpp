@@ -69,7 +69,7 @@ class LowpassOracle {
      * The constructor of the `LowpassOracle` class. It initializes an instance of the
      * `LowpassOracle` class with the given parameters.
      */
-    LowpassOracle(size_t N, double wpass, double wstop, double Lpsq, double Upsq);
+    LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, double wstop);
 
     /*!
      * @brief
@@ -102,7 +102,7 @@ class LowpassOracle {
 
 // Filter specs
 inline auto create_lowpass_case(size_t N = 48) -> std::pair<LowpassOracle, double> {
-    const auto delta0_wpass = 0.125;
+    const auto delta0_wpass = 0.025;
     const auto delta0_wstop = 0.125;
     // maximum passband ripple in dB (+/- around 0 dB)
     const auto delta1 = 20.0 * std::log10(1.0 + delta0_wpass);

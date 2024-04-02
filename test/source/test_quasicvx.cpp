@@ -38,7 +38,7 @@ struct MyQuasicCvxOracle {
         double tmp2 = std::exp(ly);
         double tmp3 = gamma * tmp2;
         fj = -sqrtx + tmp3;
-        if (fj < 0.0)  // feasible
+        if (fj <= 0.0)  // feasible
         {
             gamma = sqrtx / tmp2;
             return {{Vec{-1.0, sqrtx}, 0}, true};
@@ -47,14 +47,6 @@ struct MyQuasicCvxOracle {
         return {{Vec{-1.0, tmp3}, fj}, false};
     }
 };
-
-TEST_CASE("xtensor") {
-    auto x = Vec{};
-    CHECK_EQ(x.size(), 0U);
-
-    x = Vec{1.0, 2.0};
-    CHECK_NE(x.size(), 0U);
-}
 
 TEST_CASE("Quasiconvex 1, test feasible") {
     Ell<Vec> ellip{10.0, Vec{0.0, 0.0}};
@@ -71,7 +63,9 @@ TEST_CASE("Quasiconvex 1, test feasible") {
     // const auto &x = std::get<0>(result);
     // const CInfo &num_iters = std::get<1>(result);
     // CHECK(ell_info.feasible);
-    CHECK_EQ(-gamma, doctest::Approx(-0.4288673397));
+    const auto num_iters = std::get<1>(result);
+    CHECK_EQ(num_iters, 43);
+    CHECK_EQ(gamma, doctest::Approx(0.4288673397));
     CHECK_EQ(x[0] * x[0], doctest::Approx(0.5029823096));
     CHECK_EQ(std::exp(x[1]), doctest::Approx(1.6536872635));
 }
