@@ -76,5 +76,5 @@ TEST_CASE("Example 2, test infeasible") {
     const auto options = Options{2000, 1e-12};
     const auto result = cutting_plane_feas(omega, ellip, options);
     const auto x_feas = std::get<0>(result);
-    CHECK_EQ(x_feas.size(),0U);
+    CHECK_EQ(x_feas.size(), 0U);
 }

@@ -52,7 +52,6 @@ TEST_CASE("EllCore, test parallel cut (no effect)") {
     CHECK_EQ(ell_core.tsq(), 0.01);
 }
 
-
 TEST_CASE("EllCore, test parallel cut (no effect)") {
     auto ell_core = EllCore(0.01, 4);
     auto grad = Vec(0.5, 4);
@@ -61,7 +60,6 @@ TEST_CASE("EllCore, test parallel cut (no effect)") {
     CHECK_EQ(grad[0], doctest::Approx(0.5));
     CHECK_EQ(ell_core.tsq(), 0.01);
 }
-
 
 // Stable version
 TEST_CASE("EllCore (stable), test central cut") {
