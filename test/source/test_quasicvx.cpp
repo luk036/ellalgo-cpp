@@ -3,7 +3,7 @@
 #include <doctest/doctest.h>  // for ResultBuilder, Approx, CHECK_EQ
 
 #include <cmath>                      // for exp
-#include <ellalgo/cutting_plane.hpp>  // for cutting_plane_deep_cut
+#include <ellalgo/cutting_plane.hpp>  // for cutting_plane_bias_cut
 #include <ellalgo/ell.hpp>            // for Ell
 #include <ellalgo/ell_config.hpp>     // for CInfo, CutStatus, CutStatus::...
 #include <ellalgo/ell_stable.hpp>     // for EllStable
@@ -17,6 +17,10 @@ struct MyQuasicCvxOracle {
     using CutChoices = double;  // single cut
     using Cut = std::pair<Vec, double>;
 
+    int idx = 0;
+    double tmp2 = 0.0;
+    double tmp3 = 0.0;
+
     /**
      * @brief
      *
@@ -28,23 +32,38 @@ struct MyQuasicCvxOracle {
         double sqrtx = z[0];
         double ly = z[1];
 
-        // constraint 1: exp(x) <= y, or sqrtx**2 <= ly
-        double fj = sqrtx * sqrtx - ly;
-        if (fj > 0.0) {
-            return {{Vec{2 * sqrtx, -1.0}, fj}, false};
-        }
+        for (int i = 0; i != 2; i++) {
+            this->idx++;
+            if (this->idx == 2) {
+                this->idx = 0;  // round robin
+            }
 
-        // constraint 2: x - y >= 1
-        double tmp2 = std::exp(ly);
-        double tmp3 = gamma * tmp2;
-        fj = -sqrtx + tmp3;
-        if (fj <= 0.0)  // feasible
-        {
-            gamma = sqrtx / tmp2;
-            return {{Vec{-1.0, sqrtx}, 0}, true};
+            double fj;
+            switch (this->idx) {
+                case 0:  // constraint 1: exp(x) <= y, or sqrtx**2 <= ly
+                    fj = sqrtx * sqrtx - ly;
+                    break;
+                case 1:  // constraint 2
+                    this->tmp2 = std::exp(ly);
+                    this->tmp3 = gamma * this->tmp2;
+                    fj = -sqrtx + this->tmp3;
+                    break;
+                default:
+                    exit(0);
+            }
+            if (fj > 0.0) {
+                switch (this->idx) {
+                    case 0:
+                        return {{Vec{2 * sqrtx, -1.0}, fj}, false};
+                    case 1:
+                        return {{Vec{-1.0, this->tmp3}, fj}, false};
+                    default:
+                        exit(0);
+                }
+            }
         }
-
-        return {{Vec{-1.0, tmp3}, fj}, false};
+        gamma = sqrtx / this->tmp2;
+        return {{Vec{-1.0, sqrtx}, 0}, true};
     }
 };
 
@@ -64,10 +83,10 @@ TEST_CASE("Quasiconvex 1, test feasible") {
     // const CInfo &num_iters = std::get<1>(result);
     // CHECK(ell_info.feasible);
     const auto num_iters = std::get<1>(result);
-    CHECK_EQ(num_iters, 43);
+    CHECK_EQ(num_iters, 35);
     CHECK_EQ(gamma, doctest::Approx(0.4288673397));
-    CHECK_EQ(x[0] * x[0], doctest::Approx(0.5029823096));
-    CHECK_EQ(std::exp(x[1]), doctest::Approx(1.6536872635));
+    CHECK_EQ(x[0] * x[0], doctest::Approx(0.496544));
+    CHECK_EQ(std::exp(x[1]), doctest::Approx(1.64306));
 }
 
 TEST_CASE("Quasiconvex 1, test feasible (stable)") {

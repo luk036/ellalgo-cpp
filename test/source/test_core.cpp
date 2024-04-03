@@ -19,7 +19,7 @@ TEST_CASE("EllCore, test central cut") {
 TEST_CASE("EllCore, test deep cut") {
     auto ell_core = EllCore(0.01, 4);
     auto grad = Vec(0.5, 4);
-    auto status = ell_core.update_deep_cut(grad, 0.05);
+    auto status = ell_core.update_bias_cut(grad, 0.05);
     CHECK_EQ(status, CutStatus::Success);
     CHECK_EQ(grad[0], doctest::Approx(0.03));
     CHECK_EQ(ell_core.tsq(), 0.01);
@@ -37,7 +37,7 @@ TEST_CASE("EllCore, test parallel central cut") {
 TEST_CASE("EllCore, test parallel cut") {
     auto ell_core = EllCore(0.01, 4);
     auto grad = Vec(0.5, 4);
-    auto status = ell_core.update_deep_cut(grad, Vec{0.01, 0.04});
+    auto status = ell_core.update_bias_cut(grad, Vec{0.01, 0.04});
     CHECK_EQ(status, CutStatus::Success);
     CHECK_EQ(grad[0], doctest::Approx(0.0116));
     CHECK_EQ(ell_core.tsq(), 0.01);
@@ -46,7 +46,7 @@ TEST_CASE("EllCore, test parallel cut") {
 TEST_CASE("EllCore, test parallel cut (no effect)") {
     auto ell_core = EllCore(0.01, 4);
     auto grad = Vec(0.5, 4);
-    auto status = ell_core.update_deep_cut(grad, Vec{-0.04, 0.0625});
+    auto status = ell_core.update_bias_cut(grad, Vec{-0.04, 0.0625});
     CHECK_EQ(status, CutStatus::Success);
     CHECK_EQ(grad[0], doctest::Approx(0.0));
     CHECK_EQ(ell_core.tsq(), 0.01);
@@ -77,7 +77,7 @@ TEST_CASE("EllCore (stable), test central cut") {
 TEST_CASE("EllCore (stable), test deep cut") {
     auto ell_core = EllCore(0.01, 4);
     auto grad = Vec(0.5, 4);
-    auto status = ell_core.update_stable_deep_cut(grad, 0.05);
+    auto status = ell_core.update_stable_bias_cut(grad, 0.05);
     CHECK_EQ(status, CutStatus::Success);
     CHECK_EQ(grad[0], doctest::Approx(0.03));
     CHECK_EQ(ell_core.tsq(), 0.01);
@@ -95,7 +95,7 @@ TEST_CASE("EllCore (stable), test parallel central cut") {
 TEST_CASE("EllCore (stable), test parallel cut") {
     auto ell_core = EllCore(0.01, 4);
     auto grad = Vec(0.5, 4);
-    auto status = ell_core.update_stable_deep_cut(grad, Vec{0.01, 0.04});
+    auto status = ell_core.update_stable_bias_cut(grad, Vec{0.01, 0.04});
     CHECK_EQ(status, CutStatus::Success);
     CHECK_EQ(grad[0], doctest::Approx(0.0116));
     CHECK_EQ(ell_core.tsq(), 0.01);

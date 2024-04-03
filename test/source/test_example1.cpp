@@ -27,7 +27,7 @@ struct MyOracle {
         const auto y = z[1];
         const auto f0 = x + y;
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i != 3; i++) {
             this->idx++;
             if (this->idx == 3) {
                 this->idx = 0;  // round robin

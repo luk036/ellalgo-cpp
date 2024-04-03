@@ -56,7 +56,7 @@ inline auto cutting_plane_feas(OracleFeas &omega, SearchSpace &space,
         if (!cut) {  // feasible sol'n obtained
             return {space.xc(), niter};
         }
-        const auto status = space.update_deep_cut(*cut);  // update space
+        const auto status = space.update_bias_cut(*cut);  // update space
         if (status != CutStatus::Success || space.tsq() < options.tolerance) {
             auto res = invalid_value<CuttingPlaneArrayType<SearchSpace>>();
             return {std::move(res), niter};
@@ -105,7 +105,7 @@ inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &gam
                 x_best = space.xc();
                 return space.update_central_cut(cut);  // should update_central_cut
             } else {
-                return space.update_deep_cut(cut);
+                return space.update_bias_cut(cut);
             }
         }();
         if (status != CutStatus::Success || space.tsq() < options.tolerance) {  // no more

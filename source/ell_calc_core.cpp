@@ -128,7 +128,7 @@ auto EllCalcCore::calc_bias_cut_fast(const double& beta, const double& tau, cons
 /**
  * @brief Central Cut
  *
- * The function `_calc_deep_cut_core` calculates and returns the values of rho, sigma, and delta
+ * The function `_calc_bias_cut_core` calculates and returns the values of rho, sigma, and delta
  * based on the given beta, tau, and eta values under the central-cut:
  *
  *        g' (x - xc) \le 0.

@@ -136,7 +136,7 @@ class EllCore {
     /**
      * @brief Update ellipsoid core function using the deep cut(s)
      *
-     * The `update_deep_cut` function is a member function of the `EllCore` class. It is used to
+     * The `update_bias_cut` function is a member function of the `EllCore` class. It is used to
      * update the ellipsoid core function using a cutting plane.
      *
      * @tparam T
@@ -144,9 +144,9 @@ class EllCore {
      * @param[in] beta
      * @return CutStatus
      */
-    template <typename T> auto update_deep_cut(Vec &grad, const T &beta) -> CutStatus {
+    template <typename T> auto update_bias_cut(Vec &grad, const T &beta) -> CutStatus {
         return this->_update_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
-            return this->_update_cut_deep_cut(beta_l, tsq_l);
+            return this->_update_cut_bias_cut(beta_l, tsq_l);
         });
     }
 
@@ -187,7 +187,7 @@ class EllCore {
     /**
      * @brief Update ellipsoid core function using the deep cut(s)
      *
-     * The `update_stable_deep_cut` function is a member function of the `EllCore` class. It is used
+     * The `update_stable_bias_cut` function is a member function of the `EllCore` class. It is used
      * to update the ellipsoid core function using a cutting plane.
      *
      * @tparam T
@@ -195,9 +195,9 @@ class EllCore {
      * @param[in] beta
      * @return CutStatus
      */
-    template <typename T> auto update_stable_deep_cut(Vec &grad, const T &beta) -> CutStatus {
+    template <typename T> auto update_stable_bias_cut(Vec &grad, const T &beta) -> CutStatus {
         return this->_update_stable_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
-            return this->_update_cut_deep_cut(beta_l, tsq_l);
+            return this->_update_cut_bias_cut(beta_l, tsq_l);
         });
     }
 
@@ -382,22 +382,22 @@ class EllCore {
     }
 
     /**
-     * The function `_update_cut_deep_cut` calculates a deep cut using the `calc_deep_cut` function
+     * The function `_update_cut_bias_cut` calculates a deep cut using the `calc_bias_cut` function
      * from the `_helper` object.
      *
      * @param[in] beta The beta parameter is a constant value of type double.
      * @param[in] tsq tsq is a constant value of type double.
      *
-     * @return The function `_update_cut_deep_cut` returns a tuple containing a `CutStatus` enum
+     * @return The function `_update_cut_bias_cut` returns a tuple containing a `CutStatus` enum
      * value and another tuple containing three `double` values.
      */
-    auto _update_cut_deep_cut(const double &beta, const double &tsq) const
+    auto _update_cut_bias_cut(const double &beta, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {
-        return this->_helper.calc_deep_cut(beta, tsq);
+        return this->_helper.calc_bias_cut(beta, tsq);
     }
 
     /**
-     * The function `_update_cut_deep_cut` calculates the deep cut value based on the beta values
+     * The function `_update_cut_bias_cut` calculates the deep cut value based on the beta values
      * and tsq parameter.
      *
      * @param[in] beta A valarray of double values representing the beta values.
@@ -406,12 +406,12 @@ class EllCore {
      * @return a tuple containing a `CutStatus` enum value and another tuple containing three
      * `double` values.
      */
-    auto _update_cut_deep_cut(const std::valarray<double> &beta, const double &tsq) const
+    auto _update_cut_bias_cut(const std::valarray<double> &beta, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
         if (beta.size() < 2) {
-            return this->_helper.calc_deep_cut(beta[0], tsq);
+            return this->_helper.calc_bias_cut(beta[0], tsq);
         }
-        return this->_helper.calc_parallel_deep_cut(beta[0], beta[1], tsq);
+        return this->_helper.calc_parallel_bias_cut(beta[0], beta[1], tsq);
     }
 
     /**
@@ -421,7 +421,7 @@ class EllCore {
      * @param[in] beta The beta parameter is a constant value of type double.
      * @param[in] tsq tsq is a constant value of type double.
      *
-     * @return The function `_update_cut_deep_cut` returns a tuple containing a `CutStatus` enum
+     * @return The function `_update_cut_bias_cut` returns a tuple containing a `CutStatus` enum
      * value and another tuple containing three `double` values.
      */
     auto _update_cut_central_cut(const double &, const double &tsq) const
@@ -448,18 +448,18 @@ class EllCore {
     }
 
     /**
-     * The function `_update_cut_q` calculates a deep cut q using the `calc_deep_cut_q` function
+     * The function `_update_cut_q` calculates a deep cut q using the `calc_bias_cut_q` function
      * from the `_helper` object.
      *
      * @param[in] beta The beta parameter is a constant value of type double.
      * @param[in] tsq tsq is a constant value of type double.
      *
-     * @return The function `_update_cut_deep_cut` returns a tuple containing a `CutStatus` enum
+     * @return The function `_update_cut_bias_cut` returns a tuple containing a `CutStatus` enum
      * value and another tuple containing three `double` values.
      */
     auto _update_cut_q(const double &beta, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {
-        return this->_helper.calc_deep_cut_q(beta, tsq);
+        return this->_helper.calc_bias_cut_q(beta, tsq);
     }
 
     /**
@@ -475,9 +475,9 @@ class EllCore {
     auto _update_cut_q(const std::valarray<double> &beta, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
         if (beta.size() < 2) {
-            return this->_helper.calc_deep_cut_q(beta[0], tsq);
+            return this->_helper.calc_bias_cut_q(beta[0], tsq);
         }
-        return this->_helper.calc_parallel_deep_cut_q(beta[0], beta[1], tsq);
+        return this->_helper.calc_parallel_bias_cut_q(beta[0], beta[1], tsq);
     }
 
 };  // } EllCore

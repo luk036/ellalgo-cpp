@@ -139,16 +139,16 @@ template <typename Arr> class Ell {
     /**
      * @brief Update ellipsoid core function using the deep cut(s)
      *
-     * The `update_deep_cut` function is a member function of the `Ell` class. It is used to update
+     * The `update_bias_cut` function is a member function of the `Ell` class. It is used to update
      * the ellipsoid core function using a cutting plane.
      *
      * @tparam T
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T> auto update_deep_cut(const std::pair<Arr, T> &cut) -> CutStatus {
+    template <typename T> auto update_bias_cut(const std::pair<Arr, T> &cut) -> CutStatus {
         return this->_update_core(cut, [this](Vec &grad, const T &beta) {
-            return this->_mgr.update_deep_cut(grad, beta);
+            return this->_mgr.update_bias_cut(grad, beta);
         });
     }
 

@@ -9,7 +9,7 @@
 /**
  * @brief Parallel- or deep-cut
  *
- * The function `calc_parallel_deep_cut` calculates and returns the values of rho, sigma,
+ * The function `calc_parallel_bias_cut` calculates and returns the values of rho, sigma,
  * and delta based on the given input parameters.
  *
  * @param[in] beta0 The parameter `beta0` represents a double value.
@@ -23,14 +23,14 @@
  * 3. sigma: A double value representing the calculated sigma.
  * 4. delta: A double value representing the calculated delta.
  */
-auto EllCalc::calc_parallel_deep_cut(const double &beta0, const double &beta1,
+auto EllCalc::calc_parallel_bias_cut(const double &beta0, const double &beta1,
                                      const double &tsq) const
     -> std::tuple<CutStatus, std::tuple<double, double, double>> {
     if (beta1 < beta0) {
         return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
     }
     if ((beta1 > 0 && tsq <= beta1 * beta1) || !this->use_parallel_cut) {
-        return this->calc_deep_cut(beta0, tsq);
+        return this->calc_bias_cut(beta0, tsq);
     }
     auto &&result = this->_helper.calc_parallel_cut(beta0, beta1, tsq);
     return {CutStatus::Success, result};
@@ -68,12 +68,12 @@ auto EllCalc::calc_parallel_central_cut(const double &beta1, const double &tsq) 
 /**
  * @brief Deep-Cut
  *
- * The function `calc_deep_cut` calculates the values of `tau`, `eta` under the
+ * The function `calc_bias_cut` calculates the values of `tau`, `eta` under the
  * deep-cut:
  *
  *        g' (x - xc) + beta \le 0,
  *
- * and calls another function `_calc_deep_cut_core` to calculate the values of
+ * and calls another function `_calc_bias_cut_core` to calculate the values of
  * `CutStatus`, `double`, `double`, and `double` based on the input values of
  * `beta` and `tsq`.
  *
@@ -83,10 +83,10 @@ auto EllCalc::calc_parallel_central_cut(const double &beta1, const double &tsq) 
  * @param[in] tsq tsq is a variable of type double, which represents the square
  * of the value tau.
  *
- * @return The function `calc_deep_cut` returns a tuple containing four values:
+ * @return The function `calc_bias_cut` returns a tuple containing four values:
  * `CutStatus`, `double`, `double`, `double`.
  */
-auto EllCalc::calc_deep_cut(const double &beta, const double &tsq) const
+auto EllCalc::calc_bias_cut(const double &beta, const double &tsq) const
     -> std::tuple<CutStatus, std::tuple<double, double, double>> {
     assert(beta >= 0.0);
     if (tsq < beta * beta) {
@@ -99,7 +99,7 @@ auto EllCalc::calc_deep_cut(const double &beta, const double &tsq) const
 /**
  * @brief Central Cut
  *
- * The function `_calc_deep_cut_core` calculates and returns the values of rho, sigma,
+ * The function `_calc_bias_cut_core` calculates and returns the values of rho, sigma,
  * and delta based on the given beta, tau, and eta values under the
  * central-cut:
  *
@@ -124,7 +124,7 @@ auto EllCalc::calc_central_cut(const double &tsq) const
 }
 
 /**
- * The function `calc_parallel_deep_cut_q` calculates the parallel deep cut for a given range of
+ * The function `calc_parallel_bias_cut_q` calculates the parallel deep cut for a given range of
  * beta values and a given tsq value.
  *
  * @param[in] beta0 The parameter `beta0` represents the value of beta at the starting point of the
@@ -135,10 +135,10 @@ auto EllCalc::calc_central_cut(const double &tsq) const
  * @param[in] tsq tsq is a variable of type double, which represents the square of the parameter
  * gamma.
  *
- * @return The function `calc_parallel_deep_cut_q` returns a tuple of type `std::tuple<CutStatus,
+ * @return The function `calc_parallel_bias_cut_q` returns a tuple of type `std::tuple<CutStatus,
  * std::tuple<double, double, double>>`.
  */
-auto EllCalc::calc_parallel_deep_cut_q(const double &beta0, const double &beta1,
+auto EllCalc::calc_parallel_bias_cut_q(const double &beta0, const double &beta1,
                                        const double &tsq) const
     -> std::tuple<CutStatus, std::tuple<double, double, double>> {
     if (beta1 < beta0) {
@@ -146,7 +146,7 @@ auto EllCalc::calc_parallel_deep_cut_q(const double &beta0, const double &beta1,
     }
 
     if ((beta1 > 0.0 && tsq <= beta1 * beta1) || !this->use_parallel_cut) {
-        return this->calc_deep_cut_q(beta0, tsq);
+        return this->calc_bias_cut_q(beta0, tsq);
     }
 
     const auto b0b1 = beta0 * beta1;
@@ -166,10 +166,10 @@ auto EllCalc::calc_parallel_deep_cut_q(const double &beta0, const double &beta1,
  * @param[in] tsq The parameter `tsq` represents the square of the value `tau`, which is a variable
  * used in the calculation.
  *
- * @return The function `calc_deep_cut_q` returns a tuple containing four values: `CutStatus`,
+ * @return The function `calc_bias_cut_q` returns a tuple containing four values: `CutStatus`,
  * `double`, `double`, `double`.
  */
-auto EllCalc::calc_deep_cut_q(const double &beta, const double &tsq) const
+auto EllCalc::calc_bias_cut_q(const double &beta, const double &tsq) const
     -> std::tuple<CutStatus, std::tuple<double, double, double>> {
     const auto tau = std::sqrt(tsq);
     if (tau < beta) {

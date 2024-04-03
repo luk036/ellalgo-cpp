@@ -70,7 +70,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
-    auto calc_parallel_deep_cut(const double &beta0, const double &beta1, const double &tsq) const
+    auto calc_parallel_bias_cut(const double &beta0, const double &beta1, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
@@ -96,7 +96,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
-    auto calc_deep_cut(const double &beta, const double &tsq) const
+    auto calc_bias_cut(const double &beta, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
@@ -121,7 +121,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
-    auto calc_parallel_deep_cut_q(const double &beta0, const double &beta1, const double &tsq) const
+    auto calc_parallel_bias_cut_q(const double &beta0, const double &beta1, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
@@ -133,6 +133,6 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
-    auto calc_deep_cut_q(const double &beta, const double &tsq) const
+    auto calc_bias_cut_q(const double &beta, const double &tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 };  // } EllCalc
