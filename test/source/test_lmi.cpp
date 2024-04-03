@@ -9,7 +9,7 @@
 #include <ellalgo/ell_matrix.hpp>          // for EllStable
 #include <ellalgo/ell_stable.hpp>          // for EllStable
 #include <ellalgo/oracles/lmi_oracle.hpp>  // for LmiOracle
-#include <tuple>        // for tuple
+#include <tuple>                           // for tuple
 #include <valarray>
 #include <vector>  // for vector
 
