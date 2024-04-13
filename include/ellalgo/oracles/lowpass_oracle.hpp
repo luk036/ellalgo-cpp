@@ -50,6 +50,10 @@ class LowpassOracle {
     using Mat = std::valarray<Vec>;
     using ParallelCut = std::pair<Vec, Vec>;
 
+    double _fmax = -1e100;
+    size_t _kmax = 0;
+    bool more_alt{true};
+
     Mat A;
     double Lpsq;
     double Upsq;
@@ -58,9 +62,6 @@ class LowpassOracle {
     size_t idx1;
     size_t idx2;
     size_t idx3;
-    double _fmax = -1e100;
-    size_t _kmax = 0;
-    bool more_alt{true};
 
   public:
     /*!
