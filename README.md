@@ -1,7 +1,6 @@
 [![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/MacOS/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
 [![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/Windows/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
 [![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/Ubuntu/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
-[![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/Style/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
 [![Actions Status](https://github.com/luk036/ellalgo-cpp/workflows/Install/badge.svg)](https://github.com/luk036/ellalgo-cpp/actions)
 [![codecov](https://codecov.io/gh/luk036/ellalgo-cpp/branch/master/graph/badge.svg)](https://codecov.io/gh/luk036/ellalgo-cpp)
 
@@ -9,7 +8,7 @@
   <img src="./ellalgo.svg"/>
 </p>
 
-# 🏉 ellalgo-cpp
+# 🫒 ellalgo-cpp
 
 Ellipsoid Algorithm in Modern C++
 The Ellipsoid Method as a linear programming algorithm was first introduced by L. G. Khachiyan in 1979. It is a polynomial-time algorithm that uses ellipsoids to iteratively reduce the feasible region of a linear program until an optimal solution is found. The method works by starting with an initial ellipsoid that contains the feasible region, and then successively shrinking the ellipsoid until it contains the optimal solution. The algorithm is guaranteed to converge to an optimal solution in a finite number of steps.
@@ -155,7 +154,7 @@ Additional arguments can be passed to the analyzers by setting the `CLANG_TIDY_A
 
 Ccache can be enabled by configuring with `-DUSE_CCACHE=<ON | OFF>`.
 
-## FAQ
+## ❓ FAQ
 
 > Can I use this for header-only libraries?
 
