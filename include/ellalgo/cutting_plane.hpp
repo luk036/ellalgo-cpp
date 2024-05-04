@@ -179,41 +179,6 @@ inline auto cutting_plane_optim_q(OracleOptimQ &omega, SearchSpaceQ &space_q, Nu
  *
  * @tparam Oracle
  * @tparam Space
- * @param[in,out] omega   perform assessment on x0
- * @param[in,out] intvl   interval containing x*
- * @param[in]     options maximum iteration and error tolerance etc.
- * @return CInfo
- */
-template <typename Oracle, typename T>
-inline auto bsearch(Oracle &omega, const std::pair<T, T> &intvl, const Options &options = Options())
-    -> std::tuple<T, size_t> {
-    // assume monotone
-    // auto& [lower, upper] = intvl;
-    auto lower = intvl.first;
-    auto upper = intvl.second;
-    assert(lower <= upper);
-
-    for (auto niter = 0U; niter < options.max_iters; ++niter) {
-        auto tau = algo::half_nonnegative(upper - lower);
-        if (tau < options.tolerance) {  // no more
-            return {upper, niter};
-        }
-        auto gamma = lower;  // l may be `int` or `Fraction`
-        gamma += tau;
-        if (omega.assess_bs(gamma)) {  // feasible sol'n obtained
-            upper = gamma;
-        } else {
-            lower = gamma;
-        }
-    }
-    return {upper, options.max_iters};
-}
-
-/**
- * @brief
- *
- * @tparam Oracle
- * @tparam Space
  */
 template <typename Oracle, typename Space>  //
 class BSearchAdaptor {
@@ -257,7 +222,7 @@ class BSearchAdaptor {
      * @return bool
      */
     template <typename Num> auto assess_bs(Num &gamma) -> bool {
-        Space space = this->_space.copy();
+        Space space = this->_space.copy(); // copy
         this->_omega.update(gamma);
         const auto result = cutting_plane_feas(this->_omega, space, this->_options);
         auto x_feas = std::get<0>(result);
@@ -268,3 +233,38 @@ class BSearchAdaptor {
         return false;
     }
 };
+
+/**
+ * @brief
+ *
+ * @tparam Oracle
+ * @tparam Space
+ * @param[in,out] omega   perform assessment on x0
+ * @param[in,out] intvl   interval containing x*
+ * @param[in]     options maximum iteration and error tolerance etc.
+ * @return CInfo
+ */
+template <typename Oracle, typename T>
+inline auto bsearch(Oracle &omega, const std::pair<T, T> &intvl, const Options &options = Options())
+    -> std::tuple<T, size_t> {
+    // assume monotone
+    // auto& [lower, upper] = intvl;
+    auto lower = intvl.first;
+    auto upper = intvl.second;
+    assert(lower <= upper);
+
+    for (auto niter = 0U; niter < options.max_iters; ++niter) {
+        auto tau = algo::half_nonnegative(upper - lower);
+        if (tau < options.tolerance) {  // no more
+            return {upper, niter};
+        }
+        auto gamma = lower;  // l may be `int` or `Fraction`
+        gamma += tau;
+        if (omega.assess_bs(gamma)) {  // feasible sol'n obtained
+            upper = gamma;
+        } else {
+            lower = gamma;
+        }
+    }
+    return {upper, options.max_iters};
+}
