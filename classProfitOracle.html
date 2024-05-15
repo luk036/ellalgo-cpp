@@ -79,15 +79,15 @@ k: a given constant that restricts the quantity of x1
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#aa642df03dc11a8d086ce8b1e652ebc6f" class="m-doc">ProfitOracle</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> p,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> A,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> k,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; a,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; v)</span>
+              <span class="m-doc-wrap-bumper"><a href="#aa642df03dc11a8d086ce8b1e652ebc6f" class="m-doc">ProfitOracle</a>(</span><span class="m-doc-wrap">double p,
+              double A,
+              double k,
+              const Vec&amp; a,
+              const Vec&amp; v)</span>
             </dt>
             <dd>Construct a new profit oracle object.</dd>
             <dt id="a258ec5f52763e1fce40827129a0f48f1">
-              <span class="m-doc-wrap-bumper"><a href="#a258ec5f52763e1fce40827129a0f48f1" class="m-doc-self">ProfitOracle</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="class_profit_oracle.html" class="m-doc">ProfitOracle</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#a258ec5f52763e1fce40827129a0f48f1" class="m-doc-self">ProfitOracle</a>(</span><span class="m-doc-wrap">const <a href="classProfitOracle.html" class="m-doc">ProfitOracle</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
             </dt>
             <dd>Construct a new profit oracle object (only explicitly)</dd>
           </dl>
@@ -96,17 +96,17 @@ k: a given constant that restricts the quantity of x1
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a28e7470120d4bcad0eef86ee21fd36b2" class="m-doc">set_elasticities</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; elasticities) -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a28e7470120d4bcad0eef86ee21fd36b2" class="m-doc">set_elasticities</a>(</span><span class="m-doc-wrap">const Vec&amp; elasticities) -&gt; auto</span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7e38e7483145b9e644c306c40d0bc8a9" class="m-doc">assess_feas</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; y,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; gamma) -&gt; Cut * -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7e38e7483145b9e644c306c40d0bc8a9" class="m-doc">assess_feas</a>(</span><span class="m-doc-wrap">const Vec&amp; y,
+              const double&amp; gamma) -&gt; Cut * -&gt; auto</span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4c70ce4c5aa87583a8964b45ddb28625" class="m-doc">assess_optim</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; y,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; gamma) -&gt; std::tuple&lt; Cut, bool &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4c70ce4c5aa87583a8964b45ddb28625" class="m-doc">assess_optim</a>(</span><span class="m-doc-wrap">const Vec&amp; y,
+              double&amp; gamma) -&gt; std::tuple&lt; Cut, bool &gt; -&gt; auto</span>
             </dt>
             <dd></dd>
           </dl>
@@ -115,11 +115,11 @@ k: a given constant that restricts the quantity of x1
           <h2>Function documentation</h2>
           <section class="m-doc-details" id="aa642df03dc11a8d086ce8b1e652ebc6f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> ProfitOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa642df03dc11a8d086ce8b1e652ebc6f" class="m-doc-self">ProfitOracle</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> p,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> A,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> k,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; a,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; v)</span></span>
+              <span class="m-doc-wrap-bumper"> ProfitOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa642df03dc11a8d086ce8b1e652ebc6f" class="m-doc-self">ProfitOracle</a>(</span><span class="m-doc-wrap">double p,
+              double A,
+              double k,
+              const Vec&amp; a,
+              const Vec&amp; v)</span></span>
             </h3>
             <p>Construct a new profit oracle object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -152,14 +152,14 @@ k: a given constant that restricts the quantity of x1
           </div></section>
           <section class="m-doc-details" id="a28e7470120d4bcad0eef86ee21fd36b2"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> ProfitOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28e7470120d4bcad0eef86ee21fd36b2" class="m-doc-self">set_elasticities</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; elasticities)</span></span>
+              <span class="m-doc-wrap-bumper">auto ProfitOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28e7470120d4bcad0eef86ee21fd36b2" class="m-doc-self">set_elasticities</a>(</span><span class="m-doc-wrap">const Vec&amp; elasticities)</span></span>
             </h3>
-<p>The <code>set_elasticities</code> function is a member function of the <code><a href="class_profit_oracle.html" class="m-doc">ProfitOracle</a></code> class. It takes a <code>Vec</code> object <code>elasticities</code> as input and sets the <code>_elasticities</code> member variable of the <code><a href="class_profit_oracle.html" class="m-doc">ProfitOracle</a></code> object to the input value. This function allows you to update the elasticities used by the profit oracle for assessing feasibility and optimization.</p>
+<p>The <code>set_elasticities</code> function is a member function of the <code><a href="classProfitOracle.html" class="m-doc">ProfitOracle</a></code> class. It takes a <code>Vec</code> object <code>elasticities</code> as input and sets the <code>_elasticities</code> member variable of the <code><a href="classProfitOracle.html" class="m-doc">ProfitOracle</a></code> object to the input value. This function allows you to update the elasticities used by the profit oracle for assessing feasibility and optimization.</p>
           </div></section>
           <section class="m-doc-details" id="a7e38e7483145b9e644c306c40d0bc8a9"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> ProfitOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7e38e7483145b9e644c306c40d0bc8a9" class="m-doc-self">assess_feas</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; y,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; gamma) -&gt; Cut *</span></span>
+              <span class="m-doc-wrap-bumper">auto ProfitOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7e38e7483145b9e644c306c40d0bc8a9" class="m-doc-self">assess_feas</a>(</span><span class="m-doc-wrap">const Vec&amp; y,
+              const double&amp; gamma) -&gt; Cut *</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -185,8 +185,8 @@ k: a given constant that restricts the quantity of x1
           </div></section>
           <section class="m-doc-details" id="a4c70ce4c5aa87583a8964b45ddb28625"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> ProfitOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c70ce4c5aa87583a8964b45ddb28625" class="m-doc-self">assess_optim</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; y,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; gamma) -&gt; std::tuple&lt; Cut, bool &gt;</span></span>
+              <span class="m-doc-wrap-bumper">auto ProfitOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c70ce4c5aa87583a8964b45ddb28625" class="m-doc-self">assess_optim</a>(</span><span class="m-doc-wrap">const Vec&amp; y,
+              double&amp; gamma) -&gt; std::tuple&lt; Cut, bool &gt;</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -255,7 +255,7 @@ k: a given constant that restricts the quantity of x1
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.10.0 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

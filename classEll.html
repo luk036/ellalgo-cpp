@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ell class | EllAlgo</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">EllAlgo</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li>
+              <a href="pages.html">Pages</a>
+              <ol>
+                <li><a href="about.html">About</a></li>
+              </ol>
+            </li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="ell_8hpp.html">&lt;ellalgo/ell.hpp&gt;</a></div>
+          <div class="m-doc-template">template&lt;typename Arr&gt;</div>
+          Ell <span class="m-thin">class</span>
+        </h1>
+        <p>Ellipsoid Search Space.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>The <code><a href="classEll.html" class="m-doc">Ell</a></code> class represents an ellipsoid search space:</p><p>ell = {x | (x - xc)&#x27; mq^-1 (x - xc) \le \kappa}</p><p>It is used to define and manipulate ellipsoids in a multidimensional space. The ellipsoid is defined by a center point (<code>_xc</code>) and a core function (<code>_mgr</code>). The core function is responsible for updating the ellipsoid based on cutting planes. The <code><a href="classEll.html" class="m-doc">Ell</a></code> class provides methods to update the ellipsoid using different types of cutting planes and to retrieve information about the ellipsoid, such as the center point and the squared radius.</p><p>This version keeps $Q$ symmetric but no promise of positive definite</p>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="a653f7393457f75395661ff0e36a4a886">
+              using <a href="#a653f7393457f75395661ff0e36a4a886" class="m-doc-self">Vec</a> = std::valarray&lt;double&gt;
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1cc10a81d7afcbaca55ca013f28f2e06">
+              using <a href="#a1cc10a81d7afcbaca55ca013f28f2e06" class="m-doc-self">ArrayType</a> = Arr
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#aecd757c5896f1d07e4f8c03449145953" class="m-doc">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html#a653f7393457f75395661ff0e36a4a886" class="m-doc">Vec</a>&amp; val,
+              Arr x)</span>
+            </dt>
+            <dd>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#abbc34a907867d226667f083d5eeabb01" class="m-doc">Ell</a>(</span><span class="m-doc-wrap">const double&amp; alpha,
+              Arr x)</span>
+            </dt>
+            <dd>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a77418531cd2878e2f327e34630e72fe5" class="m-doc">Ell</a>(</span><span class="m-doc-wrap"><a href="classEll.html" class="m-doc">Ell</a>&amp;&amp; E) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
+            <dt id="a7299eeaf3ab360b26777de81ab04bcf1">
+              <span class="m-doc-wrap-bumper"><a href="#a7299eeaf3ab360b26777de81ab04bcf1" class="m-doc-self">~Ell</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Destroy the <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#aef6ee25c1ef09b0dac6a2e588c6180c3" class="m-doc">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html" class="m-doc">Ell</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-info">explicit</span> </span>
+            </dt>
+            <dd>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af8bd99281e3b3bf4dfec6501e64c8511" class="m-doc">copy</a>(</span><span class="m-doc-wrap">) const -&gt; Ell -&gt; auto</span>
+            </dt>
+            <dd>explicitly copy</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#adf1bf44dddc4842f80d6b9ed72981b8b" class="m-doc">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr -&gt; auto</span>
+            </dt>
+            <dd>copy the whole array anyway</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a64cc652c04ac21f955b8f7b201202822" class="m-doc">set_xc</a>(</span><span class="m-doc-wrap">const Arr&amp; xc)</span>
+            </dt>
+            <dd>Set the xc object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a26f2ad81981553f2033b2079f3888be1" class="m-doc">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double -&gt; auto</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#af3355e44f6d0d83aa94fa6eedaa794de" class="m-doc">set_use_parallel_cut</a>(</span><span class="m-doc-wrap">bool value)</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a46fcc93e45a21cf9f4a5ee85fb0398da" class="m-doc">update_bias_cut</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus -&gt; auto</span>
+            </dt>
+            <dd>Update ellipsoid core function using the deep cut(s)</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a976736b3797439586305e7d537987148" class="m-doc">update_central_cut</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus -&gt; auto</span>
+            </dt>
+            <dd>Update ellipsoid core function using the central cut(s)</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7a009ad13d78325eaf42f201b02ecd36" class="m-doc">update_q</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus -&gt; auto</span>
+            </dt>
+            <dd>Update ellipsoid core function using the cut(s)</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="aecd757c5896f1d07e4f8c03449145953"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aecd757c5896f1d07e4f8c03449145953" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html#a653f7393457f75395661ff0e36a4a886" class="m-doc">Vec</a>&amp; val,
+              Arr x)</span></span>
+            </h3>
+            <p>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">val&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The parameter &quot;val&quot; is of type Vec, which is likely a vector or array-like data structure. It is being passed by reference to the constructor of the <a href="classEll.html" class="m-doc">Ell</a> class.</td>
+                </tr>
+                <tr>
+                  <td>x&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>x is an object of type Arr, which is likely an array or vector. It is being passed by value to the constructor of the <a href="classEll.html" class="m-doc">Ell</a> class.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The function is a constructor for an <a href="classEll.html" class="m-doc">Ell</a> object that takes a Vec and an Arr as parameters.</p>
+          </div></section>
+          <section class="m-doc-details" id="abbc34a907867d226667f083d5eeabb01"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abbc34a907867d226667f083d5eeabb01" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap">const double&amp; alpha,
+              Arr x)</span></span>
+            </h3>
+            <p>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">alpha&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The parameter <code>alpha</code> is a constant reference to a <code>double</code> value. It is used to initialize the <code>_mgr</code> member variable of the <code><a href="classEll.html" class="m-doc">Ell</a></code> class.</td>
+                </tr>
+                <tr>
+                  <td>x&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The parameter <code>x</code> is of type <code>Arr</code>, which is likely an array or vector of some kind. It is being passed by value, meaning a copy of the <code>x</code> object will be made and stored in the <code>_xc</code> member variable of the <code><a href="classEll.html" class="m-doc">Ell</a></code> object being constructed.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The function constructs a new <a href="classEll.html" class="m-doc">Ell</a> object with a given alpha value and an array of x values.</p>
+          </div></section>
+          <section class="m-doc-details" id="a77418531cd2878e2f327e34630e72fe5"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a77418531cd2878e2f327e34630e72fe5" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap"><a href="classEll.html" class="m-doc">Ell</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span> <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">E&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The parameter &quot;E&quot; is an rvalue reference to an object of type &quot;Ell&quot;.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The function is a constructor for an <a href="classEll.html" class="m-doc">Ell</a> object that takes an rvalue reference as a parameter.</p>
+          </div></section>
+          <section class="m-doc-details" id="aef6ee25c1ef09b0dac6a2e588c6180c3"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aef6ee25c1ef09b0dac6a2e588c6180c3" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html" class="m-doc">Ell</a>&amp; E) <span class="m-label m-info">explicit</span>  <span class="m-label m-info">defaulted</span></span></span>
+            </h3>
+            <p>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">E&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The parameter &quot;E&quot; is a reference to an object of type &quot;Ell&quot;.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>To avoid accidentally copying, only explicit copy is allowed</p>
+          </div></section>
+          <section class="m-doc-details" id="af8bd99281e3b3bf4dfec6501e64c8511"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8bd99281e3b3bf4dfec6501e64c8511" class="m-doc-self">copy</a>(</span><span class="m-doc-wrap">) const -&gt; Ell</span></span>
+            </h3>
+            <p>explicitly copy</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classEll.html" class="m-doc">Ell</a></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adf1bf44dddc4842f80d6b9ed72981b8b"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adf1bf44dddc4842f80d6b9ed72981b8b" class="m-doc-self">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr</span></span>
+            </h3>
+            <p>copy the whole array anyway</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Arr</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a64cc652c04ac21f955b8f7b201202822"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a64cc652c04ac21f955b8f7b201202822" class="m-doc-self">set_xc</a>(</span><span class="m-doc-wrap">const Arr&amp; xc)</span></span>
+            </h3>
+            <p>Set the xc object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">xc&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a26f2ad81981553f2033b2079f3888be1"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a26f2ad81981553f2033b2079f3888be1" class="m-doc-self">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>double</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af3355e44f6d0d83aa94fa6eedaa794de"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3355e44f6d0d83aa94fa6eedaa794de" class="m-doc-self">set_use_parallel_cut</a>(</span><span class="m-doc-wrap">bool value)</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The value parameter is a boolean value that determines whether or not to use parallel cut.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The function sets the value of the use_parallel_cut property in the _mgr object.</p>
+          </div></section>
+          <section class="m-doc-details" id="a46fcc93e45a21cf9f4a5ee85fb0398da"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr&gt;
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a46fcc93e45a21cf9f4a5ee85fb0398da" class="m-doc-self">update_bias_cut</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus</span></span>
+            </h3>
+            <p>Update ellipsoid core function using the deep cut(s)</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>cut&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>cutting-plane</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::tuple&lt;int, double&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The <code>update_bias_cut</code> function is a member function of the <code><a href="classEll.html" class="m-doc">Ell</a></code> class. It is used to update the ellipsoid core function using a cutting plane.</p>
+          </div></section>
+          <section class="m-doc-details" id="a976736b3797439586305e7d537987148"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr&gt;
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a976736b3797439586305e7d537987148" class="m-doc-self">update_central_cut</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus</span></span>
+            </h3>
+            <p>Update ellipsoid core function using the central cut(s)</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>cut&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>cutting-plane</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::tuple&lt;int, double&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The <code>update_central_cut</code> function is a member function of the <code><a href="classEll.html" class="m-doc">Ell</a></code> class. It is used to update the ellipsoid core function using a cutting plane.</p>
+          </div></section>
+          <section class="m-doc-details" id="a7a009ad13d78325eaf42f201b02ecd36"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Arr&gt;
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7a009ad13d78325eaf42f201b02ecd36" class="m-doc-self">update_q</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus</span></span>
+            </h3>
+            <p>Update ellipsoid core function using the cut(s)</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>cut&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>cutting-plane</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::tuple&lt;int, double&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The <code>update_q</code> function is a member function of the <code><a href="classEll.html" class="m-doc">Ell</a></code> class. It is used to update the ellipsoid core function using a cutting plane.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

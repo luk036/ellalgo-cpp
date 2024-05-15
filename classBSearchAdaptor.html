@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ProfitOracleRb class | EllAlgo</title>
+  <title>BSearchAdaptor class | EllAlgo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -49,10 +49,25 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          ProfitOracleRb <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="profit__oracle_8hpp.html">&lt;ellalgo/oracles/profit_oracle.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="cutting__plane_8hpp.html">&lt;ellalgo/cutting_plane.hpp&gt;</a></div>
+          <div class="m-doc-template">template&lt;typename Oracle, typename Space&gt;</div>
+          BSearchAdaptor <span class="m-thin">class</span>
         </h1>
-        <p>Oracle for a profit maximization problem (robust version)</p>
+        <table class="m-table m-fullwidth m-flat">
+          <thead>
+            <tr><th colspan="2">Template parameters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 1%">Oracle</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Space</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -65,98 +80,132 @@
             </li>
           </ul>
         </nav>
-<p>This example is taken from [Aliabadi and Salahi, 2013]:</p><pre>max     p&#x27;(A x1^alpha&#x27; x2^beta&#x27;) - v1&#x27;*x1 - v2&#x27;*x2
-s.t.    x1 \le k&#x27;
-</pre><p>where: alpha&#x27; = alpha \pm e1 beta&#x27; = beta \pm e2 p&#x27; = p \pm e3 k&#x27; = k \pm e4 v&#x27; = v \pm e5</p><aside class="m-note m-default"><h4>See also</h4><p><a href="class_profit_oracle.html" class="m-doc">ProfitOracle</a></p></aside>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#afbb320fd145c8319af423a1e063d8b80" class="m-doc">ProfitOracleRb</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> p,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> A,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> k,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; a,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; v,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; e,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> e3)</span>
+              <span class="m-doc-wrap-bumper"><a href="#a2d40565c22dc20d2432e5b95801826c2" class="m-doc">BSearchAdaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; omega,
+              Space&amp; space)</span>
             </dt>
-            <dd>Construct a new profit rb oracle object.</dd>
+            <dd>Construct a new bsearch adaptor object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a3dd20886e21dba25f8641bd85a13f2cd" class="m-doc">BSearchAdaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; omega,
+              Space&amp; space,
+              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options)</span>
+            </dt>
+            <dd>Construct a new bsearch adaptor object.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a545091e91d5a68569cbcc39265e45a3b" class="m-doc">assess_optim</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; y,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; gamma) -&gt; std::tuple&lt; Cut, bool &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae9ed90c5a8bd2b8f8e4912621db74855" class="m-doc">x_best</a>(</span><span class="m-doc-wrap">) const -&gt; ArrayType -&gt; auto</span>
             </dt>
-            <dd>Make object callable for <a href="cutting__plane_8hpp.html#a91f15c3b770007a94a9526f8de37fa89" class="m-doc">cutting_<wbr />plane_<wbr />optim()</a></dd>
+            <dd>get best x</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename Num&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6a2a0fbc3feed91cd600aaf6c2d39b00" class="m-doc">assess_bs</a>(</span><span class="m-doc-wrap">Num&amp; gamma) -&gt; bool -&gt; auto</span>
+            </dt>
+            <dd></dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="afbb320fd145c8319af423a1e063d8b80"><div>
+          <section class="m-doc-details" id="a2d40565c22dc20d2432e5b95801826c2"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> ProfitOracleRb::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afbb320fd145c8319af423a1e063d8b80" class="m-doc-self">ProfitOracleRb</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> p,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> A,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> k,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; a,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; v,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; e,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> e3)</span></span>
+              <div class="m-doc-template">
+                template&lt;typename Oracle, typename Space&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> BSearchAdaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2d40565c22dc20d2432e5b95801826c2" class="m-doc-self">BSearchAdaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; omega,
+              Space&amp; space)</span></span>
             </h3>
-            <p>Construct a new profit rb oracle object.</p>
+            <p>Construct a new bsearch adaptor object.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">p&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>the market price per unit</td>
+                  <td style="width: 1%">omega&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>perform assessment on x0</td>
                 </tr>
                 <tr>
-                  <td>A&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>the scale of production</td>
-                </tr>
-                <tr>
-                  <td>k&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>a given constant that restricts the quantity of x1</td>
-                </tr>
-                <tr>
-                  <td>a&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>the output elasticities</td>
-                </tr>
-                <tr>
-                  <td>v&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>output price</td>
-                </tr>
-                <tr>
-                  <td>e&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>paramters for uncertainty</td>
-                </tr>
-                <tr>
-                  <td>e3&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>paramters for uncertainty</td>
+                  <td>space&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>search Space containing x*</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a545091e91d5a68569cbcc39265e45a3b"><div>
+          <section class="m-doc-details" id="a3dd20886e21dba25f8641bd85a13f2cd"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> ProfitOracleRb::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a545091e91d5a68569cbcc39265e45a3b" class="m-doc-self">assess_optim</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; y,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; gamma) -&gt; std::tuple&lt; Cut, bool &gt;</span></span>
+              <div class="m-doc-template">
+                template&lt;typename Oracle, typename Space&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> BSearchAdaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3dd20886e21dba25f8641bd85a13f2cd" class="m-doc-self">BSearchAdaptor</a>(</span><span class="m-doc-wrap">Oracle&amp; omega,
+              Space&amp; space,
+              const <a href="structOptions.html" class="m-doc">Options</a>&amp; options)</span></span>
             </h3>
-            <p>Make object callable for <a href="cutting__plane_8hpp.html#a91f15c3b770007a94a9526f8de37fa89" class="m-doc">cutting_<wbr />plane_<wbr />optim()</a></p>
+            <p>Construct a new bsearch adaptor object.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">y&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>input quantity (in log scale)</td>
+                  <td style="width: 1%">omega&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>perform assessment on x0</td>
                 </tr>
+                <tr>
+                  <td>space&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>search space containing x*</td>
+                </tr>
+                <tr>
+                  <td>options&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>maximum iteration and error tolerance etc.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae9ed90c5a8bd2b8f8e4912621db74855"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Oracle, typename Space&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto BSearchAdaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae9ed90c5a8bd2b8f8e4912621db74855" class="m-doc-self">x_best</a>(</span><span class="m-doc-wrap">) const -&gt; ArrayType</span></span>
+            </h3>
+            <p>get best x</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>auto</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6a2a0fbc3feed91cd600aaf6c2d39b00"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename Oracle, typename Space&gt;
+                template&lt;typename Num&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto BSearchAdaptor&lt;Oracle, Space&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a2a0fbc3feed91cd600aaf6c2d39b00" class="m-doc-self">assess_bs</a>(</span><span class="m-doc-wrap">Num&amp; gamma) -&gt; bool</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">Num</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
                 <tr>
                   <td>gamma&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
                   <td>the best-so-far optimal value</td>
@@ -165,11 +214,10 @@ s.t.    x1 \le k&#x27;
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Cut and the updated best-so-far value</td>
+                  <td>bool</td>
                 </tr>
               </tfoot>
             </table>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="cutting__plane_8hpp.html#a91f15c3b770007a94a9526f8de37fa89" class="m-doc">cutting_<wbr />plane_<wbr />optim</a></p></aside>
           </div></section>
         </section>
       </div>
@@ -216,7 +264,7 @@ s.t.    x1 \le k&#x27;
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.10.0 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
