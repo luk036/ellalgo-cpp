@@ -75,7 +75,7 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
 auto LowpassOracle::assess_feas(const Vec &x, const double &Spsq) -> ParallelCut * {
     static ParallelCut cut = std::make_pair(Vec{0.0}, Vec{0.0});
 
-    this->more_alt = true;
+    // this->more_alt = true;
     auto n = x.size();
 
     auto matrix_vector = [this, &x](size_t k) {
@@ -148,7 +148,7 @@ auto LowpassOracle::assess_feas(const Vec &x, const double &Spsq) -> ParallelCut
         }
     }
 
-    this->more_alt = false;
+    // this->more_alt = false;
 
     // 1.0 nonnegative-real constraint
     // case 1,

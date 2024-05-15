@@ -52,7 +52,6 @@ class LowpassOracle {
 
     double _fmax = -1e100;
     size_t _kmax = 0;
-    bool more_alt{true};
 
     Mat A;
     double Lpsq;
