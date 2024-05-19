@@ -222,7 +222,7 @@ class BSearchAdaptor {
      * @return bool
      */
     template <typename Num> auto assess_bs(Num &gamma) -> bool {
-        Space space = this->_space.copy(); // copy
+        Space space = this->_space.copy();  // copy
         this->_omega.update(gamma);
         const auto result = cutting_plane_feas(this->_omega, space, this->_options);
         auto x_feas = std::get<0>(result);

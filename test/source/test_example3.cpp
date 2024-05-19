@@ -17,7 +17,7 @@ struct MyOracle3 {
     double target = -1e100;
 
     void update(double gamma) { this->target = gamma; }
-    
+
     /**
      * @brief
      *
