@@ -78,6 +78,7 @@ struct Options {
     double tolerance = 1e-9;
 };
 
+/** x: assuming not zero */
 std::pair<double, int> power_iteration(const Matrix& A, Vector& x, const Options& options) {
     x.normalize();
     for (int niter = 0; niter < options.max_iters; ++niter) {
@@ -85,12 +86,10 @@ std::pair<double, int> power_iteration(const Matrix& A, Vector& x, const Options
         x = A * x1;
         x.normalize();
         if ((x - x1).l1_norm() <= options.tolerance || (x + x1).l1_norm() <= options.tolerance) {
-            double ld = (A * x1).dot(x1);
-            return {ld, niter};
+            return {(A * x).dot(x), niter};
         }
     }
-    double ld = (A * x).dot(x);
-    return {ld, options.max_iters};
+    return {(A * x).dot(x), options.max_iters};
 }
 
 std::pair<double, int> power_iteration4(const Matrix& A, Vector& x, const Options& options) {
@@ -101,13 +100,11 @@ std::pair<double, int> power_iteration4(const Matrix& A, Vector& x, const Option
         x /= x.l1_norm();
         if ((x - x1).l1_norm() <= options.tolerance || (x + x1).l1_norm() <= options.tolerance) {
             x.normalize();
-            double ld = (A * x).dot(x);
-            return {ld, niter};
+            return {(A * x).dot(x), niter};
         }
     }
     x.normalize();
-    double ld = (A * x).dot(x);
-    return {ld, options.max_iters};
+    return {(A * x).dot(x), options.max_iters};
 }
 
 std::pair<double, int> power_iteration2(const Matrix& A, Vector& x, const Options& options) {
