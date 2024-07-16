@@ -5,6 +5,7 @@
 
 #include <cmath>
 #include <stdexcept>
+#include <string>
 
 template <typename Matrix, typename Vector>
 Vector conjugate_gradient2(const Matrix& A, const Vector& b, const Vector* x0, double tol = 1e-5,
