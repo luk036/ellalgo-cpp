@@ -79,6 +79,7 @@ class Matrix {
     std::vector<std::vector<double>> data;
 };
 
+template <typename Matrix, typename Vector>
 inline Vector conjugate_gradient(const Matrix& A, const Vector& b, const Vector* x0 = nullptr,
                                  double tol = 1e-5, int max_iter = 1000) {
     size_t n = b.size();

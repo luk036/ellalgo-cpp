@@ -67,8 +67,9 @@ TEST_CASE("Conjugate Gradient Tolerance") {
     A[1] = {1, 3};
     Vector b({1, 2});
     double tol = 1e-10;
+    Vector x0(2);
 
-    Vector x = conjugate_gradient(A, b, nullptr, tol);
+    Vector x = conjugate_gradient(A, b, &x0, tol);
 
     Vector residual = b - A.dot(x);
     CHECK(residual.norm() < tol);
