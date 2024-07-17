@@ -8,12 +8,12 @@
 #include <string>
 
 template <typename Matrix, typename Vector>
-Vector conjugate_gradient2(const Matrix& A, const Vector& b, const Vector* x0, double tol = 1e-5,
+Vector conjugate_gradient2(const Matrix& A, const Vector& b, Vector& x, double tol = 1e-5,
                            int max_iter = 1000) {
     using T = typename Vector::value_type;
 
-    size_t n = b.size();
-    Vector x = x0 ? *x0 : Vector(n);
+    // size_t n = b.size();
+    // Vector x = x0 ? *x0 : Vector(n);
 
     Vector r = b - A * x;
     Vector p = r;
