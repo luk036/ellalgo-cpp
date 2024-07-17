@@ -1,18 +1,18 @@
-#include <ellalgo/greeter.h>
+// #include <ellalgo/greeter.h>
 #include <ellalgo/version.h>
 
 #include <cxxopts.hpp>
 #include <iostream>
 #include <string>
-#include <unordered_map>
+// #include <unordered_map>
 
 auto main(int argc, char **argv) -> int {
-    const std::unordered_map<std::string, ellalgo::LanguageCode> languages{
-        {"en", ellalgo::LanguageCode::EN},
-        {"de", ellalgo::LanguageCode::DE},
-        {"es", ellalgo::LanguageCode::ES},
-        {"fr", ellalgo::LanguageCode::FR},
-    };
+    // const std::unordered_map<std::string, ellalgo::LanguageCode> languages{
+    //     {"en", ellalgo::LanguageCode::EN},
+    //     {"de", ellalgo::LanguageCode::DE},
+    //     {"es", ellalgo::LanguageCode::ES},
+    //     {"fr", ellalgo::LanguageCode::FR},
+    // };
 
     cxxopts::Options options(*argv, "A program to welcome the world!");
 
@@ -40,14 +40,14 @@ auto main(int argc, char **argv) -> int {
         return 0;
     }
 
-    auto langIt = languages.find(language);
-    if (langIt == languages.end()) {
-        std::cerr << "unknown language code: " << language << std::endl;
-        return 1;
-    }
+    // auto langIt = languages.find(language);
+    // if (langIt == languages.end()) {
+    //     std::cerr << "unknown language code: " << language << std::endl;
+    //     return 1;
+    // }
 
-    ellalgo::EllAlgo ellalgo(name);
-    std::cout << ellalgo.greet(langIt->second) << std::endl;
+    // ellalgo::EllAlgo ellalgo(name);
+    // std::cout << ellalgo.greet(langIt->second) << std::endl;
 
     return 0;
 }
