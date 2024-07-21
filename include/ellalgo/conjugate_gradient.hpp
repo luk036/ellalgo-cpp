@@ -5,8 +5,8 @@
 
 #include <cmath>
 #include <stdexcept>
-#include <vector>
 #include <string>
+#include <vector>
 
 class Vector0 {
   public:
@@ -82,7 +82,7 @@ class Matrix0 {
 
 template <typename Matrix0, typename Vector0>
 inline Vector0 conjugate_gradient(const Matrix0& A, const Vector0& b, const Vector0* x0 = nullptr,
-                                 double tol = 1e-5, int max_iter = 1000) {
+                                  double tol = 1e-5, int max_iter = 1000) {
     size_t n = b.size();
     Vector0 x = x0 ? *x0 : Vector0(n);
 
