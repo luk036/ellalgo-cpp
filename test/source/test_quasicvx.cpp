@@ -22,15 +22,22 @@ struct MyQuasicCvxOracle {
     double tmp3 = 0.0;
 
     /**
-     * @brief
+     * The function assess_optim takes a vector xc and a double gamma, assesses optimization
+     * constraints, and returns a tuple containing a Cut object and a boolean value.
      *
-     * @param[in] z
-     * @param[in,out] gamma
-     * @return std::tuple<Cut, double>
+     * @param[in] xc The `xc` parameter is a `Vec` object that contains two elements. The first
+     * element is stored in `xc[0]` and represents the square root of a value (`sqrtx`), while the
+     * second element is stored in `xc[1]` and represents another value (`ly
+     * @param[in,out] gamma Gamma is a parameter passed by reference to the `assess_optim` function.
+     * It is a double type variable that is modified within the function and used in calculations
+     * related to constraints.
+     *
+     * @return The function `assess_optim` returns a `std::tuple` containing a `Cut` object and a
+     * boolean value.
      */
-    auto assess_optim(const Vec &z, double &gamma) -> std::tuple<Cut, bool> {
-        double sqrtx = z[0];
-        double ly = z[1];
+    auto assess_optim(const Vec &xc, double &gamma) -> std::tuple<Cut, bool> {
+        double sqrtx = xc[0];
+        double ly = xc[1];
 
         for (int i = 0; i != 2; i++) {
             this->idx++;

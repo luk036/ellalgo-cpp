@@ -16,17 +16,22 @@ struct MyOracle {
     int idx = 0U;
 
     /**
-     * @brief
+     * The function assess_feas assesses the feasibility of a given vector xc with respect to two
+     * constraints and returns a pointer to a Cut object representing the violated constraint.
      *
-     * @param[in] z
-     * @return std::optional<Cut>
+     * @param[in] xc The parameter `xc` is of type `Vec`, which seems to be a vector or array-like
+     * structure containing two elements representing coordinates in a 2D space. In this function
+     * `assess_feas`, the elements of `xc` are accessed as `x` and `y` respectively.
+     *
+     * @return A pointer to a `Cut` object is being returned. The `Cut` object being returned is
+     * either `cut1` or `cut2`, which are static variables initialized within the function.
      */
-    auto assess_feas(const Vec &z) -> Cut * {
+    auto assess_feas(const Vec &xc) -> Cut * {
         static auto cut1 = Cut{Vec{1.0, 1.0}, 0.0};
         static auto cut2 = Cut{Vec{-1.0, 1.0}, 0.0};
 
-        const auto x = z[0];
-        const auto y = z[1];
+        const auto x = xc[0];
+        const auto y = xc[1];
 
         for (int i = 0; i != 2; ++i) {
             this->idx++;

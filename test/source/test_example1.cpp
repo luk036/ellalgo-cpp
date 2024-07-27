@@ -16,15 +16,24 @@ struct MyOracle {
     int idx = 0;
 
     /**
-     * @brief
+     * The function assess_optim assesses the optimality of a given point in a mathematical
+     * optimization problem with constraints and an objective function.
      *
-     * @param[in] z
-     * @param[in,out] gamma
-     * @return std::pair<Cut, double>
+     * @param[in] xc The parameter `xc` is a vector containing two elements, representing the
+     * coordinates of a point in a 2D space. The first element corresponds to the x-coordinate, and
+     * the second element corresponds to the y-coordinate.
+     * @param[in,out] gamma The `gamma` parameter in the `assess_optim` function is a reference to a
+     * `double` type variable. It is passed as an input-output parameter, meaning its value can be
+     * modified within the function and the updated value will be reflected outside the function
+     * scope as well.
+     *
+     * @return The function `assess_optim` returns a tuple containing a `Cut` object and a boolean
+     * value. The `Cut` object represents a cut in a mathematical optimization context, and the
+     * boolean value indicates whether the optimization assessment was successful.
      */
-    auto assess_optim(const Vec &z, double &gamma) -> std::tuple<Cut, bool> {
-        const auto x = z[0];
-        const auto y = z[1];
+    auto assess_optim(const Vec &xc, double &gamma) -> std::tuple<Cut, bool> {
+        const auto x = xc[0];
+        const auto y = xc[1];
         const auto f0 = x + y;
 
         for (int i = 0; i != 3; i++) {

@@ -19,10 +19,16 @@ struct MyOracle3 {
     void update(double gamma) { this->target = gamma; }
 
     /**
-     * @brief
+     * The assess_feas function assesses the feasibility of a given point based on predefined
+     * constraints and returns a pointer to the corresponding cut if violated.
      *
-     * @param[in] z
-     * @return std::optional<Cut>
+     * @param[in] xc The parameter `xc` is of type `Vec`, which seems to be a vector containing two
+     * elements representing coordinates in a 2D space. In the function `assess_feas`, the elements
+     * of `xc` are accessed as `x` and `y` using `xc[0]
+     *
+     * @return A pointer to a `Cut` object is being returned from the `assess_feas` function. The
+     * function returns a pointer to one of the static `Cut` objects (`cut1`, `cut2`, `cut3`,
+     * `cut4`) based on the constraints being assessed.
      */
     auto assess_feas(const Vec &xc) -> Cut * {
         static auto cut1 = Cut{Vec{-1.0, 0.0}, 0.0};

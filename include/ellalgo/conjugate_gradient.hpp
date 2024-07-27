@@ -83,26 +83,26 @@ class Matrix0 {
 template <typename Matrix0, typename Vector0>
 inline Vector0 conjugate_gradient(const Matrix0& A, const Vector0& b, const Vector0* x0 = nullptr,
                                   double tol = 1e-5, int max_iter = 1000) {
-    size_t n = b.size();
-    Vector0 x = x0 ? *x0 : Vector0(n);
+    size_t ndim = b.size();
+    Vector0 x_vector = x0 ? *x0 : Vector0(ndim);
 
-    Vector0 r = b - A.dot(x);
-    Vector0 p = r;
-    double r_norm_sq = r.dot(r);
+    Vector0 residual = b - A.dot(x_vector);
+    Vector0 director = residual;
+    double r_norm_sq = residual.dot(residual);
 
     for (int i = 0; i < max_iter; ++i) {
-        Vector0 Ap = A.dot(p);
-        double alpha = r_norm_sq / p.dot(Ap);
-        x += alpha * p;
-        r -= alpha * Ap;
-        double r_norm_sq_new = r.dot(r);
+        Vector0 Ap = A.dot(director);
+        double alpha = r_norm_sq / director.dot(Ap);
+        x_vector += alpha * director;
+        residual -= alpha * Ap;
+        double r_norm_sq_new = residual.dot(residual);
 
         if (std::sqrt(r_norm_sq_new) < tol) {
-            return x;
+            return x_vector;
         }
 
         double beta = r_norm_sq_new / r_norm_sq;
-        p = r + beta * p;
+        director = residual + beta * director;
         r_norm_sq = r_norm_sq_new;
     }
 
