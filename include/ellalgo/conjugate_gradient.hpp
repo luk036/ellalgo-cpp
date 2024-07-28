@@ -80,6 +80,20 @@ class Matrix0 {
     std::vector<std::vector<double>> data;
 };
 
+/**
+ * Solves the linear system Ax = b using the conjugate gradient method.
+ *
+ * @tparam Matrix0 The matrix type, which must support matrix-vector multiplication.
+ * @tparam Vector0 The vector type, which must support vector operations.
+ * @param A The matrix A in the linear system Ax = b.
+ * @param b The right-hand side vector b in the linear system Ax = b.
+ * @param x0 An optional initial guess for the solution vector x.
+ * @param tol The tolerance for the residual norm, used as the stopping criterion.
+ * @param max_iter The maximum number of iterations to perform.
+ * @return The solution vector x.
+ * @throws std::runtime_error if the conjugate gradient method does not converge after the maximum
+ * number of iterations.
+ */
 template <typename Matrix0, typename Vector0>
 inline Vector0 conjugate_gradient(const Matrix0& A, const Vector0& b, const Vector0* x0 = nullptr,
                                   double tol = 1e-5, int max_iter = 1000) {

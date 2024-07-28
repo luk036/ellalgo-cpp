@@ -7,8 +7,21 @@
 #include <stdexcept>
 #include <string>
 
-/** The provided code snippet defines a templated function `conjugate_gradient2` that implements the
-Conjugate Gradient method for solving a system of linear equations of the form Ax = b. */
+/**
+ * Solves a system of linear equations Ax = b using the Conjugate Gradient method.
+ *
+ * @tparam Matrix The type of the matrix A.
+ * @tparam Vector The type of the vectors b and x.
+ * @param A The matrix A in the system of linear equations Ax = b.
+ * @param b The right-hand side vector b in the system of linear equations Ax = b.
+ * @param x_vector The initial guess for the solution vector x. This vector will be updated
+ * in-place.
+ * @param tol The tolerance for the residual norm, used as the stopping criterion.
+ * @param max_iter The maximum number of iterations to perform.
+ * @return The solution vector x.
+ * @throws std::runtime_error if the Conjugate Gradient method does not converge after the maximum
+ * number of iterations.
+ */
 template <typename Matrix, typename Vector>
 Vector conjugate_gradient2(const Matrix& A, const Vector& b, Vector& x_vector, double tol = 1e-5,
                            int max_iter = 1000) {

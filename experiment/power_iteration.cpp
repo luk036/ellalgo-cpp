@@ -12,9 +12,10 @@ class Vector {
      * The function `Vector` initializes a vector with the values provided in the `initializer_list`
      * `list`.
      *
-     * @param[in] list The `list` parameter in the code snippet `Vector(std::initializer_list<double>
-     * list) : data(list) {}` is of type `std::initializer_list<double>`. This parameter allows you
-     * to initialize the `Vector` object with a list of `double` values.
+     * @param[in] list The `list` parameter in the code snippet
+     * `Vector(std::initializer_list<double> list) : data(list) {}` is of type
+     * `std::initializer_list<double>`. This parameter allows you to initialize the `Vector` object
+     * with a list of `double` values.
      */
     Vector(std::initializer_list<double> list) : data(list) {}
 
@@ -71,10 +72,10 @@ class Vector {
     /**
      * The `dot` function calculates the dot product of two vectors.
      *
-     * @param[in] other The `other` parameter in the `dot` function is of type `Vector&`, which means it
-     * is a reference to another `Vector` object. This parameter is used to calculate the dot
-     * product of the current `Vector` object with another `Vector` object passed as an argument to
-     * the function
+     * @param[in] other The `other` parameter in the `dot` function is of type `Vector&`, which
+     * means it is a reference to another `Vector` object. This parameter is used to calculate the
+     * dot product of the current `Vector` object with another `Vector` object passed as an argument
+     * to the function
      *
      * @return The `dot` product of the current `Vector` object and the `other` `Vector` object is
      * being returned.
@@ -133,8 +134,8 @@ class Vector {
  * element-wise subtraction of the corresponding elements.
  *
  * @param[in] a The parameter `a` is a constant reference to a `Vector` object.
- * @param[in] b The parameter `b` in the `operator-` function represents a `Vector` object that is being
- * subtracted from another `Vector` object `a`.
+ * @param[in] b The parameter `b` in the `operator-` function represents a `Vector` object that is
+ * being subtracted from another `Vector` object `a`.
  *
  * @return a new `Vector` object that contains the result of subtracting each element of vector `b`
  * from the corresponding element of vector `a`.
@@ -152,8 +153,8 @@ Vector operator-(const Vector& a, const Vector& b) {
  * @param[in] a The parameters `a` and `b` are both of type `Vector`, which is a custom class
  * representing a mathematical vector. The `operator+` function overloads the `+` operator for
  * adding two vectors element-wise.
- * @param[in] b The parameter `b` in the `operator+` function represents a `Vector` object that is being
- * added to another `Vector` object `a`.
+ * @param[in] b The parameter `b` in the `operator+` function represents a `Vector` object that is
+ * being added to another `Vector` object `a`.
  *
  * @return The function `operator+` is returning a new `Vector` object that contains the
  * element-wise sum of the elements of two input `Vector` objects `a` and `b`.
@@ -171,7 +172,8 @@ class Matrix {
     /**
      * The Matrix constructor initializes the data using a list of lists of doubles.
      *
-     * @param[in] list A list of lists of double values that is used to initialize the Matrix object.
+     * @param[in] list A list of lists of double values that is used to initialize the Matrix
+     * object.
      */
     Matrix(std::initializer_list<std::initializer_list<double>> list)
         : data(list.begin(), list.end()) {}
@@ -179,9 +181,9 @@ class Matrix {
     /**
      * The function overloads the * operator to perform matrix-vector multiplication.
      *
-     * @param[in] v The `operator*` function you provided is for multiplying a matrix (represented as a
-     * vector of vectors) by a vector. The `v` parameter in this context represents the vector that
-     * you want to multiply the matrix with.
+     * @param[in] v The `operator*` function you provided is for multiplying a matrix (represented
+     * as a vector of vectors) by a vector. The `v` parameter in this context represents the vector
+     * that you want to multiply the matrix with.
      *
      * @return The `operator*` function is returning a new `Vector` object that is the result of
      * multiplying the current `Vector` object (`this`) with another `Vector` object `v`.
@@ -273,8 +275,9 @@ std::pair<double, int> power_iteration4(const Matrix& A, Vector& x, const Option
  * The function `power_iteration2` implements the power iteration method to find the dominant
  * eigenvalue and eigenvector of a matrix.
  *
- * @param[in] A The parameter `A` in the `power_iteration2` function represents a matrix. It is used for
- * matrix-vector multiplication and eigenvalue calculations within the power iteration algorithm.
+ * @param[in] A The parameter `A` in the `power_iteration2` function represents a matrix. It is used
+ * for matrix-vector multiplication and eigenvalue calculations within the power iteration
+ * algorithm.
  * @param[in,out] x The parameter `x` is a vector that represents the initial guess for the dominant
  * eigenvector of the matrix `A`. It is normalized at the beginning of the `power_iteration2`
  * function to ensure that the calculations are stable and converge properly.
@@ -306,14 +309,14 @@ std::pair<double, int> power_iteration2(const Matrix& A, Vector& x, const Option
  * The function `power_iteration3` implements the power iteration method to find the dominant
  * eigenvalue and eigenvector of a matrix.
  *
- * @param[in] A The parameter `A` in the `power_iteration3` function represents a matrix. It is used in
- * the power iteration algorithm to find the dominant eigenvalue and eigenvector of the matrix.
+ * @param[in] A The parameter `A` in the `power_iteration3` function represents a matrix. It is used
+ * in the power iteration algorithm to find the dominant eigenvalue and eigenvector of the matrix.
  * @param[in,out] x The `x` parameter in the `power_iteration3` function represents the initial
  * vector used in the power iteration algorithm. It is the starting vector that is iteratively
  * transformed and normalized to find the dominant eigenvalue and eigenvector of the given matrix
  * `A`.
- * @param[in] options The `Options` struct likely contains parameters for controlling the behavior of
- * the power iteration algorithm. These parameters could include:
+ * @param[in] options The `Options` struct likely contains parameters for controlling the behavior
+ * of the power iteration algorithm. These parameters could include:
  *
  * @return A std::pair<double, int> is being returned, where the first element of the pair is the
  * dominant eigenvalue (ld) and the second element is the number of iterations (niter) performed.
