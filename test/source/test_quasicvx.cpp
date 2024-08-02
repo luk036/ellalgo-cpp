@@ -14,7 +14,7 @@ using Vec = std::valarray<double>;
 
 struct MyQuasicCvxOracle {
     using ArrayType = Vec;
-    using CutChoices = double;  // single cut
+    using CutChoice = double;  // single cut
     using Cut = std::pair<Vec, double>;
 
     int idx = 0;
@@ -37,7 +37,10 @@ struct MyQuasicCvxOracle {
      */
     auto assess_optim(const Vec &xc, double &gamma) -> std::tuple<Cut, bool> {
         double sqrtx = xc[0];
-        double ly = xc[1];
+        double logy = xc[1];
+        double fj;
+        double tmp2;
+        double tmp3;
 
         for (int i = 0; i != 2; i++) {
             this->idx++;
@@ -45,31 +48,24 @@ struct MyQuasicCvxOracle {
                 this->idx = 0;  // round robin
             }
 
-            double fj;
             switch (this->idx) {
-                case 0:  // constraint 1: exp(x) <= y, or sqrtx**2 <= ly
-                    fj = sqrtx * sqrtx - ly;
+                case 0:  // constraint 1: exp(x) <= y, or sqrtx**2 <= logy
+                    if ((fj = sqrtx * sqrtx - logy) > 0.0) {
+                        return {{Vec{2 * sqrtx, -1.0}, fj}, false};
+                    }
                     break;
                 case 1:  // constraint 2
-                    this->tmp2 = std::exp(ly);
-                    this->tmp3 = gamma * this->tmp2;
-                    fj = -sqrtx + this->tmp3;
+                    tmp2 = std::exp(logy);
+                    tmp3 = gamma * tmp2;
+                    if ((fj = -sqrtx + tmp3) > 0.0) {
+                        return {{Vec{-1.0, tmp3}, fj}, false};
+                    }
                     break;
                 default:
                     exit(0);
             }
-            if (fj > 0.0) {
-                switch (this->idx) {
-                    case 0:
-                        return {{Vec{2 * sqrtx, -1.0}, fj}, false};
-                    case 1:
-                        return {{Vec{-1.0, this->tmp3}, fj}, false};
-                    default:
-                        exit(0);
-                }
-            }
         }
-        gamma = sqrtx / this->tmp2;
+        gamma = sqrtx / tmp2;
         return {{Vec{-1.0, sqrtx}, 0}, true};
     }
 };

@@ -10,7 +10,7 @@ using Vec = std::valarray<double>;
 
 struct MyOracle3 {
     using ArrayType = Vec;
-    using CutChoices = double;
+    using CutChoice = double;
     using Cut = std::pair<Vec, double>;
 
     int idx = 0U;

@@ -10,10 +10,11 @@ using Vec = std::valarray<double>;
 
 struct MyOracle {
     using ArrayType = Vec;
-    using CutChoices = double;  // single cut
+    using CutChoice = double;  // single cut
     using Cut = std::pair<Vec, double>;
 
-    int idx = 0;
+    mutable int idx = 0;  // for round robin
+    const int num_constraints = 3;
 
     /**
      * The function assess_optim assesses the optimality of a given point in a mathematical
@@ -31,41 +32,35 @@ struct MyOracle {
      * value. The `Cut` object represents a cut in a mathematical optimization context, and the
      * boolean value indicates whether the optimization assessment was successful.
      */
-    auto assess_optim(const Vec &xc, double &gamma) -> std::tuple<Cut, bool> {
+    auto assess_optim(const Vec &xc, double &gamma) const -> std::tuple<Cut, bool> {
         const auto x = xc[0];
         const auto y = xc[1];
         const auto f0 = x + y;
 
-        for (int i = 0; i != 3; i++) {
+        for (int i = 0; i != this->num_constraints; i++) {
             this->idx++;
-            if (this->idx == 3) {
+            if (this->idx == this->num_constraints) {
                 this->idx = 0;  // round robin
             }
-            double fj = 0.0;
+            double fj;
             switch (this->idx) {
                 case 0:  // constraint 1: x + y <= 3
-                    fj = f0 - 3.0;
+                    if (f0 > 3.0) {
+                        return {{Vec{1.0, 1.0}, f0 - 3.0}, false};
+                    }
                     break;
                 case 1:  // constraint 2: x - y >= 1
-                    fj = -x + y + 1.0;
+                    if ((fj = -x + y + 1.0) > 0.0) {
+                        return {{Vec{-1.0, 1.0}, fj}, false};
+                    }
                     break;
                 case 2:  // objective: maximize x + y
-                    fj = gamma - f0;
+                    if ((fj = gamma - f0) > 0.0) {
+                        return {{Vec{-1.0, -1.0}, fj}, false};
+                    };
                     break;
                 default:
                     exit(0);
-            }
-            if (fj > 0.0) {
-                switch (this->idx) {
-                    case 0:
-                        return {{Vec{1.0, 1.0}, fj}, false};
-                    case 1:
-                        return {{Vec{-1.0, 1.0}, fj}, false};
-                    case 2:
-                        return {{Vec{-1.0, -1.0}, fj}, false};
-                    default:
-                        exit(0);
-                }
             }
         }
         gamma = f0;
