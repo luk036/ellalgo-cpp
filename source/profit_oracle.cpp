@@ -103,8 +103,8 @@ auto ProfitOracle::assess_optim(const Vec &y, double &gamma) -> std::tuple<Cut, 
  *
  * @return The function `assess_optim_q` returns a tuple containing the following elements:
  */
-auto ProfitOracleQ::assess_optim_q(const Vec &y, double &gamma, bool retry)
-    -> std::tuple<Cut, bool, Vec, bool> {
+auto ProfitOracleQ::assess_optim_q(const Vec &y, double &gamma,
+                                   bool retry) -> std::tuple<Cut, bool, Vec, bool> {
     if (!retry) {
         auto cut = this->_P.assess_feas(y, gamma);
         if (cut) {

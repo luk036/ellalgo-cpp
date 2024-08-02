@@ -51,16 +51,16 @@ class LowpassOracle {
     using ParallelCut = std::pair<Vec, Vec>;
 
     double _fmax = -1e100;
-    size_t _kmax = 0;
+    int _kmax = 0;
 
     Mat A;
     double Lpsq;
     double Upsq;
-    size_t nwpass;
-    size_t nwstop;
-    size_t idx1;
-    size_t idx2;
-    size_t idx3;
+    int nwpass;
+    int nwstop;
+    int idx1;
+    int idx2;
+    int idx3;
 
   public:
     /*!

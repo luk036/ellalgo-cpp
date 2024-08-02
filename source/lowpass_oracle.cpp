@@ -51,13 +51,13 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
             this->A[i][j] = 2.0 * std::cos(w[i] * j);
         }
     }
-    this->nwpass = size_t(std::floor(wpass * double(m - 1)) + 1);
-    this->nwstop = size_t(std::floor(wstop * double(m - 1)) + 1);
+    this->nwpass = int(std::floor(wpass * double(m - 1)) + 1);
+    this->nwstop = int(std::floor(wstop * double(m - 1)) + 1);
 
     // For round robin
-    this->idx1 = 0U;
-    this->idx2 = this->nwpass;
-    this->idx3 = this->nwstop;
+    this->idx1 = -1;
+    this->idx2 = this->nwpass - 1;
+    this->idx3 = this->nwstop - 1;
 }
 
 /**
@@ -88,7 +88,7 @@ auto LowpassOracle::assess_feas(const Vec &x, const double &Spsq) -> ParallelCut
 
     // case 2,
     // 2.0 passband constraints
-    for (size_t __k = 0; __k != this->nwpass; ++__k) {
+    for (int __k = 0; __k != this->nwpass; ++__k) {
         ++this->idx1;
         if (this->idx1 == this->nwpass) {
             this->idx1 = 0;  // round robin
@@ -108,10 +108,10 @@ auto LowpassOracle::assess_feas(const Vec &x, const double &Spsq) -> ParallelCut
 
     // case 3,
     // 3.0 stopband constraint
-    auto N = A.size();
+    auto N = int(A.size());
     this->_fmax = -1e100;  // std::numeric_limits<double>::min()
-    this->_kmax = 0U;
-    for (size_t __k = this->nwstop; __k != N; ++__k) {
+    this->_kmax = -1;
+    for (int __k = this->nwstop; __k != N; ++__k) {
         ++this->idx3;
         if (this->idx3 == N) {
             this->idx3 = this->nwstop;  // round robin
@@ -135,7 +135,7 @@ auto LowpassOracle::assess_feas(const Vec &x, const double &Spsq) -> ParallelCut
 
     // case 4,
     // 1.0 nonnegative-real constraint
-    for (size_t __k = this->nwpass; __k != this->nwstop; ++__k) {
+    for (int __k = this->nwpass; __k != this->nwstop; ++__k) {
         ++this->idx2;
         if (this->idx2 == this->nwstop) {
             this->idx2 = this->nwpass;  // round robin
