@@ -27,7 +27,7 @@ class ProfitOracle {
     using Vec = std::valarray<double>;
     using Cut = std::pair<Vec, double>;
 
-    int idx = 0;
+    int idx = -1;
     const double _log_pA;
     const double _log_k;
     const Vec _price_out;

@@ -13,7 +13,7 @@ struct MyOracle {
     using CutChoice = double;  // single cut
     using Cut = std::pair<Vec, double>;
 
-    mutable int idx = 0;  // for round robin
+    mutable int idx = -1;  // for round robin
     const int num_constraints = 3;
 
     /**

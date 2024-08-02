@@ -13,7 +13,7 @@ struct MyOracle3 {
     using CutChoice = double;
     using Cut = std::pair<Vec, double>;
 
-    int idx = 0U;
+    int idx = -1;
     double target = -1e100;
 
     void update(double gamma) { this->target = gamma; }

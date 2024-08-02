@@ -17,7 +17,7 @@ struct MyQuasicCvxOracle {
     using CutChoice = double;  // single cut
     using Cut = std::pair<Vec, double>;
 
-    int idx = 0;
+    int idx = -1;
     double tmp2 = 0.0;
     double tmp3 = 0.0;
 

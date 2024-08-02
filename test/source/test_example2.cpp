@@ -13,7 +13,7 @@ struct MyOracle {
     using CutChoices = double;
     using Cut = std::pair<Vec, double>;
 
-    int idx = 0U;
+    int idx = -1;
 
     /**
      * The function assess_feas assesses the feasibility of a given vector xc with respect to two

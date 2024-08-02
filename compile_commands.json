@@ -1,0 +1,131 @@
+[
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/b/benchmark/1.8.5/012c3603520846a28ea31af09e6c80ec/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ell/linux/x86_64/release/bench/BM_ell.cpp.o", "bench/BM_ell.cpp"],
+  "file": "bench/BM_ell.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/b/benchmark/1.8.5/012c3603520846a28ea31af09e6c80ec/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_lmi/linux/x86_64/release/bench/BM_lmi.cpp.o", "bench/BM_lmi.cpp"],
+  "file": "bench/BM_lmi.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/EllAlgo/linux/x86_64/release/source/ell1d.cpp.o", "source/ell1d.cpp"],
+  "file": "source/ell1d.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/EllAlgo/linux/x86_64/release/source/ell_calc.cpp.o", "source/ell_calc.cpp"],
+  "file": "source/ell_calc.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/EllAlgo/linux/x86_64/release/source/ell_calc_core.cpp.o", "source/ell_calc_core.cpp"],
+  "file": "source/ell_calc_core.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/EllAlgo/linux/x86_64/release/source/ell_core.cpp.o", "source/ell_core.cpp"],
+  "file": "source/ell_core.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/EllAlgo/linux/x86_64/release/source/ldlt_mgr.cpp.o", "source/ldlt_mgr.cpp"],
+  "file": "source/ldlt_mgr.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/EllAlgo/linux/x86_64/release/source/lowpass_oracle.cpp.o", "source/lowpass_oracle.cpp"],
+  "file": "source/lowpass_oracle.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/EllAlgo/linux/x86_64/release/source/profit_oracle.cpp.o", "source/profit_oracle.cpp"],
+  "file": "source/profit_oracle.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/main.cpp.o", "test/source/main.cpp"],
+  "file": "test/source/main.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_calc.cpp.o", "test/source/test_calc.cpp"],
+  "file": "test/source/test_calc.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_calc_core.cpp.o", "test/source/test_calc_core.cpp"],
+  "file": "test/source/test_calc_core.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_conjugate_gradient.cpp.o", "test/source/test_conjugate_gradient.cpp"],
+  "file": "test/source/test_conjugate_gradient.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_conjugate_gradient2.cpp.o", "test/source/test_conjugate_gradient2.cpp"],
+  "file": "test/source/test_conjugate_gradient2.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_core.cpp.o", "test/source/test_core.cpp"],
+  "file": "test/source/test_core.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_ell_matrix.cpp.o", "test/source/test_ell_matrix.cpp"],
+  "file": "test/source/test_ell_matrix.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_example2.cpp.o", "test/source/test_example2.cpp"],
+  "file": "test/source/test_example2.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_ldlt.cpp.o", "test/source/test_ldlt.cpp"],
+  "file": "test/source/test_ldlt.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_lmi.cpp.o", "test/source/test_lmi.cpp"],
+  "file": "test/source/test_lmi.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_lmi_old.cpp.o", "test/source/test_lmi_old.cpp"],
+  "file": "test/source/test_lmi_old.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_lowpass.cpp.o", "test/source/test_lowpass.cpp"],
+  "file": "test/source/test_lowpass.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_profit.cpp.o", "test/source/test_profit.cpp"],
+  "file": "test/source/test_profit.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_example1.cpp.o", "test/source/test_example1.cpp"],
+  "file": "test/source/test_example1.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_example3.cpp.o", "test/source/test_example3.cpp"],
+  "file": "test/source/test_example3.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/d/doctest/2.4.11/0a52cbf458ea46be8a84f4e85f2e0a21/include", "-I", "/home/gitpod/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_ellalgo/linux/x86_64/release/test/source/test_quasicvx.cpp.o", "test/source/test_quasicvx.cpp"],
+  "file": "test/source/test_quasicvx.cpp"
+},
+{
+  "directory": "/workspace/cpp/ellalgo-cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-Wall", "-Werror", "-O3", "-std=c++14", "-Iinclude", "-I", "/home/gitpod/.xmake/packages/b/benchmark/1.8.5/012c3603520846a28ea31af09e6c80ec/include", "-Wconversion", "-DNDEBUG", "-o", "build/.objs/test_lowpass/linux/x86_64/release/bench/BM_lowpass.cpp.o", "bench/BM_lowpass.cpp"],
+  "file": "bench/BM_lowpass.cpp"
+}]
