@@ -39,7 +39,7 @@ struct MyQuasicCvxOracle {
         double sqrtx = xc[0];
         double logy = xc[1];
         double fj;
-        double tmp2;
+        double y;
         double tmp3;
 
         for (int i = 0; i != 2; i++) {
@@ -55,8 +55,8 @@ struct MyQuasicCvxOracle {
                     }
                     break;
                 case 1:  // constraint 2
-                    tmp2 = std::exp(logy);
-                    tmp3 = gamma * tmp2;
+                    y = std::exp(logy);
+                    tmp3 = gamma * y;
                     if ((fj = -sqrtx + tmp3) > 0.0) {
                         return {{Vec{-1.0, tmp3}, fj}, false};
                     }
@@ -65,7 +65,7 @@ struct MyQuasicCvxOracle {
                     exit(0);
             }
         }
-        gamma = sqrtx / tmp2;
+        gamma = sqrtx / y;
         return {{Vec{-1.0, sqrtx}, 0}, true};
     }
 };
@@ -100,6 +100,8 @@ TEST_CASE("Quasiconvex 1, test feasible (stable)") {
     const auto result = cutting_plane_optim(omega, ellip, gamma, options);
     const auto x = std::get<0>(result);
     REQUIRE_EQ(x.size(), 2U);
+    const auto num_iters = std::get<1>(result);
+    CHECK_EQ(num_iters, 35);
     // const auto &num_iters = std::get<1>(result);
     // CHECK(ell_info.feasible);
 
