@@ -19,7 +19,7 @@ struct MyQuasicCvxOracle {
 
     int idx = -1;
     double tmp2 = 0.0;
-    double tmp3 = 0.0;
+    // double tmp3 = 0.0;
 
     /**
      * The function assess_optim takes a vector xc and a double gamma, assesses optimization
@@ -39,7 +39,7 @@ struct MyQuasicCvxOracle {
         double sqrtx = xc[0];
         double logy = xc[1];
         double fj;
-        double y;
+        double y = std::exp(logy);
         double tmp3;
 
         for (int i = 0; i != 2; i++) {
@@ -55,7 +55,7 @@ struct MyQuasicCvxOracle {
                     }
                     break;
                 case 1:  // constraint 2
-                    y = std::exp(logy);
+                    // y = std::exp(logy);
                     tmp3 = gamma * y;
                     if ((fj = -sqrtx + tmp3) > 0.0) {
                         return {{Vec{-1.0, tmp3}, fj}, false};
