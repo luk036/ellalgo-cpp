@@ -47,10 +47,9 @@ template <typename T> inline auto invalid_value() ->
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
-template <typename OracleFeas, typename SearchSpace>
-inline auto cutting_plane_feas(OracleFeas &omega, SearchSpace &space,
-                               const Options &options = Options())
-    -> std::tuple<CuttingPlaneArrayType<SearchSpace>, size_t> {
+template <typename OracleFeas, typename SearchSpace> inline auto cutting_plane_feas(
+    OracleFeas &omega, SearchSpace &space,
+    const Options &options = Options()) -> std::tuple<CuttingPlaneArrayType<SearchSpace>, size_t> {
     for (auto niter = 0U; niter != options.max_iters; ++niter) {
         const auto cut = omega.assess_feas(space.xc());
         if (!cut) {  // feasible sol'n obtained
@@ -91,10 +90,9 @@ inline auto cutting_plane_feas(OracleFeas &omega, SearchSpace &space,
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
-template <typename OracleOptim, typename SearchSpace, typename Num>
-inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &gamma,
-                                const Options &options = Options())
-    -> std::tuple<CuttingPlaneArrayType<SearchSpace>, size_t> {
+template <typename OracleOptim, typename SearchSpace, typename Num> inline auto cutting_plane_optim(
+    OracleOptim &omega, SearchSpace &space, Num &gamma,
+    const Options &options = Options()) -> std::tuple<CuttingPlaneArrayType<SearchSpace>, size_t> {
     auto x_best = invalid_value<CuttingPlaneArrayType<SearchSpace>>();
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
         const auto __result1 = omega.assess_optim(space.xc(), gamma);
@@ -245,8 +243,8 @@ class BSearchAdaptor {
  * @return CInfo
  */
 template <typename Oracle, typename T>
-inline auto bsearch(Oracle &omega, const std::pair<T, T> &intvl, const Options &options = Options())
-    -> std::tuple<T, size_t> {
+inline auto bsearch(Oracle &omega, const std::pair<T, T> &intvl,
+                    const Options &options = Options()) -> std::tuple<T, size_t> {
     // assume monotone
     // auto& [lower, upper] = intvl;
     auto lower = intvl.first;
