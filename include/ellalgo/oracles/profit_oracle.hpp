@@ -188,6 +188,6 @@ class ProfitOracleQ {
      *
      * @see cutting_plane_optim_q
      */
-    auto assess_optim_q(const Vec &y, double &gamma,
-                        bool retry) -> std::tuple<Cut, bool, Vec, bool>;
+    auto assess_optim_q(const Vec &y, double &gamma, bool retry)
+        -> std::tuple<Cut, bool, Vec, bool>;
 };

@@ -28,9 +28,10 @@
  * @return The function `calc_parallel_cut` returns a tuple containing three values: `rho`, `sigma`,
  * and `delta`.
  */
-auto EllCalcCore::calc_parallel_cut_fast(
-    const double& beta0, const double& beta1, const double& tsq, const double& b0b1,
-    const double& eta) const -> std::tuple<double, double, double> {
+auto EllCalcCore::calc_parallel_cut_fast(const double& beta0, const double& beta1,
+                                         const double& tsq, const double& b0b1,
+                                         const double& eta) const
+    -> std::tuple<double, double, double> {
     auto bavg = 0.5 * (beta0 + beta1);
     auto bavgsq = bavg * bavg;
     auto h = 0.5 * (tsq + b0b1) + this->_n_f * bavgsq;
