@@ -20,10 +20,10 @@ TEST_CASE("Conjugate Gradient Simple") {
 }
 
 TEST_CASE("Conjugate Gradient Larger") {
-    int n = 100;
+    size_t n = 100;
     Matrix2<double> A(n, n);
-    for (int i = 0; i < n; ++i) {
-        A[i][i] = i + 1;
+    for (size_t i = 0; i < n; ++i) {
+        A[i][i] = double(i + 1);
     }
 
     std::random_device rd;
@@ -31,7 +31,7 @@ TEST_CASE("Conjugate Gradient Larger") {
     std::uniform_real_distribution<> dis(0, 1);
 
     Vector2<double> x_true(n);
-    for (int i = 0; i < n; ++i) {
+    for (size_t i = 0; i < n; ++i) {
         x_true[i] = dis(gen);
     }
     Vector2<double> b = A * x_true;
