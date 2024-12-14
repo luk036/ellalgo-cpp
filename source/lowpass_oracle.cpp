@@ -93,15 +93,15 @@ auto LowpassOracle::assess_feas(const Vec &x, const double &Spsq) -> ParallelCut
         if (this->idx1 == this->nwpass) {
             this->idx1 = 0;  // round robin
         }
-        double v = matrix_vector(this->idx1);
+        double v = matrix_vector(size_t(this->idx1));
         if (v > this->Upsq) {
             cut.second = Vec{v - this->Upsq, v - this->Lpsq};
-            cut.first = this->A[this->idx1];
+            cut.first = this->A[size_t(this->idx1)];
             return &cut;
         }
         if (v < this->Lpsq) {
             cut.second = Vec{-v + this->Lpsq, -v + this->Upsq};
-            cut.first = -this->A[this->idx1];
+            cut.first = -this->A[size_t(this->idx1)];
             return &cut;
         }
     }
@@ -116,15 +116,15 @@ auto LowpassOracle::assess_feas(const Vec &x, const double &Spsq) -> ParallelCut
         if (this->idx3 == N) {
             this->idx3 = this->nwstop;  // round robin
         }
-        double v = matrix_vector(this->idx3);
+        double v = matrix_vector(size_t(this->idx3));
         if (v > Spsq) {
             cut.second = Vec{v - Spsq, v};
-            cut.first = this->A[this->idx3];
+            cut.first = this->A[size_t(this->idx3)];
             return &cut;
         }
         if (v < 0.0) {
             cut.second = Vec{-v, -v + Spsq};
-            cut.first = -this->A[this->idx3];
+            cut.first = -this->A[size_t(this->idx3)];
             return &cut;
         }
         if (v > this->_fmax) {
@@ -140,10 +140,10 @@ auto LowpassOracle::assess_feas(const Vec &x, const double &Spsq) -> ParallelCut
         if (this->idx2 == this->nwstop) {
             this->idx2 = this->nwpass;  // round robin
         }
-        double v = matrix_vector(this->idx2);
+        double v = matrix_vector(size_t(this->idx2));
         if (v < 0.0) {
             cut.second = Vec{-v};
-            cut.first = -this->A[this->idx2];
+            cut.first = -this->A[size_t(this->idx2)];
             return &cut;
         }
     }
@@ -182,5 +182,5 @@ auto LowpassOracle::assess_optim(const Vec &x, double &Spsq) -> std::tuple<Paral
     }
     // Begin objective function
     Spsq = this->_fmax;  // output
-    return {{this->A[this->_kmax], Vec{0.0, this->_fmax}}, true};
+    return {{this->A[size_t(this->_kmax)], Vec{0.0, this->_fmax}}, true};
 }
