@@ -9,7 +9,7 @@
 #include <ellalgo/ell_matrix.hpp>              // for EllStable
 #include <ellalgo/ell_stable.hpp>              // for EllStable
 #include <ellalgo/oracles/lmi_old_oracle.hpp>  // for LmiOldOracle
-// #include <gsl/span> // for span
+// #include <span> // for span
 // #include <spdlog/sinks/stdout_sinks.h>
 // #include <spdlog/spdlog.h>
 // #include <optional>    // for optional
