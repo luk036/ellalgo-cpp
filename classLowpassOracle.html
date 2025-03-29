@@ -72,11 +72,11 @@ s.t.  L^2(\omega) \le R(\omega) \le U^2(\omega), \forall \omega \in
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a90eaf7d8d26a0e056a3495c5b9a84a44" class="m-doc">LowpassOracle</a>(</span><span class="m-doc-wrap">size_t N,
-              double Lpsq,
-              double Upsq,
-              double wpass,
-              double wstop)</span>
+              <span class="m-doc-wrap-bumper"><a href="#a90eaf7d8d26a0e056a3495c5b9a84a44" class="m-doc">LowpassOracle</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> N,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> Lpsq,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> Upsq,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> wpass,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> wstop)</span>
             </dt>
             <dd>Construct a new lowpass oracle object.</dd>
           </dl>
@@ -85,18 +85,18 @@ s.t.  L^2(\omega) \le R(\omega) \le U^2(\omega), \forall \omega \in
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aa6aa1a80dcbfeb896fff00d8bcf1e59f" class="m-doc">assess_feas</a>(</span><span class="m-doc-wrap">const Vec&amp; x,
-              const double&amp; Spsq) -&gt; ParallelCut * -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa6aa1a80dcbfeb896fff00d8bcf1e59f" class="m-doc">assess_feas</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; x,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; Spsq) -&gt; ParallelCut * -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3aa851da31891cd6c56ed981cf8499e5" class="m-doc">assess_optim</a>(</span><span class="m-doc-wrap">const Vec&amp; x,
-              double&amp; Spsq) -&gt; std::tuple&lt; ParallelCut, bool &gt; -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3aa851da31891cd6c56ed981cf8499e5" class="m-doc">assess_optim</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; x,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; Spsq) -&gt; std::tuple&lt; ParallelCut, bool &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>The <code>assess_optim</code> function is a member function of the <code><a href="classLowpassOracle.html" class="m-doc">LowpassOracle</a></code> class. It takes a <code>Vec</code> object <code>x</code> and a reference to a <code>double</code> variable <code>Spsq</code> as input parameters.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#abc30b80169275f27acd55c91eaa7e67c" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const Vec&amp; x,
-              double&amp; Spsq) -&gt; std::tuple&lt; ParallelCut, bool &gt; -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#abc30b80169275f27acd55c91eaa7e67c" class="m-doc">operator()</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; x,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; Spsq) -&gt; std::tuple&lt; ParallelCut, bool &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd></dd>
           </dl>
@@ -105,19 +105,19 @@ s.t.  L^2(\omega) \le R(\omega) \le U^2(\omega), \forall \omega \in
           <h2>Function documentation</h2>
           <section class="m-doc-details" id="a90eaf7d8d26a0e056a3495c5b9a84a44"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> LowpassOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a90eaf7d8d26a0e056a3495c5b9a84a44" class="m-doc-self">LowpassOracle</a>(</span><span class="m-doc-wrap">size_t N,
-              double Lpsq,
-              double Upsq,
-              double wpass,
-              double wstop)</span></span>
+              <span class="m-doc-wrap-bumper"> LowpassOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a90eaf7d8d26a0e056a3495c5b9a84a44" class="m-doc-self">LowpassOracle</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> N,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> Lpsq,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> Upsq,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> wpass,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> wstop)</span></span>
             </h3>
             <p>Construct a new lowpass oracle object.</p>
 <p>The constructor of the <code><a href="classLowpassOracle.html" class="m-doc">LowpassOracle</a></code> class. It initializes an instance of the <code><a href="classLowpassOracle.html" class="m-doc">LowpassOracle</a></code> class with the given parameters.</p>
           </div></section>
           <section class="m-doc-details" id="aa6aa1a80dcbfeb896fff00d8bcf1e59f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto LowpassOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa6aa1a80dcbfeb896fff00d8bcf1e59f" class="m-doc-self">assess_feas</a>(</span><span class="m-doc-wrap">const Vec&amp; x,
-              const double&amp; Spsq) -&gt; ParallelCut *</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LowpassOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa6aa1a80dcbfeb896fff00d8bcf1e59f" class="m-doc-self">assess_feas</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; x,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; Spsq) -&gt; ParallelCut *</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -137,8 +137,8 @@ s.t.  L^2(\omega) \le R(\omega) \le U^2(\omega), \forall \omega \in
           </div></section>
           <section class="m-doc-details" id="a3aa851da31891cd6c56ed981cf8499e5"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto LowpassOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3aa851da31891cd6c56ed981cf8499e5" class="m-doc-self">assess_optim</a>(</span><span class="m-doc-wrap">const Vec&amp; x,
-              double&amp; Spsq) -&gt; std::tuple&lt; ParallelCut, bool &gt;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LowpassOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3aa851da31891cd6c56ed981cf8499e5" class="m-doc-self">assess_optim</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; x,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; Spsq) -&gt; std::tuple&lt; ParallelCut, bool &gt;</span></span>
             </h3>
             <p>The <code>assess_optim</code> function is a member function of the <code><a href="classLowpassOracle.html" class="m-doc">LowpassOracle</a></code> class. It takes a <code>Vec</code> object <code>x</code> and a reference to a <code>double</code> variable <code>Spsq</code> as input parameters.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -159,8 +159,8 @@ s.t.  L^2(\omega) \le R(\omega) \le U^2(\omega), \forall \omega \in
           </div></section>
           <section class="m-doc-details" id="abc30b80169275f27acd55c91eaa7e67c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto LowpassOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abc30b80169275f27acd55c91eaa7e67c" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const Vec&amp; x,
-              double&amp; Spsq) -&gt; std::tuple&lt; ParallelCut, bool &gt;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LowpassOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abc30b80169275f27acd55c91eaa7e67c" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Vec&amp; x,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; Spsq) -&gt; std::tuple&lt; ParallelCut, bool &gt;</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
@@ -216,7 +216,7 @@ s.t.  L^2(\omega) \le R(\omega) \le U^2(\omega), \forall \omega \in
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

@@ -50,7 +50,7 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="ell_8hpp.html">&lt;ellalgo/ell.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename Arr&gt;</div>
+          <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a>&gt;</div>
           Ell <span class="m-thin">class</span>
         </h1>
         <p>Ellipsoid Search Space.</p>
@@ -72,11 +72,11 @@
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
             <dt id="a653f7393457f75395661ff0e36a4a886">
-              using <a href="#a653f7393457f75395661ff0e36a4a886" class="m-doc-self">Vec</a> = std::valarray&lt;double&gt;
+              using <a href="#a653f7393457f75395661ff0e36a4a886" class="m-doc-self">Vec</a> = std::valarray&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;
             </dt>
             <dd><span></span></dd>
             <dt id="a1cc10a81d7afcbaca55ca013f28f2e06">
-              using <a href="#a1cc10a81d7afcbaca55ca013f28f2e06" class="m-doc-self">ArrayType</a> = Arr
+              using <a href="#a1cc10a81d7afcbaca55ca013f28f2e06" class="m-doc-self">ArrayType</a> = <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a>
             </dt>
             <dd><span></span></dd>
           </dl>
@@ -85,13 +85,13 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#aecd757c5896f1d07e4f8c03449145953" class="m-doc">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html#a653f7393457f75395661ff0e36a4a886" class="m-doc">Vec</a>&amp; val,
-              Arr x)</span>
+              <span class="m-doc-wrap-bumper"><a href="#aecd757c5896f1d07e4f8c03449145953" class="m-doc">Ell</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classEll.html#a653f7393457f75395661ff0e36a4a886" class="m-doc">Vec</a>&amp; val,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> x)</span>
             </dt>
             <dd>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#abbc34a907867d226667f083d5eeabb01" class="m-doc">Ell</a>(</span><span class="m-doc-wrap">const double&amp; alpha,
-              Arr x)</span>
+              <span class="m-doc-wrap-bumper"><a href="#abbc34a907867d226667f083d5eeabb01" class="m-doc">Ell</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; alpha,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> x)</span>
             </dt>
             <dd>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
             <dt>
@@ -103,7 +103,7 @@
             </dt>
             <dd>Destroy the <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#aef6ee25c1ef09b0dac6a2e588c6180c3" class="m-doc">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html" class="m-doc">Ell</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-info">explicit</span> </span>
+              <span class="m-doc-wrap-bumper"><a href="#aef6ee25c1ef09b0dac6a2e588c6180c3" class="m-doc">Ell</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classEll.html" class="m-doc">Ell</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-info">explicit</span> </span>
             </dt>
             <dd>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</dd>
           </dl>
@@ -112,38 +112,38 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af8bd99281e3b3bf4dfec6501e64c8511" class="m-doc">copy</a>(</span><span class="m-doc-wrap">) const -&gt; Ell -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af8bd99281e3b3bf4dfec6501e64c8511" class="m-doc">copy</a>(</span><span class="m-doc-wrap">) const -&gt; Ell -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>explicitly copy</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#adf1bf44dddc4842f80d6b9ed72981b8b" class="m-doc">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#adf1bf44dddc4842f80d6b9ed72981b8b" class="m-doc">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>copy the whole array anyway</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a64cc652c04ac21f955b8f7b201202822" class="m-doc">set_xc</a>(</span><span class="m-doc-wrap">const Arr&amp; xc)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a64cc652c04ac21f955b8f7b201202822" class="m-doc">set_xc</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a>&amp; xc) -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">void</a></span>
             </dt>
             <dd>Set the xc object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a26f2ad81981553f2033b2079f3888be1" class="m-doc">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a26f2ad81981553f2033b2079f3888be1" class="m-doc">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#af3355e44f6d0d83aa94fa6eedaa794de" class="m-doc">set_use_parallel_cut</a>(</span><span class="m-doc-wrap">bool value)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af3355e44f6d0d83aa94fa6eedaa794de" class="m-doc">set_use_parallel_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">bool</a> value) -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">void</a></span>
             </dt>
             <dd></dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a46fcc93e45a21cf9f4a5ee85fb0398da" class="m-doc">update_bias_cut</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus -&gt; auto</span>
+              <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a46fcc93e45a21cf9f4a5ee85fb0398da" class="m-doc">update_bias_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::pair&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; CutStatus -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>Update ellipsoid core function using the deep cut(s)</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a976736b3797439586305e7d537987148" class="m-doc">update_central_cut</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus -&gt; auto</span>
+              <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a976736b3797439586305e7d537987148" class="m-doc">update_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::pair&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; CutStatus -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>Update ellipsoid core function using the central cut(s)</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7a009ad13d78325eaf42f201b02ecd36" class="m-doc">update_q</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus -&gt; auto</span>
+              <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7a009ad13d78325eaf42f201b02ecd36" class="m-doc">update_q</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::pair&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; CutStatus -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>Update ellipsoid core function using the cut(s)</dd>
           </dl>
@@ -153,10 +153,10 @@
           <section class="m-doc-details" id="aecd757c5896f1d07e4f8c03449145953"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> _1&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aecd757c5896f1d07e4f8c03449145953" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html#a653f7393457f75395661ff0e36a4a886" class="m-doc">Vec</a>&amp; val,
-              Arr x)</span></span>
+              <span class="m-doc-wrap-bumper"> Ell&lt;_1&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aecd757c5896f1d07e4f8c03449145953" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classEll.html#a653f7393457f75395661ff0e36a4a886" class="m-doc">Vec</a>&amp; val,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> x)</span></span>
             </h3>
             <p>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -179,10 +179,10 @@
           <section class="m-doc-details" id="abbc34a907867d226667f083d5eeabb01"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> _1&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abbc34a907867d226667f083d5eeabb01" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap">const double&amp; alpha,
-              Arr x)</span></span>
+              <span class="m-doc-wrap-bumper"> Ell&lt;_1&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abbc34a907867d226667f083d5eeabb01" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; alpha,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> x)</span></span>
             </h3>
             <p>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -205,9 +205,9 @@
           <section class="m-doc-details" id="a77418531cd2878e2f327e34630e72fe5"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> _1&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a77418531cd2878e2f327e34630e72fe5" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap"><a href="classEll.html" class="m-doc">Ell</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span> <span class="m-label m-success">noexcept</span></span></span>
+              <span class="m-doc-wrap-bumper"> Ell&lt;_1&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a77418531cd2878e2f327e34630e72fe5" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap"><a href="classEll.html" class="m-doc">Ell</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span> <span class="m-label m-success">noexcept</span></span></span>
             </h3>
             <p>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -226,9 +226,9 @@
           <section class="m-doc-details" id="aef6ee25c1ef09b0dac6a2e588c6180c3"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> _1&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aef6ee25c1ef09b0dac6a2e588c6180c3" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap">const <a href="classEll.html" class="m-doc">Ell</a>&amp; E) <span class="m-label m-info">explicit</span>  <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper"> Ell&lt;_1&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aef6ee25c1ef09b0dac6a2e588c6180c3" class="m-doc-self">Ell</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classEll.html" class="m-doc">Ell</a>&amp; E) <span class="m-label m-info">explicit</span>  <span class="m-label m-info">defaulted</span></span></span>
             </h3>
             <p>Construct a new <a href="classEll.html" class="m-doc">Ell</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -247,9 +247,9 @@
           <section class="m-doc-details" id="af8bd99281e3b3bf4dfec6501e64c8511"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> _1&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8bd99281e3b3bf4dfec6501e64c8511" class="m-doc-self">copy</a>(</span><span class="m-doc-wrap">) const -&gt; Ell</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> Ell&lt;_1&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8bd99281e3b3bf4dfec6501e64c8511" class="m-doc-self">copy</a>(</span><span class="m-doc-wrap">) const -&gt; Ell</span></span>
             </h3>
             <p>explicitly copy</p>
             <table class="m-table m-fullwidth m-flat">
@@ -264,9 +264,9 @@
           <section class="m-doc-details" id="adf1bf44dddc4842f80d6b9ed72981b8b"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> _1&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adf1bf44dddc4842f80d6b9ed72981b8b" class="m-doc-self">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> Ell&lt;_1&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adf1bf44dddc4842f80d6b9ed72981b8b" class="m-doc-self">xc</a>(</span><span class="m-doc-wrap">) const -&gt; Arr</span></span>
             </h3>
             <p>copy the whole array anyway</p>
             <table class="m-table m-fullwidth m-flat">
@@ -281,9 +281,9 @@
           <section class="m-doc-details" id="a64cc652c04ac21f955b8f7b201202822"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> _1&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a64cc652c04ac21f955b8f7b201202822" class="m-doc-self">set_xc</a>(</span><span class="m-doc-wrap">const Arr&amp; xc)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">void</a> Ell&lt;_1&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a64cc652c04ac21f955b8f7b201202822" class="m-doc-self">set_xc</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a>&amp; xc)</span></span>
             </h3>
             <p>Set the xc object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -301,9 +301,9 @@
           <section class="m-doc-details" id="a26f2ad81981553f2033b2079f3888be1"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> _1&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a26f2ad81981553f2033b2079f3888be1" class="m-doc-self">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> Ell&lt;_1&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a26f2ad81981553f2033b2079f3888be1" class="m-doc-self">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
@@ -317,9 +317,9 @@
           <section class="m-doc-details" id="af3355e44f6d0d83aa94fa6eedaa794de"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> _1&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3355e44f6d0d83aa94fa6eedaa794de" class="m-doc-self">set_use_parallel_cut</a>(</span><span class="m-doc-wrap">bool value)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">void</a> Ell&lt;_1&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3355e44f6d0d83aa94fa6eedaa794de" class="m-doc-self">set_use_parallel_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">bool</a> value)</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -337,10 +337,10 @@
           <section class="m-doc-details" id="a46fcc93e45a21cf9f4a5ee85fb0398da"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
-                template&lt;typename T&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> _1&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a46fcc93e45a21cf9f4a5ee85fb0398da" class="m-doc-self">update_bias_cut</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> Ell&lt;_1&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a46fcc93e45a21cf9f4a5ee85fb0398da" class="m-doc-self">update_bias_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::pair&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; CutStatus</span></span>
             </h3>
             <p>Update ellipsoid core function using the deep cut(s)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -374,10 +374,10 @@
           <section class="m-doc-details" id="a976736b3797439586305e7d537987148"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
-                template&lt;typename T&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> _1&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a976736b3797439586305e7d537987148" class="m-doc-self">update_central_cut</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> Ell&lt;_1&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a976736b3797439586305e7d537987148" class="m-doc-self">update_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::pair&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; CutStatus</span></span>
             </h3>
             <p>Update ellipsoid core function using the central cut(s)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -411,10 +411,10 @@
           <section class="m-doc-details" id="a7a009ad13d78325eaf42f201b02ecd36"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename Arr&gt;
-                template&lt;typename T&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a> _1&gt;
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto Ell&lt;Arr&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7a009ad13d78325eaf42f201b02ecd36" class="m-doc-self">update_q</a>(</span><span class="m-doc-wrap">const std::pair&lt;Arr, T&gt;&amp; cut) -&gt; CutStatus</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> Ell&lt;_1&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7a009ad13d78325eaf42f201b02ecd36" class="m-doc-self">update_q</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::pair&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr</a>, T&gt;&amp; cut) -&gt; CutStatus</span></span>
             </h3>
             <p>Update ellipsoid core function using the cut(s)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -490,7 +490,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

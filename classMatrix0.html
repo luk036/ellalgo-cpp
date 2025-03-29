@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ellalgo/greeter.h file | EllAlgo</title>
+  <title>Matrix0 class | EllAlgo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -49,7 +49,8 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_c643d85e6397546380b30b2f15699579.html">ellalgo</a>/</span>greeter.h <span class="m-thin">file</span>
+          Matrix0 <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="conjugate__gradient_8hpp.html">&lt;ellalgo/conjugate_gradient.hpp&gt;</a></div>
         </h1>
         <p><span></span></p>
         <nav class="m-block m-default">
@@ -58,26 +59,45 @@
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespaceellalgo.html" class="m-doc">ellalgo</a></dt>
+            <dt id="a99301a1325dee1275f2571817aaf5f14">
+              <span class="m-doc-wrap-bumper"><a href="#a99301a1325dee1275f2571817aaf5f14" class="m-doc-self">Matrix0</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> rows,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> cols)</span>
+            </dt>
             <dd><span></span></dd>
           </dl>
         </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt>
-              class <a href="classellalgo_1_1EllAlgo.html" class="m-doc">ellalgo::EllAlgo</a>
+            <dt id="a1f31b447130830f5163483c117601442">
+              <span class="m-doc-wrap-bumper">auto <a href="#a1f31b447130830f5163483c117601442" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i) -&gt; std::vector&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;&amp;</span>
             </dt>
-            <dd>A class for saying hello in multiple languages.</dd>
+            <dd><span></span></dd>
+            <dt id="a0177ad808064db523d0e176bbcb440e7">
+              <span class="m-doc-wrap-bumper">auto <a href="#a0177ad808064db523d0e176bbcb440e7" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::vector&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a25354bcfa6a6de848ea73465267cfce7">
+              <span class="m-doc-wrap-bumper">auto <a href="#a25354bcfa6a6de848ea73465267cfce7" class="m-doc-self">rows</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a013d517c1e7a777ba605cb3e7395d4ad">
+              <span class="m-doc-wrap-bumper">auto <a href="#a013d517c1e7a777ba605cb3e7395d4ad" class="m-doc-self">cols</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1c39c7f2c7dfdd0744a245d643198b79">
+              <span class="m-doc-wrap-bumper">auto <a href="#a1c39c7f2c7dfdd0744a245d643198b79" class="m-doc-self">dot</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; v) const -&gt; <a href="classVector0.html" class="m-doc">Vector0</a></span>
+            </dt>
+            <dd><span></span></dd>
           </dl>
         </section>
       </div>
@@ -124,7 +144,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>EllAlgo. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
