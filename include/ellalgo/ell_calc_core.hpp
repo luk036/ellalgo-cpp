@@ -88,8 +88,8 @@ class EllCalcCore {
      * @return The function `calc_parallel_cut` returns a tuple containing three values: `rho`,
      * `sigma`, and `delta`.
      */
-    auto calc_parallel_cut(const double &beta0, const double &beta1, const double &tsq) const
-        -> std::tuple<double, double, double> {
+    auto calc_parallel_cut(const double &beta0, const double &beta1,
+                           const double &tsq) const -> std::tuple<double, double, double> {
         auto b0b1 = beta0 * beta1;
         auto eta = tsq + this->_n_f * b0b1;
         return this->calc_parallel_cut_fast(beta0, beta1, tsq, b0b1, eta);
@@ -110,8 +110,8 @@ class EllCalcCore {
      * @return Tuple containing computed rho, sigma and delta.
      */
     auto calc_parallel_cut_fast(const double &beta0, const double &beta1, const double &tsq,
-                                const double &b0b1, const double &eta) const
-        -> std::tuple<double, double, double>;
+                                const double &b0b1,
+                                const double &eta) const -> std::tuple<double, double, double>;
 
     /**
      * Calculates ellipsoid parameters after parallel central cuts.
@@ -131,8 +131,8 @@ class EllCalcCore {
      * @param[in] tsq Square of tau parameter.
      * @return Tuple containing computed rho, sigma and delta.
      */
-    auto calc_parallel_central_cut(const double &beta1, const double &tsq) const
-        -> std::tuple<double, double, double>;
+    auto calc_parallel_central_cut(const double &beta1,
+                                   const double &tsq) const -> std::tuple<double, double, double>;
 
     /**
      * Calculates new ellipsoid parameters after bias cut.
@@ -153,8 +153,8 @@ class EllCalcCore {
      *
      * @return The function `calc_bias_cut` returns a tuple containing the following values:
      */
-    auto calc_bias_cut(const double &beta, const double &tau) const
-        -> std::tuple<double, double, double> {
+    auto calc_bias_cut(const double &beta,
+                       const double &tau) const -> std::tuple<double, double, double> {
         return this->calc_bias_cut_fast(beta, tau, tau + this->_n_f * beta);
     }
 
@@ -169,8 +169,8 @@ class EllCalcCore {
      * It takes the bias parameter beta, tau, and eta as inputs and returns a
      * tuple containing the computed rho, sigma, delta values.
      */
-    auto calc_bias_cut_fast(const double &beta, const double &tau, const double &eta) const
-        -> std::tuple<double, double, double>;
+    auto calc_bias_cut_fast(const double &beta, const double &tau,
+                            const double &eta) const -> std::tuple<double, double, double>;
 
     /**
      * Calculates new ellipsoid parameters after applying a central cut.

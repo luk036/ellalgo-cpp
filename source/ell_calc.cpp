@@ -23,9 +23,8 @@
  * 3. sigma: A double value representing the calculated sigma.
  * 4. delta: A double value representing the calculated delta.
  */
-auto EllCalc::calc_parallel_bias_cut(const double &beta0, const double &beta1,
-                                     const double &tsq) const
-    -> std::tuple<CutStatus, std::tuple<double, double, double>> {
+auto EllCalc::calc_parallel_bias_cut(const double &beta0, const double &beta1, const double &tsq)
+    const -> std::tuple<CutStatus, std::tuple<double, double, double>> {
     if (beta1 < beta0) {
         return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
     }
@@ -138,9 +137,8 @@ auto EllCalc::calc_central_cut(const double &tsq) const
  * @return The function `calc_parallel_bias_cut_q` returns a tuple of type `std::tuple<CutStatus,
  * std::tuple<double, double, double>>`.
  */
-auto EllCalc::calc_parallel_bias_cut_q(const double &beta0, const double &beta1,
-                                       const double &tsq) const
-    -> std::tuple<CutStatus, std::tuple<double, double, double>> {
+auto EllCalc::calc_parallel_bias_cut_q(const double &beta0, const double &beta1, const double &tsq)
+    const -> std::tuple<CutStatus, std::tuple<double, double, double>> {
     if (beta1 < beta0) {
         return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
     }
