@@ -28,19 +28,22 @@
  * @return The function `calc_parallel_cut` returns a tuple containing three values: `rho`, `sigma`,
  * and `delta`.
  */
-auto EllCalcCore::calc_parallel_cut_fast(
-    const double& beta0, const double& beta1, const double& tsq, const double& b0b1,
-    const double& eta) const -> std::tuple<double, double, double> {
-    auto bavg = 0.5 * (beta0 + beta1);
-    auto bavgsq = bavg * bavg;
-    auto h = 0.5 * (tsq + b0b1) + this->_n_f * bavgsq;
-    auto k = h + std::sqrt(h * h - this->_n_plus_1 * eta * bavgsq);
-    auto inv_mu_plus_1 = eta / k;
-    auto inv_mu = eta / (k - eta);
-    auto&& rho = bavg * inv_mu_plus_1;
-    auto&& sigma = inv_mu_plus_1;
-    auto&& delta = (tsq + inv_mu * (bavgsq * inv_mu_plus_1 - b0b1)) / tsq;
-    return {rho, sigma, delta};
+auto EllCalcCore::calc_parallel_cut_fast(double beta0, double beta1,
+                                         double tsq, double b0b1,
+                                         double eta) const noexcept
+    -> std::tuple<double, double, double> {
+    const double bavg = 0.5 * (beta0 + beta1);
+    const double bavgsq = bavg * bavg;
+    const double h = 0.5 * (tsq + b0b1) + _n_f * bavgsq;
+    const double sqrt_term = std::sqrt(h * h - _n_plus_1 * eta * bavgsq);
+    const double k = h + sqrt_term;
+    const double inv_mu_plus_1 = eta / k;
+    const double inv_mu = eta / (k - eta);
+    return {
+        bavg * inv_mu_plus_1,                                   // rho
+        inv_mu_plus_1,                                          // sigma
+        (tsq + inv_mu * (bavgsq * inv_mu_plus_1 - b0b1)) / tsq  // delta
+    };
 }
 
 /**
@@ -52,19 +55,21 @@ auto EllCalcCore::calc_parallel_cut_fast(
  *        g' (x - xc) <= 0,
  *        g' (x - xc) + beta1 >= 0.
  *
- *                 _.-'''''''-._
- *               ,'      |      `.
- *              /  |     |        \
- *             .   |     |         .
- *             |   |               |
- *             |   |     .         |
- *             |   |               |
- *             :\  |     |        /:
- *             | `._     |     _.' |
- *             |   |'-.......-'    |
- *             |   |     |         |
- *            "-τ" "-β"  0        +τ
- *                   1
+ *         _.-'''''''-._
+ *       ,'             `.
+ *      /                 \
+ *     .                   .
+ *     |                   |
+ *     |         .         |
+ *     |                   |
+ *      \                 / 
+ *       `._           _.'  
+ *          '-.......-'      
+ *      
+ *          |    |
+ *     +----+----+---------+
+ *    "-τ" "-β"  0        "+τ"
+ *           1
  *
  * @param[in] beta1 The parameter `beta1` represents a double value.
  * @param[in] tsq tsq is a constant value representing the square of the variable tau.
@@ -72,17 +77,18 @@ auto EllCalcCore::calc_parallel_cut_fast(
  * @return The function `calc_parallel_central_cut` returns a tuple containing three values: rho,
  * sigma, and delta.
  */
-auto EllCalcCore::calc_parallel_central_cut(const double& beta1, const double& tsq) const
+auto EllCalcCore::calc_parallel_central_cut(double beta1, double tsq) const noexcept
     -> std::tuple<double, double, double> {
-    auto b1sq = beta1 * beta1;
-    auto a1sq = b1sq / tsq;
-    auto k = this->_half_n * a1sq;
-    auto r = k + std::sqrt(1.0 - a1sq + k * k);
-    auto r_plus_1 = r + 1.0;
-    auto&& rho = beta1 / r_plus_1;
-    auto&& sigma = 2.0 / r_plus_1;
-    auto&& delta = r / (r - this->_inv_n);
-    return {rho, sigma, delta};
+    const double b1sq = beta1 * beta1;
+    const double a1sq = b1sq / tsq;
+    const double k = _half_n * a1sq;
+    const double r = k + std::sqrt(1.0 - a1sq + k * k);
+    const double r_plus_1 = r + 1.0;
+    return {
+        beta1 / r_plus_1,  // rho
+        2.0 / r_plus_1,    // sigma
+        r / (r - _inv_n)   // delta
+    };
 }
 
 /**
@@ -91,20 +97,22 @@ auto EllCalcCore::calc_parallel_central_cut(const double& beta1, const double& t
  * The function `calc_bias_cut` calculates and returns the values of rho, sigma, and delta based on
  * the given beta and tau values under the bias-cut:
  *
- *        g' (x - xc) + beta \le 0
+ *        g' (x - xc) + β \le 0
  *
- *              _.-'''''''-._
- *            ,'   |         `.
- *           /     |           \
- *          .      |            .
- *          |      |            |
- *          |      |  .         |
- *          |      |            |
- *          :\     |           /:
- *          | `._  |        _.' |
- *          |    '-.......-'    |
- *          |      |            |
- *         "-τ"     "-β"       +τ
+ *           _.-'''''''-._
+ *         ,'             `.
+ *        /                 \
+ *       .                   .
+ *       |                   |
+ *       |         .         |
+ *       |                   |
+ *        \                 /
+ *         `._           _.'
+ *            '-.......-'
+ *
+ *       |      |
+ *       +------+------------+
+ *      "-τ"   "-β"          "+τ"
  *
  *
  * @param[in] beta The parameter "beta" represents a value used in the calculation. It is a double
@@ -115,13 +123,13 @@ auto EllCalcCore::calc_parallel_central_cut(const double& beta1, const double& t
  *
  * @return The function `calc_bias_cut` returns a tuple containing the following values:
  */
-auto EllCalcCore::calc_bias_cut_fast(const double& beta, const double& tau, const double& eta) const
+auto EllCalcCore::calc_bias_cut_fast(double beta, double tau, double eta) const noexcept
     -> std::tuple<double, double, double> {
-    auto alpha = beta / tau;
-    auto&& sigma = this->_cst2 * eta / (tau + beta);
-    auto&& rho = eta / this->_n_plus_1;
-    auto&& delta = this->_cst1 * (1.0 - alpha * alpha);
-    return {rho, sigma, delta};
+    return {
+        eta / _n_plus_1,                             // rho
+        _cst2 * eta / (tau + beta),                  // sigma
+        _cst1 * (1.0 - (beta * beta) / (tau * tau))  // delta
+    };
 }
 
 /**
@@ -132,18 +140,20 @@ auto EllCalcCore::calc_bias_cut_fast(const double& beta, const double& tau, cons
  *
  *        g' (x - xc) \le 0.
  *
- *            _.-'''''''-._
- *          ,'      |      `.
- *         /        |        \
- *        .         |         .
- *        |                   |
- *        |         .         |
- *        |                   |
- *        :\        |        /:
- *        | `._     |     _.' |
- *        |    '-.......-'    |
- *        |         |         |
- *       "-τ"       0        +τ
+ *           _.-'''''''-._
+ *         ,'             `.
+ *        /                 \
+ *       .                   .
+ *       |                   |
+ *       |         .         |
+ *       |                   |
+ *        \                 /
+ *         `._           _.'
+ *            '-.......-'
+ *
+ *       |         |
+ *       +---------+---------+
+ *      "-τ"       "0"       "+τ"
  *
  *
  * @param[in] tau tau is a constant value of type double. It represents the square of the variable
@@ -151,9 +161,11 @@ auto EllCalcCore::calc_bias_cut_fast(const double& beta, const double& tau, cons
  *
  * @return A tuple containing the values of rho, sigma, and delta.
  */
-auto EllCalcCore::calc_central_cut(const double& tau) const -> std::tuple<double, double, double> {
-    auto&& sigma = this->_cst2;
-    auto&& rho = tau / this->_n_plus_1;
-    auto&& delta = this->_cst1;
-    return {rho, sigma, delta};
+auto EllCalcCore::calc_central_cut(double tau) const noexcept
+    -> std::tuple<double, double, double> {
+    return {
+        tau / _n_plus_1,  // rho
+        _cst2,            // sigma
+        _cst1             // delta
+    };
 }
