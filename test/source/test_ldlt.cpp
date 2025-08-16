@@ -138,3 +138,34 @@ TEST_CASE("Cholesky test sqrt") {
     CHECK_EQ(R(2, 1), doctest::Approx(0.0));
     CHECK_EQ(R(2, 2), doctest::Approx(1.0));
 }
+
+TEST_CASE("Cholesky test 10") {
+    Matrix m(5U);
+    m.row(0) = Vec{4.0, 1.0, 1.0, 1.0, 1.0};
+    m.row(1) = Vec{1.0, 5.0, 1.0, 1.0, 1.0};
+    m.row(2) = Vec{1.0, 1.0, 6.0, 1.0, 1.0};
+    m.row(3) = Vec{1.0, 1.0, 1.0, 7.0, 1.0};
+    m.row(4) = Vec{1.0, 1.0, 1.0, 1.0, 8.0};
+
+    auto ldlt_mgr = LDLTMgr(5);
+    CHECK(ldlt_mgr.factorize(m));
+    CHECK(ldlt_mgr.is_spd());
+}
+
+// TEST_CASE("Cholesky test solve") {
+//     Matrix m(3U);
+//     m.row(0) = Vec{25.0, 15.0, -5.0};
+//     m.row(1) = Vec{15.0, 18.0, 0.0};
+//     m.row(2) = Vec{-5.0, 0.0, 11.0};
+//
+//     auto ldlt_mgr = LDLTMgr(3);
+//     CHECK(ldlt_mgr.factorize(m));
+//
+//     Vec b{1.0, 2.0, 3.0};
+//     Vec x(0.0, 3);
+//     ldlt_mgr.solve(b, x);
+//
+//     CHECK_EQ(x[0], doctest::Approx(0.07692307692307693));
+//     CHECK_EQ(x[1], doctest::Approx(0.038461538461538464));
+//     CHECK_EQ(x[2], doctest::Approx(0.3076923076923077));
+// }

@@ -94,3 +94,14 @@ TEST_CASE("Example 2, test feasible") {
     const auto num_iters = std::get<1>(result);
     CHECK_EQ(num_iters, 34);
 }
+
+TEST_CASE("Example 3, test feasible2") {
+    auto ellip = Ell<Vec>(Vec{100.0, 100.0}, Vec{0.0, 0.0});
+    auto omega = MyOracle3{};
+    const auto options = Options{2000, 1e-8};
+    BSearchAdaptor<MyOracle3, Ell<Vec> > adaptor(omega, ellip, options);
+    auto intvl = std::pair<double, double>{-200.0, 200.0};
+    const auto result = bsearch(adaptor, intvl, options);
+    const auto num_iters = std::get<1>(result);
+    CHECK_EQ(num_iters, 35);
+}

@@ -107,3 +107,23 @@ TEST_CASE("EllCore (stable), test parallel cut (no effect)") {
     CHECK_EQ(grad[0], doctest::Approx(0.5));
     CHECK_EQ(ell_core.tsq(), 0.01);
 }
+
+TEST_CASE("EllCore, test zero gradient") {
+    auto ell_core = EllCore(0.01, 4);
+    auto grad = Vec(0.0, 4);
+    auto status = ell_core.update_central_cut(grad, 0.0);
+    CHECK_EQ(status, CutStatus::Success);
+    CHECK_EQ(grad[0], 0.0);
+    CHECK_EQ(ell_core.tsq(), 0.0);
+}
+
+TEST_CASE("EllCore, no defer trick") {
+    auto ell_core = EllCore(0.01, 4);
+    ell_core.no_defer_trick = true;
+    CHECK(ell_core.no_defer_trick);
+    auto grad = Vec(0.5, 4);
+    auto status = ell_core.update_central_cut(grad, 0.0);
+    CHECK_EQ(status, CutStatus::Success);
+    CHECK_EQ(grad[0], 0.01);
+    CHECK_EQ(ell_core.tsq(), 0.01);
+}

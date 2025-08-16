@@ -99,3 +99,69 @@ TEST_CASE("Example 1, test infeasible2") {
     const auto x = std::get<0>(result);
     CHECK_EQ(x.size(), 0U);
 }
+
+TEST_CASE("Example 1, test feasible2") {
+    auto ell = Ell<Vec>(Vec{10.0, 10.0}, Vec{1.0, 1.0});
+    auto oracle = MyOracle{};
+    auto gamma = -1.0e100;  // std::numeric_limits<double>::min()
+    const auto options = Options{2000, 1e-10};
+    const auto result = cutting_plane_optim(oracle, ell, gamma, options);
+    const auto &x = std::get<0>(result);
+    REQUIRE_NE(x.size(), 0U);
+    CHECK(x[0] >= 0.0);
+}
+
+struct MyOracle2 {
+    using ArrayType = Vec;
+    using CutChoice = double;  // single cut
+    using Cut = std::pair<Vec, double>;
+
+    mutable int idx = -1;  // for round robin
+    const int num_constraints = 3;
+
+    auto assess_optim(const Vec &xc, double &gamma) const -> std::tuple<Cut, bool> {
+        const auto x = xc[0];
+        const auto y = xc[1];
+        const auto f0 = x + y;
+
+        for (int i = 0; i != this->num_constraints; i++) {
+            this->idx++;
+            if (this->idx == this->num_constraints) {
+                this->idx = 0;  // round robin
+            }
+            double fj;
+            switch (this->idx) {
+                case 0:  // constraint 1: x + y <= 3
+                    if (f0 > 3.0) {
+                        return {{Vec{1.0, 1.0}, f0 - 3.0}, false};
+                    }
+                    break;
+                case 1:  // constraint 2: x - y >= 1
+                    if ((fj = -x + y + 1.0) > 0.0) {
+                        return {{Vec{-1.0, 1.0}, fj}, false};
+                    }
+                    break;
+                case 2:  // objective: maximize x - y
+                    if ((fj = gamma - (x - y)) > 0.0) {
+                        return {{Vec{-1.0, 1.0}, fj}, false};
+                    };
+                    break;
+                default:
+                    exit(0);
+            }
+        }
+        gamma = x - y;
+        return {{Vec{-1.0, 1.0}, 0.0}, true};
+    }
+};
+
+TEST_CASE("Example 1, test objective") {
+    auto ell = Ell<Vec>(Vec{10.0, 10.0}, Vec{0.0, 0.0});
+    auto oracle = MyOracle2{};
+    auto gamma = -1.0e100;  // std::numeric_limits<double>::min()
+    const auto options = Options{2000, 1e-10};
+    const auto result = cutting_plane_optim(oracle, ell, gamma, options);
+    const auto &x = std::get<0>(result);
+    REQUIRE_NE(x.size(), 0U);
+    CHECK(x[0] >= 0.0);
+}

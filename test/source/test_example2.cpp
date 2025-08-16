@@ -83,3 +83,12 @@ TEST_CASE("Example 2, test infeasible") {
     const auto x_feas = std::get<0>(result);
     CHECK_EQ(x_feas.size(), 0U);
 }
+
+TEST_CASE("Example 2, test feasible2") {
+    auto ellip = Ell<Vec>(Vec{10.0, 10.0}, Vec{1.0, 1.0});
+    auto omega = MyOracle{};
+    const auto options = Options{2000, 1e-12};
+    const auto result = cutting_plane_feas(omega, ellip, options);
+    const auto x_feas = std::get<0>(result);
+    CHECK_NE(x_feas.size(), 0U);
+}
