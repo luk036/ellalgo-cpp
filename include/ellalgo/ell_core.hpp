@@ -249,7 +249,7 @@ class EllCore {
      * @param[in] cut_strategy
      * @return CutStatus
      */
-        template <typename T, typename Fn>
+    template <typename T, typename Fn>
     auto _update_core(Vec &grad, const T &beta, Fn &&cut_strategy) -> CutStatus {
         std::valarray<double> grad_t(0.0, this->_n);
         auto omega = 0.0;
@@ -299,7 +299,6 @@ class EllCore {
         grad = grad_t * (rho / omega);
         return status;  // g++-7 is ok
     }
-
 
     /**
      * @brief Update ellipsoid core function using the cut(s)
