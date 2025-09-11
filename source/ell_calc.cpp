@@ -57,7 +57,7 @@ auto EllCalc::calc_parallel_central_cut(const double &beta1, const double &tsq) 
     if (beta1 < 0.0) {
         return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
     }
-    if (tsq < beta1 * beta1 || !this->use_parallel_cut) {
+    if (tsq <= beta1 * beta1 || !this->use_parallel_cut) {
         return this->calc_central_cut(tsq);
     }
     auto &&result = this->_helper.calc_parallel_central_cut(beta1, tsq);
