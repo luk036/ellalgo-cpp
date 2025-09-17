@@ -70,15 +70,15 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ab3f9a5218fbd3c1581e74f1369476c33" class="m-doc">EllCalcCore</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> ndim) <span class="m-label m-flat m-info">explicit</span> </span>
+              <span class="m-doc-wrap-bumper"><a href="#a2cc9f0212d952ba397c74d5f83e3a117" class="m-doc">EllCalcCore</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> ndim) <span class="m-label m-flat m-info">explicit</span>  <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ad1d98091cd74de2dae350ab19454b146" class="m-doc">EllCalcCore</a>(</span><span class="m-doc-wrap"><a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a>&amp;&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#adea418d34151b7d7ffebb0acc37091d6" class="m-doc">EllCalcCore</a>(</span><span class="m-doc-wrap"><a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a>&amp;&amp; E) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#aab19210e22b56705b57bb1fad7c1b7fc" class="m-doc">EllCalcCore</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#a01d9c930b27ebb64328fba325a830774" class="m-doc">EllCalcCore</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a>&amp; E) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd></dd>
           </dl>
@@ -87,46 +87,46 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a399a9ef217faa047ae28aa8910822b9a" class="m-doc">calc_parallel_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta0,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta1,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; tsq) const -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#abb375cf12fe5461240875d7b33259868" class="m-doc">calc_parallel_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta0,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta1,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tsq) const noexcept -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aa9a85d458b2d985cb9d0d5767fa20d01" class="m-doc">calc_parallel_cut_fast</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta0,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta1,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; tsq,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; b0b1,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; eta) const -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#adc339817a8cfbed1d594e5f0677d3611" class="m-doc">calc_parallel_cut_fast</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta0,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta1,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tsq,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> b0b1,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> eta) const noexcept -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad249bdb079a919c561480fa5bd651149" class="m-doc">calc_parallel_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta1,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; tsq) const -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7d7cdcc7c8ddac442412fc6407771403" class="m-doc">calc_parallel_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta1,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tsq) const noexcept -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a71d934f987f99f2e1f53f26ecd8c8973" class="m-doc">calc_bias_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; tau) const -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3c979a7aa5222be01f842baa4900f280" class="m-doc">calc_bias_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tau) const noexcept -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a6eb884bc8ca4a3e645a7ea68e72a543e" class="m-doc">calc_bias_cut_fast</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; tau,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; eta) const -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad39dd8688f37576cb9eac1c023d9c21d" class="m-doc">calc_bias_cut_fast</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tau,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> eta) const noexcept -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>Fast Bias Cut.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aea1fa295b65afd3575e2cd75d8d17152" class="m-doc">calc_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; tau) const -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0912780e3b5bdf8acba51800dd089310" class="m-doc">calc_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tau) const noexcept -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd></dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ab3f9a5218fbd3c1581e74f1369476c33"><div>
+          <section class="m-doc-details" id="a2cc9f0212d952ba397c74d5f83e3a117"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab3f9a5218fbd3c1581e74f1369476c33" class="m-doc-self">EllCalcCore</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> ndim) <span class="m-label m-info">explicit</span> </span></span>
+              <span class="m-doc-wrap-bumper"> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2cc9f0212d952ba397c74d5f83e3a117" class="m-doc-self">EllCalcCore</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> ndim) <span class="m-label m-info">explicit</span>  <span class="m-label m-success">noexcept</span></span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -141,9 +141,9 @@
             </table>
 <p>Constructor for <a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a> class. Initializes member variables based on input ndim.</p><p>Example: <a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a> E(2);</p>
           </div></section>
-          <section class="m-doc-details" id="ad1d98091cd74de2dae350ab19454b146"><div>
+          <section class="m-doc-details" id="adea418d34151b7d7ffebb0acc37091d6"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad1d98091cd74de2dae350ab19454b146" class="m-doc-self">EllCalcCore</a>(</span><span class="m-doc-wrap"><a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper"> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adea418d34151b7d7ffebb0acc37091d6" class="m-doc-self">EllCalcCore</a>(</span><span class="m-doc-wrap"><a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a>&amp;&amp; E) <span class="m-label m-info">defaulted</span> <span class="m-label m-success">noexcept</span></span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -158,9 +158,9 @@
             </table>
 <p>Move constructor for <a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a>.</p><p>This is a move constructor that allows <a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a> objects to be efficiently moved instead of copied. It takes an rvalue reference to another <a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a> object and steals its resources.</p>
           </div></section>
-          <section class="m-doc-details" id="aab19210e22b56705b57bb1fad7c1b7fc"><div>
+          <section class="m-doc-details" id="a01d9c930b27ebb64328fba325a830774"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aab19210e22b56705b57bb1fad7c1b7fc" class="m-doc-self">EllCalcCore</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a>&amp; E) <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper"> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a01d9c930b27ebb64328fba325a830774" class="m-doc-self">EllCalcCore</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a>&amp; E) <span class="m-label m-info">defaulted</span> <span class="m-label m-success">noexcept</span></span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -175,11 +175,11 @@
             </table>
 <p>Copy constructor for <a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a>.</p><p>Allows copying an existing <a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a> object into a new <a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a> object. The new object will be an exact copy of the original.</p>
           </div></section>
-          <section class="m-doc-details" id="a399a9ef217faa047ae28aa8910822b9a"><div>
+          <section class="m-doc-details" id="abb375cf12fe5461240875d7b33259868"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a399a9ef217faa047ae28aa8910822b9a" class="m-doc-self">calc_parallel_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta0,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta1,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; tsq) const -&gt; std::tuple&lt; double, double, double &gt;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abb375cf12fe5461240875d7b33259868" class="m-doc-self">calc_parallel_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta0,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta1,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tsq) const noexcept -&gt; std::tuple&lt; double, double, double &gt;</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -206,15 +206,15 @@
                 </tr>
               </tfoot>
             </table>
-<p>Calculates the new ellipsoid parameters rho, sigma, and delta after applying parallel cuts defined by beta0 and beta1.</p><p>This is a public member function that computes the ellipsoid parameters after parallel cuts of the form:</p><p>g&#x27;(x - xc) + beta0 &lt;= 0 g&#x27;(x - xc) + beta1 &gt;= 0</p><p>It takes in the parallel cut parameters beta0, beta1, and the squared value of tau. It computes intermediate values b0b1 and eta, then calls <a href="classEllCalcCore.html#aa9a85d458b2d985cb9d0d5767fa20d01" class="m-doc">calc_<wbr />parallel_<wbr />cut_<wbr />fast()</a> to calculate rho, sigma, delta which are returned as a tuple.</p><p>Example: auto [rho, sigma, delta] = E.calc_parallel_cut(beta0, beta1, tsq);</p>
+<p>Calculates the new ellipsoid parameters rho, sigma, and delta after applying parallel cuts defined by beta0 and beta1.</p><p>This is a public member function that computes the ellipsoid parameters after parallel cuts of the form:</p><p>g&#x27;(x - xc) + beta0 &lt;= 0 g&#x27;(x - xc) + beta1 &gt;= 0</p><p>It takes in the parallel cut parameters beta0, beta1, and the squared value of tau. It computes intermediate values b0b1 and eta, then calls <a href="classEllCalcCore.html#adc339817a8cfbed1d594e5f0677d3611" class="m-doc">calc_<wbr />parallel_<wbr />cut_<wbr />fast()</a> to calculate rho, sigma, delta which are returned as a tuple.</p><p>Example: auto [rho, sigma, delta] = E.calc_parallel_cut(beta0, beta1, tsq);</p>
           </div></section>
-          <section class="m-doc-details" id="aa9a85d458b2d985cb9d0d5767fa20d01"><div>
+          <section class="m-doc-details" id="adc339817a8cfbed1d594e5f0677d3611"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa9a85d458b2d985cb9d0d5767fa20d01" class="m-doc-self">calc_parallel_cut_fast</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta0,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta1,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; tsq,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; b0b1,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; eta) const -&gt; std::tuple&lt; double, double, double &gt;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adc339817a8cfbed1d594e5f0677d3611" class="m-doc-self">calc_parallel_cut_fast</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta0,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta1,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tsq,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> b0b1,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> eta) const noexcept -&gt; std::tuple&lt; double, double, double &gt;</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -251,10 +251,10 @@
             </table>
 <p>Calculates ellipsoid parameters after parallel cuts.</p><p>This public member function computes the ellipsoid parameters rho, sigma, and delta after applying parallel cuts defined by beta0 and beta1. The parameters beta0, beta1, tsq, b0b1, and eta are used in the calculation.</p>
           </div></section>
-          <section class="m-doc-details" id="ad249bdb079a919c561480fa5bd651149"><div>
+          <section class="m-doc-details" id="a7d7cdcc7c8ddac442412fc6407771403"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad249bdb079a919c561480fa5bd651149" class="m-doc-self">calc_parallel_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta1,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; tsq) const -&gt; std::tuple&lt; double, double, double &gt;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7d7cdcc7c8ddac442412fc6407771403" class="m-doc-self">calc_parallel_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta1,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tsq) const noexcept -&gt; std::tuple&lt; double, double, double &gt;</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -279,10 +279,10 @@
             </table>
 <p>Calculates ellipsoid parameters after parallel central cuts.</p><p>This is a public member function that computes the ellipsoid parameters after parallel central cuts of the form:</p><p>g&#x27;(x - xc) &lt;= 0 g&#x27;(x - xc) + beta1 &gt;= 0</p><p>This function computes the ellipsoid parameters rho, sigma, and delta after applying parallel central cuts defined by beta1 and tau. The parameters beta1 and tsq are used in the calculation.</p>
           </div></section>
-          <section class="m-doc-details" id="a71d934f987f99f2e1f53f26ecd8c8973"><div>
+          <section class="m-doc-details" id="a3c979a7aa5222be01f842baa4900f280"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a71d934f987f99f2e1f53f26ecd8c8973" class="m-doc-self">calc_bias_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; tau) const -&gt; std::tuple&lt; double, double, double &gt;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3c979a7aa5222be01f842baa4900f280" class="m-doc-self">calc_bias_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tau) const noexcept -&gt; std::tuple&lt; double, double, double &gt;</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -307,18 +307,18 @@
             </table>
 <p>Calculates new ellipsoid parameters after bias cut.</p><p>This function computes the new ellipsoid parameters rho, sigma, and delta after applying a bias cut of the form:</p><p>g&#x27;(x - xc) + beta &lt;= 0</p><p>It takes the bias parameter beta and tau as inputs. Tau is the square of the original tau parameter. It returns the computed rho, sigma, delta tuple.</p>
           </div></section>
-          <section class="m-doc-details" id="a6eb884bc8ca4a3e645a7ea68e72a543e"><div>
+          <section class="m-doc-details" id="ad39dd8688f37576cb9eac1c023d9c21d"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6eb884bc8ca4a3e645a7ea68e72a543e" class="m-doc-self">calc_bias_cut_fast</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; beta,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; tau,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; eta) const -&gt; std::tuple&lt; double, double, double &gt;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad39dd8688f37576cb9eac1c023d9c21d" class="m-doc-self">calc_bias_cut_fast</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> beta,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tau,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> eta) const noexcept -&gt; std::tuple&lt; double, double, double &gt;</span></span>
             </h3>
             <p>Fast Bias Cut.</p>
 <p>This is a public member function that calculates the new ellipsoid parameters rho, sigma, and delta after applying a bias cut of the form:</p><p>g&#x27;(x - xc) + beta &lt;= 0</p><p>It takes the bias parameter beta, tau, and eta as inputs and returns a tuple containing the computed rho, sigma, delta values.</p>
           </div></section>
-          <section class="m-doc-details" id="aea1fa295b65afd3575e2cd75d8d17152"><div>
+          <section class="m-doc-details" id="a0912780e3b5bdf8acba51800dd089310"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aea1fa295b65afd3575e2cd75d8d17152" class="m-doc-self">calc_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; tau) const -&gt; std::tuple&lt; double, double, double &gt;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0912780e3b5bdf8acba51800dd089310" class="m-doc-self">calc_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tau) const noexcept -&gt; std::tuple&lt; double, double, double &gt;</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
