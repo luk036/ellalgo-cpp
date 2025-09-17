@@ -12,9 +12,9 @@ end
 if is_plat("linux") then
     set_warnings("all", "error")
     add_cxflags("-Wconversion", {force = true})
-    add_cxflags("-nostdinc++", {force = true})
-    add_sysincludedirs(os.getenv("PREFIX") .. "/include/c++/v1", {public = true})
-    add_sysincludedirs(os.getenv("PREFIX") .. "/include", {public = true})
+    -- add_cxflags("-nostdinc++", {force = true})
+    -- add_sysincludedirs(os.getenv("PREFIX") .. "/include/c++/v1", {public = true})
+    -- add_sysincludedirs(os.getenv("PREFIX") .. "/include", {public = true})
 elseif is_plat("windows") then
     add_cxflags("/W4 /WX /wd4127 /wd4530", {force = true})
 end
