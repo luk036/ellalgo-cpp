@@ -252,14 +252,13 @@ class EllCore {
     template <typename T, typename Fn>
     auto _update_core(Vec &grad, const T &beta, Fn &&cut_strategy) -> CutStatus {
         std::valarray<double> grad_t(0.0, this->_n);
-        auto omega = 0.0;
         for (auto i = 0U; i != this->_n; ++i) {
             for (auto j = 0U; j != this->_n; ++j) {
                 grad_t[i] += this->_mq(i, j) * grad[j];
             }
-            omega += grad_t[i] * grad[i];
         }
 
+        const auto omega = (grad_t * grad).sum();
         this->_tsq = this->_kappa * omega;
 
         if (omega == 0.0) {

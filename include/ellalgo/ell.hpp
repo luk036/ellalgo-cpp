@@ -39,11 +39,7 @@ template <typename Arr> class Ell {
     EllCore _mgr;
 
     /**
-     * @brief Construct a new Ell object
-     *
-     * The `operator=` function is being deleted in this code. This means that the assignment
-     * operator is not allowed for objects of the `Ell` class. By deleting this function, the code
-     * prevents objects of the `Ell` class from being assigned to each other.
+     * @brief Deleted copy assignment operator.
      *
      * @param[in] E The parameter "E" is a reference to an object of type "Ell".
      */
@@ -51,35 +47,23 @@ template <typename Arr> class Ell {
 
   public:
     /**
-     * @brief Construct a new Ell object
+     * @brief Construct a new Ell object from a vector and an array.
      *
-     * The function is a constructor for an Ell object that takes a Vec and an Arr as parameters.
-     *
-     * @param[in] val The parameter "val" is of type Vec, which is likely a vector or array-like
-     * data structure. It is being passed by reference to the constructor of the Ell class.
-     * @param[in] x x is an object of type Arr, which is likely an array or vector. It is being
-     * passed by value to the constructor of the Ell class.
+     * @param[in] val A vector of double values.
+     * @param[in] x An array of type Arr.
      */
     Ell(const Vec &val, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(val, _n) {}
 
     /**
-     * @brief Construct a new Ell object
+     * @brief Construct a new Ell object from an alpha value and an array.
      *
-     * The function constructs a new Ell object with a given alpha value and an array of x values.
-     *
-     * @param[in] alpha The parameter `alpha` is a constant reference to a `double` value. It is
-     * used to initialize the `_mgr` member variable of the `Ell` class.
-     * @param[in] x The parameter `x` is of type `Arr`, which is likely an array or vector of some
-     * kind. It is being passed by value, meaning a copy of the `x` object will be made and stored
-     * in the `_xc` member variable of the `Ell` object being constructed.
+     * @param[in] alpha A double value representing the scaling factor.
+     * @param[in] x An array of type Arr.
      */
     Ell(const double &alpha, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(alpha, _n) {}
 
     /**
-     * @brief Construct a new Ell object
-     *
-     * The function is a constructor for an Ell object that takes an rvalue reference as a
-     * parameter.
+     * @brief Construct a new Ell object (move constructor)
      *
      * @param[in] E The parameter "E" is an rvalue reference to an object of type "Ell".
      */
@@ -92,59 +76,53 @@ template <typename Arr> class Ell {
     ~Ell() = default;
 
     /**
-     * @brief Construct a new Ell object
-     *
-     * To avoid accidentally copying, only explicit copy is allowed
+     * @brief Construct a new Ell object (explicit copy)
      *
      * @param[in] E The parameter "E" is a reference to an object of type "Ell".
      */
     explicit Ell(const Ell &E) = default;
 
     /**
-     * @brief explicitly copy
+     * @brief Explicitly copy the Ell object.
      *
-     * @return Ell
+     * @return Ell A new Ell object that is a copy of the current object.
      */
     auto copy() const -> Ell { return Ell(*this); }
 
     /**
-     * @brief copy the whole array anyway
+     * @brief Get the center of the ellipsoid.
      *
-     * @return Arr
+     * @return Arr The center of the ellipsoid.
      */
     auto xc() const -> Arr { return this->_xc; }
 
     /**
-     * @brief Set the xc object
+     * @brief Set the center of the ellipsoid.
      *
-     * @param[in] xc
+     * @param[in] xc The new center of the ellipsoid.
      */
     void set_xc(const Arr &xc) { this->_xc = xc; }
 
     /**
-     * @brief
+     * @brief Get the squared radius of the ellipsoid.
      *
-     * @return double
+     * @return double The squared radius.
      */
     auto tsq() const -> double { return this->_mgr.tsq(); }
 
     /**
-     * The function sets the value of the use_parallel_cut property in the _mgr object.
+     * @brief Set whether to use parallel cut.
      *
-     * @param[in] value The value parameter is a boolean value that determines whether or not to use
-     * parallel cut.
+     * @param[in] value True to use parallel cut, false otherwise.
      */
     void set_use_parallel_cut(bool value) { this->_mgr.set_use_parallel_cut(value); }
 
     /**
-     * @brief Update ellipsoid core function using the deep cut(s)
+     * @brief Update ellipsoid using a deep cut.
      *
-     * The `update_bias_cut` function is a member function of the `Ell` class. It is used to update
-     * the ellipsoid core function using a cutting plane.
-     *
-     * @tparam T
-     * @param[in] cut cutting-plane
-     * @return std::tuple<int, double>
+     * @tparam T Type of the beta parameter.
+     * @param[in] cut A pair containing the gradient and beta value.
+     * @return CutStatus The status of the cut.
      */
     template <typename T> auto update_bias_cut(const std::pair<Arr, T> &cut) -> CutStatus {
         return this->_update_core(cut, [this](Vec &grad, const T &beta) {
@@ -153,14 +131,11 @@ template <typename Arr> class Ell {
     }
 
     /**
-     * @brief Update ellipsoid core function using the central cut(s)
+     * @brief Update ellipsoid using a central cut.
      *
-     * The `update_central_cut` function is a member function of the `Ell` class. It is used to
-     * update the ellipsoid core function using a cutting plane.
-     *
-     * @tparam T
-     * @param[in] cut cutting-plane
-     * @return std::tuple<int, double>
+     * @tparam T Type of the beta parameter.
+     * @param[in] cut A pair containing the gradient and beta value.
+     * @return CutStatus The status of the cut.
      */
     template <typename T> auto update_central_cut(const std::pair<Arr, T> &cut) -> CutStatus {
         return this->_update_core(cut, [this](Vec &grad, const T &beta) {
@@ -169,14 +144,11 @@ template <typename Arr> class Ell {
     }
 
     /**
-     * @brief Update ellipsoid core function using the cut(s)
+     * @brief Update ellipsoid using a cut with a specific Q matrix.
      *
-     * The `update_q` function is a member function of the `Ell` class. It is used to update the
-     * ellipsoid core function using a cutting plane.
-     *
-     * @tparam T
-     * @param[in] cut cutting-plane
-     * @return std::tuple<int, double>
+     * @tparam T Type of the beta parameter.
+     * @param[in] cut A pair containing the gradient and beta value.
+     * @return CutStatus The status of the cut.
      */
     template <typename T> auto update_q(const std::pair<Arr, T> &cut) -> CutStatus {
         return this->_update_core(
@@ -185,14 +157,13 @@ template <typename Arr> class Ell {
 
   private:
     /**
-     * @brief Update ellipsoid core function using the cut(s)
+     * @brief Update ellipsoid core function using the cut(s).
      *
-     * The `_update_core` function is a private member function of the `Ell` class. It is used to
-     * update the ellipsoid core function using a cutting plane.
-     *
-     * @tparam T
-     * @param[in] cut cutting-plane
-     * @return std::tuple<int, double>
+     * @tparam T Type of the beta parameter.
+     * @tparam Fn Type of the cut strategy function.
+     * @param[in] cut A pair containing the gradient and beta value.
+     * @param[in] cut_strategy The strategy function to apply the cut.
+     * @return CutStatus The status of the cut.
      */
     template <typename T, typename Fn>
     auto _update_core(const std::pair<Arr, T> &cut, Fn &&cut_strategy) -> CutStatus {

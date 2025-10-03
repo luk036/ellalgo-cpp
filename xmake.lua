@@ -30,6 +30,7 @@ target("test_ellalgo")
     add_deps("EllAlgo")
     add_files("test/source/*.cpp")
     add_packages("doctest", "fmt")
+    add_tests("default")
 
 target("test_ell")
     set_kind("binary")
