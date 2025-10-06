@@ -64,9 +64,7 @@ struct MyOracle3 {
 
     double t = 0.0;
 
-    void update(double t) {
-        this->t = t;
-    }
+    void update(double t_new) { this->t = t_new; }
 
     auto assess_feas(const ArrayType& x) -> std::optional<Cut> {
         double f = x[0] + x[1] - 3.0;
