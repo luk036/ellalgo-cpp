@@ -192,7 +192,10 @@ template <typename Arr> class EllStable {
     auto _update_core(const std::pair<Arr, T> &cut, Fn &&cut_strategy) -> CutStatus {
         const auto &grad = cut.first;
         const auto &beta = cut.second;
-        auto g = grad;
+        std::valarray<double> g(this->_n);
+        for (auto i = 0U; i != this->_n; ++i) {
+            g[i] = grad[i];
+        }
 
         auto result = cut_strategy(g, beta);
         if (result == CutStatus::Success) {
