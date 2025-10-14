@@ -27,11 +27,7 @@ class EllCalc {
     /**
      * @brief Construct a new EllCalcobject
      *
-     * @tparam V
-     * @tparam U
-     * @param[in] kappa
-     * @param[in] mq
-     * @param[in] x
+     * @param[in] ndim
      */
     explicit EllCalc(size_t ndim) : _n_f{double(ndim)}, _helper{ndim} {
         assert(ndim >= 2U);  // do not accept one-dimensional
@@ -80,7 +76,6 @@ class EllCalc {
      *        g' (x - xc) + beta1 \ge 0
      *
      * @param[in] beta1
-     * @param[in] b1sq
      * @param[in] tsq
      * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */

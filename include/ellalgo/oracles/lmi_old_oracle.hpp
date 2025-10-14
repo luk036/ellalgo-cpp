@@ -26,6 +26,7 @@ template <typename Arr036, typename Mat = Arr036> class LmiOldOracle {
     /**
      * @brief Construct a new lmi oracle object
      *
+     * @param[in] ndim
      * @param[in] F
      * @param[in] B
      */

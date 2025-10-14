@@ -15,7 +15,7 @@ enum class CutStatus;
 /**
  * @brief Ellipsoid Search Space
  *
- *   ell = {x | (x - xc)' mq^-1 (x - xc) \le \kappa}
+ *   ell = {x | (x - xc)' mq^-1 (x - xc) ≤ κ}
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */
@@ -185,7 +185,9 @@ template <typename Arr> class EllStable {
      * to update the ellipsoid core function using a cutting plane.
      *
      * @tparam T
+     * @tparam Fn
      * @param[in] cut cutting-plane
+     * @param[in] cut_strategy
      * @return std::tuple<int, double>
      */
     template <typename T, typename Fn>

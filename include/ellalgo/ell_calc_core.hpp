@@ -6,7 +6,7 @@
 /**
  * @brief Ellipsoid Search Space
  *
- *  EllCalcCore = {x | (x - xc)' mq^-1 (x - xc) \le \kappa}
+ *  EllCalcCore = {x | (x - xc)' mq^-1 (x - xc) ≤ κ}
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */

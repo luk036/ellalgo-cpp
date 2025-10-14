@@ -28,4 +28,12 @@ CREATE_SUBDIRS = NO
 
 # Include all directories, files and namespaces in the documentation
 # Disable to include only explicitly documented objects
-M_SHOW_UNDOCUMENTED = YES
+# M_SHOW_UNDOCUMENTED = YES
+
+ALIASES += le="≤"
+ALIASES += kappa="κ"
+ALIASES += pi="π"
+ALIASES += omega="ω"
+ALIASES += forall="∀"
+ALIASES += in="∈"
+ALIASES += pm="±"

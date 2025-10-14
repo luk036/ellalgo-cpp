@@ -13,7 +13,7 @@
  *
  * Without the knowledge of the type of xc
  *
- *  \mathcal{E} {x | (x - xc)' mq^-1 (x - xc) \le \kappa}
+ *  ℰ {x | (x - xc)' mq^-1 (x - xc) ≤ κ}
  */
 class EllCore {
     using Vec = std::valarray<double>;
@@ -307,7 +307,7 @@ class EllCore {
      *
      * @tparam T
      * @tparam Fn
-     * @param[in] grad gradient
+     * @param[in] g gradient
      * @param[in] beta
      * @param[in] cut_strategy
      * @return CutStatus
@@ -422,7 +422,6 @@ class EllCore {
      * The function `_update_cut_central_cut` calculates a central cut using the `calc_central_cut`
      * function from the `_helper` object.
      *
-     * @param[in] beta The beta parameter is a constant value of type double.
      * @param[in] tsq tsq is a constant value of type double.
      *
      * @return The function `_update_cut_bias_cut` returns a tuple containing a `CutStatus` enum

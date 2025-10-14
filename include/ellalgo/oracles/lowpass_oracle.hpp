@@ -41,9 +41,9 @@
  *
  *    This example is taken from Almir Mutapcic in 2006:
  *
- *        min   \gamma
- *        s.t.  L^2(\omega) \le R(\omega) \le U^2(\omega), \forall \omega \in
- * [0, \pi] R(\omega) > 0, \forall \omega \in [0, \pi]
+ *        min   γ
+ *        s.t.  L²(ω) ≤ R(ω) ≤ U²(ω), ∀ ω ∈ [0, π]
+ *              R(ω) > 0, ∀ ω ∈ [0, π]
  */
 class LowpassOracle {
     using Vec = std::valarray<double>;

@@ -89,11 +89,11 @@ class ProfitOracle {
  *        s.t.    x1 \le k'
  *
  *    where:
- *        alpha' = alpha \pm e1
- *        beta' = beta \pm e2
- *        p' = p \pm e3
- *        k' = k \pm e4
- *        v' = v \pm e5
+ *        alpha' = alpha ± e1
+ *        beta' = beta ± e2
+ *        p' = p ± e3
+ *        k' = k ± e4
+ *        v' = v ± e5
  *
  * @see ProfitOracle
  */

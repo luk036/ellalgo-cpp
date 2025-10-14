@@ -132,9 +132,10 @@ inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &gam
  * short.
  *
  * @tparam OracleOptimQ
- * @tparam Space
+ * @tparam SearchSpaceQ
+ * @tparam Num
  * @param[in,out] omega   perform assessment on x0
- * @param[in,out] space   search Space containing x*
+ * @param[in,out] space_q   search Space containing x*
  * @param[in,out] gamma   best-so-far optimal sol'n
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
