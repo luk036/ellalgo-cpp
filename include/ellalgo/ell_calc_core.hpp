@@ -1,6 +1,7 @@
 #pragma once
 
 #include <tuple>
+#include <cstddef> // For size_t
 
 /**
  * @brief Ellipsoid Search Space
