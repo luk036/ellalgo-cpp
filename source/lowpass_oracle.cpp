@@ -3,9 +3,7 @@
 #include <cmath>                               // for pow, log10, M_PI, cos
 #include <ellalgo/oracles/lowpass_oracle.hpp>  // for LowpassOracle, filter_...
 #include <tuple>                               // for tuple
-#include <type_traits>                         // for move
 #include <valarray>                            // for valarray
-#include <vector>                              // for vector, vector<>::size_...
 
 using Vec = std::valarray<double>;
 using Mat = std::valarray<Vec>;

@@ -1,8 +1,7 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include <cmath>
-#include <tuple>
+#include <utility> // for std::pair
 
 // forward declaration
 enum class CutStatus;

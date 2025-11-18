@@ -16,7 +16,7 @@ if is_plat("linux") then
     -- add_sysincludedirs(os.getenv("PREFIX") .. "/include/c++/v1", {public = true})
     -- add_sysincludedirs(os.getenv("PREFIX") .. "/include", {public = true})
 elseif is_plat("windows") then
-    add_cxflags("/W4 /WX /wd4127 /wd4530", {force = true})
+    add_cxflags("/W4 /WX /wd4127 /wd4530 /wd4819", {force = true})
 end
 
 target("EllAlgo")

@@ -1,13 +1,9 @@
-// -*- coding: utf-8 -*-
 #pragma once
 
-#include <cmath>
-#include <tuple>
 #include <valarray>
 
 #include "ell_config.hpp"
 #include "ell_core.hpp"
-#include "ell_matrix.hpp"
 
 // forward declaration
 enum class CutStatus;
