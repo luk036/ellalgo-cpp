@@ -29,7 +29,7 @@ class EllCalc {
      *
      * @param[in] ndim
      */
-    explicit EllCalc(size_t ndim) : _n_f{double(ndim)}, _helper{ndim} {
+    explicit EllCalc(const size_t ndim) : _n_f{double(ndim)}, _helper{ndim} {
         assert(ndim >= 2U);  // do not accept one-dimensional
     }
 
@@ -66,7 +66,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
-    auto calc_parallel_bias_cut(const double &beta0, const double &beta1, const double &tsq) const
+    auto calc_parallel_bias_cut(const double beta0, const double beta1, const double tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
@@ -79,7 +79,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
-    auto calc_parallel_central_cut(const double &beta1, const double &tsq) const
+    auto calc_parallel_central_cut(const double beta1, const double tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
@@ -91,7 +91,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
-    auto calc_bias_cut(const double &beta, const double &tsq) const
+    auto calc_bias_cut(const double beta, const double tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
@@ -102,7 +102,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
-    auto calc_central_cut(const double &tsq) const
+    auto calc_central_cut(const double tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
@@ -116,7 +116,7 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
-    auto calc_parallel_bias_cut_q(const double &beta0, const double &beta1, const double &tsq) const
+    auto calc_parallel_bias_cut_q(const double beta0, const double beta1, const double tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 
     /**
@@ -128,6 +128,6 @@ class EllCalc {
      * @param[in] tsq
      * @return std::tuple<CutStatus, std::tuple<double, double, double>>
      */
-    auto calc_bias_cut_q(const double &beta, const double &tsq) const
+    auto calc_bias_cut_q(const double beta, const double tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 };  // } EllCalc

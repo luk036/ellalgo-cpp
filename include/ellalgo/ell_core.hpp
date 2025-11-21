@@ -81,7 +81,7 @@ class EllCore {
      * @param[in] ndim The parameter `ndim` represents the number of dimensions for the EllCore
      * object. It specifies the size of the matrix used in the construction of the object.
      */
-    EllCore(double alpha, size_t ndim) : EllCore{alpha, Matrix(ndim), ndim} {
+    EllCore(const double alpha, const size_t ndim) : EllCore{alpha, Matrix(ndim), ndim} {
         this->_mq.identity();
     }
 
@@ -145,7 +145,7 @@ class EllCore {
      * @return CutStatus
      */
     template <typename T> auto update_bias_cut(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
+        return this->_update_core(grad, beta, [this](const T &beta_l, const double tsq_l) {
             return this->_update_cut_bias_cut(beta_l, tsq_l);
         });
     }
@@ -162,7 +162,7 @@ class EllCore {
      * @return CutStatus
      */
     template <typename T> auto update_central_cut(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
+        return this->_update_core(grad, beta, [this](const T &beta_l, const double tsq_l) {
             return this->_update_cut_central_cut(beta_l, tsq_l);
         });
     }
@@ -179,7 +179,7 @@ class EllCore {
      * @return CutStatus
      */
     template <typename T> auto update_q(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
+        return this->_update_core(grad, beta, [this](const T &beta_l, const double tsq_l) {
             return this->_update_cut_q(beta_l, tsq_l);
         });
     }
@@ -196,7 +196,7 @@ class EllCore {
      * @return CutStatus
      */
     template <typename T> auto update_stable_bias_cut(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_stable_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
+        return this->_update_stable_core(grad, beta, [this](const T &beta_l, const double tsq_l) {
             return this->_update_cut_bias_cut(beta_l, tsq_l);
         });
     }
@@ -213,7 +213,7 @@ class EllCore {
      * @return CutStatus
      */
     template <typename T> auto update_stable_central_cut(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_stable_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
+        return this->_update_stable_core(grad, beta, [this](const T &beta_l, const double tsq_l) {
             return this->_update_cut_central_cut(beta_l, tsq_l);
         });
     }
@@ -230,7 +230,7 @@ class EllCore {
      * @return CutStatus
      */
     template <typename T> auto update_stable_q(Vec &grad, const T &beta) -> CutStatus {
-        return this->_update_stable_core(grad, beta, [this](const T &beta_l, const double &tsq_l) {
+        return this->_update_stable_core(grad, beta, [this](const T &beta_l, const double tsq_l) {
             return this->_update_cut_q(beta_l, tsq_l);
         });
     }
@@ -395,7 +395,7 @@ class EllCore {
      * @return The function `_update_cut_bias_cut` returns a tuple containing a `CutStatus` enum
      * value and another tuple containing three `double` values.
      */
-    auto _update_cut_bias_cut(const double &beta, const double &tsq) const
+    auto _update_cut_bias_cut(const double beta, const double tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {
         return this->_helper.calc_bias_cut(beta, tsq);
     }
@@ -410,7 +410,7 @@ class EllCore {
      * @return a tuple containing a `CutStatus` enum value and another tuple containing three
      * `double` values.
      */
-    auto _update_cut_bias_cut(const std::valarray<double> &beta, const double &tsq) const
+    auto _update_cut_bias_cut(const std::valarray<double> &beta, const double tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
         if (beta.size() < 2) {
             return this->_helper.calc_bias_cut(beta[0], tsq);
@@ -427,7 +427,7 @@ class EllCore {
      * @return The function `_update_cut_bias_cut` returns a tuple containing a `CutStatus` enum
      * value and another tuple containing three `double` values.
      */
-    auto _update_cut_central_cut(const double &, const double &tsq) const
+    auto _update_cut_central_cut(const double &, const double tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {
         return this->_helper.calc_central_cut(tsq);
     }
@@ -442,7 +442,7 @@ class EllCore {
      * @return a tuple containing a `CutStatus` enum value and another tuple containing three
      * `double` values.
      */
-    auto _update_cut_central_cut(const std::valarray<double> &beta, const double &tsq) const
+    auto _update_cut_central_cut(const std::valarray<double> &beta, const double tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
         if (beta.size() < 2) {
             return this->_helper.calc_central_cut(tsq);
@@ -460,7 +460,7 @@ class EllCore {
      * @return The function `_update_cut_bias_cut` returns a tuple containing a `CutStatus` enum
      * value and another tuple containing three `double` values.
      */
-    auto _update_cut_q(const double &beta, const double &tsq) const
+    auto _update_cut_q(const double beta, const double tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {
         return this->_helper.calc_bias_cut_q(beta, tsq);
     }
@@ -475,7 +475,7 @@ class EllCore {
      * @return a tuple containing a `CutStatus` enum value and another tuple containing three
      * `double` values.
      */
-    auto _update_cut_q(const std::valarray<double> &beta, const double &tsq) const
+    auto _update_cut_q(const std::valarray<double> &beta, const double tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
         if (beta.size() < 2) {
             return this->_helper.calc_bias_cut_q(beta[0], tsq);
