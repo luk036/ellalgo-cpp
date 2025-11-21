@@ -26,7 +26,7 @@ class ell1d {
      * @param[in] l
      * @param[in] u
      */
-    ell1d(const double &l, const double &u) noexcept : _r{(u - l) / 2}, _xc{l + _r} {}
+    ell1d(const double l, const double u) noexcept : _r{(u - l) / 2}, _xc{l + _r} {}
 
     /**
      * @brief Construct a new ell1d object
@@ -47,7 +47,7 @@ class ell1d {
      *
      * @param[in] xc
      */
-    auto set_xc(const double &xc) noexcept -> void { _xc = xc; }
+    auto set_xc(const double xc) noexcept -> void { _xc = xc; }
 
     /**
      * @brief

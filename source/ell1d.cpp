@@ -10,7 +10,7 @@
  *
  * @return The function `my_abs` returns the absolute value of the input `a`.
  */
-inline double my_abs(const double &number) { return number > 0.0 ? number : -number; }
+inline double my_abs(const double number) { return number > 0.0 ? number : -number; }
 
 /**
  * The function updates the parameters of an ellipsoidal cut based on a given cut.
