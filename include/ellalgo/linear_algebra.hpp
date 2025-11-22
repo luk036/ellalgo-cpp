@@ -27,8 +27,6 @@ template <typename T> class Vector2 {
 
     /**
      * Destroys the Vector2 object.
-     *
-     * @return None
      */
     ~Vector2() = default;
 

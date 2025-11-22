@@ -34,13 +34,13 @@ template <typename T> inline auto invalid_value() ->
  * options object as input. A function f(x) is *convex* if there always exist a
  * g(x) such that f(z) >= f(x) + g(x)' * (z - x), forall z, x in dom f. Note
  * that dom f does not need to be a convex set in our definition. The affine
- * function g' (x - xc) + beta is called a cutting-plane, or a ``cut'' for
+ * function g' (x - xc) + beta is called a cutting-plane, or a `cut` for
  * short.
  *
  * A *separation oracle* asserts that an evalution point xc is feasible,
  * or provide a cut that separates the feasible region and xc.
  *
- * @svgbob
+ * <pre>
  *    Initial ellipsoid
  *   ┌─────────────────┐
  *   │    feasible     │
@@ -52,7 +52,7 @@ template <typename T> inline auto invalid_value() ->
  *   │      /          │   feasible region
  *   └─────●───────────┘
  *        new center
- * @end
+ * </pre>
  *
  * @tparam OracleFeas
  * @tparam SearchSpace
@@ -87,13 +87,13 @@ inline auto cutting_plane_feas(OracleFeas &omega, SearchSpace &space,
  * solving a convex optimization problem:
  *
  *   min  gamma
- *   s.t. f(x, gamma) <= 0, x \in R
+ *   s.t. f(x, gamma) <= 0, x $ \in $ R
  *
  * It takes a cutting-plane oracle `omega`, a search space `space`, and an
  * options object as input. A function f(x) is *convex* if there always exist a
  * g(x) such that f(z) >= f(x) + g(x)' * (z - x), forall z, x in dom f. Note
  * that dom f does not need to be a convex set in our definition. The affine
- * function g' (x - xc) + beta is called a cutting-plane, or a ``cut'' for
+ * function g' (x - xc) + beta is called a cutting-plane, or a `cut` for
  * short.
  *
  * @tparam OracleOptim
@@ -142,7 +142,7 @@ inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &gam
  * options object as input. A function f(x) is *convex* if there always exist a
  * g(x) such that f(z) >= f(x) + g(x)' * (z - x), forall z, x in dom f. Note
  * that dom f does not need to be a convex set in our definition. The affine
- * function g' (x - xc) + beta is called a cutting-plane, or a ``cut'' for
+ * function g' (x - xc) + beta is called a cutting-plane, or a `cut` for
  * short.
  *
  * @tparam OracleOptimQ

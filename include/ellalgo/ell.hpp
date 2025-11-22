@@ -24,7 +24,7 @@ enum class CutStatus;
  *
  * This version keeps $Q$ symmetric but no promise of positive definite
  *
- * @svgbob
+ * <pre>
  *    n-dimensional space
  *         ┌─┐
  *       ┌─┘ └─┐
@@ -35,7 +35,7 @@ enum class CutStatus;
  *     └─┐     ┌─┘
  *       └─┐ ┌─┘
  *         └─┘
- * @end
+ * </pre>
  */
 template <typename Arr> class Ell {
   public:

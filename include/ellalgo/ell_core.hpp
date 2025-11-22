@@ -15,7 +15,7 @@
  *
  *  ℰ {x | (x - xc)' mq^-1 (x - xc) ≤ κ}
  *
- * @svgbob
+ * <pre>
  *    2D Ellipsoid Core Visualization
  *        y
  *        ^
@@ -29,7 +29,7 @@
  *        ● (x)
  *      point inside/outside
  *      ellipsoid
- * @end
+ * </pre>
  */
 class EllCore {
     using Vec = std::valarray<double>;
