@@ -40,6 +40,20 @@ template <typename T> inline auto invalid_value() ->
  * A *separation oracle* asserts that an evalution point xc is feasible,
  * or provide a cut that separates the feasible region and xc.
  *
+ * @svgbob
+ *    Initial ellipsoid
+ *   ┌─────────────────┐
+ *   │    feasible     │
+ *   │    region       │
+ *   │    ●xc   ┌──────┼──→ cutting plane
+ *   │         /       │
+ *   │        /        │←─ new ellipsoid
+ *   │       /         │   containing
+ *   │      /          │   feasible region
+ *   └─────●───────────┘
+ *        new center
+ * @end
+ *
  * @tparam OracleFeas
  * @tparam SearchSpace
  * @param[in,out] omega   perform assessment on x0

@@ -23,6 +23,19 @@ enum class CutStatus;
  * ellipsoid, such as the center point and the squared radius.
  *
  * This version keeps $Q$ symmetric but no promise of positive definite
+ *
+ * @svgbob
+ *    n-dimensional space
+ *         ┌─┐
+ *       ┌─┘ └─┐
+ *     ┌─┘     └─┐
+ *   ┌─┘         └─┐  ←─ ellipsoid boundary
+ *   │   ● xc      │      center point
+ *   └─┐         ┌─┘
+ *     └─┐     ┌─┘
+ *       └─┐ ┌─┘
+ *         └─┘
+ * @end
  */
 template <typename Arr> class Ell {
   public:

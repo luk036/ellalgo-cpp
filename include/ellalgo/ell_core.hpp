@@ -14,6 +14,22 @@
  * Without the knowledge of the type of xc
  *
  *  ℰ {x | (x - xc)' mq^-1 (x - xc) ≤ κ}
+ *
+ * @svgbob
+ *    2D Ellipsoid Core Visualization
+ *        y
+ *        ^
+ *        │
+ *      ┌─┼─┐  ← ellipsoid boundary
+ *    ┌─┘ │ └─┐
+ *  ──┼───●───┼──→ x  ← center (xc)
+ *    └─┐ │ ┌─┘
+ *      └─┼─┘
+ *        │
+ *        ● (x)
+ *      point inside/outside
+ *      ellipsoid
+ * @end
  */
 class EllCore {
     using Vec = std::valarray<double>;
