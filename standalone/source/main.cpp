@@ -1,7 +1,7 @@
 // #include <ellalgo/greeter.h>
-#include <ellalgo/version.h>
-
+// #include <ellalgo/version.h>
 #include <cxxopts.hpp>
+#include <ellalgo/logger.hpp>
 #include <iostream>
 #include <string>
 // #include <unordered_map>
@@ -36,7 +36,7 @@ auto main(int argc, char **argv) -> int {
     }
 
     if (result["version"].as<bool>()) {
-        std::cout << "EllAlgo, version " << ELLALGO_VERSION << std::endl;
+        // std::cout << "EllAlgo, version " << ELLALGO_VERSION << std::endl;
         return 0;
     }
 
@@ -48,6 +48,9 @@ auto main(int argc, char **argv) -> int {
 
     // ellalgo::EllAlgo ellalgo(name);
     // std::cout << ellalgo.greet(langIt->second) << std::endl;
+
+    // Example usage of spdlog
+    ellalgo::log_with_spdlog("Hello from EllAlgo with spdlog!");
 
     return 0;
 }

@@ -4,6 +4,8 @@ add_rules("mode.debug", "mode.release", "mode.coverage")
 add_requires("doctest", {alias = "doctest"})
 add_requires("fmt", {alias = "fmt"})
 add_requires("benchmark", {alias = "benchmark"})
+add_requires("spdlog", {alias = "spdlog"})
+add_requires("cxxopts", {alias = "cxxopts"})
 
 if is_mode("coverage") then
     add_cxflags("-ftest-coverage", "-fprofile-arcs", {force = true})
@@ -23,7 +25,7 @@ target("EllAlgo")
     set_kind("static")
     add_includedirs("include", {public = true})
     add_files("source/*.cpp")
-    add_packages("fmt")
+    add_packages("fmt", "spdlog")
 
 target("test_ellalgo")
     set_kind("binary")
@@ -52,6 +54,13 @@ target("test_lowpass")
     add_includedirs("include", {public = true})
     add_files("bench/BM_lowpass.cpp")
     add_packages("benchmark")
+
+target("EllAlgoStandalone")
+    set_kind("binary")
+    add_deps("EllAlgo")
+    add_files("standalone/source/main.cpp")
+    add_packages("cxxopts", "spdlog")
+    set_filename("EllAlgo")
 
 
 -- If you want to known more usage about xmake, please see https://xmake.io
