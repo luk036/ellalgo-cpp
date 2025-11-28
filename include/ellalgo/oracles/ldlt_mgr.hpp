@@ -46,9 +46,9 @@ class LDLTMgr {
      */
     explicit LDLTMgr(size_t N) : witness_vec(0.0, N), _n{N}, T{N} {}
 
-    LDLTMgr(const LDLTMgr &) = delete;
-    LDLTMgr &operator=(const LDLTMgr &) = delete;
-    LDLTMgr(LDLTMgr &&) = default;
+    LDLTMgr(const LDLTMgr&) = delete;
+    LDLTMgr& operator=(const LDLTMgr&) = delete;
+    LDLTMgr(LDLTMgr&&) = default;
 
     /**
      * @brief Perform LDLT Factorization
@@ -64,7 +64,7 @@ class LDLTMgr {
      *
      * @param[in] A Symmetric Matrix
      */
-    template <typename Mat> auto factorize(const Mat &A) -> bool {
+    template <typename Mat> auto factorize(const Mat& A) -> bool {
         return this->factor([&A](size_t i, size_t j) { return A(i, j); });
     }
 
@@ -77,7 +77,7 @@ class LDLTMgr {
      *
      * See also: factorize()
      */
-    auto factor(const std::function<double(size_t, size_t)> &get_matrix_elem) -> bool;
+    auto factor(const std::function<double(size_t, size_t)>& get_matrix_elem) -> bool;
 
     /**
      * @brief Perform LDLT Factorization (Lazy evaluation)
@@ -89,15 +89,14 @@ class LDLTMgr {
      * See also: factorize()
      */
     auto factor_with_allow_semidefinite(
-        const std::function<double(size_t, size_t)> &get_matrix_elem) -> bool;
+        const std::function<double(size_t, size_t)>& get_matrix_elem) -> bool;
 
     /**
-     * @brief Is $A$ symmetric positive definite (spd)
+     * @brief Check if the matrix is symmetric positive definite.
      *
-     * @return true
-     * @return false
+     * @return bool True if the matrix is SPD, false otherwise.
      */
-    auto is_spd() const noexcept -> bool { return this->pos.second == 0; }
+    constexpr auto is_spd() const noexcept -> bool { return this->pos.second == 0; }
 
     /**
      * @brief witness that certifies $A$ is not symmetric positive definite
@@ -117,7 +116,7 @@ class LDLTMgr {
      * @tparam Arr036
      * @param[in] v
      */
-    template <typename Arr036> auto set_witness_vec(Arr036 &v) const -> void {
+    template <typename Arr036> auto set_witness_vec(Arr036& v) const -> void {
         for (auto i = 0U; i != this->_n; ++i) {
             v[i] = this->witness_vec[i];
         }
@@ -130,12 +129,12 @@ class LDLTMgr {
      * @param[in] A
      * @return double
      */
-    template <typename Mat> auto sym_quad(const Mat &A) const -> double {
+    template <typename Mat> auto sym_quad(const Mat& A) const -> double {
         auto res = double{};
-        const auto &v = this->witness_vec;
+        const auto& v = this->witness_vec;
         // const auto& [start, stop] = this->pos;
-        const auto &start = this->pos.first;
-        const auto &stop = this->pos.second;
+        const auto& start = this->pos.first;
+        const auto& stop = this->pos.second;
         for (auto i = start; i != stop; ++i) {
             auto s = 0.0;
             for (auto j = i + 1; j != stop; ++j) {
@@ -156,7 +155,7 @@ class LDLTMgr {
      * @tparam Mat
      * @param[in,out] M
      */
-    template <typename Mat> auto sqrt(Mat &M) -> void {
+    template <typename Mat> auto sqrt(Mat& M) -> void {
         assert(this->is_spd());
 
         for (auto i = 0U; i != this->_n; ++i) {

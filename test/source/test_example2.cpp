@@ -26,7 +26,7 @@ struct MyOracle {
      * @return A pointer to a `Cut` object is being returned. The `Cut` object being returned is
      * either `cut1` or `cut2`, which are static variables initialized within the function.
      */
-    auto assess_feas(const Vec &xc) -> Cut * {
+    auto assess_feas(const Vec& xc) -> Cut* {
         static auto cut1 = Cut{Vec{1.0, 1.0}, 0.0};
         static auto cut2 = Cut{Vec{-1.0, 1.0}, 0.0};
 

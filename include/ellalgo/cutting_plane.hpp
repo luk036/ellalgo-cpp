@@ -62,8 +62,8 @@ template <typename T> inline auto invalid_value() ->
  * @return Information of Cutting-plane method
  */
 template <typename OracleFeas, typename SearchSpace>
-inline auto cutting_plane_feas(OracleFeas &omega, SearchSpace &space,
-                               const Options &options = Options())
+inline auto cutting_plane_feas(OracleFeas& omega, SearchSpace& space,
+                               const Options& options = Options())
     -> std::tuple<CuttingPlaneArrayType<SearchSpace>, size_t> {
     for (auto niter = 0U; niter != options.max_iters; ++niter) {
         const auto cut = omega.assess_feas(space.xc());
@@ -106,14 +106,14 @@ inline auto cutting_plane_feas(OracleFeas &omega, SearchSpace &space,
  * @return Information of Cutting-plane method
  */
 template <typename OracleOptim, typename SearchSpace, typename Num>
-inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &gamma,
-                                const Options &options = Options())
+inline auto cutting_plane_optim(OracleOptim& omega, SearchSpace& space, Num& gamma,
+                                const Options& options = Options())
     -> std::tuple<CuttingPlaneArrayType<SearchSpace>, size_t> {
     auto x_best = invalid_value<CuttingPlaneArrayType<SearchSpace>>();
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
         const auto __result1 = omega.assess_optim(space.xc(), gamma);
-        const auto &cut = std::get<0>(__result1);
-        const auto &shrunk = std::get<1>(__result1);
+        const auto& cut = std::get<0>(__result1);
+        const auto& shrunk = std::get<1>(__result1);
         const auto status = [&]() {
             if (shrunk) {  // best gamma obtained
                 x_best = space.xc();
@@ -155,16 +155,16 @@ inline auto cutting_plane_optim(OracleOptim &omega, SearchSpace &space, Num &gam
  * @return Information of Cutting-plane method
  */
 template <typename OracleOptimQ, typename SearchSpaceQ, typename Num>
-inline auto cutting_plane_optim_q(OracleOptimQ &omega, SearchSpaceQ &space_q, Num &gamma,
-                                  const Options &options = Options())
+inline auto cutting_plane_optim_q(OracleOptimQ& omega, SearchSpaceQ& space_q, Num& gamma,
+                                  const Options& options = Options())
     -> std::tuple<CuttingPlaneArrayType<SearchSpaceQ>, size_t> {
     auto x_best = invalid_value<CuttingPlaneArrayType<SearchSpaceQ>>();
     auto retry = false;
 
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
         const auto result1 = omega.assess_optim_q(space_q.xc(), gamma, retry);
-        const auto &cut = std::get<0>(result1);
-        const auto &shrunk = std::get<1>(result1);
+        const auto& cut = std::get<0>(result1);
+        const auto& shrunk = std::get<1>(result1);
         if (shrunk) {  // best gamma obtained
             auto x_q = std::get<2>(result1);
             x_best = std::move(x_q);
@@ -176,7 +176,7 @@ inline auto cutting_plane_optim_q(OracleOptimQ &omega, SearchSpaceQ &space_q, Nu
         } else if (status == CutStatus::NoSoln) {
             return {std::move(x_best), niter};
         } else if (status == CutStatus::NoEffect) {
-            const auto &more_alt = std::get<3>(result1);
+            const auto& more_alt = std::get<3>(result1);
             if (!more_alt) {  // more alt?
                 break;        // no more alternative cut
             }
@@ -199,8 +199,8 @@ template <typename Oracle, typename Space>  //
 class BSearchAdaptor {
     using ArrayType = typename Space::ArrayType;
 
-    Oracle &_omega;
-    Space &_space;
+    Oracle& _omega;
+    Space& _space;
     const Options _options;
 
   public:
@@ -210,7 +210,7 @@ class BSearchAdaptor {
      * @param[in,out] omega perform assessment on x0
      * @param[in,out] space search Space containing x*
      */
-    BSearchAdaptor(Oracle &omega, Space &space) : BSearchAdaptor{omega, space, Options()} {}
+    BSearchAdaptor(Oracle& omega, Space& space) : BSearchAdaptor{omega, space, Options()} {}
 
     /**
      * @brief Construct a new bsearch adaptor object
@@ -219,13 +219,13 @@ class BSearchAdaptor {
      * @param[in,out] space   search space containing x*
      * @param[in]     options maximum iteration and error tolerance etc.
      */
-    BSearchAdaptor(Oracle &omega, Space &space, const Options &options)
+    BSearchAdaptor(Oracle& omega, Space& space, const Options& options)
         : _omega{omega}, _space{space}, _options{options} {}
 
     /**
-     * @brief get best x
+     * @brief Get the best x value.
      *
-     * @return auto
+     * @return ArrayType The best x value.
      */
     auto x_best() const -> ArrayType { return this->_space.xc(); }
 
@@ -236,7 +236,7 @@ class BSearchAdaptor {
      * @param[in,out] gamma the best-so-far optimal value
      * @return bool
      */
-    template <typename Num> auto assess_bs(Num &gamma) -> bool {
+    template <typename Num> auto assess_bs(Num& gamma) -> bool {
         Space space = this->_space.copy();  // copy
         this->_omega.update(gamma);
         const auto result = cutting_plane_feas(this->_omega, space, this->_options);
@@ -260,7 +260,7 @@ class BSearchAdaptor {
  * @return CInfo
  */
 template <typename Oracle, typename T>
-inline auto bsearch(Oracle &omega, const std::pair<T, T> &intvl, const Options &options = Options())
+inline auto bsearch(Oracle& omega, const std::pair<T, T>& intvl, const Options& options = Options())
     -> std::tuple<T, size_t> {
     // assume monotone
     // auto& [lower, upper] = intvl;

@@ -21,9 +21,9 @@ inline double my_abs(const double number) { return number > 0.0 ? number : -numb
  *
  * @return The function `update` returns a value of type `CutStatus`.
  */
-auto ell1d::update(const std::pair<double, double> &cut) noexcept -> CutStatus {
-    const auto &g = cut.first;
-    const auto &beta = cut.second;
+auto ell1d::update(const std::pair<double, double>& cut) noexcept -> CutStatus {
+    const auto& g = cut.first;
+    const auto& beta = cut.second;
 
     const auto tau = ::my_abs(this->_r * g);
     this->_tsq = tau * tau;
@@ -58,8 +58,8 @@ auto ell1d::update(const std::pair<double, double> &cut) noexcept -> CutStatus {
  *
  * @return a value of type `CutStatus`.
  */
-auto ell1d::update_central_cut(const std::pair<double, double> &cut) noexcept -> CutStatus {
-    const auto &g = cut.first;
+auto ell1d::update_central_cut(const std::pair<double, double>& cut) noexcept -> CutStatus {
+    const auto& g = cut.first;
     const auto tau = ::my_abs(this->_r * g);
     this->_tsq = tau * tau;
     this->_r /= 2;

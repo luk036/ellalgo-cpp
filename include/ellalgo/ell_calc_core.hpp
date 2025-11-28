@@ -1,7 +1,7 @@
 #pragma once
 
+#include <cstddef>  // For size_t
 #include <tuple>
-#include <cstddef> // For size_t
 
 /**
  * @brief Ellipsoid Search Space
@@ -50,7 +50,7 @@ class EllCalcCore {
      *
      * @param[in] E An rvalue reference to the EllCalcCore object being moved.
      */
-    EllCalcCore(EllCalcCore &&E) noexcept = default;
+    EllCalcCore(EllCalcCore&& E) noexcept = default;
 
     /**
      * Copy constructor for EllCalcCore.
@@ -60,7 +60,7 @@ class EllCalcCore {
      *
      * @param[in] E The EllCalcCore object to copy.
      */
-    EllCalcCore(const EllCalcCore &E) noexcept = default;
+    EllCalcCore(const EllCalcCore& E) noexcept = default;
 
     /**
      * Calculates the new ellipsoid parameters rho, sigma, and delta after
@@ -109,8 +109,9 @@ class EllCalcCore {
      * @param[in] eta Computed intermediate value.
      * @return Tuple containing computed rho, sigma and delta.
      */
-    auto calc_parallel_cut_fast(const double beta0, const double beta1, const double tsq, const double b0b1,
-                                const double eta) const noexcept -> std::tuple<double, double, double>;
+    auto calc_parallel_cut_fast(const double beta0, const double beta1, const double tsq,
+                                const double b0b1, const double eta) const noexcept
+        -> std::tuple<double, double, double>;
 
     /**
      * Calculates ellipsoid parameters after parallel central cuts.

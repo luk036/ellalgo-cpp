@@ -76,7 +76,7 @@ class LowpassOracle {
      * @param[in] x
      * @param[in] Spsq
      */
-    auto assess_feas(const Vec &x, const double &Spsq) -> ParallelCut *;
+    auto assess_feas(const Vec& x, const double& Spsq) -> ParallelCut*;
 
     /*!
      * @brief
@@ -87,14 +87,14 @@ class LowpassOracle {
      * @param[in] x
      * @param[in,out] Spsq
      */
-    auto assess_optim(const Vec &x, double &Spsq) -> std::tuple<ParallelCut, bool>;
+    auto assess_optim(const Vec& x, double& Spsq) -> std::tuple<ParallelCut, bool>;
 
     /*!
      * @brief
      *
      * @return auto
      */
-    auto operator()(const Vec &x, double &Spsq) -> std::tuple<ParallelCut, bool> {
+    auto operator()(const Vec& x, double& Spsq) -> std::tuple<ParallelCut, bool> {
         return this->assess_optim(x, Spsq);
     }
 };

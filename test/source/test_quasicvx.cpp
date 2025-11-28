@@ -35,7 +35,7 @@ struct MyQuasicCvxOracle {
      * @return The function `assess_optim` returns a `std::tuple` containing a `Cut` object and a
      * boolean value.
      */
-    auto assess_optim(const Vec &xc, double &gamma) -> std::tuple<Cut, bool> {
+    auto assess_optim(const Vec& xc, double& gamma) -> std::tuple<Cut, bool> {
         double sqrtx = xc[0];
         double logy = xc[1];
         double fj;
@@ -77,7 +77,7 @@ TEST_CASE("Quasiconvex 1, test feasible") {
     auto gamma = 0.0;
     const auto options = Options{2000, 1e-8};
     const auto result = cutting_plane_optim(omega, ellip, gamma, options);
-    const Vec &x = std::get<0>(result);
+    const Vec& x = std::get<0>(result);
     REQUIRE_EQ(x.size(), 2U);
     // CHECK_EQ(-gamma, doctest::Approx(-0.4288673397));
     // CHECK_EQ(x[0] * x[0], doctest::Approx(0.499876));

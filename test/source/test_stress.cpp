@@ -16,7 +16,7 @@ struct MyStressOracle {
     mutable int idx = -1;  // for round robin
     const int num_constraints = 5;
 
-    auto assess_optim(const Vec &xc, double &gamma) const -> std::tuple<Cut, bool> {
+    auto assess_optim(const Vec& xc, double& gamma) const -> std::tuple<Cut, bool> {
         const auto x = xc[0];
         const auto y = xc[1];
         const auto f0 = x + y;
@@ -38,12 +38,12 @@ struct MyStressOracle {
                         return {{Vec{-1.0, 1.0}, fj}, false};
                     }
                     break;
-                case 2: // constraint 3: x >= 0
+                case 2:  // constraint 3: x >= 0
                     if (-x > 0.0) {
                         return {{Vec{-1.0, 0.0}, -x}, false};
                     }
                     break;
-                case 3: // constraint 4: y >= 0
+                case 3:  // constraint 4: y >= 0
                     if (-y > 0.0) {
                         return {{Vec{0.0, -1.0}, -y}, false};
                     }
@@ -68,7 +68,7 @@ TEST_CASE("Stress test") {
     auto gamma = -1.0e100;
     const auto options = Options{10000, 1e-12};
     const auto result = cutting_plane_optim(oracle, ell, gamma, options);
-    const auto &x = std::get<0>(result);
+    const auto& x = std::get<0>(result);
     REQUIRE_NE(x.size(), 0U);
     CHECK(x[0] >= 0.0);
     CHECK(x[1] >= 0.0);
@@ -81,7 +81,7 @@ struct MyQuadraticOracle {
     using CutChoice = double;  // single cut
     using Cut = std::pair<Vec, double>;
 
-    auto assess_optim(const Vec &x, double &gamma) const -> std::tuple<Cut, bool> {
+    auto assess_optim(const Vec& x, double& gamma) const -> std::tuple<Cut, bool> {
         const auto x1 = x[0];
         const auto x2 = x[1];
 
@@ -98,26 +98,27 @@ struct MyQuadraticOracle {
         }
 
         // Objective: minimize -(x1^2 + x2^2)
-        double f0 = -(x1*x1 + x2*x2);
+        double f0 = -(x1 * x1 + x2 * x2);
         fj = f0 - gamma;
         if (fj > 0.0) {
-            return {{Vec{-2.0*x1, -2.0*x2}, fj}, false};
+            return {{Vec{-2.0 * x1, -2.0 * x2}, fj}, false};
         }
 
         gamma = f0;
-        return {{Vec{-2.0*x1, -2.0*x2}, 0.0}, true};
+        return {{Vec{-2.0 * x1, -2.0 * x2}, 0.0}, true};
     }
 };
 
 TEST_CASE("Stress test Quadratic") {
     auto ell = Ell<Vec>(Vec{10.0, 10.0}, Vec{0.0, 0.0});
     auto oracle = MyQuadraticOracle{};
-    auto gamma = 1.0e100; // For minimization, gamma should be initialized to a large value
+    auto gamma = 1.0e100;  // For minimization, gamma should be initialized to a large value
     const auto options = Options{20000, 1e-12};
     const auto result = cutting_plane_optim(oracle, ell, gamma, options);
-    const auto &x = std::get<0>(result);
+    const auto& x = std::get<0>(result);
     REQUIRE_NE(x.size(), 0U);
     CHECK(x[0] + x[1] <= 2.000000001);
     CHECK(x[0] - x[1] >= -1.000000001);
-    CHECK(x[0] * x[0] + x[1] * x[1] <= 2.500000001); // Now checking for <= -2.5 (original maximization)
+    CHECK(x[0] * x[0] + x[1] * x[1]
+          <= 2.500000001);  // Now checking for <= -2.5 (original maximization)
 }

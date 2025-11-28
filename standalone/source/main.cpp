@@ -6,7 +6,7 @@
 #include <string>
 // #include <unordered_map>
 
-auto main(int argc, char **argv) -> int {
+auto main(int argc, char** argv) -> int {
     // const std::unordered_map<std::string, ellalgo::LanguageCode> languages{
     //     {"en", ellalgo::LanguageCode::EN},
     //     {"de", ellalgo::LanguageCode::DE},

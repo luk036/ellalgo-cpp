@@ -52,7 +52,7 @@ template <typename Arr> class Ell {
      *
      * @param[in] E The parameter "E" is a reference to an object of type "Ell".
      */
-    auto operator=(const Ell &E) -> Ell & = delete;
+    auto operator=(const Ell& E) -> Ell& = delete;
 
   public:
     /**
@@ -61,7 +61,7 @@ template <typename Arr> class Ell {
      * @param[in] val A vector of double values.
      * @param[in] x An array of type Arr.
      */
-    Ell(const Vec &val, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(val, _n) {}
+    Ell(const Vec& val, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(val, _n) {}
 
     /**
      * @brief Construct a new Ell object from an alpha value and an array.
@@ -76,7 +76,7 @@ template <typename Arr> class Ell {
      *
      * @param[in] E The parameter "E" is an rvalue reference to an object of type "Ell".
      */
-    Ell(Ell &&E) noexcept = default;
+    Ell(Ell&& E) noexcept = default;
 
     /**
      * @brief Destroy the Ell object
@@ -89,7 +89,7 @@ template <typename Arr> class Ell {
      *
      * @param[in] E The parameter "E" is a reference to an object of type "Ell".
      */
-    explicit Ell(const Ell &E) = default;
+    explicit Ell(const Ell& E) = default;
 
     /**
      * @brief Explicitly copy the Ell object.
@@ -110,14 +110,14 @@ template <typename Arr> class Ell {
      *
      * @param[in] xc The new center of the ellipsoid.
      */
-    void set_xc(const Arr &xc) { this->_xc = xc; }
+    void set_xc(const Arr& xc) { this->_xc = xc; }
 
     /**
      * @brief Get the squared radius of the ellipsoid.
      *
      * @return double The squared radius.
      */
-    auto tsq() const -> double { return this->_mgr.tsq(); }
+    constexpr auto tsq() const -> double { return this->_mgr.tsq(); }
 
     /**
      * @brief Set whether to use parallel cut.
@@ -133,8 +133,8 @@ template <typename Arr> class Ell {
      * @param[in] cut A pair containing the gradient and beta value.
      * @return CutStatus The status of the cut.
      */
-    template <typename T> auto update_bias_cut(const std::pair<Arr, T> &cut) -> CutStatus {
-        return this->_update_core(cut, [this](Vec &grad, const T &beta) {
+    template <typename T> auto update_bias_cut(const std::pair<Arr, T>& cut) -> CutStatus {
+        return this->_update_core(cut, [this](Vec& grad, const T& beta) {
             return this->_mgr.update_bias_cut(grad, beta);
         });
     }
@@ -146,8 +146,8 @@ template <typename Arr> class Ell {
      * @param[in] cut A pair containing the gradient and beta value.
      * @return CutStatus The status of the cut.
      */
-    template <typename T> auto update_central_cut(const std::pair<Arr, T> &cut) -> CutStatus {
-        return this->_update_core(cut, [this](Vec &grad, const T &beta) {
+    template <typename T> auto update_central_cut(const std::pair<Arr, T>& cut) -> CutStatus {
+        return this->_update_core(cut, [this](Vec& grad, const T& beta) {
             return this->_mgr.update_central_cut(grad, beta);
         });
     }
@@ -159,9 +159,9 @@ template <typename Arr> class Ell {
      * @param[in] cut A pair containing the gradient and beta value.
      * @return CutStatus The status of the cut.
      */
-    template <typename T> auto update_q(const std::pair<Arr, T> &cut) -> CutStatus {
+    template <typename T> auto update_q(const std::pair<Arr, T>& cut) -> CutStatus {
         return this->_update_core(
-            cut, [this](Vec &grad, const T &beta) { return this->_mgr.update_q(grad, beta); });
+            cut, [this](Vec& grad, const T& beta) { return this->_mgr.update_q(grad, beta); });
     }
 
   private:
@@ -175,9 +175,9 @@ template <typename Arr> class Ell {
      * @return CutStatus The status of the cut.
      */
     template <typename T, typename Fn>
-    auto _update_core(const std::pair<Arr, T> &cut, Fn &&cut_strategy) -> CutStatus {
-        const auto &grad = cut.first;
-        const auto &beta = cut.second;
+    auto _update_core(const std::pair<Arr, T>& cut, Fn&& cut_strategy) -> CutStatus {
+        const auto& grad = cut.first;
+        const auto& beta = cut.second;
         std::valarray<double> g(this->_n);
         for (auto i = 0U; i != this->_n; ++i) {
             g[i] = grad[i];

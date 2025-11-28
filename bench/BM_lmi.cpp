@@ -32,8 +32,8 @@ template <typename Oracle> class MyOracle {
      * @param[in] B2
      * @param[in] c
      */
-    MyOracle(size_t m1, const std::vector<Matrix> &F1, const Matrix &B1, size_t m2,
-             const std::vector<Matrix> &F2, const Matrix &B2, Vec c)
+    MyOracle(size_t m1, const std::vector<Matrix>& F1, const Matrix& B1, size_t m2,
+             const std::vector<Matrix>& F2, const Matrix& B2, Vec c)
         : lmi1{m1, F1, B1}, lmi2{m2, F2, B2}, c{std::move(c)} {}
 
     /**
@@ -43,7 +43,7 @@ template <typename Oracle> class MyOracle {
      * @param[in,out] gamma
      * @return std::tuple<Cut, double>
      */
-    std::tuple<Cut, bool> assess_optim(const Vec &x, double &gamma) {
+    std::tuple<Cut, bool> assess_optim(const Vec& x, double& gamma) {
         const auto f0 = (this->c * x).sum();
         const auto f1 = f0 - gamma;
         if (f1 > 0.0) {
@@ -66,7 +66,7 @@ template <typename Oracle> class MyOracle {
      * @param[in,out] gamma
      * @return std::tuple<Cut, double>
      */
-    std::tuple<Cut, bool> operator()(const Vec &x, double &gamma) {
+    std::tuple<Cut, bool> operator()(const Vec& x, double& gamma) {
         return this->assess_optim(x, gamma);
     }
 };
@@ -76,7 +76,7 @@ template <typename Oracle> class MyOracle {
  *
  * @param[in,out] state
  */
-static void LMI_Lazy(benchmark::State &state) {
+static void LMI_Lazy(benchmark::State& state) {
     using Vec = std::valarray<double>;
     using M_t = std::vector<Matrix>;
 
@@ -141,7 +141,7 @@ BENCHMARK(LMI_Lazy);
  *
  * @param[in,out] state
  */
-static void LMI_old(benchmark::State &state) {
+static void LMI_old(benchmark::State& state) {
     using Vec = std::valarray<double>;
     using M_t = std::vector<Matrix>;
 

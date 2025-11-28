@@ -32,7 +32,7 @@ struct MyOracle {
      * value. The `Cut` object represents a cut in a mathematical optimization context, and the
      * boolean value indicates whether the optimization assessment was successful.
      */
-    auto assess_optim(const Vec &xc, double &gamma) const -> std::tuple<Cut, bool> {
+    auto assess_optim(const Vec& xc, double& gamma) const -> std::tuple<Cut, bool> {
         const auto x = xc[0];
         const auto y = xc[1];
         const auto f0 = x + y;
@@ -74,7 +74,7 @@ TEST_CASE("Example 1, test feasible") {
     auto gamma = -1.0e100;  // std::numeric_limits<double>::min()
     const auto options = Options{2000, 1e-10};
     const auto result = cutting_plane_optim(oracle, ell, gamma, options);
-    const auto &x = std::get<0>(result);
+    const auto& x = std::get<0>(result);
     REQUIRE_NE(x.size(), 0U);
     CHECK(x[0] >= 0.0);
 }
@@ -106,7 +106,7 @@ TEST_CASE("Example 1, test feasible2") {
     auto gamma = -1.0e100;  // std::numeric_limits<double>::min()
     const auto options = Options{2000, 1e-10};
     const auto result = cutting_plane_optim(oracle, ell, gamma, options);
-    const auto &x = std::get<0>(result);
+    const auto& x = std::get<0>(result);
     REQUIRE_NE(x.size(), 0U);
     CHECK(x[0] >= 0.0);
 }
@@ -119,7 +119,7 @@ struct MyOracle2 {
     mutable int idx = -1;  // for round robin
     const int num_constraints = 3;
 
-    auto assess_optim(const Vec &xc, double &gamma) const -> std::tuple<Cut, bool> {
+    auto assess_optim(const Vec& xc, double& gamma) const -> std::tuple<Cut, bool> {
         const auto x = xc[0];
         const auto y = xc[1];
         const auto f0 = x + y;
@@ -161,7 +161,7 @@ TEST_CASE("Example 1, test objective") {
     auto gamma = -1.0e100;  // std::numeric_limits<double>::min()
     const auto options = Options{2000, 1e-10};
     const auto result = cutting_plane_optim(oracle, ell, gamma, options);
-    const auto &x = std::get<0>(result);
+    const auto& x = std::get<0>(result);
     REQUIRE_NE(x.size(), 0U);
     CHECK(x[0] >= 0.0);
 }

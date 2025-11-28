@@ -45,21 +45,21 @@ class ProfitOracle {
      * @param[in] a the output elasticities
      * @param[in] v output price
      */
-    ProfitOracle(double p, double A, double k, const Vec &a, const Vec &v)
+    ProfitOracle(double p, double A, double k, const Vec& a, const Vec& v)
         : _log_pA{std::log(p * A)}, _log_k{std::log(k)}, _price_out{v}, _elasticities{a} {}
 
     /**
      * @brief Construct a new profit oracle object (only explicitly)
      *
      */
-    ProfitOracle(const ProfitOracle &) = delete;
+    ProfitOracle(const ProfitOracle&) = delete;
 
     /** The `set_elasticities` function is a member function of the `ProfitOracle` class.
     It takes a `Vec` object `elasticities` as input and sets the `_elasticities` member variable
     of the `ProfitOracle` object to the input value. This function allows you to update
     the elasticities used by the profit oracle for assessing feasibility and optimization.
     */
-    auto set_elasticities(const Vec &elasticities) { this->_elasticities = elasticities; }
+    auto set_elasticities(const Vec& elasticities) { this->_elasticities = elasticities; }
 
     /**
      * @brief
@@ -68,7 +68,7 @@ class ProfitOracle {
      * @param[in] gamma the best-so-far optimal value
      * @return std::tuple<Cut, double> Cut and the updated best-so-far value
      */
-    auto assess_feas(const Vec &y, const double &gamma) -> Cut *;
+    auto assess_feas(const Vec& y, const double& gamma) -> Cut*;
 
     /**
      * @brief
@@ -77,7 +77,7 @@ class ProfitOracle {
      * @param[in,out] gamma the best-so-far optimal value
      * @return std::tuple<Cut, double> Cut and the updated best-so-far value
      */
-    auto assess_optim(const Vec &y, double &gamma) -> std::tuple<Cut, bool>;
+    auto assess_optim(const Vec& y, double& gamma) -> std::tuple<Cut, bool>;
 };
 
 /**
@@ -117,7 +117,7 @@ class ProfitOracleRb {
      * @param[in] e paramters for uncertainty
      * @param[in] e3 paramters for uncertainty
      */
-    ProfitOracleRb(double p, double A, double k, const Vec &a, const Vec &v, const Vec &e,
+    ProfitOracleRb(double p, double A, double k, const Vec& a, const Vec& v, const Vec& e,
                    double e3)
         : _uie{e}, _elasticities{a}, _P(p - e3, A, k - e3, a, v + Vec{e3, e3}) {}
 
@@ -130,7 +130,7 @@ class ProfitOracleRb {
      *
      * @see cutting_plane_optim
      */
-    auto assess_optim(const Vec &y, double &gamma) -> std::tuple<Cut, bool> {
+    auto assess_optim(const Vec& y, double& gamma) -> std::tuple<Cut, bool> {
         auto a_rb = this->_elasticities;
         a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
         a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
@@ -176,7 +176,7 @@ class ProfitOracleQ {
      * @param[in] a the output elasticities
      * @param[in] v output price
      */
-    ProfitOracleQ(double p, double A, double k, const Vec &a, const Vec &v) : _P{p, A, k, a, v} {}
+    ProfitOracleQ(double p, double A, double k, const Vec& a, const Vec& v) : _P{p, A, k, a, v} {}
 
     /**
      * @brief Make object callable for cutting_plane_optim_q()
@@ -188,6 +188,6 @@ class ProfitOracleQ {
      *
      * @see cutting_plane_optim_q
      */
-    auto assess_optim_q(const Vec &y, double &gamma, bool retry)
+    auto assess_optim_q(const Vec& y, double& gamma, bool retry)
         -> std::tuple<Cut, bool, Vec, bool>;
 };

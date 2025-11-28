@@ -52,7 +52,7 @@ class Matrix {
      * @param[in] col - Column index to access
      * @return Reference to the element at the given row and column.
      */
-    double &operator()(size_t row, size_t col) { return this->data[row * ndim + col]; }
+    double& operator()(size_t row, size_t col) { return this->data[row * ndim + col]; }
 
     /**
      * Read-only accessor for matrix elements using 2D array syntax.
@@ -72,7 +72,7 @@ class Matrix {
      * @param[in] col - Column index
      * @return Constant reference to element at (row, col)
      */
-    const double &operator()(size_t row, size_t col) const { return this->data[row * ndim + col]; }
+    const double& operator()(size_t row, size_t col) const { return this->data[row * ndim + col]; }
 
     /**
      * Multiplies each element of the matrix by the given scalar value.
@@ -86,7 +86,7 @@ class Matrix {
      * @param[in] alpha - The scalar value to multiply each element by.
      * @return Reference to this matrix after multiplication.
      */
-    Matrix &operator*=(double alpha) {
+    Matrix& operator*=(double alpha) {
         this->data *= alpha;
         return *this;
     }

@@ -18,7 +18,7 @@ using Cut = std::pair<Vec, double>;
  * of type `Cut`, which is a struct or class that contains a vector `g` and a double `fj`. The
  * second element is of type `bool`.
  */
-auto ProfitOracle::assess_feas(const Vec &y, const double &gamma) -> Cut * {
+auto ProfitOracle::assess_feas(const Vec& y, const double& gamma) -> Cut* {
     static auto cut1 = Cut{Vec{1.0, 0.0}, 0.0};
     static auto cut2 = Cut{Vec{-1.0, 1.0}, 0.0};
 
@@ -78,7 +78,7 @@ auto ProfitOracle::assess_feas(const Vec &y, const double &gamma) -> Cut * {
  * of type `Cut`, which is a struct or class that contains a vector `g` and a double `fj`. The
  * second element is of type `bool`.
  */
-auto ProfitOracle::assess_optim(const Vec &y, double &gamma) -> std::tuple<Cut, bool> {
+auto ProfitOracle::assess_optim(const Vec& y, double& gamma) -> std::tuple<Cut, bool> {
     auto cut = this->assess_feas(y, gamma);
     if (cut) {
         return {*cut, false};
@@ -103,7 +103,7 @@ auto ProfitOracle::assess_optim(const Vec &y, double &gamma) -> std::tuple<Cut, 
  *
  * @return The function `assess_optim_q` returns a tuple containing the following elements:
  */
-auto ProfitOracleQ::assess_optim_q(const Vec &y, double &gamma, bool retry)
+auto ProfitOracleQ::assess_optim_q(const Vec& y, double& gamma, bool retry)
     -> std::tuple<Cut, bool, Vec, bool> {
     if (!retry) {
         auto cut = this->_P.assess_feas(y, gamma);
@@ -122,10 +122,10 @@ auto ProfitOracleQ::assess_optim_q(const Vec &y, double &gamma, bool retry)
         this->_yd = std::log(x);
     }
     auto result1 = this->_P.assess_optim(this->_yd, gamma);
-    auto &cut = std::get<0>(result1);
-    auto &shrunk = std::get<1>(result1);
-    auto &grad = std::get<0>(cut);
-    auto &beta = std::get<1>(cut);
+    auto& cut = std::get<0>(result1);
+    auto& shrunk = std::get<1>(result1);
+    auto& grad = std::get<0>(cut);
+    auto& beta = std::get<1>(cut);
     auto diff = this->_yd - y;
     beta += grad[0] * diff[0] + grad[1] * diff[1];
     return {std::move(cut), shrunk, this->_yd, !retry};

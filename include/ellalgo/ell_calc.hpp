@@ -38,7 +38,7 @@ class EllCalc {
      *
      * @param[in] E (move)
      */
-    EllCalc(EllCalc &&E) = default;
+    EllCalc(EllCalc&& E) = default;
 
     /**
      * @brief Destroy the EllCalcobject
@@ -53,7 +53,7 @@ class EllCalc {
      *
      * @param[in] E
      */
-    EllCalc(const EllCalc &E) = default;
+    EllCalc(const EllCalc& E) = default;
 
     /**
      * @brief Calculate a new ellipsoid under a parallel cut

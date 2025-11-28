@@ -30,7 +30,7 @@ struct MyOracle3 {
      * function returns a pointer to one of the static `Cut` objects (`cut1`, `cut2`, `cut3`,
      * `cut4`) based on the constraints being assessed.
      */
-    auto assess_feas(const Vec &xc) -> Cut * {
+    auto assess_feas(const Vec& xc) -> Cut* {
         static auto cut1 = Cut{Vec{-1.0, 0.0}, 0.0};
         static auto cut2 = Cut{Vec{0.0, -1.0}, 0.0};
         static auto cut3 = Cut{Vec{1.0, 1.0}, 0.0};

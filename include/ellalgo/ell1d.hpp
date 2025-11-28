@@ -1,7 +1,7 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include <utility> // for std::pair
+#include <utility>  // for std::pair
 
 // forward declaration
 enum class CutStatus;
@@ -33,12 +33,12 @@ class ell1d {
      *
      * @param[in] E
      */
-    explicit ell1d(const ell1d &E) = default;
+    explicit ell1d(const ell1d& E) = default;
 
     /**
-     * @brief
+     * @brief Get the center of the ellipsoid.
      *
-     * @return double
+     * @return double The center of the ellipsoid.
      */
     auto xc() const noexcept -> double { return _xc; }
 
@@ -50,11 +50,11 @@ class ell1d {
     auto set_xc(const double xc) noexcept -> void { _xc = xc; }
 
     /**
-     * @brief
+     * @brief Get the squared radius of the ellipsoid.
      *
-     * @return double
+     * @return double The squared radius.
      */
-    auto tsq() const -> double { return this->_tsq; }
+    constexpr auto tsq() const -> double { return this->_tsq; }
 
     /**
      * @brief
@@ -62,7 +62,7 @@ class ell1d {
      * @param[in] cut
      * @return return_t
      */
-    auto update(const std::pair<double, double> &cut) noexcept -> CutStatus;
+    auto update(const std::pair<double, double>& cut) noexcept -> CutStatus;
 
     /**
      * @brief
@@ -70,5 +70,5 @@ class ell1d {
      * @param[in] cut
      * @return return_t
      */
-    auto update_central_cut(const std::pair<double, double> &cut) noexcept -> CutStatus;
+    auto update_central_cut(const std::pair<double, double>& cut) noexcept -> CutStatus;
 };  // } ell1d

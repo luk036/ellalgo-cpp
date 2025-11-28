@@ -23,8 +23,7 @@
  * 3. sigma: A double value representing the calculated sigma.
  * 4. delta: A double value representing the calculated delta.
  */
-auto EllCalc::calc_parallel_bias_cut(const double beta0, const double beta1,
-                                     const double tsq) const
+auto EllCalc::calc_parallel_bias_cut(const double beta0, const double beta1, const double tsq) const
     -> std::tuple<CutStatus, std::tuple<double, double, double>> {
     if (beta1 < beta0) {
         return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
@@ -32,7 +31,7 @@ auto EllCalc::calc_parallel_bias_cut(const double beta0, const double beta1,
     if ((beta1 > 0 && tsq <= beta1 * beta1) || !this->use_parallel_cut) {
         return this->calc_bias_cut(beta0, tsq);
     }
-    auto &&result = this->_helper.calc_parallel_cut(beta0, beta1, tsq);
+    auto&& result = this->_helper.calc_parallel_cut(beta0, beta1, tsq);
     return {CutStatus::Success, result};
 }
 
@@ -60,7 +59,7 @@ auto EllCalc::calc_parallel_central_cut(const double beta1, const double tsq) co
     if (tsq <= beta1 * beta1 || !this->use_parallel_cut) {
         return this->calc_central_cut(tsq);
     }
-    auto &&result = this->_helper.calc_parallel_central_cut(beta1, tsq);
+    auto&& result = this->_helper.calc_parallel_central_cut(beta1, tsq);
     return {CutStatus::Success, result};
     // this->_mu ???
 }
@@ -92,7 +91,7 @@ auto EllCalc::calc_bias_cut(const double beta, const double tsq) const
     if (tsq < beta * beta) {
         return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
     }
-    auto &&result = this->_helper.calc_bias_cut(beta, std::sqrt(tsq));
+    auto&& result = this->_helper.calc_bias_cut(beta, std::sqrt(tsq));
     return {CutStatus::Success, result};
 }
 
@@ -119,7 +118,7 @@ auto EllCalc::calc_central_cut(const double tsq) const
     // auto sigma = this->_c2;
     // auto rho = std::sqrt(tsq) / this->_nPlus1;
     // auto delta = this->_c1;
-    auto &&result = this->_helper.calc_central_cut(std::sqrt(tsq));
+    auto&& result = this->_helper.calc_central_cut(std::sqrt(tsq));
     return {CutStatus::Success, result};
 }
 
@@ -154,7 +153,7 @@ auto EllCalc::calc_parallel_bias_cut_q(const double beta0, const double beta1,
     if (ELL_UNLIKELY(eta <= 0.0)) {
         return {CutStatus::NoEffect, {0.0, 0.0, 1.0}};  // no effect
     }
-    auto &&result = this->_helper.calc_parallel_cut_fast(beta0, beta1, tsq, b0b1, eta);
+    auto&& result = this->_helper.calc_parallel_cut_fast(beta0, beta1, tsq, b0b1, eta);
     return {CutStatus::Success, result};
 }
 
@@ -179,6 +178,6 @@ auto EllCalc::calc_bias_cut_q(const double beta, const double tsq) const
     if (ELL_UNLIKELY(eta <= 0.0)) {
         return {CutStatus::NoEffect, {0.0, 0.0, 1.0}};  // no effect
     }
-    auto &&result = this->_helper.calc_bias_cut_fast(beta, tau, eta);
+    auto&& result = this->_helper.calc_bias_cut_fast(beta, tau, eta);
     return {CutStatus::Success, result};
 }

@@ -44,8 +44,8 @@ class MyLMIOracle {
      * @param[in] c The parameter `c` is a vector of type `Vec`. It is being moved into the
      * `MyLMIOracle` object.
      */
-    MyLMIOracle(size_t m1, const std::vector<Matrix> &F1, const Matrix &B1, size_t m2,
-                const std::vector<Matrix> &F2, const Matrix &B2, Vec c)
+    MyLMIOracle(size_t m1, const std::vector<Matrix>& F1, const Matrix& B1, size_t m2,
+                const std::vector<Matrix>& F2, const Matrix& B2, Vec c)
         : lmi1{m1, F1, B1}, lmi2{m2, F2, B2}, c{std::move(c)} {}
 
     /**
@@ -59,7 +59,7 @@ class MyLMIOracle {
      * @return The function `assess_optim` returns a tuple containing a `Cut` object and a boolean
      * value.
      */
-    auto assess_optim(const Vec &x, double &gamma) -> std::tuple<Cut, bool> {
+    auto assess_optim(const Vec& x, double& gamma) -> std::tuple<Cut, bool> {
         if (const auto cut1 = this->lmi1(x)) {
             return {*cut1, false};
         }
@@ -192,8 +192,8 @@ TEST_CASE("LMI test ") {
 
     auto gamma = 1e100;  // should be std::numeric_limits<double>::max()
     const auto result = cutting_plane_optim(omega, ellip, gamma);
-    const auto &x = std::get<0>(result);
-    const auto &num_iters = std::get<1>(result);
+    const auto& x = std::get<0>(result);
+    const auto& num_iters = std::get<1>(result);
 
     CHECK_NE(x.size(), 0U);
     CHECK_EQ(num_iters, 281);

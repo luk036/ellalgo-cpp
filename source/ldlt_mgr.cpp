@@ -3,10 +3,10 @@
 
 /* The `factor` function in the `LDLTMgr` class is responsible for performing the factorization of a
 matrix using the LDL^T decomposition. */
-auto LDLTMgr::factor(const std::function<double(size_t, size_t)> &get_matrix_elem) -> bool {
+auto LDLTMgr::factor(const std::function<double(size_t, size_t)>& get_matrix_elem) -> bool {
     this->pos = {0U, 0U};
-    auto const &start = this->pos.first;
-    auto &stop = this->pos.second;
+    auto const& start = this->pos.first;
+    auto& stop = this->pos.second;
 
     for (auto i = 0U; i != this->_n; ++i) {
         auto d = get_matrix_elem(i, start);
@@ -34,10 +34,10 @@ auto LDLTMgr::factor(const std::function<double(size_t, size_t)> &get_matrix_ele
 performing the factorization of a matrix using the LDL^T decomposition, allowing for semidefinite
 matrices. */
 auto LDLTMgr::factor_with_allow_semidefinite(
-    const std::function<double(size_t, size_t)> &get_matrix_elem) -> bool {
+    const std::function<double(size_t, size_t)>& get_matrix_elem) -> bool {
     this->pos = {0U, 0U};
-    auto &start = this->pos.first;
-    auto &stop = this->pos.second;
+    auto& start = this->pos.first;
+    auto& stop = this->pos.second;
 
     for (auto i = 0U; i != this->_n; ++i) {
         auto d = get_matrix_elem(i, start);
@@ -74,8 +74,8 @@ auto LDLTMgr::witness() -> double {
     assert(!this->is_spd());
 
     // const auto& [start, n] = this->pos;
-    const auto &start = this->pos.first;
-    const auto &n = this->pos.second;
+    const auto& start = this->pos.first;
+    const auto& n = this->pos.second;
     auto m = n - 1;  // assume stop > 0
     this->witness_vec[m] = 1.0;
     for (auto i = m; i > start; --i) {

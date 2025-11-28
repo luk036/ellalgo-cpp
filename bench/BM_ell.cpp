@@ -20,7 +20,7 @@ static const auto limit = 30.5;
 static const auto elasticities = Vec{0.1, 0.4};
 static const auto price_out = Vec{10.0, 35.0};
 
-static void ELL_normal(benchmark::State &state) {
+static void ELL_normal(benchmark::State& state) {
     // Code inside this loop is measured repeatedly
     while (state.KeepRunning()) {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
@@ -34,7 +34,7 @@ static void ELL_normal(benchmark::State &state) {
 // Register the function as a benchmark
 BENCHMARK(ELL_normal);
 
-static void ELL_stable(benchmark::State &state) {
+static void ELL_stable(benchmark::State& state) {
     // Code inside this loop is measured repeatedly
     while (state.KeepRunning()) {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
@@ -48,7 +48,7 @@ static void ELL_stable(benchmark::State &state) {
 // Register the function as a benchmark
 BENCHMARK(ELL_stable);
 
-static void ELL_normal_rb(benchmark::State &state) {
+static void ELL_normal_rb(benchmark::State& state) {
     // Code inside this loop is measured repeatedly
     while (state.KeepRunning()) {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
@@ -63,7 +63,7 @@ static void ELL_normal_rb(benchmark::State &state) {
 // Register the function as a benchmark
 BENCHMARK(ELL_normal_rb);
 
-static void ELL_stable_rb(benchmark::State &state) {
+static void ELL_stable_rb(benchmark::State& state) {
     // Code inside this loop is measured repeatedly
     while (state.KeepRunning()) {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
@@ -78,7 +78,7 @@ static void ELL_stable_rb(benchmark::State &state) {
 // Register the function as a benchmark
 BENCHMARK(ELL_stable_rb);
 
-static void ELL_normal_q(benchmark::State &state) {
+static void ELL_normal_q(benchmark::State& state) {
     // Code inside this loop is measured repeatedly
     while (state.KeepRunning()) {
         Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
@@ -92,7 +92,7 @@ static void ELL_normal_q(benchmark::State &state) {
 // Register the function as a benchmark
 BENCHMARK(ELL_normal_q);
 
-static void ELL_stable_q(benchmark::State &state) {
+static void ELL_stable_q(benchmark::State& state) {
     // Code inside this loop is measured repeatedly
     while (state.KeepRunning()) {
         EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};

@@ -70,7 +70,7 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
  * @return The function `assess_feas` returns a tuple containing a `ParallelCut` object and a
  * boolean value.
  */
-auto LowpassOracle::assess_feas(const Vec &x, const double &Spsq) -> ParallelCut * {
+auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut* {
     static ParallelCut cut = std::make_pair(Vec{0.0}, Vec{0.0});
 
     // this->more_alt = true;
@@ -173,7 +173,7 @@ auto LowpassOracle::assess_feas(const Vec &x, const double &Spsq) -> ParallelCut
  * @return The function `assess_optim` returns a tuple containing a `ParallelCut` object and a
  * boolean value.
  */
-auto LowpassOracle::assess_optim(const Vec &x, double &Spsq) -> std::tuple<ParallelCut, bool> {
+auto LowpassOracle::assess_optim(const Vec& x, double& Spsq) -> std::tuple<ParallelCut, bool> {
     auto cut = this->assess_feas(x, Spsq);
     if (cut) {
         return {*cut, false};

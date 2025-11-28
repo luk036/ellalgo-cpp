@@ -35,7 +35,7 @@ template <typename Arr> class EllStable {
      *
      * @param[in] E The parameter "E" is a reference to an object of type "EllStable".
      */
-    auto operator=(const EllStable &E) -> EllStable & = delete;
+    auto operator=(const EllStable& E) -> EllStable& = delete;
 
   public:
     /**
@@ -49,7 +49,7 @@ template <typename Arr> class EllStable {
      * @param[in] x x is an object of type Arr, which is likely an array or vector. It is being
      * passed by value to the constructor of the EllStable class.
      */
-    EllStable(const Vec &val, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(val, _n) {}
+    EllStable(const Vec& val, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(val, _n) {}
 
     /**
      * @brief Construct a new EllStable object
@@ -63,7 +63,7 @@ template <typename Arr> class EllStable {
      * kind. It is being passed by value, meaning a copy of the `x` object will be made and stored
      * in the `_xc` member variable of the `EllStable` object being constructed.
      */
-    EllStable(const double &alpha, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(alpha, _n) {}
+    EllStable(const double& alpha, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(alpha, _n) {}
 
     /**
      * @brief Construct a new EllStable object
@@ -73,7 +73,7 @@ template <typename Arr> class EllStable {
      *
      * @param[in] E The parameter "E" is an rvalue reference to an object of type "EllStable".
      */
-    EllStable(EllStable &&E) noexcept = default;
+    EllStable(EllStable&& E) noexcept = default;
 
     /**
      * @brief Destroy the EllStable object
@@ -88,7 +88,7 @@ template <typename Arr> class EllStable {
      *
      * @param[in] E The parameter "E" is a reference to an object of type "EllStable".
      */
-    explicit EllStable(const EllStable &E) = default;
+    explicit EllStable(const EllStable& E) = default;
 
     /**
      * @brief explicitly copy
@@ -98,9 +98,9 @@ template <typename Arr> class EllStable {
     auto copy() const -> EllStable { return EllStable(*this); }
 
     /**
-     * @brief copy the whole array anyway
+     * @brief Get the center of the ellipsoid.
      *
-     * @return Arr
+     * @return Arr The center of ellipsoid.
      */
     auto xc() const -> Arr { return this->_xc; }
 
@@ -109,14 +109,14 @@ template <typename Arr> class EllStable {
      *
      * @param[in] xc
      */
-    void set_xc(const Arr &xc) { this->_xc = xc; }
+    void set_xc(const Arr& xc) { this->_xc = xc; }
 
     /**
-     * @brief
+     * @brief Get the squared radius of the ellipsoid.
      *
-     * @return Arr
+     * @return double The squared radius.
      */
-    auto tsq() const -> double { return this->_mgr.tsq(); }
+    constexpr auto tsq() const -> double { return this->_mgr.tsq(); }
 
     /**
      * The function sets the value of the use_parallel_cut property in the _mgr object.
@@ -136,8 +136,8 @@ template <typename Arr> class EllStable {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T> auto update_bias_cut(const std::pair<Arr, T> &cut) -> CutStatus {
-        return this->_update_core(cut, [this](Vec &grad, const T &beta) {
+    template <typename T> auto update_bias_cut(const std::pair<Arr, T>& cut) -> CutStatus {
+        return this->_update_core(cut, [this](Vec& grad, const T& beta) {
             return this->_mgr.update_stable_bias_cut(grad, beta);
         });
     }
@@ -152,8 +152,8 @@ template <typename Arr> class EllStable {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T> auto update_central_cut(const std::pair<Arr, T> &cut) -> CutStatus {
-        return this->_update_core(cut, [this](Vec &grad, const T &beta) {
+    template <typename T> auto update_central_cut(const std::pair<Arr, T>& cut) -> CutStatus {
+        return this->_update_core(cut, [this](Vec& grad, const T& beta) {
             return this->_mgr.update_stable_central_cut(grad, beta);
         });
     }
@@ -168,8 +168,8 @@ template <typename Arr> class EllStable {
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>
      */
-    template <typename T> auto update_q(const std::pair<Arr, T> &cut) -> CutStatus {
-        return this->_update_core(cut, [this](Vec &grad, const T &beta) {
+    template <typename T> auto update_q(const std::pair<Arr, T>& cut) -> CutStatus {
+        return this->_update_core(cut, [this](Vec& grad, const T& beta) {
             return this->_mgr.update_stable_q(grad, beta);
         });
     }
@@ -188,9 +188,9 @@ template <typename Arr> class EllStable {
      * @return std::tuple<int, double>
      */
     template <typename T, typename Fn>
-    auto _update_core(const std::pair<Arr, T> &cut, Fn &&cut_strategy) -> CutStatus {
-        const auto &grad = cut.first;
-        const auto &beta = cut.second;
+    auto _update_core(const std::pair<Arr, T>& cut, Fn&& cut_strategy) -> CutStatus {
+        const auto& grad = cut.first;
+        const auto& beta = cut.second;
         std::valarray<double> g(this->_n);
         for (auto i = 0U; i != this->_n; ++i) {
             g[i] = grad[i];
