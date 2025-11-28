@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.14...3.22)
 # Note: update this to your new project's name and version
 project(
   EllAlgo
-  VERSION 1.6
+  VERSION 1.6.1
   LANGUAGES CXX
 )
 
@@ -26,20 +26,6 @@ include(cmake/specific.cmake)
 
 # PackageProject.cmake will be used to make our target installable
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.8.0")
-
-CPMAddPackage(
-  NAME fmt
-  GIT_TAG 10.2.1
-  GITHUB_REPOSITORY fmtlib/fmt
-  OPTIONS "FMT_INSTALL YES" # create an installable target
-)
-
-CPMAddPackage(
-  NAME spdlog
-  GIT_TAG v1.12.0
-  GITHUB_REPOSITORY gabime/spdlog
-  OPTIONS "SPDLOG_INSTALL YES" # create an installable target
-)
 
 # ---- Add source files ----
 
@@ -63,7 +49,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 14)
 target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
 
 # Link dependencies
-target_link_libraries(${PROJECT_NAME} PRIVATE ${SPECIFIC_LIBS} spdlog::spdlog)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${SPECIFIC_LIBS})
 
 target_include_directories(
   ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
