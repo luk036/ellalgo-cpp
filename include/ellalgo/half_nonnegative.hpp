@@ -1,4 +1,7 @@
-/*
+/**
+ * @file half_nonnegative.hpp
+ * @brief Utility functions for computing half of non-negative numbers
+ *
  * Copyright 2019 Denis Yaroshevskiy
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,12 +25,33 @@
 
 namespace algo {
 
+    /**
+     * @brief Compute half of a non-negative integral number
+     * 
+     * This function computes half of a non-negative integral number.
+     * For integral types, it uses unsigned arithmetic to avoid overflow
+     * when dealing with negative numbers.
+     * 
+     * @tparam N The integral type
+     * @param[in] n The non-negative number to halve
+     * @return Half of the input number
+     */
     template <typename N> auto half_nonnegative(N n) noexcept ->
         typename std::enable_if_t<std::is_integral<N>::value, N> {
         using UN = typename std::make_unsigned_t<N>;
         return static_cast<N>(static_cast<UN>(n) / 2);
     }
 
+    /**
+     * @brief Compute half of a non-negative floating-point number
+     * 
+     * This function computes half of a non-negative floating-point number.
+     * For non-integral types, it simply divides by 2.
+     * 
+     * @tparam N The non-integral type
+     * @param[in] n The non-negative number to halve
+     * @return Half of the input number
+     */
     template <typename N> auto half_nonnegative(N n) noexcept ->
         typename std::enable_if_t<!std::is_integral<N>::value, N> {
         return std::move(n) / 2;

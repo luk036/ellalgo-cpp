@@ -97,11 +97,11 @@ class Matrix {
      * This performs an element-wise multiplication of the matrix by the scalar value alpha.
      *
      * Example:
-     * >>> matrix = Matrix(3, 0.0)
-     * >>> matrix *= 2.0
-     * >>> matrix
-     * valarray([0., 0., 0., 0., 0., 0., 0., 0., 0.],
-     *          [3])
+     * @code{.cpp}
+     * Matrix matrix(3, 0.0);
+     * matrix *= 2.0;
+     * // matrix becomes valarray([0., 0., 0., 0., 0., 0., 0., 0., 0.], [3])
+     * @endcode
      *
      * @param[in] alpha - The scalar value to multiply the matrix by.
      * @return A new Matrix object containing the result of the multiplication.
@@ -116,11 +116,11 @@ class Matrix {
      * all diagonal elements to 1.
      *
      * Example:
-     * >>> matrix = Matrix(3, 0.0)
-     * >>> matrix.identity()
-     * >>> matrix
-     * valarray([1., 0., 0., 0., 1., 0., 0., 0., 1.],
-     *          [3])
+     * @code{.cpp}
+     * Matrix matrix(3, 0.0);
+     * matrix.identity();
+     * // matrix becomes valarray([1., 0., 0., 0., 1., 0., 0., 0., 1.], [3])
+     * @endcode
      */
     void identity() {
         this->clear();
@@ -134,12 +134,13 @@ class Matrix {
      * where row index equals column index, corresponding to the diagonal.
      *
      * Example:
-     * >>> matrix = Matrix(3, 0.0)
-     * >>> matrix(0, 0) = 1.0
-     * >>> matrix(1, 1) = 2.0
-     * >>> matrix(2, 2) = 3.0
-     * >>> matrix.diagonal()
-     * valarray([1., 2., 3.], 3)
+     * @code{.cpp}
+     * Matrix matrix(3, 0.0);
+     * matrix(0, 0) = 1.0;
+     * matrix(1, 1) = 2.0;
+     * matrix(2, 2) = 3.0;
+     * // matrix.diagonal() returns valarray([1., 2., 3.], 3)
+     * @endcode
      *
      * @return View of the diagonal elements as a slice_array.
      */
@@ -152,12 +153,13 @@ class Matrix {
      * where row index + column index equals ndim-1, corresponding to the secondary diagonal.
      *
      * Example:
-     * >>> matrix = Matrix(3, 0.0)
-     * >>> matrix(0, 0) = 1.0
-     * >>> matrix(1, 1) = 2.0
-     * >>> matrix(2, 2) = 3.0
-     * >>> matrix.secondary_diagonal()
-     * valarray([0., 0.], 2)
+     * @code{.cpp}
+     * Matrix matrix(3, 0.0);
+     * matrix(0, 0) = 1.0;
+     * matrix(1, 1) = 2.0;
+     * matrix(2, 2) = 3.0;
+     * // matrix.secondary_diagonal() returns valarray([0., 0.], 2)
+     * @endcode
      *
      * @return View of the secondary diagonal elements as a slice_array.
      */
@@ -172,16 +174,15 @@ class Matrix {
      * of the specified row index.
      *
      * Example:
-     * >>> matrix = Matrix(3, 0.0)
-     * >>> matrix(0, 0) = 1.0
-     * >>> matrix(1, 1) = 2.0
-     * >>> matrix(2, 2) = 3.0
-     * >>> matrix.row(0)
-     * valarray([1., 0., 0.], 3)
-     * >>> matrix.row(1)
-     * valarray([0., 2., 0.], 3)
-     * >>> matrix.row(2)
-     * valarray([0., 0., 3.], 3)
+     * @code{.cpp}
+     * Matrix matrix(3, 0.0);
+     * matrix(0, 0) = 1.0;
+     * matrix(1, 1) = 2.0;
+     * matrix(2, 2) = 3.0;
+     * // matrix.row(0) returns valarray([1., 0., 0.], 3)
+     * // matrix.row(1) returns valarray([0., 2., 0.], 3)
+     * // matrix.row(2) returns valarray([0., 0., 3.], 3)
+     * @endcode
      *
      * @param[in] row - The index of the row to extract.
      * @return View of the row elements as a slice_array.
@@ -197,16 +198,15 @@ class Matrix {
      * of the specified column index.
      *
      * Example:
-     * >>> matrix = Matrix(3, 0.0)
-     * >>> matrix(0, 0) = 1.0
-     * >>> matrix(1, 1) = 2.0
-     * >>> matrix(2, 2) = 3.0
-     * >>> matrix.column(0)
-     * valarray([1., 0., 0.], 3)
-     * >>> matrix.column(1)
-     * valarray([0., 2., 0.], 3)
-     * >>> matrix.column(2)
-     * valarray([0., 0., 3.], 3)
+     * @code{.cpp}
+     * Matrix matrix(3, 0.0);
+     * matrix(0, 0) = 1.0;
+     * matrix(1, 1) = 2.0;
+     * matrix(2, 2) = 3.0;
+     * // matrix.column(0) returns valarray([1., 0., 0.], 3)
+     * // matrix.column(1) returns valarray([0., 2., 0.], 3)
+     * // matrix.column(2) returns valarray([0., 0., 3.], 3)
+     * @endcode
      *
      * @param[in] col - The index of the column to extract.
      * @return View of the column elements as a slice_array.
@@ -222,12 +222,13 @@ class Matrix {
      * elements, and then summing those elements.
      *
      * Example:
-     * >>> matrix = Matrix(3, 0.0)
-     * >>> matrix(0, 0) = 1.0
-     * >>> matrix(1, 1) = 2.0
-     * >>> matrix(2, 2) = 3.0
-     * >>> matrix.trace()
-     * 6.0
+     * @code{.cpp}
+     * Matrix matrix(3, 0.0);
+     * matrix(0, 0) = 1.0;
+     * matrix(1, 1) = 2.0;
+     * matrix(2, 2) = 3.0;
+     * // matrix.trace() returns 6.0
+     * @endcode
      *
      * @return The trace of the matrix as a double.
      */

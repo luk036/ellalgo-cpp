@@ -1,3 +1,12 @@
+/**
+ * @file ell_calc_core.cpp
+ * @brief Core implementation of ellipsoid calculation utilities
+ *
+ * This file implements the core calculations for updating ellipsoids
+ * under different types of cutting planes. These calculations are
+ * fundamental to the ellipsoid algorithm for convex optimization.
+ */
+
 #include <cmath>                      // for sqrt
 #include <ellalgo/ell_calc_core.hpp>  // for EllCalcCore
 #include <tuple>                      // for tuple

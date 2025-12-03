@@ -1,14 +1,26 @@
+/**
+ * @file ell1d.cpp
+ * @brief Implementation of 1-dimensional ellipsoid algorithm
+ *
+ * This file implements the ellipsoid algorithm for 1-dimensional optimization
+ * problems. The 1D case is a simplified version that can be solved more
+ * efficiently than the general n-dimensional case.
+ */
+
 #include <ellalgo/ell1d.hpp>             // for ell1d, ell1d::return_t
 #include <ellalgo/ell_assert.hpp>        // for ELL_UNLIKELY
 #include <ellalgo/ell_config.hpp>        // for CutStatus, CutStatus::Success
 #include <ellalgo/half_nonnegative.hpp>  // for half_nonnegative
 
 /**
- * The function "my_abs" returns the absolute value of a given double number.
- *
- * @param[in] a a is a constant reference to a double value.
- *
- * @return The function `my_abs` returns the absolute value of the input `a`.
+ * @brief Compute absolute value of a double
+ * 
+ * This helper function returns the absolute value of a given double number.
+ * It's a simple implementation that avoids calling std::abs for potential
+ * performance benefits in this critical path.
+ * 
+ * @param[in] number The number to compute absolute value for
+ * @return The absolute value of the input number
  */
 inline double my_abs(const double number) { return number > 0.0 ? number : -number; }
 

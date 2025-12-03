@@ -1,3 +1,12 @@
+/**
+ * @file profit_oracle.cpp
+ * @brief Implementation of profit maximization oracle
+ *
+ * This file implements oracles for profit maximization problems using
+ * the ellipsoid algorithm. It includes both continuous and discrete
+ * optimization variants.
+ */
+
 #include <ellalgo/oracles/profit_oracle.hpp>
 
 using Vec = std::valarray<double>;

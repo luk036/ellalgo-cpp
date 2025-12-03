@@ -72,8 +72,7 @@ class LDLTMgr {
      * @brief Perform LDLT Factorization (Lazy evaluation)
      *
      * @param[in] get_matrix_elem function to access the elements of A
-     * @return true
-     * @return false
+     * @return bool true if factorization was successful, false otherwise
      *
      * See also: factorize()
      */
@@ -83,8 +82,7 @@ class LDLTMgr {
      * @brief Perform LDLT Factorization (Lazy evaluation)
      *
      * @param[in] get_matrix_elem function to access the elements of A
-     * @return true
-     * @return false
+     * @return bool true if factorization was successful, false otherwise
      *
      * See also: factorize()
      */

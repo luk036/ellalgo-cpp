@@ -1,8 +1,25 @@
+/**
+ * @file ldlt_mgr.cpp
+ * @brief Implementation of LDLT factorization manager
+ *
+ * This file implements the LDLT factorization algorithm for symmetric matrices.
+ * The LDLT factorization decomposes a symmetric matrix A into L*D*L^T where
+ * L is lower triangular with unit diagonal and D is diagonal.
+ */
+
 #include <ellalgo/oracles/ldlt_mgr.hpp>
 #include <functional>
 
-/* The `factor` function in the `LDLTMgr` class is responsible for performing the factorization of a
-matrix using the LDL^T decomposition. */
+/**
+ * @brief Perform LDLT factorization of a symmetric matrix
+ * 
+ * This function performs the LDLT factorization of a symmetric matrix using
+ * the provided function to access matrix elements. It stores the result in
+ * the internal T matrix and updates the position information.
+ * 
+ * @param[in] get_matrix_elem Function to access matrix elements A(i,j)
+ * @return true if the matrix is positive definite, false otherwise
+ */
 auto LDLTMgr::factor(const std::function<double(size_t, size_t)>& get_matrix_elem) -> bool {
     this->pos = {0U, 0U};
     auto const& start = this->pos.first;
@@ -30,9 +47,16 @@ auto LDLTMgr::factor(const std::function<double(size_t, size_t)>& get_matrix_ele
     return this->is_spd();
 }
 
-/* The `factor_with_allow_semidefinite` function in the `LDLTMgr` class is responsible for
-performing the factorization of a matrix using the LDL^T decomposition, allowing for semidefinite
-matrices. */
+/**
+ * @brief Perform LDLT factorization allowing semidefinite matrices
+ * 
+ * This function performs LDLT factorization but allows for semidefinite
+ * matrices (zero diagonal elements). When a zero diagonal element is
+ * encountered, it restarts the factorization from the next position.
+ * 
+ * @param[in] get_matrix_elem Function to access matrix elements A(i,j)
+ * @return true if the matrix is positive definite, false otherwise
+ */
 auto LDLTMgr::factor_with_allow_semidefinite(
     const std::function<double(size_t, size_t)>& get_matrix_elem) -> bool {
     this->pos = {0U, 0U};
@@ -66,9 +90,13 @@ auto LDLTMgr::factor_with_allow_semidefinite(
 }
 
 /**
- * The function calculates the witness value for a given LDLT matrix.
- *
- * @return The function `witness()` returns a `double` value.
+ * @brief Calculate witness vector for non-positive definite matrix
+ * 
+ * This function calculates a witness vector that certifies that the matrix
+ * is not positive definite. The witness is used in cutting-plane methods
+ * to generate separating hyperplanes.
+ * 
+ * @return The negative of the last diagonal element in the factorization
  */
 auto LDLTMgr::witness() -> double {
     assert(!this->is_spd());

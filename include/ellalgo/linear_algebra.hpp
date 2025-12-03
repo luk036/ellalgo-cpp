@@ -1,4 +1,11 @@
-// linear_algebra.hpp
+/**
+ * @file linear_algebra.hpp
+ * @brief Basic linear algebra utilities for vectors and matrices
+ *
+ * This header provides simple vector and matrix classes for basic linear
+ * algebra operations. These are lightweight implementations designed
+ * specifically for the ellalgo library.
+ */
 
 #ifndef LINEAR_ALGEBRA_HPP
 #define LINEAR_ALGEBRA_HPP
@@ -6,6 +13,15 @@
 #include <cmath>
 #include <vector>
 
+/**
+ * @brief A simple 2D vector class for linear algebra operations
+ * 
+ * This class provides basic vector operations including addition, subtraction,
+ * scalar multiplication, dot product, and norm calculation. It is implemented
+ * using std::vector as the underlying storage.
+ * 
+ * @tparam T The element type (typically float or double)
+ */
 template <typename T> class Vector2 {
   public:
     using value_type = T;
@@ -154,14 +170,25 @@ template <typename T> inline Vector2<T> operator*(Vector2<T> v, T scalar) {
  */
 template <typename T> inline Vector2<T> operator*(T scalar, Vector2<T> v) { return v * scalar; }
 
+/**
+ * @brief A simple 2D matrix class for linear algebra operations
+ * 
+ * This class provides basic matrix operations including matrix-vector
+ * multiplication. It is implemented using std::vector of std::vector
+ * as the underlying storage.
+ * 
+ * @tparam T The element type (typically float or double)
+ */
 template <typename T> class Matrix2 {
   public:
     /**
-     * Constructs a new Matrix2 with the specified number of rows and columns, initializing all
-     * elements to the default value of type T.
+     * @brief Construct a matrix with specified dimensions
+     * 
+     * Creates a matrix with the given number of rows and columns,
+     * initializing all elements to the default value of type T.
      *
-     * @param rows The number of rows in the Matrix2.
-     * @param cols The number of columns in the Matrix2.
+     * @param[in] rows The number of rows in the Matrix2
+     * @param[in] cols The number of columns in the Matrix2
      */
     Matrix2(size_t rows, size_t cols) : data(rows, std::vector<T>(cols, T{})) {}
 

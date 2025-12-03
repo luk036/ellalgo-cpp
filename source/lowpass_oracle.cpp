@@ -1,3 +1,12 @@
+/**
+ * @file lowpass_oracle.cpp
+ * @brief Implementation of lowpass filter design oracle
+ *
+ * This file implements an oracle for designing lowpass digital filters
+ * using the ellipsoid algorithm. The oracle assesses feasibility and
+ * optimality conditions for filter specifications.
+ */
+
 #include <stddef.h>  // for size_t
 
 #include <cmath>                               // for pow, log10, M_PI, cos

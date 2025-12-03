@@ -1,3 +1,12 @@
+/**
+ * @file ell_calc.cpp
+ * @brief Implementation of ellipsoid calculation utilities
+ *
+ * This file implements the ellipsoid calculation methods for different
+ * types of cutting planes. It provides the interface between the
+ * core calculations and the ellipsoid algorithm.
+ */
+
 #include <cassert>
 #include <cmath>                      // for sqrt
 #include <ellalgo/ell_assert.hpp>     // for ELL_UNLIKELY
