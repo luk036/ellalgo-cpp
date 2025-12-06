@@ -1,66 +1,66 @@
 set_languages("c++17")
 
 add_rules("mode.debug", "mode.release", "mode.coverage")
-add_requires("doctest", {alias = "doctest"})
-add_requires("fmt", {alias = "fmt"})
-add_requires("benchmark", {alias = "benchmark"})
-add_requires("spdlog", {alias = "spdlog"})
-add_requires("cxxopts", {alias = "cxxopts"})
+add_requires("doctest", { alias = "doctest" })
+add_requires("fmt", { alias = "fmt" })
+add_requires("benchmark", { alias = "benchmark" })
+add_requires("spdlog", { alias = "spdlog" })
+add_requires("cxxopts", { alias = "cxxopts" })
 
 if is_mode("coverage") then
-    add_cxflags("-ftest-coverage", "-fprofile-arcs", {force = true})
+    add_cxflags("-ftest-coverage", "-fprofile-arcs", { force = true })
 end
 
 if is_plat("linux") then
     set_warnings("all", "error")
-    add_cxflags("-Wconversion", {force = true})
+    add_cxflags("-Wconversion", { force = true })
     -- add_cxflags("-nostdinc++", {force = true})
     -- add_sysincludedirs(os.getenv("PREFIX") .. "/include/c++/v1", {public = true})
     -- add_sysincludedirs(os.getenv("PREFIX") .. "/include", {public = true})
 elseif is_plat("windows") then
-    add_cxflags("/EHsc /W4 /WX", {force = true})
+    add_cxflags("/EHsc /W4 /WX /wd4819", { force = true })
 end
 
 target("EllAlgo")
-    set_kind("static")
-    add_includedirs("include", {public = true})
-    add_files("source/*.cpp")
-    add_packages("fmt", "spdlog")
+set_kind("static")
+add_includedirs("include", { public = true })
+add_files("source/*.cpp")
+add_packages("fmt", "spdlog")
 
 target("test_ellalgo")
-    set_kind("binary")
-    add_deps("EllAlgo")
-    add_files("test/source/*.cpp")
-    add_packages("doctest", "fmt")
-    add_tests("default")
+set_kind("binary")
+add_deps("EllAlgo")
+add_files("test/source/*.cpp")
+add_packages("doctest", "fmt")
+add_tests("default")
 
 target("test_ell")
-    set_kind("binary")
-    add_deps("EllAlgo")
-    add_includedirs("include", {public = true})
-    add_files("bench/BM_ell.cpp")
-    add_packages("benchmark")
+set_kind("binary")
+add_deps("EllAlgo")
+add_includedirs("include", { public = true })
+add_files("bench/BM_ell.cpp")
+add_packages("benchmark")
 
 target("test_lmi")
-    set_kind("binary")
-    add_deps("EllAlgo")
-    add_includedirs("include", {public = true})
-    add_files("bench/BM_lmi.cpp")
-    add_packages("benchmark")
+set_kind("binary")
+add_deps("EllAlgo")
+add_includedirs("include", { public = true })
+add_files("bench/BM_lmi.cpp")
+add_packages("benchmark")
 
 target("test_lowpass")
-    set_kind("binary")
-    add_deps("EllAlgo")
-    add_includedirs("include", {public = true})
-    add_files("bench/BM_lowpass.cpp")
-    add_packages("benchmark")
+set_kind("binary")
+add_deps("EllAlgo")
+add_includedirs("include", { public = true })
+add_files("bench/BM_lowpass.cpp")
+add_packages("benchmark")
 
 target("EllAlgoStandalone")
-    set_kind("binary")
-    add_deps("EllAlgo")
-    add_files("standalone/source/main.cpp")
-    add_packages("cxxopts", "spdlog")
-    set_filename("EllAlgo")
+set_kind("binary")
+add_deps("EllAlgo")
+add_files("standalone/source/main.cpp")
+add_packages("cxxopts", "spdlog")
+set_filename("EllAlgo")
 
 
 -- If you want to known more usage about xmake, please see https://xmake.io
@@ -130,4 +130,3 @@ target("EllAlgoStandalone")
 --
 -- @endcode
 --
-

@@ -13,10 +13,10 @@
 /**
  * @def ELL_LIKELY
  * @brief Hint that the expression is likely to be true
- * 
+ *
  * This macro tells the compiler that the expression is likely to evaluate
  * to true, allowing it to optimize the generated code for the common case.
- * 
+ *
  * @param x The expression to evaluate
  * @return The same expression value
  */
@@ -29,11 +29,11 @@
 /**
  * @def ELL_UNLIKELY
  * @brief Hint that the expression is unlikely to be true
- * 
+ *
  * This macro tells the compiler that the expression is unlikely to evaluate
  * to true, allowing it to optimize the generated code for the uncommon case.
  * This is typically used for error conditions or exceptional paths.
- * 
+ *
  * @param x The expression to evaluate
  * @return The same expression value
  */

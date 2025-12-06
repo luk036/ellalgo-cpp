@@ -15,11 +15,11 @@
 
 /**
  * @brief A simple 2D vector class for linear algebra operations
- * 
+ *
  * This class provides basic vector operations including addition, subtraction,
  * scalar multiplication, dot product, and norm calculation. It is implemented
  * using std::vector as the underlying storage.
- * 
+ *
  * @tparam T The element type (typically float or double)
  */
 template <typename T> class Vector2 {
@@ -172,18 +172,18 @@ template <typename T> inline Vector2<T> operator*(T scalar, Vector2<T> v) { retu
 
 /**
  * @brief A simple 2D matrix class for linear algebra operations
- * 
+ *
  * This class provides basic matrix operations including matrix-vector
  * multiplication. It is implemented using std::vector of std::vector
  * as the underlying storage.
- * 
+ *
  * @tparam T The element type (typically float or double)
  */
 template <typename T> class Matrix2 {
   public:
     /**
      * @brief Construct a matrix with specified dimensions
-     * 
+     *
      * Creates a matrix with the given number of rows and columns,
      * initializing all elements to the default value of type T.
      *

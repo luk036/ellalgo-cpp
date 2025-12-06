@@ -12,11 +12,11 @@
 
 /**
  * @brief Perform LDLT factorization of a symmetric matrix
- * 
+ *
  * This function performs the LDLT factorization of a symmetric matrix using
  * the provided function to access matrix elements. It stores the result in
  * the internal T matrix and updates the position information.
- * 
+ *
  * @param[in] get_matrix_elem Function to access matrix elements A(i,j)
  * @return true if the matrix is positive definite, false otherwise
  */
@@ -49,11 +49,11 @@ auto LDLTMgr::factor(const std::function<double(size_t, size_t)>& get_matrix_ele
 
 /**
  * @brief Perform LDLT factorization allowing semidefinite matrices
- * 
+ *
  * This function performs LDLT factorization but allows for semidefinite
  * matrices (zero diagonal elements). When a zero diagonal element is
  * encountered, it restarts the factorization from the next position.
- * 
+ *
  * @param[in] get_matrix_elem Function to access matrix elements A(i,j)
  * @return true if the matrix is positive definite, false otherwise
  */
@@ -91,11 +91,11 @@ auto LDLTMgr::factor_with_allow_semidefinite(
 
 /**
  * @brief Calculate witness vector for non-positive definite matrix
- * 
+ *
  * This function calculates a witness vector that certifies that the matrix
  * is not positive definite. The witness is used in cutting-plane methods
  * to generate separating hyperplanes.
- * 
+ *
  * @return The negative of the last diagonal element in the factorization
  */
 auto LDLTMgr::witness() -> double {

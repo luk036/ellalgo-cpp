@@ -27,11 +27,11 @@ namespace algo {
 
     /**
      * @brief Compute half of a non-negative integral number
-     * 
+     *
      * This function computes half of a non-negative integral number.
      * For integral types, it uses unsigned arithmetic to avoid overflow
      * when dealing with negative numbers.
-     * 
+     *
      * @tparam N The integral type
      * @param[in] n The non-negative number to halve
      * @return Half of the input number
@@ -44,10 +44,10 @@ namespace algo {
 
     /**
      * @brief Compute half of a non-negative floating-point number
-     * 
+     *
      * This function computes half of a non-negative floating-point number.
      * For non-integral types, it simply divides by 2.
-     * 
+     *
      * @tparam N The non-integral type
      * @param[in] n The non-negative number to halve
      * @return Half of the input number

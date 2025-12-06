@@ -14,11 +14,11 @@ namespace ellalgo {
 
     /**
      * @brief Log a message using spdlog
-     * 
+     *
      * This function logs a message using the spdlog library. It provides
      * a simple interface for logging messages throughout the ellalgo
      * library without exposing the full spdlog API.
-     * 
+     *
      * @param[in] message The message to log
      */
     void log_with_spdlog(const std::string& message);

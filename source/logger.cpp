@@ -16,12 +16,12 @@ namespace ellalgo {
 
     /**
      * @brief Log a message using spdlog to a file
-     * 
+     *
      * This function creates a file logger that writes to "ellalgo.log",
      * sets it as the default logger, and logs the provided message with
      * an info level. The logger is configured to flush on info level
      * messages to ensure they are written to disk immediately.
-     * 
+     *
      * @param[in] message The message to log
      */
     void log_with_spdlog(const std::string& message) {
