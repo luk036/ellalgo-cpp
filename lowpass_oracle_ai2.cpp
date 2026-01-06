@@ -20,7 +20,7 @@ class LowpassOracle {
 
   public:
     LowpassOracle(Arr A, int nwpass, int nwstop, double Lpsq, double Upsq) {
-        this->A = A;
+        this->A = std::move(A);
         this->nwpass = nwpass;
         this->nwstop = nwstop;
         this->Lpsq = Lpsq;
@@ -43,12 +43,12 @@ class LowpassOracle {
             if (v > Upsq) {
                 Arr g = A[k];
                 pair<double, double> f = make_pair(v - Upsq, v - Lpsq);
-                return make_pair(make_pair(g, f), 0.0);
+                return make_pair(make_pair(std::move(g), f), 0.0);
             }
             if (v < Lpsq) {
                 Arr g = A[k];
                 pair<double, double> f = make_pair(-v + Lpsq, -v + Upsq);
-                return make_pair(make_pair(g, f), 0.0);
+                return make_pair(make_pair(std::move(g), f), 0.0);
             }
         }
 
@@ -63,12 +63,12 @@ class LowpassOracle {
             if (v > Spsq) {
                 Arr g = A[k];
                 pair<double, double> f = make_pair(v - Spsq, v);
-                return make_pair(make_pair(g, f), 0.0);
+                return make_pair(make_pair(std::move(g), f), 0.0);
             }
             if (v < 0) {
                 Arr g = A[k];
                 pair<double, double> f = make_pair(-v, -v + Spsq);
-                return make_pair(make_pair(g, f), 0.0);
+                return make_pair(make_pair(std::move(g), f), 0.0);
             }
             if (v > fmax) {
                 fmax = v;
@@ -85,7 +85,7 @@ class LowpassOracle {
             if (v < 0) {
                 double f = -v;
                 Arr g = A[k];
-                return make_pair(make_pair(g, f), 0.0);  // single cut
+                return make_pair(make_pair(std::move(g), f), 0.0);  // single cut
             }
         }
 
@@ -96,14 +96,14 @@ class LowpassOracle {
             Arr g(n, 0.0);
             g[0] = -1.0;
             double f = -x[0];
-            return make_pair(make_pair(g, f), 0.0);
+            return make_pair(make_pair(std::move(g), f), 0.0);
         }
 
         // Begin objective function
         Spsq = fmax;
         pair<double, double> f = make_pair(0.0, fmax);
         Arr g = A[imax];
-        return make_pair(make_pair(g, f), Spsq);
+        return make_pair(make_pair(std::move(g), f), Spsq);
     }
 };
 
@@ -145,8 +145,8 @@ pair<LowpassOracle, double> create_lowpass_case(int N = 48) {
     double Upsq = Up * Up;
     double Spsq = Sp * Sp;
 
-    LowpassOracle omega(A, nwpass, nwstop, Lpsq, Upsq);
-    return make_pair(omega, Spsq);
+    LowpassOracle omega(std::move(A), nwpass, nwstop, Lpsq, Upsq);
+    return make_pair(std::move(omega), Spsq);
 }
 
 int main() {
