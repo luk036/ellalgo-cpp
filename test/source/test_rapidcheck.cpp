@@ -102,7 +102,7 @@ TEST_CASE("Property-based test: update_central_cut reduces ellipsoid") {
 }
 
 TEST_CASE("Property-based test: Multiple cuts reduce ellipsoid") {
-    rc::check("Multiple cuts progressively reduce ellipsoid tsq", []() {
+    rc::check("Multiple cuts maintain ellipsoid tsq non-negativity", []() {
         auto n = static_cast<size_t>(*rc::gen::inRange(2, 5));
         auto alpha = 10.0;
         auto num_cuts = static_cast<size_t>(*rc::gen::inRange(2, 6));
@@ -110,7 +110,6 @@ TEST_CASE("Property-based test: Multiple cuts reduce ellipsoid") {
         std::vector<double> x(n, 0.0);
         auto ellip = Ell<std::vector<double>>(alpha, x);
 
-        double prev_tsq = ellip.tsq();
         for (size_t k = 0; k < num_cuts; ++k) {
             // Create a random gradient
             std::vector<double> grad(n);
@@ -123,10 +122,8 @@ TEST_CASE("Property-based test: Multiple cuts reduce ellipsoid") {
             auto status = ellip.update_central_cut(cut);
 
             if (status == CutStatus::Success) {
-                double curr_tsq = ellip.tsq();
                 // tsq should remain non-negative
-                RC_ASSERT(curr_tsq >= 0.0);
-                prev_tsq = curr_tsq;
+                RC_ASSERT(ellip.tsq() >= 0.0);
             }
         }
     });
