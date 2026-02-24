@@ -1,0 +1,11 @@
+[2026-02-24 23:07:29.791] [file_logger] [info] EllAlgo message: Hello from EllAlgo with spdlog!
+[2026-02-24 23:22:47.860] [file_logger] [info] EllAlgo message: Test message from wrapper function
+[2026-02-24 23:22:47.886] [file_logger] [info] EllAlgo message: First message
+[2026-02-24 23:22:47.887] [file_logger] [info] EllAlgo message: Second message
+[2026-02-24 23:22:47.888] [file_logger] [info] EllAlgo message: Third message
+[2026-02-24 23:22:47.933] [file_logger] [info] EllAlgo message: Format test message
+[2026-02-24 23:22:47.972] [file_logger] [info] EllAlgo message: Starting ellipsoid algorithm test
+[2026-02-24 23:22:47.974] [file_logger] [info] EllAlgo message: Iteration 0 completed
+[2026-02-24 23:22:47.976] [file_logger] [info] EllAlgo message: Iteration 1 completed
+[2026-02-24 23:22:47.988] [file_logger] [info] EllAlgo message: Iteration 2 completed
+[2026-02-24 23:22:47.989] [file_logger] [info] EllAlgo message: Ellipsoid algorithm test completed

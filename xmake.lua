@@ -35,7 +35,7 @@ target("test_ellalgo")
 set_kind("binary")
 add_deps("EllAlgo")
 add_files("test/source/*.cpp")
-add_packages("doctest", "fmt")
+add_packages("doctest", "fmt", "spdlog")
 add_tests("default")
 
 -- Check if rapidcheck was downloaded by CMake
