@@ -13,6 +13,52 @@
 
 /**
  * The function calculates and returns three values (rho, sigma, and delta) based on the input
+ * parameters (beta0, beta1, tsq, b0b1, and eta).
+ *
+ *                 _.-'''''''-._
+ *               ,'     |       `.
+ *              /  |    |         \
+ *             .   |    |          .
+ *             |   |    |          |
+ *             |   |    |.         |
+ *             |   |    |          |
+ *             :\  |    |         /:
+ *             | `._    |      _.' |
+ *             |   |'-.......-'    |
+ *             |   |    |          |
+ *            "-τ" "-β" "-β"      +τ
+ *                   1    0
+ *
+ * @param[in] beta0 The parameter `beta0` represents the value of beta for the first variable.
+ * @param[in] beta1 The parameter `beta1` represents a value used in the calculation.
+ * @param[in] tsq tsq is a constant value of type double. It represents the square of the parameter
+ * tau.
+ * @param[in] b0b1 Product of beta0 and beta1.
+ * @param[in] eta Computed intermediate value (tsq + n * b0b1).
+ *
+ * @return The function `calc_parallel_cut_fast` returns a tuple containing three values: `rho`,
+ * `sigma`, and `delta`.
+ */
+auto EllCalcCore::calc_parallel_cut_fast(const double beta0, const double beta1, const double tsq,
+                                         const double b0b1, const double eta) const noexcept
+    -> std::tuple<double, double, double> {
+    const double b0sq = beta0 * beta0;
+    const double b1sq = beta1 * beta1;
+    const double zeta0 = tsq - b0sq;
+    const double zeta1 = tsq - b1sq;
+    const double temp = this->_half_n * (b1sq - b0sq);
+    const double xi = std::sqrt(zeta0 * zeta1 + temp * temp);
+    const double bsum = beta0 + beta1;
+    const double bsumsq = bsum * bsum;
+    // const double sigma = this->_cst3 + this->_cst2 * (tsq + b0b1 - xi) / bsumsq;
+    const double sigma = 2.0 * eta / (tsq + b0b1 + this->_half_n * bsumsq + xi);
+    const double rho = sigma * (beta0 + beta1) / 2.0;
+    const double delta = this->_cst1 * ((zeta0 + zeta1) / 2.0 + xi / this->_n_f) / tsq;
+    return {rho, sigma, delta};
+}
+
+/**
+ * The function calculates and returns three values (rho, sigma, and delta) based on the input
  * parameters (beta0, beta1, and tsq).
  *
  *                 _.-'''''''-._
@@ -37,7 +83,7 @@
  * @return The function `calc_parallel_cut` returns a tuple containing three values: `rho`, `sigma`,
  * and `delta`.
  */
-auto EllCalcCore::calc_parallel_cut_fast(const double beta0, const double beta1, const double tsq,
+auto EllCalcCore::calc_parallel_cut_fast_old(const double beta0, const double beta1, const double tsq,
                                          const double b0b1, const double eta) const noexcept
     -> std::tuple<double, double, double> {
     const double bavg = 0.5 * (beta0 + beta1);
@@ -102,8 +148,8 @@ auto EllCalcCore::calc_parallel_central_cut(const double beta1, const double tsq
 /**
  * @brief Calculate new ellipsoid under Non-central Cut
  *
- * The function `calc_bias_cut` calculates and returns the values of rho, sigma, and delta based on
- * the given beta and tau values under the bias-cut:
+ * The function `calc_bias_cut_fast` calculates and returns the values of rho, sigma, and delta based on
+ * the given beta, tau, and eta values under the bias-cut:
  *
  *        g' (x - xc) + β \le 0
  *
@@ -127,9 +173,10 @@ auto EllCalcCore::calc_parallel_central_cut(const double beta1, const double tsq
  * value.
  * @param[in] tau The parameter "tau" represents a value used in the calculation. It is not
  * specified in the code snippet provided. You would need to provide a value for "tau" in order to
- * use the `calc_bias_cut` function.
+ * use the `calc_bias_cut_fast` function.
+ * @param[in] eta Computed intermediate value (tau + n * beta).
  *
- * @return The function `calc_bias_cut` returns a tuple containing the following values:
+ * @return The function `calc_bias_cut_fast` returns a tuple containing the following values:
  */
 auto EllCalcCore::calc_bias_cut_fast(const double beta, const double tau,
                                      const double eta) const noexcept

@@ -67,9 +67,14 @@ class LowpassOracle {
      *
      * The constructor of the `LowpassOracle` class. It initializes an instance of the
      * `LowpassOracle` class with the given parameters.
+     *
+     * @param[in] N Number of FIR coefficients (including zeroth)
+     * @param[in] Lpsq Square of lower passband bound (L^2)
+     * @param[in] Upsq Square of upper passband bound (U^2)
+     * @param[in] wpass Passband edge frequency
+     * @param[in] wstop Stopband edge frequency
      */
     LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, double wstop);
-
     /*!
      * @brief
      *

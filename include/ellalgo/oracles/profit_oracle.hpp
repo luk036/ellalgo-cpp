@@ -114,12 +114,11 @@ class ProfitOracleRb {
      * @param[in] k a given constant that restricts the quantity of x1
      * @param[in] a the output elasticities
      * @param[in] v output price
-     * @param[in] e paramters for uncertainty
-     * @param[in] e3 paramters for uncertainty
+     * @param[in] e parameters for uncertainty
+     * @param[in] e3 parameters for uncertainty
      */
     ProfitOracleRb(double p, double A, double k, const Vec& a, const Vec& v, const Vec& e,
-                   double e3)
-        : _uie{e}, _elasticities{a}, _P(p - e3, A, k - e3, a, v + Vec{e3, e3}) {}
+                   double e3): _uie{e}, _elasticities{a}, _P(p - e3, A, k - e3, a, v + Vec{e3, e3}) {}
 
     /**
      * @brief Make object callable for cutting_plane_optim()

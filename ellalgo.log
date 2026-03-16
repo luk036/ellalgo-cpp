@@ -9,3 +9,13 @@
 [2026-02-24 23:22:47.976] [file_logger] [info] EllAlgo message: Iteration 1 completed
 [2026-02-24 23:22:47.988] [file_logger] [info] EllAlgo message: Iteration 2 completed
 [2026-02-24 23:22:47.989] [file_logger] [info] EllAlgo message: Ellipsoid algorithm test completed
+[2026-03-16 17:44:58.508] [file_logger] [info] EllAlgo message: Test message from wrapper function
+[2026-03-16 17:44:58.533] [file_logger] [info] EllAlgo message: First message
+[2026-03-16 17:44:58.534] [file_logger] [info] EllAlgo message: Second message
+[2026-03-16 17:44:58.535] [file_logger] [info] EllAlgo message: Third message
+[2026-03-16 17:44:58.579] [file_logger] [info] EllAlgo message: Format test message
+[2026-03-16 17:44:58.616] [file_logger] [info] EllAlgo message: Starting ellipsoid algorithm test
+[2026-03-16 17:44:58.618] [file_logger] [info] EllAlgo message: Iteration 0 completed
+[2026-03-16 17:44:58.619] [file_logger] [info] EllAlgo message: Iteration 1 completed
+[2026-03-16 17:44:58.620] [file_logger] [info] EllAlgo message: Iteration 2 completed
+[2026-03-16 17:44:58.621] [file_logger] [info] EllAlgo message: Ellipsoid algorithm test completed
