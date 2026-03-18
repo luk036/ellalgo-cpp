@@ -43,7 +43,7 @@ class ProfitOracle {
      * @param[in] A the scale of production
      * @param[in] k a given constant that restricts the quantity of x1
      * @param[in] a the output elasticities
-     * @param[in] v output price
+     * @param[in] v the output prices
      */
     ProfitOracle(double p, double A, double k, const Vec& a, const Vec& v)
         : _log_pA{std::log(p * A)}, _log_k{std::log(k)}, _price_out{v}, _elasticities{a} {}

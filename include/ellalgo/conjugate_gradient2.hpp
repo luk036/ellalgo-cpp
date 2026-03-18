@@ -11,14 +11,14 @@
  * Solves a system of linear equations Ax = b using the Conjugate Gradient method.
  *
  * @tparam Matrix The type of the matrix A.
- * @tparam Vector The type of the vectors b and x.
+ * @tparam Vector The type of the vectors b and x_vector.
  * @param A The matrix A in the system of linear equations Ax = b.
  * @param b The right-hand side vector b in the system of linear equations Ax = b.
- * @param x_vector The initial guess for the solution vector x. This vector will be updated
+ * @param x_vector The initial guess for the solution vector. This vector will be updated
  * in-place.
  * @param tol The tolerance for the residual norm, used as the stopping criterion.
  * @param max_iter The maximum number of iterations to perform.
- * @return The solution vector x.
+ * @return The solution vector.
  * @throws std::runtime_error if the Conjugate Gradient method does not converge after the maximum
  * number of iterations.
  */

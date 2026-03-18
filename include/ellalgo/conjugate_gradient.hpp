@@ -87,10 +87,10 @@ class Matrix0 {
  * @tparam Vector0 The vector type, which must support vector operations.
  * @param A The matrix A in the linear system Ax = b.
  * @param b The right-hand side vector b in the linear system Ax = b.
- * @param x0 An optional initial guess for the solution vector x.
+ * @param x0 An optional initial guess for the solution vector.
  * @param tol The tolerance for the residual norm, used as the stopping criterion.
  * @param max_iter The maximum number of iterations to perform.
- * @return The solution vector x.
+ * @return The solution vector.
  * @throws std::runtime_error if the conjugate gradient method does not converge after the maximum
  * number of iterations.
  */
