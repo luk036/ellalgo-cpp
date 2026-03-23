@@ -57,18 +57,18 @@ class ell1d {
     constexpr auto tsq() const -> double { return this->_tsq; }
 
     /**
-     * @brief
+     * @brief Update the 1D ellipsoid using a deep cut
      *
-     * @param[in] cut
-     * @return return_t
+     * @param[in] cut A pair containing (gradient, beta) representing the cut
+     * @return CutStatus The status of the cut operation
      */
     auto update(const std::pair<double, double>& cut) noexcept -> CutStatus;
 
     /**
-     * @brief
+     * @brief Update the 1D ellipsoid using a central cut
      *
-     * @param[in] cut
-     * @return return_t
+     * @param[in] cut A pair containing (gradient, beta) representing the cut
+     * @return CutStatus The status of the cut operation
      */
     auto update_central_cut(const std::pair<double, double>& cut) noexcept -> CutStatus;
 };  // } ell1d

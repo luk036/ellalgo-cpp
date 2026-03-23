@@ -1,4 +1,10 @@
-// conjugate_gradient.hpp
+/**
+ * @file conjugate_gradient2.hpp
+ * @brief Alternative conjugate gradient method for solving linear systems
+ *
+ * This header provides an alternative implementation of the conjugate gradient
+ * method using operator overloading instead of method calls.
+ */
 
 #ifndef CONJUGATE_GRADIENT2_HPP
 #define CONJUGATE_GRADIENT2_HPP
