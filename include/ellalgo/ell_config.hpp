@@ -50,8 +50,8 @@ enum class CutStatus {
  * including feasibility status and number of iterations used.
  */
 struct CInfo {
-    bool feasible;      ///< Whether a feasible solution was found
-    size_t num_iters;   ///< Number of iterations performed
+    bool feasible;     ///< Whether a feasible solution was found
+    size_t num_iters;  ///< Number of iterations performed
 };
 
 /**

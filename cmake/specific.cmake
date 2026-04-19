@@ -9,7 +9,8 @@ CPMAddPackage(
   NAME spdlog
   GIT_TAG v1.12.0
   GITHUB_REPOSITORY gabime/spdlog
-  OPTIONS "SPDLOG_INSTALL YES" "SPDLOG_FMT_EXTERNAL YES" # Use external fmt to avoid bundled fmt deprecation issues
+  OPTIONS "SPDLOG_INSTALL YES" "SPDLOG_FMT_EXTERNAL YES" # Use external fmt to avoid bundled fmt
+                                                         # deprecation issues
 )
 
 set(SPECIFIC_LIBS fmt::fmt spdlog::spdlog)

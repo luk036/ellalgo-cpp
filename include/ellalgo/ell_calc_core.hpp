@@ -96,9 +96,8 @@ class EllCalcCore {
     }
 
     auto calc_parallel_cut_fast_old(const double beta0, const double beta1, const double tsq,
-                                const double b0b1, const double eta) const noexcept
+                                    const double b0b1, const double eta) const noexcept
         -> std::tuple<double, double, double>;
-
 
     /**
      * Calculates ellipsoid parameters after parallel cuts.

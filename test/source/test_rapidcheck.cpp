@@ -270,8 +270,8 @@ TEST_CASE("Property-based test: Negative beta affects cut result") {
         auto status = ellip.update_bias_cut(cut);
 
         // Status should be success for reasonable cuts
-        RC_ASSERT(status == CutStatus::Success || status == CutStatus::NoSoln ||
-                  status == CutStatus::NoEffect);
+        RC_ASSERT(status == CutStatus::Success || status == CutStatus::NoSoln
+                  || status == CutStatus::NoEffect);
     });
 }
 
@@ -294,8 +294,8 @@ TEST_CASE("Property-based test: Large gradient magnitude") {
         auto status = ellip.update_central_cut(cut);
 
         // Should handle large gradients gracefully
-        RC_ASSERT(status == CutStatus::Success || status == CutStatus::NoSoln ||
-                  status == CutStatus::NoEffect);
+        RC_ASSERT(status == CutStatus::Success || status == CutStatus::NoSoln
+                  || status == CutStatus::NoEffect);
     });
 }
 
@@ -319,8 +319,8 @@ TEST_CASE("Property-based test: Small alpha ellipsoid") {
         auto status = ellip.update_central_cut(cut);
 
         // Should handle small alpha gracefully
-        RC_ASSERT(status == CutStatus::Success || status == CutStatus::NoSoln ||
-                  status == CutStatus::NoEffect);
+        RC_ASSERT(status == CutStatus::Success || status == CutStatus::NoSoln
+                  || status == CutStatus::NoEffect);
     });
 }
 
@@ -343,8 +343,8 @@ TEST_CASE("Property-based test: High-dimensional ellipsoid") {
         auto status = ellip.update_central_cut(cut);
 
         // Should handle high dimensions gracefully
-        RC_ASSERT(status == CutStatus::Success || status == CutStatus::NoSoln ||
-                  status == CutStatus::NoEffect);
+        RC_ASSERT(status == CutStatus::Success || status == CutStatus::NoSoln
+                  || status == CutStatus::NoEffect);
     });
 }
 

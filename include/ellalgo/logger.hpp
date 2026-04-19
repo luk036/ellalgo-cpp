@@ -23,4 +23,4 @@ namespace ellalgo {
      */
     void log_with_spdlog(const std::string& message);
 
-}
+}  // namespace ellalgo

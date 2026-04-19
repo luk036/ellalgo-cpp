@@ -70,8 +70,8 @@ enable_testing()
 # testing frameworks add the tests target instead: add_test(NAME ${PROJECT_NAME} COMMAND
 # ${PROJECT_NAME})
 
-# Disable doctest auto-discovery to avoid conflicts with RapidCheck
-# Instead, use a single test that runs all tests (both doctest and RapidCheck)
+# Disable doctest auto-discovery to avoid conflicts with RapidCheck Instead, use a single test that
+# runs all tests (both doctest and RapidCheck)
 add_test(NAME ${PROJECT_NAME} COMMAND ${PROJECT_NAME})
 
 # ---- code coverage ----

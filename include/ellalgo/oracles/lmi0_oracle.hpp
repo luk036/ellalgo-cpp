@@ -27,7 +27,7 @@ template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle {
     LDLTMgr _mq;  ///< LDLT manager for matrix factorization
 
   private:
-    const std::vector<Mat>& _F;  ///< Vector of matrices F₀, F₁, ..., Fₙ
+    const std::vector<Mat>& _F;                          ///< Vector of matrices F₀, F₁, ..., Fₙ
     std::unique_ptr<Cut> cut = std::make_unique<Cut>();  ///< Storage for cut information
 
   public:

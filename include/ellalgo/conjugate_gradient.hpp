@@ -25,11 +25,11 @@
 class Vector0 {
   public:
     /**
- * @brief Construct a new Vector0 object with given size
- *
- * @param[in] size The size of the vector
- */
-Vector0(size_t size) : data(size, 0.0) {}
+     * @brief Construct a new Vector0 object with given size
+     *
+     * @param[in] size The size of the vector
+     */
+    Vector0(size_t size) : data(size, 0.0) {}
 
     /**
      * @brief Construct a new Vector0 from a std::vector

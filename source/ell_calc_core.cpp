@@ -83,8 +83,9 @@ auto EllCalcCore::calc_parallel_cut_fast(const double beta0, const double beta1,
  * @return The function `calc_parallel_cut` returns a tuple containing three values: `rho`, `sigma`,
  * and `delta`.
  */
-auto EllCalcCore::calc_parallel_cut_fast_old(const double beta0, const double beta1, const double tsq,
-                                         const double b0b1, const double eta) const noexcept
+auto EllCalcCore::calc_parallel_cut_fast_old(const double beta0, const double beta1,
+                                             const double tsq, const double b0b1,
+                                             const double eta) const noexcept
     -> std::tuple<double, double, double> {
     const double bavg = 0.5 * (beta0 + beta1);
     const double bavgsq = bavg * bavg;
@@ -148,8 +149,8 @@ auto EllCalcCore::calc_parallel_central_cut(const double beta1, const double tsq
 /**
  * @brief Calculate new ellipsoid under Non-central Cut
  *
- * The function `calc_bias_cut_fast` calculates and returns the values of rho, sigma, and delta based on
- * the given beta, tau, and eta values under the bias-cut:
+ * The function `calc_bias_cut_fast` calculates and returns the values of rho, sigma, and delta
+ * based on the given beta, tau, and eta values under the bias-cut:
  *
  *        g' (x - xc) + β \le 0
  *
