@@ -55,7 +55,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    target_compile_options(EllAlgo PUBLIC -Wall -Wpedantic -Wextra -Werror -Wno-deprecated-literal-operator)
+    target_compile_options(
+      EllAlgo PUBLIC -Wall -Wpedantic -Wextra -Werror -Wno-deprecated-literal-operator
+    )
   elseif(MSVC)
     target_compile_options(EllAlgo PUBLIC /W4 /WX /wd4819 /wd4996)
     target_compile_definitions(${PROJECT_NAME} PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
