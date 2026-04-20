@@ -19,9 +19,9 @@ cmake --build build/test
 ```bash
 # Via CMake test target (recommended)
 CTEST_OUTPUT_ON_FAILURE=1 cmake --build build/test --target test
-./build/test
 
-# Direct executable/EllAlgoTests
+# Or run the executable directly
+./build/test/EllAlgoTests
 ```
 
 ### Run Single Test
@@ -38,22 +38,16 @@ ctest -R test_ell -V
 cmake -S all -B build
 cmake --build build
 
-# Run tests
+# Run tests and standalone
 ./build/test/EllAlgoTests
-
-# Run standalone
 ./build/standalone/EllAlgo --help
 ```
 
 ### Code Formatting
 ```bash
 cmake -S test -B build/test
-
-# Check formatting
-cmake --build build/test --target format
-
-# Apply fixes
-cmake --build build/test --target fix-format
+cmake --build build/test --target format      # check
+cmake --build build/test --target fix-format # apply
 ```
 
 ### Build Documentation
@@ -63,16 +57,9 @@ cmake --build build/doc --target GenerateDocs
 ```
 
 ### Additional Build Options
-```bash
-# Code coverage
-cmake -S test -B build/test -DENABLE_TEST_COVERAGE=1
-
-# Sanitizers
-cmake -S test -B build/test -DUSE_SANITIZER=Address
-
-# Static analyzers
-cmake -S test -B build/test -DUSE_STATIC_ANALYZER=clang-tidy
-```
+- Code coverage: `-DENABLE_TEST_COVERAGE=1`
+- Sanitizers: `-DUSE_SANITIZER=Address`
+- Static analyzers: `-DUSE_STATIC_ANALYZER=clang-tidy`
 
 ## Code Style Guidelines
 
@@ -97,27 +84,27 @@ cmake -S test -B build/test -DUSE_STATIC_ANALYZER=clang-tidy
 
 ### Code Patterns
 
-**Include Order** (via clang-format IncludeBlocks: Regroup):
+#### Include Order (via clang-format IncludeBlocks: Regroup):
 1. Standard library (`<cmath>`, `<vector>`, etc.)
 2. Related header (`.hpp`/`.h`)
 3. Other project headers (`<ellalgo/...>`)
 4. External dependencies
 
-**Function Return Types**:
+#### Function Return Types
 ```cpp
 // Use trailing return type for class methods
 auto calc_bias_cut(const double beta, const double tsq) const
     -> std::tuple<CutStatus, std::tuple<double, double, double>>;
 ```
 
-**Member Access**:
+#### Member Access
 ```cpp
 // Use this-> for member access
 auto xc() const -> Arr { return this->_xc; }
 this->_mgr.update_bias_cut(grad, beta);
 ```
 
-**Error Handling**:
+#### Error Handling
 ```cpp
 // Use CutStatus enum for algorithm status
 enum class CutStatus { Success, NoSoln, NoEffect, Infinity };
