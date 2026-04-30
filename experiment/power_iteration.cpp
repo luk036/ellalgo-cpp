@@ -357,31 +357,31 @@ int main() {
     std::cout << "1-----------------------------\n";
     Vector x1{0.3, 0.5, 0.4};
     auto [ld1, niter1] = power_iteration(A, x1, options);
-    std::cout << x1[0] << " " << x1[1] << " " << x1[2] << std::endl;
-    std::cout << ld1 << std::endl;
-    std::cout << niter1 << std::endl;
+    std::cout << x1[0] << " " << x1[1] << " " << x1[2] << '\n';
+    std::cout << ld1 << '\n';
+    std::cout << niter1 << '\n';
 
     std::cout << "4-----------------------------\n";
     Vector x4{0.3, 0.5, 0.4};
     auto [ld4, niter4] = power_iteration4(A, x4, options);
-    std::cout << x4[0] << " " << x4[1] << " " << x4[2] << std::endl;
-    std::cout << ld4 << std::endl;
-    std::cout << niter4 << std::endl;
+    std::cout << x4[0] << " " << x4[1] << " " << x4[2] << '\n';
+    std::cout << ld4 << '\n';
+    std::cout << niter4 << '\n';
 
     options.tolerance = 1e-14;
     std::cout << "2-----------------------------\n";
     Vector x2{0.3, 0.5, 0.4};
     auto [ld2, niter2] = power_iteration2(A, x2, options);
-    std::cout << x2[0] << " " << x2[1] << " " << x2[2] << std::endl;
-    std::cout << ld2 << std::endl;
-    std::cout << niter2 << std::endl;
+    std::cout << x2[0] << " " << x2[1] << " " << x2[2] << '\n';
+    std::cout << ld2 << '\n';
+    std::cout << niter2 << '\n';
 
     std::cout << "3-----------------------------\n";
     Vector x3{0.3, 0.5, 0.4};
     auto [ld3, niter3] = power_iteration3(A, x3, options);
-    std::cout << x3[0] << " " << x3[1] << " " << x3[2] << std::endl;
-    std::cout << ld3 << std::endl;
-    std::cout << niter3 << std::endl;
+    std::cout << x3[0] << " " << x3[1] << " " << x3[2] << '\n';
+    std::cout << ld3 << '\n';
+    std::cout << niter3 << '\n';
 
     return 0;
 }
