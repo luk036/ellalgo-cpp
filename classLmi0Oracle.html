@@ -49,11 +49,21 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="lmi0__oracle_8hpp.html">&lt;ellalgo/oracles/lmi0_oracle.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr036</a>, <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> Mat = <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr036</a>&gt;</div>
           Lmi0Oracle <span class="m-thin">class</span>
         </h1>
-        <p>Oracle for Linear <a href="classMatrix.html" class="m-doc">Matrix</a> Inequality.</p>
+        <p>Oracle for Linear <a href="classMatrix.html" class="m-doc">Matrix</a> Inequality (LMI) feasibility problems.</p>
+        <table class="m-table m-fullwidth m-flat">
+          <thead>
+            <tr><th colspan="2">Template parameters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 1%">Mat</td>
+              <td><a href="classMatrix.html" class="m-doc">Matrix</a> type (defaults to Arr036)</td>
+            </tr>
+          </tbody>
+        </table>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -68,8 +78,8 @@
           </ul>
         </nav>
 <p>This oracle solves the following feasibility problem:</p><pre>find  x
-s.t.  F * x &lt;= 0
-</pre>
+s.t.  F₀ + F₁x₁ + F₂x₂ + ... + Fₙxₙ ⪯ 0
+</pre><p>where Fᵢ are symmetric matrices and ⪯ denotes negative semidefinite. This is a fundamental problem in semidefinite programming and control theory.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -77,7 +87,7 @@ s.t.  F * x &lt;= 0
               <span class="m-doc-wrap-bumper"><a href="#afece9730a5a290fc68e0a9049fd3e5ef" class="m-doc">Lmi0Oracle</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> ndim,
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::vector&lt;Mat&gt;&amp; F)</span>
             </dt>
-            <dd>Construct a new Lmi 0 Oracle object.</dd>
+            <dd>Construct a new LMI Oracle object.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -86,7 +96,7 @@ s.t.  F * x &lt;= 0
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a15ef17deae55d46d2f096cf4a2eb8532" class="m-doc">assess_feas</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr036</a>&amp; x) -&gt; Cut * -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
-            <dd></dd>
+            <dd>Assess the feasibility of a given point.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a2bc1d9133ba53bf330b7df887221998b" class="m-doc">operator()</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr036</a>&amp; x) -&gt; Cut * -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
@@ -99,7 +109,7 @@ s.t.  F * x &lt;= 0
             <dt id="a644142b050d23048c6073619d6c0367a">
               <a href="classLDLTMgr.html" class="m-doc">LDLTMgr</a> <a href="#a644142b050d23048c6073619d6c0367a" class="m-doc-self">_mq</a>
             </dt>
-            <dd><span></span></dd>
+            <dd>LDLT manager for matrix factorization.</dd>
           </dl>
         </section>
         <section>
@@ -112,7 +122,7 @@ s.t.  F * x &lt;= 0
               <span class="m-doc-wrap-bumper"> Lmi0Oracle&lt;_1, Mat&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afece9730a5a290fc68e0a9049fd3e5ef" class="m-doc-self">Lmi0Oracle</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> ndim,
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::vector&lt;Mat&gt;&amp; F)</span></span>
             </h3>
-            <p>Construct a new Lmi 0 Oracle object.</p>
+            <p>Construct a new LMI Oracle object.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -120,11 +130,11 @@ s.t.  F * x &lt;= 0
               <tbody>
                 <tr>
                   <td style="width: 1%">ndim&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
+                  <td>Dimension of the decision space</td>
                 </tr>
                 <tr>
                   <td>F&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
+                  <td>Vector of matrices defining the LMI constraints</td>
                 </tr>
               </tbody>
             </table>
@@ -136,6 +146,7 @@ s.t.  F * x &lt;= 0
               </div>
               <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> Lmi0Oracle&lt;_1, Mat&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15ef17deae55d46d2f096cf4a2eb8532" class="m-doc-self">assess_feas</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Arr036</a>&amp; x) -&gt; Cut *</span></span>
             </h3>
+            <p>Assess the feasibility of a given point.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -143,16 +154,17 @@ s.t.  F * x &lt;= 0
               <tbody>
                 <tr>
                   <td style="width: 1%">x&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
+                  <td>The point to assess feasibility</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Cut*</td>
+                  <td>Pointer to cut information, or nullptr if feasible</td>
                 </tr>
               </tfoot>
             </table>
+<p>This method checks if the given point x satisfies the LMI constraint. If not feasible, it returns a cutting plane that separates x from the feasible region.</p>
           </div></section>
           <section class="m-doc-details" id="a2bc1d9133ba53bf330b7df887221998b"><div>
             <h3>

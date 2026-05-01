@@ -51,7 +51,7 @@
         <h1>
           <span class="m-breadcrumb"><a href="dir_c643d85e6397546380b30b2f15699579.html">ellalgo</a>/</span>ell_assert.hpp <span class="m-thin">file</span>
         </h1>
-        <p><span></span></p>
+        <p>Branch prediction macros for performance optimization.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -63,18 +63,70 @@
             </li>
           </ul>
         </nav>
+<p>This header provides macros for giving hints to the compiler about the likelihood of certain conditions being true or false. This can help the CPU generate more efficient code by optimizing branch prediction.</p>
         <section id="define-members">
           <h2><a href="#define-members">Defines</a></h2>
           <dl class="m-doc">
-            <dt id="a9b2bcf927f32e95cc65cc4a0630716ed">
-              <span class="m-doc-wrap-bumper">#define <a href="#a9b2bcf927f32e95cc65cc4a0630716ed" class="m-doc-self">ELL_LIKELY</a>(</span><span class="m-doc-wrap">x)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#a9b2bcf927f32e95cc65cc4a0630716ed" class="m-doc">ELL_LIKELY</a>(</span><span class="m-doc-wrap">x)</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a13c1c24f55b464cb9e69683afd589b8d">
-              <span class="m-doc-wrap-bumper">#define <a href="#a13c1c24f55b464cb9e69683afd589b8d" class="m-doc-self">ELL_UNLIKELY</a>(</span><span class="m-doc-wrap">x)</span>
+            <dd>Hint that the expression is likely to be true.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#a13c1c24f55b464cb9e69683afd589b8d" class="m-doc">ELL_UNLIKELY</a>(</span><span class="m-doc-wrap">x)</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Hint that the expression is unlikely to be true.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Define documentation</h2>
+          <section class="m-doc-details" id="a9b2bcf927f32e95cc65cc4a0630716ed"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#a9b2bcf927f32e95cc65cc4a0630716ed" class="m-doc-self">ELL_LIKELY</a>(</span><span class="m-doc-wrap">x)</span>
+            </h3>
+            <p>Hint that the expression is likely to be true.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">x</td>
+                  <td>The expression to evaluate</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The same expression value</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This macro tells the compiler that the expression is likely to evaluate to true, allowing it to optimize the generated code for the common case.</p>
+          </div></section>
+          <section class="m-doc-details" id="a13c1c24f55b464cb9e69683afd589b8d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#a13c1c24f55b464cb9e69683afd589b8d" class="m-doc-self">ELL_UNLIKELY</a>(</span><span class="m-doc-wrap">x)</span>
+            </h3>
+            <p>Hint that the expression is unlikely to be true.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">x</td>
+                  <td>The expression to evaluate</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The same expression value</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This macro tells the compiler that the expression is unlikely to evaluate to true, allowing it to optimize the generated code for the uncommon case. This is typically used for error conditions or exceptional paths.</p>
+          </div></section>
         </section>
       </div>
     </div>

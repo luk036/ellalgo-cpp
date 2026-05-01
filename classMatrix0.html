@@ -52,7 +52,7 @@
           Matrix0 <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="conjugate__gradient_8hpp.html">&lt;ellalgo/conjugate_gradient.hpp&gt;</a></div>
         </h1>
-        <p><span></span></p>
+        <p>A simple matrix class for conjugate gradient calculations.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -65,40 +65,163 @@
             </li>
           </ul>
         </nav>
+<p>This class provides basic matrix operations needed for the conjugate gradient method, including matrix-vector multiplication.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="a99301a1325dee1275f2571817aaf5f14">
-              <span class="m-doc-wrap-bumper"><a href="#a99301a1325dee1275f2571817aaf5f14" class="m-doc-self">Matrix0</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> rows,
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a99301a1325dee1275f2571817aaf5f14" class="m-doc">Matrix0</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> rows,
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> cols)</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Construct a new <a href="classMatrix0.html" class="m-doc">Matrix0</a> object.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt id="a1f31b447130830f5163483c117601442">
-              <span class="m-doc-wrap-bumper">auto <a href="#a1f31b447130830f5163483c117601442" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i) -&gt; std::vector&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;&amp;</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1f31b447130830f5163483c117601442" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i) -&gt; std::vector&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;&amp;</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a0177ad808064db523d0e176bbcb440e7">
-              <span class="m-doc-wrap-bumper">auto <a href="#a0177ad808064db523d0e176bbcb440e7" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::vector&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;&amp;</span>
+            <dd>Access row i of the matrix.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0177ad808064db523d0e176bbcb440e7" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::vector&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;&amp;</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a25354bcfa6a6de848ea73465267cfce7">
-              <span class="m-doc-wrap-bumper">auto <a href="#a25354bcfa6a6de848ea73465267cfce7" class="m-doc-self">rows</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a></span>
+            <dd>Access row i of the matrix (const version)</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a25354bcfa6a6de848ea73465267cfce7" class="m-doc">rows</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a></span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a013d517c1e7a777ba605cb3e7395d4ad">
-              <span class="m-doc-wrap-bumper">auto <a href="#a013d517c1e7a777ba605cb3e7395d4ad" class="m-doc-self">cols</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a></span>
+            <dd>Get the number of rows.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a013d517c1e7a777ba605cb3e7395d4ad" class="m-doc">cols</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a></span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a1c39c7f2c7dfdd0744a245d643198b79">
-              <span class="m-doc-wrap-bumper">auto <a href="#a1c39c7f2c7dfdd0744a245d643198b79" class="m-doc-self">dot</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; v) const -&gt; <a href="classVector0.html" class="m-doc">Vector0</a></span>
+            <dd>Get the number of columns.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1c39c7f2c7dfdd0744a245d643198b79" class="m-doc">dot</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; v) const -&gt; <a href="classVector0.html" class="m-doc">Vector0</a></span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Multiply the matrix by a vector.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a99301a1325dee1275f2571817aaf5f14"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Matrix0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a99301a1325dee1275f2571817aaf5f14" class="m-doc-self">Matrix0</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> rows,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> cols)</span></span>
+            </h3>
+            <p>Construct a new <a href="classMatrix0.html" class="m-doc">Matrix0</a> object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rows&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Number of rows</td>
+                </tr>
+                <tr>
+                  <td>cols&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Number of columns</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1f31b447130830f5163483c117601442"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::vector&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;&amp; Matrix0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1f31b447130830f5163483c117601442" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i)</span></span>
+            </h3>
+            <p>Access row i of the matrix.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">i&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Row index</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to the row vector</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0177ad808064db523d0e176bbcb440e7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::vector&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;&amp; Matrix0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0177ad808064db523d0e176bbcb440e7" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i) const</span></span>
+            </h3>
+            <p>Access row i of the matrix (const version)</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">i&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Row index</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Const reference to the row vector</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a25354bcfa6a6de848ea73465267cfce7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> Matrix0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a25354bcfa6a6de848ea73465267cfce7" class="m-doc-self">rows</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the number of rows.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Number of rows</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a013d517c1e7a777ba605cb3e7395d4ad"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> Matrix0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a013d517c1e7a777ba605cb3e7395d4ad" class="m-doc-self">cols</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the number of columns.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Number of columns</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1c39c7f2c7dfdd0744a245d643198b79"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classVector0.html" class="m-doc">Vector0</a> Matrix0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1c39c7f2c7dfdd0744a245d643198b79" class="m-doc-self">dot</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; v) const</span></span>
+            </h3>
+            <p>Multiply the matrix by a vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">v&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The vector to multiply</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The resulting vector</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

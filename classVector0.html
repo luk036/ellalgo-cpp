@@ -52,7 +52,7 @@
           Vector0 <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="conjugate__gradient_8hpp.html">&lt;ellalgo/conjugate_gradient.hpp&gt;</a></div>
         </h1>
-        <p><span></span></p>
+        <p>A simple vector class for conjugate gradient calculations.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -65,55 +65,259 @@
             </li>
           </ul>
         </nav>
+<p>This class provides basic vector operations needed for the conjugate gradient method, including addition, subtraction, scalar multiplication, dot product, and norm calculation.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="a1b2c1178d3f39f1593573437f5f434df">
-              <span class="m-doc-wrap-bumper"><a href="#a1b2c1178d3f39f1593573437f5f434df" class="m-doc-self">Vector0</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> size)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a1b2c1178d3f39f1593573437f5f434df" class="m-doc">Vector0</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> size)</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="ae20c1de0c50804803c8e4c70a72faf72">
-              <span class="m-doc-wrap-bumper"><a href="#ae20c1de0c50804803c8e4c70a72faf72" class="m-doc-self">Vector0</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::vector&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;&amp; v)</span>
+            <dd>Construct a new <a href="classVector0.html" class="m-doc">Vector0</a> object with given size.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ae20c1de0c50804803c8e4c70a72faf72" class="m-doc">Vector0</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::vector&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;&amp; v)</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Construct a new <a href="classVector0.html" class="m-doc">Vector0</a> from a std::vector.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt id="a435d653373479368430edfd02d95763b">
-              <span class="m-doc-wrap-bumper">auto <a href="#a435d653373479368430edfd02d95763b" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i) -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp;</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a435d653373479368430edfd02d95763b" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i) -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp;</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a16e8d86ac56e3e52f1634c86c15ccd57">
-              <span class="m-doc-wrap-bumper">auto <a href="#a16e8d86ac56e3e52f1634c86c15ccd57" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp;</span>
+            <dd>Access element at index i.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a16e8d86ac56e3e52f1634c86c15ccd57" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp;</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="af1c260e585d8ab2ee6f7765e57ad4247">
-              <span class="m-doc-wrap-bumper">auto <a href="#af1c260e585d8ab2ee6f7765e57ad4247" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a></span>
+            <dd>Access element at index i (const version)</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af1c260e585d8ab2ee6f7765e57ad4247" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a></span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="af64c2d13f84dea4142ac1d0d7ed5c8ba">
-              <span class="m-doc-wrap-bumper">auto <a href="#af64c2d13f84dea4142ac1d0d7ed5c8ba" class="m-doc-self">operator+=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; rhs) -&gt; <a href="classVector0.html" class="m-doc">Vector0</a>&amp;</span>
+            <dd>Get the size of the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af64c2d13f84dea4142ac1d0d7ed5c8ba" class="m-doc">operator+=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; rhs) -&gt; <a href="classVector0.html" class="m-doc">Vector0</a>&amp;</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a2419de63f83ec12fe74f25e45ca6cfc8">
-              <span class="m-doc-wrap-bumper">auto <a href="#a2419de63f83ec12fe74f25e45ca6cfc8" class="m-doc-self">operator-=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; rhs) -&gt; <a href="classVector0.html" class="m-doc">Vector0</a>&amp;</span>
+            <dd>Add another vector to this vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2419de63f83ec12fe74f25e45ca6cfc8" class="m-doc">operator-=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; rhs) -&gt; <a href="classVector0.html" class="m-doc">Vector0</a>&amp;</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a0a662f8cce6392bc63896b6e2cfadb20">
-              <span class="m-doc-wrap-bumper">auto <a href="#a0a662f8cce6392bc63896b6e2cfadb20" class="m-doc-self">operator*=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> scalar) -&gt; <a href="classVector0.html" class="m-doc">Vector0</a>&amp;</span>
+            <dd>Subtract another vector from this vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0a662f8cce6392bc63896b6e2cfadb20" class="m-doc">operator*=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> scalar) -&gt; <a href="classVector0.html" class="m-doc">Vector0</a>&amp;</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a621648fe2cd134763be9f47305e37fce">
-              <span class="m-doc-wrap-bumper">auto <a href="#a621648fe2cd134763be9f47305e37fce" class="m-doc-self">dot</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; other) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a></span>
+            <dd>Multiply this vector by a scalar.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a621648fe2cd134763be9f47305e37fce" class="m-doc">dot</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; other) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a></span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a20a146d3e156feb66bc5761e17ae7d4c">
-              <span class="m-doc-wrap-bumper">auto <a href="#a20a146d3e156feb66bc5761e17ae7d4c" class="m-doc-self">norm</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a></span>
+            <dd>Compute the dot product with another vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a20a146d3e156feb66bc5761e17ae7d4c" class="m-doc">norm</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a></span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Compute the L2 norm of the vector.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a1b2c1178d3f39f1593573437f5f434df"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Vector0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1b2c1178d3f39f1593573437f5f434df" class="m-doc-self">Vector0</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> size)</span></span>
+            </h3>
+            <p>Construct a new <a href="classVector0.html" class="m-doc">Vector0</a> object with given size.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">size&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The size of the vector</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae20c1de0c50804803c8e4c70a72faf72"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Vector0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae20c1de0c50804803c8e4c70a72faf72" class="m-doc-self">Vector0</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::vector&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;&amp; v)</span></span>
+            </h3>
+            <p>Construct a new <a href="classVector0.html" class="m-doc">Vector0</a> from a std::vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">v&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The std::vector to copy from</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a435d653373479368430edfd02d95763b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; Vector0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a435d653373479368430edfd02d95763b" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i)</span></span>
+            </h3>
+            <p>Access element at index i.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">i&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Index of the element</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to the element</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a16e8d86ac56e3e52f1634c86c15ccd57"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; Vector0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a16e8d86ac56e3e52f1634c86c15ccd57" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> i) const</span></span>
+            </h3>
+            <p>Access element at index i (const version)</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">i&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Index of the element</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Const reference to the element</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af1c260e585d8ab2ee6f7765e57ad4247"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> Vector0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af1c260e585d8ab2ee6f7765e57ad4247" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the size of the vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Size of the vector</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af64c2d13f84dea4142ac1d0d7ed5c8ba"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classVector0.html" class="m-doc">Vector0</a>&amp; Vector0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af64c2d13f84dea4142ac1d0d7ed5c8ba" class="m-doc-self">operator+=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; rhs)</span></span>
+            </h3>
+            <p>Add another vector to this vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rhs&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The vector to add</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this vector after addition</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2419de63f83ec12fe74f25e45ca6cfc8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classVector0.html" class="m-doc">Vector0</a>&amp; Vector0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2419de63f83ec12fe74f25e45ca6cfc8" class="m-doc-self">operator-=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; rhs)</span></span>
+            </h3>
+            <p>Subtract another vector from this vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rhs&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The vector to subtract</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this vector after subtraction</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0a662f8cce6392bc63896b6e2cfadb20"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classVector0.html" class="m-doc">Vector0</a>&amp; Vector0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0a662f8cce6392bc63896b6e2cfadb20" class="m-doc-self">operator*=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> scalar)</span></span>
+            </h3>
+            <p>Multiply this vector by a scalar.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">scalar&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The scalar value to multiply</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this vector after multiplication</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a621648fe2cd134763be9f47305e37fce"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> Vector0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a621648fe2cd134763be9f47305e37fce" class="m-doc-self">dot</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; other) const</span></span>
+            </h3>
+            <p>Compute the dot product with another vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The other vector</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The dot product result</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a20a146d3e156feb66bc5761e17ae7d4c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> Vector0::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a20a146d3e156feb66bc5761e17ae7d4c" class="m-doc-self">norm</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Compute the L2 norm of the vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The L2 norm (Euclidean length)</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

@@ -50,7 +50,6 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           LowpassOracle <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="lowpass__oracle_8hpp.html">&lt;ellalgo/oracles/lowpass_oracle.hpp&gt;</a></div>
         </h1>
         <p>Oracle for FIR lowpass filter design.</p>
         <nav class="m-block m-default">
@@ -65,9 +64,10 @@
             </li>
           </ul>
         </nav>
-<p>This example is taken from Almir Mutapcic in 2006:</p><pre>min   \gamma
-s.t.  L^2(\omega) \le R(\omega) \le U^2(\omega), \forall \omega \in
-</pre><p>[0, \pi] R(\omega) &gt; 0, \forall \omega \in [0, \pi]</p>
+<p>This example is taken from Almir Mutapcic in 2006:</p><pre>min   γ
+s.t.  L²(ω) ≤ R(ω) ≤ U²(ω), ∀ ω ∈ [0, π]
+      R(ω) &gt; 0, ∀ ω ∈ [0, π]
+</pre>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -112,6 +112,33 @@ s.t.  L^2(\omega) \le R(\omega) \le U^2(\omega), \forall \omega \in
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> wstop)</span></span>
             </h3>
             <p>Construct a new lowpass oracle object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">N&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Number of FIR coefficients (including zeroth)</td>
+                </tr>
+                <tr>
+                  <td>Lpsq&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Square of lower passband bound (L^2)</td>
+                </tr>
+                <tr>
+                  <td>Upsq&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Square of upper passband bound (U^2)</td>
+                </tr>
+                <tr>
+                  <td>wpass&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Passband edge frequency</td>
+                </tr>
+                <tr>
+                  <td>wstop&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Stopband edge frequency</td>
+                </tr>
+              </tbody>
+            </table>
 <p>The constructor of the <code><a href="classLowpassOracle.html" class="m-doc">LowpassOracle</a></code> class. It initializes an instance of the <code><a href="classLowpassOracle.html" class="m-doc">LowpassOracle</a></code> class with the given parameters.</p>
           </div></section>
           <section class="m-doc-details" id="aa6aa1a80dcbfeb896fff00d8bcf1e59f"><div>

@@ -50,9 +50,8 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           Options <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ell__config_8hpp.html">&lt;ellalgo/ell_config.hpp&gt;</a></div>
         </h1>
-        <p><a href="structOptions.html" class="m-doc">Options</a>.</p>
+        <p>Configuration options for the ellipsoid algorithm.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -65,18 +64,19 @@
             </li>
           </ul>
         </nav>
+<p>This structure contains the configuration parameters for controlling the behavior of the ellipsoid algorithm, including maximum iterations and convergence tolerance.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="ab72fb640172a6109e34c8a5366563753">
-              <span class="m-doc-wrap-bumper"><a href="#ab72fb640172a6109e34c8a5366563753" class="m-doc-self">Options</a>(</span><span class="m-doc-wrap">)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ab72fb640172a6109e34c8a5366563753" class="m-doc">Options</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a55b77026044cdb67012ca95210f34f39">
-              <span class="m-doc-wrap-bumper"><a href="#a55b77026044cdb67012ca95210f34f39" class="m-doc-self">Options</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> max_iters,
+            <dd>Default constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a55b77026044cdb67012ca95210f34f39" class="m-doc">Options</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> max_iters,
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tol)</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Constructor with custom parameters.</dd>
           </dl>
         </section>
         <section id="pub-attribs">
@@ -85,12 +85,44 @@
             <dt id="a79ef34251f40cb7ef68615307a2dfcb0">
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> <a href="#a79ef34251f40cb7ef68615307a2dfcb0" class="m-doc-self">max_iters</a>
             </dt>
-            <dd><span></span></dd>
+            <dd>Maximum number of iterations allowed.</dd>
             <dt id="ac679b1118fdd146896bcd2cf5f35460f">
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> <a href="#ac679b1118fdd146896bcd2cf5f35460f" class="m-doc-self">tolerance</a>
             </dt>
-            <dd><span></span></dd>
+            <dd>Convergence tolerance for stopping criteria.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ab72fb640172a6109e34c8a5366563753"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Options::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab72fb640172a6109e34c8a5366563753" class="m-doc-self">Options</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Default constructor.</p>
+<p>Initializes with default values: max_iters = 2000, tolerance = 1e-20</p>
+          </div></section>
+          <section class="m-doc-details" id="a55b77026044cdb67012ca95210f34f39"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Options::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a55b77026044cdb67012ca95210f34f39" class="m-doc-self">Options</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> max_iters,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> tol)</span></span>
+            </h3>
+            <p>Constructor with custom parameters.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">max_iters&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Maximum number of iterations</td>
+                </tr>
+                <tr>
+                  <td>tol&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Convergence tolerance</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

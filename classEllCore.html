@@ -50,7 +50,6 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           EllCore <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ell__core_8hpp.html">&lt;ellalgo/ell_core.hpp&gt;</a></div>
         </h1>
         <p>Ellipsoid Search Space Core.</p>
         <nav class="m-block m-default">
@@ -61,12 +60,25 @@
               <ul>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
-                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>Without the knowledge of the type of xc</p><p>\mathcal{E} {x | (x - xc)&#x27; mq^-1 (x - xc) \le \kappa}</p>
+<p>Without the knowledge of the type of xc</p><p>ℰ {x | (x - xc)&#x27; mq^-1 (x - xc) ≤ κ}</p><pre>
+   2D Ellipsoid Core Visualization
+       y
+       ^
+       │
+     ┌─┼─┐  ← ellipsoid boundary
+   ┌─┘ │ └─┐
+ ──┼───●───┼──→ x  ← center (xc)
+   └─┐ │ ┌─┘
+     └─┼─┘
+       │
+       ● (x)
+     point inside/outside
+     ellipsoid
+</pre>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -76,8 +88,8 @@
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ad3281918ec8c3d5df99a1ba420f0b640" class="m-doc">EllCore</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> alpha,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> ndim)</span>
+              <span class="m-doc-wrap-bumper"><a href="#ab9bab8c6171742a963bb6929016842da" class="m-doc">EllCore</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> alpha,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> ndim)</span>
             </dt>
             <dd>Construct a new <a href="classEllCore.html" class="m-doc">EllCore</a> object.</dd>
             <dt>
@@ -102,7 +114,7 @@
             </dt>
             <dd>explicitly copy</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aabaf7131bd0b595fc3203bc88cbf370c" class="m-doc">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af530148b8833e2c78d849d44784db173" class="m-doc">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">constexpr</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd></dd>
             <dt>
@@ -147,15 +159,6 @@
             <dd>Update ellipsoid core function using the cut(s)</dd>
           </dl>
         </section>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
-          <dl class="m-doc">
-            <dt id="aa8ac7a71a7e8e0289a193a6f893b9e6e">
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">bool</a> <a href="#aa8ac7a71a7e8e0289a193a6f893b9e6e" class="m-doc-self">no_defer_trick</a>
-            </dt>
-            <dd><span></span></dd>
-          </dl>
-        </section>
         <section>
           <h2>Function documentation</h2>
           <section class="m-doc-details" id="a004880c1fe0b0de4f0c7899616938731"><div>
@@ -180,10 +183,10 @@
             </table>
 <p>The function constructs a new <a href="classEllCore.html" class="m-doc">EllCore</a> object with a given value and dimension.</p>
           </div></section>
-          <section class="m-doc-details" id="ad3281918ec8c3d5df99a1ba420f0b640"><div>
+          <section class="m-doc-details" id="ab9bab8c6171742a963bb6929016842da"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad3281918ec8c3d5df99a1ba420f0b640" class="m-doc-self">EllCore</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> alpha,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> ndim)</span></span>
+              <span class="m-doc-wrap-bumper"> EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab9bab8c6171742a963bb6929016842da" class="m-doc-self">EllCore</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> alpha,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> ndim)</span></span>
             </h3>
             <p>Construct a new <a href="classEllCore.html" class="m-doc">EllCore</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -253,9 +256,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aabaf7131bd0b595fc3203bc88cbf370c"><div>
+          <section class="m-doc-details" id="af530148b8833e2c78d849d44784db173"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aabaf7131bd0b595fc3203bc88cbf370c" class="m-doc-self">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">constexpr</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> EllCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af530148b8833e2c78d849d44784db173" class="m-doc-self">tsq</a>(</span><span class="m-doc-wrap">) const -&gt; double</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>

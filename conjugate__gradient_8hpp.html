@@ -51,7 +51,7 @@
         <h1>
           <span class="m-breadcrumb"><a href="dir_c643d85e6397546380b30b2f15699579.html">ellalgo</a>/</span>conjugate_gradient.hpp <span class="m-thin">file</span>
         </h1>
-        <p><span></span></p>
+        <p>Conjugate gradient method for solving linear systems.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -64,42 +64,43 @@
             </li>
           </ul>
         </nav>
+<p>This header provides classes and functions for solving linear systems using the conjugate gradient method. It includes a simple Vector and <a href="classMatrix.html" class="m-doc">Matrix</a> class for demonstration purposes.</p>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classVector0.html" class="m-doc">Vector0</a>
             </dt>
-            <dd><span></span></dd>
+            <dd>A simple vector class for conjugate gradient calculations.</dd>
             <dt>
               class <a href="classMatrix0.html" class="m-doc">Matrix0</a>
             </dt>
-            <dd><span></span></dd>
+            <dd>A simple matrix class for conjugate gradient calculations.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
-            <dt id="a1a488ed2bcea00e94ecde3b95019b468">
-              <span class="m-doc-wrap-bumper">auto <a href="#a1a488ed2bcea00e94ecde3b95019b468" class="m-doc-self">operator+</a>(</span><span class="m-doc-wrap"><a href="classVector0.html" class="m-doc">Vector0</a> lhs,
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1a488ed2bcea00e94ecde3b95019b468" class="m-doc">operator+</a>(</span><span class="m-doc-wrap"><a href="classVector0.html" class="m-doc">Vector0</a> lhs,
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; rhs) -&gt; <a href="classVector0.html" class="m-doc">Vector0</a></span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="ab06a47966d6d4654e7662202cef4e8b7">
-              <span class="m-doc-wrap-bumper">auto <a href="#ab06a47966d6d4654e7662202cef4e8b7" class="m-doc-self">operator-</a>(</span><span class="m-doc-wrap"><a href="classVector0.html" class="m-doc">Vector0</a> lhs,
+            <dd>Add two vectors.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab06a47966d6d4654e7662202cef4e8b7" class="m-doc">operator-</a>(</span><span class="m-doc-wrap"><a href="classVector0.html" class="m-doc">Vector0</a> lhs,
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; rhs) -&gt; <a href="classVector0.html" class="m-doc">Vector0</a></span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a1d98c27eeafc005c18eb1dbbef4aa7a4">
-              <span class="m-doc-wrap-bumper">auto <a href="#a1d98c27eeafc005c18eb1dbbef4aa7a4" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap"><a href="classVector0.html" class="m-doc">Vector0</a> v,
+            <dd>Subtract two vectors.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1d98c27eeafc005c18eb1dbbef4aa7a4" class="m-doc">operator*</a>(</span><span class="m-doc-wrap"><a href="classVector0.html" class="m-doc">Vector0</a> v,
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> scalar) -&gt; <a href="classVector0.html" class="m-doc">Vector0</a></span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="adc2ce654c71d3878ea9f6a5b341f7596">
-              <span class="m-doc-wrap-bumper">auto <a href="#adc2ce654c71d3878ea9f6a5b341f7596" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> scalar,
+            <dd>Multiply a vector by a scalar.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#adc2ce654c71d3878ea9f6a5b341f7596" class="m-doc">operator*</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> scalar,
               <a href="classVector0.html" class="m-doc">Vector0</a> v) -&gt; <a href="classVector0.html" class="m-doc">Vector0</a></span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Multiply a scalar by a vector.</dd>
             <dt>
               <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="classMatrix0.html" class="m-doc">Matrix0</a>, <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="classVector0.html" class="m-doc">Vector0</a>&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#af6c15f8983331a6f6e1e21a153da7d52" class="m-doc">conjugate_gradient</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classMatrix0.html" class="m-doc">Matrix0</a>&amp; A,
@@ -113,6 +114,118 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a1a488ed2bcea00e94ecde3b95019b468"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classVector0.html" class="m-doc">Vector0</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1a488ed2bcea00e94ecde3b95019b468" class="m-doc-self">operator+</a>(</span><span class="m-doc-wrap"><a href="classVector0.html" class="m-doc">Vector0</a> lhs,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; rhs)</span></span>
+            </h3>
+            <p>Add two vectors.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">lhs&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Left-hand side vector</td>
+                </tr>
+                <tr>
+                  <td>rhs&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Right-hand side vector</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The resulting vector</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab06a47966d6d4654e7662202cef4e8b7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classVector0.html" class="m-doc">Vector0</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab06a47966d6d4654e7662202cef4e8b7" class="m-doc-self">operator-</a>(</span><span class="m-doc-wrap"><a href="classVector0.html" class="m-doc">Vector0</a> lhs,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classVector0.html" class="m-doc">Vector0</a>&amp; rhs)</span></span>
+            </h3>
+            <p>Subtract two vectors.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">lhs&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Left-hand side vector</td>
+                </tr>
+                <tr>
+                  <td>rhs&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Right-hand side vector</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The resulting vector</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1d98c27eeafc005c18eb1dbbef4aa7a4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classVector0.html" class="m-doc">Vector0</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1d98c27eeafc005c18eb1dbbef4aa7a4" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap"><a href="classVector0.html" class="m-doc">Vector0</a> v,
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> scalar)</span></span>
+            </h3>
+            <p>Multiply a vector by a scalar.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">v&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The vector to multiply</td>
+                </tr>
+                <tr>
+                  <td>scalar&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The scalar value</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The resulting vector</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adc2ce654c71d3878ea9f6a5b341f7596"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classVector0.html" class="m-doc">Vector0</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adc2ce654c71d3878ea9f6a5b341f7596" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> scalar,
+              <a href="classVector0.html" class="m-doc">Vector0</a> v)</span></span>
+            </h3>
+            <p>Multiply a scalar by a vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">scalar&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The scalar value</td>
+                </tr>
+                <tr>
+                  <td>v&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The vector to multiply</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The resulting vector</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="af6c15f8983331a6f6e1e21a153da7d52"><div>
             <h3>
               <div class="m-doc-template">
@@ -139,7 +252,7 @@
                 </tr>
                 <tr>
                   <td>x0</td>
-                  <td>An optional initial guess for the solution vector x.</td>
+                  <td>An optional initial guess for the solution vector.</td>
                 </tr>
                 <tr>
                   <td>tol</td>
@@ -153,7 +266,7 @@
               <thead>
                 <tr>
                   <th>Returns</th>
-                  <td>The solution vector x.</td>
+                  <td>The solution vector.</td>
                 </tr>
               </thead>
               <thead>

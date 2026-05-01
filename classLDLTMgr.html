@@ -50,7 +50,6 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           LDLTMgr <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ldlt__mgr_8hpp.html">&lt;ellalgo/oracles/ldlt_mgr.hpp&gt;</a></div>
         </h1>
         <p>LDLT factorization.</p>
         <nav class="m-block m-default">
@@ -74,23 +73,11 @@
               <span class="m-doc-wrap-bumper"><a href="#a43322b727396f7fbc3ef48eeac133096" class="m-doc">LDLTMgr</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> N) <span class="m-label m-flat m-info">explicit</span> </span>
             </dt>
             <dd>Construct a new ldlt ext object.</dd>
-            <dt id="a2ce9d8ddc0b81c073037b545fae6e2e3">
-              <span class="m-doc-wrap-bumper"><a href="#a2ce9d8ddc0b81c073037b545fae6e2e3" class="m-doc-self">LDLTMgr</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classLDLTMgr.html" class="m-doc">LDLTMgr</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a189af948cc280cea59674433317c1fca">
-              <span class="m-doc-wrap-bumper"><a href="#a189af948cc280cea59674433317c1fca" class="m-doc-self">LDLTMgr</a>(</span><span class="m-doc-wrap"><a href="classLDLTMgr.html" class="m-doc">LDLTMgr</a>&amp;&amp;) <span class="m-label m-flat m-info">defaulted</span></span>
-            </dt>
-            <dd><span></span></dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt id="a1b346173191ab42aa0360207391bb73d">
-              <span class="m-doc-wrap-bumper">auto <a href="#a1b346173191ab42aa0360207391bb73d" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="classLDLTMgr.html" class="m-doc">LDLTMgr</a>&amp;) -&gt; <a href="classLDLTMgr.html" class="m-doc">LDLTMgr</a>&amp; <span class="m-label m-flat m-danger">deleted</span></span>
-            </dt>
-            <dd><span></span></dd>
             <dt>
               <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> Mat&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a2af45dc9628f487ab821aff6f3fc0794" class="m-doc">factorize</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> Mat&amp; A) -&gt; bool -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
@@ -105,9 +92,9 @@
             </dt>
             <dd>Perform LDLT Factorization (Lazy evaluation)</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0a2d047ce3d930da880474c9a4aff9f2" class="m-doc">is_spd</a>(</span><span class="m-doc-wrap">) const noexcept -&gt; bool -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab9d90f7e3cd6190b2b7be2b49f4a6baa" class="m-doc">is_spd</a>(</span><span class="m-doc-wrap">) const noexcept -&gt; bool -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">constexpr</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
-            <dd>Is $A$ symmetric positive definite (spd)</dd>
+            <dd>Check if the matrix is symmetric positive definite.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a0c2f0d8bd99e16c64103b5d1da966dcb" class="m-doc">witness</a>(</span><span class="m-doc-wrap">) -&gt; double -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
@@ -204,7 +191,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>true</td>
+                  <td>bool true if factorization was successful, false otherwise</td>
                 </tr>
               </tfoot>
             </table>
@@ -228,22 +215,22 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>true</td>
+                  <td>bool true if factorization was successful, false otherwise</td>
                 </tr>
               </tfoot>
             </table>
 <p>See also: <a href="classLDLTMgr.html#a2af45dc9628f487ab821aff6f3fc0794" class="m-doc">factorize()</a></p>
           </div></section>
-          <section class="m-doc-details" id="a0a2d047ce3d930da880474c9a4aff9f2"><div>
+          <section class="m-doc-details" id="ab9d90f7e3cd6190b2b7be2b49f4a6baa"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0a2d047ce3d930da880474c9a4aff9f2" class="m-doc-self">is_spd</a>(</span><span class="m-doc-wrap">) const noexcept -&gt; bool</span></span>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">constexpr</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab9d90f7e3cd6190b2b7be2b49f4a6baa" class="m-doc-self">is_spd</a>(</span><span class="m-doc-wrap">) const noexcept -&gt; bool</span></span>
             </h3>
-            <p>Is $A$ symmetric positive definite (spd)</p>
+            <p>Check if the matrix is symmetric positive definite.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>true</td>
+                  <td>bool True if the matrix is SPD, false otherwise.</td>
                 </tr>
               </tfoot>
             </table>

@@ -53,7 +53,18 @@
           <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> T&gt;</div>
           Matrix2 <span class="m-thin">class</span>
         </h1>
-        <p><span></span></p>
+        <p>A simple 2D matrix class for linear algebra operations.</p>
+        <table class="m-table m-fullwidth m-flat">
+          <thead>
+            <tr><th colspan="2">Template parameters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 1%">T</td>
+              <td>The element type (typically float or double)</td>
+            </tr>
+          </tbody>
+        </table>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -66,6 +77,7 @@
             </li>
           </ul>
         </nav>
+<p>This class provides basic matrix operations including matrix-vector multiplication. It is implemented using std::vector of std::vector as the underlying storage.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -73,7 +85,7 @@
               <span class="m-doc-wrap-bumper"><a href="#a63cdc784d136d7665cdc87f2ce7b7678" class="m-doc">Matrix2</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> rows,
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> cols)</span>
             </dt>
-            <dd></dd>
+            <dd>Construct a matrix with specified dimensions.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -111,22 +123,23 @@
               <span class="m-doc-wrap-bumper"> Matrix2&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a63cdc784d136d7665cdc87f2ce7b7678" class="m-doc-self">Matrix2</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> rows,
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> cols)</span></span>
             </h3>
+            <p>Construct a matrix with specified dimensions.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">rows</td>
-                  <td>The number of rows in the <a href="classMatrix2.html" class="m-doc">Matrix2</a>.</td>
+                  <td style="width: 1%">rows&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The number of rows in the <a href="classMatrix2.html" class="m-doc">Matrix2</a></td>
                 </tr>
                 <tr>
-                  <td>cols</td>
-                  <td>The number of columns in the <a href="classMatrix2.html" class="m-doc">Matrix2</a>.</td>
+                  <td>cols&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The number of columns in the <a href="classMatrix2.html" class="m-doc">Matrix2</a></td>
                 </tr>
               </tbody>
             </table>
-<p>Constructs a new <a href="classMatrix2.html" class="m-doc">Matrix2</a> with the specified number of rows and columns, initializing all elements to the default value of type T.</p>
+<p>Creates a matrix with the given number of rows and columns, initializing all elements to the default value of type T.</p>
           </div></section>
           <section class="m-doc-details" id="aa06bc3d87de99a19d5258210f1027228"><div>
             <h3>
