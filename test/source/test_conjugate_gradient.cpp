@@ -14,7 +14,7 @@ TEST_CASE("Conjugate Gradient Simple") {
 
     Vector0 x = conjugate_gradient(A, b);
 
-    CHECK((x - x_expected).norm() < 1e-5);
+    CHECK_LT((x - x_expected).norm(), 1e-5);
 }
 
 TEST_CASE("Conjugate Gradient Larger") {
@@ -36,7 +36,7 @@ TEST_CASE("Conjugate Gradient Larger") {
 
     Vector0 x = conjugate_gradient(A, b);
 
-    CHECK((x - x_true).norm() < 1e-5);
+    CHECK_LT((x - x_true).norm(), 1e-5);
 }
 
 TEST_CASE("Conjugate Gradient with Initial Guess") {
@@ -49,7 +49,7 @@ TEST_CASE("Conjugate Gradient with Initial Guess") {
 
     Vector0 x = conjugate_gradient(A, b, &x0);
 
-    CHECK((x - x_expected).norm() < 1e-5);
+    CHECK_LT((x - x_expected).norm(), 1e-5);
 }
 
 // TEST_CASE("Conjugate Gradient Non-Convergence") {
@@ -72,5 +72,5 @@ TEST_CASE("Conjugate Gradient Tolerance") {
     Vector0 x = conjugate_gradient(A, b, &x0, tol);
 
     Vector0 residual = b - A.dot(x);
-    CHECK(residual.norm() < tol);
+    CHECK_LT(residual.norm(), tol);
 }

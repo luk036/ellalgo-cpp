@@ -34,7 +34,7 @@ auto run_lowpass(bool use_parallel_cut) {
     // std::cout << "lowpass r: " << r << '\n';
     // auto Ustop = 20 * std::log10(std::sqrt(Spsq_new));
     // std::cout << "Min attenuation in the stopband is " << Ustop << " dB.\n";
-    // CHECK(r[0] >= 0.0);
+    // CHECK_GE(r[0], 0.0);
 
     return std::make_tuple(r.size() != 0U, num_iters);
 }

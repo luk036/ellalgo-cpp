@@ -76,7 +76,7 @@ TEST_CASE("Example 1, test feasible") {
     const auto result = cutting_plane_optim(oracle, ell, gamma, options);
     const auto& x = std::get<0>(result);
     REQUIRE_NE(x.size(), 0U);
-    CHECK(x[0] >= 0.0);
+    CHECK_GE(x[0], 0.0);
 }
 
 TEST_CASE("Example 1, test infeasible1") {
@@ -108,7 +108,7 @@ TEST_CASE("Example 1, test feasible2") {
     const auto result = cutting_plane_optim(oracle, ell, gamma, options);
     const auto& x = std::get<0>(result);
     REQUIRE_NE(x.size(), 0U);
-    CHECK(x[0] >= 0.0);
+    CHECK_GE(x[0], 0.0);
 }
 
 struct MyOracle2 {
@@ -163,5 +163,5 @@ TEST_CASE("Example 1, test objective") {
     const auto result = cutting_plane_optim(oracle, ell, gamma, options);
     const auto& x = std::get<0>(result);
     REQUIRE_NE(x.size(), 0U);
-    CHECK(x[0] >= 0.0);
+    CHECK_GE(x[0], 0.0);
 }

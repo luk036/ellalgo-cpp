@@ -31,7 +31,7 @@ TEST_CASE("Profit Test") {
         const auto& y = std::get<0>(__result);
         const auto& num_iters = std::get<1>(__result);
         REQUIRE_EQ(y.size(), 2U);
-        CHECK(y[0] <= std::log(limit));
+        CHECK_LE(y[0], std::log(limit));
         CHECK_EQ(num_iters, 83);
     }();
 
@@ -43,7 +43,7 @@ TEST_CASE("Profit Test") {
         const auto& y = std::get<0>(result);
         const auto& num_iters = std::get<1>(result);
         REQUIRE_EQ(y.size(), 2U);
-        CHECK(y[0] <= std::log(limit));
+        CHECK_LE(y[0], std::log(limit));
         CHECK_EQ(num_iters, 90);
     }();
 
@@ -55,7 +55,7 @@ TEST_CASE("Profit Test") {
         const auto& y = std::get<0>(result);
         const auto& num_iters = std::get<1>(result);
         REQUIRE_EQ(y.size(), 2U);
-        CHECK(y[0] <= std::log(limit));
+        CHECK_LE(y[0], std::log(limit));
         CHECK_EQ(num_iters, 29);
     }();
 }
@@ -78,7 +78,7 @@ TEST_CASE("Profit Test (Stable)") {
         const auto& y = std::get<0>(result);
         const auto& num_iters = std::get<1>(result);
         REQUIRE_EQ(y.size(), 2U);
-        CHECK(y[0] <= std::log(limit));
+        CHECK_LE(y[0], std::log(limit));
         CHECK_EQ(num_iters, 83);
     }();
 
@@ -90,7 +90,7 @@ TEST_CASE("Profit Test (Stable)") {
         const auto& y = std::get<0>(result);
         const auto& num_iters = std::get<1>(result);
         REQUIRE_EQ(y.size(), 2U);
-        CHECK(y[0] <= std::log(limit));
+        CHECK_LE(y[0], std::log(limit));
         CHECK_EQ(num_iters, 90);
     }();
 
@@ -102,7 +102,7 @@ TEST_CASE("Profit Test (Stable)") {
         const auto& y = std::get<0>(result);
         const auto& num_iters = std::get<1>(result);
         REQUIRE_EQ(y.size(), 2U);
-        CHECK(y[0] <= std::log(limit));
+        CHECK_LE(y[0], std::log(limit));
         CHECK_EQ(num_iters, 29);
     }();
 }

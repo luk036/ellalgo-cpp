@@ -24,7 +24,7 @@ TEST_CASE("Cholesky test 2") {
 
     auto ldlt_mgr = LDLTMgr(4);
     ldlt_mgr.factorize(m2);
-    CHECK(!ldlt_mgr.is_spd());
+    CHECK_FALSE(ldlt_mgr.is_spd());
     ldlt_mgr.witness();
     CHECK_EQ(ldlt_mgr.pos, std::pair<size_t, size_t>{0, 2});
 }
@@ -37,7 +37,7 @@ TEST_CASE("Cholesky test 3") {
 
     auto ldlt_mgr = LDLTMgr(3);
     ldlt_mgr.factorize(m3);
-    CHECK(!ldlt_mgr.is_spd());
+    CHECK_FALSE(ldlt_mgr.is_spd());
     const auto ep = ldlt_mgr.witness();
     Vec v(0.0, 3);
     ldlt_mgr.set_witness_vec(v);
@@ -66,7 +66,7 @@ TEST_CASE("Cholesky test 5") {
 
     auto ldlt_mgr = LDLTMgr(4);
     ldlt_mgr.factor_with_allow_semidefinite([&m2](size_t i, size_t j) { return m2(i, j); });
-    CHECK(!ldlt_mgr.is_spd());
+    CHECK_FALSE(ldlt_mgr.is_spd());
     ldlt_mgr.witness();
     CHECK_EQ(ldlt_mgr.pos, std::pair<size_t, size_t>{0, 2});
 }
@@ -90,7 +90,7 @@ TEST_CASE("Cholesky test 7") {
 
     auto ldlt_mgr = LDLTMgr(3);
     ldlt_mgr.factor_with_allow_semidefinite([&m3](size_t i, size_t j) { return m3(i, j); });
-    CHECK(!ldlt_mgr.is_spd());
+    CHECK_FALSE(ldlt_mgr.is_spd());
     const auto ep = ldlt_mgr.witness();
     CHECK_EQ(ep, 20.0);
 }
@@ -102,7 +102,7 @@ TEST_CASE("Cholesky test 8") {
     m3.row(2) = Vec{-5.0, 0.0, 20.0};
 
     auto ldlt_mgr = LDLTMgr(3);
-    CHECK(!ldlt_mgr.factorize(m3));
+    CHECK_FALSE(ldlt_mgr.factorize(m3));
 }
 
 TEST_CASE("Cholesky test 9") {

@@ -8,7 +8,7 @@ using Vec = std::valarray<double>;
 
 TEST_CASE("EllCore, test central cut") {
     auto ell_core = EllCore(0.01, 4);
-    CHECK(!ell_core.no_defer_trick);
+    CHECK_FALSE(ell_core.no_defer_trick);
     auto grad = Vec(0.5, 4);
     auto status = ell_core.update_central_cut(grad, 0.0);
     CHECK_EQ(status, CutStatus::Success);
@@ -64,7 +64,7 @@ TEST_CASE("EllCore, test parallel cut (no effect)") {
 // Stable version
 TEST_CASE("EllCore (stable), test central cut") {
     auto ell_core = EllCore(0.01, 4);
-    CHECK(!ell_core.no_defer_trick);
+    CHECK_FALSE(ell_core.no_defer_trick);
     auto grad = Vec(0.5, 4);
     auto status = ell_core.update_stable_central_cut(grad, 0.0);
     CHECK_EQ(status, CutStatus::Success);

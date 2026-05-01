@@ -70,10 +70,10 @@ TEST_CASE("Stress test") {
     const auto result = cutting_plane_optim(oracle, ell, gamma, options);
     const auto& x = std::get<0>(result);
     REQUIRE_NE(x.size(), 0U);
-    CHECK(x[0] >= 0.0);
-    CHECK(x[1] >= 0.0);
-    CHECK(x[0] + x[1] <= 3.000000001);
-    CHECK(x[0] - x[1] >= 0.999999999);
+    CHECK_GE(x[0], 0.0);
+    CHECK_GE(x[1], 0.0);
+    CHECK_LE(x[0] + x[1], 3.000000001);
+    CHECK_GE(x[0] - x[1], 0.999999999);
 }
 
 struct MyQuadraticOracle {
@@ -117,8 +117,8 @@ TEST_CASE("Stress test Quadratic") {
     const auto result = cutting_plane_optim(oracle, ell, gamma, options);
     const auto& x = std::get<0>(result);
     REQUIRE_NE(x.size(), 0U);
-    CHECK(x[0] + x[1] <= 2.000000001);
-    CHECK(x[0] - x[1] >= -1.000000001);
+    CHECK_LE(x[0] + x[1], 2.000000001);
+    CHECK_GE(x[0] - x[1], -1.000000001);
     CHECK(x[0] * x[0] + x[1] * x[1]
           <= 2.500000001);  // Now checking for <= -2.5 (original maximization)
 }
