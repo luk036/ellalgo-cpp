@@ -28,7 +28,7 @@ TEST_CASE("Cutting-plane feasibility") {
     options.tolerance = 1e-8;
 
     auto result = cutting_plane_feas(oracle, ell, options);
-    CHECK(std::get<0>(result).size() != 0);
+    CHECK_NE(std::get<0>(result).size(), 0);
 }
 
 struct MyOracle2 {
@@ -55,7 +55,7 @@ TEST_CASE("Cutting-plane optimization") {
     double t = 1e100;
 
     auto result = cutting_plane_optim(oracle, ell, t, options);
-    CHECK(std::get<0>(result).size() != 0);
+    CHECK_NE(std::get<0>(result).size(), 0);
 }
 
 struct MyOracle3 {
