@@ -1,6 +1,7 @@
 // -*- coding: utf-8 -*-
 #define DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #include <doctest/doctest.h>  // for ResultBuilder, Approx, CHECK_EQ
+#include <cmath>
 
 #include <cmath>                      // for exp
 #include <ellalgo/cutting_plane.hpp>  // for cutting_plane_bias_cut
@@ -38,9 +39,9 @@ struct MyQuasicCvxOracle {
     auto assess_optim(const Vec& xc, double& gamma) -> std::tuple<Cut, bool> {
         double sqrtx = xc[0];
         double logy = xc[1];
-        double fj;
+        double fj = NAN;
         double y = std::exp(logy);
-        double tmp3;
+        double tmp3 = NAN;
 
         for (int i = 0; i != 2; i++) {
             this->idx++;

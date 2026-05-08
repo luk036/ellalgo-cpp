@@ -7,14 +7,11 @@
 
 TEST_CASE("EllCalc, test central cut") {
     auto ell_calc = EllCalc(4);
-    double rho;
-    double sigma;
-    double delta;
-    CutStatus status;
-    std::tuple<double, double, double> result;
-    std::tie(status, result) = ell_calc.calc_central_cut(0.01);
+    // CutStatus status;
+    // std::tuple<double, double, double> result;
+    auto [status, result] = ell_calc.calc_central_cut(0.01);
     CHECK_EQ(status, CutStatus::Success);
-    std::tie(rho, sigma, delta) = result;
+    auto [rho, sigma, delta] = result;
     CHECK_EQ(rho, doctest::Approx(0.02));
     CHECK_EQ(sigma, doctest::Approx(0.4));
     CHECK_EQ(delta, doctest::Approx(16.0 / 15.0));
@@ -22,19 +19,14 @@ TEST_CASE("EllCalc, test central cut") {
 
 TEST_CASE("EllCalc, test deep cut") {
     auto ell_calc = EllCalc(4);
-    double rho;
-    double sigma;
-    double delta;
-    CutStatus status;
-    std::tuple<double, double, double> result;
-    std::tie(status, result) = ell_calc.calc_bias_cut(0.11, 0.01);
+    auto [status, result] = ell_calc.calc_bias_cut(0.11, 0.01);
     CHECK_EQ(status, CutStatus::NoSoln);
     std::tie(status, result) = ell_calc.calc_bias_cut(0.01, 0.01);
     CHECK_EQ(status, CutStatus::Success);
 
     std::tie(status, result) = ell_calc.calc_bias_cut(0.05, 0.01);
     CHECK_EQ(status, CutStatus::Success);
-    std::tie(rho, sigma, delta) = result;
+    auto [rho, sigma, delta] = result;
     CHECK_EQ(rho, doctest::Approx(0.06));
     CHECK_EQ(sigma, doctest::Approx(0.8));
     CHECK_EQ(delta, doctest::Approx(0.8));
@@ -42,14 +34,9 @@ TEST_CASE("EllCalc, test deep cut") {
 
 TEST_CASE("EllCalc, test parallel central cut") {
     auto ell_calc = EllCalc(4);
-    double rho;
-    double sigma;
-    double delta;
-    CutStatus status;
-    std::tuple<double, double, double> result;
-    std::tie(status, result) = ell_calc.calc_parallel_central_cut(0.05, 0.01);
+    auto [status, result] = ell_calc.calc_parallel_central_cut(0.05, 0.01);
     CHECK_EQ(status, CutStatus::Success);
-    std::tie(rho, sigma, delta) = result;
+    auto [rho, sigma, delta] = result;
     CHECK_EQ(rho, doctest::Approx(0.02));
     CHECK_EQ(sigma, doctest::Approx(0.8));
     CHECK_EQ(delta, doctest::Approx(1.2));
@@ -57,17 +44,12 @@ TEST_CASE("EllCalc, test parallel central cut") {
 
 TEST_CASE("EllCalc, test parallel deep cut") {
     auto ell_calc = EllCalc(4);
-    double rho;
-    double sigma;
-    double delta;
-    CutStatus status;
-    std::tuple<double, double, double> result;
-    std::tie(status, result) = ell_calc.calc_parallel_bias_cut(0.07, 0.05, 0.01);
+    auto [status, result] = ell_calc.calc_parallel_bias_cut(0.07, 0.05, 0.01);
     CHECK_EQ(status, CutStatus::NoSoln);
 
     std::tie(status, result) = ell_calc.calc_parallel_bias_cut(0.0, 0.05, 0.01);
     CHECK_EQ(status, CutStatus::Success);
-    std::tie(rho, sigma, delta) = result;
+    auto [rho, sigma, delta] = result;
     CHECK_EQ(rho, doctest::Approx(0.02));
     CHECK_EQ(sigma, doctest::Approx(0.8));
     CHECK_EQ(delta, doctest::Approx(1.2));
@@ -89,20 +71,13 @@ TEST_CASE("EllCalc, test parallel deep cut") {
 
 TEST_CASE("EllCalc, test parallel deep cut (no effect)") {
     auto ell_calc = EllCalc(4);
-    CutStatus status;
-    std::tuple<double, double, double> result;
-    std::tie(status, result) = ell_calc.calc_parallel_bias_cut_q(-0.04, 0.0625, 0.01);
+    auto [status, result] = ell_calc.calc_parallel_bias_cut_q(-0.04, 0.0625, 0.01);
     CHECK_EQ(status, CutStatus::NoEffect);
 }
 
 TEST_CASE("EllCalc, test deep cut q") {
     auto ell_calc = EllCalc(4);
-    double rho;
-    double sigma;
-    double delta;
-    CutStatus status;
-    std::tuple<double, double, double> result;
-    std::tie(status, result) = ell_calc.calc_bias_cut_q(0.11, 0.01);
+    auto [status, result] = ell_calc.calc_bias_cut_q(0.11, 0.01);
     CHECK_EQ(status, CutStatus::NoSoln);
     std::tie(status, result) = ell_calc.calc_bias_cut_q(0.01, 0.01);
     CHECK_EQ(status, CutStatus::Success);
@@ -111,7 +86,7 @@ TEST_CASE("EllCalc, test deep cut q") {
 
     std::tie(status, result) = ell_calc.calc_bias_cut_q(0.05, 0.01);
     CHECK_EQ(status, CutStatus::Success);
-    std::tie(rho, sigma, delta) = result;
+    auto [rho, sigma, delta] = result;
     CHECK_EQ(rho, doctest::Approx(0.06));
     CHECK_EQ(sigma, doctest::Approx(0.8));
     CHECK_EQ(delta, doctest::Approx(0.8));
@@ -119,19 +94,14 @@ TEST_CASE("EllCalc, test deep cut q") {
 
 TEST_CASE("EllCalc, test parallel deep cut q") {
     auto ell_calc = EllCalc(4);
-    double rho;
-    double sigma;
-    double delta;
-    CutStatus status;
-    std::tuple<double, double, double> result;
-    std::tie(status, result) = ell_calc.calc_parallel_bias_cut_q(0.07, 0.03, 0.01);
+    auto [status, result] = ell_calc.calc_parallel_bias_cut_q(0.07, 0.03, 0.01);
     CHECK_EQ(status, CutStatus::NoSoln);
     std::tie(status, result) = ell_calc.calc_parallel_bias_cut_q(-0.04, 0.0625, 0.01);
     CHECK_EQ(status, CutStatus::NoEffect);
 
     std::tie(status, result) = ell_calc.calc_parallel_bias_cut(0.0, 0.05, 0.01);
     CHECK_EQ(status, CutStatus::Success);
-    std::tie(rho, sigma, delta) = result;
+    auto [rho, sigma, delta] = result;
     CHECK_EQ(rho, doctest::Approx(0.02));
     CHECK_EQ(sigma, doctest::Approx(0.8));
     CHECK_EQ(delta, doctest::Approx(1.2));
@@ -153,14 +123,9 @@ TEST_CASE("EllCalc, test parallel deep cut q") {
 
 TEST_CASE("EllCalc, test bias cut") {
     auto ell_calc = EllCalc(4);
-    double rho;
-    double sigma;
-    double delta;
-    CutStatus status;
-    std::tuple<double, double, double> result;
-    std::tie(status, result) = ell_calc.calc_bias_cut(0.05, 0.1);
+    auto [status, result] = ell_calc.calc_bias_cut(0.05, 0.1);
     CHECK_EQ(status, CutStatus::Success);
-    std::tie(rho, sigma, delta) = result;
+    auto [rho, sigma, delta] = result;
     CHECK_EQ(rho, doctest::Approx(0.103246));
     CHECK_EQ(sigma, doctest::Approx(0.563832));
     CHECK_EQ(delta, doctest::Approx(1.04));
@@ -168,14 +133,9 @@ TEST_CASE("EllCalc, test bias cut") {
 
 TEST_CASE("EllCalc, test parallel central cut v1") {
     auto ell_calc = EllCalc(4);
-    double rho;
-    double sigma;
-    double delta;
-    CutStatus status;
-    std::tuple<double, double, double> result;
-    std::tie(status, result) = ell_calc.calc_parallel_central_cut(1.0, 4.0);
+    auto [status, result] = ell_calc.calc_parallel_central_cut(1.0, 4.0);
     CHECK_EQ(status, CutStatus::Success);
-    std::tie(rho, sigma, delta) = result;
+    auto [rho, sigma, delta] = result;
     CHECK_EQ(rho, doctest::Approx(0.4));
     CHECK_EQ(sigma, doctest::Approx(0.8));
     CHECK_EQ(delta, doctest::Approx(1.2));
@@ -183,14 +143,9 @@ TEST_CASE("EllCalc, test parallel central cut v1") {
 
 TEST_CASE("EllCalc, test parallel cut v1") {
     auto ell_calc = EllCalc(4);
-    double rho;
-    double sigma;
-    double delta;
-    CutStatus status;
-    std::tuple<double, double, double> result;
-    std::tie(status, result) = ell_calc.calc_parallel_bias_cut(0.01, 0.04, 0.01);
+    auto [status, result] = ell_calc.calc_parallel_bias_cut(0.01, 0.04, 0.01);
     CHECK_EQ(status, CutStatus::Success);
-    std::tie(rho, sigma, delta) = result;
+    auto [rho, sigma, delta] = result;
     CHECK_EQ(rho, doctest::Approx(0.0232));
     CHECK_EQ(sigma, doctest::Approx(0.928));
     CHECK_EQ(delta, doctest::Approx(1.232));
@@ -198,14 +153,9 @@ TEST_CASE("EllCalc, test parallel cut v1") {
 
 TEST_CASE("EllCalc, test parallel cut (no effect) v2") {
     auto ell_calc = EllCalc(4);
-    double rho;
-    double sigma;
-    double delta;
-    CutStatus status;
-    std::tuple<double, double, double> result;
-    std::tie(status, result) = ell_calc.calc_parallel_bias_cut_q(-0.04, 0.0625, 0.01);
+    auto [status, result] = ell_calc.calc_parallel_bias_cut_q(-0.04, 0.0625, 0.01);
     CHECK_EQ(status, CutStatus::NoEffect);
-    std::tie(rho, sigma, delta) = result;
+    auto [rho, sigma, delta] = result;
     CHECK_EQ(rho, doctest::Approx(0.0));
     CHECK_EQ(sigma, doctest::Approx(0.0));
     CHECK_EQ(delta, doctest::Approx(1.0));

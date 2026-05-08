@@ -68,7 +68,7 @@ TEST_CASE("test_logger_formatting") {
     while (std::getline(logfile, line)) {
         if (line.find("Format test message") != std::string::npos) {
             // Check for timestamp pattern [YYYY-MM-DD HH:MM:SS.mmm]
-            found = (line.find("[") == 0 && line.find("]") > 0);
+            found = (line.find('[') == 0 && line.find(']') > 0);
             // Check for logger name
             found = found && (line.find("[file_logger]") != std::string::npos);
             // Check for log level
@@ -82,10 +82,7 @@ TEST_CASE("test_logger_formatting") {
 
 TEST_CASE("test_direct_spdlog_usage") {
     // Test direct spdlog usage for comparison
-    try {
-        spdlog::drop("direct_test_logger");
-    } catch (...) {
-    }
+    spdlog::drop("direct_test_logger");
 
     auto logger = spdlog::basic_logger_mt("direct_test_logger", "direct_test.log");
     logger->set_level(spdlog::level::info);

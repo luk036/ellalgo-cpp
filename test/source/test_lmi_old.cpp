@@ -14,7 +14,6 @@
 // #include <spdlog/spdlog.h>
 // #include <optional>    // for optional
 #include <tuple>        // for tuple
-#include <type_traits>  // for move, add_const<>::type
 #include <valarray>
 #include <vector>  // for vector
 
@@ -29,7 +28,7 @@ class MyOldOracle {
 
     LmiOldOracle<Vec, Matrix> lmi1;
     LmiOldOracle<Vec, Matrix> lmi2;
-    const Vec c;
+    Vec c;
 
   public:
     /**
@@ -64,12 +63,12 @@ class MyOldOracle {
      * value.
      */
     auto assess_optim(const Vec& x, double& gamma) -> std::tuple<Cut, bool> {
-        const auto cut1 = this->lmi1(x);
-        if (cut1) {
+        auto *const cut1 = this->lmi1(x);
+        if (cut1 != nullptr) {
             return {*cut1, false};
         }
-        const auto cut2 = this->lmi2(x);
-        if (cut2) {
+        auto *const cut2 = this->lmi2(x);
+        if (cut2 != nullptr) {
             return {*cut2, false};
         }
         const auto f0 = (this->c * x).sum();

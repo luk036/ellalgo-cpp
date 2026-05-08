@@ -1,5 +1,6 @@
 #define DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #include <doctest/doctest.h>  // for ResultBuilder, TestCase, CHECK_EQ
+#include <cmath>
 
 #include <ellalgo/cutting_plane.hpp>  // for cutting_plane_optim
 #include <ellalgo/ell.hpp>            // for Ell
@@ -14,7 +15,7 @@ struct MyOracle {
     using Cut = std::pair<Vec, double>;
 
     mutable int idx = -1;  // for round robin
-    const int num_constraints = 3;
+    int num_constraints = 3;
 
     /**
      * The function assess_optim assesses the optimality of a given point in a mathematical
@@ -42,7 +43,6 @@ struct MyOracle {
             if (this->idx == this->num_constraints) {
                 this->idx = 0;  // round robin
             }
-            double fj;
             switch (this->idx) {
                 case 0:  // constraint 1: x + y <= 3
                     if (f0 > 3.0) {
@@ -50,12 +50,12 @@ struct MyOracle {
                     }
                     break;
                 case 1:  // constraint 2: x - y >= 1
-                    if ((fj = -x + y + 1.0) > 0.0) {
+                    if (double fj = -x + y + 1.0; fj > 0.0) {
                         return {{Vec{-1.0, 1.0}, fj}, false};
                     }
                     break;
                 case 2:  // objective: maximize x + y
-                    if ((fj = gamma - f0) > 0.0) {
+                    if (double fj = gamma - f0; fj > 0.0) {
                         return {{Vec{-1.0, -1.0}, fj}, false};
                     };
                     break;
@@ -117,7 +117,7 @@ struct MyOracle2 {
     using Cut = std::pair<Vec, double>;
 
     mutable int idx = -1;  // for round robin
-    const int num_constraints = 3;
+    int num_constraints = 3;
 
     auto assess_optim(const Vec& xc, double& gamma) const -> std::tuple<Cut, bool> {
         const auto x = xc[0];
@@ -129,7 +129,6 @@ struct MyOracle2 {
             if (this->idx == this->num_constraints) {
                 this->idx = 0;  // round robin
             }
-            double fj;
             switch (this->idx) {
                 case 0:  // constraint 1: x + y <= 3
                     if (f0 > 3.0) {
@@ -137,12 +136,12 @@ struct MyOracle2 {
                     }
                     break;
                 case 1:  // constraint 2: x - y >= 1
-                    if ((fj = -x + y + 1.0) > 0.0) {
+                    if (double fj = -x + y + 1.0; fj > 0.0) {
                         return {{Vec{-1.0, 1.0}, fj}, false};
                     }
                     break;
                 case 2:  // objective: maximize x - y
-                    if ((fj = gamma - (x - y)) > 0.0) {
+                    if (double fj = gamma - (x - y); fj > 0.0) {
                         return {{Vec{-1.0, 1.0}, fj}, false};
                     };
                     break;

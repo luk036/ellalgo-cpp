@@ -7,7 +7,7 @@
  * optimality conditions for filter specifications.
  */
 
-#include <stddef.h>  // for size_t
+#include <cstddef>  // for size_t
 
 #include <cmath>                               // for pow, log10, M_PI, cos
 #include <ellalgo/oracles/lowpass_oracle.hpp>  // for LowpassOracle, filter_...
@@ -19,7 +19,7 @@ using Mat = std::valarray<Vec>;
 using ParallelCut = std::pair<Vec, Vec>;
 
 #ifndef M_PI
-#    define M_PI 3.14159265358979323846264338327950288
+constexpr double M_PI = 3.14159265358979323846264338327950288;
 #endif
 
 /**
@@ -95,7 +95,7 @@ auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut
 
     // case 2,
     // 2.0 passband constraints
-    for (int __k = 0; __k != this->nwpass; ++__k) {
+    for (int _k = 0; _k != this->nwpass; ++_k) {
         ++this->idx1;
         if (this->idx1 == this->nwpass) {
             this->idx1 = 0;  // round robin
@@ -118,7 +118,7 @@ auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut
     auto N = int(A.size());
     this->_fmax = -1e100;  // std::numeric_limits<double>::min()
     this->_kmax = -1;
-    for (int __k = this->nwstop; __k != N; ++__k) {
+    for (int _k = this->nwstop; _k != N; ++_k) {
         ++this->idx3;
         if (this->idx3 == N) {
             this->idx3 = this->nwstop;  // round robin
@@ -142,7 +142,7 @@ auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut
 
     // case 4,
     // 1.0 nonnegative-real constraint
-    for (int __k = this->nwpass; __k != this->nwstop; ++__k) {
+    for (int _k = this->nwpass; _k != this->nwstop; ++_k) {
         ++this->idx2;
         if (this->idx2 == this->nwstop) {
             this->idx2 = this->nwpass;  // round robin
@@ -183,8 +183,8 @@ auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut
  * boolean value.
  */
 auto LowpassOracle::assess_optim(const Vec& x, double& Spsq) -> std::tuple<ParallelCut, bool> {
-    auto cut = this->assess_feas(x, Spsq);
-    if (cut) {
+    auto *cut = this->assess_feas(x, Spsq);
+    if (cut != nullptr) {
         return {*cut, false};
     }
     // Begin objective function

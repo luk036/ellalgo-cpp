@@ -1,5 +1,6 @@
 #define DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #include <doctest/doctest.h>  // for ResultBuilder, TestCase, CHECK
+#include <cmath>
 
 #include <ellalgo/cutting_plane.hpp>  // for cutting_plane_optim
 #include <ellalgo/ell.hpp>            // for ell
@@ -38,7 +39,7 @@ struct MyOracle {
             if (this->idx == 2) {
                 this->idx = 0;  // round robin
             }
-            double fj;
+            double fj = NAN;
             switch (this->idx) {
                 case 0:  // constraint 1: x + y <= 3
                     fj = x + y - 3.0;

@@ -88,8 +88,8 @@ auto ProfitOracle::assess_feas(const Vec& y, const double& gamma) -> Cut* {
  * second element is of type `bool`.
  */
 auto ProfitOracle::assess_optim(const Vec& y, double& gamma) -> std::tuple<Cut, bool> {
-    auto cut = this->assess_feas(y, gamma);
-    if (cut) {
+    auto *cut = this->assess_feas(y, gamma);
+    if (cut != nullptr) {
         return {*cut, false};
     }
 
@@ -115,8 +115,8 @@ auto ProfitOracle::assess_optim(const Vec& y, double& gamma) -> std::tuple<Cut, 
 auto ProfitOracleQ::assess_optim_q(const Vec& y, double& gamma, bool retry)
     -> std::tuple<Cut, bool, Vec, bool> {
     if (!retry) {
-        auto cut = this->_P.assess_feas(y, gamma);
-        if (cut) {
+        auto *cut = this->_P.assess_feas(y, gamma);
+        if (cut != nullptr) {
             return {*cut, false, y, true};
         }
 
