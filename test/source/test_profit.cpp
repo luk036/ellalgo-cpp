@@ -27,9 +27,9 @@ TEST_CASE("Profit Test") {
         ProfitOracle omega{unit_price, A, limit, a, v};
         double gamma = 0.0;
 
-        const auto __result = cutting_plane_optim(omega, ellip, gamma);
-        const auto& y = std::get<0>(__result);
-        const auto& num_iters = std::get<1>(__result);
+        const auto _result = cutting_plane_optim(omega, ellip, gamma);
+        const auto& y = std::get<0>(_result);
+        const auto& num_iters = std::get<1>(_result);
         REQUIRE_EQ(y.size(), 2U);
         CHECK_LE(y[0], std::log(limit));
         CHECK_EQ(num_iters, 83);

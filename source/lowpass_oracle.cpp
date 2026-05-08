@@ -46,7 +46,7 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
     const auto m = 15 * N;
     Vec w(m);
     for (size_t i = 0U; i != m; ++i) {
-        w[i] = double(i) * M_PI / double(m - 1);
+        w[i] = static_cast<double>(i) * M_PI / static_cast<double>(m - 1);
     }
 
     // A is the matrix used to compute the power spectrum
@@ -58,8 +58,8 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
             this->A[i][j] = 2.0 * std::cos(w[i] * j);
         }
     }
-    this->nwpass = int(std::floor(wpass * double(m - 1)) + 1);
-    this->nwstop = int(std::floor(wstop * double(m - 1)) + 1);
+    this->nwpass = static_cast<int>(std::floor(wpass * static_cast<double>(m - 1)) + 1);
+    this->nwstop = static_cast<int>(std::floor(wstop * static_cast<double>(m - 1)) + 1);
 
     // For round robin
     this->idx1 = -1;
@@ -100,22 +100,22 @@ auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut
         if (this->idx1 == this->nwpass) {
             this->idx1 = 0;  // round robin
         }
-        double v = matrix_vector(size_t(this->idx1));
+        double v = matrix_vector(static_cast<size_t>(this->idx1));
         if (v > this->Upsq) {
             cut.second = Vec{v - this->Upsq, v - this->Lpsq};
-            cut.first = this->A[size_t(this->idx1)];
+            cut.first = this->A[static_cast<size_t>(this->idx1)];
             return &cut;
         }
         if (v < this->Lpsq) {
             cut.second = Vec{-v + this->Lpsq, -v + this->Upsq};
-            cut.first = -this->A[size_t(this->idx1)];
+            cut.first = -this->A[static_cast<size_t>(this->idx1)];
             return &cut;
         }
     }
 
     // case 3,
     // 3.0 stopband constraint
-    auto N = int(A.size());
+    auto N = static_cast<int>(A.size());
     this->_fmax = -1e100;  // std::numeric_limits<double>::min()
     this->_kmax = -1;
     for (int _k = this->nwstop; _k != N; ++_k) {
@@ -123,15 +123,15 @@ auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut
         if (this->idx3 == N) {
             this->idx3 = this->nwstop;  // round robin
         }
-        double v = matrix_vector(size_t(this->idx3));
+        double v = matrix_vector(static_cast<size_t>(this->idx3));
         if (v > Spsq) {
             cut.second = Vec{v - Spsq, v};
-            cut.first = this->A[size_t(this->idx3)];
+            cut.first = this->A[static_cast<size_t>(this->idx3)];
             return &cut;
         }
         if (v < 0.0) {
             cut.second = Vec{-v, -v + Spsq};
-            cut.first = -this->A[size_t(this->idx3)];
+            cut.first = -this->A[static_cast<size_t>(this->idx3)];
             return &cut;
         }
         if (v > this->_fmax) {
@@ -147,10 +147,10 @@ auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut
         if (this->idx2 == this->nwstop) {
             this->idx2 = this->nwpass;  // round robin
         }
-        double v = matrix_vector(size_t(this->idx2));
+        double v = matrix_vector(static_cast<size_t>(this->idx2));
         if (v < 0.0) {
             cut.second = Vec{-v};
-            cut.first = -this->A[size_t(this->idx2)];
+            cut.first = -this->A[static_cast<size_t>(this->idx2)];
             return &cut;
         }
     }
@@ -189,5 +189,5 @@ auto LowpassOracle::assess_optim(const Vec& x, double& Spsq) -> std::tuple<Paral
     }
     // Begin objective function
     Spsq = this->_fmax;  // output
-    return {{this->A[size_t(this->_kmax)], Vec{0.0, this->_fmax}}, true};
+    return {{this->A[static_cast<size_t>(this->_kmax)], Vec{0.0, this->_fmax}}, true};
 }

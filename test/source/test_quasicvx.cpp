@@ -3,7 +3,6 @@
 #include <doctest/doctest.h>  // for ResultBuilder, Approx, CHECK_EQ
 #include <cmath>
 
-#include <cmath>                      // for exp
 #include <ellalgo/cutting_plane.hpp>  // for cutting_plane_bias_cut
 #include <ellalgo/ell.hpp>            // for Ell
 #include <ellalgo/ell_config.hpp>     // for CInfo, CutStatus, CutStatus::...
@@ -37,11 +36,10 @@ struct MyQuasicCvxOracle {
      * boolean value.
      */
     auto assess_optim(const Vec& xc, double& gamma) -> std::tuple<Cut, bool> {
-        double sqrtx = xc[0];
-        double logy = xc[1];
-        double fj = NAN;
-        double y = std::exp(logy);
-        double tmp3 = NAN;
+        const double sqrtx = xc[0];
+        const double logy = xc[1];
+        const double y = std::exp(logy);
+        const double tmp3 = gamma * y;;
 
         for (int i = 0; i != 2; i++) {
             this->idx++;
@@ -51,15 +49,14 @@ struct MyQuasicCvxOracle {
 
             switch (this->idx) {
                 case 0:  // constraint 1: exp(x) <= y, or sqrtx**2 <= logy
-                    if ((fj = sqrtx * sqrtx - logy) > 0.0) {
-                        return {{Vec{2 * sqrtx, -1.0}, fj}, false};
+                    if (double fj0 = sqrtx * sqrtx - logy; fj0 > 0.0) {
+                        return {{Vec{2 * sqrtx, -1.0}, fj0}, false};
                     }
                     break;
                 case 1:  // constraint 2
                     // y = std::exp(logy);
-                    tmp3 = gamma * y;
-                    if ((fj = -sqrtx + tmp3) > 0.0) {
-                        return {{Vec{-1.0, tmp3}, fj}, false};
+                    if (double fj1 = -sqrtx + tmp3; fj1 > 0.0) {
+                        return {{Vec{-1.0, tmp3}, fj1}, false};
                     }
                     break;
                 default:

@@ -23,7 +23,7 @@ TEST_CASE("Conjugate Gradient Larger") {
     size_t n = 100;
     Matrix2<double> A(n, n);
     for (size_t i = 0; i < n; ++i) {
-        A[i][i] = double(i + 1);
+        A[i][i] = static_cast<double>(i + 1);
     }
 
     std::random_device rd;
