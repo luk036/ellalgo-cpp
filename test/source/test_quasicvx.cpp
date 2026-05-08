@@ -1,8 +1,8 @@
 // -*- coding: utf-8 -*-
 #define DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #include <doctest/doctest.h>  // for ResultBuilder, Approx, CHECK_EQ
-#include <cmath>
 
+#include <cmath>
 #include <ellalgo/cutting_plane.hpp>  // for cutting_plane_bias_cut
 #include <ellalgo/ell.hpp>            // for Ell
 #include <ellalgo/ell_config.hpp>     // for CInfo, CutStatus, CutStatus::...
@@ -39,7 +39,8 @@ struct MyQuasicCvxOracle {
         const double sqrtx = xc[0];
         const double logy = xc[1];
         const double y = std::exp(logy);
-        const double tmp3 = gamma * y;;
+        const double tmp3 = gamma * y;
+        ;
 
         for (int i = 0; i != 2; i++) {
             this->idx++;

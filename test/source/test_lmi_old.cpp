@@ -13,7 +13,7 @@
 // #include <spdlog/sinks/stdout_sinks.h>
 // #include <spdlog/spdlog.h>
 // #include <optional>    // for optional
-#include <tuple>        // for tuple
+#include <tuple>  // for tuple
 #include <valarray>
 #include <vector>  // for vector
 
@@ -63,11 +63,11 @@ class MyOldOracle {
      * value.
      */
     auto assess_optim(const Vec& x, double& gamma) -> std::tuple<Cut, bool> {
-        auto *const cut1 = this->lmi1(x);
+        auto* const cut1 = this->lmi1(x);
         if (cut1 != nullptr) {
             return {*cut1, false};
         }
-        auto *const cut2 = this->lmi2(x);
+        auto* const cut2 = this->lmi2(x);
         if (cut2 != nullptr) {
             return {*cut2, false};
         }

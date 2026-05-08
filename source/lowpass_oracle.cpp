@@ -7,9 +7,8 @@
  * optimality conditions for filter specifications.
  */
 
-#include <cstddef>  // for size_t
-
 #include <cmath>                               // for pow, log10, M_PI, cos
+#include <cstddef>                             // for size_t
 #include <ellalgo/oracles/lowpass_oracle.hpp>  // for LowpassOracle, filter_...
 #include <tuple>                               // for tuple
 #include <valarray>                            // for valarray
@@ -183,7 +182,7 @@ auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut
  * boolean value.
  */
 auto LowpassOracle::assess_optim(const Vec& x, double& Spsq) -> std::tuple<ParallelCut, bool> {
-    auto *cut = this->assess_feas(x, Spsq);
+    auto* cut = this->assess_feas(x, Spsq);
     if (cut != nullptr) {
         return {*cut, false};
     }

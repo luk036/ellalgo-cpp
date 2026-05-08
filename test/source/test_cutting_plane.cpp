@@ -39,7 +39,7 @@ struct MyOracle2 {
         double f = x[0] + x[1];
         if (f > t) {
             return {{{1.0, 1.0}, f - t}, false};
-        }  
+        }
         t = f;
         return {{{-1.0, -1.0}, 0.0}, true};
     }

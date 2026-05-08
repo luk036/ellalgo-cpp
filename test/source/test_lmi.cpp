@@ -60,10 +60,10 @@ class MyLMIOracle {
      * value.
      */
     auto assess_optim(const Vec& x, double& gamma) -> std::tuple<Cut, bool> {
-        if (auto *const cut1 = this->lmi1(x)) {
+        if (auto* const cut1 = this->lmi1(x)) {
             return {*cut1, false};
         }
-        if (auto *const cut2 = this->lmi2(x)) {
+        if (auto* const cut2 = this->lmi2(x)) {
             return {*cut2, false};
         }
         const auto f0 = (this->c * x).sum();
