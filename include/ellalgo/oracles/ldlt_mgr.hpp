@@ -33,7 +33,7 @@ class LDLTMgr {
   public:
     Rng pos{0U, 0U};  //!< the rows where the process starts and stops
     Vec witness_vec;  //!< witness vector
-    size_t _n;  //!< dimension
+    size_t _n;        //!< dimension
 
   private:
     Matrix T;  //!< temporary storage
