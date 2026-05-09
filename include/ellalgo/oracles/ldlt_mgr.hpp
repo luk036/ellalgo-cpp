@@ -33,7 +33,7 @@ class LDLTMgr {
   public:
     Rng pos{0U, 0U};  //!< the rows where the process starts and stops
     Vec witness_vec;  //!< witness vector
-    const size_t _n;  //!< dimension
+    size_t _n;  //!< dimension
 
   private:
     Matrix T;  //!< temporary storage
@@ -49,6 +49,8 @@ class LDLTMgr {
     LDLTMgr(const LDLTMgr&) = delete;
     LDLTMgr& operator=(const LDLTMgr&) = delete;
     LDLTMgr(LDLTMgr&&) = default;
+    LDLTMgr& operator=(LDLTMgr&&) = delete;
+    ~LDLTMgr() = default;
 
     /**
      * @brief Perform LDLT Factorization

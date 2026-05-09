@@ -53,6 +53,10 @@ class ProfitOracle {
      *
      */
     ProfitOracle(const ProfitOracle&) = delete;
+    ProfitOracle& operator=(const ProfitOracle&) = delete;
+    ProfitOracle(ProfitOracle&&) = delete;
+    ProfitOracle& operator=(ProfitOracle&&) = delete;
+    ~ProfitOracle() = default;
 
     /** The `set_elasticities` function is a member function of the `ProfitOracle` class.
     It takes a `Vec` object `elasticities` as input and sets the `_elasticities` member variable

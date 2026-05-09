@@ -15,13 +15,13 @@ class EllCalcCore {
     /**
      * Member variables for EllCalcCore class.
      */
-    const double _n_f;
-    const double _n_plus_1;
-    const double _half_n;
-    const double _inv_n;
-    const double _n_sq;
-    const double _cst1;
-    const double _cst2;
+    double _n_f;
+    double _n_plus_1;
+    double _half_n;
+    double _inv_n;
+    double _n_sq;
+    double _cst1;
+    double _cst2;
 
   public:
     /**
@@ -41,6 +41,11 @@ class EllCalcCore {
           _n_sq{_n_f * _n_f},
           _cst1{_n_sq / (_n_sq - 1.0)},
           _cst2{2.0 / _n_plus_1} {}
+
+    // Rule of five: explicitly default destructor and assignment operators
+    ~EllCalcCore() noexcept = default;
+    EllCalcCore& operator=(const EllCalcCore&) noexcept = default;
+    EllCalcCore& operator=(EllCalcCore&&) noexcept = default;
 
     /**
      * Move constructor for EllCalcCore.

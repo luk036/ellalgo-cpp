@@ -14,6 +14,12 @@ class ell1d {
   public:
     using ArrayType = double;
 
+    // Rule of Five: explicitly default special member functions
+    ~ell1d() = default;
+    ell1d& operator=(const ell1d&) = default;
+    ell1d(ell1d&&) noexcept = default;
+    ell1d& operator=(ell1d&&) noexcept = default;
+
   private:
     double _r;
     double _xc;

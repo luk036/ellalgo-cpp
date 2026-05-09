@@ -27,7 +27,7 @@ template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle {
     LDLTMgr _mq;  ///< LDLT manager for matrix factorization
 
   private:
-    const std::vector<Mat>& _F;                          ///< Vector of matrices F₀, F₁, ..., Fₙ
+    const std::vector<Mat>& m_F;                          ///< Vector of matrices F₀, F₁, ..., Fₙ
     std::unique_ptr<Cut> cut = std::make_unique<Cut>();  ///< Storage for cut information
 
   public:
@@ -37,7 +37,7 @@ template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle {
      * @param[in] ndim Dimension of the decision space
      * @param[in] F Vector of matrices defining the LMI constraints
      */
-    Lmi0Oracle(size_t ndim, const std::vector<Mat>& F) : _mq(ndim), _F{F} {}
+    Lmi0Oracle(size_t ndim, const std::vector<Mat>& F) : _mq(ndim), m_F{F} {}
 
     /**
      * @brief Assess the feasibility of a given point
@@ -55,7 +55,7 @@ template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle {
         auto getA = [&n, &x, this](size_t i, size_t j) -> double {
             auto a = 0.0;
             for (auto k = 0U; k != n; ++k) {
-                a += this->_F[k](i, j) * x[k];
+                a += this->m_F[k](i, j) * x[k];
             }
             return a;
         };
@@ -67,7 +67,7 @@ template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle {
         auto ep = this->_mq.witness();  // call before sym_quad() !!!
         Arr036 g{x};
         for (auto i = 0U; i != n; ++i) {
-            g[i] = -this->_mq.sym_quad(this->_F[i]);
+            g[i] = -this->_mq.sym_quad(this->m_F[i]);
         }
         cut->first = std::move(g);
         cut->second = std::move(ep);

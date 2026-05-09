@@ -22,7 +22,7 @@ template <typename Arr> class EllStable {
     using ArrayType = Arr;
 
   private:
-    const size_t _n;
+    size_t _n;
     Arr _xc;
     EllCore _mgr;
 
@@ -63,6 +63,11 @@ template <typename Arr> class EllStable {
      * @param[in] E The parameter "E" is an rvalue reference to an object of type "EllStable".
      */
     EllStable(EllStable&& E) noexcept = default;
+
+    /**
+     * @brief Move assignment operator
+     */
+    auto operator=(EllStable&&) noexcept -> EllStable& = default;
 
     /**
      * @brief Destroy the EllStable object

@@ -13,6 +13,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 
 /**
@@ -158,7 +159,7 @@ inline Vector0 operator*(Vector0 v, double scalar) {
  * @param[in] v The vector to multiply
  * @return The resulting vector
  */
-inline Vector0 operator*(double scalar, Vector0 v) { return v * scalar; }
+inline Vector0 operator*(double scalar, Vector0 v) { return std::move(v) * scalar; }
 
 /**
  * @brief A simple matrix class for conjugate gradient calculations

@@ -47,6 +47,26 @@ template <typename T> class Vector2 {
     ~Vector2() = default;
 
     /**
+     * Copy constructor.
+     */
+    Vector2(const Vector2&) = default;
+
+    /**
+     * Copy assignment operator.
+     */
+    Vector2& operator=(const Vector2&) = default;
+
+    /**
+     * Move constructor.
+     */
+    Vector2(Vector2&&) noexcept = default;
+
+    /**
+     * Move assignment operator.
+     */
+    Vector2& operator=(Vector2&&) noexcept = default;
+
+    /**
      * Provides access to the elements of the Vector2 object.
      *
      * @param i The index of the element to access.

@@ -43,7 +43,7 @@ template <typename Arr> class Ell {
     using ArrayType = Arr;
 
   private:
-    const size_t _n;
+    size_t _n;
     Arr _xc;
     EllCore _mgr;
 
@@ -77,6 +77,14 @@ template <typename Arr> class Ell {
      * @param[in] E The parameter "E" is an rvalue reference to an object of type "Ell".
      */
     Ell(Ell&& E) noexcept = default;
+
+    /**
+     * @brief Move assignment operator.
+     *
+     * @param[in] E The parameter "E" is an rvalue reference to an object of type "Ell".
+     * @return Ell& Reference to this object.
+     */
+    auto operator=(Ell&& E) noexcept -> Ell& = default;
 
     /**
      * @brief Destroy the Ell object

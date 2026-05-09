@@ -111,16 +111,15 @@ inline auto cutting_plane_optim(OracleOptim& omega, SearchSpace& space, Num& gam
     -> std::tuple<CuttingPlaneArrayType<SearchSpace>, size_t> {
     auto x_best = invalid_value<CuttingPlaneArrayType<SearchSpace>>();
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
-        const auto __result1 = omega.assess_optim(space.xc(), gamma);
-        const auto& cut = std::get<0>(__result1);
-        const auto& shrunk = std::get<1>(__result1);
+        const auto _result1 = omega.assess_optim(space.xc(), gamma);
+        const auto& cut = std::get<0>(_result1);
+        const auto& shrunk = std::get<1>(_result1);
         const auto status = [&]() {
             if (shrunk) {  // best gamma obtained
                 x_best = space.xc();
                 return space.update_central_cut(cut);  // should update_central_cut
-            } else {
-                return space.update_bias_cut(cut);
             }
+            return space.update_bias_cut(cut);
         }();
         if (status != CutStatus::Success || space.tsq() < options.tolerance) {  // no more
             return {std::move(x_best), niter};
@@ -199,9 +198,9 @@ template <typename Oracle, typename Space>  //
 class BSearchAdaptor {
     using ArrayType = typename Space::ArrayType;
 
-    Oracle& _omega;
-    Space& _space;
-    const Options _options;
+    Oracle* _omega;
+    Space* _space;
+    Options _options;
 
   public:
     /**
@@ -220,14 +219,14 @@ class BSearchAdaptor {
      * @param[in]     options maximum iteration and error tolerance etc.
      */
     BSearchAdaptor(Oracle& omega, Space& space, const Options& options)
-        : _omega{omega}, _space{space}, _options{options} {}
+        : _omega{&omega}, _space{&space}, _options{options} {}
 
     /**
      * @brief Get the best x value.
      *
      * @return ArrayType The best x value.
      */
-    auto x_best() const -> ArrayType { return this->_space.xc(); }
+    auto x_best() const -> ArrayType { return this->_space->xc(); }
 
     /**
      * @brief
@@ -237,12 +236,12 @@ class BSearchAdaptor {
      * @return bool
      */
     template <typename Num> auto assess_bs(Num& gamma) -> bool {
-        Space space = this->_space.copy();  // copy
-        this->_omega.update(gamma);
-        const auto result = cutting_plane_feas(this->_omega, space, this->_options);
+        Space space = this->_space->copy();  // copy
+        this->_omega->update(gamma);
+        const auto result = cutting_plane_feas(*this->_omega, space, this->_options);
         auto x_feas = std::get<0>(result);
         if (x_feas.size() != 0U) {
-            this->_space.set_xc(x_feas);
+            this->_space->set_xc(x_feas);
             return true;
         }
         return false;

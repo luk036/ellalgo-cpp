@@ -2,6 +2,7 @@
 #pragma once
 
 #include <tuple>
+#include <utility>
 #include <valarray>
 
 #include "ell_calc.hpp"
@@ -111,6 +112,11 @@ class EllCore {
      *
      */
     EllCore(EllCore&& E) = default;
+
+    /**
+     * @brief Move assignment operator
+     */
+    EllCore& operator=(EllCore&&) = default;
 
     /**
      * @brief Destroy the EllCore object
@@ -282,16 +288,16 @@ class EllCore {
             return CutStatus::Success;
         }
 
-        auto __result = cut_strategy(beta, this->_tsq);
-        auto status = std::get<0>(__result);
+        auto _result = std::forward<Fn>(cut_strategy)(beta, this->_tsq);
+        auto status = std::get<0>(_result);
         if (status != CutStatus::Success) {
             return status;
         }
 
-        double rho;
-        double sigma;
-        double delta;
-        std::tie(rho, sigma, delta) = std::get<1>(__result);
+        double rho{};
+        double sigma{};
+        double delta{};
+        std::tie(rho, sigma, delta) = std::get<1>(_result);
 
         // n (n+1) / 2 + n
         const auto r = sigma / omega;
@@ -356,16 +362,16 @@ class EllCore {
 
         this->_tsq = this->_kappa * omega;
 
-        auto __result = cut_strategy(beta, this->_tsq);
-        auto status = std::get<0>(__result);
+        auto result = std::forward<Fn>(cut_strategy)(beta, this->_tsq);
+        auto status = std::get<0>(result);
         if (status != CutStatus::Success) {
             return status;
         }
 
-        double rho;
-        double sigma;
-        double delta;
-        std::tie(rho, sigma, delta) = std::get<1>(__result);
+        double rho{};
+        double sigma{};
+        double delta{};
+        std::tie(rho, sigma, delta) = std::get<1>(result);
 
         // Calculate the (L')^-1 * D^-1 * L^-1 * grad : (n-1)n / 2
         auto grad_t{invDinvLg};                     // initially
@@ -443,7 +449,7 @@ class EllCore {
      * @return The function `_update_cut_bias_cut` returns a tuple containing a `CutStatus` enum
      * value and another tuple containing three `double` values.
      */
-    auto _update_cut_central_cut(const double&, const double tsq) const
+    auto _update_cut_central_cut(const double& /*unused*/, const double tsq) const
         -> std::tuple<CutStatus, std::tuple<double, double, double>> {
         return this->_helper.calc_central_cut(tsq);
     }

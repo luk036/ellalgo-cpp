@@ -20,8 +20,8 @@ class EllCalc {
     bool use_parallel_cut = true;
 
   protected:
-    const double _n_f;
-    const EllCalcCore _helper;
+    double _n_f;
+    EllCalcCore _helper;
 
   public:
     /**
@@ -39,6 +39,16 @@ class EllCalc {
      * @param[in] E (move)
      */
     EllCalc(EllCalc&& E) = default;
+
+    /**
+     * @brief Copy assignment operator
+     */
+    EllCalc& operator=(const EllCalc& other) = default;
+
+    /**
+     * @brief Move assignment operator
+     */
+    EllCalc& operator=(EllCalc&& other) = default;
 
     /**
      * @brief Destroy the EllCalcobject
