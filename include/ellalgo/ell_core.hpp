@@ -353,11 +353,9 @@ class EllCore {
         }
 
         // calculate omega: n
-        auto gg_t{invDinvLg};  // initially
-        auto omega = 0.0;      // initially
+        auto omega = 0.0;
         for (auto i = 0U; i != this->_n; ++i) {
-            gg_t[i] *= invLg[i];
-            omega += gg_t[i];
+            omega += invDinvLg[i] * invLg[i];
         }
 
         this->_tsq = this->_kappa * omega;

@@ -3,7 +3,6 @@
 
 #include <cassert>  // for assert
 #include <cstddef>  // for size_t
-#include <functional>
 #include <utility>  // for pair
 #include <valarray>
 
@@ -73,23 +72,79 @@ class LDLTMgr {
     /**
      * @brief Perform LDLT Factorization (Lazy evaluation)
      *
+     * @tparam Fn callable type with signature double(size_t, size_t)
      * @param[in] get_matrix_elem function to access the elements of A
      * @return bool true if factorization was successful, false otherwise
      *
      * See also: factorize()
      */
-    auto factor(const std::function<double(size_t, size_t)>& get_matrix_elem) -> bool;
+    template <typename Fn>
+    auto factor(Fn&& get_matrix_elem) -> bool {
+        this->pos = {0U, 0U};
+        auto const& start = this->pos.first;
+        auto& stop = this->pos.second;
+
+        for (auto i = 0U; i != this->_n; ++i) {
+            auto d = get_matrix_elem(i, start);
+            for (auto j = start; j != i; ++j) {
+                this->T(j, i) = d;
+                this->T(i, j) = d / this->T(j, j);  // note: T(j, i) here!
+                auto s = j + 1;
+                d = get_matrix_elem(i, s);
+                for (auto k = start; k != s; ++k) {
+                    d -= this->T(i, k) * this->T(k, s);
+                }
+            }
+            this->T(i, i) = d;
+
+            if (d <= 0.0) {
+                stop = i + 1;
+                break;
+            }
+        }
+
+        return this->is_spd();
+    }
 
     /**
      * @brief Perform LDLT Factorization (Lazy evaluation)
      *
+     * @tparam Fn callable type with signature double(size_t, size_t)
      * @param[in] get_matrix_elem function to access the elements of A
      * @return bool true if factorization was successful, false otherwise
      *
      * See also: factorize()
      */
-    auto factor_with_allow_semidefinite(
-        const std::function<double(size_t, size_t)>& get_matrix_elem) -> bool;
+    template <typename Fn>
+    auto factor_with_allow_semidefinite(Fn&& get_matrix_elem) -> bool {
+        this->pos = {0U, 0U};
+        auto& start = this->pos.first;
+        auto& stop = this->pos.second;
+
+        for (auto i = 0U; i != this->_n; ++i) {
+            auto d = get_matrix_elem(i, start);
+            for (auto j = start; j != i; ++j) {
+                this->T(j, i) = d;
+                this->T(i, j) = d / this->T(j, j);  // note: T(j, i) here!
+                auto s = j + 1;
+                d = get_matrix_elem(i, s);
+                for (auto k = start; k != s; ++k) {
+                    d -= this->T(i, k) * this->T(k, s);
+                }
+            }
+            this->T(i, i) = d;
+
+            if (d < 0.0) {
+                stop = i + 1;
+                break;
+            }
+            if (d == 0.0) {
+                start = i + 1;
+                // restart at i + 1, special as an LMI oracle
+            }
+        }
+        return this->is_spd();
+    }
 
     /**
      * @brief Check if the matrix is symmetric positive definite.
