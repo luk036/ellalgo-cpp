@@ -44,6 +44,19 @@ enum class CutStatus {
 };
 
 /**
+ * @brief Result of a cutting-plane calculation
+ *
+ * POD struct replacing nested `std::tuple<CutStatus, tuple<double,double,double>>`.
+ * Enables register-passing and better inlining on all modern ABIs.
+ */
+struct CutResult {
+    CutStatus status;  ///< Status of the cut
+    double rho;        ///< Step size along gradient direction
+    double sigma;      ///< Scaling factor for matrix update
+    double delta;      ///< Contraction factor for ellipsoid volume
+};
+
+/**
  * @brief Information about the computation result
  *
  * This structure contains information about the computation,

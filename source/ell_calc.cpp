@@ -33,15 +33,15 @@
  * 4. delta: A double value representing the calculated delta.
  */
 auto EllCalc::calc_parallel_bias_cut(const double beta0, const double beta1, const double tsq) const
-    -> std::tuple<CutStatus, std::tuple<double, double, double>> {
+    -> CutResult {
     if (beta1 < beta0) {
-        return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
+        return {CutStatus::NoSoln, 0.0, 0.0, 0.0};  // no sol'n
     }
     if ((beta1 > 0 && tsq <= beta1 * beta1) || !this->use_parallel_cut) {
         return this->calc_bias_cut(beta0, tsq);
     }
-    auto&& result = this->_helper.calc_parallel_cut(beta0, beta1, tsq);
-    return {CutStatus::Success, result};
+    auto&& core = this->_helper.calc_parallel_cut(beta0, beta1, tsq);
+    return {CutStatus::Success, std::get<0>(core), std::get<1>(core), std::get<2>(core)};
 }
 
 /**
@@ -61,15 +61,15 @@ auto EllCalc::calc_parallel_bias_cut(const double beta0, const double beta1, con
  * 4. delta: A double value representing the calculated delta.
  */
 auto EllCalc::calc_parallel_central_cut(const double beta1, const double tsq) const
-    -> std::tuple<CutStatus, std::tuple<double, double, double>> {
+    -> CutResult {
     if (beta1 < 0.0) {
-        return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
+        return {CutStatus::NoSoln, 0.0, 0.0, 0.0};  // no sol'n
     }
     if (tsq <= beta1 * beta1 || !this->use_parallel_cut) {
         return this->calc_central_cut(tsq);
     }
-    auto&& result = this->_helper.calc_parallel_central_cut(beta1, tsq);
-    return {CutStatus::Success, result};
+    auto&& core = this->_helper.calc_parallel_central_cut(beta1, tsq);
+    return {CutStatus::Success, std::get<0>(core), std::get<1>(core), std::get<2>(core)};
     // this->_mu ???
 }
 
@@ -95,13 +95,13 @@ auto EllCalc::calc_parallel_central_cut(const double beta1, const double tsq) co
  * `CutStatus`, `double`, `double`, `double`.
  */
 auto EllCalc::calc_bias_cut(const double beta, const double tsq) const
-    -> std::tuple<CutStatus, std::tuple<double, double, double>> {
+    -> CutResult {
     assert(beta >= 0.0);
     if (tsq < beta * beta) {
-        return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
+        return {CutStatus::NoSoln, 0.0, 0.0, 0.0};  // no sol'n
     }
-    auto&& result = this->_helper.calc_bias_cut(beta, std::sqrt(tsq));
-    return {CutStatus::Success, result};
+    auto&& core = this->_helper.calc_bias_cut(beta, std::sqrt(tsq));
+    return {CutStatus::Success, std::get<0>(core), std::get<1>(core), std::get<2>(core)};
 }
 
 /**
@@ -123,12 +123,12 @@ auto EllCalc::calc_bias_cut(const double beta, const double tsq) const
  * 4. delta
  */
 auto EllCalc::calc_central_cut(const double tsq) const
-    -> std::tuple<CutStatus, std::tuple<double, double, double>> {
+    -> CutResult {
     // auto sigma = this->_c2;
     // auto rho = std::sqrt(tsq) / this->_nPlus1;
     // auto delta = this->_c1;
-    auto&& result = this->_helper.calc_central_cut(std::sqrt(tsq));
-    return {CutStatus::Success, result};
+    auto&& core = this->_helper.calc_central_cut(std::sqrt(tsq));
+    return {CutStatus::Success, std::get<0>(core), std::get<1>(core), std::get<2>(core)};
 }
 
 /**
@@ -147,10 +147,10 @@ auto EllCalc::calc_central_cut(const double tsq) const
  * std::tuple<double, double, double>>`.
  */
 auto EllCalc::calc_parallel_bias_cut_q(const double beta0, const double beta1,
-                                       const double tsq) const
-    -> std::tuple<CutStatus, std::tuple<double, double, double>> {
+                                        const double tsq) const
+    -> CutResult {
     if (beta1 < beta0) {
-        return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
+        return {CutStatus::NoSoln, 0.0, 0.0, 0.0};  // no sol'n
     }
 
     if ((beta1 > 0.0 && tsq <= beta1 * beta1) || !this->use_parallel_cut) {
@@ -160,10 +160,10 @@ auto EllCalc::calc_parallel_bias_cut_q(const double beta0, const double beta1,
     const auto b0b1 = beta0 * beta1;
     const auto eta = tsq + this->_n_f * b0b1;
     if (ELL_UNLIKELY(eta <= 0.0)) {
-        return {CutStatus::NoEffect, {0.0, 0.0, 1.0}};  // no effect
+        return {CutStatus::NoEffect, 0.0, 0.0, 1.0};  // no effect
     }
-    auto&& result = this->_helper.calc_parallel_cut_fast(beta0, beta1, tsq, b0b1, eta);
-    return {CutStatus::Success, result};
+    auto&& core = this->_helper.calc_parallel_cut_fast(beta0, beta1, tsq, b0b1, eta);
+    return {CutStatus::Success, std::get<0>(core), std::get<1>(core), std::get<2>(core)};
 }
 
 /**
@@ -178,15 +178,15 @@ auto EllCalc::calc_parallel_bias_cut_q(const double beta0, const double beta1,
  * `double`, `double`, `double`.
  */
 auto EllCalc::calc_bias_cut_q(const double beta, const double tsq) const
-    -> std::tuple<CutStatus, std::tuple<double, double, double>> {
+    -> CutResult {
     const auto tau = std::sqrt(tsq);
     if (tau < beta) {
-        return {CutStatus::NoSoln, {0.0, 0.0, 0.0}};  // no sol'n
+        return {CutStatus::NoSoln, 0.0, 0.0, 0.0};  // no sol'n
     }
     const auto eta = tau + this->_n_f * beta;
     if (ELL_UNLIKELY(eta <= 0.0)) {
-        return {CutStatus::NoEffect, {0.0, 0.0, 1.0}};  // no effect
+        return {CutStatus::NoEffect, 0.0, 0.0, 1.0};  // no effect
     }
-    auto&& result = this->_helper.calc_bias_cut_fast(beta, tau, eta);
-    return {CutStatus::Success, result};
+    auto&& core = this->_helper.calc_bias_cut_fast(beta, tau, eta);
+    return {CutStatus::Success, std::get<0>(core), std::get<1>(core), std::get<2>(core)};
 }

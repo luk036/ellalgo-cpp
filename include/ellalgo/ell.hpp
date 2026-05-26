@@ -187,14 +187,14 @@ template <typename Arr> class Ell {
         const auto& grad = cut.first;
         const auto& beta = cut.second;
         std::valarray<double> g(this->_n);
-        for (auto i = 0U; i != this->_n; ++i) {
+        for (size_t i = 0; i != this->_n; ++i) {
             g[i] = grad[i];
         }
 
         auto result = cut_strategy(g, beta);
 
         if (result == CutStatus::Success) {
-            for (auto i = 0U; i != this->_n; ++i) {
+            for (size_t i = 0; i != this->_n; ++i) {
                 this->_xc[i] -= g[i];
             }
         }

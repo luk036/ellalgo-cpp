@@ -40,6 +40,7 @@ class EllCore {
     Matrix _mq;
     EllCalc _helper;
     double _tsq{};
+    Vec _scratch;
 
   public:
     bool no_defer_trick = false;
@@ -70,8 +71,8 @@ class EllCore {
      * @param[in] ndim The parameter `ndim` represents the number of dimensions for the EllCore
      * object.
      */
-    EllCore(const double& kappa, Matrix&& mq, size_t ndim)
-        : _n{ndim}, _kappa{kappa}, _mq{std::move(mq)}, _helper{_n} {}
+    EllCore(double kappa, Matrix&& mq, size_t ndim)
+        : _n{ndim}, _kappa{kappa}, _mq{std::move(mq)}, _helper{_n}, _scratch(0.0, ndim) {}
 
   public:
     /**
@@ -259,10 +260,9 @@ class EllCore {
 
   private:
     /**
-     * @brief Update ellipsoid core function using the cut(s)
+     * @brief Update ellipsoid core using the cut(s)
      *
-     * The `_update_core` function is a private member function of the `EllCore` class. It is used
-     * to update the ellipsoid core function using a cutting plane.
+     * The cut_strategy callable must take (beta, tsq) and return a CutResult.
      *
      * @tparam T
      * @tparam Fn
@@ -274,8 +274,8 @@ class EllCore {
     template <typename T, typename Fn>
     auto _update_core(Vec& grad, const T& beta, Fn&& cut_strategy) -> CutStatus {
         std::valarray<double> grad_t(0.0, this->_n);
-        for (auto i = 0U; i != this->_n; ++i) {
-            for (auto j = 0U; j != this->_n; ++j) {
+        for (size_t i = 0; i != this->_n; ++i) {
+            for (size_t j = 0; j != this->_n; ++j) {
                 grad_t[i] += this->_mq(i, j) * grad[j];
             }
         }
@@ -288,44 +288,38 @@ class EllCore {
             return CutStatus::Success;
         }
 
-        auto _result = std::forward<Fn>(cut_strategy)(beta, this->_tsq);
-        auto status = std::get<0>(_result);
-        if (status != CutStatus::Success) {
-            return status;
+        auto result = std::forward<Fn>(cut_strategy)(beta, this->_tsq);
+        if (result.status != CutStatus::Success) {
+            return result.status;
         }
 
-        double rho{};
-        double sigma{};
-        double delta{};
-        std::tie(rho, sigma, delta) = std::get<1>(_result);
-
         // n (n+1) / 2 + n
-        const auto r = sigma / omega;
-        for (auto i = 0U; i != this->_n; ++i) {
+        const auto r = result.sigma / omega;
+        for (size_t i = 0; i != this->_n; ++i) {
             const auto rQg = r * grad_t[i];
-            for (auto j = 0U; j != i; ++j) {
+            for (size_t j = 0; j != i; ++j) {
                 this->_mq(i, j) -= rQg * grad_t[j];
                 this->_mq(j, i) = this->_mq(i, j);
             }
             this->_mq(i, i) -= rQg * grad_t[i];
         }
 
-        this->_kappa *= delta;
+        this->_kappa *= result.delta;
 
         if (this->no_defer_trick) {
             this->_mq *= this->_kappa;
             this->_kappa = 1.0;
         }
 
-        grad = grad_t * (rho / omega);
-        return status;  // g++-7 is ok
+        grad = grad_t * (result.rho / omega);
+        return result.status;
     }
 
     /**
-     * @brief Update ellipsoid core function using the cut(s)
+     * @brief Update ellipsoid core using the cut(s) — numerically stable LDL^T form
      *
-     * The `_update_stable_core` function is a private member function of the `EllCore` class. It is
-     * used to update the ellipsoid core function using a cutting plane.
+     * Uses LDL^T factorization instead of the direct Q-update in _update_core.
+     * The cut_strategy callable must take (beta, tsq) and return a CutResult.
      *
      * @tparam T
      * @tparam Fn
@@ -336,40 +330,31 @@ class EllCore {
      */
     template <typename T, typename Fn>
     auto _update_stable_core(Vec& g, const T& beta, Fn&& cut_strategy) -> CutStatus {
-        // Calculate L^-1 * grad: (n-1)*n/2 multiplications
-        auto invLg{g};  // initially
-        for (auto j = 0U; j != this->_n - 1; ++j) {
-            for (auto i = j + 1; i != this->_n; ++i) {
+        auto& invLg = this->_scratch;
+        invLg = g;
+        for (size_t j = 0; j != this->_n - 1; ++j) {
+            for (size_t i = j + 1; i != this->_n; ++i) {
                 this->_mq(j, i) = this->_mq(i, j) * invLg[j];
-                // keep for rank-one update
                 invLg[i] -= this->_mq(j, i);
             }
         }
 
-        // calculate inv(D)*inv(L)*grad: n
-        auto invDinvLg{invLg};  // initially
-        for (auto i = 0U; i != this->_n; ++i) {
+        auto invDinvLg{invLg};
+        for (size_t i = 0; i != this->_n; ++i) {
             invDinvLg[i] *= this->_mq(i, i);
         }
 
-        // calculate omega: n
         auto omega = 0.0;
-        for (auto i = 0U; i != this->_n; ++i) {
+        for (size_t i = 0; i != this->_n; ++i) {
             omega += invDinvLg[i] * invLg[i];
         }
 
         this->_tsq = this->_kappa * omega;
 
         auto result = std::forward<Fn>(cut_strategy)(beta, this->_tsq);
-        auto status = std::get<0>(result);
-        if (status != CutStatus::Success) {
-            return status;
+        if (result.status != CutStatus::Success) {
+            return result.status;
         }
-
-        double rho{};
-        double sigma{};
-        double delta{};
-        std::tie(rho, sigma, delta) = std::get<1>(result);
 
         // Calculate the (L')^-1 * D^-1 * L^-1 * grad : (n-1)n / 2
         auto grad_t{invDinvLg};                     // initially
@@ -380,17 +365,16 @@ class EllCore {
         }
 
         // rank-one update: 3*n + (n-1)*n/2
-        // const auto r = this->_sigma / omega;
-        const auto mu = sigma / (1.0 - sigma);
+        const auto mu = result.sigma / (1.0 - result.sigma);
         auto oldt = omega / mu;  // initially
         // const auto m = this->_n - 1;
         auto v{g};
-        for (auto j = 0U; j != this->_n; ++j) {
+        for (size_t j = 0; j != this->_n; ++j) {
             const auto p = v[j];
             const auto temp = invDinvLg[j];
             const auto newt = oldt + p * temp;
             const auto beta2 = temp / newt;
-            this->_mq(j, j) *= oldt / newt;  // update invD
+            this->_mq(j, j) *= oldt / newt;
             for (auto k = j + 1; k != this->_n; ++k) {
                 v[k] -= this->_mq(j, k);
                 this->_mq(k, j) += beta2 * v[k];
@@ -400,38 +384,32 @@ class EllCore {
         // const auto gamma = oldt + gg_t[m];
         // this->_mq(m, m) *= oldt / gamma; // update invD
         //
-        this->_kappa *= delta;
-        g = grad_t * (rho / omega);
-        return status;
+        this->_kappa *= result.delta;
+        g = grad_t * (result.rho / omega);
+        return result.status;
     }
 
     /**
-     * The function `_update_cut_bias_cut` calculates a deep cut using the `calc_bias_cut` function
-     * from the `_helper` object.
+     * @brief Delegate bias cut to EllCalc (single beta)
      *
-     * @param[in] beta The beta parameter is a constant value of type double.
-     * @param[in] tsq tsq is a constant value of type double.
-     *
-     * @return The function `_update_cut_bias_cut` returns a tuple containing a `CutStatus` enum
-     * value and another tuple containing three `double` values.
+     * @param[in] beta  Bias term
+     * @param[in] tsq   Squared radius
+     * @return CutResult
      */
-    auto _update_cut_bias_cut(const double beta, const double tsq) const
-        -> std::tuple<CutStatus, std::tuple<double, double, double>> {
+    auto _update_cut_bias_cut(double beta, double tsq) const -> CutResult {
         return this->_helper.calc_bias_cut(beta, tsq);
     }
 
     /**
-     * The function `_update_cut_bias_cut` calculates the deep cut value based on the beta values
-     * and tsq parameter.
+     * @brief Delegate bias cut to EllCalc (valarray beta = parallel cut)
      *
-     * @param[in] beta A valarray of double values representing the beta values.
-     * @param[in] tsq tsq is a constant value of type double.
+     * Dispatches to calc_parallel_bias_cut when beta.size() ≥ 2.
      *
-     * @return a tuple containing a `CutStatus` enum value and another tuple containing three
-     * `double` values.
+     * @param[in] beta  Vector containing [beta0, beta1] for parallel cut
+     * @param[in] tsq   Squared radius
+     * @return CutResult
      */
-    auto _update_cut_bias_cut(const std::valarray<double>& beta, const double tsq) const
-        -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
+    auto _update_cut_bias_cut(const std::valarray<double>& beta, double tsq) const -> CutResult {
         if (beta.size() < 2) {
             return this->_helper.calc_bias_cut(beta[0], tsq);
         }
@@ -439,31 +417,25 @@ class EllCore {
     }
 
     /**
-     * The function `_update_cut_central_cut` calculates a central cut using the `calc_central_cut`
-     * function from the `_helper` object.
+     * @brief Delegate central cut to EllCalc (single beta, unused)
      *
-     * @param[in] tsq tsq is a constant value of type double.
-     *
-     * @return The function `_update_cut_bias_cut` returns a tuple containing a `CutStatus` enum
-     * value and another tuple containing three `double` values.
+     * @param[in] tsq   Squared radius
+     * @return CutResult
      */
-    auto _update_cut_central_cut(const double& /*unused*/, const double tsq) const
-        -> std::tuple<CutStatus, std::tuple<double, double, double>> {
+    auto _update_cut_central_cut(double /*unused*/, double tsq) const -> CutResult {
         return this->_helper.calc_central_cut(tsq);
     }
 
     /**
-     * The function `_update_cut_central_cut` calculates the central cut value based on the beta
-     * values and tsq parameter.
+     * @brief Delegate central cut to EllCalc (valarray beta = parallel cut)
      *
-     * @param[in] beta A valarray of double values representing the beta values.
-     * @param[in] tsq tsq is a constant value of type double.
+     * Dispatches to calc_parallel_central_cut when beta.size() ≥ 2.
      *
-     * @return a tuple containing a `CutStatus` enum value and another tuple containing three
-     * `double` values.
+     * @param[in] beta  Vector containing [beta0, beta1] for parallel cut
+     * @param[in] tsq   Squared radius
+     * @return CutResult
      */
-    auto _update_cut_central_cut(const std::valarray<double>& beta, const double tsq) const
-        -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
+    auto _update_cut_central_cut(const std::valarray<double>& beta, double tsq) const -> CutResult {
         if (beta.size() < 2) {
             return this->_helper.calc_central_cut(tsq);
         }
@@ -471,32 +443,26 @@ class EllCore {
     }
 
     /**
-     * The function `_update_cut_q` calculates a deep cut q using the `calc_bias_cut_q` function
-     * from the `_helper` object.
+     * @brief Delegate bias-cut-Q to EllCalc (single beta)
      *
-     * @param[in] beta The beta parameter is a constant value of type double.
-     * @param[in] tsq tsq is a constant value of type double.
-     *
-     * @return The function `_update_cut_bias_cut` returns a tuple containing a `CutStatus` enum
-     * value and another tuple containing three `double` values.
+     * @param[in] beta  Bias term
+     * @param[in] tsq   Squared radius
+     * @return CutResult
      */
-    auto _update_cut_q(const double beta, const double tsq) const
-        -> std::tuple<CutStatus, std::tuple<double, double, double>> {
+    auto _update_cut_q(double beta, double tsq) const -> CutResult {
         return this->_helper.calc_bias_cut_q(beta, tsq);
     }
 
     /**
-     * The function `_update_cut_q` calculates the deep cut q value based on the beta values and tsq
-     * parameter.
+     * @brief Delegate bias-cut-Q to EllCalc (valarray beta = parallel cut)
      *
-     * @param[in] beta A valarray of double values representing the beta values.
-     * @param[in] tsq tsq is a constant value of type double.
+     * Dispatches to calc_parallel_bias_cut_q when beta.size() ≥ 2.
      *
-     * @return a tuple containing a `CutStatus` enum value and another tuple containing three
-     * `double` values.
+     * @param[in] beta  Vector containing [beta0, beta1] for parallel cut
+     * @param[in] tsq   Squared radius
+     * @return CutResult
      */
-    auto _update_cut_q(const std::valarray<double>& beta, const double tsq) const
-        -> std::tuple<CutStatus, std::tuple<double, double, double>> {  // parallel cut
+    auto _update_cut_q(const std::valarray<double>& beta, double tsq) const -> CutResult {
         if (beta.size() < 2) {
             return this->_helper.calc_bias_cut_q(beta[0], tsq);
         }

@@ -1,12 +1,9 @@
 #pragma once
 
 #include <cassert>
-#include <tuple>
 
 #include "ell_calc_core.hpp"
-
-// Forward declaration
-enum class CutStatus;
+#include "ell_config.hpp"
 
 /**
  * @brief Ellipsoid Search Space
@@ -66,78 +63,73 @@ class EllCalc {
     EllCalc(const EllCalc& E) = default;
 
     /**
-     * @brief Calculate a new ellipsoid under a parallel cut
+     * @brief Parallel deep cut
      *
-     *        g' (x - xc) + beta0 \le 0
-     *        g' (x - xc) + beta1 \ge 0
+     * Two parallel constraints: beta0 ≤ g'(x - xc) ≤ beta1.
+     * Falls back to calc_bias_cut when parallel cut is ineffective.
      *
-     * @param[in] beta0
-     * @param[in] beta1
-     * @param[in] tsq
-     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
+     * @param[in] beta0  Lower bound
+     * @param[in] beta1  Upper bound
+     * @param[in] tsq    Squared ellipsoid radius (τ²)
+     * @return CutResult with rho, sigma, delta
      */
-    auto calc_parallel_bias_cut(const double beta0, const double beta1, const double tsq) const
-        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
+    auto calc_parallel_bias_cut(double beta0, double beta1, double tsq) const -> CutResult;
 
     /**
-     * @brief Calculate new ellipsoid under Parallel Cut, one of them is central
+     * @brief Parallel central cut
      *
-     *        g' (x - xc) \le 0
-     *        g' (x - xc) + beta1 \ge 0
+     * One central + one parallel: 0 ≤ g'(x - xc) ≤ beta1.
+     * Falls back to calc_central_cut when parallel cut is ineffective.
      *
-     * @param[in] beta1
-     * @param[in] tsq
-     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
+     * @param[in] beta1  Upper bound
+     * @param[in] tsq    Squared ellipsoid radius (τ²)
+     * @return CutResult with rho, sigma, delta
      */
-    auto calc_parallel_central_cut(const double beta1, const double tsq) const
-        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
+    auto calc_parallel_central_cut(double beta1, double tsq) const -> CutResult;
 
     /**
-     * @brief Calculate new ellipsoid under Deep Cut
+     * @brief Deep (bias) cut
      *
-     *        g' (x - xc) + beta \le 0
+     * Single constraint: g'(x - xc) + beta ≤ 0.
      *
-     * @param[in] beta
-     * @param[in] tsq
-     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
+     * @param[in] beta  Bias term (≥ 0)
+     * @param[in] tsq   Squared ellipsoid radius (τ²)
+     * @return CutResult with rho, sigma, delta
      */
-    auto calc_bias_cut(const double beta, const double tsq) const
-        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
+    auto calc_bias_cut(double beta, double tsq) const -> CutResult;
 
     /**
-     * @brief Calculate new ellipsoid under Central Cut
+     * @brief Central cut
      *
-     *        g' (x - xc) \le 0
+     * Single constraint passing through center: g'(x - xc) ≤ 0.
      *
-     * @param[in] tsq
-     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
+     * @param[in] tsq  Squared ellipsoid radius (τ²)
+     * @return CutResult with rho, sigma, delta
      */
-    auto calc_central_cut(const double tsq) const
-        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
+    auto calc_central_cut(double tsq) const -> CutResult;
 
     /**
-     * @brief Calculate new ellipsoid under Parallel Cut
+     * @brief Parallel deep cut (Q-version for discrete optimization)
      *
-     *        g' (x - xc) + beta0 \le 0
-     *        g' (x - xc) + beta1 \ge 0
+     * Two parallel constraints with alternative fallback (NoEffect).
+     * Used by cutting_plane_optim_q for discrete convex problems.
      *
-     * @param[in] beta0
-     * @param[in] beta1
-     * @param[in] tsq
-     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
+     * @param[in] beta0  Lower bound
+     * @param[in] beta1  Upper bound
+     * @param[in] tsq    Squared ellipsoid radius (τ²)
+     * @return CutResult with rho, sigma, delta
      */
-    auto calc_parallel_bias_cut_q(const double beta0, const double beta1, const double tsq) const
-        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
+    auto calc_parallel_bias_cut_q(double beta0, double beta1, double tsq) const -> CutResult;
 
     /**
-     * @brief Calculate new ellipsoid under Deep Cut
+     * @brief Deep cut (Q-version for discrete optimization)
      *
-     *        g' (x - xc) + beta \le 0
+     * Single constraint with NoEffect fallback (instead of NoSoln).
+     * Used by cutting_plane_optim_q for discrete convex problems.
      *
-     * @param[in] beta
-     * @param[in] tsq
-     * @return std::tuple<CutStatus, std::tuple<double, double, double>>
+     * @param[in] beta  Bias term
+     * @param[in] tsq   Squared ellipsoid radius (τ²)
+     * @return CutResult with rho, sigma, delta
      */
-    auto calc_bias_cut_q(const double beta, const double tsq) const
-        -> std::tuple<CutStatus, std::tuple<double, double, double>>;
+    auto calc_bias_cut_q(double beta, double tsq) const -> CutResult;
 };  // } EllCalc
