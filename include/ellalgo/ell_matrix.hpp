@@ -64,8 +64,7 @@ class Matrix {
      * @param[in] ndim  Number of rows/columns
      * @param[in] init  Fill value (default 0.0)
      */
-    explicit Matrix(std::size_t ndim, double init = 0.0)
-        : ndim{ndim}, data(ndim * ndim, init) {}
+    explicit Matrix(std::size_t ndim, double init = 0.0) : ndim{ndim}, data(ndim * ndim, init) {}
 
     /** @brief Reset all elements to value */
     void clear(double value = 0.0) { std::fill(this->data.begin(), this->data.end(), value); }
@@ -100,9 +99,7 @@ class Matrix {
     }
 
     /** @brief Mutable view of the diagonal (stride = ndim + 1) */
-    SliceView diagonal() {
-        return SliceView(this->data.data(), this->ndim + 1, this->ndim);
-    }
+    SliceView diagonal() { return SliceView(this->data.data(), this->ndim + 1, this->ndim); }
 
     /** @brief Mutable view of row r (contiguous, stride = 1) */
     SliceView row(std::size_t r) {

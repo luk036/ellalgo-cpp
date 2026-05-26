@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
-#include <ellalgo/arr.hpp>
+
 #include <cmath>
+#include <ellalgo/arr.hpp>
 
 TEST_CASE("Arr: 1D construction") {
     Arr a(5);
@@ -9,7 +10,9 @@ TEST_CASE("Arr: 1D construction") {
     CHECK(!a.is_2d());
 
     Arr b(3);
-    b(0) = 1.5; b(1) = 1.5; b(2) = 1.5;
+    b(0) = 1.5;
+    b(1) = 1.5;
+    b(2) = 1.5;
     CHECK(b(0) == 1.5);
     CHECK(b(2) == 1.5);
 }
@@ -168,14 +171,16 @@ TEST_CASE("Arr: where") {
 TEST_CASE("Arr: dot product (matrix-vector)") {
     // A = [[1,2],[3,4]], x = [5,6]
     auto A = Arr(2, 2);
-    A(0, 0) = 1; A(0, 1) = 2;
-    A(1, 0) = 3; A(1, 1) = 4;
+    A(0, 0) = 1;
+    A(0, 1) = 2;
+    A(1, 0) = 3;
+    A(1, 1) = 4;
     auto x = Arr{5.0, 6.0};
 
     auto y = dot(A, x);
     CHECK(y.size() == 2);
-    CHECK(y(0) == 1*5 + 2*6);
-    CHECK(y(1) == 3*5 + 4*6);
+    CHECK(y(0) == 1 * 5 + 2 * 6);
+    CHECK(y(1) == 3 * 5 + 4 * 6);
 }
 
 TEST_CASE("Arr: outer product") {
@@ -204,8 +209,7 @@ TEST_CASE("Arr: concatenate") {
 TEST_CASE("Arr: view") {
     auto A = Arr(3, 4);
     for (size_t i = 0; i < 3; ++i)
-        for (size_t j = 0; j < 4; ++j)
-            A(i, j) = double(i * 4 + j);
+        for (size_t j = 0; j < 4; ++j) A(i, j) = double(i * 4 + j);
 
     auto sub = view(A, Range(1, 3), Range(0, 2));
     CHECK(sub.rows() == 2);
@@ -255,7 +259,9 @@ TEST_CASE("Arr: operator[] for EllAlgo compatibility") {
 
 TEST_CASE("Arr: data pointer") {
     Arr a(3);
-    a(0) = 1.0; a(1) = 1.0; a(2) = 1.0;
+    a(0) = 1.0;
+    a(1) = 1.0;
+    a(2) = 1.0;
     auto* ptr = a.data();
     CHECK(ptr[0] == 1.0);
     ptr[1] = 2.0;

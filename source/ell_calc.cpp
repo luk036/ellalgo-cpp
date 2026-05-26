@@ -60,8 +60,7 @@ auto EllCalc::calc_parallel_bias_cut(const double beta0, const double beta1, con
  * 3. sigma: A double value representing the calculated sigma.
  * 4. delta: A double value representing the calculated delta.
  */
-auto EllCalc::calc_parallel_central_cut(const double beta1, const double tsq) const
-    -> CutResult {
+auto EllCalc::calc_parallel_central_cut(const double beta1, const double tsq) const -> CutResult {
     if (beta1 < 0.0) {
         return {CutStatus::NoSoln, 0.0, 0.0, 0.0};  // no sol'n
     }
@@ -94,8 +93,7 @@ auto EllCalc::calc_parallel_central_cut(const double beta1, const double tsq) co
  * @return The function `calc_bias_cut` returns a tuple containing four values:
  * `CutStatus`, `double`, `double`, `double`.
  */
-auto EllCalc::calc_bias_cut(const double beta, const double tsq) const
-    -> CutResult {
+auto EllCalc::calc_bias_cut(const double beta, const double tsq) const -> CutResult {
     assert(beta >= 0.0);
     if (tsq < beta * beta) {
         return {CutStatus::NoSoln, 0.0, 0.0, 0.0};  // no sol'n
@@ -122,8 +120,7 @@ auto EllCalc::calc_bias_cut(const double beta, const double tsq) const
  * 3. sigma
  * 4. delta
  */
-auto EllCalc::calc_central_cut(const double tsq) const
-    -> CutResult {
+auto EllCalc::calc_central_cut(const double tsq) const -> CutResult {
     // auto sigma = this->_c2;
     // auto rho = std::sqrt(tsq) / this->_nPlus1;
     // auto delta = this->_c1;
@@ -147,8 +144,7 @@ auto EllCalc::calc_central_cut(const double tsq) const
  * std::tuple<double, double, double>>`.
  */
 auto EllCalc::calc_parallel_bias_cut_q(const double beta0, const double beta1,
-                                        const double tsq) const
-    -> CutResult {
+                                       const double tsq) const -> CutResult {
     if (beta1 < beta0) {
         return {CutStatus::NoSoln, 0.0, 0.0, 0.0};  // no sol'n
     }
@@ -177,8 +173,7 @@ auto EllCalc::calc_parallel_bias_cut_q(const double beta0, const double beta1,
  * @return The function `calc_bias_cut_q` returns a tuple containing four values: `CutStatus`,
  * `double`, `double`, `double`.
  */
-auto EllCalc::calc_bias_cut_q(const double beta, const double tsq) const
-    -> CutResult {
+auto EllCalc::calc_bias_cut_q(const double beta, const double tsq) const -> CutResult {
     const auto tau = std::sqrt(tsq);
     if (tau < beta) {
         return {CutStatus::NoSoln, 0.0, 0.0, 0.0};  // no sol'n
