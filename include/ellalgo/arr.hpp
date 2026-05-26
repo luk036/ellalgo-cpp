@@ -24,9 +24,10 @@ class Arr {
     Arr() = default;
 
     explicit Arr(size_t n) : _data(n, 0.0), _rows(n), _cols(0) {}
-    Arr(size_t n, double val) : _data(n, val), _rows(n), _cols(0) {}
     Arr(size_t r, size_t c) : _data(r * c, 0.0), _rows(r), _cols(c) {}
     Arr(size_t r, size_t c, double val) : _data(r * c, val), _rows(r), _cols(c) {}
+    // Note: Arr(size_t, double) removed to avoid ambiguity with Arr(size_t, size_t).
+    // Use Arr(n) / zeros(n) for zero-initialized 1D arrays.
     Arr(std::initializer_list<double> il) : _data(il), _rows(il.size()), _cols(0) {}
     explicit Arr(std::vector<double> v) : _data(std::move(v)), _rows(_data.size()), _cols(0) {}
 
@@ -130,8 +131,8 @@ inline Arr view(const Arr& a, const Range& rows) {
 // ---------------------------------------------------------------------------
 // Builder functions
 // ---------------------------------------------------------------------------
-inline Arr zeros(size_t n)                { return Arr(n, 0.0); }
-inline Arr zeros(size_t r, size_t c)      { return Arr(r, c, 0.0); }
+inline Arr zeros(size_t n)                { Arr a(n); return a; }
+inline Arr zeros(size_t r, size_t c)      { return Arr(r, c); }
 inline Arr ones(size_t r, size_t c)       { return Arr(r, c, 1.0); }
 
 inline Arr linspace(double start, double end, size_t n) {
