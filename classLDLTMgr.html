@@ -84,11 +84,13 @@
             </dt>
             <dd>Perform LDLT Factorization.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aa15b2340f83c901f5f214bedbb07855f" class="m-doc">factor</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::function&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>(<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>, <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>)&gt;&amp; get_matrix_elem) -&gt; bool -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Fn</a>&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a30e5131261b9ba4e6e8ee433cc453de4" class="m-doc">factor</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Fn</a>&amp;&amp; get_matrix_elem) -&gt; bool -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>Perform LDLT Factorization (Lazy evaluation)</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aee4caecda02beb560520a4a02ffb3444" class="m-doc">factor_with_allow_semidefinite</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::function&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>(<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>, <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>)&gt;&amp; get_matrix_elem) -&gt; bool -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
+              <div class="m-doc-template">template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Fn</a>&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a955a59134842a07987788a6f43a634f5" class="m-doc">factor_with_allow_semidefinite</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Fn</a>&amp;&amp; get_matrix_elem) -&gt; bool -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a></span>
             </dt>
             <dd>Perform LDLT Factorization (Lazy evaluation)</dd>
             <dt>
@@ -127,8 +129,8 @@
               Vec <a href="#ae5b03da1529a27964723627bceb43166" class="m-doc-self">witness_vec</a>
             </dt>
             <dd>witness vector</dd>
-            <dt id="ad30dd7a02d63bd650296fb0d23878103">
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> <a href="#ad30dd7a02d63bd650296fb0d23878103" class="m-doc-self">_n</a>
+            <dt id="ae4a6101a03bc17eb2eda83735977b0c4">
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> <a href="#ae4a6101a03bc17eb2eda83735977b0c4" class="m-doc-self">_n</a>
             </dt>
             <dd>dimension</dd>
           </dl>
@@ -173,9 +175,12 @@
             </table>
 <p>The <code>factorize</code> function is a template function that takes a symmetric matrix <code>A</code> as input and performs the LDLT factorization on it. It calls the <code>factor</code> function with a lambda function as an argument. The lambda function takes the indices <code>i</code> and <code>j</code> and returns the element <code>A(i, j)</code> of the matrix <code>A</code>. The <code>factor</code> function performs the actual factorization using the provided lambda function. The <code>factorize</code> function returns a boolean value indicating whether the factorization was successful or not.</p>
           </div></section>
-          <section class="m-doc-details" id="aa15b2340f83c901f5f214bedbb07855f"><div>
+          <section class="m-doc-details" id="a30e5131261b9ba4e6e8ee433cc453de4"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa15b2340f83c901f5f214bedbb07855f" class="m-doc-self">factor</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::function&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>(<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>, <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>)&gt;&amp; get_matrix_elem) -&gt; bool</span></span>
+              <div class="m-doc-template">
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Fn</a>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a30e5131261b9ba4e6e8ee433cc453de4" class="m-doc-self">factor</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Fn</a>&amp;&amp; get_matrix_elem) -&gt; bool</span></span>
             </h3>
             <p>Perform LDLT Factorization (Lazy evaluation)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -197,9 +202,12 @@
             </table>
 <p>See also: <a href="classLDLTMgr.html#a2af45dc9628f487ab821aff6f3fc0794" class="m-doc">factorize()</a></p>
           </div></section>
-          <section class="m-doc-details" id="aee4caecda02beb560520a4a02ffb3444"><div>
+          <section class="m-doc-details" id="a955a59134842a07987788a6f43a634f5"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aee4caecda02beb560520a4a02ffb3444" class="m-doc-self">factor_with_allow_semidefinite</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> std::function&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>(<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>, <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a>)&gt;&amp; get_matrix_elem) -&gt; bool</span></span>
+              <div class="m-doc-template">
+                template&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">typename</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Fn</a>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">auto</a> LDLTMgr::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a955a59134842a07987788a6f43a634f5" class="m-doc-self">factor_with_allow_semidefinite</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">Fn</a>&amp;&amp; get_matrix_elem) -&gt; bool</span></span>
             </h3>
             <p>Perform LDLT Factorization (Lazy evaluation)</p>
             <table class="m-table m-fullwidth m-flat">

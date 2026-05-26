@@ -51,6 +51,7 @@
         <h1>
           Matrix <span class="m-thin">class</span>
         </h1>
+        <p>Square matrix with flat std::vector&lt;double&gt; storage.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -63,75 +64,72 @@
             </li>
           </ul>
         </nav>
-<p>Square matrix</p>
+<p>Provides element access via operator()(row, col) and strided views (row, column, diagonal) via <a href="classSliceView.html" class="m-doc">SliceView</a>, which supports assignment from valarray, scalar fill, element access, and implicit valarray conversion — matching the original std::slice_array&lt;double&gt; API.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ad3bbb84c0f82154354f09dd3fbedd203" class="m-doc">Matrix</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> ndim,
+              <span class="m-doc-wrap-bumper"><a href="#af14b9bac2a5252d6fc2820cc78e9f9e5" class="m-doc">Matrix</a>(</span><span class="m-doc-wrap">std::size_t ndim,
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> init = 0.0) <span class="m-label m-flat m-info">explicit</span> </span>
             </dt>
-            <dd></dd>
+            <dd>Construct an ndim × ndim matrix.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9fe8ba81567a259d389d2f05d74848ff" class="m-doc">clear</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> value = 0.0) -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">void</a></span>
+            <dt id="a9fe8ba81567a259d389d2f05d74848ff">
+              <span class="m-doc-wrap-bumper">auto <a href="#a9fe8ba81567a259d389d2f05d74848ff" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> value = 0.0) -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">void</a></span>
             </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a6b3e290ca2ce684e96bbbddfec0c3bc6" class="m-doc">operator()</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> row,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> col) -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp;</span>
+            <dd>Reset all elements to value.</dd>
+            <dt id="a8f7c080fa668e781f6a3f4982545635c">
+              <span class="m-doc-wrap-bumper">auto <a href="#a8f7c080fa668e781f6a3f4982545635c" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">std::size_t row,
+              std::size_t col) -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp;</span>
             </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0b1dc9bab8449403ef3a36c304fba675" class="m-doc">operator()</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> row,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> col) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp;</span>
+            <dd>Access element (row, col) — mutable.</dd>
+            <dt id="af76b0cde675db7b6c0d8a0356175e34b">
+              <span class="m-doc-wrap-bumper">auto <a href="#af76b0cde675db7b6c0d8a0356175e34b" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">std::size_t row,
+              std::size_t col) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp;</span>
             </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#abce5ed7ac68a19d050db43716a6dac37" class="m-doc">operator*=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> alpha) -&gt; <a href="classMatrix.html" class="m-doc">Matrix</a>&amp;</span>
+            <dd>Access element (row, col) — const.</dd>
+            <dt id="abce5ed7ac68a19d050db43716a6dac37">
+              <span class="m-doc-wrap-bumper">auto <a href="#abce5ed7ac68a19d050db43716a6dac37" class="m-doc-self">operator*=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> alpha) -&gt; <a href="classMatrix.html" class="m-doc">Matrix</a>&amp;</span>
             </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9046133abcc3c3cd5f8bfd82637e2ab6" class="m-doc">operator*</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> alpha) const -&gt; <a href="classMatrix.html" class="m-doc">Matrix</a></span>
+            <dd>Scale all elements by alpha.</dd>
+            <dt id="a9046133abcc3c3cd5f8bfd82637e2ab6">
+              <span class="m-doc-wrap-bumper">auto <a href="#a9046133abcc3c3cd5f8bfd82637e2ab6" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> alpha) const -&gt; <a href="classMatrix.html" class="m-doc">Matrix</a></span>
             </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a80cb34cb249d96168c7f25ed1cc5c675" class="m-doc">identity</a>(</span><span class="m-doc-wrap">) -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">void</a></span>
+            <dd>Return a scaled copy.</dd>
+            <dt id="a80cb34cb249d96168c7f25ed1cc5c675">
+              <span class="m-doc-wrap-bumper">auto <a href="#a80cb34cb249d96168c7f25ed1cc5c675" class="m-doc-self">identity</a>(</span><span class="m-doc-wrap">) -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">void</a></span>
             </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad72d577d4b454c42376fbdebb36c6d5e" class="m-doc">diagonal</a>(</span><span class="m-doc-wrap">) -&gt; std::slice_array&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;</span>
+            <dd>Set to identity matrix.</dd>
+            <dt id="af2b508579a83374064df12de2f832417">
+              <span class="m-doc-wrap-bumper">auto <a href="#af2b508579a83374064df12de2f832417" class="m-doc-self">diagonal</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classSliceView.html" class="m-doc">SliceView</a></span>
             </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad819ad76774d246d72d8aee70cfce29d" class="m-doc">secondary_diagonal</a>(</span><span class="m-doc-wrap">) -&gt; std::slice_array&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;</span>
+            <dd>Mutable view of the diagonal (stride = ndim + 1)</dd>
+            <dt id="acbd856c3222889e6e6091136f4ab17d0">
+              <span class="m-doc-wrap-bumper">auto <a href="#acbd856c3222889e6e6091136f4ab17d0" class="m-doc-self">row</a>(</span><span class="m-doc-wrap">std::size_t r) -&gt; <a href="classSliceView.html" class="m-doc">SliceView</a></span>
             </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a6b54ccf6e663f9d9638845039a5d289c" class="m-doc">row</a>(</span><span class="m-doc-wrap">std::size_t row) -&gt; std::slice_array&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;</span>
+            <dd>Mutable view of row r (contiguous, stride = 1)</dd>
+            <dt id="a7f6e70c1d6cedeab84d2dafcdc0d88bf">
+              <span class="m-doc-wrap-bumper">auto <a href="#a7f6e70c1d6cedeab84d2dafcdc0d88bf" class="m-doc-self">column</a>(</span><span class="m-doc-wrap">std::size_t c) -&gt; <a href="classSliceView.html" class="m-doc">SliceView</a></span>
             </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a173be4f0bd28c2f7866852daaf6b8810" class="m-doc">column</a>(</span><span class="m-doc-wrap">std::size_t col) -&gt; std::slice_array&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt;</span>
+            <dd>Mutable view of column c (strided, stride = ndim)</dd>
+            <dt id="ab583aa60184abad002a2c2b72197a879">
+              <span class="m-doc-wrap-bumper">auto <a href="#ab583aa60184abad002a2c2b72197a879" class="m-doc-self">trace</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a></span>
             </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab583aa60184abad002a2c2b72197a879" class="m-doc">trace</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a></span>
-            </dt>
-            <dd></dd>
+            <dd>Sum of diagonal elements.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ad3bbb84c0f82154354f09dd3fbedd203"><div>
+          <section class="m-doc-details" id="af14b9bac2a5252d6fc2820cc78e9f9e5"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> Matrix::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad3bbb84c0f82154354f09dd3fbedd203" class="m-doc-self">Matrix</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> ndim,
+              <span class="m-doc-wrap-bumper"> Matrix::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af14b9bac2a5252d6fc2820cc78e9f9e5" class="m-doc-self">Matrix</a>(</span><span class="m-doc-wrap">std::size_t ndim,
               <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> init = 0.0) <span class="m-label m-info">explicit</span> </span></span>
             </h3>
+            <p>Construct an ndim × ndim matrix.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -139,266 +137,14 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">ndim&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>- The dimension of the matrix (number of rows/columns)</td>
+                  <td>Number of rows/columns</td>
                 </tr>
                 <tr>
                   <td>init&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>- Optional initial value for all elements. Default is 0.0.</td>
+                  <td>Fill value (default 0.0)</td>
                 </tr>
               </tbody>
             </table>
-<p>Constructor to create a new <a href="classMatrix.html" class="m-doc">Matrix</a> object.</p><p>Example: <code class="m-code"><span class="n">Matrix</span><span class="w"> </span><span class="nf">A</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span></code></p>
-          </div></section>
-          <section class="m-doc-details" id="a9fe8ba81567a259d389d2f05d74848ff"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">void</a> Matrix::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9fe8ba81567a259d389d2f05d74848ff" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> value = 0.0)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">value&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>- The value to set all elements to. Defaults to 0.0.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Sets all elements of the matrix to the given value.</p><p>Example:</p><pre class="m-code"><span class="n">Matrix</span><span class="w"> </span><span class="nf">A</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-<span class="n">A</span><span class="p">.</span><span class="n">clear</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span></pre>
-          </div></section>
-          <section class="m-doc-details" id="a6b3e290ca2ce684e96bbbddfec0c3bc6"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; Matrix::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6b3e290ca2ce684e96bbbddfec0c3bc6" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> row,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> col)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">row&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>- Row index to access</td>
-                </tr>
-                <tr>
-                  <td>col&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>- Column index to access</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Reference to the element at the given row and column.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Operator overload to access elements using 2D array syntax.</p><p>Allows modifying elements using matrix(row, col) = value.</p><p>Example:</p><pre class="m-code"><span class="n">Matrix</span><span class="w"> </span><span class="nf">A</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-<span class="n">A</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
-<span class="n">A</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
-<span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
-<span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span><span class="p">;</span></pre>
-          </div></section>
-          <section class="m-doc-details" id="a0b1dc9bab8449403ef3a36c304fba675"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&amp; Matrix::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b1dc9bab8449403ef3a36c304fba675" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> row,
-              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">size_<wbr />t</a> col) const</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">row&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>- Row index</td>
-                </tr>
-                <tr>
-                  <td>col&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>- Column index</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Constant reference to element at (row, col)</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Read-only accessor for matrix elements using 2D array syntax.</p><p>Allows accessing elements using matrix(row, col).</p><p>Example:</p><pre class="m-code"><span class="n">Matrix</span><span class="w"> </span><span class="nf">A</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-<span class="n">A</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
-<span class="n">A</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
-<span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
-<span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span><span class="p">;</span></pre>
-          </div></section>
-          <section class="m-doc-details" id="abce5ed7ac68a19d050db43716a6dac37"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="classMatrix.html" class="m-doc">Matrix</a>&amp; Matrix::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abce5ed7ac68a19d050db43716a6dac37" class="m-doc-self">operator*=</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> alpha)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">alpha&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>- The scalar value to multiply each element by.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Reference to this matrix after multiplication.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Multiplies each element of the matrix by the given scalar value.</p><p>Example:</p><pre class="m-code"><span class="n">Matrix</span><span class="w"> </span><span class="nf">A</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-<span class="n">A</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span></pre>
-          </div></section>
-          <section class="m-doc-details" id="a9046133abcc3c3cd5f8bfd82637e2ab6"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="classMatrix.html" class="m-doc">Matrix</a> Matrix::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9046133abcc3c3cd5f8bfd82637e2ab6" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> alpha) const</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">alpha&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>- The scalar value to multiply the matrix by.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>A new <a href="classMatrix.html" class="m-doc">Matrix</a> object containing the result of the multiplication.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Overloads the multiplication operator (*) to multiply the matrix by a scalar value.</p><p>This performs an element-wise multiplication of the matrix by the scalar value alpha.</p><p>Example:</p><pre class="m-code"><span class="n">Matrix</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
-<span class="n">matrix</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
-<span class="c1">// matrix becomes valarray([0., 0., 0., 0., 0., 0., 0., 0., 0.], [3])</span></pre>
-          </div></section>
-          <section class="m-doc-details" id="a80cb34cb249d96168c7f25ed1cc5c675"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">void</a> Matrix::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a80cb34cb249d96168c7f25ed1cc5c675" class="m-doc-self">identity</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-<p>Sets the matrix to be an identity matrix by clearing it and then setting all diagonal elements to 1.</p><p>Example:</p><pre class="m-code"><span class="n">Matrix</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
-<span class="n">matrix</span><span class="p">.</span><span class="n">identity</span><span class="p">();</span>
-<span class="c1">// matrix becomes valarray([1., 0., 0., 0., 1., 0., 0., 0., 1.], [3])</span></pre>
-          </div></section>
-          <section class="m-doc-details" id="ad72d577d4b454c42376fbdebb36c6d5e"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::slice_array&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt; Matrix::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad72d577d4b454c42376fbdebb36c6d5e" class="m-doc-self">diagonal</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>View of the diagonal elements as a slice_array.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Returns a view representing the diagonal elements of the matrix.</p><p>This slices the underlying data array to extract the elements where row index equals column index, corresponding to the diagonal.</p><p>Example:</p><pre class="m-code"><span class="n">Matrix</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
-<span class="c1">// matrix.diagonal() returns valarray([1., 2., 3.], 3)</span></pre>
-          </div></section>
-          <section class="m-doc-details" id="ad819ad76774d246d72d8aee70cfce29d"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::slice_array&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt; Matrix::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad819ad76774d246d72d8aee70cfce29d" class="m-doc-self">secondary_diagonal</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>View of the secondary diagonal elements as a slice_array.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Returns a view representing the secondary diagonal elements of the matrix.</p><p>This slices the underlying data array to extract the elements where row index + column index equals ndim-1, corresponding to the secondary diagonal.</p><p>Example:</p><pre class="m-code"><span class="n">Matrix</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
-<span class="c1">// matrix.secondary_diagonal() returns valarray([0., 0.], 2)</span></pre>
-          </div></section>
-          <section class="m-doc-details" id="a6b54ccf6e663f9d9638845039a5d289c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::slice_array&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt; Matrix::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6b54ccf6e663f9d9638845039a5d289c" class="m-doc-self">row</a>(</span><span class="m-doc-wrap">std::size_t row)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">row&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>- The index of the row to extract.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>View of the row elements as a slice_array.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Returns a view representing a row of the matrix.</p><p>This slices the underlying data array to extract the elements of the specified row index.</p><p>Example:</p><pre class="m-code"><span class="n">Matrix</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
-<span class="c1">// matrix.row(0) returns valarray([1., 0., 0.], 3)</span>
-<span class="c1">// matrix.row(1) returns valarray([0., 2., 0.], 3)</span>
-<span class="c1">// matrix.row(2) returns valarray([0., 0., 3.], 3)</span></pre>
-          </div></section>
-          <section class="m-doc-details" id="a173be4f0bd28c2f7866852daaf6b8810"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::slice_array&lt;<a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a>&gt; Matrix::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a173be4f0bd28c2f7866852daaf6b8810" class="m-doc-self">column</a>(</span><span class="m-doc-wrap">std::size_t col)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">col&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>- The index of the column to extract.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>View of the column elements as a slice_array.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Returns a view representing a column of the matrix.</p><p>This slices the underlying data array to extract the elements of the specified column index.</p><p>Example:</p><pre class="m-code"><span class="n">Matrix</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
-<span class="c1">// matrix.column(0) returns valarray([1., 0., 0.], 3)</span>
-<span class="c1">// matrix.column(1) returns valarray([0., 2., 0.], 3)</span>
-<span class="c1">// matrix.column(2) returns valarray([0., 0., 3.], 3)</span></pre>
-          </div></section>
-          <section class="m-doc-details" id="ab583aa60184abad002a2c2b72197a879"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> Matrix::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab583aa60184abad002a2c2b72197a879" class="m-doc-self">trace</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>The trace of the matrix as a double.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Calculates the trace of the matrix, which is the sum of the diagonal elements.</p><p>The trace is computed by slicing the data array to extract just the diagonal elements, and then summing those elements.</p><p>Example:</p><pre class="m-code"><span class="n">Matrix</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
-<span class="n">matrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
-<span class="c1">// matrix.trace() returns 6.0</span></pre>
           </div></section>
         </section>
       </div>

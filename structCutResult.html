@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>EllAlgo</title>
+  <title>CutResult struct | EllAlgo</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -33,7 +33,7 @@
             <li><a href="namespaces.html">Namespaces</a></li>
           </ol>
           <ol class="m-col-t-6 m-col-m-none" start="3">
-            <li><a href="annotated.html" id="m-navbar-current">Classes</a></li>
+            <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
               <use href="#m-doc-search-icon-path" />
@@ -48,50 +48,43 @@
   <div class="m-container m-container-inflatable">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <h1>Classes</h1>
-        <ul class="m-doc">
-          <li>class <a href="classArr.html" class="m-doc">Arr</a> <span class="m-doc"></span></li>
-          <li>class <a href="classBSearchAdaptor.html" class="m-doc">BSearchAdaptor</a> <span class="m-doc"></span></li>
-          <li>struct <a href="structCInfo.html" class="m-doc">CInfo</a> <span class="m-doc">Information about the computation result.</span></li>
-          <li>struct <a href="structCutResult.html" class="m-doc">CutResult</a> <span class="m-doc">Result of a cutting-plane calculation.</span></li>
-          <li>class <a href="classEll.html" class="m-doc">Ell</a> <span class="m-doc">Ellipsoid Search Space.</span></li>
-          <li>class <a href="classell1d.html" class="m-doc">ell1d</a> <span class="m-doc">Ellipsoid Method for special 1D case.</span></li>
-          <li>class <a href="classEllCalc.html" class="m-doc">EllCalc</a> <span class="m-doc">Ellipsoid Search Space.</span></li>
-          <li>class <a href="classEllCalcCore.html" class="m-doc">EllCalcCore</a> <span class="m-doc">Ellipsoid Search Space.</span></li>
-          <li>class <a href="classEllCore.html" class="m-doc">EllCore</a> <span class="m-doc">Ellipsoid Search Space Core.</span></li>
-          <li>class <a href="classEllStable.html" class="m-doc">EllStable</a> <span class="m-doc">Ellipsoid Search Space.</span></li>
-          <li>class <a href="classLDLTMgr.html" class="m-doc">LDLTMgr</a> <span class="m-doc">LDLT factorization.</span></li>
-          <li>class <a href="classLmi0Oracle.html" class="m-doc">Lmi0Oracle</a> <span class="m-doc">Oracle for Linear <a href="classMatrix.html" class="m-doc">Matrix</a> Inequality (LMI) feasibility problems.</span></li>
-          <li>class <a href="classLmiOldOracle.html" class="m-doc">LmiOldOracle</a> <span class="m-doc">Oracle for Linear <a href="classMatrix.html" class="m-doc">Matrix</a> Inequality.</span></li>
-          <li>class <a href="classLmiOracle.html" class="m-doc">LmiOracle</a> <span class="m-doc">Oracle for Linear <a href="classMatrix.html" class="m-doc">Matrix</a> Inequality.</span></li>
-          <li>class <a href="classLowpassOracle.html" class="m-doc">LowpassOracle</a> <span class="m-doc">Oracle for FIR lowpass filter design.</span></li>
-          <li>class <a href="classMatrix.html" class="m-doc">Matrix</a> <span class="m-doc">Square matrix with flat std::vector&lt;double&gt; storage.</span></li>
-          <li>class <a href="classMatrix0.html" class="m-doc">Matrix0</a> <span class="m-doc">A simple matrix class for conjugate gradient calculations.</span></li>
-          <li>class <a href="classMatrix2.html" class="m-doc">Matrix2</a> <span class="m-doc">A simple 2D matrix class for linear algebra operations.</span></li>
-          <li>struct <a href="structOptions.html" class="m-doc">Options</a> <span class="m-doc">Configuration options for the ellipsoid algorithm.</span></li>
-          <li>class <a href="classProfitOracle.html" class="m-doc">ProfitOracle</a> <span class="m-doc">Oracle for a profit maximization problem.</span></li>
-          <li>class <a href="classProfitOracleQ.html" class="m-doc">ProfitOracleQ</a> <span class="m-doc">Oracle for profit maximization problem (discrete version)</span></li>
-          <li>class <a href="classProfitOracleRb.html" class="m-doc">ProfitOracleRb</a> <span class="m-doc">Oracle for a profit maximization problem (robust version)</span></li>
-          <li>class <a href="classSliceView.html" class="m-doc">SliceView</a> <span class="m-doc">Proxy view over a strided slice of a flat array.</span></li>
-          <li>class <a href="classVector0.html" class="m-doc">Vector0</a> <span class="m-doc">A simple vector class for conjugate gradient calculations.</span></li>
-          <li>class <a href="classVector2.html" class="m-doc">Vector2</a> <span class="m-doc">A simple 2D vector class for linear algebra operations.</span></li>
-        </ul>
-        <script>
-        function toggle(e) {
-            e.parentElement.className = e.parentElement.className == 'm-doc-collapsible' ?
-                'm-doc-expansible' : 'm-doc-collapsible';
-            return false;
-        }
-        /* Collapse all nodes marked as such. Doing it via JS instead of
-           directly in markup so disabling it doesn't harm usability. The list
-           is somehow regenerated on every iteration and shrinks as I change
-           the classes. It's not documented anywhere and I'm not sure if this
-           is the same across browsers, so I am going backwards in that list to
-           be sure. */
-        var collapsed = document.getElementsByClassName("collapsed");
-        for(var i = collapsed.length - 1; i >= 0; --i)
-            collapsed[i].className = 'm-doc-expansible';
-        </script>
+        <h1>
+          CutResult <span class="m-thin">struct</span>
+        </h1>
+        <p>Result of a cutting-plane calculation.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>POD struct replacing nested <code>std::tuple&lt;CutStatus, tuple&lt;double,double,double&gt;&gt;</code>. Enables register-passing and better inlining on all modern ABIs.</p>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a9bee4830e34c96a03963bed93dece734">
+              <a href="ell__config_8hpp.html#af6c5aa64702e88776265c19b9df2d5c3" class="m-doc">CutStatus</a> <a href="#a9bee4830e34c96a03963bed93dece734" class="m-doc-self">status</a>
+            </dt>
+            <dd>Status of the cut.</dd>
+            <dt id="acbcf9d2f3d7c89c550700007b2d093bb">
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> <a href="#acbcf9d2f3d7c89c550700007b2d093bb" class="m-doc-self">rho</a>
+            </dt>
+            <dd>Step size along gradient direction.</dd>
+            <dt id="a8a124f99001b4ddab4d49d83fc32d175">
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> <a href="#a8a124f99001b4ddab4d49d83fc32d175" class="m-doc-self">sigma</a>
+            </dt>
+            <dd>Scaling factor for matrix update.</dd>
+            <dt id="a3723eeae08312445964adc0bc52b5c07">
+              <a href="cutting__plane_8hpp.html#ad26ca87915343c46805e35162d5c89c3" class="m-doc">double</a> <a href="#a3723eeae08312445964adc0bc52b5c07" class="m-doc-self">delta</a>
+            </dt>
+            <dd>Contraction factor for ellipsoid volume.</dd>
+          </dl>
+        </section>
       </div>
     </div>
   </div>
