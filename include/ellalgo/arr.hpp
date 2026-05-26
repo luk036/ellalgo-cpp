@@ -8,6 +8,7 @@
 #include <array>
 #include <cassert>
 #include <cmath>
+#include <cstdint>  // for SIZE_MAX
 #include <functional>
 #include <initializer_list>
 #include <numeric>
