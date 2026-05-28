@@ -4,12 +4,9 @@
 /// Supports 1D (vector) and 2D (row-major matrix) with operations
 /// needed by ellipsoid-method-based solvers. Not a general-purpose array library.
 
-#include <algorithm>
-#include <array>
 #include <cassert>
 #include <cmath>
 #include <cstdint>  // for SIZE_MAX
-#include <functional>
 #include <initializer_list>
 #include <numeric>
 #include <utility>
@@ -24,13 +21,13 @@ class Arr {
 
     Arr() = default;
 
-    explicit Arr(size_t n) : _data(n, 0.0), _rows(n), _cols(0) {}
+    explicit Arr(size_t n) : _data(n, 0.0), _rows(n) {}
     Arr(size_t r, size_t c) : _data(r * c, 0.0), _rows(r), _cols(c) {}
     Arr(size_t r, size_t c, double val) : _data(r * c, val), _rows(r), _cols(c) {}
     // Note: Arr(size_t, double) removed to avoid ambiguity with Arr(size_t, size_t).
     // Use Arr(n) / zeros(n) for zero-initialized 1D arrays.
-    Arr(std::initializer_list<double> il) : _data(il), _rows(il.size()), _cols(0) {}
-    explicit Arr(std::vector<double> v) : _data(std::move(v)), _rows(_data.size()), _cols(0) {}
+    Arr(std::initializer_list<double> il) : _data(il), _rows(il.size()) {}
+    explicit Arr(std::vector<double> v) : _data(std::move(v)), _rows(_data.size()) {}
 
     double& operator()(size_t i) { return _data[i]; }
     const double& operator()(size_t i) const { return _data[i]; }
@@ -88,7 +85,7 @@ struct Range {
     size_t step = 1;
 
     Range() = default;
-    explicit Range(size_t end) : start(0), end(end) {}
+    explicit Range(size_t end) : end(end) {}
     Range(size_t start, size_t end) : start(start), end(end) {}
     Range(size_t start, size_t end, size_t step) : start(start), end(end), step(step) {}
     static constexpr size_t ALL = SIZE_MAX;

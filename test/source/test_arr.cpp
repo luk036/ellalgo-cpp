@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <ellalgo/arr.hpp>
+#include <algorithm>  // for std::sort
 
 TEST_CASE("Arr: 1D construction") {
     Arr a(5);
