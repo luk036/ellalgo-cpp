@@ -227,7 +227,7 @@ inline Arr outer(const Arr& u, const Arr& v) {
 // ---------------------------------------------------------------------------
 // concatenate (axis=1 only)
 // ---------------------------------------------------------------------------
-inline Arr concatenate(const Arr& a, const Arr& b, int /* axis */= 1) {
+inline Arr concatenate(const Arr& a, const Arr& b, int /* axis */ = 1) {
     assert(a.is_2d() && b.is_2d() && a.rows() == b.rows());
     size_t m = a.rows();
     size_t ca = a.cols();
