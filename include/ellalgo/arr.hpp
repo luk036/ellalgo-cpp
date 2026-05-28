@@ -145,8 +145,8 @@ inline Arr linspace(double start, double end, size_t n) {
         out(0) = start;
         return out;
     }
-    double step = (end - start) / (n - 1);
-    for (size_t i = 0; i < n; ++i) out(i) = start + step * i;
+    double step = (end - start) / static_cast<double>(n - 1);
+    for (size_t i = 0; i < n; ++i) out(i) = start + step * static_cast<double>(i);
     return out;
 }
 
@@ -230,9 +230,11 @@ inline Arr outer(const Arr& u, const Arr& v) {
 // ---------------------------------------------------------------------------
 // concatenate (axis=1 only)
 // ---------------------------------------------------------------------------
-inline Arr concatenate(const Arr& a, const Arr& b, int = 1) {
+inline Arr concatenate(const Arr& a, const Arr& b, int /* axis */= 1) {
     assert(a.is_2d() && b.is_2d() && a.rows() == b.rows());
-    size_t m = a.rows(), ca = a.cols(), cb = b.cols();
+    size_t m = a.rows();
+    size_t ca = a.cols();
+    size_t cb = b.cols();
     Arr out(m, ca + cb);
     for (size_t i = 0; i < m; ++i) {
         for (size_t j = 0; j < ca; ++j) out(i, j) = a(i, j);
