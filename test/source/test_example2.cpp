@@ -48,7 +48,8 @@ struct MyOracle {
                     fj = -x + y + 1.0;
                     break;
                 default:
-                    exit(0);
+                    assert(false && "Implementation error");  // should not reach here
+                    break;
             }
             if (fj > 0.0) {
                 switch (this->idx) {
@@ -59,7 +60,8 @@ struct MyOracle {
                         cut2.second = fj;
                         return &cut2;
                     default:
-                        exit(0);
+                        assert(false && "Implementation error");  // should not reach here
+                        break;
                 }
             }
         }

@@ -15,7 +15,7 @@ struct MyStressOracle {
     using Cut = std::pair<Vec, double>;
 
     mutable int idx = -1;  // for round robin
-    const int num_constraints = 5;
+    int num_constraints = 5;
 
     auto assess_optim(const Vec& xc, double& gamma) const -> std::tuple<Cut, bool> {
         const auto x = xc[0];
@@ -27,7 +27,6 @@ struct MyStressOracle {
             if (this->idx == this->num_constraints) {
                 this->idx = 0;  // round robin
             }
-            double fj = NAN;
             switch (this->idx) {
                 case 0:  // constraint 1: x + y <= 3
                     if (f0 > 3.0) {
@@ -35,27 +34,28 @@ struct MyStressOracle {
                     }
                     break;
                 case 1:  // constraint 2: x - y >= 1
-                    if ((fj = -x + y + 1.0) > 0.0) {
-                        return {{Vec{-1.0, 1.0}, fj}, false};
+                    if (auto fj1 = -x + y + 1.0; fj1 > 0.0) {
+                        return {{Vec{-1.0, 1.0}, fj1}, false};
                     }
                     break;
                 case 2:  // constraint 3: x >= 0
-                    if (-x > 0.0) {
-                        return {{Vec{-1.0, 0.0}, -x}, false};
+                    if (auto fj2 = -x; fj2 > 0.0) {
+                        return {{Vec{-1.0, 0.0}, fj2}, false};
                     }
                     break;
                 case 3:  // constraint 4: y >= 0
-                    if (-y > 0.0) {
-                        return {{Vec{0.0, -1.0}, -y}, false};
+                    if (auto fj3 = -y; fj3 > 0.0) {
+                        return {{Vec{0.0, -1.0}, fj3}, false};
                     }
                     break;
                 case 4:  // objective: maximize x + y
-                    if ((fj = gamma - f0) > 0.0) {
-                        return {{Vec{-1.0, -1.0}, fj}, false};
+                    if (auto fj4 = gamma - f0; fj4 > 0.0) {
+                        return {{Vec{-1.0, -1.0}, fj4}, false};
                     };
                     break;
                 default:
-                    exit(0);
+                    assert(false && "Implementation error");  // should not reach here
+                    break;
             }
         }
         gamma = f0;

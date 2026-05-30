@@ -61,7 +61,8 @@ struct MyQuasicCvxOracle {
                     }
                     break;
                 default:
-                    exit(0);
+                    assert(false && "Implementation error");  // should not reach here
+                    break;
             }
         }
         gamma = sqrtx / y;

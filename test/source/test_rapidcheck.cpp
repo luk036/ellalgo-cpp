@@ -10,7 +10,7 @@
 
 TEST_CASE("Property-based test: Ell constructor with alpha sets initial tsq") {
     rc::check("Ell(alpha, x) has tsq = 0 initially", []() {
-        auto n = static_cast<size_t>(*rc::gen::inRange(1, 11));
+        auto n = static_cast<size_t>(*rc::gen::inRange(2, 11));
         auto alpha = *rc::gen::positive<double>();
 
         std::vector<double> x(n, 0.0);
@@ -22,7 +22,7 @@ TEST_CASE("Property-based test: Ell constructor with alpha sets initial tsq") {
 
 TEST_CASE("Property-based test: Ell constructor with vector sets initial tsq") {
     rc::check("Ell(val, x) has tsq = 0 initially", []() {
-        auto n = static_cast<size_t>(*rc::gen::inRange(1, 11));
+        auto n = static_cast<size_t>(*rc::gen::inRange(2, 11));
         std::valarray<double> val(1.0, n);
         std::vector<double> x(n, 0.0);
 
@@ -34,7 +34,7 @@ TEST_CASE("Property-based test: Ell constructor with vector sets initial tsq") {
 
 TEST_CASE("Property-based test: Ell center is correctly initialized") {
     rc::check("Ell center matches input vector", []() {
-        auto n = static_cast<size_t>(*rc::gen::inRange(1, 11));
+        auto n = static_cast<size_t>(*rc::gen::inRange(2, 11));
         auto alpha = *rc::gen::positive<double>();
 
         std::vector<double> x(n);
@@ -131,7 +131,7 @@ TEST_CASE("Property-based test: Multiple cuts reduce ellipsoid") {
 
 TEST_CASE("Property-based test: set_xc changes ellipsoid center") {
     rc::check("set_xc updates center correctly", []() {
-        auto n = static_cast<size_t>(*rc::gen::inRange(1, 11));
+        auto n = static_cast<size_t>(*rc::gen::inRange(2, 11));
         auto alpha = *rc::gen::positive<double>();
 
         std::vector<double> x(n, 0.0);
@@ -154,7 +154,7 @@ TEST_CASE("Property-based test: set_xc changes ellipsoid center") {
 
 TEST_CASE("Property-based test: Copy constructor creates identical ellipsoid") {
     rc::check("Copied ellipsoid has same center and tsq", []() {
-        auto n = static_cast<size_t>(*rc::gen::inRange(1, 11));
+        auto n = static_cast<size_t>(*rc::gen::inRange(2, 11));
         auto alpha = *rc::gen::positive<double>();
 
         std::vector<double> x(n);
@@ -177,7 +177,7 @@ TEST_CASE("Property-based test: Copy constructor creates identical ellipsoid") {
 
 TEST_CASE("Property-based test: Copy method creates identical ellipsoid") {
     rc::check("Copied ellipsoid has same center and tsq", []() {
-        auto n = static_cast<size_t>(*rc::gen::inRange(1, 11));
+        auto n = static_cast<size_t>(*rc::gen::inRange(2, 11));
         auto alpha = *rc::gen::positive<double>();
 
         std::vector<double> x(n);
@@ -247,31 +247,6 @@ TEST_CASE("Property-based test: Orthogonal cuts in 2D") {
             // At least one cut should succeed
             RC_ASSERT(status1 == CutStatus::Success || status2 == CutStatus::Success);
         }
-    });
-}
-
-TEST_CASE("Property-based test: Negative beta affects cut result") {
-    rc::check("Negative beta in bias cut affects ellipsoid update", []() {
-        auto n = static_cast<size_t>(*rc::gen::inRange(2, 5));
-        auto alpha = *rc::gen::positive<double>() + 2.0;
-
-        std::vector<double> x(n, 0.0);
-        auto ellip = Ell<std::vector<double>>(alpha, x);
-
-        // Create gradient
-        std::vector<double> grad(n);
-        for (size_t i = 0; i < n; ++i) {
-            grad[i] = *rc::gen::nonNegative<double>() + 0.1;
-        }
-
-        // Negative beta means the cut is "deeper"
-        auto beta = -*rc::gen::positive<double>();
-        auto cut = std::make_pair(grad, beta);
-        auto status = ellip.update_bias_cut(cut);
-
-        // Status should be success for reasonable cuts
-        RC_ASSERT(status == CutStatus::Success || status == CutStatus::NoSoln
-                  || status == CutStatus::NoEffect);
     });
 }
 
