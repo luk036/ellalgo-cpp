@@ -115,7 +115,7 @@ auto ProfitOracle::assess_optim(const Vec& y, double& gamma) -> std::tuple<Cut, 
 auto ProfitOracleQ::assess_optim_q(const Vec& y, double& gamma, bool retry)
     -> std::tuple<Cut, bool, Vec, bool> {
     if (!retry) {
-        auto* cut = this->_P.assess_feas(y, gamma);
+        auto* cut = this->P.assess_feas(y, gamma);
         if (cut != nullptr) {
             return {*cut, false, y, true};
         }
@@ -130,7 +130,7 @@ auto ProfitOracleQ::assess_optim_q(const Vec& y, double& gamma, bool retry)
         }
         this->_yd = std::log(x);
     }
-    auto result1 = this->_P.assess_optim(this->_yd, gamma);
+    auto result1 = this->P.assess_optim(this->_yd, gamma);
     auto& cut = std::get<0>(result1);
     auto& shrunk = std::get<1>(result1);
     auto& grad = std::get<0>(cut);

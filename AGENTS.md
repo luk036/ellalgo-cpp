@@ -73,7 +73,7 @@ cmake --build build/doc --target GenerateDocs
 ### C++ Standards
 - **Library**: C++14
 - **Tests**: C++17
-- **Always use**: `CXX_STANDARD 14` (or 17 for tests)
+- **Always use**: `CXX_STANDARD 20` (or 17 for tests)
 
 ### Naming Conventions
 - **Classes**: PascalCase (`Ell`, `EllCalc`, `CutStatus`)

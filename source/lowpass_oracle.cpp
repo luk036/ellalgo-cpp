@@ -10,6 +10,7 @@
 #include <cmath>                               // for pow, log10, M_PI, cos
 #include <cstddef>                             // for size_t
 #include <ellalgo/oracles/lowpass_oracle.hpp>  // for LowpassOracle, filter_...
+#include <numbers>
 #include <tuple>                               // for tuple
 #include <valarray>                            // for valarray
 
@@ -18,7 +19,7 @@ using Mat = std::valarray<Vec>;
 using ParallelCut = std::pair<Vec, Vec>;
 
 #ifndef M_PI
-constexpr double M_PI = 3.14159265358979323846264338327950288;
+constexpr double M_PI = std::numbers::pi;
 #endif
 
 /**

@@ -78,7 +78,7 @@ class LDLTMgr {
      *
      * See also: factorize()
      */
-    template <typename Fn> auto factor(Fn&& get_matrix_elem) -> bool {
+    template <typename Fn> auto factor(Fn get_matrix_elem) -> bool {
         this->pos = {0U, 0U};
         auto const& start = this->pos.first;
         auto& stop = this->pos.second;
@@ -114,7 +114,7 @@ class LDLTMgr {
      *
      * See also: factorize()
      */
-    template <typename Fn> auto factor_with_allow_semidefinite(Fn&& get_matrix_elem) -> bool {
+    template <typename Fn> auto factor_with_allow_semidefinite(Fn get_matrix_elem) -> bool {
         this->pos = {0U, 0U};
         auto& start = this->pos.first;
         auto& stop = this->pos.second;

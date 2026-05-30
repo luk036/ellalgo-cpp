@@ -107,7 +107,7 @@ class ProfitOracleRb {
 
     const Vec _uie;
     Vec _elasticities;
-    ProfitOracle _P;
+    ProfitOracle P;
 
   public:
     /**
@@ -123,7 +123,7 @@ class ProfitOracleRb {
      */
     ProfitOracleRb(double p, double A, double k, const Vec& a, const Vec& v, const Vec& e,
                    double e3)
-        : _uie{e}, _elasticities{a}, _P(p - e3, A, k - e3, a, v + Vec{e3, e3}) {}
+        : _uie{e}, _elasticities{a}, P(p - e3, A, k - e3, a, v + Vec{e3, e3}) {}
 
     /**
      * @brief Make object callable for cutting_plane_optim()
@@ -138,8 +138,8 @@ class ProfitOracleRb {
         auto a_rb = this->_elasticities;
         a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
         a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
-        this->_P.set_elasticities(a_rb);
-        return this->_P.assess_optim(y, gamma);
+        this->P.set_elasticities(a_rb);
+        return this->P.assess_optim(y, gamma);
     }
 };
 
@@ -167,8 +167,8 @@ class ProfitOracleQ {
     using Vec = std::valarray<double>;
     using Cut = std::pair<Vec, double>;
 
-    ProfitOracle _P;
-    Vec _yd{};
+    ProfitOracle P;
+    Vec _yd;
 
   public:
     /**
@@ -180,7 +180,7 @@ class ProfitOracleQ {
      * @param[in] a the output elasticities
      * @param[in] v output price
      */
-    ProfitOracleQ(double p, double A, double k, const Vec& a, const Vec& v) : _P{p, A, k, a, v} {}
+    ProfitOracleQ(double p, double A, double k, const Vec& a, const Vec& v) : P{p, A, k, a, v} {}
 
     /**
      * @brief Make object callable for cutting_plane_optim_q()

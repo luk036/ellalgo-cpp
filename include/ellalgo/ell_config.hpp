@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <ostream>
 #include <utility>  // for pair
 
 /**
@@ -11,15 +12,17 @@
  * and convergence tolerance.
  */
 struct Options {
-    size_t max_iters;  ///< Maximum number of iterations allowed
-    double tolerance;  ///< Convergence tolerance for stopping criteria
+    size_t max_iters;   ///< Maximum number of iterations allowed
+    double tolerance;   ///< Convergence tolerance for stopping criteria
+    bool verbose;       ///< Enable iteration logging
 
     /**
      * @brief Default constructor
      *
-     * Initializes with default values: max_iters = 2000, tolerance = 1e-20
+     * Initializes with default values: max_iters = 2000, tolerance = 1e-20,
+     * verbose = false.
      */
-    Options() : max_iters{2000}, tolerance{1e-20} {}
+    Options() : max_iters{2000}, tolerance{1e-20}, verbose{false} {}
 
     /**
      * @brief Constructor with custom parameters
@@ -27,7 +30,7 @@ struct Options {
      * @param[in] max_iters Maximum number of iterations
      * @param[in] tol Convergence tolerance
      */
-    Options(size_t max_iters, double tol) : max_iters{max_iters}, tolerance{tol} {}
+    Options(size_t max_iters, double tol) : max_iters{max_iters}, tolerance{tol}, verbose{false} {}
 };
 
 /**
@@ -42,6 +45,17 @@ enum class CutStatus {
     NoEffect,  ///< Cut had no effect on ellipsoid
     Unknown    ///< Unknown status
 };
+
+/// Stream output for CutStatus
+inline auto operator<<(std::ostream& os, CutStatus s) -> std::ostream& {
+    switch (s) {
+        case CutStatus::Success: return os << "✓ success";
+        case CutStatus::NoSoln:  return os << "✗ no solution";
+        case CutStatus::NoEffect: return os << "⏭ no effect";
+        case CutStatus::Unknown: return os << "? unknown";
+    }
+    return os;
+}
 
 /**
  * @brief Result of a cutting-plane calculation
@@ -70,16 +84,12 @@ struct CInfo {
 /**
  * @brief Type alias for the array type used by template parameter T
  *
- * This type alias extracts the ArrayType nested type from template parameter T.
- *
  * @tparam T The type containing ArrayType
  */
 template <typename T> using ArrayType = typename T::ArrayType;
 
 /**
  * @brief Type alias for the cut choice type used by template parameter T
- *
- * This type alias extracts the CutChoice nested type from template parameter T.
  *
  * @tparam T The type containing CutChoice
  */
@@ -88,9 +98,6 @@ template <typename T> using CutChoice = typename T::CutChoice;
 /**
  * @brief Type alias for a cutting plane concept
  *
- * This type alias defines a pair of array and cut choice, representing
- * a cutting plane in the algorithm.
- *
  * @tparam T The template parameter type
  */
 template <typename T> using CutConcept = std::pair<ArrayType<T>, CutChoice<T>>;
@@ -98,13 +105,44 @@ template <typename T> using CutConcept = std::pair<ArrayType<T>, CutChoice<T>>;
 /**
  * @brief Type alias for return type of Q optimization
  *
- * This type alias defines the return type for Q optimization functions,
- * containing cut concept, boolean flags, and array data.
- *
  * @tparam T The template parameter type
  */
 template <typename T> using RetQ = std::tuple<CutConcept<T>, bool, ArrayType<T>, bool>;
 
+/// Single cut parameter β in gᵀ(x - xc) + β ≤ 0
+using SingleCut = double;
+
+// --- C++20 Concepts (simple constraints to avoid MSVC ICE) ---
 #if __cpp_concepts >= 201907L
-// #include "ell_concepts.hpp"
+#include <concepts>
+
+template <typename O, typename A>
+concept OracleFeas = requires(O& o, const A& x) {
+    { o.assess_feas(x) };
+};
+
+template <typename O, typename A, typename N>
+concept OracleOptim = requires(O& o, const A& x, N& g) {
+    { o.assess_optim(x, g) };
+};
+
+template <typename O, typename A, typename N>
+concept OracleOptimQ = requires(O& o, const A& x, N& g, bool r) {
+    { o.assess_optim_q(x, g, r) };
+};
+
+template <typename O, typename N>
+concept OracleBS = requires(O& o, N& g) {
+    { o.assess_bs(g) };
+};
+
+template <typename S>
+concept SearchSpace = requires(S& s, const std::pair<typename S::ArrayType, double>& cut) {
+    typename S::ArrayType;
+    { s.xc() };
+    { s.tsq() };
+    { s.update_bias_cut(cut) } -> std::same_as<CutStatus>;
+    { s.update_central_cut(cut) } -> std::same_as<CutStatus>;
+};
+
 #endif

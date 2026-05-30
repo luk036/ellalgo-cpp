@@ -9,12 +9,21 @@
 
 #include "benchmark/benchmark.h"  // for BENCHMARK, State, BENCHMARK_...
 
+namespace {
+    template <typename O, typename V>
+    concept LmiCallable = requires(O& o, const V& x) {
+        { o(x) } -> std::convertible_to<bool>;
+    };
+}
+
 /**
  * @brief
  *
  * @tparam Oracle
  */
-template <typename Oracle> class MyOracle {
+template <typename Oracle>
+    requires LmiCallable<Oracle, std::valarray<double>>
+class MyOracle {
     using Vec = std::valarray<double>;
     using Cut = std::pair<Vec, double>;
 

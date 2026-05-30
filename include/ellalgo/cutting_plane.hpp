@@ -8,16 +8,16 @@
 #include "ell_config.hpp"
 #include "half_nonnegative.hpp"
 
-template <typename SearchSpace> using CuttingPlaneArrayType =
-    typename std::remove_reference<SearchSpace>::type::ArrayType;
+template <typename S> using CuttingPlaneArrayType =
+    typename std::remove_reference_t<S>::ArrayType;
 
 template <typename T> inline auto invalid_value() ->
-    typename std::enable_if<std::is_floating_point<T>::value, T>::type {
+    T requires std::is_floating_point_v<T> {
     return std::nan("1");
 }
 
 template <typename T> inline auto invalid_value() ->
-    typename std::enable_if<!std::is_floating_point<T>::value, T>::type {
+    T requires (!std::is_floating_point_v<T>) {
     return T{};
 }
 
@@ -61,10 +61,11 @@ template <typename T> inline auto invalid_value() ->
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
-template <typename OracleFeas, typename SearchSpace>
-inline auto cutting_plane_feas(OracleFeas& omega, SearchSpace& space,
+template <typename O, typename S>
+    requires OracleFeas<O, typename S::ArrayType> && SearchSpace<S>
+inline auto cutting_plane_feas(O& omega, S& space,
                                const Options& options = Options())
-    -> std::tuple<CuttingPlaneArrayType<SearchSpace>, size_t> {
+    -> std::tuple<CuttingPlaneArrayType<S>, size_t> {
     for (auto niter = 0U; niter != options.max_iters; ++niter) {
         const auto cut = omega.assess_feas(space.xc());
         if (!cut) {  // feasible sol'n obtained
@@ -72,11 +73,11 @@ inline auto cutting_plane_feas(OracleFeas& omega, SearchSpace& space,
         }
         const auto status = space.update_bias_cut(*cut);  // update space
         if (status != CutStatus::Success || space.tsq() < options.tolerance) {
-            auto res = invalid_value<CuttingPlaneArrayType<SearchSpace>>();
+            auto res = invalid_value<CuttingPlaneArrayType<S>>();
             return {std::move(res), niter};
         }
     }
-    auto res = invalid_value<CuttingPlaneArrayType<SearchSpace>>();
+    auto res = invalid_value<CuttingPlaneArrayType<S>>();
     return {std::move(res), options.max_iters};
 }
 
@@ -105,11 +106,12 @@ inline auto cutting_plane_feas(OracleFeas& omega, SearchSpace& space,
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
-template <typename OracleOptim, typename SearchSpace, typename Num>
-inline auto cutting_plane_optim(OracleOptim& omega, SearchSpace& space, Num& gamma,
+template <typename O, typename S, typename N>
+    requires OracleOptim<O, typename S::ArrayType, N> && SearchSpace<S>
+inline auto cutting_plane_optim(O& omega, S& space, N& gamma,
                                 const Options& options = Options())
-    -> std::tuple<CuttingPlaneArrayType<SearchSpace>, size_t> {
-    auto x_best = invalid_value<CuttingPlaneArrayType<SearchSpace>>();
+    -> std::tuple<CuttingPlaneArrayType<S>, size_t> {
+    auto x_best = invalid_value<CuttingPlaneArrayType<S>>();
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
         const auto _result1 = omega.assess_optim(space.xc(), gamma);
         const auto& cut = std::get<0>(_result1);
@@ -153,11 +155,12 @@ inline auto cutting_plane_optim(OracleOptim& omega, SearchSpace& space, Num& gam
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return Information of Cutting-plane method
  */
-template <typename OracleOptimQ, typename SearchSpaceQ, typename Num>
-inline auto cutting_plane_optim_q(OracleOptimQ& omega, SearchSpaceQ& space_q, Num& gamma,
+template <typename O, typename S, typename N>
+    requires OracleOptimQ<O, typename S::ArrayType, N> && SearchSpace<S>
+inline auto cutting_plane_optim_q(O& omega, S& space_q, N& gamma,
                                   const Options& options = Options())
-    -> std::tuple<CuttingPlaneArrayType<SearchSpaceQ>, size_t> {
-    auto x_best = invalid_value<CuttingPlaneArrayType<SearchSpaceQ>>();
+    -> std::tuple<CuttingPlaneArrayType<S>, size_t> {
+    auto x_best = invalid_value<CuttingPlaneArrayType<S>>();
     auto retry = false;
 
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
@@ -258,8 +261,9 @@ class BSearchAdaptor {
  * @param[in]     options maximum iteration and error tolerance etc.
  * @return CInfo
  */
-template <typename Oracle, typename T>
-inline auto bsearch(Oracle& omega, const std::pair<T, T>& intvl, const Options& options = Options())
+template <typename O, typename T>
+    requires OracleBS<O, T>
+inline auto bsearch(O& omega, const std::pair<T, T>& intvl, const Options& options = Options())
     -> std::tuple<T, size_t> {
     // assume monotone
     // auto& [lower, upper] = intvl;

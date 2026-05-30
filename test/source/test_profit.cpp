@@ -10,7 +10,6 @@
 #include <ellalgo/ell_config.hpp>             // for CInfo
 #include <ellalgo/ell_stable.hpp>             // for EllStable
 #include <ellalgo/oracles/profit_oracle.hpp>  // for ProfitOracle, profit_r...
-#include <tuple>                              // for get
 
 TEST_CASE("Profit Test") {
     using Vec = std::valarray<double>;

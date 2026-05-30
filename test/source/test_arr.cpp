@@ -210,7 +210,7 @@ TEST_CASE("Arr: concatenate") {
 TEST_CASE("Arr: view") {
     auto A = Arr(3, 4);
     for (size_t i = 0; i < 3; ++i)
-        for (size_t j = 0; j < 4; ++j) A(i, j) = double(i * 4 + j);
+        for (size_t j = 0; j < 4; ++j) A(i, j) = static_cast<double>(i * 4 + j);
 
     auto sub = view(A, Range(1, 3), Range(0, 2));
     CHECK(sub.rows() == 2);
@@ -271,7 +271,7 @@ TEST_CASE("Arr: data pointer") {
 
 TEST_CASE("Arr: begin/end") {
     Arr a = Arr{3.0, 1.0, 2.0};
-    std::sort(a.begin(), a.end());
+    std::ranges::sort(a);
     CHECK(a(0) == 1.0);
     CHECK(a(2) == 3.0);
 }
