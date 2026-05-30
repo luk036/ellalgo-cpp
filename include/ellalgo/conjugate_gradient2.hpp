@@ -13,6 +13,15 @@
 #include <stdexcept>
 #include <string>
 
+// GCC 13 with -Wall -Werror emits -Werror=alloc-size-larger-than= when a size_t
+// parameter is passed to std::vector constructor, because the compiler can't prove
+// the allocation won't exceed PTRDIFF_MAX. This is a false positive when sizes
+// are bounded by actual matrix dimensions at runtime.
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Walloc-size-larger-than="
+#endif
+
 /**
  * Solves a system of linear equations Ax = b using the Conjugate Gradient method.
  *
@@ -56,5 +65,9 @@ Vector conjugate_gradient2(const Matrix& A, const Vector& b, Vector& x_vector, d
     throw std::runtime_error("Conjugate Gradient did not converge after " + std::to_string(max_iter)
                              + " iterations");
 }
+
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC diagnostic pop
+#endif
 
 #endif  // CONJUGATE_GRADIENT_HPP

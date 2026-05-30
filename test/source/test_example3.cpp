@@ -19,13 +19,6 @@ struct MyOracle3 {
 
     void update(double gamma) { this->target = gamma; }
 
-    MyOracle3() = default;
-    MyOracle3(const MyOracle3&) = default;
-    MyOracle3(MyOracle3&&) = default;
-    MyOracle3& operator=(const MyOracle3&) = default;
-    MyOracle3& operator=(MyOracle3&&) = default;
-    ~MyOracle3() = default;
-
     /**
      * The assess_feas function assesses the feasibility of a given point based on predefined
      * constraints and returns a pointer to the corresponding cut if violated.
@@ -47,13 +40,13 @@ struct MyOracle3 {
         const auto x = xc[0];
         const auto y = xc[1];
 
-        if (this->idx < -1) {
-            this->idx = -1;
-        }
+        // if (this->idx < -1) {
+        //     this->idx = -1;
+        // }
 
         for (int i = 0; i != 4; ++i) {
             this->idx++;
-            if (this->idx >= 4) {
+            if (this->idx == 4) {
                 this->idx = 0;  // round robin
             }
             double fj = NAN;

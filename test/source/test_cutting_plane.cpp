@@ -57,7 +57,7 @@ TEST_CASE("Cutting-plane optimization") {
     CHECK_NE(std::get<0>(result).size(), 0);
 }
 
-struct MyOracle3 {
+struct MyOracle4 {
     using ArrayType = std::vector<double>;
     using Cut = std::pair<ArrayType, double>;
 
@@ -76,7 +76,7 @@ struct MyOracle3 {
 
 TEST_CASE("Binary search") {
     auto ell = Ell<std::vector<double>>(10.0, std::vector<double>{0.0, 0.0});
-    auto oracle = MyOracle3{};
+    auto oracle = MyOracle4{};
     auto options = Options();
     options.max_iters = 2000;
     options.tolerance = 1e-8;

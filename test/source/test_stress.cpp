@@ -1,7 +1,6 @@
 #define DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #include <doctest/doctest.h>  // for ResultBuilder, TestCase, CHECK_EQ
 
-#include <cmath>
 #include <ellalgo/cutting_plane.hpp>  // for cutting_plane_optim
 #include <ellalgo/ell.hpp>            // for Ell
 #include <ellalgo/ell_config.hpp>     // for CInfo, CutStatus, CutStatus::...
