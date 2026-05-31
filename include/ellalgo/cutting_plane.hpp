@@ -8,16 +8,17 @@
 #include "ell_config.hpp"
 #include "half_nonnegative.hpp"
 
-template <typename S> using CuttingPlaneArrayType =
-    typename std::remove_reference_t<S>::ArrayType;
+template <typename S> using CuttingPlaneArrayType = typename std::remove_reference_t<S>::ArrayType;
 
-template <typename T> inline auto invalid_value() ->
-    T requires std::is_floating_point_v<T> {
+template <typename T> inline auto invalid_value() -> T
+    requires std::is_floating_point_v<T>
+{
     return std::nan("1");
 }
 
-template <typename T> inline auto invalid_value() ->
-    T requires (!std::is_floating_point_v<T>) {
+template <typename T> inline auto invalid_value() -> T
+    requires(!std::is_floating_point_v<T>)
+{
     return T{};
 }
 
@@ -63,8 +64,7 @@ template <typename T> inline auto invalid_value() ->
  */
 template <typename O, typename S>
     requires OracleFeas<O, typename S::ArrayType> && SearchSpace<S>
-inline auto cutting_plane_feas(O& omega, S& space,
-                               const Options& options = Options())
+inline auto cutting_plane_feas(O& omega, S& space, const Options& options = Options())
     -> std::tuple<CuttingPlaneArrayType<S>, size_t> {
     for (auto niter = 0U; niter != options.max_iters; ++niter) {
         const auto cut = omega.assess_feas(space.xc());
@@ -108,8 +108,7 @@ inline auto cutting_plane_feas(O& omega, S& space,
  */
 template <typename O, typename S, typename N>
     requires OracleOptim<O, typename S::ArrayType, N> && SearchSpace<S>
-inline auto cutting_plane_optim(O& omega, S& space, N& gamma,
-                                const Options& options = Options())
+inline auto cutting_plane_optim(O& omega, S& space, N& gamma, const Options& options = Options())
     -> std::tuple<CuttingPlaneArrayType<S>, size_t> {
     auto x_best = invalid_value<CuttingPlaneArrayType<S>>();
     for (auto niter = 0U; niter < options.max_iters; ++niter) {

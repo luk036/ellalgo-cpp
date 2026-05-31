@@ -14,7 +14,7 @@ namespace {
     concept LmiCallable = requires(O& o, const V& x) {
         { o(x) } -> std::convertible_to<bool>;
     };
-}
+}  // namespace
 
 /**
  * @brief

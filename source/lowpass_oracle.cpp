@@ -11,8 +11,8 @@
 #include <cstddef>                             // for size_t
 #include <ellalgo/oracles/lowpass_oracle.hpp>  // for LowpassOracle, filter_...
 #include <numbers>
-#include <tuple>                               // for tuple
-#include <valarray>                            // for valarray
+#include <tuple>     // for tuple
+#include <valarray>  // for valarray
 
 using Vec = std::valarray<double>;
 using Mat = std::valarray<Vec>;

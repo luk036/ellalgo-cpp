@@ -12,9 +12,9 @@
  * and convergence tolerance.
  */
 struct Options {
-    size_t max_iters;   ///< Maximum number of iterations allowed
-    double tolerance;   ///< Convergence tolerance for stopping criteria
-    bool verbose;       ///< Enable iteration logging
+    size_t max_iters;  ///< Maximum number of iterations allowed
+    double tolerance;  ///< Convergence tolerance for stopping criteria
+    bool verbose;      ///< Enable iteration logging
 
     /**
      * @brief Default constructor
@@ -49,10 +49,14 @@ enum class CutStatus {
 /// Stream output for CutStatus
 inline auto operator<<(std::ostream& os, CutStatus s) -> std::ostream& {
     switch (s) {
-        case CutStatus::Success: return os << "✓ success";
-        case CutStatus::NoSoln:  return os << "✗ no solution";
-        case CutStatus::NoEffect: return os << "⏭ no effect";
-        case CutStatus::Unknown: return os << "? unknown";
+        case CutStatus::Success:
+            return os << "✓ success";
+        case CutStatus::NoSoln:
+            return os << "✗ no solution";
+        case CutStatus::NoEffect:
+            return os << "⏭ no effect";
+        case CutStatus::Unknown:
+            return os << "? unknown";
     }
     return os;
 }
@@ -114,7 +118,7 @@ using SingleCut = double;
 
 // --- C++20 Concepts (simple constraints to avoid MSVC ICE) ---
 #if __cpp_concepts >= 201907L
-#include <concepts>
+#    include <concepts>
 
 template <typename O, typename A>
 concept OracleFeas = requires(O& o, const A& x) {

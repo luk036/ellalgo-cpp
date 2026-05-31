@@ -18,8 +18,8 @@
 // the allocation won't exceed PTRDIFF_MAX. This is a false positive when sizes
 // are bounded by actual matrix dimensions at runtime.
 #if defined(__GNUC__) && !defined(__clang__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Walloc-size-larger-than="
+#    pragma GCC diagnostic push
+#    pragma GCC diagnostic ignored "-Walloc-size-larger-than="
 #endif
 
 /**
@@ -67,7 +67,7 @@ Vector conjugate_gradient2(const Matrix& A, const Vector& b, Vector& x_vector, d
 }
 
 #if defined(__GNUC__) && !defined(__clang__)
-#pragma GCC diagnostic pop
+#    pragma GCC diagnostic pop
 #endif
 
 #endif  // CONJUGATE_GRADIENT_HPP
