@@ -1,0 +1,106 @@
+./ellalgo-cpp
+[  3%] Built target fmt
+[ 10%] Built target spdlog
+[ 11%] Building CXX object _deps/ellalgo-build/CMakeFiles/EllAlgo.dir/source/logger.cpp.o
+In file included from /data/data/com.termux/files/home/github/cpp/ellalgo-cpp/source/logger.cpp:10:
+In file included from /data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/spdlog-src/include/spdlog/spdlog.h:14:
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/spdlog-src/include/spdlog/logger.h:380:9: error: call to consteval function 'fmt::basic_format_string<char,
+      const char *, const char *&, int &>::basic_format_string<FMT_COMPILE_STRING, 0>' is not a constant expression
+  380 |         SPDLOG_LOGGER_CATCH(loc)
+      |         ^
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/spdlog-src/include/spdlog/logger.h:36:46: note: expanded from macro 'SPDLOG_LOGGER_CATCH'
+   36 |                 err_handler_(fmt_lib::format(SPDLOG_FMT_STRING("{} [{}({})]"), ex.what(), location.filename, location.line));              \
+      |                                              ^
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/spdlog-src/include/spdlog/common.h:54:46: note: expanded from macro 'SPDLOG_FMT_STRING'
+   54 | #    define SPDLOG_FMT_STRING(format_string) FMT_STRING(format_string)
+      |                                              ^
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/fmt-src/include/fmt/format.h:1848:23: note: expanded from macro 'FMT_STRING'
+ 1848 | #define FMT_STRING(s) FMT_STRING_IMPL(s, fmt::detail::compile_string, )
+      |                       ^
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/fmt-src/include/fmt/format.h:1825:3: note: expanded from macro 'FMT_STRING_IMPL'
+ 1825 |   [] {                                                                        \
+      |   ^
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/spdlog-src/include/spdlog/logger.h:90:9: note: in instantiation of function template specialization
+      'spdlog::logger::log_<const std::string &>' requested here
+   90 |         log_(loc, lvl, details::to_string_view(fmt), std::forward<Args>(args)...);
+      |         ^
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/spdlog-src/include/spdlog/logger.h:96:9: note: in instantiation of function template specialization
+      'spdlog::logger::log<const std::string &>' requested here
+   96 |         log(source_loc{}, lvl, fmt, std::forward<Args>(args)...);
+      |         ^
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/spdlog-src/include/spdlog/logger.h:158:9: note: in instantiation of function template specialization
+      'spdlog::logger::log<const std::string &>' requested here
+  158 |         log(level::info, fmt, std::forward<Args>(args)...);
+      |         ^
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/source/logger.cpp:43:21: note: in instantiation of function template specialization
+      'spdlog::logger::info<const std::string &>' requested here
+   43 |             logger->info("EllAlgo message: {}", message);
+      |                     ^
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/fmt-src/include/fmt/core.h:704:54: note: subexpression not valid in a constant expression
+  704 |     format_str_.remove_prefix(detail::to_unsigned(it - begin()));
+      |                                                   ~~~^~~~~~~~~
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/fmt-src/include/fmt/core.h:2682:5: note: in call to 'this->context_.advance_to(&"{} [{}({})]"[1])'
+ 2682 |     context_.advance_to(begin);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/fmt-src/include/fmt/core.h:2677:5: note: in call to
+      'this->on_format_specs(0, &"{} [{}({})]"[1], &"{} [{}({})]"[1])'
+ 2677 |     on_format_specs(id, begin, begin);  // Call parse() on empty specs.
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/fmt-src/include/fmt/core.h:2502:5: note: in call to 'handler.on_replacement_field(0, &"{} [{}({})]"[1])'
+ 2502 |     handler.on_replacement_field(handler.on_arg_id(), begin);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/fmt-src/include/fmt/core.h:2534:21: note: in call to 'parse_replacement_field<char,
+      fmt::detail::format_string_checker<char, const char *, const char *, int> &>(&"{} [{}({})]"[1], &"{} [{}({})]"[11], checker(s))'
+ 2534 |         begin = p = parse_replacement_field(p - 1, end, handler);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/fmt-src/include/fmt/core.h:2787:7: note: in call to 'parse_format_string<true, char,
+      fmt::detail::format_string_checker<char, const char *, const char *, int>>({&"{} [{}({})]"[0], 11}, checker(s))'
+ 2787 |       detail::parse_format_string<true>(str_, checker(s));
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/spdlog-src/include/spdlog/logger.h:380:9: note: in call to 'basic_format_string<FMT_COMPILE_STRING, 0>([] {
+    struct FMT_COMPILE_STRING : fmt::detail::compile_string {
+        using char_type [[maybe_unused]] = fmt::remove_cvref_t<decltype("{} [{}({})]"[0])>;
+    };
+    return FMT_COMPILE_STRING();
+}())'
+  380 |         SPDLOG_LOGGER_CATCH(loc)
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/spdlog-src/include/spdlog/logger.h:36:46: note: expanded from macro 'SPDLOG_LOGGER_CATCH'
+   36 |                 err_handler_(fmt_lib::format(SPDLOG_FMT_STRING("{} [{}({})]"), ex.what(), location.filename, location.line));              \
+      |                                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/spdlog-src/include/spdlog/common.h:54:46: note: expanded from macro 'SPDLOG_FMT_STRING'
+   54 | #    define SPDLOG_FMT_STRING(format_string) FMT_STRING(format_string)
+      |                                              ^~~~~~~~~~~~~~~~~~~~~~~~~
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/fmt-src/include/fmt/format.h:1848:23: note: expanded from macro 'FMT_STRING'
+ 1848 | #define FMT_STRING(s) FMT_STRING_IMPL(s, fmt::detail::compile_string, )
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/data/data/com.termux/files/home/github/cpp/ellalgo-cpp/build/_deps/fmt-src/include/fmt/format.h:1825:3: note: expanded from macro 'FMT_STRING_IMPL'
+ 1825 |   [] {                                                                        \
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1826 |     /* Use the hidden visibility as a workaround for a GCC bug (#1973). */    \
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1827 |     /* Use a macro-like name to avoid shadowing warnings. */                  \
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1828 |     struct FMT_VISIBILITY("hidden") FMT_COMPILE_STRING : base {               \
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1829 |       using char_type FMT_MAYBE_UNUSED = fmt::remove_cvref_t<decltype(s[0])>; \
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1830 |       FMT_MAYBE_UNUSED FMT_CONSTEXPR explicit                                 \
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1831 |       operator fmt::basic_string_view<char_type>() const {                    \
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1832 |         return fmt::detail_exported::compile_string_to_view<char_type>(s);    \
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1833 |       }                                                                       \
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1834 |     };                                                                        \
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1835 |     return FMT_COMPILE_STRING();                                              \
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1836 |   }()
+      |   ~~~
+1 error generated.
+make[2]: *** [_deps/ellalgo-build/CMakeFiles/EllAlgo.dir/build.make:135: _deps/ellalgo-build/CMakeFiles/EllAlgo.dir/source/logger.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:864: _deps/ellalgo-build/CMakeFiles/EllAlgo.dir/all] Error 2
+make: *** [Makefile:166: all] Error 2
+

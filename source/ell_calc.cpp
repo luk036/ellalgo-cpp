@@ -13,7 +13,6 @@
 #include <ellalgo/ell_calc.hpp>       // for EllCalc
 #include <ellalgo/ell_calc_core.hpp>  // for EllCalcCore
 #include <ellalgo/ell_config.hpp>     // for CutStatus, CutStatus::Success
-#include <tuple>                      // for tuple
 
 /**
  * @brief Parallel- or deep-cut

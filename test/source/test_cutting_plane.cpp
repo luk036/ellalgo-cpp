@@ -7,7 +7,7 @@
 #include <optional>
 #include <vector>
 
-struct MyOracle {
+struct MyOracleC {
     using ArrayType = std::vector<double>;
     using Cut = std::pair<ArrayType, double>;
 
@@ -22,7 +22,7 @@ struct MyOracle {
 
 TEST_CASE("Cutting-plane feasibility") {
     auto ell = Ell<std::vector<double>>(10.0, std::vector<double>{0.0, 0.0});
-    auto oracle = MyOracle{};
+    auto oracle = MyOracleC{};
     auto options = Options();
     options.max_iters = 2000;
     options.tolerance = 1e-8;
@@ -31,7 +31,7 @@ TEST_CASE("Cutting-plane feasibility") {
     CHECK_NE(std::get<0>(result).size(), 0);
 }
 
-struct MyOracle2 {
+struct MyOracleC2 {
     using ArrayType = std::vector<double>;
     using Cut = std::pair<ArrayType, double>;
 
@@ -47,7 +47,7 @@ struct MyOracle2 {
 
 TEST_CASE("Cutting-plane optimization") {
     auto ell = Ell<std::vector<double>>(10.0, std::vector<double>{0.0, 0.0});
-    auto oracle = MyOracle2{};
+    auto oracle = MyOracleC2{};
     auto options = Options();
     options.max_iters = 2000;
     options.tolerance = 1e-8;
@@ -57,7 +57,7 @@ TEST_CASE("Cutting-plane optimization") {
     CHECK_NE(std::get<0>(result).size(), 0);
 }
 
-struct MyOracle4 {
+struct MyOracleC3 {
     using ArrayType = std::vector<double>;
     using Cut = std::pair<ArrayType, double>;
 
@@ -76,7 +76,7 @@ struct MyOracle4 {
 
 TEST_CASE("Binary search") {
     auto ell = Ell<std::vector<double>>(10.0, std::vector<double>{0.0, 0.0});
-    auto oracle = MyOracle4{};
+    auto oracle = MyOracleC3{};
     auto options = Options();
     options.max_iters = 2000;
     options.tolerance = 1e-8;
