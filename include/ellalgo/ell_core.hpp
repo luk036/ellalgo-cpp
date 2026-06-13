@@ -46,30 +46,15 @@ class EllCore {
     bool no_defer_trick = false;
 
   private:
-    /**
-     * @brief Construct a new EllCore object
-     *
-     * The `operator=` function is being deleted in this code. This means that the assignment
-     * operator is not allowed for objects of the `EllCore` class. By deleting this function, the
-     * code prevents objects of the `EllCore` class from being assigned to each other.
-     *
-     * @param[in] E The parameter "E" is a reference to an object of type "EllCore".
-     */
+    /// @brief Deleted copy assignment operator (non-copyable).
     auto operator=(const EllCore& E) -> EllCore& = delete;
 
     /**
-     * @brief Construct a new EllCore object
+     * @brief Construct EllCore with initial kappa, matrix, and dimension
      *
-     * The function is a constructor for the EllCore class that takes in a kappa value, a Matrix
-     * object, and a size_t value as parameters.
-     *
-     * @param[in] kappa The kappa parameter is a constant value of type double. It is used in the
-     * construction of the EllCore object.
-     * @param[in] mq The parameter `mq` is a matrix of type `Matrix` that is being moved into the
-     * `_mq` member variable of the `EllCore` object. The type `Matrix` is not specified in the code
-     * snippet, so it would need to be defined elsewhere in the code.
-     * @param[in] ndim The parameter `ndim` represents the number of dimensions for the EllCore
-     * object.
+     * @param[in] kappa Initial scaling factor κ for the ellipsoid
+     * @param[in] mq Initial shape matrix Q (moved in)
+     * @param[in] ndim Number of dimensions
      */
     EllCore(double kappa, Matrix&& mq, size_t ndim)
         : _n{ndim}, _kappa{kappa}, _mq{std::move(mq)}, _helper{_n}, _scratch(0.0, ndim) {}
@@ -142,9 +127,9 @@ class EllCore {
     auto copy() const -> EllCore { return EllCore(*this); }
 
     /**
-     * @brief
+     * @brief Get the squared ellipsoid radius τ²
      *
-     * @return double
+     * @return double The squared radius
      */
     constexpr auto tsq() const -> double { return this->_tsq; }
 

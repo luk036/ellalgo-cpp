@@ -1,5 +1,22 @@
+/**
+ * @file ldlt_mgr.cpp
+ * @brief Implementation of LDLT factorization witness computation
+ *
+ * Computes a witness vector certifying that a matrix
+ * is not symmetric positive definite.
+ */
+
 #include <ellalgo/oracles/ldlt_mgr.hpp>
 
+/**
+ * @brief Compute a witness certifying non-SPD status
+ *
+ * After a failed LDLT factorization (is_spd() == false),
+ * this function computes a witness vector w such that
+ * w' A w < 0, proving A is not positive definite.
+ *
+ * @return double The negative pivot value (-T(m,m)) at the failure point
+ */
 auto LDLTMgr::witness() -> double {
     assert(!this->is_spd());
 

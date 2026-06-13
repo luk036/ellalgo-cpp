@@ -46,7 +46,7 @@ enum class CutStatus {
     Unknown    ///< Unknown status
 };
 
-/// Stream output for CutStatus
+/// @brief Stream output operator for CutStatus
 inline auto operator<<(std::ostream& os, CutStatus s) -> std::ostream& {
     switch (s) {
         case CutStatus::Success:
@@ -75,14 +75,13 @@ struct CutResult {
 };
 
 /**
- * @brief Information about the computation result
+ * @brief Information about the cutting-plane computation result
  *
- * This structure contains information about the computation,
- * including feasibility status and number of iterations used.
+ * Contains feasibility status and iteration count.
  */
 struct CInfo {
-    bool feasible;     ///< Whether a feasible solution was found
-    size_t num_iters;  ///< Number of iterations performed
+    bool feasible;          ///< Whether a feasible solution was found
+    size_t num_iters = 0;   ///< Number of iterations performed
 };
 
 /**
@@ -113,7 +112,11 @@ template <typename T> using CutConcept = std::pair<ArrayType<T>, CutChoice<T>>;
  */
 template <typename T> using RetQ = std::tuple<CutConcept<T>, bool, ArrayType<T>, bool>;
 
-/// Single cut parameter β in gᵀ(x - xc) + β ≤ 0
+/**
+ * @brief Single cut parameter β in gᵀ(x - xc) + β ≤ 0
+ *
+ * Represents the bias term in a cutting plane constraint.
+ */
 using SingleCut = double;
 
 // --- C++20 Concepts (simple constraints to avoid MSVC ICE) ---

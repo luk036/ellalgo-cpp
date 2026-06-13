@@ -47,11 +47,7 @@ template <typename Arr> class Ell {
     Arr _xc;
     EllCore _mgr;
 
-    /**
-     * @brief Deleted copy assignment operator.
-     *
-     * @param[in] E The parameter "E" is a reference to an object of type "Ell".
-     */
+    /// @brief Deleted copy assignment operator (non-copyable).
     auto operator=(const Ell& E) -> Ell& = delete;
 
   public:

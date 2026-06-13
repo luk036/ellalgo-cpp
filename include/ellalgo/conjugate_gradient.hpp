@@ -126,7 +126,7 @@ class Vector0 {
 };
 
 /**
- * @brief Add two vectors
+ * @brief Element-wise vector addition
  *
  * @param[in] lhs Left-hand side vector
  * @param[in] rhs Right-hand side vector
@@ -138,7 +138,7 @@ inline Vector0 operator+(Vector0 lhs, const Vector0& rhs) {
 }
 
 /**
- * @brief Subtract two vectors
+ * @brief Element-wise vector subtraction
  *
  * @param[in] lhs Left-hand side vector
  * @param[in] rhs Right-hand side vector
@@ -150,7 +150,7 @@ inline Vector0 operator-(Vector0 lhs, const Vector0& rhs) {
 }
 
 /**
- * @brief Multiply a vector by a scalar
+ * @brief Scalar-vector multiplication (vector * scalar)
  *
  * @param[in] v The vector to multiply
  * @param[in] scalar The scalar value
@@ -162,7 +162,7 @@ inline Vector0 operator*(Vector0 v, double scalar) {
 }
 
 /**
- * @brief Multiply a scalar by a vector
+ * @brief Scalar-vector multiplication (scalar * vector)
  *
  * @param[in] scalar The scalar value
  * @param[in] v The vector to multiply
@@ -237,7 +237,7 @@ class Matrix0 {
 };
 
 /**
- * Solves the linear system Ax = b using the conjugate gradient method.
+ * @brief Solve Ax = b using the conjugate gradient method.
  *
  * @tparam Matrix0 The matrix type, which must support matrix-vector multiplication.
  * @tparam Vector0 The vector type, which must support vector operations.

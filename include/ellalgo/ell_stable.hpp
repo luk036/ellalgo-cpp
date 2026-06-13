@@ -26,15 +26,7 @@ template <typename Arr> class EllStable {
     Arr _xc;
     EllCore _mgr;
 
-    /**
-     * @brief Construct a new EllStable object
-     *
-     * The `operator=` function is being deleted in this code. This means that the assignment
-     * operator is not allowed for objects of the `EllStable` class. By deleting this function, the
-     * code prevents objects of the `EllStable` class from being assigned to each other.
-     *
-     * @param[in] E The parameter "E" is a reference to an object of type "EllStable".
-     */
+    /// @brief Deleted copy assignment operator (non-copyable).
     auto operator=(const EllStable& E) -> EllStable& = delete;
 
   public:

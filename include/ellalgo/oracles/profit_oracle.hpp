@@ -66,11 +66,13 @@ class ProfitOracle {
     auto set_elasticities(const Vec& elasticities) { this->_elasticities = elasticities; }
 
     /**
-     * @brief
+     * @brief Assess feasibility of a given input quantity
+     *
+     * Uses round-robin to check constraints. Returns a cut if infeasible.
      *
      * @param[in] y input quantity (in log scale)
      * @param[in] gamma the best-so-far optimal value
-     * @return std::tuple<Cut, double> Cut and the updated best-so-far value
+     * @return Cut* Pointer to cut, or nullptr if feasible
      */
     auto assess_feas(const Vec& y, const double& gamma) -> Cut*;
 

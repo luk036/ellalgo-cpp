@@ -147,12 +147,11 @@ auto EllCalcCore::calc_parallel_central_cut(const double beta1, const double tsq
 }
 
 /**
- * @brief Calculate new ellipsoid under Non-central Cut
+ * @brief Fast bias cut computation
  *
- * The function `calc_bias_cut_fast` calculates and returns the values of rho, sigma, and delta
- * based on the given beta, tau, and eta values under the bias-cut:
+ * Direct formula for the bias (deep) cut:
  *
- *        g' (x - xc) + β \le 0
+ *        g' (x - xc) + β ≤ 0
  *
  *           _.-'''''''-._
  *         ,'             `.
@@ -169,15 +168,10 @@ auto EllCalcCore::calc_parallel_central_cut(const double beta1, const double tsq
  *       +------+------------+
  *      "-τ"   "-β"          "+τ"
  *
- *
- * @param[in] beta The parameter "beta" represents a value used in the calculation. It is a double
- * value.
- * @param[in] tau The parameter "tau" represents a value used in the calculation. It is not
- * specified in the code snippet provided. You would need to provide a value for "tau" in order to
- * use the `calc_bias_cut_fast` function.
- * @param[in] eta Computed intermediate value (tau + n * beta).
- *
- * @return The function `calc_bias_cut_fast` returns a tuple containing the following values:
+ * @param[in] beta Bias parameter
+ * @param[in] tau  Ellipsoid radius (√τ²)
+ * @param[in] eta  Pre-computed (tau + n × beta)
+ * @return Tuple (rho, sigma, delta)
  */
 auto EllCalcCore::calc_bias_cut_fast(const double beta, const double tau,
                                      const double eta) const noexcept
@@ -190,12 +184,11 @@ auto EllCalcCore::calc_bias_cut_fast(const double beta, const double tau,
 }
 
 /**
- * @brief Central Cut
+ * @brief Central cut computation
  *
- * The function `_calc_bias_cut_core` calculates and returns the values of rho, sigma, and delta
- * based on the given beta, tau, and eta values under the central-cut:
+ * Single constraint through the center:
  *
- *        g' (x - xc) \le 0.
+ *        g' (x - xc) ≤ 0.
  *
  *           _.-'''''''-._
  *         ,'             `.
@@ -212,11 +205,8 @@ auto EllCalcCore::calc_bias_cut_fast(const double beta, const double tau,
  *       +---------+---------+
  *      "-τ"       "0"       "+τ"
  *
- *
- * @param[in] tau tau is a constant value of type double. It represents the square of the variable
- * tau.
- *
- * @return A tuple containing the values of rho, sigma, and delta.
+ * @param[in] tau Ellipsoid radius (√τ²)
+ * @return Tuple (rho, sigma, delta)
  */
 auto EllCalcCore::calc_central_cut(const double tau) const noexcept
     -> std::tuple<double, double, double> {

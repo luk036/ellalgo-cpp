@@ -33,10 +33,10 @@ template <typename Arr036, typename Mat = Arr036> class LmiOldOracle {
     LmiOldOracle(size_t ndim, const std::vector<Mat>& F, Mat B)
         : _mgr{ndim}, m_F{F}, m_F0{std::move(B)} {}
     /**
-     * @brief
+     * @brief Assess the feasibility of a given point via LDLT factorization
      *
-     * @param[in] x
-     * @return std::optional<Cut>
+     * @param[in] x The point to assess feasibility
+     * @return Cut* Pointer to cut information, or nullptr if feasible
      */
     auto assess_feas(const Arr036& x) -> Cut* {
         const auto n = x.size();
@@ -65,10 +65,10 @@ template <typename Arr036, typename Mat = Arr036> class LmiOldOracle {
     }
 
     /**
-     * @brief
+     * @brief Call operator wrapping assess_feas
      *
-     * @param[in] x
-     * @return std::optional<Cut>
+     * @param[in] x The point to assess feasibility
+     * @return Cut* Pointer to cut, or nullptr if feasible
      */
     auto operator()(const Arr036& x) -> Cut* { return assess_feas(x); }
 };

@@ -101,16 +101,15 @@ auto ProfitOracle::assess_optim(const Vec& y, double& gamma) -> std::tuple<Cut, 
 }
 
 /**
- * The function assess_optim_q assesses the optimization of a given gamma value using a set of
- * input parameters.
+ * @brief Assess optimality for discrete profit maximization
  *
- * @param[in] y A vector containing the input values.
- * @param[in,out] gamma The "gamma" parameter is a reference to a double value. It is used to
- * store the best-so-far value for optimization.
- * @param[in] retry A boolean flag indicating whether the function should retry the assessment or
- * not.
+ * Uses round-to-nearest-integer for discrete variables and adjusts
+ * the beta term to account for the discretization gap.
  *
- * @return The function `assess_optim_q` returns a tuple containing the following elements:
+ * @param[in] y     Input vector (log-scaled quantities)
+ * @param[in,out] gamma Best-so-far optimal value
+ * @param[in] retry Whether to re-use cached discrete point
+ * @return Tuple (cut, shrunk, discrete_y, more_alt)
  */
 auto ProfitOracleQ::assess_optim_q(const Vec& y, double& gamma, bool retry)
     -> std::tuple<Cut, bool, Vec, bool> {

@@ -68,30 +68,16 @@ class EllCalcCore {
     EllCalcCore(const EllCalcCore& E) noexcept = default;
 
     /**
-     * Calculates the new ellipsoid parameters rho, sigma, and delta after
-     * applying parallel cuts defined by beta0 and beta1.
+     * @brief Compute new ellipsoid parameters for parallel bias cut
      *
-     * This is a public member function that computes the ellipsoid parameters
-     * after parallel cuts of the form:
+     * Two parallel constraints: g'(x - xc) + beta0 ≤ 0 and g'(x - xc) + beta1 ≥ 0.
+     * Computes intermediate values b0b1 and eta, then delegates to
+     * calc_parallel_cut_fast().
      *
-     *   g'(x - xc) + beta0 <= 0
-     *   g'(x - xc) + beta1 >= 0
-     *
-     * It takes in the parallel cut parameters beta0, beta1, and the squared
-     * value of tau. It computes intermediate values b0b1 and eta, then calls
-     * calc_parallel_cut_fast() to calculate rho, sigma, delta which are
-     * returned as a tuple.
-     *
-     * Example:
-     * auto [rho, sigma, delta] = E.calc_parallel_cut(beta0, beta1, tsq);
-     *
-     * @param[in] beta0 The parameter `beta0` represents the value of beta for the first variable.
-     * @param[in] beta1 The parameter `beta1` represents a value used in the calculation.
-     * @param[in] tsq tsq is a constant value of type double. It represents the square of the
-     * parameter tau.
-     *
-     * @return The function `calc_parallel_cut` returns a tuple containing three values: `rho`,
-     * `sigma`, and `delta`.
+     * @param[in] beta0  Lower bound of the parallel cut
+     * @param[in] beta1  Upper bound of the parallel cut
+     * @param[in] tsq    Squared ellipsoid radius τ²
+     * @return Tuple (rho, sigma, delta) — step size, scaling factor, contraction
      */
     auto calc_parallel_cut(const double beta0, const double beta1, const double tsq) const noexcept
         -> std::tuple<double, double, double> {
@@ -105,62 +91,44 @@ class EllCalcCore {
         -> std::tuple<double, double, double>;
 
     /**
-     * Calculates ellipsoid parameters after parallel cuts.
+     * @brief Fast parallel cut computation with pre-computed values
      *
-     * This public member function computes the ellipsoid parameters rho, sigma,
-     * and delta after applying parallel cuts defined by beta0 and beta1. The
-     * parameters beta0, beta1, tsq, b0b1, and eta are used in the calculation.
+     * Uses pre-computed b0b1 and eta to compute rho, sigma, delta
+     * for parallel bias cuts without re-computing intermediates.
      *
-     * @param[in] beta0 First parallel cut parameter.
-     * @param[in] beta1 Second parallel cut parameter.
-     * @param[in] tsq Square of tau parameter.
-     * @param[in] b0b1 Product of beta0 and beta1.
-     * @param[in] eta Computed intermediate value.
-     * @return Tuple containing computed rho, sigma and delta.
+     * @param[in] beta0 First parallel cut parameter
+     * @param[in] beta1 Second parallel cut parameter
+     * @param[in] tsq   Squared tau (τ²)
+     * @param[in] b0b1  Product beta0 × beta1
+     * @param[in] eta   Intermediate value (tsq + n × b0b1)
+     * @return Tuple (rho, sigma, delta)
      */
     auto calc_parallel_cut_fast(const double beta0, const double beta1, const double tsq,
                                 const double b0b1, const double eta) const noexcept
         -> std::tuple<double, double, double>;
 
     /**
-     * Calculates ellipsoid parameters after parallel central cuts.
+     * @brief Compute new ellipsoid parameters for parallel central cut
      *
-     * This is a public member function that computes the ellipsoid parameters
-     * after parallel central cuts of the form:
+     * One central cut through the center plus one parallel constraint:
+     * g'(x - xc) ≤ 0 and g'(x - xc) + beta1 ≥ 0.
      *
-     *   g'(x - xc) <= 0
-     *   g'(x - xc) + beta1 >= 0
-     *
-     * This function computes the ellipsoid parameters rho, sigma,
-     * and delta after applying parallel central cuts defined by
-     * beta1 and tau. The parameters beta1 and tsq are used in
-     * the calculation.
-     *
-     * @param[in] beta1 Parallel cut parameter.
-     * @param[in] tsq Square of tau parameter.
-     * @return Tuple containing computed rho, sigma and delta.
+     * @param[in] beta1 Upper bound of the parallel constraint
+     * @param[in] tsq   Squared ellipsoid radius τ²
+     * @return Tuple (rho, sigma, delta)
      */
     auto calc_parallel_central_cut(const double beta1, const double tsq) const noexcept
         -> std::tuple<double, double, double>;
 
     /**
-     * Calculates new ellipsoid parameters after bias cut.
+     * @brief Compute new ellipsoid parameters for bias (deep) cut
      *
-     * This function computes the new ellipsoid parameters rho, sigma,
-     * and delta after applying a bias cut of the form:
+     * Single constraint: g'(x - xc) + beta ≤ 0.
+     * Computes eta = tau + n × beta, then delegates to calc_bias_cut_fast().
      *
-     *   g'(x - xc) + beta <= 0
-     *
-     * It takes the bias parameter beta and tau as inputs.
-     * Tau is the square of the original tau parameter.
-     * It returns the computed rho, sigma, delta tuple.
-     *
-     * @param[in] beta The parameter "beta" represents a value used in the calculation.
-     * @param[in] tau The parameter "tau" represents a value used in the calculation. It is not
-     * specified in the code snippet provided. You would need to provide a value for "tau" in order
-     * to use the `calc_bias_cut` function.
-     *
-     * @return The function `calc_bias_cut` returns a tuple containing the following values:
+     * @param[in] beta Bias parameter (≥ 0)
+     * @param[in] tau  Square root of τ² (i.e. the ellipsoid radius)
+     * @return Tuple (rho, sigma, delta)
      */
     auto calc_bias_cut(const double beta, const double tau) const noexcept
         -> std::tuple<double, double, double> {
@@ -168,30 +136,27 @@ class EllCalcCore {
     }
 
     /**
-     * @brief Fast Bias Cut
+     * @brief Fast bias cut computation with pre-computed eta
      *
-     * This is a public member function that calculates the new ellipsoid parameters
-     * rho, sigma, and delta after applying a bias cut of the form:
+     * Uses pre-computed eta = tau + n × beta to directly compute
+     * rho, sigma, delta without re-computing intermediates.
      *
-     *   g'(x - xc) + beta <= 0
-     *
-     * It takes the bias parameter beta, tau, and eta as inputs and returns a
-     * tuple containing the computed rho, sigma, delta values.
+     * @param[in] beta Bias parameter
+     * @param[in] tau  Ellipsoid radius
+     * @param[in] eta  Intermediate value (tau + n × beta)
+     * @return Tuple (rho, sigma, delta)
      */
     auto calc_bias_cut_fast(const double beta, const double tau, const double eta) const noexcept
         -> std::tuple<double, double, double>;
 
     /**
-     * Calculates new ellipsoid parameters after applying a central cut.
+     * @brief Compute new ellipsoid parameters for central cut
      *
-     * This function takes the tau parameter as input and computes
-     * the new ellipsoid parameters rho, sigma, and delta after
-     * applying a central cut defined by:
+     * Single constraint through the center: g'(x - xc) ≤ 0.
+     * The cut passes through the ellipsoid center, making beta = 0.
      *
-     *   g'(x - xc) <= 0
-     *
-     * @param[in] tau The tau parameter.
-     * @return Tuple containing computed rho, sigma and delta.
+     * @param[in] tau Ellipsoid radius (τ)
+     * @return Tuple (rho, sigma, delta)
      */
     auto calc_central_cut(const double tau) const noexcept -> std::tuple<double, double, double>;
 };  // } EllCalcCore

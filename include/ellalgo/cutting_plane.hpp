@@ -10,12 +10,27 @@
 
 template <typename S> using CuttingPlaneArrayType = typename std::remove_reference_t<S>::ArrayType;
 
+/**
+ * @brief Return an invalid/sentinel value for type T
+ *
+ * For floating-point types, returns NaN.
+ * For non-floating-point types, returns a default-constructed T.
+ *
+ * @tparam T The type of the invalid value
+ * @return T The sentinel invalid value
+ */
 template <typename T> inline auto invalid_value() -> T
     requires std::is_floating_point_v<T>
 {
     return std::nan("1");
 }
 
+/**
+ * @brief Return an invalid/sentinel value for non-floating-point types
+ *
+ * @tparam T The type (must not be floating-point)
+ * @return T Default-constructed T{}
+ */
 template <typename T> inline auto invalid_value() -> T
     requires(!std::is_floating_point_v<T>)
 {
@@ -191,10 +206,13 @@ inline auto cutting_plane_optim_q(O& omega, S& space_q, N& gamma,
 }  // END
 
 /**
- * @brief
+ * @brief Binary search adaptor wrapping a cutting-plane feasibility oracle
  *
- * @tparam Oracle
- * @tparam Space
+ * Uses cutting_plane_feas() as a sub-routine to test feasibility
+ * at each candidate value, enabling binary search on a parameter.
+ *
+ * @tparam Oracle Feasibility oracle type
+ * @tparam Space  Search space type
  */
 template <typename Oracle, typename Space>  //
 class BSearchAdaptor {
@@ -251,14 +269,19 @@ class BSearchAdaptor {
 };
 
 /**
- * @brief
+ * @brief Binary search using a cutting-plane oracle
  *
- * @tparam Oracle
- * @tparam Space
- * @param[in,out] omega   perform assessment on x0
- * @param[in,out] intvl   interval containing x*
- * @param[in]     options maximum iteration and error tolerance etc.
- * @return CInfo
+ * Assumes monotone feasibility: if gamma is feasible,
+ * all larger values are also feasible.
+ * Narrows the interval [lower, upper] containing the
+ * threshold value.
+ *
+ * @tparam O Oracle type satisfying OracleBS concept
+ * @tparam T Numeric type for the search parameter
+ * @param[in,out] omega   Oracle for feasibility assessment
+ * @param[in]     intvl   Initial interval [lower, upper] containing the threshold
+ * @param[in]     options Maximum iterations and tolerance
+ * @return Tuple (threshold, num_iterations)
  */
 template <typename O, typename T>
     requires OracleBS<O, T>

@@ -15,21 +15,15 @@
 #include <ellalgo/ell_config.hpp>     // for CutStatus, CutStatus::Success
 
 /**
- * @brief Parallel- or deep-cut
+ * @brief Parallel bias cut computation
  *
- * The function `calc_parallel_bias_cut` calculates and returns the values of rho, sigma,
- * and delta based on the given input parameters.
+ * Two parallel constraints: beta0 ≤ g'(x - xc) ≤ beta1.
+ * Falls back to calc_bias_cut when parallel cut is ineffective.
  *
- * @param[in] beta0 The parameter `beta0` represents a double value.
- * @param[in] beta1 The parameter `beta1` represents a double value.
- * @param[in] tsq tsq is a constant value of type double. It represents the
- * square of the variable tau.
- *
- * @return a tuple containing the following values:
- * 1. CutStatus: An enum value indicating the status of the calculation.
- * 2. rho: A double value representing the calculated rho.
- * 3. sigma: A double value representing the calculated sigma.
- * 4. delta: A double value representing the calculated delta.
+ * @param[in] beta0 Lower bound of the parallel cut
+ * @param[in] beta1 Upper bound of the parallel cut
+ * @param[in] tsq   Squared ellipsoid radius τ²
+ * @return CutResult with status, rho, sigma, delta
  */
 auto EllCalc::calc_parallel_bias_cut(const double beta0, const double beta1, const double tsq) const
     -> CutResult {
@@ -47,20 +41,14 @@ auto EllCalc::calc_parallel_bias_cut(const double beta0, const double beta1, con
 }
 
 /**
- * @brief Parallel central cut
+ * @brief Parallel central cut computation
  *
- * The function `calc_parallel_central_cut` calculates and returns the values of rho, sigma,
- * and delta based on the given input parameters.
+ * One central cut through the center plus one parallel constraint:
+ * 0 ≤ g'(x - xc) ≤ beta1.
  *
- * @param[in] beta1 The parameter `beta1` represents a double value.
- * @param[in] tsq tsq is a constant value of type double. It represents the
- * square of the variable tau.
- *
- * @return a tuple containing the following values:
- * 1. CutStatus: An enum value indicating the status of the calculation.
- * 2. rho: A double value representing the calculated rho.
- * 3. sigma: A double value representing the calculated sigma.
- * 4. delta: A double value representing the calculated delta.
+ * @param[in] beta1 Upper bound of the parallel cut
+ * @param[in] tsq   Squared ellipsoid radius τ²
+ * @return CutResult with status, rho, sigma, delta
  */
 auto EllCalc::calc_parallel_central_cut(const double beta1, const double tsq) const -> CutResult {
     if (beta1 < 0.0) {
@@ -78,25 +66,14 @@ auto EllCalc::calc_parallel_central_cut(const double beta1, const double tsq) co
 }
 
 /**
- * @brief Deep-Cut
+ * @brief Deep (bias) cut
  *
- * The function `calc_bias_cut` calculates the values of `tau`, `eta` under the
- * deep-cut:
+ * Single constraint: g'(x - xc) + beta ≤ 0.
+ * Checks feasibility then delegates to EllCalcCore for computation.
  *
- *        g' (x - xc) + beta \le 0,
- *
- * and calls another function `_calc_bias_cut_core` to calculate the values of
- * `CutStatus`, `double`, `double`, and `double` based on the input values of
- * `beta` and `tsq`.
- *
- * @param[in] beta The parameter "beta" represents a value that needs to be
- * greater than or equal to 0.0. It is used in the calculation of "eta" and is
- * compared with "tsq" in the if statement.
- * @param[in] tsq tsq is a variable of type double, which represents the square
- * of the value tau.
- *
- * @return The function `calc_bias_cut` returns a tuple containing four values:
- * `CutStatus`, `double`, `double`, `double`.
+ * @param[in] beta Bias term (≥ 0)
+ * @param[in] tsq  Squared ellipsoid radius τ²
+ * @return CutResult with status, rho, sigma, delta
  */
 auto EllCalc::calc_bias_cut(const double beta, const double tsq) const -> CutResult {
     assert(beta >= 0.0);
@@ -111,22 +88,12 @@ auto EllCalc::calc_bias_cut(const double beta, const double tsq) const -> CutRes
 }
 
 /**
- * @brief Central Cut
+ * @brief Central cut
  *
- * The function `_calc_bias_cut_core` calculates and returns the values of rho, sigma,
- * and delta based on the given beta, tau, and eta values under the
- * central-cut:
+ * Single constraint passing through center: g'(x - xc) ≤ 0.
  *
- *        g' (x - xc) \le 0
- *
- * @param[in] tsq tsq is a constant value of type double. It represents the
- * square of the variable tau.
- *
- * @return A tuple containing the following values:
- * 1. CutStatus::Success
- * 2. rho
- * 3. sigma
- * 4. delta
+ * @param[in] tsq Squared ellipsoid radius τ²
+ * @return CutResult with status, rho, sigma, delta
  */
 auto EllCalc::calc_central_cut(const double tsq) const -> CutResult {
     // auto sigma = this->_c2;
@@ -140,19 +107,15 @@ auto EllCalc::calc_central_cut(const double tsq) const -> CutResult {
 }
 
 /**
- * The function `calc_parallel_bias_cut_q` calculates the parallel deep cut for a given range of
- * beta values and a given tsq value.
+ * @brief Parallel bias cut (Q-version for discrete optimization)
  *
- * @param[in] beta0 The parameter `beta0` represents the value of beta at the starting point of the
- * calculation. It is a constant reference to a double.
- * @param[in] beta1 The parameter `beta1` represents a value that is being compared to `beta0` in
- * the `if` statement on line 2. It is also used in calculations on lines 6 and 11. Without more
- * context, it is difficult to determine the exact meaning of `beta1`.
- * @param[in] tsq tsq is a variable of type double, which represents the square of the parameter
- * gamma.
+ * Two parallel constraints with alternative fallback (NoEffect).
+ * Used by cutting_plane_optim_q for discrete convex problems.
  *
- * @return The function `calc_parallel_bias_cut_q` returns a tuple of type `std::tuple<CutStatus,
- * std::tuple<double, double, double>>`.
+ * @param[in] beta0 Lower bound of the parallel cut
+ * @param[in] beta1 Upper bound of the parallel cut
+ * @param[in] tsq   Squared ellipsoid radius τ²
+ * @return CutResult with status, rho, sigma, delta
  */
 auto EllCalc::calc_parallel_bias_cut_q(const double beta0, const double beta1,
                                        const double tsq) const -> CutResult {
@@ -178,15 +141,14 @@ auto EllCalc::calc_parallel_bias_cut_q(const double beta0, const double beta1,
 }
 
 /**
- * The function calculates the deep cut for a given beta and tsq value.
+ * @brief Deep cut (Q-version for discrete optimization)
  *
- * @param[in] beta The parameter `beta` represents a value used in the calculation. It is passed by
- * reference as a constant double.
- * @param[in] tsq The parameter `tsq` represents the square of the value `tau`, which is a variable
- * used in the calculation.
+ * Single constraint with NoEffect fallback (instead of NoSoln).
+ * Used by cutting_plane_optim_q for discrete convex problems.
  *
- * @return The function `calc_bias_cut_q` returns a tuple containing four values: `CutStatus`,
- * `double`, `double`, `double`.
+ * @param[in] beta Bias term
+ * @param[in] tsq  Squared ellipsoid radius τ²
+ * @return CutResult with status, rho, sigma, delta
  */
 auto EllCalc::calc_bias_cut_q(const double beta, const double tsq) const -> CutResult {
     const auto tau = std::sqrt(tsq);
