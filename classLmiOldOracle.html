@@ -85,11 +85,11 @@ s.t.  (B - F * x) &gt;= 0
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a3b0f84fa6a65f45ab0da63c4051953e1" class="m-doc">assess_feas</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">Arr036</a>&amp; x) -&gt; Cut * -&gt; <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a></span>
             </dt>
-            <dd></dd>
+            <dd>Assess the feasibility of a given point via LDLT factorization.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a71b0c898b4fbb5af55c2c93c8ed35d96" class="m-doc">operator()</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">Arr036</a>&amp; x) -&gt; Cut * -&gt; <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a></span>
             </dt>
-            <dd></dd>
+            <dd>Call operator wrapping assess_feas.</dd>
           </dl>
         </section>
         <section>
@@ -131,6 +131,7 @@ s.t.  (B - F * x) &gt;= 0
               </div>
               <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a> LmiOldOracle&lt;_1, Mat&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b0f84fa6a65f45ab0da63c4051953e1" class="m-doc-self">assess_feas</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">Arr036</a>&amp; x) -&gt; Cut *</span></span>
             </h3>
+            <p>Assess the feasibility of a given point via LDLT factorization.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -138,13 +139,13 @@ s.t.  (B - F * x) &gt;= 0
               <tbody>
                 <tr>
                   <td style="width: 1%">x&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
+                  <td>The point to assess feasibility</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>std::optional&lt;Cut&gt;</td>
+                  <td>Cut* Pointer to cut information, or nullptr if feasible</td>
                 </tr>
               </tfoot>
             </table>
@@ -156,6 +157,7 @@ s.t.  (B - F * x) &gt;= 0
               </div>
               <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a> LmiOldOracle&lt;_1, Mat&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a71b0c898b4fbb5af55c2c93c8ed35d96" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">Arr036</a>&amp; x) -&gt; Cut *</span></span>
             </h3>
+            <p>Call operator wrapping assess_feas.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -163,13 +165,13 @@ s.t.  (B - F * x) &gt;= 0
               <tbody>
                 <tr>
                   <td style="width: 1%">x&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td></td>
+                  <td>The point to assess feasibility</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>std::optional&lt;Cut&gt;</td>
+                  <td>Cut* Pointer to cut, or nullptr if feasible</td>
                 </tr>
               </tfoot>
             </table>

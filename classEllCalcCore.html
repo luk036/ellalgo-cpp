@@ -90,7 +90,7 @@
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> beta1,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> tsq) const noexcept -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a></span>
             </dt>
-            <dd></dd>
+            <dd>Compute new ellipsoid parameters for parallel bias cut.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a32701a5418c01d7ff7b4f07647ddf1a1" class="m-doc">calc_parallel_cut_fast</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> beta0,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> beta1,
@@ -98,27 +98,27 @@
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> b0b1,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> eta) const noexcept -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a></span>
             </dt>
-            <dd></dd>
+            <dd>Fast parallel cut computation with pre-computed values.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a153f2124246c243516d7113cbe43f5f1" class="m-doc">calc_parallel_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> beta1,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> tsq) const noexcept -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a></span>
             </dt>
-            <dd></dd>
+            <dd>Compute new ellipsoid parameters for parallel central cut.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a281d9306932304d2c14387151f5ce936" class="m-doc">calc_bias_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> beta,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> tau) const noexcept -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a></span>
             </dt>
-            <dd></dd>
+            <dd>Compute new ellipsoid parameters for bias (deep) cut.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac799cb86d010981ab42a15d1d43ed973" class="m-doc">calc_bias_cut_fast</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> beta,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> tau,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> eta) const noexcept -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a></span>
             </dt>
-            <dd>Fast Bias Cut.</dd>
+            <dd>Fast bias cut computation with pre-computed eta.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ad95177bbaea5d078059e5059090e4401" class="m-doc">calc_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> tau) const noexcept -&gt; std::tuple&lt; double, double, double &gt; -&gt; <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a></span>
             </dt>
-            <dd></dd>
+            <dd>Compute new ellipsoid parameters for central cut.</dd>
           </dl>
         </section>
         <section>
@@ -180,6 +180,7 @@
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> beta1,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> tsq) const noexcept -&gt; std::tuple&lt; double, double, double &gt;</span></span>
             </h3>
+            <p>Compute new ellipsoid parameters for parallel bias cut.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -187,25 +188,25 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">beta0&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>The parameter <code>beta0</code> represents the value of beta for the first variable.</td>
+                  <td>Lower bound of the parallel cut</td>
                 </tr>
                 <tr>
                   <td>beta1&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>The parameter <code>beta1</code> represents a value used in the calculation.</td>
+                  <td>Upper bound of the parallel cut</td>
                 </tr>
                 <tr>
                   <td>tsq&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>tsq is a constant value of type double. It represents the square of the parameter tau.</td>
+                  <td>Squared ellipsoid radius τ²</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The function <code>calc_parallel_cut</code> returns a tuple containing three values: <code>rho</code>, <code>sigma</code>, and <code>delta</code>.</td>
+                  <td>Tuple (rho, sigma, delta) — step size, scaling factor, contraction</td>
                 </tr>
               </tfoot>
             </table>
-<p>Calculates the new ellipsoid parameters rho, sigma, and delta after applying parallel cuts defined by beta0 and beta1.</p><p>This is a public member function that computes the ellipsoid parameters after parallel cuts of the form:</p><p>g&#x27;(x - xc) + beta0 &lt;= 0 g&#x27;(x - xc) + beta1 &gt;= 0</p><p>It takes in the parallel cut parameters beta0, beta1, and the squared value of tau. It computes intermediate values b0b1 and eta, then calls <a href="classEllCalcCore.html#a32701a5418c01d7ff7b4f07647ddf1a1" class="m-doc">calc_<wbr />parallel_<wbr />cut_<wbr />fast()</a> to calculate rho, sigma, delta which are returned as a tuple.</p><p>Example: auto [rho, sigma, delta] = E.calc_parallel_cut(beta0, beta1, tsq);</p>
+<p>Two parallel constraints: g&#x27;(x - xc) + beta0 ≤ 0 and g&#x27;(x - xc) + beta1 ≥ 0. Computes intermediate values b0b1 and eta, then delegates to <a href="classEllCalcCore.html#a32701a5418c01d7ff7b4f07647ddf1a1" class="m-doc">calc_<wbr />parallel_<wbr />cut_<wbr />fast()</a>.</p>
           </div></section>
           <section class="m-doc-details" id="a32701a5418c01d7ff7b4f07647ddf1a1"><div>
             <h3>
@@ -215,6 +216,7 @@
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> b0b1,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> eta) const noexcept -&gt; std::tuple&lt; double, double, double &gt;</span></span>
             </h3>
+            <p>Fast parallel cut computation with pre-computed values.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -222,39 +224,40 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">beta0&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>First parallel cut parameter.</td>
+                  <td>First parallel cut parameter</td>
                 </tr>
                 <tr>
                   <td>beta1&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>Second parallel cut parameter.</td>
+                  <td>Second parallel cut parameter</td>
                 </tr>
                 <tr>
                   <td>tsq&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>Square of tau parameter.</td>
+                  <td>Squared tau (τ²)</td>
                 </tr>
                 <tr>
                   <td>b0b1&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>Product of beta0 and beta1.</td>
+                  <td>Product beta0 × beta1</td>
                 </tr>
                 <tr>
                   <td>eta&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>Computed intermediate value.</td>
+                  <td>Intermediate value (tsq + n × b0b1)</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Tuple containing computed rho, sigma and delta.</td>
+                  <td>Tuple (rho, sigma, delta)</td>
                 </tr>
               </tfoot>
             </table>
-<p>Calculates ellipsoid parameters after parallel cuts.</p><p>This public member function computes the ellipsoid parameters rho, sigma, and delta after applying parallel cuts defined by beta0 and beta1. The parameters beta0, beta1, tsq, b0b1, and eta are used in the calculation.</p>
+<p>Uses pre-computed b0b1 and eta to compute rho, sigma, delta for parallel bias cuts without re-computing intermediates.</p>
           </div></section>
           <section class="m-doc-details" id="a153f2124246c243516d7113cbe43f5f1"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a153f2124246c243516d7113cbe43f5f1" class="m-doc-self">calc_parallel_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> beta1,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> tsq) const noexcept -&gt; std::tuple&lt; double, double, double &gt;</span></span>
             </h3>
+            <p>Compute new ellipsoid parameters for parallel central cut.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -262,27 +265,28 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">beta1&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>Parallel cut parameter.</td>
+                  <td>Upper bound of the parallel constraint</td>
                 </tr>
                 <tr>
                   <td>tsq&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>Square of tau parameter.</td>
+                  <td>Squared ellipsoid radius τ²</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Tuple containing computed rho, sigma and delta.</td>
+                  <td>Tuple (rho, sigma, delta)</td>
                 </tr>
               </tfoot>
             </table>
-<p>Calculates ellipsoid parameters after parallel central cuts.</p><p>This is a public member function that computes the ellipsoid parameters after parallel central cuts of the form:</p><p>g&#x27;(x - xc) &lt;= 0 g&#x27;(x - xc) + beta1 &gt;= 0</p><p>This function computes the ellipsoid parameters rho, sigma, and delta after applying parallel central cuts defined by beta1 and tau. The parameters beta1 and tsq are used in the calculation.</p>
+<p>One central cut through the center plus one parallel constraint: g&#x27;(x - xc) ≤ 0 and g&#x27;(x - xc) + beta1 ≥ 0.</p>
           </div></section>
           <section class="m-doc-details" id="a281d9306932304d2c14387151f5ce936"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a281d9306932304d2c14387151f5ce936" class="m-doc-self">calc_bias_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> beta,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> tau) const noexcept -&gt; std::tuple&lt; double, double, double &gt;</span></span>
             </h3>
+            <p>Compute new ellipsoid parameters for bias (deep) cut.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -290,21 +294,21 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">beta&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>The parameter &quot;beta&quot; represents a value used in the calculation.</td>
+                  <td>Bias parameter (≥ 0)</td>
                 </tr>
                 <tr>
                   <td>tau&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>The parameter &quot;tau&quot; represents a value used in the calculation. It is not specified in the code snippet provided. You would need to provide a value for &quot;tau&quot; in order to use the <code>calc_bias_cut</code> function.</td>
+                  <td>Square root of τ² (i.e. the ellipsoid radius)</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The function <code>calc_bias_cut</code> returns a tuple containing the following values:</td>
+                  <td>Tuple (rho, sigma, delta)</td>
                 </tr>
               </tfoot>
             </table>
-<p>Calculates new ellipsoid parameters after bias cut.</p><p>This function computes the new ellipsoid parameters rho, sigma, and delta after applying a bias cut of the form:</p><p>g&#x27;(x - xc) + beta &lt;= 0</p><p>It takes the bias parameter beta and tau as inputs. Tau is the square of the original tau parameter. It returns the computed rho, sigma, delta tuple.</p>
+<p>Single constraint: g&#x27;(x - xc) + beta ≤ 0. Computes eta = tau + n × beta, then delegates to <a href="classEllCalcCore.html#ac799cb86d010981ab42a15d1d43ed973" class="m-doc">calc_<wbr />bias_<wbr />cut_<wbr />fast()</a>.</p>
           </div></section>
           <section class="m-doc-details" id="ac799cb86d010981ab42a15d1d43ed973"><div>
             <h3>
@@ -312,13 +316,39 @@
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> tau,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> eta) const noexcept -&gt; std::tuple&lt; double, double, double &gt;</span></span>
             </h3>
-            <p>Fast Bias Cut.</p>
-<p>This is a public member function that calculates the new ellipsoid parameters rho, sigma, and delta after applying a bias cut of the form:</p><p>g&#x27;(x - xc) + beta &lt;= 0</p><p>It takes the bias parameter beta, tau, and eta as inputs and returns a tuple containing the computed rho, sigma, delta values.</p>
+            <p>Fast bias cut computation with pre-computed eta.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">beta&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bias parameter</td>
+                </tr>
+                <tr>
+                  <td>tau&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Ellipsoid radius</td>
+                </tr>
+                <tr>
+                  <td>eta&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Intermediate value (tau + n × beta)</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Tuple (rho, sigma, delta)</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Uses pre-computed eta = tau + n × beta to directly compute rho, sigma, delta without re-computing intermediates.</p>
           </div></section>
           <section class="m-doc-details" id="ad95177bbaea5d078059e5059090e4401"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a> EllCalcCore::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad95177bbaea5d078059e5059090e4401" class="m-doc-self">calc_central_cut</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a> tau) const noexcept -&gt; std::tuple&lt; double, double, double &gt;</span></span>
             </h3>
+            <p>Compute new ellipsoid parameters for central cut.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -326,17 +356,17 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">tau&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>The tau parameter.</td>
+                  <td>Ellipsoid radius (τ)</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Tuple containing computed rho, sigma and delta.</td>
+                  <td>Tuple (rho, sigma, delta)</td>
                 </tr>
               </tfoot>
             </table>
-<p>Calculates new ellipsoid parameters after applying a central cut.</p><p>This function takes the tau parameter as input and computes the new ellipsoid parameters rho, sigma, and delta after applying a central cut defined by:</p><p>g&#x27;(x - xc) &lt;= 0</p>
+<p>Single constraint through the center: g&#x27;(x - xc) ≤ 0. The cut passes through the ellipsoid center, making beta = 0.</p>
           </div></section>
         </section>
       </div>

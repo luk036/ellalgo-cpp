@@ -102,7 +102,7 @@ k: a given constant that restricts the quantity of x1
               <span class="m-doc-wrap-bumper">auto <a href="#a7e38e7483145b9e644c306c40d0bc8a9" class="m-doc">assess_feas</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> Vec&amp; y,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a>&amp; gamma) -&gt; Cut * -&gt; <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a></span>
             </dt>
-            <dd></dd>
+            <dd>Assess feasibility of a given input quantity.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a4c70ce4c5aa87583a8964b45ddb28625" class="m-doc">assess_optim</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> Vec&amp; y,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a>&amp; gamma) -&gt; std::tuple&lt; Cut, bool &gt; -&gt; <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a></span>
@@ -160,6 +160,7 @@ k: a given constant that restricts the quantity of x1
               <span class="m-doc-wrap-bumper"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">auto</a> ProfitOracle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7e38e7483145b9e644c306c40d0bc8a9" class="m-doc-self">assess_feas</a>(</span><span class="m-doc-wrap"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> Vec&amp; y,
               <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">const</a> <a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64" class="m-doc">double</a>&amp; gamma) -&gt; Cut *</span></span>
             </h3>
+            <p>Assess feasibility of a given input quantity.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -177,10 +178,11 @@ k: a given constant that restricts the quantity of x1
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>std::tuple&lt;Cut, double&gt; Cut and the updated best-so-far value</td>
+                  <td>Cut* Pointer to cut, or nullptr if feasible</td>
                 </tr>
               </tfoot>
             </table>
+<p>Uses round-robin to check constraints. Returns a cut if infeasible.</p>
           </div></section>
           <section class="m-doc-details" id="a4c70ce4c5aa87583a8964b45ddb28625"><div>
             <h3>
