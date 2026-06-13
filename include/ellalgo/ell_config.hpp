@@ -80,8 +80,8 @@ struct CutResult {
  * Contains feasibility status and iteration count.
  */
 struct CInfo {
-    bool feasible;          ///< Whether a feasible solution was found
-    size_t num_iters = 0;   ///< Number of iterations performed
+    bool feasible;         ///< Whether a feasible solution was found
+    size_t num_iters = 0;  ///< Number of iterations performed
 };
 
 /**
