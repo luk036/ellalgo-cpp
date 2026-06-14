@@ -39,6 +39,7 @@ elseif(MSVC)
     EllAlgo
     PUBLIC /W4
            /WX
+           /wd5285
            /wd4459
            /wd4819
            /wd4146

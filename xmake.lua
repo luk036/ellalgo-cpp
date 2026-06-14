@@ -26,7 +26,7 @@ if is_plat("linux") then
         add_cxflags("-march=native", "-mtune=native", { force = true })
     end
 elseif is_plat("windows") then
-    add_cxflags("/EHsc /W4 /WX /wd4459 /wd4819", { force = true })
+    add_cxflags("/EHsc /W4 /WX /wd5285 /wd4459 /wd4819", { force = true })
     -- Enable AVX2 in release mode for auto-vectorization
     if is_mode("release") then
         add_cxflags("/arch:AVX2", { force = true })
