@@ -127,11 +127,11 @@ if (ELL_UNLIKELY(eta <= 0.0)) {
 
 ### Compiler Flags (Enforced)
 - **GCC/Clang**: `-Wall -Wpedantic -Wextra -Werror`
-- **MSVC**: `/utf-8 /W4 /WX /wd5285`
+- **MSVC**: `/utf-8 /W4 /WX`
 
 ### Dependencies (via CPM.cmake)
 - `fmt` (12.1.0) - formatting
-- `doctest` (2.4.11) - testing
+- `doctest` (2.5.2) - testing
 - `rapidcheck` - property-based testing
 - `PackageProject.cmake` - installation
 
