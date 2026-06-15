@@ -127,7 +127,7 @@ if (ELL_UNLIKELY(eta <= 0.0)) {
 
 ### Compiler Flags (Enforced)
 - **GCC/Clang**: `-Wall -Wpedantic -Wextra -Werror`
-- **MSVC**: `/utf-8 /W4 /WX /wd5285 /wd4996`
+- **MSVC**: `/utf-8 /W4 /WX /wd5285`
 
 ### Dependencies (via CPM.cmake)
 - `fmt` (12.1.0) - formatting

@@ -42,7 +42,6 @@ elseif(MSVC)
            /wd5285
            /wd4146
            /wd4127
-           /wd4996
   )
   # target_compile_definitions(EllAlgoTests PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
 endif()
