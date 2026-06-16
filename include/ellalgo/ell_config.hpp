@@ -1,3 +1,8 @@
+/**
+ * @file ell_config.hpp
+ * @brief Configuration types and constants for the ellipsoid algorithm
+ */
+
 #pragma once
 
 #include <cstddef>

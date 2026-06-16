@@ -1,3 +1,8 @@
+/**
+ * @file cutting_plane.hpp
+ * @brief Cutting-plane methods for convex feasibility and optimization
+ */
+
 #pragma once
 
 #include <cassert>

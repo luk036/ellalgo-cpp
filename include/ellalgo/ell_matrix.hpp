@@ -1,3 +1,8 @@
+/**
+ * @file ell_matrix.hpp
+ * @brief Square matrix with flat storage and strided views
+ */
+
 #pragma once
 
 #include <cstddef>

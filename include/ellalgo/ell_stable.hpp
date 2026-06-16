@@ -1,3 +1,8 @@
+/**
+ * @file ell_stable.hpp
+ * @brief Numerically stable ellipsoid search space (LDL^T-based)
+ */
+
 // -*- coding: utf-8 -*-
 #pragma once
 

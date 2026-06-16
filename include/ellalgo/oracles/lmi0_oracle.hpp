@@ -1,3 +1,8 @@
+/**
+ * @file lmi0_oracle.hpp
+ * @brief Oracle for Linear Matrix Inequality (LMI) feasibility (compact form)
+ */
+
 // -*- coding: utf-8 -*-
 #pragma once
 

@@ -1,3 +1,8 @@
+/**
+ * @file ell1d.hpp
+ * @brief 1-dimensional ellipsoid method
+ */
+
 // -*- coding: utf-8 -*-
 #pragma once
 

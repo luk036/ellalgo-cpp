@@ -1,3 +1,8 @@
+/**
+ * @file ell_calc.hpp
+ * @brief Ellipsoid computation layer with cut dispatch
+ */
+
 #pragma once
 
 #include <cassert>

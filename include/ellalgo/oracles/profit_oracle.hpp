@@ -1,3 +1,8 @@
+/**
+ * @file profit_oracle.hpp
+ * @brief Oracles for profit maximization problems (Cobb-Douglas)
+ */
+
 // -*- coding: utf-8 -*-
 #pragma once
 

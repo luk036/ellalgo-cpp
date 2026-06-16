@@ -1,3 +1,8 @@
+/**
+ * @file ell.hpp
+ * @brief Ellipsoid search space main class
+ */
+
 #pragma once
 
 #include <valarray>

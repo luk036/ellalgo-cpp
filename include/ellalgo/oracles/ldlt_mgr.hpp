@@ -1,3 +1,8 @@
+/**
+ * @file ldlt_mgr.hpp
+ * @brief LDL^T factorization manager for symmetric matrices
+ */
+
 // -*- coding: utf-8 -*-
 #pragma once
 

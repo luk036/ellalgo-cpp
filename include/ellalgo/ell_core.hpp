@@ -1,3 +1,8 @@
+/**
+ * @file ell_core.hpp
+ * @brief Ellipsoid search space core with matrix update
+ */
+
 // -*- coding: utf-8 -*-
 #pragma once
 

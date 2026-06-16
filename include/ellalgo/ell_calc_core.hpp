@@ -1,3 +1,8 @@
+/**
+ * @file ell_calc_core.hpp
+ * @brief Core ellipsoid calculation routines
+ */
+
 #pragma once
 
 #include <cstddef>  // For size_t

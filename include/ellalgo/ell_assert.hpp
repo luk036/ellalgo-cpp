@@ -8,6 +8,11 @@
  * prediction.
  */
 
+/**
+ * @file ell_assert.hpp
+ * @brief Branch prediction macros for performance optimization
+ */
+
 #pragma once
 
 /**

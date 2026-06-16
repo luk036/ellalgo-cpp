@@ -1,3 +1,8 @@
+/**
+ * @file lowpass_oracle.hpp
+ * @brief Oracle for FIR lowpass filter design via spectral factorization
+ */
+
 #pragma once
 
 // #include <limits>
@@ -35,7 +40,7 @@
 // *********************************************************************
 // number of FIR coefficients (including zeroth)
 
-/*!
+/**
  * @brief Oracle for FIR lowpass filter design.
  *
  *    This example is taken from Almir Mutapcic in 2006:
@@ -62,7 +67,7 @@ class LowpassOracle {
     int idx3;
 
   public:
-    /*!
+    /**
      * @brief Construct a new lowpass oracle object
      *
      * The constructor of the `LowpassOracle` class. It initializes an instance of the
@@ -75,36 +80,49 @@ class LowpassOracle {
      * @param[in] wstop Stopband edge frequency
      */
     LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, double wstop);
-    /*!
-     * @brief
+    /**
+     * @brief Assess feasibility of the given autocorrelation coefficients
      *
-     * @param[in] x
-     * @param[in] Spsq
+     * @param[in] x The autocorrelation coefficients
+     * @param[in] Spsq Stopband power specification
+     * @return Pointer to parallel cut, or nullptr if feasible
      */
     auto assess_feas(const Vec& x, const double& Spsq) -> ParallelCut*;
 
-    /*!
-     * @brief
+    /**
+     * @brief Assess optimality of the given autocorrelation coefficients
      *
-     * The `assess_optim` function is a member function of the `LowpassOracle` class. It takes a
-     * `Vec` object `x` and a reference to a `double` variable `Spsq` as input parameters.
+     * Attempts to improve the stopband attenuation Spsq using a
+     * parallel cut. If feasible, returns the cut and a flag indicating
+     * whether Spsq was improved.
      *
-     * @param[in] x
-     * @param[in,out] Spsq
+     * @param[in] x The autocorrelation coefficients
+     * @param[in,out] Spsq The stopband power (improved in place if possible)
+     * @return Tuple of (parallel cut, whether Spsq was shrunk)
      */
     auto assess_optim(const Vec& x, double& Spsq) -> std::tuple<ParallelCut, bool>;
 
-    /*!
-     * @brief
+    /**
+     * @brief Call operator wrapping assess_optim
      *
-     * @return auto
+     * @param[in] x The autocorrelation coefficients
+     * @param[in,out] Spsq The stopband power
+     * @return Tuple of (parallel cut, whether Spsq was shrunk)
      */
     auto operator()(const Vec& x, double& Spsq) -> std::tuple<ParallelCut, bool> {
         return this->assess_optim(x, Spsq);
     }
 };
 
-// Filter specs
+/**
+ * @brief Create a default lowpass filter design case
+ *
+ * Constructs a LowpassOracle with standard filter specs:
+ * 48 FIR coefficients, passband ripple 0.025, stopband attenuation 0.125.
+ *
+ * @param[in] N Number of FIR coefficients (default: 48)
+ * @return Pair of (LowpassOracle, initial stopband power S²)
+ */
 inline auto create_lowpass_case(size_t N = 48) -> std::pair<LowpassOracle, double> {
     const auto delta0_wpass = 0.025;
     const auto delta0_wstop = 0.125;
