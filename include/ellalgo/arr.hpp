@@ -306,7 +306,6 @@ inline Arr outer(const Arr& u, const Arr& v) {
 /// @brief Concatenate two 2D arrays along columns (axis=1)
 /// @param[in] a Left 2D array
 /// @param[in] b Right 2D array
-/// @param[in] axis Must be 1 (column-wise concatenation)
 /// @return 2D array with rows = a.rows(), cols = a.cols() + b.cols()
 inline Arr concatenate(const Arr& a, const Arr& b, int /* axis */ = 1) {
     assert(a.is_2d() && b.is_2d() && a.rows() == b.rows());

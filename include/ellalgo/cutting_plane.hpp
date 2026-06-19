@@ -108,7 +108,7 @@ inline auto cutting_plane_feas(O& omega, S& space, const Options& options = Opti
  * solving a convex optimization problem:
  *
  *   min  gamma
- *   s.t. f(x, gamma) <= 0, x $ \in $ R
+   *   s.t. f(x, gamma) \<= 0, x $\\in$ R
  *
  * It takes a cutting-plane oracle `omega`, a search space `space`, and an
  * options object as input. A function f(x) is *convex* if there always exist a
@@ -156,7 +156,7 @@ inline auto cutting_plane_optim(O& omega, S& space, N& gamma, const Options& opt
  * solving a discrete convex optimization problem:
  *
  *   min  gamma
- *   s.t. f(x, gamma) <= 0, x \in D
+   *   s.t. f(x, gamma) \<= 0, x $\\in$ D
  *
  * It takes a cutting-plane oracle `omega`, a search space `space`, and an
  * options object as input. A function f(x) is *convex* if there always exist a
