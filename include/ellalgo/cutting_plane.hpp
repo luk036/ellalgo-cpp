@@ -48,8 +48,9 @@ template <typename T> inline auto invalid_value() -> T
  * The `cutting_plane_feas` function implements the cutting-plane method for
  * solving a convex feasibility problem:
  *
- *   find x
- *   s.t. f(x) <= 0,
+ * @f[
+ *     \mathop{\text{find}} x \quad \text{s.t.} \quad f(x) \le 0
+ * @f]
  *
  * It takes a cutting-plane oracle `omega`, a search space `space`, and an
  * options object as input. A function f(x) is *convex* if there always exist a
@@ -61,19 +62,29 @@ template <typename T> inline auto invalid_value() -> T
  * A *separation oracle* asserts that an evalution point xc is feasible,
  * or provide a cut that separates the feasible region and xc.
  *
- * <pre>
- *    Initial ellipsoid
- *   ┌─────────────────┐
- *   │    feasible     │
- *   │    region       │
- *   │    ●xc   ┌──────┼──→ cutting plane
- *   │         /       │
- *   │        /        │←─ new ellipsoid
- *   │       /         │   containing
- *   │      /          │   feasible region
- *   └─────●───────────┘
- *        new center
- * </pre>
+ * @dot
+ *   digraph cutting_plane_feas {
+ *     bgcolor="transparent";
+ *     rankdir=TB;
+ *     node [shape=box, style=filled];
+ *     xc [label="Current center xc", fillcolor="#d4e6f1"];
+ *     oracle [label="Oracle\nassess_feas(xc)", fillcolor="#a9cce3"];
+ *     feasible [label="Feasible ✓", fillcolor="#d5f5e3", shape=egg];
+ *     cut [label="Cut\ng'(x-xc)+beta <= 0", fillcolor="#fadbd8"];
+ *     update [label="Update\nellipsoid", fillcolor="#d4e6f1"];
+ *     check [label="tsq < tol?", shape=diamond, fillcolor="#f9e79f"];
+ *     fail [label="Fail", fillcolor="#fadbd8", shape=egg];
+ *     xc -> oracle;
+ *     oracle -> feasible [label="no cut", color="#27ae60"];
+ *     oracle -> cut [label="has cut"];
+ *     cut -> update;
+ *     update -> check;
+ *     check -> xc [label="No", style=dashed, color="#e74c3c"];
+ *     check -> fail [label="Yes", color="#e74c3c"];
+ *     feasible -> result [label="return xc", color="#27ae60"];
+ *     result [label="Solution!", fillcolor="#7fb3d8", shape=egg];
+ *   }
+ * @enddot
  *
  * @tparam OracleFeas
  * @tparam SearchSpace
@@ -107,8 +118,34 @@ inline auto cutting_plane_feas(O& omega, S& space, const Options& options = Opti
  * The `cutting_plane_optim` function implements the cutting-plane method for
  * solving a convex optimization problem:
  *
- *   min  gamma
-   *   s.t. f(x, gamma) \<= 0, x $\\in$ R
+ * @f[
+ *     \min \; \gamma \quad \text{s.t.} \quad f(x, \gamma) \le 0
+ * @f]
+ *
+ * @dot
+ *   digraph cutting_plane_optim {
+ *     bgcolor="transparent";
+ *     rankdir=TB;
+ *     node [shape=box, style=filled];
+ *     xc [label="Current xc, gamma", fillcolor="#d4e6f1"];
+ *     oracle [label="Oracle assess_optim\nreturns (cut, shrunk)", fillcolor="#a9cce3"];
+ *     split [label="shrunk?", shape=diamond, fillcolor="#f9e79f"];
+ *     central [label="Update\ncentral cut", fillcolor="#d5f5e3"];
+ *     bias [label="Update\nbias cut", fillcolor="#fadbd8"];
+ *     best [label="Save x_best\n= xc", fillcolor="#d5f5e3"];
+ *     check [label="tsq < tol?", shape=diamond, fillcolor="#f9e79f"];
+ *     done [label="Return x_best", fillcolor="#7fb3d8", shape=egg];
+ *     xc -> oracle;
+ *     oracle -> split;
+ *     split -> best [label="Yes\nshrunk", color="#27ae60"];
+ *     split -> bias [label="No", color="#e74c3c"];
+ *     best -> central;
+ *     central -> check;
+ *     bias -> check;
+ *     check -> xc [label="continue", style=dashed, color="#888"];
+ *     check -> done [label="converged", color="#27ae60"];
+ *   }
+ * @enddot
  *
  * It takes a cutting-plane oracle `omega`, a search space `space`, and an
  * options object as input. A function f(x) is *convex* if there always exist a
@@ -155,8 +192,9 @@ inline auto cutting_plane_optim(O& omega, S& space, N& gamma, const Options& opt
  * The `cutting_plane_optim_q` function implements the cutting-plane method for
  * solving a discrete convex optimization problem:
  *
- *   min  gamma
-   *   s.t. f(x, gamma) \<= 0, x $\\in$ D
+ * @f[
+ *     \min \; \gamma \quad \text{s.t.} \quad f(x, \gamma) \le 0, \; x \in D
+ * @f]
  *
  * It takes a cutting-plane oracle `omega`, a search space `space`, and an
  * options object as input. A function f(x) is *convex* if there always exist a

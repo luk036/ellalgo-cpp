@@ -187,6 +187,10 @@ inline Arr zeros(size_t r, size_t c) { return Arr(r, c); }
 inline Arr ones(size_t r, size_t c) { return Arr(r, c, 1.0); }
 
 /// @brief Linearly spaced values from start to end, inclusive
+///
+/// @f[
+///     x_i = x_{\text{start}} + i \cdot \frac{x_{\text{end}} - x_{\text{start}}}{n - 1}, \qquad i = 0, \dots, n-1
+/// @f]
 /// @param[in] start First value
 /// @param[in] end   Last value
 /// @param[in] n     Number of points
@@ -273,7 +277,11 @@ inline std::vector<Arr> where(const Arr& condition) {
 // ---------------------------------------------------------------------------
 // Linear algebra
 // ---------------------------------------------------------------------------
-/// @brief Matrix-vector multiplication (2D matrix × 1D vector)
+/// @brief Matrix-vector multiplication
+///
+/// @f[
+///     y = A x, \qquad y_i = \sum_{j=1}^{n} A_{ij} x_j
+/// @f]
 /// @param[in] A 2D matrix (m × n)
 /// @param[in] x 1D vector (n)
 /// @return Result vector (m)
@@ -289,6 +297,10 @@ inline Arr dot(const Arr& A, const Arr& x) {
 }
 
 /// @brief Outer product of two 1D vectors
+///
+/// @f[
+///     C = u \otimes v, \qquad C_{ij} = u_i v_j
+/// @f]
 /// @param[in] u First 1D vector
 /// @param[in] v Second 1D vector
 /// @return 2D matrix where result(i,j) = u(i) × v(j)

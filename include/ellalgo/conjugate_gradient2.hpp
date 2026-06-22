@@ -23,7 +23,18 @@
 #endif
 
 /**
- * Solves a system of linear equations Ax = b using the Conjugate Gradient method.
+ * Solves a system of linear equations \f$Ax = b\f$ using the Conjugate Gradient method.
+ *
+ * The update at each iteration \f$k\f$:
+ * @f[
+ *     \alpha_k = \frac{r_k^T r_k}{d_k^T A d_k}, \qquad
+ *     x_{k+1} = x_k + \alpha_k d_k
+ * @f]
+ * @f[
+ *     r_{k+1} = r_k - \alpha_k A d_k, \qquad
+ *     \beta_k = \frac{r_{k+1}^T r_{k+1}}{r_k^T r_k}, \qquad
+ *     d_{k+1} = r_{k+1} + \beta_k d_k
+ * @f]
  *
  * @tparam Matrix The type of the matrix A.
  * @tparam Vector The type of the vectors b and x_vector.

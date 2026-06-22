@@ -70,7 +70,10 @@ class EllCalc {
     /**
      * @brief Parallel deep cut
      *
-     * Two parallel constraints: beta0 ≤ g'(x - xc) ≤ beta1.
+     * Two parallel constraints:
+     * @f[
+     *     \beta_0 \le g^T (x - x_c) \le \beta_1
+     * @f]
      * Falls back to calc_bias_cut when parallel cut is ineffective.
      *
      * @param[in] beta0  Lower bound
@@ -83,7 +86,10 @@ class EllCalc {
     /**
      * @brief Parallel central cut
      *
-     * One central + one parallel: 0 ≤ g'(x - xc) ≤ beta1.
+     * One central + one parallel:
+     * @f[
+     *     0 \le g^T (x - x_c) \le \beta_1
+     * @f]
      * Falls back to calc_central_cut when parallel cut is ineffective.
      *
      * @param[in] beta1  Upper bound
@@ -95,7 +101,10 @@ class EllCalc {
     /**
      * @brief Deep (bias) cut
      *
-     * Single constraint: g'(x - xc) + beta ≤ 0.
+     * Single constraint:
+     * @f[
+     *     g^T (x - x_c) + \beta \le 0
+     * @f]
      *
      * @param[in] beta  Bias term (≥ 0)
      * @param[in] tsq   Squared ellipsoid radius (τ²)
@@ -106,7 +115,10 @@ class EllCalc {
     /**
      * @brief Central cut
      *
-     * Single constraint passing through center: g'(x - xc) ≤ 0.
+     * Single constraint passing through center:
+     * @f[
+     *     g^T (x - x_c) \le 0
+     * @f]
      *
      * @param[in] tsq  Squared ellipsoid radius (τ²)
      * @return CutResult with rho, sigma, delta
@@ -116,7 +128,11 @@ class EllCalc {
     /**
      * @brief Parallel deep cut (Q-version for discrete optimization)
      *
-     * Two parallel constraints with alternative fallback (NoEffect).
+     * Two parallel constraints:
+     * @f[
+     *     \beta_0 \le g^T (x - x_c) \le \beta_1
+     * @f]
+     * Returns NoEffect instead of NoSoln when the cut is ineffective.
      * Used by cutting_plane_optim_q for discrete convex problems.
      *
      * @param[in] beta0  Lower bound
@@ -129,7 +145,11 @@ class EllCalc {
     /**
      * @brief Deep cut (Q-version for discrete optimization)
      *
-     * Single constraint with NoEffect fallback (instead of NoSoln).
+     * Single constraint:
+     * @f[
+     *     g^T (x - x_c) + \beta \le 0
+     * @f]
+     * Returns NoEffect instead of NoSoln when the cut is ineffective.
      * Used by cutting_plane_optim_q for discrete convex problems.
      *
      * @param[in] beta  Bias term

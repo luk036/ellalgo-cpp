@@ -18,7 +18,9 @@ enum class CutStatus;
  *
  * The `Ell` class represents an ellipsoid search space:
  *
- *   ell = {x | (x - xc)' mq^-1 (x - xc) ≤ κ}
+ * @f[
+ *     \mathcal{E} = \{x \mid (x - x_c)^T Q^{-1} (x - x_c) \le \kappa\}
+ * @f]
  *
  * It is used to define and manipulate ellipsoids in a multidimensional space.
  * The ellipsoid is defined by a center point (`_xc`) and a core function

@@ -21,21 +21,25 @@
  *
  *  ℰ {x | (x - xc)' mq^-1 (x - xc) ≤ κ}
  *
- * <pre>
- *    2D Ellipsoid Core Visualization
- *        y
- *        ^
- *        │
- *      ┌─┼─┐  ← ellipsoid boundary
- *    ┌─┘ │ └─┐
- *  ──┼───●───┼──→ x  ← center (xc)
- *    └─┐ │ ┌─┘
- *      └─┼─┘
- *        │
- *        ● (x)
- *      point inside/outside
- *      ellipsoid
- * </pre>
+ * @dot
+ *   digraph ellipsoid_core {
+ *     bgcolor="transparent";
+ *     rankdir=LR;
+ *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
+ *     ell [label="Ellipsoid\nQ, kappa", fillcolor="#a9cce3"];
+ *     oracle [label="Oracle\ncut = assess(xc)", fillcolor="#fadbd8"];
+ *     calc [label="Compute\ng_tilde = Q*g\nomega, tsq"];
+ *     cut [label="Cut params\n(beta, tsq)", fillcolor="#f9e79f"];
+ *     rank1 [label="Update\nQ -= (s/w) Q g g^T Q\nkappa *= delta", fillcolor="#d5f5e3"];
+ *     move [label="Move\nxc -= r/w * g_tilde", fillcolor="#d5f5e3"];
+ *     ell -> oracle;
+ *     oracle -> calc [label="g, beta"];
+ *     calc -> cut;
+ *     cut -> rank1;
+ *     rank1 -> move;
+ *     move -> ell [label="next iter", style=dashed, color="#888"];
+ *   }
+ * @enddot
  */
 class EllCore {
     using Vec = std::valarray<double>;
@@ -252,6 +256,18 @@ class EllCore {
     /**
      * @brief Update ellipsoid core using the cut(s)
      *
+     * Given gradient \f$g\f$ and ellipsoid shape \f$Q\f$, computes:
+     * @f[
+     *     \tilde{g} = Q g, \qquad
+     *     \omega = \tilde{g}^T g, \qquad
+     *     \tau^2 = \kappa \omega
+     * @f]
+     * Then performs a rank-1 update of \f$Q\f$:
+     * @f[
+     *     Q^+ = Q - \frac{\sigma}{\omega} \, Q g g^T Q
+     * @f]
+     * and scales \f$\kappa^+ = \kappa \cdot \delta\f$.
+     *
      * The cut_strategy callable must take (beta, tsq) and return a CutResult.
      *
      * @tparam T
@@ -309,6 +325,10 @@ class EllCore {
      * @brief Update ellipsoid core using the cut(s) — numerically stable LDL^T form
      *
      * Uses LDL^T factorization instead of the direct Q-update in _update_core.
+     * The shape matrix \f$Q\f$ is factorized as \f$Q = LDL^T\f$ where \f$L\f$ is
+     * unit lower-triangular and \f$D\f$ is diagonal. The rank-1 update is applied
+     * to the factors directly for better numerical stability.
+     *
      * The cut_strategy callable must take (beta, tsq) and return a CutResult.
      *
      * @tparam T

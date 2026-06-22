@@ -17,7 +17,9 @@ enum class CutStatus;
 /**
  * @brief Ellipsoid Search Space
  *
- *   ell = {x | (x - xc)' mq^-1 (x - xc) ≤ κ}
+ * @f[
+ *     \mathcal{E} = \{x \mid (x - x_c)^T Q^{-1} (x - x_c) \le \kappa\}
+ * @f]
  *
  * Keep $Q$ symmetric but no promise of positive definite
  */

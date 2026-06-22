@@ -239,6 +239,40 @@ class Matrix0 {
 /**
  * @brief Solve Ax = b using the conjugate gradient method.
  *
+ * The Conjugate Gradient method iteratively solves \f$Ax = b\f$ where \f$A\f$ is
+ * symmetric positive-definite.
+ *
+ * @dot
+ *   digraph cg_iteration {
+ *     bgcolor="transparent";
+ *     rankdir=TB;
+ *     node [shape=box, style=filled];
+ *     start [label="x_0 initial guess\nr_0 = b - A*x_0\nd_0 = r_0", fillcolor="#a9cce3"];
+ *     alpha [label="alpha_k = r_k·r_k\n/ d_k·A·d_k", fillcolor="#d4e6f1"];
+ *     update [label="x_{k+1} = x_k + alpha*d_k\nr_{k+1} = r_k - alpha*A*d_k", fillcolor="#d4e6f1"];
+ *     check [label="||r_{k+1}|| < tol?", shape=diamond, fillcolor="#f9e79f"];
+ *     beta [label="beta_k = r_{k+1}·r_{k+1}\n/ r_k·r_k\nd_{k+1} = r_{k+1} + beta*d_k", fillcolor="#d4e6f1"];
+ *     done [label="Return x", fillcolor="#7fb3d8", shape=egg];
+ *     start -> alpha;
+ *     alpha -> update;
+ *     update -> check;
+ *     check -> done [label="Yes✓", color="#27ae60"];
+ *     check -> beta [label="No", color="#e74c3c"];
+ *     beta -> alpha;
+ *   }
+ * @enddot
+ *
+ * The update at each iteration \f$k\f$ is:
+ * @f[
+ *     \alpha_k = \frac{r_k^T r_k}{d_k^T A d_k}, \qquad
+ *     x_{k+1} = x_k + \alpha_k d_k
+ * @f]
+ * @f[
+ *     r_{k+1} = r_k - \alpha_k A d_k, \qquad
+ *     \beta_k = \frac{r_{k+1}^T r_{k+1}}{r_k^T r_k}, \qquad
+ *     d_{k+1} = r_{k+1} + \beta_k d_k
+ * @f]
+ *
  * @tparam Matrix0 The matrix type, which must support matrix-vector multiplication.
  * @tparam Vector0 The vector type, which must support vector operations.
  * @param A The matrix A in the linear system Ax = b.

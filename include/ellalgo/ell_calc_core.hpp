@@ -75,9 +75,12 @@ class EllCalcCore {
     /**
      * @brief Compute new ellipsoid parameters for parallel bias cut
      *
-     * Two parallel constraints: g'(x - xc) + beta0 ≤ 0 and g'(x - xc) + beta1 ≥ 0.
-     * Computes intermediate values b0b1 and eta, then delegates to
-     * calc_parallel_cut_fast().
+     * Two parallel constraints:
+     * @f[
+     *     \beta_0 \le g^T (x - x_c) \le \beta_1
+     * @f]
+     * Computes intermediate values \f$b_0 b_1\f$ and \f$\eta = \tau^2 + n b_0 b_1\f$,
+     * then delegates to calc_parallel_cut_fast().
      *
      * @param[in] beta0  Lower bound of the parallel cut
      * @param[in] beta1  Upper bound of the parallel cut
@@ -116,7 +119,10 @@ class EllCalcCore {
      * @brief Compute new ellipsoid parameters for parallel central cut
      *
      * One central cut through the center plus one parallel constraint:
-     * g'(x - xc) ≤ 0 and g'(x - xc) + beta1 ≥ 0.
+     * @f[
+     *     g^T (x - x_c) \le 0 \quad\text{and}\quad
+     *     g^T (x - x_c) + \beta_1 \ge 0
+     * @f]
      *
      * @param[in] beta1 Upper bound of the parallel constraint
      * @param[in] tsq   Squared ellipsoid radius τ²
@@ -128,8 +134,17 @@ class EllCalcCore {
     /**
      * @brief Compute new ellipsoid parameters for bias (deep) cut
      *
-     * Single constraint: g'(x - xc) + beta ≤ 0.
-     * Computes eta = tau + n × beta, then delegates to calc_bias_cut_fast().
+     * Single constraint with bias:
+     * @f[
+     *     g^T (x - x_c) + \beta \le 0, \qquad \beta \ge 0
+     * @f]
+     * With \f$\eta = \tau + n\beta\f$, the update is:
+     * @f[
+     *     \rho = \frac{2\beta}{n+1}, \quad
+     *     \sigma = \frac{n^2}{n^2-1}\Bigl(1 - \frac{\eta^2}{n\tau^2}\Bigr), \quad
+     *     \delta = \frac{n^2}{n^2-1}\Bigl(1 - \frac{\eta^2}{\tau^2}\Bigr)
+     * @f]
+     * Delegates to calc_bias_cut_fast().
      *
      * @param[in] beta Bias parameter (≥ 0)
      * @param[in] tau  Square root of τ² (i.e. the ellipsoid radius)
@@ -143,8 +158,12 @@ class EllCalcCore {
     /**
      * @brief Fast bias cut computation with pre-computed eta
      *
-     * Uses pre-computed eta = tau + n × beta to directly compute
-     * rho, sigma, delta without re-computing intermediates.
+     * Uses pre-computed \f$\eta = \tau + n\beta\f$ to directly compute:
+     * @f[
+     *     \rho = \frac{2\beta}{n+1}, \qquad
+     *     \sigma = \frac{n^2}{n^2-1}\Bigl(1 - \frac{\eta^2}{n\tau^2}\Bigr), \qquad
+     *     \delta = \frac{n^2}{n^2-1}\Bigl(1 - \frac{\eta^2}{\tau^2}\Bigr)
+     * @f]
      *
      * @param[in] beta Bias parameter
      * @param[in] tau  Ellipsoid radius
@@ -157,8 +176,18 @@ class EllCalcCore {
     /**
      * @brief Compute new ellipsoid parameters for central cut
      *
-     * Single constraint through the center: g'(x - xc) ≤ 0.
-     * The cut passes through the ellipsoid center, making beta = 0.
+     * A central cut through the ellipsoid center:
+     * @f[
+     *     g^T (x - x_c) \le 0
+     * @f]
+     * The update formulas are:
+     * @f[
+     *     \rho = \frac{1}{n+1}, \qquad
+     *     \sigma = \frac{n^2}{n^2-1}, \qquad
+     *     \delta = \frac{n^2}{n^2-1}
+     * @f]
+     * where \f$n\f$ is the dimension and \f$\tau\f$ is the ellipsoid radius.
+     * The cut passes through the ellipsoid center, making \f$\beta = 0\f$.
      *
      * @param[in] tau Ellipsoid radius (τ)
      * @return Tuple (rho, sigma, delta)
