@@ -1,0 +1,9 @@
+<map id="ellalgo/oracles/lowpass_oracle.hpp" name="ellalgo/oracles/lowpass_oracle.hpp">
+<area shape="rect" id="Node000001" title="Oracle for FIR lowpass filter design via spectral factorization." alt="" coords="40,5,215,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,76,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,48,66,86,62,82,105,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="100,93,155,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="130,46,130,79,125,79,125,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="179,93,255,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="151,44,195,82,191,86,147,48"/>
+</map>

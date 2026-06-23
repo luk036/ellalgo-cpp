@@ -1,0 +1,18 @@
+<map id="ellalgo/ell_calc.hpp" name="ellalgo/ell_calc.hpp">
+<area shape="rect" id="Node000001" title="Ellipsoid computation layer with cut dispatch." alt="" coords="93,5,240,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,75,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,33,74,74,71,69,145,28"/>
+<area shape="rect" id="Node000003" href="$ell__calc__core_8hpp.html" title="Core ellipsoid calculation routines." alt="" coords="99,79,234,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,31,169,65,164,65,164,31"/>
+<area shape="rect" id="Node000006" href="$ell__config_8hpp.html" title="Configuration types and constants for the ellipsoid algorithm." alt="" coords="259,79,371,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="192,28,279,70,277,75,189,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="182,152,253,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="177,103,203,139,199,142,173,106"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="103,152,158,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="163,106,145,141,140,138,158,103"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="301,106,246,146,243,141,297,102"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="277,152,353,177"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="317,104,317,138,312,138,312,104"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="377,152,437,177"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="331,102,383,141,379,146,328,106"/>
+</map>

@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['ell_0',['ell',['../classEll.html',1,'Ell&lt; Arr &gt;'],['../classEll.html#aef6ee25c1ef09b0dac6a2e588c6180c3',1,'Ell::Ell(const Ell &amp;E)=default'],['../classEll.html#a77418531cd2878e2f327e34630e72fe5',1,'Ell::Ell(Ell &amp;&amp;E) noexcept=default'],['../classEll.html#abf8a7d415ee10ed6d50a59ca5971f86e',1,'Ell::Ell(const double alpha, Arr x)'],['../classEll.html#aecd757c5896f1d07e4f8c03449145953',1,'Ell::Ell(const Vec &amp;val, Arr x)']]],
+  ['ell_2ehpp_1',['ell.hpp',['../ell_8hpp.html',1,'']]],
+  ['ell1d_2',['ell1d',['../classell1d.html',1,'ell1d'],['../classell1d.html#ab35094ae1a813ad45c53872bf7130f96',1,'ell1d::ell1d(const ell1d &amp;E)=default'],['../classell1d.html#a6daf98945b52521042dea198ab788b5d',1,'ell1d::ell1d(const double l, const double u) noexcept'],['../classell1d.html#a03842ae35c8412813928d895adef6c8d',1,'ell1d::ell1d(ell1d &amp;&amp;) noexcept=default']]],
+  ['ell1d_2ehpp_3',['ell1d.hpp',['../ell1d_8hpp.html',1,'']]],
+  ['ell_5fassert_2ehpp_4',['ell_assert.hpp',['../ell__assert_8hpp.html',1,'']]],
+  ['ell_5fcalc_2ehpp_5',['ell_calc.hpp',['../ell__calc_8hpp.html',1,'']]],
+  ['ell_5fcalc_5fcore_2ehpp_6',['ell_calc_core.hpp',['../ell__calc__core_8hpp.html',1,'']]],
+  ['ell_5fconfig_2ehpp_7',['ell_config.hpp',['../ell__config_8hpp.html',1,'']]],
+  ['ell_5fcore_2ehpp_8',['ell_core.hpp',['../ell__core_8hpp.html',1,'']]],
+  ['ell_5flikely_9',['ELL_LIKELY',['../ell__assert_8hpp.html#a9b2bcf927f32e95cc65cc4a0630716ed',1,'ell_assert.hpp']]],
+  ['ell_5fmatrix_2ehpp_10',['ell_matrix.hpp',['../ell__matrix_8hpp.html',1,'']]],
+  ['ell_5fstable_2ehpp_11',['ell_stable.hpp',['../ell__stable_8hpp.html',1,'']]],
+  ['ell_5funlikely_12',['ELL_UNLIKELY',['../ell__assert_8hpp.html#a13c1c24f55b464cb9e69683afd589b8d',1,'ell_assert.hpp']]],
+  ['ellalgo_13',['ellalgo',['../namespaceellalgo.html',1,'ellalgo'],['../index.html',1,'EllAlgo']]],
+  ['ellalgo_20cpp_14',['👁️ ellalgo-cpp',['../index.html#autotoc_md0',1,'']]],
+  ['ellcalc_15',['ellcalc',['../classEllCalc.html#aa680ff45ae872c7ca842dd94c1288275',1,'EllCalc::EllCalc(const size_t ndim)'],['../classEllCalc.html#a20ba0538b001d311db271d1b5c803cc7',1,'EllCalc::EllCalc(const EllCalc &amp;E)=default'],['../classEllCalc.html',1,'EllCalc'],['../classEllCalc.html#a7d0ca31ce3e65df8bb2ed647e2f709ae',1,'EllCalc::EllCalc()']]],
+  ['ellcalccore_16',['ellcalccore',['../classEllCalcCore.html#a411eaa78b1bfc07c7b6b74109f231c47',1,'EllCalcCore::EllCalcCore(const size_t ndim) noexcept'],['../classEllCalcCore.html#adea418d34151b7d7ffebb0acc37091d6',1,'EllCalcCore::EllCalcCore(EllCalcCore &amp;&amp;E) noexcept=default'],['../classEllCalcCore.html#a01d9c930b27ebb64328fba325a830774',1,'EllCalcCore::EllCalcCore(const EllCalcCore &amp;E) noexcept=default'],['../classEllCalcCore.html',1,'EllCalcCore']]],
+  ['ellcore_17',['ellcore',['../classEllCore.html#a004880c1fe0b0de4f0c7899616938731',1,'EllCore::EllCore(const Vec &amp;val, size_t ndim)'],['../classEllCore.html#ab9bab8c6171742a963bb6929016842da',1,'EllCore::EllCore(const double alpha, const size_t ndim)'],['../classEllCore.html#a9a4ed6b24f4bb2a1dd56197c8c658110',1,'EllCore::EllCore(EllCore &amp;&amp;E)=default'],['../classEllCore.html#aee85acb6192ebd5d38b68106654f2e60',1,'EllCore::EllCore(const EllCore &amp;E)=default'],['../classEllCore.html',1,'EllCore']]],
+  ['ellstable_18',['ellstable',['../classEllStable.html#a02e9341b51c8df67855779015e705ee0',1,'EllStable::EllStable()'],['../classEllStable.html',1,'EllStable&lt; Arr &gt;'],['../classEllStable.html#ac42bfd5430b3d67ec5882e364dcc6774',1,'EllStable::EllStable(EllStable &amp;&amp;E) noexcept=default'],['../classEllStable.html#af2955dbae6dd04b1e25ed3767c47173e',1,'EllStable::EllStable(double alpha, Arr x)'],['../classEllStable.html#afe4b101d1f1b906da32642c7014f31b9',1,'EllStable::EllStable(const Vec &amp;val, Arr x)']]],
+  ['end_19',['end',['../classArr.html#a44478d7524306a2f3f4af131abf49175',1,'Arr::end()'],['../classArr.html#a367fce34c7a49ba9d98c91d043186f60',1,'Arr::end() const'],['../structRange.html#a03f9c0936cfe1741d4449eca01fed833',1,'Range::end']]],
+  ['eval_20',['eval',['../arr_8hpp.html#a93628045e5b5e89e57fd6fe17fcad9c4',1,'arr.hpp']]],
+  ['everything_20at_20once_21',['Build everything at once',['../index.html#autotoc_md9',1,'']]],
+  ['exp_22',['exp',['../arr_8hpp.html#a84ccbf82bf5d752d2e7da4244d7db3ab',1,'arr.hpp']]]
+];

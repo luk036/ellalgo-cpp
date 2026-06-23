@@ -1,0 +1,23 @@
+<map id="ellalgo/cutting_plane.hpp" name="ellalgo/cutting_plane.hpp">
+<area shape="rect" id="Node000001" title="Cutting&#45;plane methods for convex feasibility and optimization." alt="" coords="152,5,339,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,75,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,33,87,77,85,72,211,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="99,79,162,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="228,33,162,74,160,69,226,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="186,79,241,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="242,32,226,67,222,65,238,30"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="259,152,351,177"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="253,30,298,138,293,140,248,32"/>
+<area shape="rect" id="Node000006" href="$ell__config_8hpp.html" title="Configuration types and constants for the ellipsoid algorithm." alt="" coords="503,79,615,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="296,28,495,73,494,78,295,33"/>
+<area shape="rect" id="Node000010" href="$half__nonnegative_8hpp.html" title="Utility functions for computing half of non&#45;negative numbers." alt="" coords="316,79,479,104"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="271,28,361,70,359,75,269,33"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="505,152,575,177"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="558,105,549,140,544,138,553,104"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="599,152,675,177"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="573,102,616,141,613,145,570,106"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="385,152,445,177"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="537,106,452,148,449,143,534,102"/>
+<area shape="poly" id="edge10_Node000010_Node000005" title=" " alt="" coords="384,106,333,146,329,141,381,102"/>
+<area shape="poly" id="edge11_Node000010_Node000009" title=" " alt="" coords="403,104,411,138,406,140,398,105"/>
+</map>

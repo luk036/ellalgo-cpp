@@ -1,0 +1,22 @@
+<map id="ellalgo/oracles/lmi0_oracle.hpp" name="ellalgo/oracles/lmi0_oracle.hpp">
+<area shape="rect" id="Node000001" title="Oracle for Linear Matrix Inequality (LMI) feasibility (compact form)" alt="" coords="45,5,195,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,83,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,47,67,85,63,81,100,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="149,240,211,265"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="123,45,129,111,137,151,148,191,166,227,162,230,143,193,131,153,124,112,118,46"/>
+<area shape="rect" id="Node000004" href="$ldlt__mgr_8hpp.html" title="LDL^T factorization manager for symmetric matrices." alt="" coords="306,93,409,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="178,43,311,87,309,92,176,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="496,167,565,192"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="386,116,491,159,489,164,384,121"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="409,240,479,265"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="370,118,405,165,436,226,431,228,400,168,365,121"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="158,167,218,192"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="331,121,229,164,227,159,329,116"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="282,240,358,265"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="368,118,385,152,389,172,385,193,370,216,351,234,348,230,366,212,380,191,383,172,380,153,364,120"/>
+<area shape="rect" id="Node000009" href="$ell__matrix_8hpp.html" title="Square matrix with flat storage and strided views." alt="" coords="243,167,371,192"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="351,121,325,157,321,154,347,117"/>
+<area shape="poly" id="edge11_Node000009_Node000003" title=" " alt="" coords="288,194,214,235,211,231,285,190"/>
+<area shape="poly" id="edge9_Node000009_Node000006" title=" " alt="" coords="330,190,411,231,408,236,328,194"/>
+<area shape="poly" id="edge10_Node000009_Node000008" title=" " alt="" coords="311,192,318,226,313,227,306,193"/>
+</map>

@@ -1,0 +1,16 @@
+<map id="ellalgo/ell_config.hpp" name="ellalgo/ell_config.hpp">
+<area shape="rect" id="Node000001" title="Configuration types and constants for the ellipsoid algorithm." alt="" coords="260,5,420,31"/>
+<area shape="rect" id="Node000002" href="$cutting__plane_8hpp.html" title="Cutting&#45;plane methods for convex feasibility and optimization." alt="" coords="5,79,192,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="289,37,138,81,137,76,287,32"/>
+<area shape="rect" id="Node000003" href="$ell_8hpp.html" title="Ellipsoid search space main class." alt="" coords="227,225,341,251"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="300,39,276,57,257,80,250,99,248,119,253,160,266,197,280,224,275,226,261,199,248,161,242,119,245,98,252,77,272,53,297,35"/>
+<area shape="rect" id="Node000004" href="$ell__calc_8hpp.html" title="Ellipsoid computation layer with cut dispatch." alt="" coords="267,79,413,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="343,44,343,79,337,79,337,44"/>
+<area shape="rect" id="Node000005" href="$ell__core_8hpp.html" title="Ellipsoid search space core with matrix update." alt="" coords="291,152,440,177"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="383,35,408,53,428,77,431,89,431,100,421,121,403,140,385,154,382,150,400,136,416,118,426,99,426,90,423,80,404,57,380,39"/>
+<area shape="rect" id="Node000006" href="$ell__stable_8hpp.html" title="Numerically stable ellipsoid search space (LDL^T&#45;based)" alt="" coords="393,225,554,251"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="390,34,421,51,447,77,466,116,476,158,478,197,477,225,472,225,473,197,470,159,461,118,443,80,418,56,387,38"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="351,116,364,151,359,153,346,118"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="344,188,299,227,296,223,340,184"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="395,183,457,223,454,227,393,187"/>
+</map>

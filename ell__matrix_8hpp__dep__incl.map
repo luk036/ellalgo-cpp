@@ -1,0 +1,17 @@
+<map id="ellalgo/ell_matrix.hpp" name="ellalgo/ell_matrix.hpp">
+<area shape="rect" id="Node000001" title="Square matrix with flat storage and strided views." alt="" coords="233,5,397,31"/>
+<area shape="rect" id="Node000002" href="$ell__core_8hpp.html" title="Ellipsoid search space core with matrix update." alt="" coords="151,86,300,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="293,42,240,88,237,84,290,38"/>
+<area shape="rect" id="Node000005" href="$ldlt__mgr_8hpp.html" title="LDL^T factorization manager for symmetric matrices." alt="" coords="419,79,562,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="354,34,449,76,447,81,352,39"/>
+<area shape="rect" id="Node000003" href="$ell_8hpp.html" title="Ellipsoid search space main class." alt="" coords="5,174,120,199"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="193,120,86,176,84,171,190,115"/>
+<area shape="rect" id="Node000004" href="$ell__stable_8hpp.html" title="Numerically stable ellipsoid search space (LDL^T&#45;based)" alt="" coords="145,174,306,199"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="228,125,228,173,223,173,223,125"/>
+<area shape="rect" id="Node000006" href="$lmi0__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality (LMI) feasibility (compact form)" alt="" coords="330,167,481,207"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="464,130,426,168,422,165,460,127"/>
+<area shape="rect" id="Node000007" href="$lmi__old__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality feasibility (explicit matrix form)" alt="" coords="505,167,647,207"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="521,127,559,165,555,168,517,130"/>
+<area shape="rect" id="Node000008" href="$lmi__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality feasibility (lazy matrix form)" alt="" coords="671,167,814,207"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="560,121,688,164,687,169,558,126"/>
+</map>
