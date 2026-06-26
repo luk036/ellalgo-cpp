@@ -125,6 +125,10 @@ template <typename T> class Vector2 {
     /**
      * Computes the dot product of this Vector2 with the given Vector2.
      *
+     * @f[
+     *     u \cdot v = \sum_{i=1}^{n} u_i v_i
+     * @f]
+     *
      * @param other The other Vector2 to compute the dot product with.
      * @return The dot product of this Vector2 and the given Vector2.
      */
@@ -136,6 +140,10 @@ template <typename T> class Vector2 {
 
     /**
      * Computes the L2 norm (Euclidean length) of the Vector2.
+     *
+     * @f[
+     *     \|v\| = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2}
+     * @f]
      *
      * @return The L2 norm of the Vector2.
      */
@@ -244,6 +252,10 @@ template <typename T> class Matrix2 {
 
     /**
      * Multiplies the given Vector2 by the elements of this Matrix2.
+     *
+     * @f[
+     *     y_i = \sum_{j=1}^{n} A_{ij} x_j
+     * @f]
      *
      * @param v The Vector2 to multiply by the elements of this Matrix2.
      * @return The resulting Vector2 after the multiplication.

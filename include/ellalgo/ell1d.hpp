@@ -70,6 +70,10 @@ class ell1d {
     /**
      * @brief Update the 1D ellipsoid using a deep cut
      *
+     * @f[
+     *     g (x - x_c) + \beta \le 0
+     * @f]
+     *
      * @param[in] cut A pair containing (gradient, beta) representing the cut
      * @return CutStatus The status of the cut operation
      */
@@ -77,6 +81,10 @@ class ell1d {
 
     /**
      * @brief Update the 1D ellipsoid using a central cut
+     *
+     * @f[
+     *     g (x - x_c) \le 0
+     * @f]
      *
      * @param[in] cut A pair containing (gradient, beta) representing the cut
      * @return CutStatus The status of the cut operation

@@ -325,9 +325,12 @@ class EllCore {
      * @brief Update ellipsoid core using the cut(s) — numerically stable LDL^T form
      *
      * Uses LDL^T factorization instead of the direct Q-update in _update_core.
-     * The shape matrix \f$Q\f$ is factorized as \f$Q = LDL^T\f$ where \f$L\f$ is
-     * unit lower-triangular and \f$D\f$ is diagonal. The rank-1 update is applied
-     * to the factors directly for better numerical stability.
+     * The shape matrix \f$Q\f$ is factorized as:
+     * @f[
+     *     Q = LDL^T
+     * @f]
+     * where \f$L\f$ is unit lower-triangular and \f$D\f$ is diagonal. The rank-1
+     * update is applied to the factors directly for better numerical stability.
      *
      * The cut_strategy callable must take (beta, tsq) and return a CutResult.
      *

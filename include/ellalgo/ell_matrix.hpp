@@ -116,6 +116,12 @@ class Matrix {
         return SliceView(this->data.data() + c, this->ndim, this->ndim);
     }
 
-    /** @brief Sum of diagonal elements */
+    /**
+     * @brief Sum of diagonal elements
+     *
+     * @f[
+     *     \operatorname{tr}(A) = \sum_{i=1}^{n} A_{ii}
+     * @f]
+     */
     double trace() const { return const_cast<Matrix*>(this)->diagonal().sum(); }
 };

@@ -140,6 +140,26 @@ template <typename Arr> class Ell {
     /**
      * @brief Update ellipsoid using a deep cut.
      *
+     * @f[
+     *     g^T (x - x_c) + \beta \le 0
+     * @f]
+     *
+     * @dot
+     *   digraph bias_cut_update {
+     *     bgcolor="transparent";
+     *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
+     *     cut [label="Cut: g, beta", fillcolor="#a9cce3"];
+     *     update [label="x_c -= g"];
+     *     check [label="Success?", shape=diamond, fillcolor="#f9e79f"];
+     *     done [label="Updated\nellipsoid", fillcolor="#7fb3d8"];
+     *     fail [label="NoEffect", fillcolor="#fadbd8"];
+     *     cut -> update;
+     *     update -> check;
+     *     check -> done [label="Yes", color="#27ae60"];
+     *     check -> fail [label="No", color="#e74c3c"];
+     *   }
+     * @enddot
+     *
      * @tparam T Type of the beta parameter.
      * @param[in] cut A pair containing the gradient and beta value.
      * @return CutStatus The status of the cut.
@@ -153,6 +173,26 @@ template <typename Arr> class Ell {
     /**
      * @brief Update ellipsoid using a central cut.
      *
+     * @f[
+     *     g^T (x - x_c) \le 0
+     * @f]
+     *
+     * @dot
+     *   digraph central_cut_update {
+     *     bgcolor="transparent";
+     *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
+     *     cut [label="Cut: g, beta=0", fillcolor="#a9cce3"];
+     *     update [label="x_c -= g"];
+     *     check [label="Success?", shape=diamond, fillcolor="#f9e79f"];
+     *     done [label="Updated\nellipsoid", fillcolor="#7fb3d8"];
+     *     fail [label="NoEffect", fillcolor="#fadbd8"];
+     *     cut -> update;
+     *     update -> check;
+     *     check -> done [label="Yes", color="#27ae60"];
+     *     check -> fail [label="No", color="#e74c3c"];
+     *   }
+     * @enddot
+     *
      * @tparam T Type of the beta parameter.
      * @param[in] cut A pair containing the gradient and beta value.
      * @return CutStatus The status of the cut.
@@ -165,6 +205,28 @@ template <typename Arr> class Ell {
 
     /**
      * @brief Update ellipsoid using a cut with a specific Q matrix.
+     *
+     * @f[
+     *     Q^+ = Q - \frac{\sigma}{\omega} Q g g^T Q, \qquad
+     *     \kappa^+ = \kappa \cdot \delta
+     * @f]
+     *
+     * @dot
+     *   digraph q_cut_update {
+     *     bgcolor="transparent";
+     *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
+     *     cut [label="Cut: g, beta", fillcolor="#a9cce3"];
+     *     q_update [label="Q += sigma/omega\n* Q*g*g^T*Q"];
+     *     kappa [label="kappa *= delta"];
+     *     xc [label="x_c -= g"];
+     *     check [label="Success?", shape=diamond, fillcolor="#f9e79f"];
+     *     done [label="Updated\nellipsoid", fillcolor="#7fb3d8"];
+     *     fail [label="NoEffect", fillcolor="#fadbd8"];
+     *     cut -> q_update -> kappa -> xc -> check;
+     *     check -> done [label="Yes", color="#27ae60"];
+     *     check -> fail [label="No", color="#e74c3c"];
+     *   }
+     * @enddot
      *
      * @tparam T Type of the beta parameter.
      * @param[in] cut A pair containing the gradient and beta value.
