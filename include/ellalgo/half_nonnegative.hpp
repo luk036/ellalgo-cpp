@@ -32,6 +32,10 @@ namespace algo {
      * For integral types, it uses unsigned arithmetic to avoid overflow
      * when dealing with negative numbers.
      *
+     * @f[
+     *     \lfloor n/2 \rfloor
+     * @f]
+     *
      * @tparam N The integral type
      * @param[in] n The non-negative number to halve
      * @return Half of the input number
@@ -44,6 +48,10 @@ namespace algo {
 
     /**
      * @overload
+     *
+     * @f[
+     *     \lfloor n/2 \rfloor
+     * @f]
      */
     template <typename N> auto half_nonnegative(N n) noexcept ->
         typename std::enable_if_t<!std::is_integral<N>::value, N> {
