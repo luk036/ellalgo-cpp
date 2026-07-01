@@ -189,7 +189,8 @@ inline Arr ones(size_t r, size_t c) { return Arr(r, c, 1.0); }
 /// @brief Linearly spaced values from start to end, inclusive
 ///
 /// @f[
-///     x_i = x_{\text{start}} + i \cdot \frac{x_{\text{end}} - x_{\text{start}}}{n - 1}, \qquad i = 0, \dots, n-1
+///     x_i = x_{\text{start}} + i \cdot \frac{x_{\text{end}} - x_{\text{start}}}{n - 1}, \qquad i =
+///     0, \dots, n-1
 /// @f]
 /// @param[in] start First value
 /// @param[in] end   Last value

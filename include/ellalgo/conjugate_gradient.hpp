@@ -251,9 +251,8 @@ class Matrix0 {
  *     alpha [label="alpha_k = r_k·r_k\n/ d_k·A·d_k", fillcolor="#d4e6f1"];
  *     update [label="x_{k+1} = x_k + alpha*d_k\nr_{k+1} = r_k - alpha*A*d_k", fillcolor="#d4e6f1"];
  *     check [label="||r_{k+1}|| < tol?", shape=diamond, fillcolor="#f9e79f"];
- *     beta [label="beta_k = r_{k+1}·r_{k+1}\n/ r_k·r_k\nd_{k+1} = r_{k+1} + beta*d_k", fillcolor="#d4e6f1"];
- *     done [label="Return x", fillcolor="#7fb3d8", shape=egg];
- *     start -> alpha;
+ *     beta [label="beta_k = r_{k+1}·r_{k+1}\n/ r_k·r_k\nd_{k+1} = r_{k+1} + beta*d_k",
+ * fillcolor="#d4e6f1"]; done [label="Return x", fillcolor="#7fb3d8", shape=egg]; start -> alpha;
  *     alpha -> update;
  *     update -> check;
  *     check -> done [label="Yes✓", color="#27ae60"];
