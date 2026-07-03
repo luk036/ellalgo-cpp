@@ -194,8 +194,8 @@ template <typename Arr> class EllStable {
     /**
      * @brief Update ellipsoid core function using the cut(s)
      *
-     * The `update_q` function is a member function of the `EllStable` class. It is used to update the
-     * ellipsoid core function using a cutting plane.
+     * The `update_q` function is a member function of the `EllStable` class. It is used to update
+     * the ellipsoid core function using a cutting plane.
      *
      * @f[
      *     Q^+ = Q - \frac{\sigma}{\omega} Q g g^T Q, \qquad
