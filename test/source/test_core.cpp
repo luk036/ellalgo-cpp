@@ -112,7 +112,7 @@ TEST_CASE("EllCore, test zero gradient") {
     auto ell_core = EllCore(0.01, 4);
     auto grad = Vec(0.0, 4);
     auto status = ell_core.update_central_cut(grad, 0.0);
-    CHECK_EQ(status, CutStatus::Success);
+    CHECK_EQ(status, CutStatus::NoEffect);
     CHECK_EQ(grad[0], 0.0);
     CHECK_EQ(ell_core.tsq(), 0.0);
 }

@@ -6,6 +6,7 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
+#include <limits>
 #include <tuple>
 #include <utility>
 #include <valarray>
@@ -289,9 +290,9 @@ class EllCore {
         const auto omega = (grad_t * grad).sum();
         this->_tsq = this->_kappa * omega;
 
-        if (omega == 0.0) {
+        if (omega <= std::numeric_limits<double>::min()) {
             grad = grad_t;
-            return CutStatus::Success;
+            return CutStatus::NoEffect;
         }
 
         auto result = std::forward<Fn>(cut_strategy)(beta, this->_tsq);
@@ -363,6 +364,10 @@ class EllCore {
         }
 
         this->_tsq = this->_kappa * omega;
+
+        if (omega <= std::numeric_limits<double>::min()) {
+            return CutStatus::NoEffect;
+        }
 
         auto result = std::forward<Fn>(cut_strategy)(beta, this->_tsq);
         if (result.status != CutStatus::Success) {
