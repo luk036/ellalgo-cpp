@@ -121,6 +121,10 @@ template <typename T> using RetQ = std::tuple<CutConcept<T>, bool, ArrayType<T>,
  * @brief Single cut parameter β in gᵀ(x - xc) + β ≤ 0
  *
  * Represents the bias term in a cutting plane constraint.
+ *
+ * In Rust this is a newtype: `pub struct SingleCut(pub f64);`
+ * In Python this is a type alias: `SingleCut = float`
+ * In C++ this is a type alias for consistency:
  */
 using SingleCut = double;
 

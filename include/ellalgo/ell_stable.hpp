@@ -219,6 +219,28 @@ template <typename Arr> class EllStable {
      *   }
      * @enddot
      *
+     * @f[
+     *     Q^+ = Q - \frac{\sigma}{\omega} Q g g^T Q, \qquad
+     *     \kappa^+ = \kappa \cdot \delta
+     * @f]
+     *
+     * @dot
+     *   digraph stable_q_update {
+     *     bgcolor="transparent";
+     *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
+     *     cut [label="Cut: g, beta", fillcolor="#a9cce3"];
+     *     ldlt [label="LDL^T update\nQ += sigma/omega\n* Q*g*g^T*Q"];
+     *     kappa [label="kappa *= delta"];
+     *     xc [label="x_c -= g"];
+     *     check [label="Success?", shape=diamond, fillcolor="#f9e79f"];
+     *     done [label="Updated\nellipsoid", fillcolor="#7fb3d8"];
+     *     fail [label="NoEffect", fillcolor="#fadbd8"];
+     *     cut -> ldlt -> kappa -> xc -> check;
+     *     check -> done [label="Yes", color="#27ae60"];
+     *     check -> fail [label="No", color="#e74c3c"];
+     *   }
+     * @enddot
+     *
      * @tparam T
      * @param[in] cut cutting-plane
      * @return std::tuple<int, double>

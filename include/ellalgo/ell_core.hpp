@@ -6,6 +6,7 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
+#include <limits>
 #include <tuple>
 #include <utility>
 #include <valarray>
@@ -49,7 +50,10 @@ class EllCore {
     Matrix _mq;
     EllCalc _helper;
     double _tsq{};
-    Vec _scratch;
+    // Pre-allocated scratch buffers (Rust-style: eliminate per-call allocation)
+    Vec _scratch;   // w = L^{-1}g (stable) / grad_t (non-stable)
+    Vec _z;         // z = D^{-1}w (stable)
+    Vec _v;         // q = L^{-T}z then v (stable rank-1 update)
 
   public:
     bool no_defer_trick = false;
@@ -66,7 +70,8 @@ class EllCore {
      * @param[in] ndim Number of dimensions
      */
     EllCore(double kappa, Matrix&& mq, size_t ndim)
-        : _n{ndim}, _kappa{kappa}, _mq{std::move(mq)}, _helper{_n}, _scratch(0.0, ndim) {}
+        : _n{ndim}, _kappa{kappa}, _mq{std::move(mq)}, _helper{_n},
+          _scratch(0.0, ndim), _z(0.0, ndim), _v(0.0, ndim) {}
 
   public:
     /**
@@ -279,19 +284,20 @@ class EllCore {
      */
     template <typename T, typename Fn>
     auto _update_core(Vec& grad, const T& beta, Fn&& cut_strategy) -> CutStatus {
-        std::valarray<double> grad_t(0.0, this->_n);
+        // reuse _v as grad_t = M * g (pre-allocated, no allocation)
+        this->_v = 0.0;
         for (size_t i = 0; i != this->_n; ++i) {
             for (size_t j = 0; j != this->_n; ++j) {
-                grad_t[i] += this->_mq(i, j) * grad[j];
+                this->_v[i] += this->_mq(i, j) * grad[j];
             }
         }
 
-        const auto omega = (grad_t * grad).sum();
+        const auto omega = (this->_v * grad).sum();
         this->_tsq = this->_kappa * omega;
 
-        if (omega == 0.0) {
-            grad = grad_t;
-            return CutStatus::Success;
+        if (omega <= std::numeric_limits<double>::min()) {
+            grad = this->_v;
+            return CutStatus::NoEffect;
         }
 
         auto result = std::forward<Fn>(cut_strategy)(beta, this->_tsq);
@@ -302,12 +308,12 @@ class EllCore {
         // n (n+1) / 2 + n
         const auto r = result.sigma / omega;
         for (size_t i = 0; i != this->_n; ++i) {
-            const auto rQg = r * grad_t[i];
+            const auto rQg = r * this->_v[i];
             for (size_t j = 0; j != i; ++j) {
-                this->_mq(i, j) -= rQg * grad_t[j];
+                this->_mq(i, j) -= rQg * this->_v[j];
                 this->_mq(j, i) = this->_mq(i, j);
             }
-            this->_mq(i, i) -= rQg * grad_t[i];
+            this->_mq(i, i) -= rQg * this->_v[i];
         }
 
         this->_kappa *= result.delta;
@@ -317,7 +323,7 @@ class EllCore {
             this->_kappa = 1.0;
         }
 
-        grad = grad_t * (result.rho / omega);
+        grad = this->_v * (result.rho / omega);
         return result.status;
     }
 
@@ -343,62 +349,66 @@ class EllCore {
      */
     template <typename T, typename Fn>
     auto _update_stable_core(Vec& g, const T& beta, Fn&& cut_strategy) -> CutStatus {
-        auto& invLg = this->_scratch;
-        invLg = g;
+        // _scratch = w = L^{-1}g (forward substitution)
+        this->_scratch = g;
         for (size_t j = 0; j != this->_n - 1; ++j) {
             for (size_t i = j + 1; i != this->_n; ++i) {
-                this->_mq(j, i) = this->_mq(i, j) * invLg[j];
-                invLg[i] -= this->_mq(j, i);
+                this->_mq(j, i) = this->_mq(i, j) * this->_scratch[j];
+                this->_scratch[i] -= this->_mq(j, i);
             }
         }
 
-        auto invDinvLg{invLg};
+        // _z = D^{-1} * w
+        this->_z = this->_scratch;
         for (size_t i = 0; i != this->_n; ++i) {
-            invDinvLg[i] *= this->_mq(i, i);
+            this->_z[i] *= this->_mq(i, i);
         }
 
+        // omega = sum(w_i * z_i)
         auto omega = 0.0;
         for (size_t i = 0; i != this->_n; ++i) {
-            omega += invDinvLg[i] * invLg[i];
+            omega += this->_z[i] * this->_scratch[i];
         }
 
         this->_tsq = this->_kappa * omega;
+
+        if (omega <= std::numeric_limits<double>::min()) {
+            return CutStatus::NoEffect;
+        }
 
         auto result = std::forward<Fn>(cut_strategy)(beta, this->_tsq);
         if (result.status != CutStatus::Success) {
             return result.status;
         }
 
-        // Calculate the (L')^-1 * D^-1 * L^-1 * grad : (n-1)n / 2
-        auto grad_t{invDinvLg};                     // initially
-        for (auto i = this->_n - 1; i != 0; --i) {  // backward subsituition
+        // _v = grad_t = L^{-T} * z (back substitution) — preserved for final g
+        this->_v = this->_z;
+        for (auto i = this->_n - 1; i != 0; --i) {
             for (auto j = i; j != this->_n; ++j) {
-                grad_t[i - 1] -= this->_mq(j, i - 1) * grad_t[j];  // ???
+                this->_v[i - 1] -= this->_mq(j, i - 1) * this->_v[j];
             }
         }
 
-        // rank-one update: 3*n + (n-1)*n/2
+        // rank-one LDL^T update — reuse _scratch as working vector v
+        // (_scratch (w) no longer needed; overwrite with gradient)
         const auto mu = result.sigma / (1.0 - result.sigma);
-        auto oldt = omega / mu;  // initially
-        // const auto m = this->_n - 1;
-        auto v{g};
+        auto oldt = omega / mu;
+        this->_scratch = g;  // v = gradient
         for (size_t j = 0; j != this->_n; ++j) {
-            const auto p = v[j];
-            const auto temp = invDinvLg[j];
+            const auto p = this->_scratch[j];
+            const auto temp = this->_z[j];
             const auto newt = oldt + p * temp;
             const auto beta2 = temp / newt;
             this->_mq(j, j) *= oldt / newt;
             for (auto k = j + 1; k != this->_n; ++k) {
-                v[k] -= this->_mq(j, k);
-                this->_mq(k, j) += beta2 * v[k];
+                this->_scratch[k] -= this->_mq(j, k);
+                this->_mq(k, j) += beta2 * this->_scratch[k];
             }
             oldt = newt;
         }
-        // const auto gamma = oldt + gg_t[m];
-        // this->_mq(m, m) *= oldt / gamma; // update invD
-        //
         this->_kappa *= result.delta;
-        g = grad_t * (result.rho / omega);
+        // _v still holds grad_t = L^{-T}*z (preserved from back substitution)
+        g = this->_v * (result.rho / omega);
         return result.status;
     }
 
