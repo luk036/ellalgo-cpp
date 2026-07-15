@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.7;  VERSION ${PROJECT_VERSION}</span>
+   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.8;  VERSION ${PROJECT_VERSION}</span>
    </div>
   </td>
  </tr>
@@ -269,7 +269,8 @@ template&lt;<a class="el" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d
 </div><div class="memdoc">
 
 <p>Single cut parameter β in gᵀ(x - xc) + β ≤ 0. </p>
-<p>Represents the bias term in a cutting plane constraint. </p>
+<p>Represents the bias term in a cutting plane constraint.</p>
+<p>In Rust this is a newtype: <code>pub struct <a class="el" href="ell__config_8hpp.html#aa892ec59e35d6e77df483dfcaa8320a7" title="Single cut parameter β in gᵀ(x - xc) + β ≤ 0.">SingleCut(pub f64)</a>;</code> In Python this is a type alias: <code>SingleCut = float</code> In C++ this is a type alias for consistency: </p>
 
 </div>
 </div>

@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.7;  VERSION ${PROJECT_VERSION}</span>
+   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.8;  VERSION ${PROJECT_VERSION}</span>
    </div>
   </td>
  </tr>
@@ -575,6 +575,13 @@ template&lt;<a class="el" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d
 
 <p>Update ellipsoid core function using the deep cut(s) </p>
 <p>The <code>update_bias_cut</code> function is a member function of the <code><a class="el" href="classEllStable.html" title="Ellipsoid Search Space.">EllStable</a></code> class. It is used to update the ellipsoid core function using a cutting plane.</p>
+<p class="formulaDsp">
+\[
+    g^T (x - x_c) + \beta \le 0
+\]
+</p>
+<div class="dotgraph">
+<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_8.svg" width="246" height="375"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td></td></tr>
@@ -621,6 +628,13 @@ template&lt;<a class="el" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d
 
 <p>Update ellipsoid core function using the central cut(s) </p>
 <p>The <code>update_central_cut</code> function is a member function of the <code><a class="el" href="classEllStable.html" title="Ellipsoid Search Space.">EllStable</a></code> class. It is used to update the ellipsoid core function using a cutting plane.</p>
+<p class="formulaDsp">
+\[
+    g^T (x - x_c) \le 0
+\]
+</p>
+<div class="dotgraph">
+<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_9.svg" width="246" height="375"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td></td></tr>
@@ -667,6 +681,22 @@ template&lt;<a class="el" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d
 
 <p>Update ellipsoid core function using the cut(s) </p>
 <p>The <code>update_q</code> function is a member function of the <code><a class="el" href="classEllStable.html" title="Ellipsoid Search Space.">EllStable</a></code> class. It is used to update the ellipsoid core function using a cutting plane.</p>
+<p class="formulaDsp">
+\[
+    Q^+ = Q - \frac{\sigma}{\omega} Q g g^T Q, \qquad
+    \kappa^+ = \kappa \cdot \delta
+\]
+</p>
+<div class="dotgraph">
+<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_10.svg" width="246" height="590"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="formulaDsp">
+\[
+    Q^+ = Q - \frac{\sigma}{\omega} Q g g^T Q, \qquad
+    \kappa^+ = \kappa \cdot \delta
+\]
+</p>
+<div class="dotgraph">
+<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_11.svg" width="246" height="590"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td></td></tr>

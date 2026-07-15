@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.7;  VERSION ${PROJECT_VERSION}</span>
+   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.8;  VERSION ${PROJECT_VERSION}</span>
    </div>
   </td>
  </tr>
@@ -98,26 +98,26 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="namespacealgo.html">   26</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacealgo.html">algo</a> {</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="namespacealgo.html#a2f44de1a12125a3ae8c0e657fb1f4d29">   39</a></span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> N&gt; <span class="keyword">auto</span> <a class="code hl_function" href="namespacealgo.html#a2f44de1a12125a3ae8c0e657fb1f4d29">half_nonnegative</a>(<a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">N</a> <a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">n</a>) <span class="keyword">noexcept</span> -&gt;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keyword">typename</span> std::enable_if_t&lt;std::is_integral&lt;N&gt;::value, <a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">N</a>&gt; {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keyword">using </span><a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">UN</a> = <span class="keyword">typename</span> std::make_unsigned_t&lt;N&gt;;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">N</a><span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">UN</a><span class="keyword">&gt;</span>(<a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">n</a>) / 2);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="namespacealgo.html#a2f44de1a12125a3ae8c0e657fb1f4d29">   43</a></span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> N&gt; <span class="keyword">auto</span> <a class="code hl_function" href="namespacealgo.html#a2f44de1a12125a3ae8c0e657fb1f4d29">half_nonnegative</a>(<a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">N</a> <a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">n</a>) <span class="keyword">noexcept</span> -&gt;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keyword">typename</span> std::enable_if_t&lt;std::is_integral&lt;N&gt;::value, <a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">N</a>&gt; {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keyword">using </span><a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">UN</a> = <span class="keyword">typename</span> std::make_unsigned_t&lt;N&gt;;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">N</a><span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">UN</a><span class="keyword">&gt;</span>(<a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">n</a>) / 2);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
 </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> N&gt; <span class="keyword">auto</span> <a class="code hl_function" href="namespacealgo.html#a2f44de1a12125a3ae8c0e657fb1f4d29">half_nonnegative</a>(<a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">N</a> <a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">n</a>) <span class="keyword">noexcept</span> -&gt;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keyword">typename</span> std::enable_if_t&lt;!std::is_integral&lt;N&gt;::value, <a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">N</a>&gt; {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">return</span> std::move(<a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">n</a>) / 2;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}  <span class="comment">// namespace algo</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> N&gt; <span class="keyword">auto</span> <a class="code hl_function" href="namespacealgo.html#a2f44de1a12125a3ae8c0e657fb1f4d29">half_nonnegative</a>(<a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">N</a> <a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">n</a>) <span class="keyword">noexcept</span> -&gt;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keyword">typename</span> std::enable_if_t&lt;!std::is_integral&lt;N&gt;::value, <a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">N</a>&gt; {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> std::move(<a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">n</a>) / 2;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}  <span class="comment">// namespace algo</span></div>
 </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif  </span><span class="comment">// ALGO_HALF_NONNEGATIVE_H</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#endif  </span><span class="comment">// ALGO_HALF_NONNEGATIVE_H</span></div>
 <div class="ttc" id="acutting__plane_8hpp_html_a01e0eb0278b0992170960d14fa9bbb64"><div class="ttname"><a href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">invalid_value</a></div><div class="ttdeci">auto invalid_value() -&gt; T</div><div class="ttdoc">Return an invalid/sentinel value for type T.</div><div class="ttdef"><b>Definition</b> cutting_plane.hpp:27</div></div>
 <div class="ttc" id="anamespacealgo_html"><div class="ttname"><a href="namespacealgo.html">algo</a></div><div class="ttdef"><b>Definition</b> half_nonnegative.hpp:26</div></div>
-<div class="ttc" id="anamespacealgo_html_a2f44de1a12125a3ae8c0e657fb1f4d29"><div class="ttname"><a href="namespacealgo.html#a2f44de1a12125a3ae8c0e657fb1f4d29">algo::half_nonnegative</a></div><div class="ttdeci">auto half_nonnegative(N n) noexcept -&gt; typename std::enable_if_t&lt; std::is_integral&lt; N &gt;::value, N &gt;</div><div class="ttdoc">Compute half of a non-negative integral number.</div><div class="ttdef"><b>Definition</b> half_nonnegative.hpp:39</div></div>
+<div class="ttc" id="anamespacealgo_html_a2f44de1a12125a3ae8c0e657fb1f4d29"><div class="ttname"><a href="namespacealgo.html#a2f44de1a12125a3ae8c0e657fb1f4d29">algo::half_nonnegative</a></div><div class="ttdeci">auto half_nonnegative(N n) noexcept -&gt; typename std::enable_if_t&lt; std::is_integral&lt; N &gt;::value, N &gt;</div><div class="ttdoc">Compute half of a non-negative integral number.</div><div class="ttdef"><b>Definition</b> half_nonnegative.hpp:43</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

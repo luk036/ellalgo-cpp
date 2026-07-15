@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.7;  VERSION ${PROJECT_VERSION}</span>
+   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.8;  VERSION ${PROJECT_VERSION}</span>
    </div>
   </td>
  </tr>
@@ -414,6 +414,11 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Update the 1D ellipsoid using a deep cut. </p>
+<p class="formulaDsp">
+\[
+    g (x - x_c) + \beta \le 0
+\]
+</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">cut</td><td>A pair containing (gradient, beta) representing the cut </td></tr>
@@ -449,6 +454,11 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Update the 1D ellipsoid using a central cut. </p>
+<p class="formulaDsp">
+\[
+    g (x - x_c) \le 0
+\]
+</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">cut</td><td>A pair containing (gradient, beta) representing the cut </td></tr>
