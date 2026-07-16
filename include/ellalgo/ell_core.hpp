@@ -51,9 +51,9 @@ class EllCore {
     EllCalc _helper;
     double _tsq{};
     // Pre-allocated scratch buffers (Rust-style: eliminate per-call allocation)
-    Vec _scratch;   // w = L^{-1}g (stable) / grad_t (non-stable)
-    Vec _z;         // z = D^{-1}w (stable)
-    Vec _v;         // q = L^{-T}z then v (stable rank-1 update)
+    Vec _scratch;  // w = L^{-1}g (stable) / grad_t (non-stable)
+    Vec _z;        // z = D^{-1}w (stable)
+    Vec _v;        // q = L^{-T}z then v (stable rank-1 update)
 
   public:
     bool no_defer_trick = false;
@@ -70,8 +70,13 @@ class EllCore {
      * @param[in] ndim Number of dimensions
      */
     EllCore(double kappa, Matrix&& mq, size_t ndim)
-        : _n{ndim}, _kappa{kappa}, _mq{std::move(mq)}, _helper{_n},
-          _scratch(0.0, ndim), _z(0.0, ndim), _v(0.0, ndim) {}
+        : _n{ndim},
+          _kappa{kappa},
+          _mq{std::move(mq)},
+          _helper{_n},
+          _scratch(0.0, ndim),
+          _z(0.0, ndim),
+          _v(0.0, ndim) {}
 
   public:
     /**
