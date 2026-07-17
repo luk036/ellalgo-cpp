@@ -72,6 +72,13 @@ add_includedirs("include", { public = true })
 add_files("bench/BM_ell.cpp")
 add_packages("benchmark")
 
+target("test_ell_compare")
+set_kind("binary")
+add_deps("EllAlgo")
+add_includedirs("include", { public = true })
+add_files("bench/BM_ell_compare.cpp")
+add_packages("benchmark")
+
 target("test_lmi")
 set_kind("binary")
 add_deps("EllAlgo")
