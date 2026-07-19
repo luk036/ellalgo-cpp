@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include <algorithm>
 #include <cstddef>
 #include <valarray>
 #include <vector>
@@ -72,7 +73,7 @@ class Matrix {
     explicit Matrix(std::size_t ndim, double init = 0.0) : ndim{ndim}, data(ndim * ndim, init) {}
 
     /** @brief Reset all elements to value */
-    void clear(double value = 0.0) { std::fill(this->data.begin(), this->data.end(), value); }
+    void clear(double value = 0.0) { std::ranges::fill(this->data, value); }
 
     /** @brief Access element (row, col) — mutable */
     double& operator()(std::size_t row, std::size_t col) {
@@ -123,5 +124,11 @@ class Matrix {
      *     \operatorname{tr}(A) = \sum_{i=1}^{n} A_{ii}
      * @f]
      */
-    double trace() const { return const_cast<Matrix*>(this)->diagonal().sum(); }
+    double trace() const {
+        double s = 0.0;
+        for (std::size_t i = 0; i < this->ndim; ++i) {
+            s += this->operator()(i, i);
+        }
+        return s;
+    }
 };

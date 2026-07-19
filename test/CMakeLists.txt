@@ -17,12 +17,6 @@ include(../cmake/CPM.cmake)
 include(../cmake/specific.cmake)
 
 CPMAddPackage("gh:doctest/doctest@2.5.2")
-CPMAddPackage(
-  NAME rapidcheck
-  GITHUB_REPOSITORY emil-e/rapidcheck
-  GIT_TAG master
-  OPTIONS "RC_BUILD_TESTS OFF" "RC_BUILD_EXAMPLES OFF" "RC_INSTALL OFF"
-)
 CPMAddPackage("gh:TheLartians/Format.cmake@1.7.3")
 
 if(TEST_INSTALLED_VERSION)
@@ -36,19 +30,6 @@ endif()
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 add_executable(${PROJECT_NAME} ${sources})
 target_link_libraries(${PROJECT_NAME} doctest::doctest EllAlgo::EllAlgo ${SPECIFIC_LIBS})
-
-# Add RapidCheck support if available
-if(rapidcheck_ADDED)
-  target_compile_definitions(${PROJECT_NAME} PRIVATE RAPIDCHECK_H)
-  if(TARGET rapidcheck::rapidcheck)
-    target_link_libraries(${PROJECT_NAME} rapidcheck::rapidcheck)
-  else()
-    target_include_directories(${PROJECT_NAME} PRIVATE ${rapidcheck_SOURCE_DIR}/include)
-    if(TARGET rapidcheck)
-      target_link_libraries(${PROJECT_NAME} rapidcheck)
-    endif()
-  endif()
-endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 
