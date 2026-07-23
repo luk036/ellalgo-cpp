@@ -4,6 +4,9 @@
  *  Benchmark comparing Ell vs EllStable runtime performance
  *  with correctness verification across multiple problem sizes.
  */
+#define ANKERL_NANOBENCH_IMPLEMENT
+#include <nanobench.h>
+
 #include <algorithm>
 #include <cmath>
 #include <ellalgo/cutting_plane.hpp>
@@ -18,8 +21,6 @@
 #include <tuple>
 #include <type_traits>
 #include <valarray>
-
-#include "benchmark/benchmark.h"
 
 using Vec = std::valarray<double>;
 
@@ -48,7 +49,6 @@ static bool approx_equal(const Vec& a, const Vec& b, double tol = 1e-8) {
 
 // ============================================================
 //  Deterministic random-cut oracle (iteration-dependent)
-//  Same cuts regardless of floating-point path.
 // ============================================================
 
 class DetRandOracle {
@@ -220,168 +220,241 @@ static void run_verification() {
 }
 
 // ============================================================
-//  Benchmark helpers
-// ============================================================
-
-enum class Alg { Ell, EllStable };
-
-template <Alg alg>
-static void run_lowpass_bench(benchmark::State& state, size_t N, bool parallel_cut) {
-    while (state.KeepRunning()) {
-        auto [omega, spsq] = create_lowpass_case(N);
-        Options opts;
-        opts.max_iters = 50000;
-        if constexpr (alg == Alg::Ell) {
-            Ell<Vec> ellip{40.0, Vec(0.0, N)};
-            ellip.set_use_parallel_cut(parallel_cut);
-            auto result = cutting_plane_optim(omega, ellip, spsq, opts);
-            benchmark::DoNotOptimize(result);
-        } else {
-            EllStable<Vec> ellip{40.0, Vec(0.0, N)};
-            ellip.set_use_parallel_cut(parallel_cut);
-            auto result = cutting_plane_optim(omega, ellip, spsq, opts);
-            benchmark::DoNotOptimize(result);
-        }
-    }
-}
-
-template <Alg alg>
-static void run_scale_bench(benchmark::State& state, size_t N, size_t max_iters) {
-    while (state.KeepRunning()) {
-        DetRandOracle ora{N};
-        Options opts;
-        opts.max_iters = max_iters;
-        opts.tolerance = 0.0;
-        double gamma = 0.0;
-        if constexpr (alg == Alg::Ell) {
-            Ell<Vec> ellip{40.0, Vec(0.0, N)};
-            auto result = cutting_plane_optim(ora, ellip, gamma, opts);
-            benchmark::DoNotOptimize(result);
-        } else {
-            EllStable<Vec> ellip{40.0, Vec(0.0, N)};
-            auto result = cutting_plane_optim(ora, ellip, gamma, opts);
-            benchmark::DoNotOptimize(result);
-        }
-    }
-}
-
-// ============================================================
-//  Lowpass benchmarks
-// ============================================================
-
-static void BM_Ell_lp32_par(benchmark::State& s) { run_lowpass_bench<Alg::Ell>(s, 32, true); }
-BENCHMARK(BM_Ell_lp32_par);
-static void BM_Stable_lp32_par(benchmark::State& s) {
-    run_lowpass_bench<Alg::EllStable>(s, 32, true);
-}
-BENCHMARK(BM_Stable_lp32_par);
-
-static void BM_Ell_lp32_ser(benchmark::State& s) { run_lowpass_bench<Alg::Ell>(s, 32, false); }
-BENCHMARK(BM_Ell_lp32_ser);
-static void BM_Stable_lp32_ser(benchmark::State& s) {
-    run_lowpass_bench<Alg::EllStable>(s, 32, false);
-}
-BENCHMARK(BM_Stable_lp32_ser);
-
-static void BM_Ell_lp48_par(benchmark::State& s) { run_lowpass_bench<Alg::Ell>(s, 48, true); }
-BENCHMARK(BM_Ell_lp48_par);
-static void BM_Stable_lp48_par(benchmark::State& s) {
-    run_lowpass_bench<Alg::EllStable>(s, 48, true);
-}
-BENCHMARK(BM_Stable_lp48_par);
-
-static void BM_Ell_lp64_par(benchmark::State& s) { run_lowpass_bench<Alg::Ell>(s, 64, true); }
-BENCHMARK(BM_Ell_lp64_par);
-static void BM_Stable_lp64_par(benchmark::State& s) {
-    run_lowpass_bench<Alg::EllStable>(s, 64, true);
-}
-BENCHMARK(BM_Stable_lp64_par);
-
-// ============================================================
-//  Profit benchmarks
-// ============================================================
-
-static void BM_Ell_norm(benchmark::State& s) {
-    while (s.KeepRunning()) {
-        Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
-        ProfitOracle omega{unit_price, scale, limit, elasticities, price_out};
-        double gamma = 0.0;
-        benchmark::DoNotOptimize(cutting_plane_optim(omega, ellip, gamma));
-    }
-}
-BENCHMARK(BM_Ell_norm);
-
-static void BM_Stable_norm(benchmark::State& s) {
-    while (s.KeepRunning()) {
-        EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
-        ProfitOracle omega{unit_price, scale, limit, elasticities, price_out};
-        double gamma = 0.0;
-        benchmark::DoNotOptimize(cutting_plane_optim(omega, ellip, gamma));
-    }
-}
-BENCHMARK(BM_Stable_norm);
-
-static void BM_Ell_rb(benchmark::State& s) {
-    while (s.KeepRunning()) {
-        Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
-        ProfitOracleRb omega{unit_price,        scale, limit, elasticities, price_out,
-                             Vec{0.003, 0.007}, 1.0};
-        double gamma = 0.0;
-        benchmark::DoNotOptimize(cutting_plane_optim(omega, ellip, gamma));
-    }
-}
-BENCHMARK(BM_Ell_rb);
-
-static void BM_Stable_rb(benchmark::State& s) {
-    while (s.KeepRunning()) {
-        EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
-        ProfitOracleRb omega{unit_price,        scale, limit, elasticities, price_out,
-                             Vec{0.003, 0.007}, 1.0};
-        double gamma = 0.0;
-        benchmark::DoNotOptimize(cutting_plane_optim(omega, ellip, gamma));
-    }
-}
-BENCHMARK(BM_Stable_rb);
-
-// ============================================================
-//  Scaling benchmarks (deterministic random cuts)
-//  Run for fixed max_iters to measure per-iteration speed.
-// ============================================================
-
-static void BM_Ell_s16(benchmark::State& s) { run_scale_bench<Alg::Ell>(s, 16, 4000); }
-BENCHMARK(BM_Ell_s16);
-static void BM_Stable_s16(benchmark::State& s) { run_scale_bench<Alg::EllStable>(s, 16, 4000); }
-BENCHMARK(BM_Stable_s16);
-
-static void BM_Ell_s32(benchmark::State& s) { run_scale_bench<Alg::Ell>(s, 32, 4000); }
-BENCHMARK(BM_Ell_s32);
-static void BM_Stable_s32(benchmark::State& s) { run_scale_bench<Alg::EllStable>(s, 32, 4000); }
-BENCHMARK(BM_Stable_s32);
-
-static void BM_Ell_s64(benchmark::State& s) { run_scale_bench<Alg::Ell>(s, 64, 2000); }
-BENCHMARK(BM_Ell_s64);
-static void BM_Stable_s64(benchmark::State& s) { run_scale_bench<Alg::EllStable>(s, 64, 2000); }
-BENCHMARK(BM_Stable_s64);
-
-static void BM_Ell_s128(benchmark::State& s) { run_scale_bench<Alg::Ell>(s, 128, 1000); }
-BENCHMARK(BM_Ell_s128);
-static void BM_Stable_s128(benchmark::State& s) { run_scale_bench<Alg::EllStable>(s, 128, 1000); }
-BENCHMARK(BM_Stable_s128);
-
-static void BM_Ell_s256(benchmark::State& s) { run_scale_bench<Alg::Ell>(s, 256, 500); }
-BENCHMARK(BM_Ell_s256);
-static void BM_Stable_s256(benchmark::State& s) { run_scale_bench<Alg::EllStable>(s, 256, 500); }
-BENCHMARK(BM_Stable_s256);
-
-// ============================================================
 //  Custom main: verify first, then benchmark
 // ============================================================
 
-int main(int argc, char** argv) {
+int main() {
     run_verification();
 
-    ::benchmark::Initialize(&argc, argv);
-    ::benchmark::RunSpecifiedBenchmarks();
-    ::benchmark::Shutdown();
-    return 0;
+    // Fast benchmarks (short runs, 50 epochs)
+    ankerl::nanobench::Bench fast_bench;
+    fast_bench.title("Ell vs EllStable comparison").unit("op").warmup(100).epochs(50);
+
+    // Profit benchmarks
+    fast_bench.run("Ell/profit_normal", [&] {
+        Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
+        ProfitOracle omega{unit_price, scale, limit, elasticities, price_out};
+        double gamma = 0.0;
+        ankerl::nanobench::doNotOptimizeAway(cutting_plane_optim(omega, ellip, gamma));
+    });
+
+    fast_bench.run("EllStable/profit_normal", [&] {
+        EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
+        ProfitOracle omega{unit_price, scale, limit, elasticities, price_out};
+        double gamma = 0.0;
+        ankerl::nanobench::doNotOptimizeAway(cutting_plane_optim(omega, ellip, gamma));
+    });
+
+    fast_bench.run("Ell/profit_rb", [&] {
+        Ell<Vec> ellip{100.0, Vec{0.0, 0.0}};
+        ProfitOracleRb omega{unit_price,        scale, limit, elasticities, price_out,
+                             Vec{0.003, 0.007}, 1.0};
+        double gamma = 0.0;
+        ankerl::nanobench::doNotOptimizeAway(cutting_plane_optim(omega, ellip, gamma));
+    });
+
+    fast_bench.run("EllStable/profit_rb", [&] {
+        EllStable<Vec> ellip{100.0, Vec{0.0, 0.0}};
+        ProfitOracleRb omega{unit_price,        scale, limit, elasticities, price_out,
+                             Vec{0.003, 0.007}, 1.0};
+        double gamma = 0.0;
+        ankerl::nanobench::doNotOptimizeAway(cutting_plane_optim(omega, ellip, gamma));
+    });
+
+    // Slow integration benchmarks (full cutting_plane_optim loop)
+    // Use fewer epochs since each run is expensive
+    ankerl::nanobench::Bench slow_bench;
+    slow_bench.title("Ell vs EllStable (slow)").unit("op").warmup(1).epochs(3).minEpochIterations(1);
+
+    // Lowpass benchmarks
+    slow_bench.run("Ell/LP-32-par", [&] {
+        auto [omega, spsq] = create_lowpass_case(32);
+        Options opts;
+        opts.max_iters = 50000;
+        Ell<Vec> ellip{40.0, Vec(0.0, 32)};
+        ellip.set_use_parallel_cut(true);
+        auto result = cutting_plane_optim(omega, ellip, spsq, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("EllStable/LP-32-par", [&] {
+        auto [omega, spsq] = create_lowpass_case(32);
+        Options opts;
+        opts.max_iters = 50000;
+        EllStable<Vec> ellip{40.0, Vec(0.0, 32)};
+        ellip.set_use_parallel_cut(true);
+        auto result = cutting_plane_optim(omega, ellip, spsq, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("Ell/LP-32-ser", [&] {
+        auto [omega, spsq] = create_lowpass_case(32);
+        Options opts;
+        opts.max_iters = 50000;
+        Ell<Vec> ellip{40.0, Vec(0.0, 32)};
+        ellip.set_use_parallel_cut(false);
+        auto result = cutting_plane_optim(omega, ellip, spsq, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("EllStable/LP-32-ser", [&] {
+        auto [omega, spsq] = create_lowpass_case(32);
+        Options opts;
+        opts.max_iters = 50000;
+        EllStable<Vec> ellip{40.0, Vec(0.0, 32)};
+        ellip.set_use_parallel_cut(false);
+        auto result = cutting_plane_optim(omega, ellip, spsq, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("Ell/LP-48-par", [&] {
+        auto [omega, spsq] = create_lowpass_case(48);
+        Options opts;
+        opts.max_iters = 50000;
+        Ell<Vec> ellip{40.0, Vec(0.0, 48)};
+        ellip.set_use_parallel_cut(true);
+        auto result = cutting_plane_optim(omega, ellip, spsq, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("EllStable/LP-48-par", [&] {
+        auto [omega, spsq] = create_lowpass_case(48);
+        Options opts;
+        opts.max_iters = 50000;
+        EllStable<Vec> ellip{40.0, Vec(0.0, 48)};
+        ellip.set_use_parallel_cut(true);
+        auto result = cutting_plane_optim(omega, ellip, spsq, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("Ell/LP-64-par", [&] {
+        auto [omega, spsq] = create_lowpass_case(64);
+        Options opts;
+        opts.max_iters = 50000;
+        Ell<Vec> ellip{40.0, Vec(0.0, 64)};
+        ellip.set_use_parallel_cut(true);
+        auto result = cutting_plane_optim(omega, ellip, spsq, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("EllStable/LP-64-par", [&] {
+        auto [omega, spsq] = create_lowpass_case(64);
+        Options opts;
+        opts.max_iters = 50000;
+        EllStable<Vec> ellip{40.0, Vec(0.0, 64)};
+        ellip.set_use_parallel_cut(true);
+        auto result = cutting_plane_optim(omega, ellip, spsq, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    // Scaling benchmarks
+    slow_bench.run("Ell/Rand-16", [&] {
+        DetRandOracle ora{16};
+        Options opts;
+        opts.max_iters = 4000;
+        opts.tolerance = 0.0;
+        double gamma = 0.0;
+        Ell<Vec> ellip{40.0, Vec(0.0, 16)};
+        auto result = cutting_plane_optim(ora, ellip, gamma, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("EllStable/Rand-16", [&] {
+        DetRandOracle ora{16};
+        Options opts;
+        opts.max_iters = 4000;
+        opts.tolerance = 0.0;
+        double gamma = 0.0;
+        EllStable<Vec> ellip{40.0, Vec(0.0, 16)};
+        auto result = cutting_plane_optim(ora, ellip, gamma, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("Ell/Rand-32", [&] {
+        DetRandOracle ora{32};
+        Options opts;
+        opts.max_iters = 4000;
+        opts.tolerance = 0.0;
+        double gamma = 0.0;
+        Ell<Vec> ellip{40.0, Vec(0.0, 32)};
+        auto result = cutting_plane_optim(ora, ellip, gamma, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("EllStable/Rand-32", [&] {
+        DetRandOracle ora{32};
+        Options opts;
+        opts.max_iters = 4000;
+        opts.tolerance = 0.0;
+        double gamma = 0.0;
+        EllStable<Vec> ellip{40.0, Vec(0.0, 32)};
+        auto result = cutting_plane_optim(ora, ellip, gamma, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("Ell/Rand-64", [&] {
+        DetRandOracle ora{64};
+        Options opts;
+        opts.max_iters = 2000;
+        opts.tolerance = 0.0;
+        double gamma = 0.0;
+        Ell<Vec> ellip{40.0, Vec(0.0, 64)};
+        auto result = cutting_plane_optim(ora, ellip, gamma, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("EllStable/Rand-64", [&] {
+        DetRandOracle ora{64};
+        Options opts;
+        opts.max_iters = 2000;
+        opts.tolerance = 0.0;
+        double gamma = 0.0;
+        EllStable<Vec> ellip{40.0, Vec(0.0, 64)};
+        auto result = cutting_plane_optim(ora, ellip, gamma, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("Ell/Rand-128", [&] {
+        DetRandOracle ora{128};
+        Options opts;
+        opts.max_iters = 1000;
+        opts.tolerance = 0.0;
+        double gamma = 0.0;
+        Ell<Vec> ellip{40.0, Vec(0.0, 128)};
+        auto result = cutting_plane_optim(ora, ellip, gamma, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("EllStable/Rand-128", [&] {
+        DetRandOracle ora{128};
+        Options opts;
+        opts.max_iters = 1000;
+        opts.tolerance = 0.0;
+        double gamma = 0.0;
+        EllStable<Vec> ellip{40.0, Vec(0.0, 128)};
+        auto result = cutting_plane_optim(ora, ellip, gamma, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("Ell/Rand-256", [&] {
+        DetRandOracle ora{256};
+        Options opts;
+        opts.max_iters = 500;
+        opts.tolerance = 0.0;
+        double gamma = 0.0;
+        Ell<Vec> ellip{40.0, Vec(0.0, 256)};
+        auto result = cutting_plane_optim(ora, ellip, gamma, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
+
+    slow_bench.run("EllStable/Rand-256", [&] {
+        DetRandOracle ora{256};
+        Options opts;
+        opts.max_iters = 500;
+        opts.tolerance = 0.0;
+        double gamma = 0.0;
+        EllStable<Vec> ellip{40.0, Vec(0.0, 256)};
+        auto result = cutting_plane_optim(ora, ellip, gamma, opts);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
 }

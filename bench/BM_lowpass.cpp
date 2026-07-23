@@ -1,3 +1,9 @@
+/*
+ *  Distributed under the MIT License (See accompanying file /LICENSE )
+ */
+#define ANKERL_NANOBENCH_IMPLEMENT
+#include <nanobench.h>
+
 #include <ellalgo/cutting_plane.hpp>           // for cutting_plane_optim
 #include <ellalgo/ell.hpp>                     // for Ell
 #include <ellalgo/oracles/lowpass_oracle.hpp>  // for LowpassOracle, filter_...
@@ -5,15 +11,9 @@
 #include <type_traits>                         // for move, add_const<>::type
 #include <valarray>
 
-#include "benchmark/benchmark.h"  // for BENCHMARK, State, BENCHMARK_...
-
 using Vec = std::valarray<double>;
 using Mat = std::valarray<Vec>;
 using ParallelCut = std::pair<Vec, Vec>;
-
-// ********************************************************************
-// optimization
-// ********************************************************************
 
 auto run_lowpass(bool use_parallel_cut) {
     constexpr int N = 32;
@@ -31,40 +31,20 @@ auto run_lowpass(bool use_parallel_cut) {
     const auto r = std::get<0>(result2);
     const auto num_iters = std::get<1>(result2);
 
-    // std::cout << "lowpass r: " << r << '\n';
-    // auto Ustop = 20 * std::log10(std::sqrt(Spsq_new));
-    // std::cout << "Min attenuation in the stopband is " << Ustop << " dB.\n";
-    // CHECK_GE(r[0], 0.0);
-
     return std::make_tuple(r.size() != 0U, num_iters);
 }
 
-// TEST_CASE("Lowpass Filter (w/ parallel cut)") {
-static void lowpass_w_parallel_cut(benchmark::State& state) {
-    while (state.KeepRunning()) {
+int main() {
+    ankerl::nanobench::Bench bench;
+    bench.title("Lowpass filter benchmarks").unit("op").warmup(1).epochs(3).minEpochIterations(1);
+
+    bench.run("lowpass_w_parallel_cut", [&] {
         auto result = run_lowpass(true);
-        benchmark::DoNotOptimize(result);
-    }
-}
-// Register the function as a benchmark
-BENCHMARK(lowpass_w_parallel_cut);
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
 
-// TEST_CASE("Lowpass Filter (w/o parallel cut)") {
-static void lowpass_wo_parallel_cut(benchmark::State& state) {
-    while (state.KeepRunning()) {
+    bench.run("lowpass_wo_parallel_cut", [&] {
         auto result = run_lowpass(false);
-        benchmark::DoNotOptimize(result);
-    }
+        ankerl::nanobench::doNotOptimizeAway(result);
+    });
 }
-// Register the function as a benchmark
-BENCHMARK(lowpass_wo_parallel_cut);
-
-BENCHMARK_MAIN();
-
-/*
-------------------------------------------------------------------
-Benchmark                        Time             CPU   Iterations
-------------------------------------------------------------------
-lowpass_w_parallel_cut     4327390 ns      4301226 ns          163
-lowpass_wo_parallel_cut   53440994 ns     53162937 ns           13
-*/
