@@ -264,7 +264,11 @@ int main() {
     // Slow integration benchmarks (full cutting_plane_optim loop)
     // Use fewer epochs since each run is expensive
     ankerl::nanobench::Bench slow_bench;
-    slow_bench.title("Ell vs EllStable (slow)").unit("op").warmup(1).epochs(3).minEpochIterations(1);
+    slow_bench.title("Ell vs EllStable (slow)")
+        .unit("op")
+        .warmup(1)
+        .epochs(3)
+        .minEpochIterations(1);
 
     // Lowpass benchmarks
     slow_bench.run("Ell/LP-32-par", [&] {
