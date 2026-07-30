@@ -9,19 +9,19 @@ It supports parallel cuts, discrete optimization, and traditional/stable version
 
 ## Build Commands
 
-### Quick Build (Test)
+### Quick Build (All targets)
 ```bash
-cmake -S test -B build/test
-cmake --build build/test
+cmake -B build
+cmake --build build
 ```
 
 ### Run Tests
 ```bash
 # Via CMake test target (recommended)
-CTEST_OUTPUT_ON_FAILURE=1 cmake --build build/test --target test
+CTEST_OUTPUT_ON_FAILURE=1 cmake --build build --target test
 
 # Or run the executable directly
-./build/test/EllAlgoTests
+./build/test_all
 ```
 
 ### Run Single Test
@@ -30,36 +30,30 @@ CTEST_OUTPUT_ON_FAILURE=1 cmake --build build/test --target test
 ctest -R test_ell -V
 
 # Or run the executable with specific test
-./build/test/EllAlgoTests -tc="test_ell*"
+./build/test_all -tc="test_ell*"
 ```
 
-### Build Everything (All targets)
+### Build Benchmarks
 ```bash
-cmake -S all -B build
+cmake -B build -DELLALGO_BUILD_BENCHMARKS=ON
 cmake --build build
-
-# Run tests and standalone
-./build/test/EllAlgoTests
-./build/standalone/EllAlgo --help
 ```
 
-### Code Formatting
+### Build Standalone
 ```bash
-cmake -S test -B build/test
-cmake --build build/test --target format      # check
-cmake --build build/test --target fix-format # apply
+cmake -B build -DELLALGO_BUILD_STANDALONE=ON
+cmake --build build
+./build/ellalgo_standalone --help
 ```
 
 ### Build Documentation
 ```bash
-cmake -S documentation -B build/doc
-cmake --build build/doc --target GenerateDocs
+cmake -B build -DELLALGO_BUILD_DOCS=ON
+cmake --build build --target doxygen
 ```
 
 ### Additional Build Options
-- Code coverage: `-DENABLE_TEST_COVERAGE=1`
-- Sanitizers: `-DUSE_SANITIZER=Address`
-- Static analyzers: `-DUSE_STATIC_ANALYZER=clang-tidy`
+- Code coverage: `-DELLALGO_ENABLE_COVERAGE=1` (GCC/Clang only, requires gcovr)
 
 ## Code Style Guidelines
 
@@ -71,9 +65,8 @@ cmake --build build/doc --target GenerateDocs
 - **Namespace indentation**: All
 
 ### C++ Standards
-- **Library**: C++14
-- **Tests**: C++17
-- **Always use**: `CXX_STANDARD 20` (or 17 for tests)
+- **Library**: C++20
+- **Tests**: C++20
 
 ### Naming Conventions
 - **Classes**: PascalCase (`Ell`, `EllCalc`, `CutStatus`)
@@ -129,11 +122,11 @@ if (ELL_UNLIKELY(eta <= 0.0)) {
 - **GCC/Clang**: `-Wall -Wpedantic -Wextra -Werror`
 - **MSVC**: `/utf-8 /W4 /WX`
 
-### Dependencies (via CPM.cmake)
-- `fmt` (12.1.0) - formatting
+### Dependencies (via FetchContent / file download)
+- `spdlog` (v1.17.0) - logging
 - `doctest` (2.5.2) - testing
-- `rapidcheck` - property-based testing
-- `PackageProject.cmake` - installation
+- `nanobench` (v4.3.11) - microbenchmarking
+- `cxxopts` (v3.2.1) - CLI option parsing (standalone only)
 
 ## Project Structure
 
@@ -151,13 +144,12 @@ ellalgo-cpp/
 ├── standalone/           # Example executable
 ├── bench/                # Benchmarks
 ├── documentation/        # Doxygen config
-├── cmake/                # CMake utilities
-└── .clang-format        # Code formatting rules
+├── .clang-format        # Code formatting rules
 ```
 
 ## Important Notes
 
 1. **No in-source builds**: Always build in separate `build/` directory
 2. **Header-only warning**: The project uses mixed header/implementation pattern
-3. **CPM.cmake**: Dependencies downloaded at configure time; set `CPM_SOURCE_CACHE` for offline builds
+3. **Dependencies**: Downloaded via FetchContent at configure time (spdlog, nanobench, cxxopts) or file download (doctest)
 4. **Branch prediction**: Use `ELL_LIKELY` / `ELL_UNLIKELY` macros for performance-critical branches
