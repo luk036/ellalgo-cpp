@@ -1,13 +1,7 @@
 find_package(fmt CONFIG QUIET)
 if(fmt_FOUND)
   message(STATUS "Found system fmt: ${fmt_DIR}")
-  # Create a real target so CPM's if(TARGET fmt) check prevents re-adding.
-  # Without this, spdlog's bundled fmt (when SPDLOG_FMT_EXTERNAL is OFF) tries
-  # to create fmt::fmt ALIAS which conflicts with the system INSTALLED target.
-  if(NOT TARGET fmt)
-    add_library(fmt INTERFACE)
-    target_link_libraries(fmt INTERFACE fmt::fmt)
-  endif()
+  set(CPM_fmt_ADDED YES)
 else()
   CPMAddPackage(
     NAME fmt
