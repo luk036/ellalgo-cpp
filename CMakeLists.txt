@@ -58,8 +58,10 @@ FetchContent_MakeAvailable(spdlog)
 
 # Only the optional logger uses spdlog. The library is built against its headers but does not link
 # it, keeping the installed package's exported link interface free of spdlog; executables that use
-# the logger link spdlog explicitly.
+# the logger link spdlog explicitly. The compile definitions (SPDLOG_COMPILED_LIB) are propagated so
+# the library's logger shares the same compiled spdlog registry as the executables.
 get_target_property(SPDLOG_INCLUDE_DIRS spdlog INTERFACE_INCLUDE_DIRECTORIES)
+get_target_property(SPDLOG_COMPILE_DEFS spdlog INTERFACE_COMPILE_DEFINITIONS)
 
 # ---------------------------------------------------------------------------
 # Library target
@@ -73,6 +75,7 @@ target_include_directories(
                  $<INSTALL_INTERFACE:include>
 )
 target_include_directories(EllAlgo PRIVATE ${SPDLOG_INCLUDE_DIRS})
+target_compile_definitions(EllAlgo PRIVATE ${SPDLOG_COMPILE_DEFS})
 target_enable_warnings(EllAlgo)
 
 # ---------------------------------------------------------------------------
@@ -234,10 +237,13 @@ endif()
 # ---------------------------------------------------------------------------
 
 if(ELLALGO_ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
-  target_compile_options(EllAlgo PRIVATE -O0 -g -fprofile-arcs -ftest-coverage)
-  target_link_options(EllAlgo PRIVATE -fprofile-arcs -ftest-coverage)
-  target_compile_options(EllAlgoTests PRIVATE -O0 -g -fprofile-arcs -ftest-coverage)
-  target_link_options(EllAlgoTests PRIVATE -fprofile-arcs -ftest-coverage)
+  # Every target that links the instrumented library also needs the coverage runtime at link time.
+  foreach(COVERAGE_TARGET EllAlgo EllAlgoTests EllAlgoStandalone)
+    target_compile_options(${COVERAGE_TARGET} PRIVATE -O0 -g -fprofile-arcs -ftest-coverage)
+  endforeach()
+  foreach(COVERAGE_EXEC EllAlgoTests EllAlgoStandalone)
+    target_link_options(${COVERAGE_EXEC} PRIVATE -fprofile-arcs -ftest-coverage)
+  endforeach()
 
   find_program(GCOVR_PATH gcovr)
   if(GCOVR_PATH)
