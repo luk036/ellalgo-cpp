@@ -9,57 +9,56 @@ It supports parallel cuts, discrete optimization, and traditional/stable version
 
 ## Build Commands
 
-### Quick Build (Test)
+### Quick Build
 ```bash
-cmake -S test -B build/test
-cmake --build build/test
+cmake -B build
+cmake --build build
 ```
 
 ### Run Tests
 ```bash
-# Via CMake test target (recommended)
-CTEST_OUTPUT_ON_FAILURE=1 cmake --build build/test --target test
+# Via ctest (recommended)
+ctest --test-dir build --output-on-failure
 
 # Or run the executable directly
-./build/test/EllAlgoTests
+./build/EllAlgoTests
 ```
 
 ### Run Single Test
 ```bash
 # Using ctest with filter
-ctest -R test_ell -V
+ctest --test-dir build -R test_ell -V
 
 # Or run the executable with specific test
-./build/test/EllAlgoTests -tc="test_ell*"
+./build/EllAlgoTests -tc="test_ell*"
 ```
 
-### Build Everything (All targets)
+### Build Everything
 ```bash
-cmake -S all -B build
+cmake -B build
 cmake --build build
 
 # Run tests and standalone
-./build/test/EllAlgoTests
-./build/standalone/EllAlgo --help
+./build/EllAlgoTests
+./build/EllAlgo --help
 ```
 
 ### Code Formatting
 ```bash
-cmake -S test -B build/test
-cmake --build build/test --target format      # check
-cmake --build build/test --target fix-format # apply
+# Requires clang-format
+clang-format -i include/ source/ test/source/ standalone/source/ bench/*.cpp
 ```
 
 ### Build Documentation
 ```bash
-cmake -S documentation -B build/doc
-cmake --build build/doc --target GenerateDocs
+cmake -B build -DELLALGO_BUILD_DOCS=ON
+cmake --build build --target GenerateDocs
 ```
 
 ### Additional Build Options
-- Code coverage: `-DENABLE_TEST_COVERAGE=1`
-- Sanitizers: `-DUSE_SANITIZER=Address`
-- Static analyzers: `-DUSE_STATIC_ANALYZER=clang-tidy`
+- Code coverage: `-DELLALGO_ENABLE_COVERAGE=1` (adds a `coverage` gcovr target on GCC/Clang)
+- clang-tidy: `-DELLALGO_ENABLE_CLANG_TIDY=ON` then `cmake --build build --target clang-tidy`
+- Benchmarks: `-DELLALGO_BUILD_BENCHMARKS=ON`
 
 ## Code Style Guidelines
 
@@ -120,7 +119,7 @@ if (ELL_UNLIKELY(eta <= 0.0)) {
 - Use `@return` for return value documentation
 
 ### Testing
-- **Framework**: doctest (primary), RapidCheck (property-based)
+- **Framework**: doctest
 - **Test file naming**: `test_*.cpp`
 - **Test cases**: `TEST_CASE("Description")` / `SUBCASE`
 - **Assertions**: `CHECK_EQ`, `CHECK_NE`, `REQUIRE`
@@ -129,11 +128,11 @@ if (ELL_UNLIKELY(eta <= 0.0)) {
 - **GCC/Clang**: `-Wall -Wpedantic -Wextra -Werror`
 - **MSVC**: `/utf-8 /W4 /WX`
 
-### Dependencies (via CPM.cmake)
-- `fmt` (12.1.0) - formatting
-- `doctest` (2.5.2) - testing
-- `rapidcheck` - property-based testing
-- `PackageProject.cmake` - installation
+### Dependencies (via FetchContent or system packages)
+- `doctest` (2.4.11) - testing (system-installed first, header download fallback)
+- `spdlog` (v1.17.0) - logging (bundles fmt)
+- `cxxopts` (v3.2.1) - CLI parsing for the standalone example
+- `nanobench` (v4.3.11) - benchmarking (only with `ELLALGO_BUILD_BENCHMARKS`)
 
 ## Project Structure
 
@@ -146,12 +145,12 @@ ellalgo-cpp/
 │   ├── ell_assert.hpp    # Branch prediction macros
 │   └── oracles/         # Oracle implementations
 ├── source/               # Implementation files (.cpp)
-├── test/                # Test suite
-│   └── source/           # Test source files
-├── standalone/           # Example executable
+├── test/source/          # Test source files
+├── standalone/source/    # Example executable
 ├── bench/                # Benchmarks
-├── documentation/        # Doxygen config
-├── cmake/                # CMake utilities
+├── documentation/        # Doxygen config and pages
+├── test_installed/       # find_package consumer test (CI only)
+├── CMakeLists.txt        # Single build configuration
 └── .clang-format        # Code formatting rules
 ```
 
@@ -159,5 +158,5 @@ ellalgo-cpp/
 
 1. **No in-source builds**: Always build in separate `build/` directory
 2. **Header-only warning**: The project uses mixed header/implementation pattern
-3. **CPM.cmake**: Dependencies downloaded at configure time; set `CPM_SOURCE_CACHE` for offline builds
+3. **FetchContent**: Dependencies downloaded at configure time; set `FETCHCONTENT_SOURCE_DIR_*` or a local git cache for offline builds
 4. **Branch prediction**: Use `ELL_LIKELY` / `ELL_UNLIKELY` macros for performance-critical branches

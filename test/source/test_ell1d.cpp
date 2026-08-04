@@ -1,9 +1,9 @@
 #define DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #include <doctest/doctest.h>
 
-#include <ellalgo/ell1d.hpp>     // for ell1d
-#include <ellalgo/ell_config.hpp> // for CutStatus
-#include <utility>                // for pair
+#include <ellalgo/ell1d.hpp>       // for ell1d
+#include <ellalgo/ell_config.hpp>  // for CutStatus
+#include <utility>                 // for pair
 
 TEST_CASE("ell1d: construction with bounds") {
     auto e = ell1d(0.0, 10.0);

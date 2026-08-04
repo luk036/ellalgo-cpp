@@ -3,7 +3,7 @@ set_languages("c++20")
 add_rules("mode.debug", "mode.release", "mode.coverage")
 add_requires("doctest", { alias = "doctest" })
 add_requires("fmt", { alias = "fmt" })
-add_requires("benchmark", { alias = "benchmark" })
+add_requires("nanobench", { alias = "nanobench" })
 add_requires("spdlog", { alias = "spdlog" })
 add_requires("cxxopts", { alias = "cxxopts", optional = true })
 
@@ -26,7 +26,7 @@ if is_plat("linux") then
         add_cxflags("-march=native", "-mtune=native", { force = true })
     end
 elseif is_plat("windows") then
-    add_cxflags("/EHsc /utf-8 /W4 /WX", { force = true })
+    add_cxflags("/EHsc /utf-8 /W4 /WX /wd4702", { force = true })
     -- Enable AVX2 in release mode for auto-vectorization
     if is_mode("release") then
         add_cxflags("/arch:AVX2", { force = true })
@@ -46,45 +46,34 @@ add_files("test/source/*.cpp")
 add_packages("doctest", "fmt", "spdlog")
 add_tests("default")
 
--- Check if rapidcheck was built by CMake
-local rapidcheck_dir = path.join(os.projectdir(), "build", "_deps", "rapidcheck-src")
-local rapidcheck_lib_dir = path.join(os.projectdir(), "build", "_deps", "rapidcheck-build")
-local rapidcheck_lib = nil
-
-if is_plat("windows") then
-    rapidcheck_lib_dir = path.join(rapidcheck_lib_dir, "Release")
-    rapidcheck_lib = path.join(rapidcheck_lib_dir, "rapidcheck.lib")
-else
-    rapidcheck_lib = path.join(rapidcheck_lib_dir, "librapidcheck.a")
-end
-
-if os.isdir(rapidcheck_dir) and os.isfile(rapidcheck_lib) then
-    add_includedirs(path.join(rapidcheck_dir, "include"))
-    add_linkdirs(rapidcheck_lib_dir)
-    add_links("rapidcheck")
-    add_defines("RAPIDCHECK_H")
-end
-
 target("test_ell")
 set_kind("binary")
 add_deps("EllAlgo")
 add_includedirs("include", { public = true })
 add_files("bench/BM_ell.cpp")
-add_packages("benchmark")
+add_packages("nanobench")
+
+target("test_ell_compare")
+set_kind("binary")
+add_deps("EllAlgo")
+add_includedirs("include", { public = true })
+add_files("bench/BM_ell_compare.cpp")
+add_packages("nanobench")
 
 target("test_lmi")
 set_kind("binary")
 add_deps("EllAlgo")
 add_includedirs("include", { public = true })
 add_files("bench/BM_lmi.cpp")
-add_packages("benchmark")
+add_packages("nanobench")
 
 target("test_lowpass")
 set_kind("binary")
 add_deps("EllAlgo")
 add_includedirs("include", { public = true })
 add_files("bench/BM_lowpass.cpp")
-add_packages("benchmark")
+add_packages("nanobench")
+
 
 target("EllAlgoStandalone")
 set_kind("binary")
