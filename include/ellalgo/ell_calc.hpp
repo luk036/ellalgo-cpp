@@ -31,7 +31,7 @@ class EllCalc {
      *
      * @param[in] ndim
      */
-    explicit EllCalc(const size_t ndim) : _n_f{double(ndim)}, _helper{ndim} {
+    explicit EllCalc(const size_t ndim) : _n_f{static_cast<double>(ndim)}, _helper{ndim} {
         assert(ndim >= 2U);  // do not accept one-dimensional
     }
 
