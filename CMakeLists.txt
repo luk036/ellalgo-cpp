@@ -47,21 +47,28 @@ option(ELLALGO_ENABLE_COVERAGE "Enable coverage reporting" OFF)
 # Dependencies
 # ---------------------------------------------------------------------------
 
-# spdlog (bundles fmt) - used by the library's logger
-FetchContent_Declare(
-  spdlog
-  GIT_REPOSITORY https://github.com/gabime/spdlog.git
-  GIT_TAG        v1.17.0
-)
-set(SPDLOG_INSTALL OFF)
-FetchContent_MakeAvailable(spdlog)
+# spdlog (bundles fmt) - used by the library's logger.
+# Prefer a consumer- or system-provided spdlog (e.g. system install, vcpkg/Conan, or a CPM
+# dependency); only fall back to FetchContent when no spdlog target is available.
+find_package(spdlog CONFIG QUIET)
+if(NOT spdlog_FOUND AND NOT TARGET spdlog::spdlog)
+  FetchContent_Declare(
+    spdlog
+    GIT_REPOSITORY https://github.com/gabime/spdlog.git
+    GIT_TAG        v1.17.0
+  )
+  set(SPDLOG_INSTALL OFF)
+  FetchContent_MakeAvailable(spdlog)
+endif()
 
 # Only the optional logger uses spdlog. The library is built against its headers but does not link
 # it, keeping the installed package's exported link interface free of spdlog; executables that use
 # the logger link spdlog explicitly. The compile definitions (SPDLOG_COMPILED_LIB) are propagated so
 # the library's logger shares the same compiled spdlog registry as the executables.
-get_target_property(SPDLOG_INCLUDE_DIRS spdlog INTERFACE_INCLUDE_DIRECTORIES)
-get_target_property(SPDLOG_COMPILE_DEFS spdlog INTERFACE_COMPILE_DEFINITIONS)
+if(TARGET spdlog::spdlog)
+  get_target_property(SPDLOG_INCLUDE_DIRS spdlog::spdlog INTERFACE_INCLUDE_DIRECTORIES)
+  get_target_property(SPDLOG_COMPILE_DEFS spdlog::spdlog INTERFACE_COMPILE_DEFINITIONS)
+endif()
 
 # ---------------------------------------------------------------------------
 # Library target
@@ -74,7 +81,8 @@ target_include_directories(
   EllAlgo PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
                  $<INSTALL_INTERFACE:include>
 )
-target_include_directories(EllAlgo PRIVATE ${SPDLOG_INCLUDE_DIRS})
+# keep spdlog headers out of the -Werror scope (MSVC C4251 etc. in third-party headers)
+target_include_directories(EllAlgo SYSTEM PRIVATE ${SPDLOG_INCLUDE_DIRS})
 target_compile_definitions(EllAlgo PRIVATE ${SPDLOG_COMPILE_DEFS})
 target_enable_warnings(EllAlgo)
 
@@ -82,18 +90,25 @@ target_enable_warnings(EllAlgo)
 # Standalone executable
 # ---------------------------------------------------------------------------
 
-# cxxopts is a header-only CLI parser used by the standalone example
-set(CXXOPTS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-set(CXXOPTS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(CXXOPTS_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
-FetchContent_Declare(
-  cxxopts
-  GIT_REPOSITORY https://github.com/jarro2783/cxxopts.git
-  GIT_TAG        v3.2.1
-)
-FetchContent_MakeAvailable(cxxopts)
+# cxxopts is a header-only CLI parser used by the standalone example.
+# Prefer a consumer- or system-provided cxxopts (e.g. vcpkg/Conan or a CPM dependency); only fall
+# back to FetchContent when no cxxopts target is available.
+find_package(cxxopts CONFIG QUIET)
+if(NOT cxxopts_FOUND AND NOT TARGET cxxopts::cxxopts)
+  set(CXXOPTS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+  set(CXXOPTS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+  set(CXXOPTS_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
+  FetchContent_Declare(
+    cxxopts
+    GIT_REPOSITORY https://github.com/jarro2783/cxxopts.git
+    GIT_TAG        v3.2.1
+  )
+  FetchContent_MakeAvailable(cxxopts)
+endif()
 # keep third-party headers out of our -Werror scope
-get_target_property(CXXOPTS_INCLUDE_DIRS cxxopts::cxxopts INTERFACE_INCLUDE_DIRECTORIES)
+if(TARGET cxxopts::cxxopts)
+  get_target_property(CXXOPTS_INCLUDE_DIRS cxxopts::cxxopts INTERFACE_INCLUDE_DIRECTORIES)
+endif()
 
 file(GLOB ELLALGO_STANDALONE_SOURCES CONFIGURE_DEPENDS "standalone/source/*.cpp")
 add_executable(EllAlgoStandalone ${ELLALGO_STANDALONE_SOURCES})
@@ -147,6 +162,8 @@ if(ELLALGO_BUILD_TESTS)
   file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS "test/source/*.cpp")
   add_executable(EllAlgoTests ${TEST_SOURCES})
   target_link_libraries(EllAlgoTests PRIVATE EllAlgo doctest spdlog::spdlog)
+  # keep spdlog headers out of the -Werror scope (MSVC C4251 etc. in third-party headers)
+  target_include_directories(EllAlgoTests SYSTEM PRIVATE ${SPDLOG_INCLUDE_DIRS})
   target_enable_warnings(EllAlgoTests)
   add_test(NAME EllAlgoTests COMMAND EllAlgoTests)
 endif()
