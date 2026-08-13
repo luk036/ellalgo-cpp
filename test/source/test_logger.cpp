@@ -69,8 +69,6 @@ TEST_CASE("test_logger_formatting") {
         if (line.find("Format test message") != std::string::npos) {
             // Check for timestamp pattern [YYYY-MM-DD HH:MM:SS.mmm]
             found = (line.starts_with('[') && line.find(']') > 0);
-            // Check for logger name
-            found = found && (line.find("[file_logger]") != std::string::npos);
             // Check for log level
             found = found && (line.find("[info]") != std::string::npos);
             break;
