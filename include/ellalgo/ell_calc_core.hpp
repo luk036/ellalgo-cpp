@@ -39,7 +39,7 @@ class EllCalcCore {
      * @param[in] ndim Number of dimensions for EllCalcCore object.
      */
     explicit EllCalcCore(const size_t ndim) noexcept
-        : _n_f{double(ndim)},
+        : _n_f{static_cast<double>(ndim)},
           _n_plus_1{_n_f + 1.0},
           _half_n{_n_f / 2.0},
           _inv_n{1.0 / _n_f},

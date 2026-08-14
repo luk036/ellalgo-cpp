@@ -213,7 +213,7 @@ static void run_verification() {
 
     std::cout << "\n  Result: " << passed << "/" << N_VERIF << " passed.\n";
     std::cout << "============================================\n\n";
-    if (passed != size_t(N_VERIF)) {
+    if (passed != static_cast<std::size_t>(N_VERIF)) {
         std::cerr << "ERROR: Verification failed - aborting benchmarks.\n";
         std::exit(1);
     }
