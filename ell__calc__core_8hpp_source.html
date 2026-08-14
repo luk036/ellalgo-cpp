@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.9</span>
+   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.10</span>
    </div>
   </td>
  </tr>
@@ -108,7 +108,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keyword">public</span>:</div>
 <div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classEllCalcCore.html#a411eaa78b1bfc07c7b6b74109f231c47">   41</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classEllCalcCore.html#a411eaa78b1bfc07c7b6b74109f231c47">EllCalcCore</a>(<span class="keyword">const</span> <span class="keywordtype">size_t</span> ndim) <a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">noexcept</a></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        : _n_f{<a class="code hl_function" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">double</a>(ndim)},</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        : _n_f{<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(ndim)},</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>          _n_plus_1{_n_f + 1.0},</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>          _half_n{_n_f / 2.0},</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>          _inv_n{1.0 / _n_f},</div>
