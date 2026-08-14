@@ -47,15 +47,15 @@ option(ELLALGO_ENABLE_COVERAGE "Enable coverage reporting" OFF)
 # Dependencies
 # ---------------------------------------------------------------------------
 
-# spdlog (bundles fmt) - used by the library's logger.
-# Prefer a consumer- or system-provided spdlog (e.g. system install, vcpkg/Conan, or a CPM
-# dependency); only fall back to FetchContent when no spdlog target is available.
+# spdlog (bundles fmt) - used by the library's logger. Prefer a consumer- or system-provided spdlog
+# (e.g. system install, vcpkg/Conan, or a CPM dependency); only fall back to FetchContent when no
+# spdlog target is available.
 find_package(spdlog CONFIG QUIET)
 if(NOT spdlog_FOUND AND NOT TARGET spdlog::spdlog)
   FetchContent_Declare(
     spdlog
     GIT_REPOSITORY https://github.com/gabime/spdlog.git
-    GIT_TAG        v1.17.0
+    GIT_TAG v1.17.0
   )
   set(SPDLOG_INSTALL OFF)
   FetchContent_MakeAvailable(spdlog)
@@ -90,18 +90,27 @@ target_enable_warnings(EllAlgo)
 # Standalone executable
 # ---------------------------------------------------------------------------
 
-# cxxopts is a header-only CLI parser used by the standalone example.
-# Prefer a consumer- or system-provided cxxopts (e.g. vcpkg/Conan or a CPM dependency); only fall
-# back to FetchContent when no cxxopts target is available.
+# cxxopts is a header-only CLI parser used by the standalone example. Prefer a consumer- or
+# system-provided cxxopts (e.g. vcpkg/Conan or a CPM dependency); only fall back to FetchContent
+# when no cxxopts target is available.
 find_package(cxxopts CONFIG QUIET)
 if(NOT cxxopts_FOUND AND NOT TARGET cxxopts::cxxopts)
-  set(CXXOPTS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-  set(CXXOPTS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-  set(CXXOPTS_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
+  set(CXXOPTS_BUILD_EXAMPLES
+      OFF
+      CACHE BOOL "" FORCE
+  )
+  set(CXXOPTS_BUILD_TESTS
+      OFF
+      CACHE BOOL "" FORCE
+  )
+  set(CXXOPTS_ENABLE_INSTALL
+      OFF
+      CACHE BOOL "" FORCE
+  )
   FetchContent_Declare(
     cxxopts
     GIT_REPOSITORY https://github.com/jarro2783/cxxopts.git
-    GIT_TAG        v3.2.1
+    GIT_TAG v3.2.1
   )
   FetchContent_MakeAvailable(cxxopts)
 endif()
@@ -141,10 +150,9 @@ if(ELLALGO_BUILD_TESTS)
 
     if(NOT EXISTS "${DOCTEST_HEADER}")
       file(MAKE_DIRECTORY "${DOCTEST_DIR}/doctest")
-      file(
-        DOWNLOAD
-        "https://raw.githubusercontent.com/doctest/doctest/v${DOCTEST_VERSION}/doctest/doctest.h"
-        "${DOCTEST_HEADER}" STATUS download_status
+      file(DOWNLOAD
+           "https://raw.githubusercontent.com/doctest/doctest/v${DOCTEST_VERSION}/doctest/doctest.h"
+           "${DOCTEST_HEADER}" STATUS download_status
       )
       list(GET download_status 0 status_code)
       if(NOT status_code EQUAL 0)
@@ -158,6 +166,14 @@ if(ELLALGO_BUILD_TESTS)
       target_compile_options(doctest INTERFACE /wd5285)
     endif()
   endif()
+
+  # Code formatting targets (format / fix-format) via Format.cmake
+  FetchContent_Declare(
+    format
+    GIT_REPOSITORY https://github.com/TheLartians/Format.cmake
+    GIT_TAG v1.7.3
+  )
+  FetchContent_MakeAvailable(format)
 
   file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS "test/source/*.cpp")
   add_executable(EllAlgoTests ${TEST_SOURCES})
@@ -176,7 +192,7 @@ if(ELLALGO_BUILD_BENCHMARKS)
   FetchContent_Declare(
     nanobench
     GIT_REPOSITORY https://github.com/martinus/nanobench.git
-    GIT_TAG        v4.3.11
+    GIT_TAG v4.3.11
   )
   FetchContent_MakeAvailable(nanobench)
   get_target_property(NANOBENCH_INCLUDE_DIRS nanobench INTERFACE_INCLUDE_DIRECTORIES)
@@ -207,10 +223,10 @@ if(ELLALGO_ENABLE_CLANG_TIDY)
   if(CLANG_TIDY)
     add_custom_target(
       clang-tidy
-      COMMAND ${CLANG_TIDY} --extra-arg=-std=c++20
-              --extra-arg=-I${CMAKE_CURRENT_SOURCE_DIR}/include
-              ${CMAKE_CURRENT_SOURCE_DIR}/include/ellalgo/*.hpp
-              ${CMAKE_CURRENT_SOURCE_DIR}/include/ellalgo/oracles/*.hpp
+      COMMAND
+        ${CLANG_TIDY} --extra-arg=-std=c++20 --extra-arg=-I${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ellalgo/*.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ellalgo/oracles/*.hpp
       COMMENT "Running clang-tidy static analysis"
     )
   else()
@@ -275,14 +291,16 @@ if(ELLALGO_ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleCla
       coverage
       COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
       COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/coverage
-      COMMAND ${GCOVR_PATH} --root ${PROJECT_SOURCE_DIR} --html-details
-              ${CMAKE_BINARY_DIR}/coverage/index.html --exclude test/ --exclude build/
-              ${extra_gcovr_args}
+      COMMAND
+        ${GCOVR_PATH} --root ${PROJECT_SOURCE_DIR} --html-details
+        ${CMAKE_BINARY_DIR}/coverage/index.html --exclude test/ --exclude build/ ${extra_gcovr_args}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
       COMMENT "Generating coverage report in ${CMAKE_BINARY_DIR}/coverage/index.html"
     )
   else()
-    message(WARNING "gcovr not found - coverage target unavailable. Install with: pip install gcovr")
+    message(
+      WARNING "gcovr not found - coverage target unavailable. Install with: pip install gcovr"
+    )
   endif()
 endif()
 
@@ -296,9 +314,8 @@ write_basic_package_version_file(
   COMPATIBILITY SameMajorVersion
 )
 
-file(
-  WRITE "${CMAKE_CURRENT_BINARY_DIR}/EllAlgoConfig.cmake"
-  "include(\"\${CMAKE_CURRENT_LIST_DIR}/EllAlgoTargets.cmake\")\n"
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/EllAlgoConfig.cmake"
+     "include(\"\${CMAKE_CURRENT_LIST_DIR}/EllAlgoTargets.cmake\")\n"
 )
 
 install(
@@ -316,10 +333,9 @@ install(
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/EllAlgo
 )
 
-install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/EllAlgoConfig.cmake"
-        "${CMAKE_CURRENT_BINARY_DIR}/EllAlgoConfigVersion.cmake"
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/EllAlgo
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/EllAlgoConfig.cmake"
+              "${CMAKE_CURRENT_BINARY_DIR}/EllAlgoConfigVersion.cmake"
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/EllAlgo
 )
 
 install(
