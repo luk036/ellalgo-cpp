@@ -49,8 +49,12 @@ option(ELLALGO_ENABLE_COVERAGE "Enable coverage reporting" OFF)
 
 # spdlog (bundles fmt) - used by the library's logger. Prefer a consumer- or system-provided spdlog
 # (e.g. system install, vcpkg/Conan, or a CPM dependency); only fall back to FetchContent when no
-# spdlog target is available.
-find_package(spdlog CONFIG QUIET)
+# spdlog target is available. On MSVC, skip prebuilt system packages (e.g. conda): they are
+# Release-only shared libraries whose std::string ABI (_ITERATOR_DEBUG_LEVEL=0) mismatches Debug
+# builds (_ITERATOR_DEBUG_LEVEL=2), corrupting std::strings; always build from source instead.
+if(NOT MSVC)
+  find_package(spdlog CONFIG QUIET)
+endif()
 if(NOT spdlog_FOUND AND NOT TARGET spdlog::spdlog)
   FetchContent_Declare(
     spdlog
