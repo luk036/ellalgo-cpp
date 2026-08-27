@@ -64,7 +64,8 @@ template <typename Arr> class Ell {
      * @param[in] val A vector of double values.
      * @param[in] x An array of type Arr. This parameter is moved.
      */
-    Ell(const Vec& val, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(val, _n) {}
+    Ell(const Vec& val, Arr x)
+        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(val, _n) {}
 
     /**
      * @brief Construct a new Ell object from an alpha value and an array.
@@ -72,7 +73,8 @@ template <typename Arr> class Ell {
      * @param[in] alpha A double value representing the scaling factor.
      * @param[in] x An array of type Arr. This parameter is moved.
      */
-    Ell(const double alpha, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(alpha, _n) {}
+    Ell(const double alpha, Arr x)
+        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(alpha, _n) {}
 
     /**
      * @brief Construct a new Ell object (move constructor)
