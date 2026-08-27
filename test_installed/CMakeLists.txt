@@ -11,5 +11,10 @@ find_package(EllAlgo REQUIRED)
 add_executable(ellalgo_installed_test main.cpp)
 target_link_libraries(ellalgo_installed_test PRIVATE EllAlgo::EllAlgo)
 
+# Verify the dependency-free cutting-plane framework component links standalone.
+add_executable(ellalgo_core_installed_test main_core.cpp)
+target_link_libraries(ellalgo_core_installed_test PRIVATE EllAlgo::EllAlgoCore)
+
 enable_testing()
 add_test(NAME ellalgo_installed_test COMMAND ellalgo_installed_test)
+add_test(NAME ellalgo_core_installed_test COMMAND ellalgo_core_installed_test)

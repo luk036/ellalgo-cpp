@@ -70,9 +70,9 @@ cmake --build build --target GenerateDocs
 - **Namespace indentation**: All
 
 ### C++ Standards
-- **Library**: C++14
-- **Tests**: C++17
-- **Always use**: `CXX_STANDARD 20` (or 17 for tests)
+- **Library**: C++20
+- **Tests**: C++20
+- **Always use**: `CXX_STANDARD 20`
 
 ### Naming Conventions
 - **Classes**: PascalCase (`Ell`, `EllCalc`, `CutStatus`)

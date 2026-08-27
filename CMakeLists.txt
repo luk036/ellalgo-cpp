@@ -91,6 +91,24 @@ target_compile_definitions(EllAlgo PRIVATE ${SPDLOG_COMPILE_DEFS})
 target_enable_warnings(EllAlgo)
 
 # ---------------------------------------------------------------------------
+# Core component target (cutting-plane framework, header-only)
+# ---------------------------------------------------------------------------
+# EllAlgo::EllAlgoCore is the dependency-free cutting-plane framework: concepts
+# (ell_config.hpp) + drivers (cutting_plane.hpp) + bsearch utility
+# (half_nonnegative.hpp). Header-only, std-lib only — no spdlog/fmt, no
+# compiled sources. Domain oracles (Strategy instances) and search spaces
+# are supplied by consumers; this is the Strategy-pattern Context.
+add_library(EllAlgoCore INTERFACE)
+add_library(EllAlgo::EllAlgoCore ALIAS EllAlgoCore)
+
+target_include_directories(
+  EllAlgoCore INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+                        $<INSTALL_INTERFACE:include>
+)
+# concepts (OracleFeas, SearchSpace, ...) require C++20
+target_compile_features(EllAlgoCore INTERFACE cxx_std_20)
+
+# ---------------------------------------------------------------------------
 # Standalone executable
 # ---------------------------------------------------------------------------
 
@@ -323,7 +341,7 @@ file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/EllAlgoConfig.cmake"
 )
 
 install(
-  TARGETS EllAlgo
+  TARGETS EllAlgo EllAlgoCore
   EXPORT EllAlgoTargets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
