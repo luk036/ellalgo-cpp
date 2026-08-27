@@ -93,11 +93,10 @@ target_enable_warnings(EllAlgo)
 # ---------------------------------------------------------------------------
 # Core component target (cutting-plane framework, header-only)
 # ---------------------------------------------------------------------------
-# EllAlgo::EllAlgoCore is the dependency-free cutting-plane framework: concepts
-# (ell_config.hpp) + drivers (cutting_plane.hpp) + bsearch utility
-# (half_nonnegative.hpp). Header-only, std-lib only — no spdlog/fmt, no
-# compiled sources. Domain oracles (Strategy instances) and search spaces
-# are supplied by consumers; this is the Strategy-pattern Context.
+# EllAlgo::EllAlgoCore is the dependency-free cutting-plane framework: concepts (ell_config.hpp) +
+# drivers (cutting_plane.hpp) + bsearch utility (half_nonnegative.hpp). Header-only, std-lib only —
+# no spdlog/fmt, no compiled sources. Domain oracles (Strategy instances) and search spaces are
+# supplied by consumers; this is the Strategy-pattern Context.
 add_library(EllAlgoCore INTERFACE)
 add_library(EllAlgo::EllAlgoCore ALIAS EllAlgoCore)
 

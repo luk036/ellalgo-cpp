@@ -8,9 +8,8 @@
  * netoptim/corr-solver/multiplierless do.
  */
 
-#include <ellalgo/cutting_plane.hpp>
-
 #include <cmath>
+#include <ellalgo/cutting_plane.hpp>
 #include <iostream>
 #include <optional>
 #include <utility>
@@ -20,7 +19,8 @@ class IntervalSpace {
   public:
     using ArrayType = double;
 
-    explicit IntervalSpace(const double l, const double u) noexcept : _r{(u - l) / 2}, _xc{l + _r} {}
+    explicit IntervalSpace(const double l, const double u) noexcept
+        : _r{(u - l) / 2}, _xc{l + _r} {}
 
     auto xc() const noexcept -> double { return _xc; }
     auto tsq() const noexcept -> double { return _tsq; }
