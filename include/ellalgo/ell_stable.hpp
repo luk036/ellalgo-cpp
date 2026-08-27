@@ -43,7 +43,8 @@ template <typename Arr> class EllStable {
      * @param[in] val A vector of values.
      * @param[in] x An array. This parameter is moved.
      */
-    EllStable(const Vec& val, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(val, _n) {}
+    EllStable(const Vec& val, Arr x)
+        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(val, _n) {}
 
     /**
      * @brief Construct a new EllStable object
@@ -51,7 +52,8 @@ template <typename Arr> class EllStable {
      * @param[in] alpha A double value for the scaling factor.
      * @param[in] x An array. This parameter is moved.
      */
-    EllStable(double alpha, Arr x) : _n{x.size()}, _xc{std::move(x)}, _mgr(alpha, _n) {}
+    EllStable(double alpha, Arr x)
+        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(alpha, _n) {}
 
     /**
      * @brief Construct a new EllStable object
