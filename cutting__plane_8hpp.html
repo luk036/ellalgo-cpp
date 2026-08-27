@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.10</span>
+   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.11</span>
    </div>
   </td>
  </tr>
@@ -284,6 +284,7 @@ requires <a class="el" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14f
 </p>
 <p>It takes a cutting-plane oracle <code>omega</code>, a search space <code>space</code>, and an options object as input. A function f(x) is <em>convex</em> if there always exist a g(x) such that f(z) &gt;= f(x) + g(x)' * (z - x), forall z, x in dom f. Note that dom f does not need to be a convex set in our definition. The affine function g' (x - xc) + beta is called a cutting-plane, or a <code>cut</code> for short.</p>
 <p>A <em>separation oracle</em> asserts that an evalution point xc is feasible, or provide a cut that separates the feasible region and xc.</p>
+<dl class="section note"><dt>Note</dt><dd>Strategy pattern: cutting_plane_feas is the algorithm Context; the separation oracle O is the Strategy, injected as a template parameter and constrained by the OracleFeas concept. Swap oracles without touching this driver. The Context drives the Strategy via omega.assess_feas(space.xc()) and the Space side via space.update_bias_cut(*cut).</dd></dl>
 <div class="dotgraph">
 <iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_2.svg" width="518" height="610"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <dl class="tparams"><dt>Template Parameters</dt><dd>

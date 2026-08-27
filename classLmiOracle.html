@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.10</span>
+   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.11</span>
    </div>
   </td>
  </tr>
@@ -104,7 +104,8 @@ Public Member Functions</h2></td></tr>
 class LmiOracle&lt; Arr036, Mat &gt;</div><p>Oracle for Linear <a class="el" href="classMatrix.html" title="Square matrix with flat std::vector&lt;double&gt; storage.">Matrix</a> Inequality. </p>
 <p>This oracle solves the following feasibility problem: </p><pre class="fragment">find  x
 s.t.  (B - F * x) &gt;= 0
-</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</pre> <dl class="section note"><dt>Note</dt><dd>Concrete Strategy in the Strategy pattern: implements the OracleFeas contract (assess_feas) consumed by cutting_plane_feas. This is one of several interchangeable oracles (<a class="el" href="classLmi0Oracle.html" title="Oracle for Linear Matrix Inequality (LMI) feasibility problems.">Lmi0Oracle</a>, <a class="el" href="classProfitOracle.html" title="Oracle for a profit maximization problem.">ProfitOracle</a>, <a class="el" href="classLowpassOracle.html" title="Oracle for FIR lowpass filter design.">LowpassOracle</a>, NetworkOracle). </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aed3cd41c07fdb6b6e4d3649d5b571b8c" name="aed3cd41c07fdb6b6e4d3649d5b571b8c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aed3cd41c07fdb6b6e4d3649d5b571b8c">&#9670;&#160;</a></span>LmiOracle()</h2>
 

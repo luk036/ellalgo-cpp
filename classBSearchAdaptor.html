@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.10</span>
+   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.11</span>
    </div>
   </td>
  </tr>
@@ -107,6 +107,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">typename</a> <a class="el" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">Oracle</a>, <a class="el" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">typename</a> <a class="el" href="cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64">Space</a>&gt;<br />
 class BSearchAdaptor&lt; Oracle, Space &gt;</div><p>Binary search adaptor wrapping a cutting-plane feasibility oracle. </p>
 <p>Uses <a class="el" href="cutting__plane_8hpp.html#a11e83624973ecad3cc5e1f1b645f37a3" title="Find a point in a convex set (defined through a cutting-plane oracle).">cutting_plane_feas()</a> as a sub-routine to test feasibility at each candidate value, enabling binary search on a parameter.</p>
+<dl class="section note"><dt>Note</dt><dd>Adapter pattern: adapts a feasibility oracle (assess_feas) to the binary-search protocol (assess_bs), enabling parameter sweep via feasibility queries. Note the explicit 'Adaptor' name documenting the pattern.</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Oracle</td><td>Feasibility oracle type </td></tr>
