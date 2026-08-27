@@ -132,6 +132,12 @@ using SingleCut = double;
 #if __cpp_concepts >= 201907L
 #    include <concepts>
 
+/**
+ * @note These concepts formalize the Strategy pattern contracts at compile
+ *       time: any type satisfying OracleFeas (assess_feas) can be injected
+ *       into the cutting-plane Context as a Strategy. SearchSpace is the
+ *       Context-side contract (xc, tsq, update_bias_cut, update_central_cut).
+ */
 template <typename O, typename A>
 concept OracleFeas = requires(O& o, const A& x) {
     { o.assess_feas(x) };
