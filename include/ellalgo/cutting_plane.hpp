@@ -62,6 +62,13 @@ template <typename T> inline auto invalid_value() -> T
  * A *separation oracle* asserts that an evalution point xc is feasible,
  * or provide a cut that separates the feasible region and xc.
  *
+ * @note Strategy pattern: cutting_plane_feas is the algorithm Context; the
+ *       separation oracle O is the Strategy, injected as a template parameter
+ *       and constrained by the OracleFeas concept. Swap oracles without
+ *       touching this driver. The Context drives the Strategy via
+ *       omega.assess_feas(space.xc()) and the Space side via
+ *       space.update_bias_cut(*cut).
+ *
  * @dot
  *   digraph cutting_plane_feas {
  *     bgcolor="transparent";
@@ -253,6 +260,11 @@ inline auto cutting_plane_optim_q(O& omega, S& space_q, N& gamma,
  *
  * Uses cutting_plane_feas() as a sub-routine to test feasibility
  * at each candidate value, enabling binary search on a parameter.
+ *
+ * @note Adapter pattern: adapts a feasibility oracle (assess_feas) to the
+ *       binary-search protocol (assess_bs), enabling parameter sweep via
+ *       feasibility queries. Note the explicit 'Adaptor' name documenting
+ *       the pattern.
  *
  * @tparam Oracle Feasibility oracle type
  * @tparam Space  Search space type

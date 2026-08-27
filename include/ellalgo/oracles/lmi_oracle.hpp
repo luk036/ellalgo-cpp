@@ -18,6 +18,11 @@
  *
  *        find  x
  *        s.t.  (B - F * x) >= 0
+ *
+ * @note Concrete Strategy in the Strategy pattern: implements the OracleFeas
+ *       contract (assess_feas) consumed by cutting_plane_feas. This is one of
+ *       several interchangeable oracles (Lmi0Oracle, ProfitOracle,
+ *       LowpassOracle, NetworkOracle).
  */
 template <typename Arr036, typename Mat = Arr036> class LmiOracle {
     using Cut = std::pair<Arr036, double>;

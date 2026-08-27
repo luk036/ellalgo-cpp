@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(
   EllAlgo
-  VERSION 1.6.10
+  VERSION 1.6.11
   LANGUAGES CXX
 )
 
@@ -49,8 +49,12 @@ option(ELLALGO_ENABLE_COVERAGE "Enable coverage reporting" OFF)
 
 # spdlog (bundles fmt) - used by the library's logger. Prefer a consumer- or system-provided spdlog
 # (e.g. system install, vcpkg/Conan, or a CPM dependency); only fall back to FetchContent when no
-# spdlog target is available.
-find_package(spdlog CONFIG QUIET)
+# spdlog target is available. On MSVC, skip prebuilt system packages (e.g. conda): they are
+# Release-only shared libraries whose std::string ABI (_ITERATOR_DEBUG_LEVEL=0) mismatches Debug
+# builds (_ITERATOR_DEBUG_LEVEL=2), corrupting std::strings; always build from source instead.
+if(NOT MSVC)
+  find_package(spdlog CONFIG QUIET)
+endif()
 if(NOT spdlog_FOUND AND NOT TARGET spdlog::spdlog)
   FetchContent_Declare(
     spdlog
@@ -85,6 +89,24 @@ target_include_directories(
 target_include_directories(EllAlgo SYSTEM PRIVATE ${SPDLOG_INCLUDE_DIRS})
 target_compile_definitions(EllAlgo PRIVATE ${SPDLOG_COMPILE_DEFS})
 target_enable_warnings(EllAlgo)
+
+# ---------------------------------------------------------------------------
+# Core component target (cutting-plane framework, header-only)
+# ---------------------------------------------------------------------------
+# EllAlgo::EllAlgoCore is the dependency-free cutting-plane framework: concepts
+# (ell_config.hpp) + drivers (cutting_plane.hpp) + bsearch utility
+# (half_nonnegative.hpp). Header-only, std-lib only — no spdlog/fmt, no
+# compiled sources. Domain oracles (Strategy instances) and search spaces
+# are supplied by consumers; this is the Strategy-pattern Context.
+add_library(EllAlgoCore INTERFACE)
+add_library(EllAlgo::EllAlgoCore ALIAS EllAlgoCore)
+
+target_include_directories(
+  EllAlgoCore INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+                        $<INSTALL_INTERFACE:include>
+)
+# concepts (OracleFeas, SearchSpace, ...) require C++20
+target_compile_features(EllAlgoCore INTERFACE cxx_std_20)
 
 # ---------------------------------------------------------------------------
 # Standalone executable
@@ -319,7 +341,7 @@ file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/EllAlgoConfig.cmake"
 )
 
 install(
-  TARGETS EllAlgo
+  TARGETS EllAlgo EllAlgoCore
   EXPORT EllAlgoTargets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}

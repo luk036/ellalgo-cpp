@@ -33,8 +33,17 @@ elseif is_plat("windows") then
     end
 end
 
+-- dependency-free cutting-plane framework (Strategy-pattern Context)
+target("EllAlgoCore")
+set_kind("headeronly")
+add_headerfiles("include/(ellalgo/ell_config.hpp)",
+                "include/(ellalgo/cutting_plane.hpp)",
+                "include/(ellalgo/half_nonnegative.hpp)")
+add_includedirs("include", { public = true })
+
 target("EllAlgo")
 set_kind("static")
+add_deps("EllAlgoCore")
 add_includedirs("include", { public = true })
 add_files("source/*.cpp")
 add_packages("fmt", "spdlog")
