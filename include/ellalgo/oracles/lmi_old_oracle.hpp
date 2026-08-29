@@ -6,10 +6,10 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include <memory>  // for unique_ptr
+#include <utility>  // for move
 #include <vector>
 
-#include "ldlt_mgr.hpp"
+#include "lmi_oracle_base.hpp"
 
 /**
  * @brief Oracle for Linear Matrix Inequality.
@@ -18,14 +18,21 @@
  *
  *        find  x
  *        s.t.  (B - F * x) >= 0
+ *
+ * @note Concrete oracle in the Template Method pattern: builds the matrix
+ *       `A = B - Σ F_k x_k` eagerly and feeds a lambda accessor with a
+ *       positive `sym_quad` sign to the shared LmiOracleBase::assess_impl
+ *       skeleton. Behaviorally identical to LmiOracle, which uses lazy
+ *       evaluation instead of a pre-built matrix.
  */
-template <typename Arr036, typename Mat = Arr036> class LmiOldOracle {
+template <typename Arr036, typename Mat = Arr036>
+class LmiOldOracle : public LmiOracleBase<Arr036, Mat> {
+    using Base = LmiOracleBase<Arr036, Mat>;
     using Cut = std::pair<Arr036, double>;
 
     LDLTMgr _mgr;
     const std::vector<Mat>& m_F;
     Mat m_F0;
-    std::unique_ptr<Cut> cut = std::make_unique<Cut>();
 
   public:
     /**
@@ -55,18 +62,8 @@ template <typename Arr036, typename Mat = Arr036> class LmiOldOracle {
             }
         }
 
-        if (this->_mgr.factorize(A)) {
-            return nullptr;
-        }
-
-        auto ep = this->_mgr.witness();  // call before sym_quad() !!!
-        Arr036 g{x};
-        for (auto i = 0U; i != n; ++i) {
-            g[i] = this->_mgr.sym_quad(this->m_F[i]);
-        }
-        this->cut->first = std::move(g);
-        this->cut->second = std::move(ep);
-        return this->cut.get();
+        auto getA = [&A](size_t i, size_t j) { return A(i, j); };
+        return this->assess_impl(this->_mgr, this->m_F, +1, x, getA);
     }
 
     /**

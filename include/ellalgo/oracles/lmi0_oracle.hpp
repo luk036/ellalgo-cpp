@@ -6,10 +6,10 @@
 // -*- coding: utf-8 -*-
 #pragma once
 
-#include <memory>  // for unique_ptr
+#include <utility>  // for move
 #include <vector>
 
-#include "ldlt_mgr.hpp"
+#include "lmi_oracle_base.hpp"
 
 /**
  * @brief Oracle for Linear Matrix Inequality (LMI) feasibility problems
@@ -22,18 +22,22 @@
  * where Fᵢ are symmetric matrices and ⪯ denotes negative semidefinite.
  * This is a fundamental problem in semidefinite programming and control theory.
  *
+ * @note Concrete oracle in the Template Method pattern: supplies a lazy
+ *       `getA` accessor (Σ F_k x_k) with a negative `sym_quad` sign to the
+ *       shared LmiOracleBase::assess_impl skeleton.
+ *
  * @tparam Arr036 Array type for the decision variables (size 3-6)
  * @tparam Mat Matrix type (defaults to Arr036)
  */
-template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle {
+template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle : public LmiOracleBase<Arr036, Mat> {
+    using Base = LmiOracleBase<Arr036, Mat>;
     using Cut = std::pair<Arr036, double>;
 
   public:
     LDLTMgr _mq;  ///< LDLT manager for matrix factorization
 
   private:
-    const std::vector<Mat>& m_F;                         ///< Vector of matrices F₀, F₁, ..., Fₙ
-    std::unique_ptr<Cut> cut = std::make_unique<Cut>();  ///< Storage for cut information
+    const std::vector<Mat>& m_F;  ///< Vector of matrices F₀, F₁, ..., Fₙ
 
   public:
     /**
@@ -65,18 +69,7 @@ template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle {
             return a;
         };
 
-        if (this->_mq.factor(getA)) {
-            return nullptr;
-        }
-
-        auto ep = this->_mq.witness();  // call before sym_quad() !!!
-        Arr036 g{x};
-        for (auto i = 0U; i != n; ++i) {
-            g[i] = -this->_mq.sym_quad(this->m_F[i]);
-        }
-        cut->first = std::move(g);
-        cut->second = std::move(ep);
-        return cut.get();
+        return this->assess_impl(this->_mq, this->m_F, -1, x, getA);
     }
 
     /**
