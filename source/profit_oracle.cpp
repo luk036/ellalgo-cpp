@@ -7,10 +7,59 @@
  * optimization variants.
  */
 
+#include <cmath>  // for log, exp, round
+
 #include <ellalgo/oracles/profit_oracle.hpp>
 
 using Vec = std::valarray<double>;
 using Cut = std::pair<Vec, double>;
+
+/**
+ * @brief Capacity constraint: y0 <= log k
+ *
+ * Returns a cut when the constraint is violated, nullptr otherwise.
+ *
+ * @param[in] y input quantity (in log scale)
+ * @param[in] x input quantity (natural scale, unused)
+ * @param[in] gamma the best-so-far optimal value (unused)
+ * @return Cut* pointer to the cut, or nullptr if satisfied
+ */
+auto ProfitOracle::_constraint_capacity(const Vec& y, const Vec&, const double) -> Cut* {
+    static auto cut = Cut{Vec{1.0, 0.0}, 0.0};
+    const auto fj = y[0] - this->_log_k;
+    if (fj <= 0.0) {
+        return nullptr;
+    }
+    cut.second = fj;
+    return &cut;
+}
+
+/**
+ * @brief Cobb-Douglas profit constraint
+ *
+ * Computes the production value and cost; returns a cut (the profit
+ * gradient) when the profit falls below the target gamma, nullptr otherwise.
+ * Also caches `_log_Cobb` and `_vx` for use by assess_optim.
+ *
+ * @param[in] y input quantity (in log scale)
+ * @param[in] x input quantity (natural scale)
+ * @param[in] gamma the best-so-far optimal value
+ * @return Cut* pointer to the cut, or nullptr if satisfied
+ */
+auto ProfitOracle::_constraint_profit(const Vec& y, const Vec& x, const double gamma) -> Cut* {
+    static auto cut = Cut{Vec{-1.0, 1.0}, 0.0};
+    this->_log_Cobb
+        = this->_log_pA + this->_elasticities[0] * y[0] + this->_elasticities[1] * y[1];
+    this->_vx = this->_price_out[0] * x[0] + this->_price_out[1] * x[1];
+    const auto te = gamma + this->_vx;
+    const auto fj = std::log(te) - this->_log_Cobb;
+    if (fj <= 0.0) {
+        return nullptr;
+    }
+    cut.first = (this->_price_out * x) / te - this->_elasticities;
+    cut.second = fj;
+    return &cut;
+}
 
 /**
  * The function assess_feas assesses the feasibility of a given solution based on certain conditions
@@ -28,44 +77,16 @@ using Cut = std::pair<Vec, double>;
  * second element is of type `bool`.
  */
 auto ProfitOracle::assess_feas(const Vec& y, const double& gamma) -> Cut* {
-    static auto cut1 = Cut{Vec{1.0, 0.0}, 0.0};
-    static auto cut2 = Cut{Vec{-1.0, 1.0}, 0.0};
+    using ConstraintFn = auto (ProfitOracle::*)(const Vec&, const Vec&, const double) -> Cut*;
+    static constexpr ConstraintFn constraints[2] = {&ProfitOracle::_constraint_capacity,
+                                                    &ProfitOracle::_constraint_profit};
 
     const Vec x = std::exp(y);
-    auto te = 0.0;
-
     for (int i = 0; i < 2; i++) {
-        this->idx++;
-        if (this->idx == 2) {
-            this->idx = 0;  // round robin
-        }
-        double fj = 0.0;
-        switch (this->idx) {
-            case 0:  // y0 <= log k
-                fj = y[0] - this->_log_k;
-                break;
-            case 1:
-                this->_log_Cobb
-                    = this->_log_pA + this->_elasticities[0] * y[0] + this->_elasticities[1] * y[1];
-                this->_vx = this->_price_out[0] * x[0] + this->_price_out[1] * x[1];
-                te = gamma + this->_vx;
-                fj = std::log(te) - this->_log_Cobb;
-                break;
-            default:
-                exit(0);
-        }
-        if (fj > 0.0) {
-            switch (this->idx) {
-                case 0:
-                    cut1.second = fj;
-                    return &cut1;
-                case 1:
-                    cut2.first = (this->_price_out * x) / te - this->_elasticities;
-                    cut2.second = fj;
-                    return &cut2;
-                default:
-                    exit(0);
-            }
+        const auto k = this->_rr.next();
+        auto* cut = (this->*constraints[k])(y, x, gamma);
+        if (cut != nullptr) {
+            return cut;
         }
     }
 

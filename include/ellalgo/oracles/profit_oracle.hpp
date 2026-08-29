@@ -10,6 +10,8 @@
 #include <tuple>  // for tuple
 #include <valarray>
 
+#include "../round_robin.hpp"
+
 /**
  * @brief Oracle for a profit maximization problem.
  *
@@ -27,18 +29,44 @@
  *        x: input quantity
  *        v: output price
  *        k: a given constant that restricts the quantity of x1
+ *
+ * @note Strategy pattern: the two constraints (capacity and Cobb-Douglas
+ *       profit) are evaluated via a round-robin over a strategy table
+ *       (`_constraints`), replacing the former `switch (this->idx)`
+ *       dispatch. Each entry is a self-contained constraint evaluator
+ *       returning a Cut* (or nullptr when satisfied).
  */
 class ProfitOracle {
     using Vec = std::valarray<double>;
     using Cut = std::pair<Vec, double>;
 
-    int idx = -1;
+    RoundRobin _rr{2};
     const double _log_pA;
     const double _log_k;
     const Vec _price_out;
     double _log_Cobb = 0.0;
     double _vx = 0.0;
     Vec _elasticities;
+
+    /**
+     * @brief Capacity constraint: y0 <= log k
+     *
+     * @param[in] y input quantity (in log scale)
+     * @param[in] x input quantity (natural scale)
+     * @param[in] gamma the best-so-far optimal value
+     * @return Cut* pointer to the cut, or nullptr if satisfied
+     */
+    auto _constraint_capacity(const Vec& y, const Vec&, const double) -> Cut*;
+
+    /**
+     * @brief Cobb-Douglas profit constraint
+     *
+     * @param[in] y input quantity (in log scale)
+     * @param[in] x input quantity (natural scale)
+     * @param[in] gamma the best-so-far optimal value
+     * @return Cut* pointer to the cut, or nullptr if satisfied
+     */
+    auto _constraint_profit(const Vec& y, const Vec& x, const double gamma) -> Cut*;
 
   public:
     /**
