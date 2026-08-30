@@ -5,8 +5,8 @@
 
 #pragma once
 
-#include <memory>  // for unique_ptr
-#include <utility> // for pair, forward
+#include <memory>   // for unique_ptr
+#include <utility>  // for pair, forward
 #include <vector>
 
 #include "ldlt_mgr.hpp"
@@ -47,9 +47,9 @@ template <typename Arr036, typename Mat = Arr036> class LmiOracleBase {
      * @param[in]     getA Lazy accessor for matrix element A(i, j)
      * @return Cut* pointer to the packed cut, or nullptr if feasible
      */
-    template <typename LDLT, typename Fn>
-    auto assess_impl(LDLT& mgr, const std::vector<Mat>& F, const int sign, const Arr036& x,
-                     Fn&& getA) -> Cut* {
+    template <typename LDLT, typename Fn> auto assess_impl(LDLT& mgr, const std::vector<Mat>& F,
+                                                           const int sign, const Arr036& x,
+                                                           Fn&& getA) -> Cut* {
         const auto n = x.size();
         if (mgr.factor(std::forward<Fn>(getA))) {
             return nullptr;

@@ -25,8 +25,8 @@
  *       skeleton. Behaviorally identical to LmiOracle, which uses lazy
  *       evaluation instead of a pre-built matrix.
  */
-template <typename Arr036, typename Mat = Arr036>
-class LmiOldOracle : public LmiOracleBase<Arr036, Mat> {
+template <typename Arr036, typename Mat = Arr036> class LmiOldOracle
+    : public LmiOracleBase<Arr036, Mat> {
     using Base = LmiOracleBase<Arr036, Mat>;
     using Cut = std::pair<Arr036, double>;
 

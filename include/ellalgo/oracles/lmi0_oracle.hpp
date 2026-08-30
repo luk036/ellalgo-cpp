@@ -29,7 +29,8 @@
  * @tparam Arr036 Array type for the decision variables (size 3-6)
  * @tparam Mat Matrix type (defaults to Arr036)
  */
-template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle : public LmiOracleBase<Arr036, Mat> {
+template <typename Arr036, typename Mat = Arr036> class Lmi0Oracle
+    : public LmiOracleBase<Arr036, Mat> {
     using Base = LmiOracleBase<Arr036, Mat>;
     using Cut = std::pair<Arr036, double>;
 

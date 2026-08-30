@@ -8,7 +8,6 @@
  */
 
 #include <cmath>  // for log, exp, round
-
 #include <ellalgo/oracles/profit_oracle.hpp>
 
 using Vec = std::valarray<double>;
@@ -48,8 +47,7 @@ auto ProfitOracle::_constraint_capacity(const Vec& y, const Vec&, const double) 
  */
 auto ProfitOracle::_constraint_profit(const Vec& y, const Vec& x, const double gamma) -> Cut* {
     static auto cut = Cut{Vec{-1.0, 1.0}, 0.0};
-    this->_log_Cobb
-        = this->_log_pA + this->_elasticities[0] * y[0] + this->_elasticities[1] * y[1];
+    this->_log_Cobb = this->_log_pA + this->_elasticities[0] * y[0] + this->_elasticities[1] * y[1];
     this->_vx = this->_price_out[0] * x[0] + this->_price_out[1] * x[1];
     const auto te = gamma + this->_vx;
     const auto fj = std::log(te) - this->_log_Cobb;
@@ -77,9 +75,9 @@ auto ProfitOracle::_constraint_profit(const Vec& y, const Vec& x, const double g
  * second element is of type `bool`.
  */
 auto ProfitOracle::assess_feas(const Vec& y, const double& gamma) -> Cut* {
-    using ConstraintFn = auto (ProfitOracle::*)(const Vec&, const Vec&, const double) -> Cut*;
-    static constexpr ConstraintFn constraints[2] = {&ProfitOracle::_constraint_capacity,
-                                                    &ProfitOracle::_constraint_profit};
+    using ConstraintFn = auto (ProfitOracle::*)(const Vec&, const Vec&, const double)->Cut*;
+    static constexpr ConstraintFn constraints[2]
+        = {&ProfitOracle::_constraint_capacity, &ProfitOracle::_constraint_profit};
 
     const Vec x = std::exp(y);
     for (int i = 0; i < 2; i++) {

@@ -24,7 +24,8 @@
  *       the shared LmiOracleBase::assess_impl skeleton. Interchangeable with
  *       Lmi0Oracle, LmiOldOracle, ProfitOracle, LowpassOracle, NetworkOracle.
  */
-template <typename Arr036, typename Mat = Arr036> class LmiOracle : public LmiOracleBase<Arr036, Mat> {
+template <typename Arr036, typename Mat = Arr036> class LmiOracle
+    : public LmiOracleBase<Arr036, Mat> {
     using Base = LmiOracleBase<Arr036, Mat>;
     using Cut = std::pair<Arr036, double>;
 

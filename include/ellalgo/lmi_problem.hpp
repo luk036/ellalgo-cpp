@@ -34,8 +34,8 @@ template <typename Arr036, typename Mat = Arr036> class LMIProblem {
     using Vec = std::valarray<double>;
 
     size_t _ndim;
-    std::vector<Mat> _F;      // problem data, must precede _omega
-    Mat _B;                   // constant term
+    std::vector<Mat> _F;            // problem data, must precede _omega
+    Mat _B;                         // constant term
     LmiOracle<Arr036, Mat> _omega;  // holds a reference to _F
 
   public:

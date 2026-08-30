@@ -2,34 +2,33 @@
 #define DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #include <doctest/doctest.h>
 
+#include <ellalgo/ell_matrix.hpp>           // for Matrix
+#include <ellalgo/oracles/lmi0_oracle.hpp>  // for Lmi0Oracle
 #include <valarray>
 #include <vector>
 
-#include <ellalgo/ell_matrix.hpp>          // for Matrix
-#include <ellalgo/oracles/lmi0_oracle.hpp> // for Lmi0Oracle
-
 namespace {
 
-using Vec = std::valarray<double>;
-using M_t = std::vector<Matrix>;
+    using Vec = std::valarray<double>;
+    using M_t = std::vector<Matrix>;
 
-/**
- * @brief Build F0 = I, F1 = diag(1, -1).
- *
- * A(x) = x0*F0 + x1*F1 = diag(x0 + x1, x0 - x1).
- * A(x) is SPD  <=>  x0 > |x1|.
- */
-auto make_diag_problem() -> M_t {
-    auto f0 = Matrix(2);
-    f0.row(0) = Vec{1.0, 0.0};
-    f0.row(1) = Vec{0.0, 1.0};
+    /**
+     * @brief Build F0 = I, F1 = diag(1, -1).
+     *
+     * A(x) = x0*F0 + x1*F1 = diag(x0 + x1, x0 - x1).
+     * A(x) is SPD  <=>  x0 > |x1|.
+     */
+    auto make_diag_problem() -> M_t {
+        auto f0 = Matrix(2);
+        f0.row(0) = Vec{1.0, 0.0};
+        f0.row(1) = Vec{0.0, 1.0};
 
-    auto f1 = Matrix(2);
-    f1.row(0) = Vec{1.0, 0.0};
-    f1.row(1) = Vec{0.0, -1.0};
+        auto f1 = Matrix(2);
+        f1.row(0) = Vec{1.0, 0.0};
+        f1.row(1) = Vec{0.0, -1.0};
 
-    return M_t{f0, f1};
-}
+        return M_t{f0, f1};
+    }
 
 }  // namespace
 
@@ -48,7 +47,7 @@ TEST_CASE("Lmi0Oracle, cut when A(x) is not SPD") {
     Lmi0Oracle<Vec, Matrix> omega{2, F};
 
     // x0 <= |x1|  =>  not positive definite  =>  a cut is returned
-    auto* cut1 = omega.assess_feas(Vec{2.0, 3.0});   // diag(5, -1)
+    auto* cut1 = omega.assess_feas(Vec{2.0, 3.0});  // diag(5, -1)
     REQUIRE(cut1 != nullptr);
     CHECK_EQ(cut1->first.size(), 2U);
     CHECK(cut1->second > 0.0);  // deep cut (witness magnitude)
