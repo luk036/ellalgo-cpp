@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['vector0_0',['vector0',['../classVector0.html#a1b2c1178d3f39f1593573437f5f434df',1,'Vector0::Vector0(size_t size)'],['../classVector0.html#ae20c1de0c50804803c8e4c70a72faf72',1,'Vector0::Vector0(const std::vector&lt; double &gt; &amp;v)']]],
-  ['vector2_1',['vector2',['../classVector2.html#a076fe138fc069b3aaf2c0c4968e02dc9',1,'Vector2::Vector2(size_t size)'],['../classVector2.html#a51503cd0318097c848484a1fd1489167',1,'Vector2::Vector2(const std::vector&lt; T &gt; &amp;v)'],['../classVector2.html#ad042c32ce8c7eb7e4e20beca256e4340',1,'Vector2::Vector2(const Vector2 &amp;)=default'],['../classVector2.html#a5941986cba87b0687bb6d8c9ecb11595',1,'Vector2::Vector2(Vector2 &amp;&amp;) noexcept=default']]],
-  ['view_2',['view',['../arr_8hpp.html#aaa42336ffeb870628c8b127b58877aac',1,'view(const Arr &amp;a, const Range &amp;rows, const Range &amp;cols):&#160;arr.hpp'],['../arr_8hpp.html#a10ba6021923d1258ed70cb69ab8520e5',1,'view(const Arr &amp;a, const Range &amp;rows):&#160;arr.hpp']]]
+  ['update_0',['update',['../classell1d.html#ab37f075ea3f753751869749ed8137e0f',1,'ell1d']]],
+  ['update_5fbias_5fcut_1',['update_bias_cut',['../classEllBase.html#ad917d9484486f6f99f798f9851e23651',1,'EllBase::update_bias_cut()'],['../classEllCore.html#ab7ccf9f0692ba03b0ba6c5347034c9d8',1,'EllCore::update_bias_cut()']]],
+  ['update_5fcentral_5fcut_2',['update_central_cut',['../classell1d.html#a55803dd5a833c95e053c97d116359086',1,'ell1d::update_central_cut()'],['../classEllBase.html#ad5da35284fadf23f022109b56640061e',1,'EllBase::update_central_cut()'],['../classEllCore.html#a239a3f34dad0eec70f209c9e76013957',1,'EllCore::update_central_cut()']]],
+  ['update_5fq_3',['update_q',['../classEllBase.html#a5b2b36b5a58a014b8beead29980606a7',1,'EllBase::update_q()'],['../classEllCore.html#a1e9742a77dbbdb8d585b7532c554ad2c',1,'EllCore::update_q(Vec &amp;grad, const T &amp;beta) -&gt; CutStatus']]],
+  ['update_5fstable_5fbias_5fcut_4',['update_stable_bias_cut',['../classEllCore.html#aa0e0adde753b96392ce021959065eacf',1,'EllCore']]],
+  ['update_5fstable_5fcentral_5fcut_5',['update_stable_central_cut',['../classEllCore.html#ad0d3de1e4bce0913567d0af1d0a1eb91',1,'EllCore']]],
+  ['update_5fstable_5fq_6',['update_stable_q',['../classEllCore.html#a84601c516434b87a54c66a06bf4a8593',1,'EllCore']]]
 ];

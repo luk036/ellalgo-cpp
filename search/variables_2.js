@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['delta_0',['delta',['../structCutResult.html#a3723eeae08312445964adc0bc52b5c07',1,'CutResult']]]
+  ['cut_0',['cut',['../classLmiOracleBase.html#a471a457c4847cd80943ea0f6ac77a54f',1,'LmiOracleBase']]]
 ];

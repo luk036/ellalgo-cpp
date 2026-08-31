@@ -1,0 +1,9 @@
+<map id="ellalgo/ell_base.hpp" name="ellalgo/ell_base.hpp">
+<area shape="rect" id="Node000001" title="Shared ellipsoid search space base (compile&#45;time Strategy)" alt="" coords="68,5,220,31"/>
+<area shape="rect" id="Node000002" href="$ell_8hpp.html" title="Ellipsoid search space (classic Q&#45;update strategy)" alt="" coords="5,79,120,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,42,78,80,74,76,119,38"/>
+<area shape="rect" id="Node000003" href="$ell__stable_8hpp.html" title="Numerically stable ellipsoid search space (LDL^T strategy)" alt="" coords="145,79,306,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,38,214,76,210,80,166,42"/>
+<area shape="rect" id="Node000004" href="$lmi__problem_8hpp.html" title="LMI problem facade: owns data and drives the cutting&#45;plane loop." alt="" coords="135,152,315,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="228,118,228,152,223,152,223,118"/>
+</map>

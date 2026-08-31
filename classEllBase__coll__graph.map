@@ -1,0 +1,7 @@
+<map id="EllBase&lt; Arr, Stable &gt;" name="EllBase&lt; Arr, Stable &gt;">
+<area shape="rect" id="Node000001" title="Ellipsoid Search Space (shared base)" alt="" coords="5,93,173,119"/>
+<area shape="rect" id="Node000002" href="$classArr.html" title="1D or 2D array backed by std::vector&lt;double&gt; for small optimization problems" alt="" coords="30,5,71,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="64,42,86,92,82,94,59,44"/>
+<area shape="rect" id="Node000003" href="$classEllCore.html" title="Ellipsoid Search Space Core." alt="" coords="95,5,163,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="121,44,97,94,92,92,116,42"/>
+</map>

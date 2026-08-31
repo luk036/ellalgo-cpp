@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.12</span>
+   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.13</span>
    </div>
   </td>
  </tr>
@@ -83,6 +83,11 @@ $(function() {
   <div class="headertitle"><div class="title">ellalgo Directory Reference</div></div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Directory dependency graph for ellalgo:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="dir_c643d85e6397546380b30b2f15699579_dep.svg" width="123" height="152"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="subdirs" name="subdirs"></a>
 Directories</h2></td></tr>
@@ -104,13 +109,16 @@ Files</h2></td></tr>
 <tr class="memdesc:cutting__plane_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cutting-plane methods for convex feasibility and optimization. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="ell_8hpp_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ell_8hpp.html">ell.hpp</a></td></tr>
-<tr class="memdesc:ell_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ellipsoid search space main class. <br /></td></tr>
+<tr class="memdesc:ell_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ellipsoid search space (classic Q-update strategy) <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="ell1d_8hpp_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ell1d_8hpp.html">ell1d.hpp</a></td></tr>
 <tr class="memdesc:ell1d_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">1-dimensional ellipsoid method <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="ell__assert_8hpp_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ell__assert_8hpp.html">ell_assert.hpp</a></td></tr>
 <tr class="memdesc:ell__assert_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branch prediction macros for performance optimization. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="ell__base_8hpp_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ell__base_8hpp.html">ell_base.hpp</a></td></tr>
+<tr class="memdesc:ell__base_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared ellipsoid search space base (compile-time Strategy) <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="ell__calc_8hpp_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ell__calc_8hpp.html">ell_calc.hpp</a></td></tr>
 <tr class="memdesc:ell__calc_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ellipsoid computation layer with cut dispatch. <br /></td></tr>
@@ -128,7 +136,7 @@ Files</h2></td></tr>
 <tr class="memdesc:ell__matrix_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square matrix with flat storage and strided views. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="ell__stable_8hpp_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ell__stable_8hpp.html">ell_stable.hpp</a></td></tr>
-<tr class="memdesc:ell__stable_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numerically stable ellipsoid search space (LDL^T-based) <br /></td></tr>
+<tr class="memdesc:ell__stable_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numerically stable ellipsoid search space (LDL^T strategy) <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="half__nonnegative_8hpp_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="half__nonnegative_8hpp.html">half_nonnegative.hpp</a></td></tr>
 <tr class="memdesc:half__nonnegative_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility functions for computing half of non-negative numbers. <br /></td></tr>
@@ -136,8 +144,14 @@ Files</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="linear__algebra_8hpp_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linear__algebra_8hpp.html">linear_algebra.hpp</a></td></tr>
 <tr class="memdesc:linear__algebra_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic linear algebra utilities for vectors and matrices. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="lmi__problem_8hpp_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lmi__problem_8hpp.html">lmi_problem.hpp</a></td></tr>
+<tr class="memdesc:lmi__problem_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">LMI problem facade: owns data and drives the cutting-plane loop. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="logger_8hpp_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8hpp.html">logger.hpp</a></td></tr>
 <tr class="memdesc:logger_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logging utilities for the ellalgo library. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="round__robin_8hpp_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="round__robin_8hpp.html">round_robin.hpp</a></td></tr>
+<tr class="memdesc:round__robin_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Round-robin index helper for cyclic constraint scanning. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->

@@ -1,0 +1,15 @@
+<map id="ellalgo/oracles/lmi_oracle_base.hpp" name="ellalgo/oracles/lmi_oracle_base.hpp">
+<area shape="rect" id="Node000001" title="Shared LMI oracle skeleton (Template Method)" alt="" coords="180,5,323,45"/>
+<area shape="rect" id="Node000002" href="$lmi0__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality (LMI) feasibility (compact form)" alt="" coords="5,93,156,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,54,119,96,117,91,200,49"/>
+<area shape="rect" id="Node000004" href="$lmi__old__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality feasibility (explicit matrix form)" alt="" coords="180,93,323,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="254,59,254,93,249,93,249,59"/>
+<area shape="rect" id="Node000005" href="$lmi__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality feasibility (lazy matrix form)" alt="" coords="347,93,489,133"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="301,49,383,91,380,96,299,54"/>
+<area shape="rect" id="Node000003" href="$lmi__factory_8hpp.html" title="Factory functions for the LMI oracle family." alt="" coords="171,181,313,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="129,137,208,179,205,184,127,142"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="250,147,247,181,241,181,245,147"/>
+<area shape="poly" id="edge7_Node000005_Node000003" title=" " alt="" coords="368,142,282,184,279,179,366,137"/>
+<area shape="rect" id="Node000006" href="$lmi__problem_8hpp.html" title="LMI problem facade: owns data and drives the cutting&#45;plane loop." alt="" coords="337,189,517,214"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="424,147,429,188,423,188,419,147"/>
+</map>

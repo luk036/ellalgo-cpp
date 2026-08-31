@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['ldltmgr_0',['ldltmgr',['../classLDLTMgr.html#a43322b727396f7fbc3ef48eeac133096',1,'LDLTMgr::LDLTMgr(size_t N)'],['../classLDLTMgr.html#a2ce9d8ddc0b81c073037b545fae6e2e3',1,'LDLTMgr::LDLTMgr(const LDLTMgr &amp;)=delete'],['../classLDLTMgr.html#a189af948cc280cea59674433317c1fca',1,'LDLTMgr::LDLTMgr(LDLTMgr &amp;&amp;)=default']]],
-  ['linspace_1',['linspace',['../arr_8hpp.html#a68adf52c6d6cc096a8d95fa2f8618264',1,'arr.hpp']]],
-  ['lmi0oracle_2',['Lmi0Oracle',['../classLmi0Oracle.html#afece9730a5a290fc68e0a9049fd3e5ef',1,'Lmi0Oracle']]],
-  ['lmioldoracle_3',['LmiOldOracle',['../classLmiOldOracle.html#a414d07ae70dd506b332a75bd71399eb6',1,'LmiOldOracle']]],
-  ['lmioracle_4',['LmiOracle',['../classLmiOracle.html#aed3cd41c07fdb6b6e4d3649d5b571b8c',1,'LmiOracle']]],
-  ['log_5',['log',['../arr_8hpp.html#ae8735db34b44d348c2198bea8a0530aa',1,'arr.hpp']]],
-  ['log_5fwith_5fspdlog_6',['log_with_spdlog',['../namespaceellalgo.html#aa49b64ce3d994811269d66048abb49a7',1,'ellalgo']]],
-  ['lowpassoracle_7',['LowpassOracle',['../classLowpassOracle.html#a90eaf7d8d26a0e056a3495c5b9a84a44',1,'LowpassOracle']]]
+  ['identity_0',['identity',['../classMatrix.html#a80cb34cb249d96168c7f25ed1cc5c675',1,'Matrix']]],
+  ['invalid_5fvalue_1',['invalid_value',['../cutting__plane_8hpp.html#a01e0eb0278b0992170960d14fa9bbb64',1,'invalid_value() -&gt; T:&#160;cutting_plane.hpp'],['../cutting__plane_8hpp.html#aa244cf9aaa9fdb7223c7b13016aace88',1,'invalid_value() -&gt; T requires(!std::is_floating_point_v&lt; T &gt;):&#160;cutting_plane.hpp']]],
+  ['is_5f2d_2',['is_2d',['../classArr.html#a1aa8bba40a2a98904e3ec0d00e7d9cd6',1,'Arr']]],
+  ['is_5fspd_3',['is_spd',['../classLDLTMgr.html#ab9d90f7e3cd6190b2b7be2b49f4a6baa',1,'LDLTMgr']]]
 ];

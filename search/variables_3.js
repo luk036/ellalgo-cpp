@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['end_0',['end',['../structRange.html#a03f9c0936cfe1741d4449eca01fed833',1,'Range']]]
+  ['delta_0',['delta',['../structCutResult.html#a3723eeae08312445964adc0bc52b5c07',1,'CutResult']]]
 ];

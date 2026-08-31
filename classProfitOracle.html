@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.12</span>
+   <div id="projectname">EllAlgo<span id="projectnumber">&#160;1.6.13</span>
    </div>
   </td>
  </tr>
@@ -123,7 +123,8 @@ alpha, beta: the output elasticities
 x: input quantity
 v: output price
 k: a given constant that restricts the quantity of x1
-</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</pre> <dl class="section note"><dt>Note</dt><dd>Strategy pattern: the two constraints (capacity and Cobb-Douglas profit) are evaluated via a round-robin over a strategy table (<code>_constraints</code>), replacing the former <code>switch (this-&gt;idx)</code> dispatch. Each entry is a self-contained constraint evaluator returning a Cut* (or nullptr when satisfied). </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa642df03dc11a8d086ce8b1e652ebc6f" name="aa642df03dc11a8d086ce8b1e652ebc6f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa642df03dc11a8d086ce8b1e652ebc6f">&#9670;&#160;</a></span>ProfitOracle() <span class="overload">[1/3]</span></h2>
 

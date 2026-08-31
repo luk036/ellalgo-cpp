@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['max_5fiters_0',['max_iters',['../structOptions.html#a79ef34251f40cb7ef68615307a2dfcb0',1,'Options']]]
+  ['feasible_0',['feasible',['../structCInfo.html#a4f2ece5c70a87ef1593618dac0d929a7',1,'CInfo']]]
 ];

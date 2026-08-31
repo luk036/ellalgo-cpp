@@ -1,9 +1,17 @@
 <map id="ellalgo/oracles/ldlt_mgr.hpp" name="ellalgo/oracles/ldlt_mgr.hpp">
 <area shape="rect" id="Node000001" title="LDL^T factorization manager for symmetric matrices." alt="" coords="180,5,323,45"/>
-<area shape="rect" id="Node000002" href="$lmi0__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality (LMI) feasibility (compact form)" alt="" coords="5,93,156,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,54,119,96,117,91,200,49"/>
-<area shape="rect" id="Node000003" href="$lmi__old__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality feasibility (explicit matrix form)" alt="" coords="180,93,323,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="254,59,254,93,249,93,249,59"/>
-<area shape="rect" id="Node000004" href="$lmi__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality feasibility (lazy matrix form)" alt="" coords="347,93,489,133"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="301,49,383,91,380,96,299,54"/>
+<area shape="rect" id="Node000002" href="$lmi__oracle__base_8hpp.html" title="Shared LMI oracle skeleton (Template Method)" alt="" coords="180,93,323,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="254,59,254,93,249,93,249,59"/>
+<area shape="rect" id="Node000003" href="$lmi0__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality (LMI) feasibility (compact form)" alt="" coords="5,181,156,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="203,142,119,184,117,179,200,137"/>
+<area shape="rect" id="Node000005" href="$lmi__old__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality feasibility (explicit matrix form)" alt="" coords="180,181,323,221"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="254,147,254,181,249,181,249,147"/>
+<area shape="rect" id="Node000006" href="$lmi__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality feasibility (lazy matrix form)" alt="" coords="347,181,489,221"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="301,137,383,179,380,184,299,142"/>
+<area shape="rect" id="Node000004" href="$lmi__factory_8hpp.html" title="Factory functions for the LMI oracle family." alt="" coords="171,269,313,309"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="129,225,208,267,205,272,127,230"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="250,235,247,269,241,269,245,235"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="368,230,282,272,279,267,366,225"/>
+<area shape="rect" id="Node000007" href="$lmi__problem_8hpp.html" title="LMI problem facade: owns data and drives the cutting&#45;plane loop." alt="" coords="337,277,517,302"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="424,235,429,276,423,276,419,235"/>
 </map>

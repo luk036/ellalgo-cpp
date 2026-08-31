@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['verbose_0',['verbose',['../structOptions.html#abaa084df3c7ed900634b4d187aa58ea0',1,'Options']]]
+  ['use_5fparallel_5fcut_0',['use_parallel_cut',['../classEllCalc.html#a4d15638034e564ffef654b7fc4fb5df5',1,'EllCalc']]]
 ];

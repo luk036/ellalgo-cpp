@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['half_5fnonnegative_0',['half_nonnegative',['../namespacealgo.html#a2f44de1a12125a3ae8c0e657fb1f4d29',1,'algo']]]
+  ['factor_0',['factor',['../classLDLTMgr.html#acf3bdf1294e0c22ab3efcf0d401369b0',1,'LDLTMgr']]],
+  ['factor_5fwith_5fallow_5fsemidefinite_1',['factor_with_allow_semidefinite',['../classLDLTMgr.html#aaee3ed4cfeabc76e2689ea8f7ab9f5ae',1,'LDLTMgr']]],
+  ['factorize_2',['factorize',['../classLDLTMgr.html#a2af45dc9628f487ab821aff6f3fc0794',1,'LDLTMgr']]],
+  ['from_5falpha_3',['from_alpha',['../classEll.html#a256c951768f93d78f62395117145cf3d',1,'Ell::from_alpha()'],['../classEllStable.html#a708c4f053756ecebbb5bda23aa1d3623',1,'EllStable::from_alpha()']]],
+  ['from_5fradii_4',['from_radii',['../classEll.html#a87803eb9611baf4e44d6f1d57625a5b2',1,'Ell::from_radii()'],['../classEllStable.html#a78da50df19973b739ce39bfb69bc4e6c',1,'EllStable::from_radii()']]]
 ];

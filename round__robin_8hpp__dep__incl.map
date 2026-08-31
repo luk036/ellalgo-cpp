@@ -1,0 +1,7 @@
+<map id="ellalgo/round_robin.hpp" name="ellalgo/round_robin.hpp">
+<area shape="rect" id="Node000001" title="Round&#45;robin index helper for cyclic constraint scanning." alt="" coords="100,5,275,31"/>
+<area shape="rect" id="Node000002" href="$lowpass__oracle_8hpp.html" title="Oracle for FIR lowpass filter design via spectral factorization." alt="" coords="5,79,180,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,41,117,81,114,76,161,37"/>
+<area shape="rect" id="Node000003" href="$profit__oracle_8hpp.html" title="Oracles for profit maximization problems (Cobb&#45;Douglas)" alt="" coords="205,79,359,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="213,37,261,76,257,81,210,41"/>
+</map>

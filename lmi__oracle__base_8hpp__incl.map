@@ -1,0 +1,25 @@
+<map id="ellalgo/oracles/lmi_oracle_base.hpp" name="ellalgo/oracles/lmi_oracle_base.hpp">
+<area shape="rect" id="Node000001" title="Shared LMI oracle skeleton (Template Method)" alt="" coords="93,5,235,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,83,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,48,75,88,72,84,133,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="39,167,99,192"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="154,47,86,156,81,154,150,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="451,240,514,265"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="237,40,292,58,352,84,411,119,437,141,461,165,477,195,484,225,478,226,472,197,457,168,434,145,407,123,350,88,290,63,235,45"/>
+<area shape="rect" id="Node000005" href="$ldlt__mgr_8hpp.html" title="LDL^T factorization manager for symmetric matrices." alt="" coords="158,93,261,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="177,44,198,80,193,83,173,47"/>
+<area shape="poly" id="edge7_Node000005_Node000003" title=" " alt="" coords="188,121,105,163,103,158,186,116"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="175,167,244,192"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="212,119,212,153,207,153,207,119"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="246,240,317,265"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="222,117,241,138,258,165,271,196,279,226,274,227,266,198,254,168,236,142,218,120"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="123,240,199,265"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="198,121,180,141,165,168,160,198,160,227,155,227,154,197,160,166,176,138,194,117"/>
+<area shape="rect" id="Node000009" href="$ell__matrix_8hpp.html" title="Square matrix with flat storage and strided views." alt="" coords="319,167,447,192"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="238,116,343,159,341,164,236,121"/>
+<area shape="poly" id="edge13_Node000009_Node000004" title=" " alt="" coords="400,190,457,230,454,234,397,194"/>
+<area shape="poly" id="edge11_Node000009_Node000007" title=" " alt="" coords="368,194,311,234,308,230,365,190"/>
+<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="348,195,211,238,209,233,346,189"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="341,240,427,265"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="386,192,386,226,381,227,380,192"/>
+</map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['witness_5fvec_0',['witness_vec',['../classLDLTMgr.html#ae5b03da1529a27964723627bceb43166',1,'LDLTMgr']]]
+  ['verbose_0',['verbose',['../structOptions.html#abaa084df3c7ed900634b4d187aa58ea0',1,'Options']]]
 ];
