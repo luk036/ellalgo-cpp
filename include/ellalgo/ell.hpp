@@ -1,108 +1,71 @@
 /**
  * @file ell.hpp
- * @brief Ellipsoid search space main class
+ * @brief Ellipsoid search space (classic Q-update strategy)
  */
 
 #pragma once
 
 #include <valarray>
 
-#include "ell_config.hpp"
-#include "ell_core.hpp"
-
-// forward declaration
-enum class CutStatus;
+#include "ell_base.hpp"
 
 /**
- * @brief Ellipsoid Search Space
+ * @brief Ellipsoid Search Space (classic strategy)
  *
- * The `Ell` class represents an ellipsoid search space:
+ * Concrete strategy of `EllBase` with the classic direct Q-update:
+ * `EllCore::update_*` is used for cutting-plane updates.
  *
  * @f[
  *     \mathcal{E} = \{x \mid (x - x_c)^T Q^{-1} (x - x_c) \le \kappa\}
  * @f]
  *
- * It is used to define and manipulate ellipsoids in a multidimensional space.
- * The ellipsoid is defined by a center point (`_xc`) and a core function
- * (`_mgr`). The core function is responsible for updating the ellipsoid based
- * on cutting planes. The `Ell` class provides methods to update the ellipsoid
- * using different types of cutting planes and to retrieve information about the
- * ellipsoid, such as the center point and the squared radius.
- *
- * This version keeps $Q$ symmetric but no promise of positive definite
- *
- * <pre>
- *    n-dimensional space
- *         ┌─┐
- *       ┌─┘ └─┐
- *     ┌─┘     └─┐
- *   ┌─┘         └─┐  ←─ ellipsoid boundary
- *   │   ● xc      │      center point
- *   └─┐         ┌─┘
- *     └─┐     ┌─┘
- *       └─┐ ┌─┘
- *         └─┘
- * </pre>
+ * @tparam Arr Array type of the center point
  */
-template <typename Arr> class Ell {
+template <typename Arr> class Ell : public EllBase<Arr, false> {
+    using Base = EllBase<Arr, false>;
+
   public:
     using Vec = std::valarray<double>;
     using ArrayType = Arr;
 
-  private:
-    size_t _n;
-    Arr _xc;
-    EllCore _mgr;
-
-    /// @brief Deleted copy assignment operator (non-copyable).
-    auto operator=(const Ell& E) -> Ell& = delete;
-
-  public:
     /**
-     * @brief Construct a new Ell object from a vector and an array.
+     * @brief Named constructor: initial ellipsoid from per-axis radii.
      *
-     * @param[in] val A vector of double values.
+     * @param[in] val A vector of per-axis radii (diagonal of the shape matrix).
      * @param[in] x An array of type Arr. This parameter is moved.
+     * @return Ell A new Ell object.
      */
-    Ell(const Vec& val, Arr x)
-        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(val, _n) {}
+    static auto from_radii(const Vec& val, Arr x) -> Ell { return Ell(val, std::move(x)); }
 
     /**
-     * @brief Construct a new Ell object from an alpha value and an array.
+     * @brief Named constructor: initial ellipsoid from a scaling factor.
      *
      * @param[in] alpha A double value representing the scaling factor.
      * @param[in] x An array of type Arr. This parameter is moved.
+     * @return Ell A new Ell object.
      */
-    Ell(const double alpha, Arr x)
-        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(alpha, _n) {}
+    static auto from_alpha(const double alpha, Arr x) -> Ell { return Ell(alpha, std::move(x)); }
 
-    /**
-     * @brief Construct a new Ell object (move constructor)
-     *
-     * @param[in] E The parameter "E" is an rvalue reference to an object of type "Ell".
-     */
+    /// @brief Construct from a diagonal vector and a center point (moved in).
+    Ell(const Vec& val, Arr x) : Base(val, std::move(x)) {}
+
+    /// @brief Construct from a scaling factor and a center point (moved in).
+    Ell(const double alpha, Arr x) : Base(alpha, std::move(x)) {}
+
+    /// @brief Move constructor.
     Ell(Ell&& E) noexcept = default;
 
-    /**
-     * @brief Move assignment operator.
-     *
-     * @param[in] E The parameter "E" is an rvalue reference to an object of type "Ell".
-     * @return Ell& Reference to this object.
-     */
+    /// @brief Move assignment operator.
     auto operator=(Ell&& E) noexcept -> Ell& = default;
 
-    /**
-     * @brief Destroy the Ell object
-     *
-     */
+    /// @brief Destructor.
     ~Ell() = default;
 
-    /**
-     * @brief Construct a new Ell object (explicit copy)
-     *
-     * @param[in] E The parameter "E" is a reference to an object of type "Ell".
-     */
+    /// @brief Explicit copy constructor.
     explicit Ell(const Ell& E) = default;
+
+    /// @brief Deleted copy assignment operator (non-copyable).
+    auto operator=(const Ell& E) -> Ell& = delete;
 
     /**
      * @brief Explicitly copy the Ell object.
@@ -110,162 +73,4 @@ template <typename Arr> class Ell {
      * @return Ell A new Ell object that is a copy of the current object.
      */
     auto copy() const -> Ell { return Ell(*this); }
-
-    /**
-     * @brief Get the center of the ellipsoid.
-     *
-     * @return Arr The center of the ellipsoid.
-     */
-    auto xc() const -> Arr { return this->_xc; }
-
-    /**
-     * @brief Set the center of the ellipsoid.
-     *
-     * @param[in] xc The new center of the ellipsoid.
-     */
-    void set_xc(const Arr& xc) { this->_xc = xc; }
-
-    /**
-     * @brief Get the squared radius of the ellipsoid.
-     *
-     * @return double The squared radius.
-     */
-    constexpr auto tsq() const -> double { return this->_mgr.tsq(); }
-
-    /**
-     * @brief Set whether to use parallel cut.
-     *
-     * @param[in] value True to use parallel cut, false otherwise.
-     */
-    void set_use_parallel_cut(bool value) { this->_mgr.set_use_parallel_cut(value); }
-
-    /**
-     * @brief Update ellipsoid using a deep cut.
-     *
-     * @f[
-     *     g^T (x - x_c) + \beta \le 0
-     * @f]
-     *
-     * @dot
-     *   digraph bias_cut_update {
-     *     bgcolor="transparent";
-     *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
-     *     cut [label="Cut: g, beta", fillcolor="#a9cce3"];
-     *     update [label="x_c -= g"];
-     *     check [label="Success?", shape=diamond, fillcolor="#f9e79f"];
-     *     done [label="Updated\nellipsoid", fillcolor="#7fb3d8"];
-     *     fail [label="NoEffect", fillcolor="#fadbd8"];
-     *     cut -> update;
-     *     update -> check;
-     *     check -> done [label="Yes", color="#27ae60"];
-     *     check -> fail [label="No", color="#e74c3c"];
-     *   }
-     * @enddot
-     *
-     * @tparam T Type of the beta parameter.
-     * @param[in] cut A pair containing the gradient and beta value.
-     * @return CutStatus The status of the cut.
-     */
-    template <typename T> auto update_bias_cut(const std::pair<Arr, T>& cut) -> CutStatus {
-        return this->_update_core(cut, [this](Vec& grad, const T& beta) {
-            return this->_mgr.update_bias_cut(grad, beta);
-        });
-    }
-
-    /**
-     * @brief Update ellipsoid using a central cut.
-     *
-     * @f[
-     *     g^T (x - x_c) \le 0
-     * @f]
-     *
-     * @dot
-     *   digraph central_cut_update {
-     *     bgcolor="transparent";
-     *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
-     *     cut [label="Cut: g, beta=0", fillcolor="#a9cce3"];
-     *     update [label="x_c -= g"];
-     *     check [label="Success?", shape=diamond, fillcolor="#f9e79f"];
-     *     done [label="Updated\nellipsoid", fillcolor="#7fb3d8"];
-     *     fail [label="NoEffect", fillcolor="#fadbd8"];
-     *     cut -> update;
-     *     update -> check;
-     *     check -> done [label="Yes", color="#27ae60"];
-     *     check -> fail [label="No", color="#e74c3c"];
-     *   }
-     * @enddot
-     *
-     * @tparam T Type of the beta parameter.
-     * @param[in] cut A pair containing the gradient and beta value.
-     * @return CutStatus The status of the cut.
-     */
-    template <typename T> auto update_central_cut(const std::pair<Arr, T>& cut) -> CutStatus {
-        return this->_update_core(cut, [this](Vec& grad, const T& beta) {
-            return this->_mgr.update_central_cut(grad, beta);
-        });
-    }
-
-    /**
-     * @brief Update ellipsoid using a cut with a specific Q matrix.
-     *
-     * @f[
-     *     Q^+ = Q - \frac{\sigma}{\omega} Q g g^T Q, \qquad
-     *     \kappa^+ = \kappa \cdot \delta
-     * @f]
-     *
-     * @dot
-     *   digraph q_cut_update {
-     *     bgcolor="transparent";
-     *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
-     *     cut [label="Cut: g, beta", fillcolor="#a9cce3"];
-     *     q_update [label="Q += sigma/omega\n* Q*g*g^T*Q"];
-     *     kappa [label="kappa *= delta"];
-     *     xc [label="x_c -= g"];
-     *     check [label="Success?", shape=diamond, fillcolor="#f9e79f"];
-     *     done [label="Updated\nellipsoid", fillcolor="#7fb3d8"];
-     *     fail [label="NoEffect", fillcolor="#fadbd8"];
-     *     cut -> q_update -> kappa -> xc -> check;
-     *     check -> done [label="Yes", color="#27ae60"];
-     *     check -> fail [label="No", color="#e74c3c"];
-     *   }
-     * @enddot
-     *
-     * @tparam T Type of the beta parameter.
-     * @param[in] cut A pair containing the gradient and beta value.
-     * @return CutStatus The status of the cut.
-     */
-    template <typename T> auto update_q(const std::pair<Arr, T>& cut) -> CutStatus {
-        return this->_update_core(
-            cut, [this](Vec& grad, const T& beta) { return this->_mgr.update_q(grad, beta); });
-    }
-
-  private:
-    /**
-     * @brief Update ellipsoid core function using the cut(s).
-     *
-     * @tparam T Type of the beta parameter.
-     * @tparam Fn Type of the cut strategy function.
-     * @param[in] cut A pair containing the gradient and beta value.
-     * @param[in] cut_strategy The strategy function to apply the cut.
-     * @return CutStatus The status of the cut.
-     */
-    template <typename T, typename Fn>
-    auto _update_core(const std::pair<Arr, T>& cut, Fn&& cut_strategy) -> CutStatus {
-        const auto& grad = cut.first;
-        const auto& beta = cut.second;
-        std::valarray<double> g(this->_n);
-        for (size_t i = 0; i != this->_n; ++i) {
-            g[i] = grad[i];
-        }
-
-        auto result = cut_strategy(g, beta);
-
-        if (result == CutStatus::Success) {
-            for (size_t i = 0; i != this->_n; ++i) {
-                this->_xc[i] -= g[i];
-            }
-        }
-
-        return result;
-    }
 };  // } Ell

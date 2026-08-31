@@ -10,6 +10,8 @@
 #include <tuple>
 #include <valarray>
 
+#include "../round_robin.hpp"
+
 // Modified from CVX code by Almir Mutapcic in 2006.
 // Adapted in 2010 for impulse response peak-minimization by convex iteration by
 // Christine Law.
@@ -62,9 +64,9 @@ class LowpassOracle {
     double Upsq;
     int nwpass;
     int nwstop;
-    int idx1;
-    int idx2;
-    int idx3;
+    RoundRobin _rr1;  // passband scan: [0, nwpass)
+    RoundRobin _rr2;  // transition scan: [nwpass, nwstop)
+    RoundRobin _rr3;  // stopband scan: [nwstop, A.size())
 
   public:
     /**

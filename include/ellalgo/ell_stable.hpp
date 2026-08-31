@@ -1,287 +1,80 @@
 /**
  * @file ell_stable.hpp
- * @brief Numerically stable ellipsoid search space (LDL^T-based)
+ * @brief Numerically stable ellipsoid search space (LDL^T strategy)
  */
 
-// -*- coding: utf-8 -*-
 #pragma once
 
 #include <valarray>
 
-#include "ell_config.hpp"
-#include "ell_core.hpp"
-
-// forward declaration
-enum class CutStatus;
+#include "ell_base.hpp"
 
 /**
- * @brief Ellipsoid Search Space
+ * @brief Ellipsoid Search Space (stable strategy)
+ *
+ * Concrete strategy of `EllBase` with the numerically-stable LDL^T update:
+ * `EllCore::update_stable_*` is used for cutting-plane updates.
  *
  * @f[
  *     \mathcal{E} = \{x \mid (x - x_c)^T Q^{-1} (x - x_c) \le \kappa\}
  * @f]
  *
- * Keep $Q$ symmetric but no promise of positive definite
+ * @tparam Arr Array type of the center point
  */
-template <typename Arr> class EllStable {
+template <typename Arr> class EllStable : public EllBase<Arr, true> {
+    using Base = EllBase<Arr, true>;
+
   public:
     using Vec = std::valarray<double>;
     using ArrayType = Arr;
 
-  private:
-    size_t _n;
-    Arr _xc;
-    EllCore _mgr;
+    /**
+     * @brief Named constructor: initial ellipsoid from per-axis radii.
+     *
+     * @param[in] val A vector of per-axis radii (diagonal of the shape matrix).
+     * @param[in] x An array of type Arr. This parameter is moved.
+     * @return EllStable A new EllStable object.
+     */
+    static auto from_radii(const Vec& val, Arr x) -> EllStable {
+        return EllStable(val, std::move(x));
+    }
+
+    /**
+     * @brief Named constructor: initial ellipsoid from a scaling factor.
+     *
+     * @param[in] alpha A double value representing the scaling factor.
+     * @param[in] x An array of type Arr. This parameter is moved.
+     * @return EllStable A new EllStable object.
+     */
+    static auto from_alpha(const double alpha, Arr x) -> EllStable {
+        return EllStable(alpha, std::move(x));
+    }
+
+    /// @brief Construct from a diagonal vector and a center point (moved in).
+    EllStable(const Vec& val, Arr x) : Base(val, std::move(x)) {}
+
+    /// @brief Construct from a scaling factor and a center point (moved in).
+    EllStable(const double alpha, Arr x) : Base(alpha, std::move(x)) {}
+
+    /// @brief Move constructor.
+    EllStable(EllStable&& E) noexcept = default;
+
+    /// @brief Move assignment operator.
+    auto operator=(EllStable&&) noexcept -> EllStable& = default;
+
+    /// @brief Destructor.
+    ~EllStable() = default;
+
+    /// @brief Explicit copy constructor.
+    explicit EllStable(const EllStable& E) = default;
 
     /// @brief Deleted copy assignment operator (non-copyable).
     auto operator=(const EllStable& E) -> EllStable& = delete;
 
-  public:
     /**
-     * @brief Construct a new EllStable object
+     * @brief Explicitly copy the EllStable object.
      *
-     * @param[in] val A vector of values.
-     * @param[in] x An array. This parameter is moved.
-     */
-    EllStable(const Vec& val, Arr x)
-        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(val, _n) {}
-
-    /**
-     * @brief Construct a new EllStable object
-     *
-     * @param[in] alpha A double value for the scaling factor.
-     * @param[in] x An array. This parameter is moved.
-     */
-    EllStable(double alpha, Arr x)
-        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(alpha, _n) {}
-
-    /**
-     * @brief Construct a new EllStable object
-     *
-     * The function is a constructor for an EllStable object that takes an rvalue reference as a
-     * parameter.
-     *
-     * @param[in] E The parameter "E" is an rvalue reference to an object of type "EllStable".
-     */
-    EllStable(EllStable&& E) noexcept = default;
-
-    /**
-     * @brief Move assignment operator
-     */
-    auto operator=(EllStable&&) noexcept -> EllStable& = default;
-
-    /**
-     * @brief Destroy the EllStable object
-     *
-     */
-    ~EllStable() = default;
-
-    /**
-     * @brief Construct a new EllStable object
-     *
-     * To avoid accidentally copying, only explicit copy is allowed
-     *
-     * @param[in] E The parameter "E" is a reference to an object of type "EllStable".
-     */
-    explicit EllStable(const EllStable& E) = default;
-
-    /**
-     * @brief explicitly copy
-     *
-     * @return EllStable
+     * @return EllStable A new EllStable object that is a copy of the current object.
      */
     auto copy() const -> EllStable { return EllStable(*this); }
-
-    /**
-     * @brief Get the center of the ellipsoid.
-     *
-     * @return Arr The center of ellipsoid.
-     */
-    auto xc() const -> Arr { return this->_xc; }
-
-    /**
-     * @brief Set the xc object
-     *
-     * @param[in] xc
-     */
-    void set_xc(const Arr& xc) { this->_xc = xc; }
-
-    /**
-     * @brief Get the squared radius of the ellipsoid.
-     *
-     * @return double The squared radius.
-     */
-    constexpr auto tsq() const -> double { return this->_mgr.tsq(); }
-
-    /**
-     * The function sets the value of the use_parallel_cut property in the _mgr object.
-     *
-     * @param[in] value The value parameter is a boolean value that determines whether or not to use
-     * parallel cut.
-     */
-    void set_use_parallel_cut(bool value) { this->_mgr.set_use_parallel_cut(value); }
-
-    /**
-     * @brief Update ellipsoid core function using the deep cut(s)
-     *
-     * The `update_bias_cut` function is a member function of the `EllStable` class. It is used to
-     * update the ellipsoid core function using a cutting plane.
-     *
-     * @f[
-     *     g^T (x - x_c) + \beta \le 0
-     * @f]
-     *
-     * @dot
-     *   digraph stable_bias_cut {
-     *     bgcolor="transparent";
-     *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
-     *     cut [label="Cut: g, beta", fillcolor="#a9cce3"];
-     *     update [label="LDL^T update\nx_c -= g"];
-     *     check [label="Success?", shape=diamond, fillcolor="#f9e79f"];
-     *     done [label="Updated\nellipsoid", fillcolor="#7fb3d8"];
-     *     fail [label="NoEffect", fillcolor="#fadbd8"];
-     *     cut -> update;
-     *     update -> check;
-     *     check -> done [label="Yes", color="#27ae60"];
-     *     check -> fail [label="No", color="#e74c3c"];
-     *   }
-     * @enddot
-     *
-     * @tparam T
-     * @param[in] cut cutting-plane
-     * @return std::tuple<int, double>
-     */
-    template <typename T> auto update_bias_cut(const std::pair<Arr, T>& cut) -> CutStatus {
-        return this->_update_core(cut, [this](Vec& grad, const T& beta) {
-            return this->_mgr.update_stable_bias_cut(grad, beta);
-        });
-    }
-
-    /**
-     * @brief Update ellipsoid core function using the central cut(s)
-     *
-     * The `update_central_cut` function is a member function of the `EllStable` class. It is used
-     * to update the ellipsoid core function using a cutting plane.
-     *
-     * @f[
-     *     g^T (x - x_c) \le 0
-     * @f]
-     *
-     * @dot
-     *   digraph stable_central_cut {
-     *     bgcolor="transparent";
-     *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
-     *     cut [label="Cut: g, beta=0", fillcolor="#a9cce3"];
-     *     update [label="LDL^T update\nx_c -= g"];
-     *     check [label="Success?", shape=diamond, fillcolor="#f9e79f"];
-     *     done [label="Updated\nellipsoid", fillcolor="#7fb3d8"];
-     *     fail [label="NoEffect", fillcolor="#fadbd8"];
-     *     cut -> update;
-     *     update -> check;
-     *     check -> done [label="Yes", color="#27ae60"];
-     *     check -> fail [label="No", color="#e74c3c"];
-     *   }
-     * @enddot
-     *
-     * @tparam T
-     * @param[in] cut cutting-plane
-     * @return std::tuple<int, double>
-     */
-    template <typename T> auto update_central_cut(const std::pair<Arr, T>& cut) -> CutStatus {
-        return this->_update_core(cut, [this](Vec& grad, const T& beta) {
-            return this->_mgr.update_stable_central_cut(grad, beta);
-        });
-    }
-
-    /**
-     * @brief Update ellipsoid core function using the cut(s)
-     *
-     * The `update_q` function is a member function of the `EllStable` class. It is used to update the
-     * ellipsoid core function using a cutting plane.
-     *
-     * @f[
-     *     Q^+ = Q - \frac{\sigma}{\omega} Q g g^T Q, \qquad
-     *     \kappa^+ = \kappa \cdot \delta
-     * @f]
-     *
-     * @dot
-     *   digraph stable_q_update {
-     *     bgcolor="transparent";
-     *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
-     *     cut [label="Cut: g, beta", fillcolor="#a9cce3"];
-     *     ldlt [label="LDL^T update\nQ += sigma/omega\n* Q*g*g^T*Q"];
-     *     kappa [label="kappa *= delta"];
-     *     xc [label="x_c -= g"];
-     *     check [label="Success?", shape=diamond, fillcolor="#f9e79f"];
-     *     done [label="Updated\nellipsoid", fillcolor="#7fb3d8"];
-     *     fail [label="NoEffect", fillcolor="#fadbd8"];
-     *     cut -> ldlt -> kappa -> xc -> check;
-     *     check -> done [label="Yes", color="#27ae60"];
-     *     check -> fail [label="No", color="#e74c3c"];
-     *   }
-     * @enddot
-     *
-     * @f[
-     *     Q^+ = Q - \frac{\sigma}{\omega} Q g g^T Q, \qquad
-     *     \kappa^+ = \kappa \cdot \delta
-     * @f]
-     *
-     * @dot
-     *   digraph stable_q_update {
-     *     bgcolor="transparent";
-     *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
-     *     cut [label="Cut: g, beta", fillcolor="#a9cce3"];
-     *     ldlt [label="LDL^T update\nQ += sigma/omega\n* Q*g*g^T*Q"];
-     *     kappa [label="kappa *= delta"];
-     *     xc [label="x_c -= g"];
-     *     check [label="Success?", shape=diamond, fillcolor="#f9e79f"];
-     *     done [label="Updated\nellipsoid", fillcolor="#7fb3d8"];
-     *     fail [label="NoEffect", fillcolor="#fadbd8"];
-     *     cut -> ldlt -> kappa -> xc -> check;
-     *     check -> done [label="Yes", color="#27ae60"];
-     *     check -> fail [label="No", color="#e74c3c"];
-     *   }
-     * @enddot
-     *
-     * @tparam T
-     * @param[in] cut cutting-plane
-     * @return std::tuple<int, double>
-     */
-    template <typename T> auto update_q(const std::pair<Arr, T>& cut) -> CutStatus {
-        return this->_update_core(cut, [this](Vec& grad, const T& beta) {
-            return this->_mgr.update_stable_q(grad, beta);
-        });
-    }
-
-  private:
-    /**
-     * @brief Update ellipsoid core function using the cut(s)
-     *
-     * The `_update_core` function is a private member function of the `EllStable` class. It is used
-     * to update the ellipsoid core function using a cutting plane.
-     *
-     * @tparam T
-     * @tparam Fn
-     * @param[in] cut cutting-plane
-     * @param[in] cut_strategy
-     * @return std::tuple<int, double>
-     */
-    template <typename T, typename Fn>
-    auto _update_core(const std::pair<Arr, T>& cut, Fn&& cut_strategy) -> CutStatus {
-        const auto& grad = cut.first;
-        const auto& beta = cut.second;
-        std::valarray<double> g(this->_n);
-        for (size_t i = 0; i != this->_n; ++i) {
-            g[i] = grad[i];
-        }
-
-        auto result = cut_strategy(g, beta);
-        if (result == CutStatus::Success) {
-            for (size_t i = 0; i != this->_n; ++i) {
-                this->_xc[i] -= g[i];
-            }
-        }
-
-        return result;
-    }
 };  // } EllStable

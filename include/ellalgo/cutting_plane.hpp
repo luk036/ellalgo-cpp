@@ -194,6 +194,83 @@ inline auto cutting_plane_optim(O& omega, S& space, N& gamma, const Options& opt
 }  // END
 
 /**
+ * @brief State machine for the discrete cutting-plane method
+ *
+ * Encapsulates the mutable state of `cutting_plane_optim_q`: the
+ * best-so-far solution `x_best` and the `retry` phase flag. The `on_update`
+ * transition maps a CutStatus (plus the oracle's `more_alt` hint) onto a
+ * control-flow outcome.
+ *
+ * @note State pattern: the driver loop asks the machine for its current
+ *       phase (retry), feeds it each oracle/space result, and branches only
+ *       on the returned outcome. The retry/termination bookkeeping that used
+ *       to be scattered through the loop now lives in one place.
+ *
+ * @tparam A Array type of the decision variables
+ */
+template <typename A> class OptimQState {
+  public:
+    enum class Result { Continue, NoSoln, NoMoreAlt };
+
+  private:
+    A _x_best;
+    bool _retry = false;
+
+  public:
+    /**
+     * @brief Construct a new OptimQState object
+     *
+     * @param[in] invalid Sentinel (NaN) value for the initial x_best
+     */
+    explicit OptimQState(A invalid) : _x_best{std::move(invalid)} {}
+
+    /// @brief Get the best-so-far solution.
+    auto x_best() const -> const A& { return this->_x_best; }
+
+    /// @brief Get the best-so-far solution (mutable).
+    auto x_best() -> A& { return this->_x_best; }
+
+    /// @brief Whether the next assessment is a retry (reuse cached point).
+    auto retry() const -> bool { return this->_retry; }
+
+    /**
+     * @brief Transition on a newly obtained (shrunk) best solution.
+     *
+     * @param[in] x The new best discrete point (moved in)
+     */
+    void on_shrunk(A x) {
+        this->_x_best = std::move(x);
+        this->_retry = false;
+    }
+
+    /**
+     * @brief Transition on the space update result.
+     *
+     * @param[in] status   CutStatus returned by space.update_q
+     * @param[in] more_alt Whether the oracle has more alternative cuts
+     * @return Result::Continue to keep iterating; NoSoln / NoMoreAlt to stop
+     */
+    auto on_update(const CutStatus status, const bool more_alt) -> Result {
+        switch (status) {
+            case CutStatus::Success:
+                this->_retry = false;
+                return Result::Continue;
+            case CutStatus::NoSoln:
+                return Result::NoSoln;
+            case CutStatus::NoEffect:
+                if (more_alt) {
+                    this->_retry = true;
+                    return Result::Continue;
+                }
+                return Result::NoMoreAlt;
+            case CutStatus::Unknown:
+                return Result::Continue;
+        }
+        return Result::Continue;
+    }
+};
+
+/**
  * @brief Cutting-plane method for solving convex discrete optimization problem
  *
  * The `cutting_plane_optim_q` function implements the cutting-plane method for
@@ -224,35 +301,28 @@ template <typename O, typename S, typename N>
 inline auto cutting_plane_optim_q(O& omega, S& space_q, N& gamma,
                                   const Options& options = Options())
     -> std::tuple<CuttingPlaneArrayType<S>, size_t> {
-    auto x_best = invalid_value<CuttingPlaneArrayType<S>>();
-    auto retry = false;
+    using A = CuttingPlaneArrayType<S>;
+    OptimQState<A> state{invalid_value<A>()};
 
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
-        const auto result1 = omega.assess_optim_q(space_q.xc(), gamma, retry);
+        const auto result1 = omega.assess_optim_q(space_q.xc(), gamma, state.retry());
         const auto& cut = std::get<0>(result1);
         const auto& shrunk = std::get<1>(result1);
         if (shrunk) {  // best gamma obtained
-            auto x_q = std::get<2>(result1);
-            x_best = std::move(x_q);
-            retry = false;
+            state.on_shrunk(std::move(std::get<2>(result1)));
         }
-        auto status = space_q.update_q(cut);
-        if (status == CutStatus::Success) {
-            retry = false;
-        } else if (status == CutStatus::NoSoln) {
-            return {std::move(x_best), niter};
-        } else if (status == CutStatus::NoEffect) {
-            const auto& more_alt = std::get<3>(result1);
-            if (!more_alt) {  // more alt?
-                break;        // no more alternative cut
-            }
-            retry = true;
+        const auto outcome = state.on_update(space_q.update_q(cut), std::get<3>(result1));
+        if (outcome == OptimQState<A>::Result::NoSoln) {
+            return {std::move(state.x_best()), niter};
+        }
+        if (outcome == OptimQState<A>::Result::NoMoreAlt) {
+            break;  // no more alternative cut
         }
         if (space_q.tsq() < options.tolerance) {  // no more
-            return {std::move(x_best), niter};
+            return {std::move(state.x_best()), niter};
         }
     }
-    return {std::move(x_best), options.max_iters};
+    return {std::move(state.x_best()), options.max_iters};
 }  // END
 
 /**

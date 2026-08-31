@@ -62,9 +62,10 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
     this->nwstop = static_cast<int>(std::floor(wstop * static_cast<double>(m - 1)) + 1);
 
     // For round robin
-    this->idx1 = -1;
-    this->idx2 = this->nwpass - 1;
-    this->idx3 = this->nwstop - 1;
+    this->_rr1 = RoundRobin(0, static_cast<std::size_t>(this->nwpass));
+    this->_rr2 = RoundRobin(static_cast<std::size_t>(this->nwpass),
+                            static_cast<std::size_t>(this->nwstop));
+    this->_rr3 = RoundRobin(static_cast<std::size_t>(this->nwstop), this->A.size());
 }
 
 /**
@@ -96,19 +97,16 @@ auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut
     // case 2,
     // 2.0 passband constraints
     for (int _k = 0; _k != this->nwpass; ++_k) {
-        ++this->idx1;
-        if (this->idx1 == this->nwpass) {
-            this->idx1 = 0;  // round robin
-        }
-        double v = matrix_vector(static_cast<size_t>(this->idx1));
+        const auto idx = this->_rr1.next();
+        double v = matrix_vector(idx);
         if (v > this->Upsq) {
             cut.second = Vec{v - this->Upsq, v - this->Lpsq};
-            cut.first = this->A[static_cast<size_t>(this->idx1)];
+            cut.first = this->A[idx];
             return &cut;
         }
         if (v < this->Lpsq) {
             cut.second = Vec{-v + this->Lpsq, -v + this->Upsq};
-            cut.first = -this->A[static_cast<size_t>(this->idx1)];
+            cut.first = -this->A[idx];
             return &cut;
         }
     }
@@ -119,38 +117,32 @@ auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut
     this->_fmax = -1e100;  // std::numeric_limits<double>::min()
     this->_kmax = -1;
     for (int _k = this->nwstop; _k != N; ++_k) {
-        ++this->idx3;
-        if (this->idx3 == N) {
-            this->idx3 = this->nwstop;  // round robin
-        }
-        double v = matrix_vector(static_cast<size_t>(this->idx3));
+        const auto idx = this->_rr3.next();
+        double v = matrix_vector(idx);
         if (v > Spsq) {
             cut.second = Vec{v - Spsq, v};
-            cut.first = this->A[static_cast<size_t>(this->idx3)];
+            cut.first = this->A[idx];
             return &cut;
         }
         if (v < 0.0) {
             cut.second = Vec{-v, -v + Spsq};
-            cut.first = -this->A[static_cast<size_t>(this->idx3)];
+            cut.first = -this->A[idx];
             return &cut;
         }
         if (v > this->_fmax) {
             this->_fmax = v;
-            this->_kmax = this->idx3;
+            this->_kmax = static_cast<int>(idx);
         }
     }
 
     // case 4,
     // 1.0 nonnegative-real constraint
     for (int _k = this->nwpass; _k != this->nwstop; ++_k) {
-        ++this->idx2;
-        if (this->idx2 == this->nwstop) {
-            this->idx2 = this->nwpass;  // round robin
-        }
-        double v = matrix_vector(static_cast<size_t>(this->idx2));
+        const auto idx = this->_rr2.next();
+        double v = matrix_vector(idx);
         if (v < 0.0) {
             cut.second = Vec{-v};
-            cut.first = -this->A[static_cast<size_t>(this->idx2)];
+            cut.first = -this->A[idx];
             return &cut;
         }
     }
