@@ -1,18 +1,17 @@
 #define DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #include <doctest/doctest.h>  // for ResultBuilder, TestCase, CHECK
 
-#include <cmath>    // for sqrt
-#include <cstddef>  // for size_t
-#include <random>   // for mt19937, normal_distribution
-#include <tuple>    // for get
-#include <utility>  // for pair
-#include <valarray> // for valarray
-#include <vector>   // for vector
-
+#include <cmath>                                 // for sqrt
+#include <cstddef>                               // for size_t
 #include <ellalgo/cutting_plane.hpp>             // for cutting_plane_optim
 #include <ellalgo/ell.hpp>                       // for Ell
 #include <ellalgo/ell_config.hpp>                // for Options
 #include <ellalgo/oracles/chebyshev_oracle.hpp>  // for ChebyshevOracle
+#include <random>                                // for mt19937, normal_distribution
+#include <tuple>                                 // for get
+#include <utility>                               // for pair
+#include <valarray>                              // for valarray
+#include <vector>                                // for vector
 
 using Vec = std::valarray<double>;
 
@@ -91,7 +90,8 @@ TEST_CASE("Chebyshev center, n = 10, m = 50") {
 TEST_CASE("Chebyshev center, several sizes") {
     for (std::size_t n = 2; n <= 10; ++n) {
         const auto m = 5 * n;
-        const auto [A, b] = generate_polyhedron(n, m, static_cast<unsigned>(n));  // different seed per size
+        const auto [A, b]
+            = generate_polyhedron(n, m, static_cast<unsigned>(n));  // different seed per size
 
         ChebyshevOracle omega{A, b};
         const auto kappa = std::sqrt(static_cast<double>(n + 1)) + 1.0;

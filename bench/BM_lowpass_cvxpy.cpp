@@ -4,19 +4,18 @@
 #define ANKERL_NANOBENCH_IMPLEMENT
 #include <nanobench.h>
 
-#include <chrono>                                // for steady_clock, duration
-#include <cmath>                                // for log10, sqrt
-#include <cstddef>                              // for size_t
-#include <cstdio>                               // for printf
-#include <string>                               // for to_string
-#include <tuple>                                // for get
-#include <utility>                              // for move
-#include <valarray>                             // for valarray
-
-#include <ellalgo/cutting_plane.hpp>            // for cutting_plane_optim
-#include <ellalgo/ell.hpp>                      // for Ell
-#include <ellalgo/ell_config.hpp>               // for Options
-#include <ellalgo/oracles/lowpass_oracle.hpp>   // for LowpassOracle, create_lowpass_case
+#include <chrono>                              // for steady_clock, duration
+#include <cmath>                               // for log10, sqrt
+#include <cstddef>                             // for size_t
+#include <cstdio>                              // for printf
+#include <ellalgo/cutting_plane.hpp>           // for cutting_plane_optim
+#include <ellalgo/ell.hpp>                     // for Ell
+#include <ellalgo/ell_config.hpp>              // for Options
+#include <ellalgo/oracles/lowpass_oracle.hpp>  // for LowpassOracle, create_lowpass_case
+#include <string>                              // for to_string
+#include <tuple>                               // for get
+#include <utility>                             // for move
+#include <valarray>                            // for valarray
 
 using Vec = std::valarray<double>;
 

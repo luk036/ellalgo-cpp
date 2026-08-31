@@ -4,18 +4,17 @@
 #define ANKERL_NANOBENCH_IMPLEMENT
 #include <nanobench.h>
 
-#include <cmath>      // for log, sqrt
-#include <cstddef>    // for size_t
-#include <random>     // for default_random_engine, normal_distribution
-#include <tuple>      // for get
-#include <utility>    // for move
-#include <valarray>   // for valarray
-#include <vector>     // for vector
-
-#include <ellalgo/cutting_plane.hpp>            // for cutting_plane_optim
-#include <ellalgo/ell.hpp>                      // for Ell
-#include <ellalgo/ell_config.hpp>               // for Options
+#include <cmath>                                 // for log, sqrt
+#include <cstddef>                               // for size_t
+#include <ellalgo/cutting_plane.hpp>             // for cutting_plane_optim
+#include <ellalgo/ell.hpp>                       // for Ell
+#include <ellalgo/ell_config.hpp>                // for Options
 #include <ellalgo/oracles/chebyshev_oracle.hpp>  // for ChebyshevOracle
+#include <random>                                // for default_random_engine, normal_distribution
+#include <tuple>                                 // for get
+#include <utility>                               // for move
+#include <valarray>                              // for valarray
+#include <vector>                                // for vector
 
 using Vec = std::valarray<double>;
 

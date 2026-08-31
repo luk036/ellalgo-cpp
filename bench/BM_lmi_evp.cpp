@@ -4,22 +4,21 @@
 #define ANKERL_NANOBENCH_IMPLEMENT
 #include <nanobench.h>
 
-#include <chrono>     // for steady_clock, duration
-#include <cmath>      // for sqrt
-#include <cstddef>    // for size_t
-#include <cstdio>     // for printf
-#include <random>     // for mt19937, normal_distribution
-#include <string>     // for to_string
-#include <tuple>      // for get
-#include <utility>    // for move
-#include <valarray>   // for valarray
-#include <vector>     // for vector
-
-#include <ellalgo/cutting_plane.hpp>            // for cutting_plane_optim
-#include <ellalgo/ell.hpp>                      // for Ell
-#include <ellalgo/ell_config.hpp>               // for Options
-#include <ellalgo/ell_matrix.hpp>               // for Matrix
-#include <ellalgo/oracles/lmi_oracle.hpp>       // for LmiOracle
+#include <chrono>                          // for steady_clock, duration
+#include <cmath>                           // for sqrt
+#include <cstddef>                         // for size_t
+#include <cstdio>                          // for printf
+#include <ellalgo/cutting_plane.hpp>       // for cutting_plane_optim
+#include <ellalgo/ell.hpp>                 // for Ell
+#include <ellalgo/ell_config.hpp>          // for Options
+#include <ellalgo/ell_matrix.hpp>          // for Matrix
+#include <ellalgo/oracles/lmi_oracle.hpp>  // for LmiOracle
+#include <random>                          // for mt19937, normal_distribution
+#include <string>                          // for to_string
+#include <tuple>                           // for get
+#include <utility>                         // for move
+#include <valarray>                        // for valarray
+#include <vector>                          // for vector
 
 using Vec = std::valarray<double>;
 using M_t = std::vector<Matrix>;
@@ -96,11 +95,11 @@ static auto fro_norm(const Matrix& M, std::size_t d) -> double {
 class EigenOracle {
     using Cut = std::pair<Vec, double>;
 
-    M_t _F;  // A₁..A_m, −I  (must precede _lmi which references it)
-    Matrix _B;        // −A0
+    M_t _F;     // A₁..A_m, −I  (must precede _lmi which references it)
+    Matrix _B;  // −A0
     LmiOracle<Vec, Matrix> _lmi;
-    std::size_t _m;   // number of x variables (t is the last component)
-    Vec _c;           // objective gradient: e_{m+1} (selects t)
+    std::size_t _m;  // number of x variables (t is the last component)
+    Vec _c;          // objective gradient: e_{m+1} (selects t)
 
   public:
     /**
@@ -115,8 +114,8 @@ class EigenOracle {
         : _F{A_list}, _B{A0 * -1.0}, _lmi{n, this->_F, this->_B}, _m{m}, _c(Vec(0.0, m + 1)) {
         auto I = Matrix(n);
         I.identity();
-        this->_F.push_back(I * -1.0);            // F_{m+1} = −I
-        this->_c[m] = 1.0;                       // objective: minimize t
+        this->_F.push_back(I * -1.0);  // F_{m+1} = −I
+        this->_c[m] = 1.0;             // objective: minimize t
     }
 
     /**
@@ -142,12 +141,12 @@ class EigenOracle {
         if (const auto* const cut = this->_lmi(xc)) {  // t·I − A(x) ⪰ 0
             return {*cut, false};
         }
-        const auto f0 = (this->_c * xc).sum();          // objective: minimize t
+        const auto f0 = (this->_c * xc).sum();  // objective: minimize t
         if (const auto fj = f0 - gamma; fj > 0.0) {
-            return {{this->_c, fj}, false};             // deep objective cut
+            return {{this->_c, fj}, false};  // deep objective cut
         }
         gamma = f0;
-        return {{this->_c, 0.0}, true};                 // improved -> central cut
+        return {{this->_c, 0.0}, true};  // improved -> central cut
     }
 };
 
@@ -183,7 +182,7 @@ static auto solve_evp(std::size_t n, std::size_t m) -> std::tuple<double, std::s
 }
 
 int main() {
-    constexpr std::size_t N = 5;                     // LMI matrix dimension
+    constexpr std::size_t N = 5;                                  // LMI matrix dimension
     static constexpr std::size_t M_SIZES[] = {5, 8, 12, 16, 20};  // x-variable counts
     std::printf("%4s %5s %14s %8s %12s\n", "m", "vars", "ellipsoid(s)", "iters", "t*");
     std::printf("%s\n", std::string(50, '-').c_str());
@@ -193,7 +192,10 @@ int main() {
     }
 
     ankerl::nanobench::Bench bench;
-    bench.title("Min-eigenvalue LMI: ellipsoid method (m = 5..20)").unit("op").warmup(100).epochs(50);
+    bench.title("Min-eigenvalue LMI: ellipsoid method (m = 5..20)")
+        .unit("op")
+        .warmup(100)
+        .epochs(50);
     for (const auto m : M_SIZES) {
         bench.run("m=" + std::to_string(m), [&] {
             std::mt19937 rng{0};
