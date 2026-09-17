@@ -55,6 +55,7 @@ template <typename Arr, bool Stable> class EllBase {
     size_t _n;
     Arr _xc;
     EllCore _mgr;
+    Vec _g;  // scratch buffer for the cut gradient / center displacement
 
     /// @brief Deleted copy assignment operator (non-copyable).
     auto operator=(const EllBase& E) -> EllBase& = delete;
@@ -67,7 +68,7 @@ template <typename Arr, bool Stable> class EllBase {
      * @param[in] x An array of type Arr. This parameter is moved.
      */
     EllBase(const Vec& val, Arr x)
-        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(val, _n) {}
+        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(val, _n), _g(0.0, _n) {}
 
     /**
      * @brief Construct a new EllBase object from an alpha value and an array.
@@ -76,7 +77,7 @@ template <typename Arr, bool Stable> class EllBase {
      * @param[in] x An array of type Arr. This parameter is moved.
      */
     EllBase(const double alpha, Arr x)
-        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(alpha, _n) {}
+        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(alpha, _n), _g(0.0, _n) {}
 
     /**
      * @brief Construct a new EllBase object (move constructor)
@@ -260,7 +261,7 @@ template <typename Arr, bool Stable> class EllBase {
     auto _update_core(const std::pair<Arr, T>& cut, Fn&& cut_strategy) -> CutStatus {
         const auto& grad = cut.first;
         const auto& beta = cut.second;
-        std::valarray<double> g(this->_n);
+        auto& g = this->_g;
         for (size_t i = 0; i != this->_n; ++i) {
             g[i] = grad[i];
         }

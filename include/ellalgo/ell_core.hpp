@@ -289,14 +289,18 @@ class EllCore {
     template <typename T, typename Fn>
     auto _update_core(Vec& grad, const T& beta, Fn&& cut_strategy) -> CutStatus {
         // reuse _v as grad_t = M * g (pre-allocated, no allocation)
-        this->_v = 0.0;
         for (size_t i = 0; i != this->_n; ++i) {
+            auto s = 0.0;
             for (size_t j = 0; j != this->_n; ++j) {
-                this->_v[i] += this->_mq(i, j) * grad[j];
+                s += this->_mq(i, j) * grad[j];
             }
+            this->_v[i] = s;
         }
 
-        const auto omega = (this->_v * grad).sum();
+        auto omega = 0.0;
+        for (size_t i = 0; i != this->_n; ++i) {
+            omega += this->_v[i] * grad[i];
+        }
         this->_tsq = this->_kappa * omega;
 
         if (omega <= std::numeric_limits<double>::min()) {
@@ -327,7 +331,10 @@ class EllCore {
             this->_kappa = 1.0;
         }
 
-        grad = this->_v * (result.rho / omega);
+        const auto rho_over_omega = result.rho / omega;
+        for (size_t i = 0; i != this->_n; ++i) {
+            grad[i] = this->_v[i] * rho_over_omega;
+        }
         return result.status;
     }
 
@@ -412,7 +419,10 @@ class EllCore {
         }
         this->_kappa *= result.delta;
         // _v still holds grad_t = L^{-T}*z (preserved from back substitution)
-        g = this->_v * (result.rho / omega);
+        const auto rho_over_omega = result.rho / omega;
+        for (size_t i = 0; i != this->_n; ++i) {
+            g[i] = this->_v[i] * rho_over_omega;
+        }
         return result.status;
     }
 
