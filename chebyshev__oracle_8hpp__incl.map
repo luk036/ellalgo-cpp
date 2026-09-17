@@ -1,0 +1,18 @@
+<map id="ellalgo/oracles/chebyshev_oracle.hpp" name="ellalgo/oracles/chebyshev_oracle.hpp">
+<area shape="rect" id="Node000001" title="Oracle for the Chebyshev center problem (largest inscribed ball)" alt="" coords="157,5,348,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,68,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,48,82,91,80,86,200,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="299,167,369,192"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="194,48,164,62,140,78,128,97,128,107,133,117,157,133,196,148,286,168,284,173,194,153,154,138,129,120,123,108,123,96,136,75,161,57,192,43"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="144,93,199,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="235,47,195,85,192,82,231,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="223,93,283,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="255,46,255,79,250,79,250,46"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="307,93,383,119"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="277,44,322,82,319,86,273,48"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="407,93,469,119"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="298,43,399,85,397,90,296,48"/>
+<area shape="rect" id="Node000008" href="$round__robin_8hpp.html" title="Round&#45;robin index helper for cyclic constraint scanning." alt="" coords="494,93,633,119"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="328,43,505,87,504,92,326,48"/>
+<area shape="poly" id="edge8_Node000008_Node000003" title=" " alt="" coords="527,121,384,165,382,160,526,116"/>
+</map>
