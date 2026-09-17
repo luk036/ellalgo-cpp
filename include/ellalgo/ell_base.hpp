@@ -68,10 +68,7 @@ template <typename Arr, bool Stable> class EllBase {
      * @param[in] x An array of type Arr. This parameter is moved.
      */
     EllBase(const Vec& val, Arr x)
-        : _n{static_cast<std::size_t>(x.size())},
-          _xc{std::move(x)},
-          _mgr(val, _n),
-          _g(0.0, _n) {}
+        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(val, _n), _g(0.0, _n) {}
 
     /**
      * @brief Construct a new EllBase object from an alpha value and an array.
@@ -80,10 +77,7 @@ template <typename Arr, bool Stable> class EllBase {
      * @param[in] x An array of type Arr. This parameter is moved.
      */
     EllBase(const double alpha, Arr x)
-        : _n{static_cast<std::size_t>(x.size())},
-          _xc{std::move(x)},
-          _mgr(alpha, _n),
-          _g(0.0, _n) {}
+        : _n{static_cast<std::size_t>(x.size())}, _xc{std::move(x)}, _mgr(alpha, _n), _g(0.0, _n) {}
 
     /**
      * @brief Construct a new EllBase object (move constructor)
