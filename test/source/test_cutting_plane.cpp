@@ -85,3 +85,21 @@ TEST_CASE("Binary search") {
     auto result = bsearch(adaptor, std::make_pair(0.0, 10.0), options);
     CHECK(std::get<0>(result) < 3.0);
 }
+
+struct MyOracleC4 {
+    using ArrayType = std::vector<double>;
+    using Cut = std::pair<ArrayType, double>;
+
+    auto assess_bs(double gamma) -> bool { return gamma > 500.0; }
+};
+
+TEST_CASE("Binary search stops at float resolution") {
+    // The threshold is far from zero, so the bracket collapses around it and
+    // `tau` bottoms out at its ulp (~1e-13) where the default tolerance of
+    // 1e-20 is unreachable. Without a stall guard this runs to max_iters.
+    auto oracle = MyOracleC4{};
+    auto options = Options();
+    auto result = bsearch(oracle, std::make_pair(0.0, 1e6), options);
+    CHECK(std::get<1>(result) < 200);
+    CHECK(std::get<0>(result) == doctest::Approx(500.0).epsilon(1e-9));
+}
