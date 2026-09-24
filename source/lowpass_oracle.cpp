@@ -81,78 +81,23 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
  * boolean value.
  */
 auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut* {
-    static ParallelCut cut = std::make_pair(Vec{0.0}, Vec{0.0});
+    auto& cut = this->_cut;
 
-    // this->more_alt = true;
-    auto n = x.size();
-
-    auto matrix_vector = [this, &x](size_t k) {
-        double sum = 0.0;
-        for (size_t j = 0U; j != x.size(); ++j) {
-            sum += this->A[k][j] * x[j];
-        }
-        return sum;
-    };
-
-    // case 2,
-    // 2.0 passband constraints
-    for (int _k = 0; _k != this->nwpass; ++_k) {
-        const auto idx = this->_rr1.next();
-        double v = matrix_vector(idx);
-        if (v > this->Upsq) {
-            cut.second = Vec{v - this->Upsq, v - this->Lpsq};
-            cut.first = this->A[idx];
-            return &cut;
-        }
-        if (v < this->Lpsq) {
-            cut.second = Vec{-v + this->Lpsq, -v + this->Upsq};
-            cut.first = -this->A[idx];
-            return &cut;
-        }
+    if (this->scan_band(x, this->_rr1, 0U, static_cast<size_t>(this->nwpass), this->Lpsq, true,
+                        this->Upsq, false, cut)) {
+        return &cut;
+    }
+    if (this->scan_band(x, this->_rr3, static_cast<size_t>(this->nwstop), this->A.size(), 0.0, true,
+                        Spsq, true, cut)) {
+        return &cut;
+    }
+    if (this->scan_band(x, this->_rr2, static_cast<size_t>(this->nwpass),
+                        static_cast<size_t>(this->nwstop), 0.0, false, 0.0, false, cut)) {
+        return &cut;
     }
 
-    // case 3,
-    // 3.0 stopband constraint
-    auto N = static_cast<int>(A.size());
-    this->_fmax = -1e100;  // std::numeric_limits<double>::min()
-    this->_kmax = -1;
-    for (int _k = this->nwstop; _k != N; ++_k) {
-        const auto idx = this->_rr3.next();
-        double v = matrix_vector(idx);
-        if (v > Spsq) {
-            cut.second = Vec{v - Spsq, v};
-            cut.first = this->A[idx];
-            return &cut;
-        }
-        if (v < 0.0) {
-            cut.second = Vec{-v, -v + Spsq};
-            cut.first = -this->A[idx];
-            return &cut;
-        }
-        if (v > this->_fmax) {
-            this->_fmax = v;
-            this->_kmax = static_cast<int>(idx);
-        }
-    }
-
-    // case 4,
-    // 1.0 nonnegative-real constraint
-    for (int _k = this->nwpass; _k != this->nwstop; ++_k) {
-        const auto idx = this->_rr2.next();
-        double v = matrix_vector(idx);
-        if (v < 0.0) {
-            cut.second = Vec{-v};
-            cut.first = -this->A[idx];
-            return &cut;
-        }
-    }
-
-    // this->more_alt = false;
-
-    // 1.0 nonnegative-real constraint
-    // case 1,
     if (x[0] < 0.0) {
-        Vec g(0.0, n);
+        Vec g(0.0, x.size());
         g[0] = -1.0;
         cut.second = Vec{-x[0]};
         cut.first = g;
@@ -160,6 +105,39 @@ auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut
     }
 
     return nullptr;
+}
+
+auto LowpassOracle::scan_band(const Vec& x, RoundRobin& rr, size_t lo, size_t hi, double lower,
+                              bool has_upper, double upper, bool track_max,
+                              ParallelCut& cut) -> bool {
+    if (track_max) {
+        this->_fmax = -1e100;  // std::numeric_limits<double>::min()
+        this->_kmax = -1;
+    }
+
+    for (size_t k = 0; k != hi - lo; ++k) {
+        const auto idx = rr.next();
+        auto v = 0.0;
+        for (size_t j = 0U; j != x.size(); ++j) {
+            v += this->A[idx][j] * x[j];
+        }
+
+        if (has_upper && v > upper) {
+            cut.second = Vec{v - upper, v - lower};
+            cut.first = this->A[idx];
+            return true;
+        }
+        if (v < lower) {
+            cut.second = has_upper ? Vec{lower - v, upper - v} : Vec{lower - v};
+            cut.first = -this->A[idx];
+            return true;
+        }
+        if (track_max && v > this->_fmax) {
+            this->_fmax = v;
+            this->_kmax = static_cast<int>(idx);
+        }
+    }
+    return false;
 }
 
 /**

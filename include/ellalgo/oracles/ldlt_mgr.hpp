@@ -42,6 +42,55 @@ class LDLTMgr {
   private:
     Matrix T;  //!< temporary storage
 
+    /**
+     * @brief Shared LDL^T row-sweep skeleton (Template Method).
+     *
+     * The public `factor` and `factor_with_allow_semidefinite` entry points
+     * share this sweep; `allow_semidefinite` selects the pivot policy:
+     * when false, any `d <= 0` stops the sweep (positive definite); when
+     * true, a zero pivot advances `start` and only `d < 0` stops it
+     * (positive semi-definite).
+     *
+     * @tparam Fn callable with signature double(size_t, size_t)
+     * @param[in] get_matrix_elem lazy element accessor for A
+     * @param[in] allow_semidefinite pivot policy selector
+     * @return bool true if the matrix is (semi)definite per the policy
+     */
+    template <typename Fn>
+    auto _factor_impl(Fn get_matrix_elem, const bool allow_semidefinite) -> bool {
+        this->pos = {0U, 0U};
+        auto& start = this->pos.first;
+        auto& stop = this->pos.second;
+
+        for (auto i = 0U; i != this->_n; ++i) {
+            auto d = get_matrix_elem(i, start);
+            for (auto j = start; j != i; ++j) {
+                this->T(j, i) = d;
+                this->T(i, j) = d / this->T(j, j);  // note: T(j, i) here!
+                auto s = j + 1;
+                d = get_matrix_elem(i, s);
+                for (auto k = start; k != s; ++k) {
+                    d -= this->T(i, k) * this->T(k, s);
+                }
+            }
+            this->T(i, i) = d;
+
+            if (d < 0.0) {
+                stop = i + 1;
+                break;
+            }
+            if (d == 0.0) {
+                if (!allow_semidefinite) {
+                    stop = i + 1;
+                    break;
+                }
+                start = i + 1;
+                // restart at i + 1, special as an LMI oracle
+            }
+        }
+        return this->is_spd();
+    }
+
   public:
     /**
      * @brief Construct a new ldlt ext object
@@ -84,30 +133,7 @@ class LDLTMgr {
      * See also: factorize()
      */
     template <typename Fn> auto factor(Fn get_matrix_elem) -> bool {
-        this->pos = {0U, 0U};
-        auto const& start = this->pos.first;
-        auto& stop = this->pos.second;
-
-        for (auto i = 0U; i != this->_n; ++i) {
-            auto d = get_matrix_elem(i, start);
-            for (auto j = start; j != i; ++j) {
-                this->T(j, i) = d;
-                this->T(i, j) = d / this->T(j, j);  // note: T(j, i) here!
-                auto s = j + 1;
-                d = get_matrix_elem(i, s);
-                for (auto k = start; k != s; ++k) {
-                    d -= this->T(i, k) * this->T(k, s);
-                }
-            }
-            this->T(i, i) = d;
-
-            if (d <= 0.0) {
-                stop = i + 1;
-                break;
-            }
-        }
-
-        return this->is_spd();
+        return this->_factor_impl(get_matrix_elem, false);
     }
 
     /**
@@ -120,33 +146,7 @@ class LDLTMgr {
      * See also: factorize()
      */
     template <typename Fn> auto factor_with_allow_semidefinite(Fn get_matrix_elem) -> bool {
-        this->pos = {0U, 0U};
-        auto& start = this->pos.first;
-        auto& stop = this->pos.second;
-
-        for (auto i = 0U; i != this->_n; ++i) {
-            auto d = get_matrix_elem(i, start);
-            for (auto j = start; j != i; ++j) {
-                this->T(j, i) = d;
-                this->T(i, j) = d / this->T(j, j);  // note: T(j, i) here!
-                auto s = j + 1;
-                d = get_matrix_elem(i, s);
-                for (auto k = start; k != s; ++k) {
-                    d -= this->T(i, k) * this->T(k, s);
-                }
-            }
-            this->T(i, i) = d;
-
-            if (d < 0.0) {
-                stop = i + 1;
-                break;
-            }
-            if (d == 0.0) {
-                start = i + 1;
-                // restart at i + 1, special as an LMI oracle
-            }
-        }
-        return this->is_spd();
+        return this->_factor_impl(get_matrix_elem, true);
     }
 
     /**

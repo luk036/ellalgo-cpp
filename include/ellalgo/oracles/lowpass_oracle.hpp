@@ -68,6 +68,31 @@ class LowpassOracle {
     RoundRobin _rr2;  // transition scan: [nwpass, nwstop)
     RoundRobin _rr3;  // stopband scan: [nwstop, A.size())
 
+    ParallelCut _cut;  //!< storage for the cut returned by assess_feas
+
+    /**
+     * @brief Scan one frequency band for the first violated constraint.
+     *
+     * Composite/Strategy helper shared by all three bands. A two-sided band
+     * (`has_upper`) yields a parallel cut `(g, (lower_viol, upper_viol))`; a
+     * one-sided non-negativity band yields `(g, violation)`. When
+     * `track_max` is set the running stopband peak (`_fmax`/`_kmax`) is
+     * refreshed as the band is scanned.
+     *
+     * @param[in]  x         The autocorrelation coefficients
+     * @param[in,out] rr     Round-robin cursor for this band
+     * @param[in]  lo        First row index of the band
+     * @param[in]  hi        One-past-last row index of the band
+     * @param[in]  lower     Lower bound of the band
+     * @param[in]  has_upper Whether the band has a finite upper bound
+     * @param[in]  upper     Upper bound of the band (when has_upper)
+     * @param[in]  track_max Whether to track the stopband peak
+     * @param[out] cut       Cut storage to fill on violation
+     * @return true if a violating cut was produced, false otherwise
+     */
+    auto scan_band(const Vec& x, RoundRobin& rr, size_t lo, size_t hi, double lower, bool has_upper,
+                   double upper, bool track_max, ParallelCut& cut) -> bool;
+
   public:
     /**
      * @brief Construct a new lowpass oracle object

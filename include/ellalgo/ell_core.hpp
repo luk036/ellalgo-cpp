@@ -7,6 +7,7 @@
 #pragma once
 
 #include <limits>
+#include <optional>
 #include <utility>
 #include <valarray>
 
@@ -263,6 +264,57 @@ class EllCore {
 
   private:
     /**
+     * @brief Shared update prologue: τ², degeneracy guard, cut-strategy call.
+     *
+     * Sets \f$\tau^2 = \kappa\omega\f$, rejects a degenerate \f$\omega\f$
+     * (returned as `nullopt` so callers can apply their own NoEffect side
+     * effects), then evaluates the cut strategy. A non-success result is
+     * returned as-is for the caller to propagate.
+     *
+     * @tparam T  Type of the beta parameter
+     * @tparam Fn Type of the cut strategy callable
+     * @param[in] beta         Cut offset(s)
+     * @param[in] omega        Pre-computed \f$\omega = g^T Q g\f$
+     * @param[in] cut_strategy Strategy computing \f$(\rho, \sigma, \delta)\f$
+     * @return std::nullopt on degenerate omega, otherwise the CutResult
+     */
+    template <typename T, typename Fn>
+    auto _prologue(const T& beta, const double omega,
+                   Fn&& cut_strategy) -> std::optional<CutResult> {
+        this->_tsq = this->_kappa * omega;
+        if (omega <= std::numeric_limits<double>::min()) {
+            return std::nullopt;
+        }
+        return std::forward<Fn>(cut_strategy)(beta, this->_tsq);
+    }
+
+    /**
+     * @brief Shared update epilogue: scale, optional defer trick, center move.
+     *
+     * Applies \f$\kappa \leftarrow \kappa\delta\f$, optionally the
+     * `no_defer_trick` rescaling, then writes the center displacement
+     * \f$(\rho/\omega)\,g_t\f$ into `out` from the `_v` buffer computed by the
+     * caller. `allow_defer` keeps the historical asymmetry where only the
+     * classic Q-update honours `no_defer_trick`.
+     *
+     * @param[in]  result      Cut result carrying delta and rho
+     * @param[in]  omega       \f$\omega\f$ used for the displacement
+     * @param[out] out         Output vector for the center displacement
+     * @param[in]  allow_defer Whether the defer trick may be applied
+     */
+    void _epilogue(const CutResult& result, const double omega, Vec& out, const bool allow_defer) {
+        this->_kappa *= result.delta;
+        if (allow_defer && this->no_defer_trick) {
+            this->_mq *= this->_kappa;
+            this->_kappa = 1.0;
+        }
+        const auto rho_over_omega = result.rho / omega;
+        for (size_t i = 0; i != this->_n; ++i) {
+            out[i] = this->_v[i] * rho_over_omega;
+        }
+    }
+
+    /**
      * @brief Update ellipsoid core using the cut(s)
      *
      * Given gradient \f$g\f$ and ellipsoid shape \f$Q\f$, computes:
@@ -301,14 +353,13 @@ class EllCore {
         for (size_t i = 0; i != this->_n; ++i) {
             omega += this->_v[i] * grad[i];
         }
-        this->_tsq = this->_kappa * omega;
 
-        if (omega <= std::numeric_limits<double>::min()) {
+        auto maybe = this->_prologue(beta, omega, std::forward<Fn>(cut_strategy));
+        if (!maybe) {
             grad = this->_v;
             return CutStatus::NoEffect;
         }
-
-        auto result = std::forward<Fn>(cut_strategy)(beta, this->_tsq);
+        auto result = *maybe;
         if (result.status != CutStatus::Success) {
             return result.status;
         }
@@ -324,17 +375,7 @@ class EllCore {
             this->_mq(i, i) -= rQg * this->_v[i];
         }
 
-        this->_kappa *= result.delta;
-
-        if (this->no_defer_trick) {
-            this->_mq *= this->_kappa;
-            this->_kappa = 1.0;
-        }
-
-        const auto rho_over_omega = result.rho / omega;
-        for (size_t i = 0; i != this->_n; ++i) {
-            grad[i] = this->_v[i] * rho_over_omega;
-        }
+        this->_epilogue(result, omega, grad, true);
         return result.status;
     }
 
@@ -381,13 +422,11 @@ class EllCore {
             omega += this->_z[i] * this->_scratch[i];
         }
 
-        this->_tsq = this->_kappa * omega;
-
-        if (omega <= std::numeric_limits<double>::min()) {
+        auto maybe = this->_prologue(beta, omega, std::forward<Fn>(cut_strategy));
+        if (!maybe) {
             return CutStatus::NoEffect;
         }
-
-        auto result = std::forward<Fn>(cut_strategy)(beta, this->_tsq);
+        auto result = *maybe;
         if (result.status != CutStatus::Success) {
             return result.status;
         }
@@ -417,12 +456,8 @@ class EllCore {
             }
             oldt = newt;
         }
-        this->_kappa *= result.delta;
         // _v still holds grad_t = L^{-T}*z (preserved from back substitution)
-        const auto rho_over_omega = result.rho / omega;
-        for (size_t i = 0; i != this->_n; ++i) {
-            g[i] = this->_v[i] * rho_over_omega;
-        }
+        this->_epilogue(result, omega, g, false);
         return result.status;
     }
 
