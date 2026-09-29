@@ -15,6 +15,40 @@
 #include <ellalgo/ell_config.hpp>     // for CutStatus, CutStatus::Success
 
 /**
+ * @brief Shared parallel-bias dispatch for the normal and Q variants
+ *
+ * Two parallel constraints: beta0 ≤ g'(x - xc) ≤ beta1. The normal and
+ * discrete (Q) entry points differ only in the fallback cut and the
+ * eta ≤ 0 policy, selected by `discrete`.
+ *
+ * @param[in] beta0    Lower bound of the parallel cut
+ * @param[in] beta1    Upper bound of the parallel cut
+ * @param[in] tsq      Squared ellipsoid radius τ²
+ * @param[in] discrete True for the Q (discrete) fallback / eta policy
+ * @return CutResult with status, rho, sigma, delta
+ */
+auto EllCalc::_parallel_bias_cut(const double beta0, const double beta1, const double tsq,
+                                 const bool discrete) const -> CutResult {
+    if (beta1 < beta0) {
+        return {.status = CutStatus::NoSoln, .rho = 0.0, .sigma = 0.0, .delta = 0.0};  // no sol'n
+    }
+    if ((beta1 > 0.0 && tsq <= beta1 * beta1) || !this->use_parallel_cut) {
+        return discrete ? this->calc_bias_cut_q(beta0, tsq) : this->calc_bias_cut(beta0, tsq);
+    }
+    const auto b0b1 = beta0 * beta1;
+    const auto eta = tsq + this->_n_f * b0b1;
+    if (discrete && ELL_UNLIKELY(eta <= 0.0)) {
+        return {
+            .status = CutStatus::NoEffect, .rho = 0.0, .sigma = 0.0, .delta = 1.0};  // no effect
+    }
+    auto&& core = this->_helper.calc_parallel_cut_fast(beta0, beta1, tsq, b0b1, eta);
+    return {.status = CutStatus::Success,
+            .rho = std::get<0>(core),
+            .sigma = std::get<1>(core),
+            .delta = std::get<2>(core)};
+}
+
+/**
  * @brief Parallel bias cut computation
  *
  * Two parallel constraints: beta0 ≤ g'(x - xc) ≤ beta1.
@@ -27,17 +61,7 @@
  */
 auto EllCalc::calc_parallel_bias_cut(const double beta0, const double beta1, const double tsq) const
     -> CutResult {
-    if (beta1 < beta0) {
-        return {.status = CutStatus::NoSoln, .rho = 0.0, .sigma = 0.0, .delta = 0.0};  // no sol'n
-    }
-    if ((beta1 > 0 && tsq <= beta1 * beta1) || !this->use_parallel_cut) {
-        return this->calc_bias_cut(beta0, tsq);
-    }
-    auto&& core = this->_helper.calc_parallel_cut(beta0, beta1, tsq);
-    return {.status = CutStatus::Success,
-            .rho = std::get<0>(core),
-            .sigma = std::get<1>(core),
-            .delta = std::get<2>(core)};
+    return this->_parallel_bias_cut(beta0, beta1, tsq, false);
 }
 
 /**
@@ -119,25 +143,7 @@ auto EllCalc::calc_central_cut(const double tsq) const -> CutResult {
  */
 auto EllCalc::calc_parallel_bias_cut_q(const double beta0, const double beta1,
                                        const double tsq) const -> CutResult {
-    if (beta1 < beta0) {
-        return {.status = CutStatus::NoSoln, .rho = 0.0, .sigma = 0.0, .delta = 0.0};  // no sol'n
-    }
-
-    if ((beta1 > 0.0 && tsq <= beta1 * beta1) || !this->use_parallel_cut) {
-        return this->calc_bias_cut_q(beta0, tsq);
-    }
-
-    const auto b0b1 = beta0 * beta1;
-    const auto eta = tsq + this->_n_f * b0b1;
-    if (ELL_UNLIKELY(eta <= 0.0)) {
-        return {
-            .status = CutStatus::NoEffect, .rho = 0.0, .sigma = 0.0, .delta = 1.0};  // no effect
-    }
-    auto&& core = this->_helper.calc_parallel_cut_fast(beta0, beta1, tsq, b0b1, eta);
-    return {.status = CutStatus::Success,
-            .rho = std::get<0>(core),
-            .sigma = std::get<1>(core),
-            .delta = std::get<2>(core)};
+    return this->_parallel_bias_cut(beta0, beta1, tsq, true);
 }
 
 /**
