@@ -107,7 +107,7 @@ class ProfitOracle {
      * @param[in] gamma the best-so-far optimal value
      * @return Cut* Pointer to cut, or nullptr if feasible
      */
-    auto assess_feas(const Vec& y, const double& gamma) -> Cut*;
+    auto _feasibility_cut(const Vec& y, const double& gamma) -> Cut*;
 
     /**
      * @brief
@@ -144,6 +144,13 @@ class ProfitOracleRb {
     Vec _elasticities;
     ProfitOracle P;
 
+    /// @brief RAII guard restoring the wrapped oracle's elasticities on scope exit.
+    struct ScopedElasticities {
+        ProfitOracle& oracle;
+        const Vec& saved;
+        ~ScopedElasticities() { this->oracle.set_elasticities(this->saved); }
+    };
+
   public:
     /**
      * @brief Construct a new profit rb oracle object
@@ -173,8 +180,10 @@ class ProfitOracleRb {
         auto a_rb = this->_elasticities;
         a_rb[0] += y[0] > 0.0 ? -this->_uie[0] : this->_uie[0];
         a_rb[1] += y[1] > 0.0 ? -this->_uie[1] : this->_uie[1];
-        this->P.set_elasticities(a_rb);
-        return this->P.assess_optim(y, gamma);
+        auto& p = this->P;
+        const ScopedElasticities guard{p, this->_elasticities};
+        p.set_elasticities(a_rb);
+        return p.assess_optim(y, gamma);
     }
 };
 

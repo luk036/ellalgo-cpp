@@ -69,18 +69,18 @@ LowpassOracle::LowpassOracle(size_t N, double Lpsq, double Upsq, double wpass, d
 }
 
 /**
- * The function assess_feas in the LowpassOracle class assesses the optimization of a given input
- * vector x based on various constraints and returns a tuple containing the gradient and objective
- * function values, along with a boolean indicating whether the optimization is complete.
+ * The function `_feasibility_cut` in the LowpassOracle class assesses the feasibility of a given
+ * input vector x based on various constraints and returns a tuple containing the gradient and
+ * objective function values, along with a boolean indicating whether the optimization is complete.
  *
  * @param[in] x A 1-dimensional array representing the optimization variables.
  * @param[in, out] Spsq Spsq is a reference to a double variable. It is used to store the maximum
  * value of the stopband constraint.
  *
- * @return The function `assess_feas` returns a tuple containing a `ParallelCut` object and a
+ * @return The function `_feasibility_cut` returns a tuple containing a `ParallelCut` object and a
  * boolean value.
  */
-auto LowpassOracle::assess_feas(const Vec& x, const double& Spsq) -> ParallelCut* {
+auto LowpassOracle::_feasibility_cut(const Vec& x, const double& Spsq) -> ParallelCut* {
     auto& cut = this->_cut;
 
     if (this->scan_band(x, this->_rr1, 0U, static_cast<size_t>(this->nwpass), this->Lpsq, true,
@@ -153,7 +153,7 @@ auto LowpassOracle::scan_band(const Vec& x, RoundRobin& rr, size_t lo, size_t hi
  * boolean value.
  */
 auto LowpassOracle::assess_optim(const Vec& x, double& Spsq) -> std::tuple<ParallelCut, bool> {
-    auto* cut = this->assess_feas(x, Spsq);
+    auto* cut = this->_feasibility_cut(x, Spsq);
     if (cut != nullptr) {
         return {*cut, false};
     }

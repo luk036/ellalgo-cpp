@@ -68,7 +68,7 @@ class LowpassOracle {
     RoundRobin _rr2;  // transition scan: [nwpass, nwstop)
     RoundRobin _rr3;  // stopband scan: [nwstop, A.size())
 
-    ParallelCut _cut;  //!< storage for the cut returned by assess_feas
+    ParallelCut _cut;  //!< storage for the cut returned by _feasibility_cut
 
     /**
      * @brief Scan one frequency band for the first violated constraint.
@@ -114,7 +114,7 @@ class LowpassOracle {
      * @param[in] Spsq Stopband power specification
      * @return Pointer to parallel cut, or nullptr if feasible
      */
-    auto assess_feas(const Vec& x, const double& Spsq) -> ParallelCut*;
+    auto _feasibility_cut(const Vec& x, const double& Spsq) -> ParallelCut*;
 
     /**
      * @brief Assess optimality of the given autocorrelation coefficients

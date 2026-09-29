@@ -60,21 +60,21 @@ auto ProfitOracle::_constraint_profit(const Vec& y, const Vec& x, const double g
 }
 
 /**
- * The function assess_feas assesses the feasibility of a given solution based on certain conditions
- * and returns a tuple containing a cut and a boolean value.
+ * The function `_feasibility_cut` assesses the feasibility of a given solution based on certain
+ * conditions and returns a tuple containing a cut and a boolean value.
  *
  * @param[in] y The parameter `y` is a vector of values. It is used to calculate various values in
  * the function. The specific meaning of each element in the vector depends on the context and the
  * specific implementation of the `ProfitOracle` class.
  * @param[in,out] gamma The `gamma` parameter is a reference to a `double` variable. It is used to
- * store the best-so-far value for the feasibility process. The function `assess_feas` assesses
+ * store the best-so-far value for the feasibility process. The function `_feasibility_cut` assesses
  * the feasibility of a given solution and updates the `gamma` value if necessary.
  *
- * @return The function `assess_feas` returns a tuple containing two elements. The first element is
- * of type `Cut`, which is a struct or class that contains a vector `g` and a double `fj`. The
+ * @return The function `_feasibility_cut` returns a tuple containing two elements. The first element
+ * is of type `Cut`, which is a struct or class that contains a vector `g` and a double `fj`. The
  * second element is of type `bool`.
  */
-auto ProfitOracle::assess_feas(const Vec& y, const double& gamma) -> Cut* {
+auto ProfitOracle::_feasibility_cut(const Vec& y, const double& gamma) -> Cut* {
     using ConstraintFn = auto (ProfitOracle::*)(const Vec&, const Vec&, const double)->Cut*;
     static constexpr ConstraintFn constraints[2]
         = {&ProfitOracle::_constraint_capacity, &ProfitOracle::_constraint_profit};
@@ -107,7 +107,7 @@ auto ProfitOracle::assess_feas(const Vec& y, const double& gamma) -> Cut* {
  * second element is of type `bool`.
  */
 auto ProfitOracle::assess_optim(const Vec& y, double& gamma) -> std::tuple<Cut, bool> {
-    auto* cut = this->assess_feas(y, gamma);
+    auto* cut = this->_feasibility_cut(y, gamma);
     if (cut != nullptr) {
         return {*cut, false};
     }
@@ -133,7 +133,7 @@ auto ProfitOracle::assess_optim(const Vec& y, double& gamma) -> std::tuple<Cut, 
 auto ProfitOracleQ::assess_optim_q(const Vec& y, double& gamma, bool retry)
     -> std::tuple<Cut, bool, Vec, bool> {
     if (!retry) {
-        auto* cut = this->P.assess_feas(y, gamma);
+        auto* cut = this->P._feasibility_cut(y, gamma);
         if (cut != nullptr) {
             return {*cut, false, y, true};
         }
