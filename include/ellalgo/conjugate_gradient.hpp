@@ -16,6 +16,8 @@
 #include <utility>
 #include <vector>
 
+#include "ell_config.hpp"
+
 // GCC 13 with -Wall -Werror emits -Werror=alloc-size-larger-than= when a size_t
 // parameter is passed to std::vector constructor, because the compiler can't prove
 // the allocation won't exceed PTRDIFF_MAX. This is a false positive when sizes
@@ -309,8 +311,8 @@ inline Vector0 conjugate_gradient(const Matrix0& A, const Vector0& b, const Vect
         r_norm_sq = r_norm_sq_new;
     }
 
-    throw std::runtime_error("Conjugate Gradient did not converge after " + std::to_string(max_iter)
-                             + " iterations");
+    throw ConvergenceError("Conjugate Gradient did not converge after " + std::to_string(max_iter)
+                           + " iterations");
 }
 
 #if defined(__GNUC__) && !defined(__clang__)
