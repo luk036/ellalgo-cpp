@@ -29,8 +29,12 @@
  *
  * @tparam Arr036 Array type for the decision variables
  * @tparam Mat    Matrix type (defaults to Arr036)
+ * @tparam Space  Search-space strategy (defaults to EllStable), injected so
+ *                callers can select the update strategy (e.g. Ell) without
+ *                changing this facade.
  */
-template <typename Arr036, typename Mat = Arr036> class LMIProblem {
+template <typename Arr036, typename Mat = Arr036, template <typename> class Space = EllStable>
+class LMIProblem {
     using Vec = std::valarray<double>;
 
     size_t _ndim;
@@ -52,17 +56,17 @@ template <typename Arr036, typename Mat = Arr036> class LMIProblem {
     /**
      * @brief Solve the LMI feasibility problem.
      *
-     * Builds an EllStable search space with the given per-axis radii and
+     * Builds a search space of type `Space` with the given per-axis radii and
      * initial center, then runs the cutting-plane feasibility method.
      *
      * @param[in] radii  Per-axis radii of the initial ellipsoid
      * @param[in] xc     Initial center point (moved in)
      * @param[in] options Maximum iteration and error tolerance etc.
-     * @return Tuple (solution x, number of iterations)
+     * @return SolverResult carrying the solution, iteration count and status
      */
     auto solve_feas(const Vec& radii, Arr036 xc, const Options& options = Options())
-        -> std::tuple<Arr036, size_t> {
-        EllStable<Arr036> space{radii, std::move(xc)};
+        -> SolverResult<Arr036> {
+        Space<Arr036> space{radii, std::move(xc)};
         return cutting_plane_feas(this->_omega, space, options);
     }
 
@@ -72,11 +76,11 @@ template <typename Arr036, typename Mat = Arr036> class LMIProblem {
      * @param[in] alpha Scaling factor for the initial ellipsoid
      * @param[in] xc    Initial center point (moved in)
      * @param[in] options Maximum iteration and error tolerance etc.
-     * @return Tuple (solution x, number of iterations)
+     * @return SolverResult carrying the solution, iteration count and status
      */
     auto solve_feas(double alpha, Arr036 xc, const Options& options = Options())
-        -> std::tuple<Arr036, size_t> {
-        EllStable<Arr036> space{alpha, std::move(xc)};
+        -> SolverResult<Arr036> {
+        Space<Arr036> space{alpha, std::move(xc)};
         return cutting_plane_feas(this->_omega, space, options);
     }
 };
@@ -86,12 +90,14 @@ template <typename Arr036, typename Mat = Arr036> class LMIProblem {
  *
  * @tparam Arr036 Array type for the decision variables
  * @tparam Mat    Matrix type (defaults to Arr036)
+ * @tparam Space  Search-space strategy (defaults to EllStable)
  * @param[in] ndim Dimension of the decision space
  * @param[in] F    Vector of matrices F_i (moved in)
  * @param[in] B    Constant term (moved in)
- * @return LMIProblem<Arr036, Mat>
+ * @return LMIProblem<Arr036, Mat, Space>
  */
-template <typename Arr036, typename Mat = Arr036>
-inline auto make_lmi_problem(size_t ndim, std::vector<Mat> F, Mat B) -> LMIProblem<Arr036, Mat> {
+template <typename Arr036, typename Mat = Arr036, template <typename> class Space = EllStable>
+inline auto make_lmi_problem(size_t ndim, std::vector<Mat> F,
+                             Mat B) -> LMIProblem<Arr036, Mat, Space> {
     return {ndim, std::move(F), std::move(B)};
 }
