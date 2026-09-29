@@ -29,6 +29,7 @@ TEST_CASE("Cutting-plane feasibility") {
 
     auto result = cutting_plane_feas(oracle, ell, options);
     CHECK_NE(std::get<0>(result).size(), 0);
+    CHECK(result.status == SolverStatus::Success);
 }
 
 struct MyOracleC2 {
@@ -55,6 +56,7 @@ TEST_CASE("Cutting-plane optimization") {
 
     auto result = cutting_plane_optim(oracle, ell, t, options);
     CHECK_NE(std::get<0>(result).size(), 0);
+    CHECK(result.status == SolverStatus::Success);
 }
 
 struct MyOracleC3 {
@@ -84,6 +86,7 @@ TEST_CASE("Binary search") {
     auto adaptor = BSearchAdaptor(oracle, ell, options);
     auto result = bsearch(adaptor, std::make_pair(0.0, 10.0), options);
     CHECK(std::get<0>(result) < 3.0);
+    CHECK(result.status == SolverStatus::Success);
 }
 
 struct MyOracleC4 {
@@ -102,4 +105,46 @@ TEST_CASE("Binary search stops at float resolution") {
     auto result = bsearch(oracle, std::make_pair(0.0, 1e6), options);
     CHECK(std::get<1>(result) < 200);
     CHECK(std::get<0>(result) == doctest::Approx(500.0).epsilon(1e-9));
+    CHECK(result.status == SolverStatus::Success);
+}
+
+struct MyOracleAlwaysCut {
+    using ArrayType = std::vector<double>;
+    using Cut = std::pair<ArrayType, double>;
+
+    auto assess_feas(const ArrayType&) -> std::optional<Cut> {
+        return std::make_optional<Cut>({{1.0, 0.0}, 0.1});
+    }
+};
+
+struct MyOracleInfeasible {
+    using ArrayType = std::vector<double>;
+    using Cut = std::pair<ArrayType, double>;
+
+    auto assess_feas(const ArrayType&) -> std::optional<Cut> {
+        return std::make_optional<Cut>({{1.0, 0.0}, 1e9});
+    }
+};
+
+TEST_CASE("SolverResult status distinguishes Infeasible from MaxIters") {
+    using Vec = std::vector<double>;
+
+    SUBCASE("infeasible cut yields Infeasible") {
+        auto options = Options();
+        auto ell = Ell<Vec>(10.0, Vec{0.0, 0.0});
+        auto oracle = MyOracleInfeasible{};
+        const auto result = cutting_plane_feas(oracle, ell, options);
+        CHECK(result.status == SolverStatus::Infeasible);
+    }
+
+    SUBCASE("unconverged loop yields MaxIters") {
+        auto options = Options();
+        options.max_iters = 5;
+        options.tolerance = 0.0;  // disable the tsq-based early stop
+        auto ell = Ell<Vec>(10.0, Vec{0.0, 0.0});
+        auto oracle = MyOracleAlwaysCut{};
+        const auto result = cutting_plane_feas(oracle, ell, options);
+        CHECK(result.status == SolverStatus::MaxIters);
+        CHECK_EQ(std::get<1>(result), 5U);
+    }
 }
