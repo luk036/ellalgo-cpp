@@ -16,7 +16,7 @@ var searchData=
   ['lmioracle_3c_20arr036_2c_20arr036_20_3e_13',['LmiOracle&lt; Arr036, Arr036 &gt;',['../classLmiOracle.html',1,'']]],
   ['lmioraclebase_14',['LmiOracleBase',['../classLmiOracleBase.html',1,'']]],
   ['lmioraclebase_3c_20arr036_2c_20arr036_20_3e_15',['LmiOracleBase&lt; Arr036, Arr036 &gt;',['../classLmiOracleBase.html',1,'']]],
-  ['lmiproblem_16',['lmiproblem',['../classLMIProblem.html',1,'LMIProblem&lt; Arr036, Mat &gt;'],['../classLMIProblem.html#ae3eaecfd7b2eb899e012144d8ef533e2',1,'LMIProblem::LMIProblem()']]],
+  ['lmiproblem_16',['lmiproblem',['../classLMIProblem.html',1,'LMIProblem&lt; Arr036, Mat, Space &gt;'],['../classLMIProblem.html#a1740869948c7174d32f1d1c256c8f7e3',1,'LMIProblem::LMIProblem()']]],
   ['log_17',['log',['../arr_8hpp.html#ae8735db34b44d348c2198bea8a0530aa',1,'arr.hpp']]],
   ['log_5fwith_5fspdlog_18',['log_with_spdlog',['../namespaceellalgo.html#aa49b64ce3d994811269d66048abb49a7',1,'ellalgo']]],
   ['logger_2ehpp_19',['logger.hpp',['../logger_8hpp.html',1,'']]],

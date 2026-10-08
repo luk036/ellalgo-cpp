@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['success_0',['Success',['../ell__config_8hpp.html#af6c5aa64702e88776265c19b9df2d5c3a505a83f220c02df2f85c3810cd9ceb38',1,'ell_config.hpp']]]
+  ['maxiters_0',['MaxIters',['../ell__config_8hpp.html#a5e401127b1d3c1fbf7b3e1b0fbca1b27a583a30f2b08f38c3d852d46cfcad5ae7',1,'ell_config.hpp']]]
 ];

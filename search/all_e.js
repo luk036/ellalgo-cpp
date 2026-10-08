@@ -4,14 +4,13 @@ var searchData=
   ['readme_2emd_1',['README.md',['../README_8md.html',1,'']]],
   ['related_20projects_20and_20alternatives_2',['Related projects and alternatives',['../index.html#autotoc_md14',1,'']]],
   ['result_3',['Result',['../classOptimQState.html#a75e0d079121c83c84e230c15fbfd7a22',1,'OptimQState']]],
-  ['retq_4',['RetQ',['../ell__config_8hpp.html#ad4c901df98c58d7d62f9923d8942072d',1,'ell_config.hpp']]],
-  ['retry_5',['retry',['../classOptimQState.html#aab5626659104d270c2ca05923dd23ce4',1,'OptimQState']]],
-  ['rho_6',['rho',['../structCutResult.html#acbcf9d2f3d7c89c550700007b2d093bb',1,'CutResult']]],
-  ['round_5frobin_2ehpp_7',['round_robin.hpp',['../round__robin_8hpp.html',1,'']]],
-  ['roundrobin_8',['roundrobin',['../classRoundRobin.html#aa9092430160e04f411ea92d140ac9bcf',1,'RoundRobin::RoundRobin()'],['../classRoundRobin.html#a02f0dca59934cac2384eeb837eeddea2',1,'RoundRobin::RoundRobin(std::size_t lo, std::size_t hi)'],['../classRoundRobin.html#abe6308ef64bf2fe5ff736a378c6678af',1,'RoundRobin::RoundRobin(std::size_t hi)'],['../classRoundRobin.html',1,'RoundRobin']]],
-  ['row_9',['row',['../classMatrix.html#acbd856c3222889e6e6091136f4ab17d0',1,'Matrix']]],
-  ['rows_10',['rows',['../classArr.html#a6bd18dff394eec9a30c0171f74b7b92d',1,'Arr::rows()'],['../classMatrix0.html#a25354bcfa6a6de848ea73465267cfce7',1,'Matrix0::rows()'],['../classMatrix2.html#ae7a0001b68a2ec0f9030c9b7ed61ffdc',1,'Matrix2::rows()']]],
-  ['run_20clang_20format_11',['Run clang-format',['../index.html#autotoc_md7',1,'']]],
-  ['run_20test_20suite_12',['Build and run test suite',['../index.html#autotoc_md6',1,'']]],
-  ['run_20the_20standalone_20target_13',['Build and run the standalone target',['../index.html#autotoc_md5',1,'']]]
+  ['retry_4',['retry',['../classOptimQState.html#aab5626659104d270c2ca05923dd23ce4',1,'OptimQState']]],
+  ['rho_5',['rho',['../structCutResult.html#acbcf9d2f3d7c89c550700007b2d093bb',1,'CutResult']]],
+  ['round_5frobin_2ehpp_6',['round_robin.hpp',['../round__robin_8hpp.html',1,'']]],
+  ['roundrobin_7',['roundrobin',['../classRoundRobin.html#aa9092430160e04f411ea92d140ac9bcf',1,'RoundRobin::RoundRobin()'],['../classRoundRobin.html#a02f0dca59934cac2384eeb837eeddea2',1,'RoundRobin::RoundRobin(std::size_t lo, std::size_t hi)'],['../classRoundRobin.html#abe6308ef64bf2fe5ff736a378c6678af',1,'RoundRobin::RoundRobin(std::size_t hi)'],['../classRoundRobin.html',1,'RoundRobin']]],
+  ['row_8',['row',['../classMatrix.html#acbd856c3222889e6e6091136f4ab17d0',1,'Matrix']]],
+  ['rows_9',['rows',['../classArr.html#a6bd18dff394eec9a30c0171f74b7b92d',1,'Arr::rows()'],['../classMatrix0.html#a25354bcfa6a6de848ea73465267cfce7',1,'Matrix0::rows()'],['../classMatrix2.html#ae7a0001b68a2ec0f9030c9b7ed61ffdc',1,'Matrix2::rows()']]],
+  ['run_20clang_20format_10',['Run clang-format',['../index.html#autotoc_md7',1,'']]],
+  ['run_20test_20suite_11',['Build and run test suite',['../index.html#autotoc_md6',1,'']]],
+  ['run_20the_20standalone_20target_12',['Build and run the standalone target',['../index.html#autotoc_md5',1,'']]]
 ];

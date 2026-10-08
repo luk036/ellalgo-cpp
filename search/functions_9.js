@@ -5,7 +5,7 @@ var searchData=
   ['lmi0oracle_2',['Lmi0Oracle',['../classLmi0Oracle.html#afece9730a5a290fc68e0a9049fd3e5ef',1,'Lmi0Oracle']]],
   ['lmioldoracle_3',['LmiOldOracle',['../classLmiOldOracle.html#a414d07ae70dd506b332a75bd71399eb6',1,'LmiOldOracle']]],
   ['lmioracle_4',['LmiOracle',['../classLmiOracle.html#aed3cd41c07fdb6b6e4d3649d5b571b8c',1,'LmiOracle']]],
-  ['lmiproblem_5',['LMIProblem',['../classLMIProblem.html#ae3eaecfd7b2eb899e012144d8ef533e2',1,'LMIProblem']]],
+  ['lmiproblem_5',['LMIProblem',['../classLMIProblem.html#a1740869948c7174d32f1d1c256c8f7e3',1,'LMIProblem']]],
   ['log_6',['log',['../arr_8hpp.html#ae8735db34b44d348c2198bea8a0530aa',1,'arr.hpp']]],
   ['log_5fwith_5fspdlog_7',['log_with_spdlog',['../namespaceellalgo.html#aa49b64ce3d994811269d66048abb49a7',1,'ellalgo']]],
   ['lowpassoracle_8',['LowpassOracle',['../classLowpassOracle.html#a90eaf7d8d26a0e056a3495c5b9a84a44',1,'LowpassOracle']]]

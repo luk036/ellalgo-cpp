@@ -6,13 +6,18 @@
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,31,169,65,164,65,164,31"/>
 <area shape="rect" id="Node000006" href="$ell__config_8hpp.html" title="Configuration types and constants for the ellipsoid algorithm." alt="" coords="259,79,371,104"/>
 <area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="192,28,279,70,277,75,189,33"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="182,152,253,177"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="177,103,203,139,199,142,173,106"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="103,152,158,177"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="163,106,145,141,140,138,158,103"/>
-<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="301,106,246,146,243,141,297,102"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="277,152,353,177"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="317,104,317,138,312,138,312,104"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="377,152,437,177"/>
-<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="331,102,383,141,379,146,328,106"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="70,152,141,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="159,106,126,143,122,140,155,103"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="165,152,219,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="173,103,186,138,181,140,168,105"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="282,107,153,150,152,145,280,101"/>
+<area shape="poly" id="edge9_Node000006_Node000005" title=" " alt="" coords="296,106,225,147,222,143,294,102"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="443,152,519,177"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="342,102,443,144,441,149,340,106"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="543,152,630,177"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="359,101,531,146,529,151,358,107"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="243,152,335,177"/>
+<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="313,105,300,140,295,138,308,103"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="359,152,419,177"/>
+<area shape="poly" id="edge11_Node000006_Node000010" title=" " alt="" coords="328,102,369,141,365,144,325,106"/>
 </map>

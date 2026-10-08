@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['retq_0',['RetQ',['../ell__config_8hpp.html#ad4c901df98c58d7d62f9923d8942072d',1,'ell_config.hpp']]]
+  ['singlecut_0',['SingleCut',['../ell__config_8hpp.html#aa892ec59e35d6e77df483dfcaa8320a7',1,'ell_config.hpp']]]
 ];
