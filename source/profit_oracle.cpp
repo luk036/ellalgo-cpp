@@ -23,7 +23,8 @@ using Cut = std::pair<Vec, double>;
  * @param[in] gamma the best-so-far optimal value (unused)
  * @return Cut* pointer to the cut, or nullptr if satisfied
  */
-auto ProfitOracle::_constraint_capacity(const Vec& y, const Vec&, const double) -> Cut* {
+auto ProfitOracle::_constraint_capacity(const Vec& y, const Vec& /*unused*/,
+                                        const double /*unused*/) -> Cut* {
     static auto cut = Cut{Vec{1.0, 0.0}, 0.0};
     const auto fj = y[0] - this->_log_k;
     if (fj <= 0.0) {
