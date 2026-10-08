@@ -35,8 +35,8 @@ class EllCalc {
      * @param[in] discrete True to use the Q (discrete) fallback / eta policy
      * @return CutResult with status, rho, sigma, delta
      */
-    auto _parallel_bias_cut(double beta0, double beta1, double tsq,
-                            bool discrete) const -> CutResult;
+    auto _parallel_bias_cut(double beta0, double beta1, double tsq, bool discrete) const
+        -> CutResult;
 
   public:
     /**

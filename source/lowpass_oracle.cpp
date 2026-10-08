@@ -108,8 +108,8 @@ auto LowpassOracle::_feasibility_cut(const Vec& x, const double& Spsq) -> Parall
 }
 
 auto LowpassOracle::scan_band(const Vec& x, RoundRobin& rr, size_t lo, size_t hi, double lower,
-                              bool has_upper, double upper, bool track_max,
-                              ParallelCut& cut) -> bool {
+                              bool has_upper, double upper, bool track_max, ParallelCut& cut)
+    -> bool {
     if (track_max) {
         this->_fmax = -1e100;  // std::numeric_limits<double>::min()
         this->_kmax = -1;

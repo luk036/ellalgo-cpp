@@ -56,8 +56,8 @@ class LDLTMgr {
      * @param[in] allow_semidefinite pivot policy selector
      * @return bool true if the matrix is (semi)definite per the policy
      */
-    template <typename Fn>
-    auto _factor_impl(Fn get_matrix_elem, const bool allow_semidefinite) -> bool {
+    template <typename Fn> auto _factor_impl(Fn get_matrix_elem, const bool allow_semidefinite)
+        -> bool {
         this->pos = {0U, 0U};
         auto& start = this->pos.first;
         auto& stop = this->pos.second;

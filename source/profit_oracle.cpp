@@ -70,9 +70,9 @@ auto ProfitOracle::_constraint_profit(const Vec& y, const Vec& x, const double g
  * store the best-so-far value for the feasibility process. The function `_feasibility_cut` assesses
  * the feasibility of a given solution and updates the `gamma` value if necessary.
  *
- * @return The function `_feasibility_cut` returns a tuple containing two elements. The first element
- * is of type `Cut`, which is a struct or class that contains a vector `g` and a double `fj`. The
- * second element is of type `bool`.
+ * @return The function `_feasibility_cut` returns a tuple containing two elements. The first
+ * element is of type `Cut`, which is a struct or class that contains a vector `g` and a double
+ * `fj`. The second element is of type `bool`.
  */
 auto ProfitOracle::_feasibility_cut(const Vec& y, const double& gamma) -> Cut* {
     using ConstraintFn = auto (ProfitOracle::*)(const Vec&, const Vec&, const double)->Cut*;

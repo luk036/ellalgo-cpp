@@ -97,7 +97,7 @@ class LMIProblem {
  * @return LMIProblem<Arr036, Mat, Space>
  */
 template <typename Arr036, typename Mat = Arr036, template <typename> class Space = EllStable>
-inline auto make_lmi_problem(size_t ndim, std::vector<Mat> F,
-                             Mat B) -> LMIProblem<Arr036, Mat, Space> {
+inline auto make_lmi_problem(size_t ndim, std::vector<Mat> F, Mat B)
+    -> LMIProblem<Arr036, Mat, Space> {
     return {ndim, std::move(F), std::move(B)};
 }

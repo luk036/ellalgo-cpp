@@ -279,8 +279,8 @@ class EllCore {
      * @return std::nullopt on degenerate omega, otherwise the CutResult
      */
     template <typename T, typename Fn>
-    auto _prologue(const T& beta, const double omega,
-                   Fn&& cut_strategy) -> std::optional<CutResult> {
+    auto _prologue(const T& beta, const double omega, Fn&& cut_strategy)
+        -> std::optional<CutResult> {
         this->_tsq = this->_kappa * omega;
         if (omega <= std::numeric_limits<double>::min()) {
             return std::nullopt;
