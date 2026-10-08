@@ -112,7 +112,7 @@ struct MyOracleAlwaysCut {
     using ArrayType = std::vector<double>;
     using Cut = std::pair<ArrayType, double>;
 
-    auto assess_feas(const ArrayType&) -> std::optional<Cut> {
+    auto assess_feas(const ArrayType& /*unused*/) -> std::optional<Cut> {
         return std::make_optional<Cut>({{1.0, 0.0}, 0.1});
     }
 };
@@ -121,7 +121,7 @@ struct MyOracleInfeasible {
     using ArrayType = std::vector<double>;
     using Cut = std::pair<ArrayType, double>;
 
-    auto assess_feas(const ArrayType&) -> std::optional<Cut> {
+    auto assess_feas(const ArrayType& /*unused*/) -> std::optional<Cut> {
         return std::make_optional<Cut>({{1.0, 0.0}, 1e9});
     }
 };
