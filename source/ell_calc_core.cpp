@@ -58,50 +58,6 @@ auto EllCalcCore::calc_parallel_cut_fast(const double beta0, const double beta1,
 }
 
 /**
- * The function calculates and returns three values (rho, sigma, and delta) based on the input
- * parameters (beta0, beta1, and tsq).
- *
- *                 _.-'''''''-._
- *               ,'     |       `.
- *              /  |    |         \
- *             .   |    |          .
- *             |   |    |          |
- *             |   |    |.         |
- *             |   |    |          |
- *             :\  |    |         /:
- *             | `._    |      _.' |
- *             |   |'-.......-'    |
- *             |   |    |          |
- *            "-τ" "-β" "-β"      +τ
- *                   1    0
- *
- * @param[in] beta0 The parameter `beta0` represents the value of beta for the first variable.
- * @param[in] beta1 The parameter `beta1` represents a value used in the calculation.
- * @param[in] tsq tsq is a constant value of type double. It represents the square of the parameter
- * gamma.
- *
- * @return The function `calc_parallel_cut` returns a tuple containing three values: `rho`, `sigma`,
- * and `delta`.
- */
-auto EllCalcCore::calc_parallel_cut_fast_old(const double beta0, const double beta1,
-                                             const double tsq, const double b0b1,
-                                             const double eta) const noexcept
-    -> std::tuple<double, double, double> {
-    const double bavg = 0.5 * (beta0 + beta1);
-    const double bavgsq = bavg * bavg;
-    const double h = 0.5 * (tsq + b0b1) + _n_f * bavgsq;
-    const double sqrt_term = std::sqrt(h * h - _n_plus_1 * eta * bavgsq);
-    const double k = h + sqrt_term;
-    const double inv_mu_plus_1 = eta / k;
-    const double inv_mu = eta / (k - eta);
-    return {
-        bavg * inv_mu_plus_1,                                   // rho
-        inv_mu_plus_1,                                          // sigma
-        (tsq + inv_mu * (bavgsq * inv_mu_plus_1 - b0b1)) / tsq  // delta
-    };
-}
-
-/**
  * @brief Parallel Central Cut
  *
  * The function `calc_parallel_central_cut` calculates and returns the values of rho, sigma, and

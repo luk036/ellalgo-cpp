@@ -7,6 +7,9 @@
 
 #include <cstddef>
 #include <ostream>
+#include <stdexcept>
+#include <tuple>
+#include <type_traits>
 #include <utility>  // for pair
 
 /**
@@ -80,42 +83,53 @@ struct CutResult {
 };
 
 /**
- * @brief Information about the cutting-plane computation result
+ * @brief Raised by an iterative solver that fails to converge in its budget
  *
- * Contains feasibility status and iteration count.
+ * Derives from `std::runtime_error` so existing `catch (const std::runtime_error&)`
+ * handlers keep working while callers can catch this precise type.
  */
-struct CInfo {
-    bool feasible;         ///< Whether a feasible solution was found
-    size_t num_iters = 0;  ///< Number of iterations performed
+class ConvergenceError : public std::runtime_error {
+  public:
+    using std::runtime_error::runtime_error;
 };
 
 /**
- * @brief Type alias for the array type used by template parameter T
- *
- * @tparam T The type containing ArrayType
+ * @brief Termination status of a cutting-plane / binary-search solve
  */
-template <typename T> using ArrayType = typename T::ArrayType;
+enum class SolverStatus {
+    Success,     ///< A solution (or converged bracket) was produced
+    Infeasible,  ///< Search space exhausted; no solution exists
+    MaxIters     ///< Iteration cap reached before terminating
+};
 
 /**
- * @brief Type alias for the cut choice type used by template parameter T
+ * @brief Result of a cutting-plane / binary-search solve
  *
- * @tparam T The type containing CutChoice
+ * Derives from `std::tuple<X, std::size_t>` so existing `std::get<0>` /
+ * `std::get<1>` access and 2-element structured bindings keep working, while
+ * additionally exposing `.status` to tell an exhausted search space
+ * (`Infeasible`) apart from an iteration-cap stop (`MaxIters`).
+ *
+ * @tparam X Solution / best-so-far value type
  */
-template <typename T> using CutChoice = typename T::CutChoice;
+template <typename X> struct SolverResult : std::tuple<X, std::size_t> {
+    SolverStatus status;
 
-/**
- * @brief Type alias for a cutting plane concept
- *
- * @tparam T The template parameter type
- */
-template <typename T> using CutConcept = std::pair<ArrayType<T>, CutChoice<T>>;
+    SolverResult(X x, std::size_t niter, SolverStatus s)
+        : std::tuple<X, std::size_t>(std::move(x), niter), status(s) {}
+};
 
-/**
- * @brief Type alias for return type of Q optimization
- *
- * @tparam T The template parameter type
- */
-template <typename T> using RetQ = std::tuple<CutConcept<T>, bool, ArrayType<T>, bool>;
+namespace std {
+    template <typename X> struct tuple_size<SolverResult<X>> : integral_constant<size_t, 2> {};
+
+    template <typename X> struct tuple_element<0, SolverResult<X>> {
+        using type = X;
+    };
+
+    template <typename X> struct tuple_element<1, SolverResult<X>> {
+        using type = std::size_t;
+    };
+}  // namespace std
 
 /**
  * @brief Single cut parameter β in gᵀ(x - xc) + β ≤ 0

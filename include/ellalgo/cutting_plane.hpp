@@ -103,20 +103,20 @@ template <typename T> inline auto invalid_value() -> T
 template <typename O, typename S>
     requires OracleFeas<O, typename S::ArrayType> && SearchSpace<S>
 inline auto cutting_plane_feas(O& omega, S& space, const Options& options = Options())
-    -> std::tuple<CuttingPlaneArrayType<S>, size_t> {
+    -> SolverResult<CuttingPlaneArrayType<S>> {
     for (auto niter = 0U; niter != options.max_iters; ++niter) {
         const auto cut = omega.assess_feas(space.xc());
         if (!cut) {  // feasible sol'n obtained
-            return {space.xc(), niter};
+            return {space.xc(), niter, SolverStatus::Success};
         }
         const auto status = space.update_bias_cut(*cut);  // update space
         if (status != CutStatus::Success || space.tsq() < options.tolerance) {
             auto res = invalid_value<CuttingPlaneArrayType<S>>();
-            return {std::move(res), niter};
+            return {std::move(res), niter, SolverStatus::Infeasible};
         }
     }
     auto res = invalid_value<CuttingPlaneArrayType<S>>();
-    return {std::move(res), options.max_iters};
+    return {std::move(res), options.max_iters, SolverStatus::MaxIters};
 }
 
 /**
@@ -173,7 +173,7 @@ inline auto cutting_plane_feas(O& omega, S& space, const Options& options = Opti
 template <typename O, typename S, typename N>
     requires OracleOptim<O, typename S::ArrayType, N> && SearchSpace<S>
 inline auto cutting_plane_optim(O& omega, S& space, N& gamma, const Options& options = Options())
-    -> std::tuple<CuttingPlaneArrayType<S>, size_t> {
+    -> SolverResult<CuttingPlaneArrayType<S>> {
     auto x_best = invalid_value<CuttingPlaneArrayType<S>>();
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
         const auto _result1 = omega.assess_optim(space.xc(), gamma);
@@ -187,10 +187,12 @@ inline auto cutting_plane_optim(O& omega, S& space, N& gamma, const Options& opt
             return space.update_bias_cut(cut);
         }();
         if (status != CutStatus::Success || space.tsq() < options.tolerance) {  // no more
-            return {std::move(x_best), niter};
+            const auto outcome
+                = x_best.size() != 0U ? SolverStatus::Success : SolverStatus::Infeasible;
+            return {std::move(x_best), niter, outcome};
         }
     }
-    return {std::move(x_best), options.max_iters};
+    return {std::move(x_best), options.max_iters, SolverStatus::MaxIters};
 }  // END
 
 /**
@@ -300,7 +302,7 @@ template <typename O, typename S, typename N>
     requires OracleOptimQ<O, typename S::ArrayType, N> && SearchSpace<S>
 inline auto cutting_plane_optim_q(O& omega, S& space_q, N& gamma,
                                   const Options& options = Options())
-    -> std::tuple<CuttingPlaneArrayType<S>, size_t> {
+    -> SolverResult<CuttingPlaneArrayType<S>> {
     using A = CuttingPlaneArrayType<S>;
     OptimQState<A> state{invalid_value<A>()};
 
@@ -313,16 +315,20 @@ inline auto cutting_plane_optim_q(O& omega, S& space_q, N& gamma,
         }
         const auto outcome = state.on_update(space_q.update_q(cut), std::get<3>(result1));
         if (outcome == OptimQState<A>::Result::NoSoln) {
-            return {std::move(state.x_best()), niter};
+            const auto res
+                = state.x_best().size() != 0U ? SolverStatus::Success : SolverStatus::Infeasible;
+            return {std::move(state.x_best()), niter, res};
         }
         if (outcome == OptimQState<A>::Result::NoMoreAlt) {
             break;  // no more alternative cut
         }
         if (space_q.tsq() < options.tolerance) {  // no more
-            return {std::move(state.x_best()), niter};
+            const auto res
+                = state.x_best().size() != 0U ? SolverStatus::Success : SolverStatus::Infeasible;
+            return {std::move(state.x_best()), niter, res};
         }
     }
-    return {std::move(state.x_best()), options.max_iters};
+    return {std::move(state.x_best()), options.max_iters, SolverStatus::MaxIters};
 }  // END
 
 /**
@@ -411,7 +417,7 @@ class BSearchAdaptor {
 template <typename O, typename T>
     requires OracleBS<O, T>
 inline auto bsearch(O& omega, const std::pair<T, T>& intvl, const Options& options = Options())
-    -> std::tuple<T, size_t> {
+    -> SolverResult<T> {
     // assume monotone
     // auto& [lower, upper] = intvl;
     auto lower = intvl.first;
@@ -421,7 +427,7 @@ inline auto bsearch(O& omega, const std::pair<T, T>& intvl, const Options& optio
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
         auto tau = algo::half_nonnegative(upper - lower);
         if (tau < options.tolerance) {  // no more
-            return {upper, niter};
+            return {upper, niter, SolverStatus::Success};
         }
         auto gamma = lower;  // l may be `int` or `Fraction`
         gamma += tau;
@@ -431,7 +437,7 @@ inline auto bsearch(O& omega, const std::pair<T, T>& intvl, const Options& optio
         // underflows at ~1e-16 of its own magnitude), so without this guard the
         // loop would spin until max_iters without refining anything.
         if (!(lower < gamma && gamma < upper)) {
-            return {upper, niter};
+            return {upper, niter, SolverStatus::Success};
         }
         if (omega.assess_bs(gamma)) {  // feasible sol'n obtained
             upper = gamma;
@@ -439,5 +445,5 @@ inline auto bsearch(O& omega, const std::pair<T, T>& intvl, const Options& optio
             lower = gamma;
         }
     }
-    return {upper, options.max_iters};
+    return {upper, options.max_iters, SolverStatus::MaxIters};
 }

@@ -25,6 +25,19 @@ class EllCalc {
     double _n_f;
     EllCalcCore _helper;
 
+  private:
+    /**
+     * @brief Shared single-vs-discrete parallel-bias dispatch.
+     *
+     * @param[in] beta0    Lower bound
+     * @param[in] beta1    Upper bound
+     * @param[in] tsq      Squared ellipsoid radius (τ²)
+     * @param[in] discrete True to use the Q (discrete) fallback / eta policy
+     * @return CutResult with status, rho, sigma, delta
+     */
+    auto _parallel_bias_cut(double beta0, double beta1, double tsq, bool discrete) const
+        -> CutResult;
+
   public:
     /**
      * @brief Construct a new EllCalcobject

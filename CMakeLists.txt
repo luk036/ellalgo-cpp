@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(
   EllAlgo
-  VERSION 1.6.14
+  VERSION 1.6.15
   LANGUAGES CXX
 )
 
