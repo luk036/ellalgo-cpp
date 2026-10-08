@@ -106,7 +106,12 @@ static VerifResult verify_profit_normal() {
     auto [x_stable, iters_stable] = cutting_plane_optim(omega2, ellip2, gamma2);
 
     bool pass = approx_equal(x_ell, x_stable, 1e-6);
-    return {"Profit normal", pass, std::move(x_ell), std::move(x_stable), iters_ell, iters_stable};
+    return {.name = "Profit normal",
+            .pass = pass,
+            .x_ell = std::move(x_ell),
+            .x_stable = std::move(x_stable),
+            .iters_ell = iters_ell,
+            .iters_stable = iters_stable};
 }
 
 static VerifResult verify_profit_rb() {
@@ -122,7 +127,12 @@ static VerifResult verify_profit_rb() {
     auto [x_stable, iters_stable] = cutting_plane_optim(omega2, ellip2, gamma2);
 
     bool pass = approx_equal(x_ell, x_stable, 1e-6);
-    return {"Profit robust", pass, std::move(x_ell), std::move(x_stable), iters_ell, iters_stable};
+    return {.name = "Profit robust",
+            .pass = pass,
+            .x_ell = std::move(x_ell),
+            .x_stable = std::move(x_stable),
+            .iters_ell = iters_ell,
+            .iters_stable = iters_stable};
 }
 
 static VerifResult verify_lowpass(const LowpassCase& tc) {
@@ -141,7 +151,12 @@ static VerifResult verify_lowpass(const LowpassCase& tc) {
     auto [x_stable, iters_stable] = cutting_plane_optim(omega2, ellip2, spsq2, opts2);
 
     bool pass = approx_equal(x_ell, x_stable, 1e-6);
-    return {tc.label, pass, std::move(x_ell), std::move(x_stable), iters_ell, iters_stable};
+    return {.name = tc.label,
+            .pass = pass,
+            .x_ell = std::move(x_ell),
+            .x_stable = std::move(x_stable),
+            .iters_ell = iters_ell,
+            .iters_stable = iters_stable};
 }
 
 static VerifResult verify_scaling(const ScaleCase& tc) {
@@ -162,7 +177,12 @@ static VerifResult verify_scaling(const ScaleCase& tc) {
     auto [x_stable, iters_stable] = cutting_plane_optim(ora2, ellip2, gamma2, opts2);
 
     bool pass = approx_equal(x_ell, x_stable, 1e-6);
-    return {tc.label, pass, std::move(x_ell), std::move(x_stable), iters_ell, iters_stable};
+    return {.name = tc.label,
+            .pass = pass,
+            .x_ell = std::move(x_ell),
+            .x_stable = std::move(x_stable),
+            .iters_ell = iters_ell,
+            .iters_stable = iters_stable};
 }
 
 static void run_verification() {
@@ -171,15 +191,15 @@ static void run_verification() {
     std::cout << "============================================\n\n";
 
     LowpassCase lpcases[] = {
-        {32, "LP-32 par", true},
-        {32, "LP-32 ser", false},
-        {48, "LP-48 par", true},
-        {64, "LP-64 par", true},
+        {.N = 32, .label = "LP-32 par", .parallel_cut = true},
+        {.N = 32, .label = "LP-32 ser", .parallel_cut = false},
+        {.N = 48, .label = "LP-48 par", .parallel_cut = true},
+        {.N = 64, .label = "LP-64 par", .parallel_cut = true},
     };
     ScaleCase scases[] = {
-        {16, "Rand-16", 4000},
-        {32, "Rand-32", 4000},
-        {64, "Rand-64", 2000},
+        {.N = 16, .label = "Rand-16", .max_iters = 4000},
+        {.N = 32, .label = "Rand-32", .max_iters = 4000},
+        {.N = 64, .label = "Rand-64", .max_iters = 2000},
     };
 
     static constexpr int N_VERIF = 9;
@@ -190,8 +210,7 @@ static void run_verification() {
     };
 
     size_t passed = 0;
-    for (int i = 0; i < N_VERIF; ++i) {
-        const auto& r = results[i];
+    for (const auto& r : results) {
         std::cout << std::left << std::setw(18) << r.name << "  ";
         if (r.pass) {
             std::cout << "  PASS";
@@ -200,8 +219,8 @@ static void run_verification() {
             std::cout << "  FAIL";
         }
         std::cout << "  | iters: Ell=" << std::setw(5) << r.iters_ell << "  Stable=" << std::setw(5)
-                  << r.iters_stable << "  | xc[0]=" << (r.x_ell.size() ? r.x_ell[0] : -1.0)
-                  << "  dim=" << (r.x_ell.size() ? r.x_ell.size() : 0);
+                  << r.iters_stable << "  | xc[0]=" << ((r.x_ell.size() != 0u) ? r.x_ell[0] : -1.0)
+                  << "  dim=" << ((r.x_ell.size() != 0u) ? r.x_ell.size() : 0);
         if (!r.pass && r.x_ell.size() > 0 && r.x_stable.size() > 0) {
             double maxd = 0.0;
             for (size_t j = 0; j < r.x_ell.size(); ++j)
