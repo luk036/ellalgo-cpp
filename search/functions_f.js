@@ -8,7 +8,8 @@ var searchData=
   ['sliceview_5',['SliceView',['../classSliceView.html#ac86ad3e8945f788f6ec84ea64e53b272',1,'SliceView']]],
   ['solve_5ffeas_6',['solve_feas',['../classLMIProblem.html#a2f5b436a47cb759f405a528ac6a6a5f8',1,'LMIProblem::solve_feas(const Vec &amp;radii, Arr036 xc, const Options &amp;options=Options()) -&gt; SolverResult&lt; Arr036 &gt;'],['../classLMIProblem.html#a5bee33b80a29ee41a9a66706283ba0d5',1,'LMIProblem::solve_feas(double alpha, Arr036 xc, const Options &amp;options=Options()) -&gt; SolverResult&lt; Arr036 &gt;']]],
   ['solverresult_7',['SolverResult',['../structSolverResult.html#a9b6c6a1a8b2197128d40239b8fd47376',1,'SolverResult']]],
-  ['sqrt_8',['sqrt',['../classLDLTMgr.html#a7bbba061b1b4ded4cdfca5bf55f3068b',1,'LDLTMgr::sqrt()'],['../arr_8hpp.html#ae201d355f3a5ab309cb088333711e2ba',1,'sqrt():&#160;arr.hpp']]],
-  ['sum_9',['sum',['../classSliceView.html#a644baa9dd6afa24e023a683d5df6d6cf',1,'SliceView::sum()'],['../arr_8hpp.html#a584cade55306b0a8754c8a42f4229c2e',1,'sum():&#160;arr.hpp']]],
-  ['sym_5fquad_10',['sym_quad',['../classLDLTMgr.html#af67c2bccbf77125b4f7a2daa15a05024',1,'LDLTMgr']]]
+  ['sqrt_8',['sqrt',['../classLDLTMgr.html#a7bbba061b1b4ded4cdfca5bf55f3068b',1,'LDLTMgr::sqrt()'],['../arr_8hpp.html#ae201d355f3a5ab309cb088333711e2ba',1,'sqrt(const Arr &amp;a):&#160;arr.hpp']]],
+  ['stalled_9',['stalled',['../cutting__plane_8hpp.html#acad1f6f7bd1f55976581536da2522f76',1,'cutting_plane.hpp']]],
+  ['sum_10',['sum',['../classSliceView.html#a644baa9dd6afa24e023a683d5df6d6cf',1,'SliceView::sum()'],['../arr_8hpp.html#a584cade55306b0a8754c8a42f4229c2e',1,'sum():&#160;arr.hpp']]],
+  ['sym_5fquad_11',['sym_quad',['../classLDLTMgr.html#af67c2bccbf77125b4f7a2daa15a05024',1,'LDLTMgr']]]
 ];

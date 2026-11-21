@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ldltmgr_0',['ldltmgr',['../classLDLTMgr.html#a43322b727396f7fbc3ef48eeac133096',1,'LDLTMgr::LDLTMgr(size_t N)'],['../classLDLTMgr.html#a2ce9d8ddc0b81c073037b545fae6e2e3',1,'LDLTMgr::LDLTMgr(const LDLTMgr &amp;)=delete'],['../classLDLTMgr.html#a189af948cc280cea59674433317c1fca',1,'LDLTMgr::LDLTMgr(LDLTMgr &amp;&amp;)=default']]],
+  ['ldltmgr_0',['LDLTMgr',['../classLDLTMgr.html#a43322b727396f7fbc3ef48eeac133096',1,'LDLTMgr::LDLTMgr(size_t N)'],['../classLDLTMgr.html#a2ce9d8ddc0b81c073037b545fae6e2e3',1,'LDLTMgr::LDLTMgr(const LDLTMgr &amp;)=delete'],['../classLDLTMgr.html#a189af948cc280cea59674433317c1fca',1,'LDLTMgr::LDLTMgr(LDLTMgr &amp;&amp;)=default']]],
   ['linspace_1',['linspace',['../arr_8hpp.html#a68adf52c6d6cc096a8d95fa2f8618264',1,'arr.hpp']]],
   ['lmi0oracle_2',['Lmi0Oracle',['../classLmi0Oracle.html#afece9730a5a290fc68e0a9049fd3e5ef',1,'Lmi0Oracle']]],
   ['lmioldoracle_3',['LmiOldOracle',['../classLmiOldOracle.html#a414d07ae70dd506b332a75bd71399eb6',1,'LmiOldOracle']]],

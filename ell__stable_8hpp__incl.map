@@ -1,50 +1,50 @@
 <map id="ellalgo/ell_stable.hpp" name="ellalgo/ell_stable.hpp">
-<area shape="rect" id="Node000001" title="Numerically stable ellipsoid search space (LDL^T strategy)" alt="" coords="5,5,167,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="112,299,188,324"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,30,147,285,142,286,86,31"/>
-<area shape="rect" id="Node000003" href="$ell__base_8hpp.html" title="Shared ellipsoid search space base (compile&#45;time Strategy)" alt="" coords="321,79,425,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="133,28,314,73,312,78,131,33"/>
-<area shape="poly" id="edge5_Node000003_Node000002" title=" " alt="" coords="361,106,231,227,172,290,168,286,227,223,358,102"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="397,372,468,397"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="338,106,251,140,202,164,155,191,116,221,91,254,85,270,85,287,90,305,101,322,120,336,148,348,224,365,309,375,384,379,383,385,309,380,223,370,146,353,117,341,97,326,85,307,79,288,80,269,87,251,112,217,152,186,199,159,249,135,336,102"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="901,372,961,397"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="425,92,488,97,566,107,649,124,730,150,791,176,836,204,873,242,908,297,921,328,929,357,924,359,916,330,904,300,868,245,832,208,788,181,728,154,647,129,565,112,488,102,425,97"/>
-<area shape="rect" id="Node000006" href="$ell__config_8hpp.html" title="Configuration types and constants for the ellipsoid algorithm." alt="" coords="714,299,826,324"/>
-<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="388,102,476,169,538,210,605,248,662,273,717,292,715,297,660,278,602,253,536,215,473,173,385,106"/>
-<area shape="rect" id="Node000011" href="$ell__core_8hpp.html" title="Ellipsoid search space core with matrix update." alt="" coords="615,152,717,177"/>
-<area shape="poly" id="edge13_Node000003_Node000011" title=" " alt="" coords="420,101,606,146,605,151,419,107"/>
-<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="714,327,484,375,482,375,481,370,483,369,713,321"/>
-<area shape="poly" id="edge12_Node000006_Node000005" title=" " alt="" coords="797,322,894,364,891,369,795,326"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="691,372,767,397"/>
-<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="765,326,745,361,740,359,761,323"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="791,372,877,397"/>
-<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="783,323,817,360,813,364,779,326"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="496,372,551,397"/>
-<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="730,327,565,374,563,369,729,322"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="575,372,667,397"/>
-<area shape="poly" id="edge11_Node000006_Node000010" title=" " alt="" coords="747,326,659,368,656,364,745,322"/>
-<area shape="poly" id="edge17_Node000011_Node000002" title=" " alt="" coords="615,170,548,174,464,184,373,201,284,228,224,258,176,292,173,288,221,254,282,223,372,196,463,179,547,169,615,165"/>
-<area shape="poly" id="edge16_Node000011_Node000005" title=" " alt="" coords="709,175,759,194,809,223,845,256,876,293,920,358,916,361,872,296,841,260,806,227,756,199,707,180"/>
-<area shape="poly" id="edge24_Node000011_Node000006" title=" " alt="" coords="717,175,755,193,773,207,787,224,793,240,793,256,785,287,780,286,788,256,788,241,782,227,769,211,753,198,714,180"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="615,225,674,251"/>
-<area shape="poly" id="edge14_Node000011_Node000012" title=" " alt="" coords="665,178,655,213,649,211,660,177"/>
-<area shape="rect" id="Node000013" title=" " alt="" coords="698,225,773,251"/>
-<area shape="poly" id="edge15_Node000011_Node000013" title=" " alt="" coords="679,176,717,214,713,217,676,180"/>
-<area shape="rect" id="Node000014" href="$ell__calc_8hpp.html" title="Ellipsoid computation layer with cut dispatch." alt="" coords="442,225,541,251"/>
-<area shape="poly" id="edge18_Node000011_Node000014" title=" " alt="" coords="639,180,534,222,532,218,637,175"/>
-<area shape="rect" id="Node000017" href="$ell__matrix_8hpp.html" title="Square matrix with flat storage and strided views." alt="" coords="296,225,412,251"/>
-<area shape="poly" id="edge25_Node000011_Node000017" title=" " alt="" coords="616,180,418,225,417,220,615,175"/>
-<area shape="poly" id="edge23_Node000014_Node000006" title=" " alt="" coords="537,248,712,293,711,298,535,253"/>
-<area shape="rect" id="Node000015" title=" " alt="" coords="621,299,690,324"/>
-<area shape="poly" id="edge19_Node000014_Node000015" title=" " alt="" coords="519,248,617,291,615,296,517,253"/>
-<area shape="rect" id="Node000016" href="$ell__calc__core_8hpp.html" title="Core ellipsoid calculation routines." alt="" coords="461,299,596,324"/>
-<area shape="poly" id="edge20_Node000014_Node000016" title=" " alt="" coords="500,250,519,285,514,288,495,252"/>
-<area shape="poly" id="edge21_Node000016_Node000004" title=" " alt="" coords="515,326,461,366,458,361,512,322"/>
-<area shape="poly" id="edge22_Node000016_Node000009" title=" " alt="" coords="530,325,528,359,523,358,525,324"/>
-<area shape="poly" id="edge28_Node000017_Node000002" title=" " alt="" coords="322,253,197,297,195,292,320,248"/>
-<area shape="poly" id="edge27_Node000017_Node000004" title=" " alt="" coords="366,250,399,297,426,357,421,360,394,300,361,253"/>
-<area shape="rect" id="Node000018" title=" " alt="" coords="213,299,298,324"/>
-<area shape="poly" id="edge26_Node000017_Node000018" title=" " alt="" coords="340,253,284,293,281,288,337,249"/>
-<area shape="rect" id="Node000019" title=" " alt="" coords="323,299,385,324"/>
-<area shape="poly" id="edge29_Node000017_Node000019" title=" " alt="" coords="357,251,357,285,351,285,351,251"/>
+<area shape="rect" id="Node000001" title="Numerically stable ellipsoid search space (LDL^T strategy)." alt="" coords="5,5,166,33"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="82,308,158,336"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,32,120,293,114,293,85,35"/>
+<area shape="rect" id="Node000003" href="$ell__base_8hpp.html" title="Shared ellipsoid search space base (compile&#45;time Strategy)." alt="" coords="288,81,392,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="131,31,282,75,278,78,131,36"/>
+<area shape="poly" id="edge5_Node000003_Node000002" title=" " alt="" coords="323,111,270,164,198,234,142,298,138,294,194,231,266,160,327,107"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="364,384,434,411"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="300,111,217,147,168,172,123,200,86,231,62,265,57,282,56,299,61,316,73,334,91,348,118,359,192,377,276,387,352,394,346,395,275,392,191,382,116,364,88,352,69,337,56,318,51,299,51,281,57,262,82,228,120,196,166,167,215,143,304,107"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="864,384,923,411"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="392,96,455,101,532,111,614,128,694,154,755,181,800,211,836,250,871,307,883,338,891,370,887,367,878,340,866,309,832,253,797,215,753,186,693,159,613,133,531,116,455,106,393,101"/>
+<area shape="rect" id="Node000006" href="$ell__config_8hpp.html" title="Configuration types and constants for the ellipsoid algorithm." alt="" coords="676,308,788,336"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="356,107,444,177,505,219,569,258,622,282,675,303,670,303,620,287,567,262,502,224,441,181,355,112"/>
+<area shape="rect" id="Node000011" href="$ell__core_8hpp.html" title="Ellipsoid search space core with matrix update." alt="" coords="581,157,681,184"/>
+<area shape="poly" id="edge13_Node000003_Node000011" title=" " alt="" coords="392,107,568,152,563,154,393,112"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="679,334,450,386,449,387,448,381,449,381,674,335"/>
+<area shape="poly" id="edge12_Node000006_Node000005" title=" " alt="" coords="762,334,854,377,849,377,760,339"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="656,384,731,411"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="728,335,709,372,706,368,723,338"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="755,384,840,411"/>
+<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="745,334,779,373,774,371,743,339"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="461,384,515,411"/>
+<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="690,336,531,386,530,380,684,337"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="540,384,631,411"/>
+<area shape="poly" id="edge11_Node000006_Node000010" title=" " alt="" coords="709,336,626,379,624,374,703,337"/>
+<area shape="poly" id="edge17_Node000011_Node000002" title=" " alt="" coords="577,174,513,180,430,190,341,208,253,235,195,266,148,300,145,296,192,261,251,230,339,203,430,185,513,175,583,172"/>
+<area shape="poly" id="edge16_Node000011_Node000005" title=" " alt="" coords="677,182,726,202,772,230,808,263,838,301,882,371,877,369,834,304,804,267,769,234,723,206,677,188"/>
+<area shape="poly" id="edge24_Node000011_Node000006" title=" " alt="" coords="682,182,721,200,738,214,752,231,758,247,758,264,748,296,745,292,753,263,752,248,747,234,734,218,718,205,681,187"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="580,232,639,260"/>
+<area shape="poly" id="edge14_Node000011_Node000012" title=" " alt="" coords="629,183,619,219,616,216,625,187"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="663,232,737,260"/>
+<area shape="poly" id="edge15_Node000011_Node000013" title=" " alt="" coords="644,182,680,221,675,220,642,187"/>
+<area shape="rect" id="Node000014" href="$ell__calc_8hpp.html" title="Ellipsoid computation layer with cut dispatch." alt="" coords="407,232,505,260"/>
+<area shape="poly" id="edge18_Node000011_Node000014" title=" " alt="" coords="602,184,502,229,500,224,597,186"/>
+<area shape="rect" id="Node000017" href="$ell__matrix_8hpp.html" title="Square matrix with flat storage and strided views." alt="" coords="264,232,379,260"/>
+<area shape="poly" id="edge25_Node000011_Node000017" title=" " alt="" coords="578,185,393,231,391,226,583,183"/>
+<area shape="poly" id="edge23_Node000014_Node000006" title=" " alt="" coords="506,258,671,303,665,304,505,263"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="585,308,653,336"/>
+<area shape="poly" id="edge19_Node000014_Node000015" title=" " alt="" coords="486,258,579,301,574,301,485,263"/>
+<area shape="rect" id="Node000016" href="$ell__calc__core_8hpp.html" title="Core ellipsoid calculation routines." alt="" coords="427,308,560,336"/>
+<area shape="poly" id="edge20_Node000014_Node000016" title=" " alt="" coords="464,258,483,295,478,293,462,263"/>
+<area shape="poly" id="edge21_Node000016_Node000004" title=" " alt="" coords="479,335,429,376,426,372,474,337"/>
+<area shape="poly" id="edge22_Node000016_Node000009" title=" " alt="" coords="494,334,492,370,488,366,491,338"/>
+<area shape="poly" id="edge28_Node000017_Node000002" title=" " alt="" coords="283,262,171,305,169,300,288,259"/>
+<area shape="poly" id="edge27_Node000017_Node000004" title=" " alt="" coords="333,258,367,307,392,370,387,368,362,309,331,263"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="182,308,266,336"/>
+<area shape="poly" id="edge26_Node000017_Node000018" title=" " alt="" coords="306,259,255,301,252,296,302,262"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="290,308,353,336"/>
+<area shape="poly" id="edge29_Node000017_Node000019" title=" " alt="" coords="323,258,324,294,319,291,320,263"/>
 </map>

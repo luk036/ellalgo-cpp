@@ -1,29 +1,29 @@
 <map id="ellalgo/oracles/lmi0_oracle.hpp" name="ellalgo/oracles/lmi0_oracle.hpp">
-<area shape="rect" id="Node000001" title="Oracle for Linear Matrix Inequality (LMI) feasibility (compact form)" alt="" coords="179,5,329,45"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="421,240,481,265"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="290,43,361,92,397,126,428,165,442,196,450,226,445,227,437,198,424,168,393,130,357,96,287,48"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,313,68,339"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="225,48,195,69,165,95,132,132,109,163,67,241,45,301,40,299,62,239,104,160,128,129,161,91,191,65,222,43"/>
-<area shape="rect" id="Node000004" href="$lmi__oracle__base_8hpp.html" title="Shared LMI oracle skeleton (Template Method)" alt="" coords="176,93,332,119"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="257,46,257,79,251,79,251,46"/>
-<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="264,118,289,153,326,190,368,215,409,234,407,239,365,220,323,194,285,156,259,121"/>
-<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="226,121,187,141,148,169,117,201,89,238,51,302,46,300,85,235,113,198,144,165,184,136,224,116"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="337,167,414,192"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="275,116,345,157,343,162,272,121"/>
-<area shape="rect" id="Node000006" href="$ldlt__mgr_8hpp.html" title="LDL^T factorization manager for symmetric matrices." alt="" coords="159,167,261,192"/>
-<area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="249,120,227,156,222,154,244,118"/>
-<area shape="poly" id="edge10_Node000006_Node000002" title=" " alt="" coords="250,189,409,236,407,241,248,195"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="125,240,194,265"/>
-<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="204,194,178,230,173,227,199,191"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="116,313,187,339"/>
-<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="176,194,142,213,127,226,115,241,111,256,114,272,132,301,127,304,109,273,106,256,110,239,123,222,139,208,173,190"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="345,313,421,339"/>
-<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="262,187,313,205,338,219,360,238,377,268,384,299,379,300,372,270,356,242,335,224,311,210,261,192"/>
-<area shape="rect" id="Node000010" href="$ell__matrix_8hpp.html" title="Square matrix with flat storage and strided views." alt="" coords="218,240,346,265"/>
-<area shape="poly" id="edge12_Node000006_Node000010" title=" " alt="" coords="224,190,262,228,259,232,220,194"/>
-<area shape="poly" id="edge16_Node000010_Node000003" title=" " alt="" coords="243,268,82,314,80,309,242,263"/>
-<area shape="poly" id="edge14_Node000010_Node000008" title=" " alt="" coords="262,268,186,309,183,304,260,263"/>
-<area shape="poly" id="edge15_Node000010_Node000009" title=" " alt="" coords="300,263,357,303,354,307,297,268"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="235,313,321,339"/>
-<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="284,266,282,300,277,300,279,266"/>
+<area shape="rect" id="Node000001" title="Oracle for Linear Matrix Inequality (LMI) feasibility (compact form)." alt="" coords="178,5,327,50"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="419,249,478,277"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="290,48,360,99,396,133,425,172,439,203,447,235,442,233,434,205,421,175,392,137,357,103,290,53"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,325,68,353"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="218,53,193,74,165,100,131,138,108,170,66,250,45,311,40,309,61,248,103,167,127,135,161,96,189,70,221,49"/>
+<area shape="rect" id="Node000004" href="$lmi__oracle__base_8hpp.html" title="Shared LMI oracle skeleton (Template Method)." alt="" coords="175,98,330,126"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="254,48,255,83,250,82,251,53"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="261,123,287,161,324,199,364,225,407,247,402,247,361,230,320,203,283,164,259,129"/>
+<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="219,128,185,148,148,176,117,209,90,246,51,312,47,310,86,243,113,206,144,172,182,144,223,124"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="334,174,411,201"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="274,124,341,165,336,166,274,129"/>
+<area shape="rect" id="Node000006" href="$ldlt__mgr_8hpp.html" title="LDL^T factorization manager for symmetric matrices." alt="" coords="157,174,260,201"/>
+<area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="246,124,226,162,222,159,243,128"/>
+<area shape="poly" id="edge10_Node000006_Node000002" title=" " alt="" coords="252,199,407,247,402,249,251,205"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="125,249,193,277"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="202,200,178,238,174,235,198,204"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="116,325,186,353"/>
+<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="169,204,140,223,126,236,115,250,111,266,113,282,131,314,126,313,108,283,105,265,110,248,122,232,137,219,173,200"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="344,325,420,353"/>
+<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="260,195,312,214,337,229,359,248,375,278,382,311,378,308,370,279,354,251,334,233,310,219,260,201"/>
+<area shape="rect" id="Node000010" href="$ell__matrix_8hpp.html" title="Square matrix with flat storage and strided views." alt="" coords="217,249,344,277"/>
+<area shape="poly" id="edge12_Node000006_Node000010" title=" " alt="" coords="222,199,260,238,255,238,221,204"/>
+<area shape="poly" id="edge16_Node000010_Node000003" title=" " alt="" coords="238,280,84,326,82,321,236,275"/>
+<area shape="poly" id="edge14_Node000010_Node000008" title=" " alt="" coords="260,277,188,320,186,315,255,278"/>
+<area shape="poly" id="edge15_Node000010_Node000009" title=" " alt="" coords="299,275,354,316,349,315,298,280"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="236,325,320,353"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="282,276,281,311,277,308,278,279"/>
 </map>

@@ -7,6 +7,7 @@ var searchData=
   ['lmioracle_3c_20arr036_2c_20arr036_20_3e_4',['LmiOracle&lt; Arr036, Arr036 &gt;',['../classLmiOracle.html',1,'']]],
   ['lmioraclebase_5',['LmiOracleBase',['../classLmiOracleBase.html',1,'']]],
   ['lmioraclebase_3c_20arr036_2c_20arr036_20_3e_6',['LmiOracleBase&lt; Arr036, Arr036 &gt;',['../classLmiOracleBase.html',1,'']]],
-  ['lmiproblem_7',['LMIProblem',['../classLMIProblem.html',1,'']]],
-  ['lowpassoracle_8',['LowpassOracle',['../classLowpassOracle.html',1,'']]]
+  ['lmioraclebase_3c_20arr036_2c_20mat_20_3e_7',['LmiOracleBase&lt; Arr036, Mat &gt;',['../classLmiOracleBase.html',1,'']]],
+  ['lmiproblem_8',['LMIProblem',['../classLMIProblem.html',1,'']]],
+  ['lowpassoracle_9',['LowpassOracle',['../classLowpassOracle.html',1,'']]]
 ];

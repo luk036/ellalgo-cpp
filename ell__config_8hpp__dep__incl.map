@@ -1,24 +1,24 @@
 <map id="ellalgo/ell_config.hpp" name="ellalgo/ell_config.hpp">
-<area shape="rect" id="Node000001" title="Configuration types and constants for the ellipsoid algorithm." alt="" coords="466,5,626,31"/>
-<area shape="rect" id="Node000002" href="$conjugate__gradient_8hpp.html" title="Conjugate gradient method for solving linear systems." alt="" coords="5,79,228,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="464,36,186,81,185,76,463,30"/>
-<area shape="rect" id="Node000003" href="$conjugate__gradient2_8hpp.html" title="Alternative conjugate gradient method for solving linear systems." alt="" coords="252,79,483,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="506,38,398,81,396,76,504,33"/>
-<area shape="rect" id="Node000004" href="$cutting__plane_8hpp.html" title="Cutting&#45;plane methods for convex feasibility and optimization." alt="" coords="347,152,534,177"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="536,44,496,106,454,153,450,150,492,102,531,41"/>
-<area shape="rect" id="Node000006" href="$ell__base_8hpp.html" title="Shared ellipsoid search space base (compile&#45;time Strategy)" alt="" coords="551,225,703,251"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="555,43,573,104,599,176,623,224,618,226,594,178,568,106,550,44"/>
-<area shape="rect" id="Node000009" href="$ell__calc_8hpp.html" title="Ellipsoid computation layer with cut dispatch." alt="" coords="609,79,755,104"/>
-<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="581,34,661,76,659,81,578,39"/>
-<area shape="rect" id="Node000010" href="$ell__core_8hpp.html" title="Ellipsoid search space core with matrix update." alt="" coords="609,152,758,177"/>
-<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="640,30,718,49,749,62,769,77,775,89,775,101,761,122,737,140,711,154,709,150,734,136,757,118,770,99,770,90,765,80,747,66,716,54,639,35"/>
-<area shape="rect" id="Node000005" href="$lmi__problem_8hpp.html" title="LMI problem facade: owns data and drives the cutting&#45;plane loop." alt="" coords="479,372,659,397"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="441,191,444,255,452,290,468,323,482,338,498,351,534,369,532,374,496,355,478,342,464,325,447,292,439,255,436,191"/>
-<area shape="rect" id="Node000007" href="$ell_8hpp.html" title="Ellipsoid search space (classic Q&#45;update strategy)" alt="" coords="478,299,593,324"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="604,261,552,301,549,296,600,257"/>
-<area shape="rect" id="Node000008" href="$ell__stable_8hpp.html" title="Numerically stable ellipsoid search space (LDL^T strategy)" alt="" coords="617,299,779,324"/>
-<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="651,259,688,297,685,300,647,263"/>
-<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="666,333,591,374,589,369,664,328"/>
-<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="685,118,686,152,680,152,680,118"/>
-<area shape="poly" id="edge11_Node000010_Node000006" title=" " alt="" coords="668,190,638,227,634,224,663,187"/>
+<area shape="rect" id="Node000001" title="Configuration types and constants for the ellipsoid algorithm." alt="" coords="465,5,624,33"/>
+<area shape="rect" id="Node000002" href="$conjugate__gradient_8hpp.html" title="Conjugate gradient method for solving linear systems." alt="" coords="5,81,228,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="451,38,195,83,193,78,454,34"/>
+<area shape="rect" id="Node000003" href="$conjugate__gradient2_8hpp.html" title="Alternative conjugate gradient method for solving linear systems." alt="" coords="252,81,482,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="496,41,400,83,397,78,501,38"/>
+<area shape="rect" id="Node000004" href="$cutting__plane_8hpp.html" title="Cutting&#45;plane methods for convex feasibility and optimization." alt="" coords="346,157,532,184"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="533,45,496,110,454,158,450,154,492,107,529,49"/>
+<area shape="rect" id="Node000006" href="$ell__base_8hpp.html" title="Shared ellipsoid search space base (compile&#45;time Strategy)." alt="" coords="550,232,702,260"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="553,46,572,110,598,183,621,233,616,231,593,185,567,112,550,50"/>
+<area shape="rect" id="Node000009" href="$ell__calc_8hpp.html" title="Ellipsoid computation layer with cut dispatch." alt="" coords="607,81,754,109"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="582,38,659,80,654,81,582,43"/>
+<area shape="rect" id="Node000010" href="$ell__core_8hpp.html" title="Ellipsoid search space core with matrix update." alt="" coords="608,157,756,184"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="639,32,717,51,748,64,768,79,774,91,774,103,760,125,737,144,711,159,709,154,734,139,756,122,768,102,768,92,764,83,745,69,716,56,640,37"/>
+<area shape="rect" id="Node000005" href="$lmi__problem_8hpp.html" title="LMI problem facade: owns data and drives the cutting&#45;plane loop." alt="" coords="478,384,657,411"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="439,197,443,265,452,301,468,334,481,349,497,362,532,384,527,383,494,366,477,353,464,337,447,303,438,266,435,202"/>
+<area shape="rect" id="Node000007" href="$ell_8hpp.html" title="Ellipsoid search space (classic Q&#45;update strategy)." alt="" coords="477,308,590,336"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="600,269,551,310,549,305,595,271"/>
+<area shape="rect" id="Node000008" href="$ell__stable_8hpp.html" title="Numerically stable ellipsoid search space (LDL^T strategy)." alt="" coords="615,308,775,336"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="650,269,685,308,680,307,648,274"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="662,343,591,386,589,381,657,344"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="683,122,684,158,679,155,679,127"/>
+<area shape="poly" id="edge11_Node000010_Node000006" title=" " alt="" coords="665,195,637,234,634,230,661,198"/>
 </map>

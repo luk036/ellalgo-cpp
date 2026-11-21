@@ -1,3 +1,11 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classLmiOracleBase.html" title=" " alt="" coords="5,5,188,45"/>
+<area shape="rect" id="Node000000" href="$classLmiOracleBase.html" title=" " alt="" coords="5,109,187,154"/>
+<area shape="rect" id="Node000001" href="$classLmiOracle.html" title=" " alt="" coords="246,5,395,50"/>
+<area shape="poly" id="edge4_Node000000_Node000001" title=" " alt="" coords="152,100,234,60,264,49,259,52,236,65,155,104"/>
+<area shape="rect" id="Node000002" href="$classLmi0Oracle.html" title="Oracle for Linear Matrix Inequality (LMI) feasibility problems." alt="" coords="242,75,399,119"/>
+<area shape="poly" id="edge5_Node000000_Node000002" title=" " alt="" coords="201,113,244,108,239,110,203,118"/>
+<area shape="rect" id="Node000003" href="$classLmiOldOracle.html" title="Oracle for Linear Matrix Inequality." alt="" coords="235,144,406,189"/>
+<area shape="poly" id="edge6_Node000000_Node000003" title=" " alt="" coords="202,145,237,152,232,154,202,151"/>
+<area shape="rect" id="Node000004" href="$classLmiOracle.html" title="Oracle for Linear Matrix Inequality." alt="" coords="246,213,395,258"/>
+<area shape="poly" id="edge7_Node000000_Node000004" title=" " alt="" coords="154,159,236,199,264,213,259,213,234,203,153,164"/>
 </map>

@@ -1,0 +1,12 @@
+var searchData=
+[
+  ['target_0',['Build and run the standalone target',['../index.html#autotoc_md5',1,'']]],
+  ['template_20to_20your_20needs_1',['Adjust the template to your needs',['../index.html#autotoc_md4',1,'']]],
+  ['test_20suite_2',['Build and run test suite',['../index.html#autotoc_md6',1,'']]],
+  ['the_20documentation_3',['Build the documentation',['../index.html#autotoc_md8',1,'']]],
+  ['the_20standalone_20target_4',['Build and run the standalone target',['../index.html#autotoc_md5',1,'']]],
+  ['the_20template_20to_20your_20needs_5',['Adjust the template to your needs',['../index.html#autotoc_md4',1,'']]],
+  ['tidy_6',['clang-tidy',['../index.html#autotoc_md11',1,'']]],
+  ['to_20your_20needs_7',['Adjust the template to your needs',['../index.html#autotoc_md4',1,'']]],
+  ['tools_8',['Additional tools',['../index.html#autotoc_md10',1,'']]]
+];

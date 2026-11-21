@@ -5,9 +5,9 @@ var searchData=
   ['make_5flmi_5foracle_2',['make_lmi_oracle',['../lmi__factory_8hpp.html#a36ccaa2af87db241eb7e068f2a939f1c',1,'lmi_factory.hpp']]],
   ['make_5flmi_5fproblem_3',['make_lmi_problem',['../lmi__problem_8hpp.html#a16b0201aa3da36eca7a6befa91a52257',1,'lmi_problem.hpp']]],
   ['make_5fsame_5fshape_4',['make_same_shape',['../arr_8hpp.html#a7d5c2536c89a894e5df5dd80535edb44',1,'arr.hpp']]],
-  ['matrix_5',['matrix',['../classMatrix.html',1,'Matrix'],['../classMatrix.html#af14b9bac2a5252d6fc2820cc78e9f9e5',1,'Matrix::Matrix()']]],
-  ['matrix0_6',['matrix0',['../classMatrix0.html',1,'Matrix0'],['../classMatrix0.html#a99301a1325dee1275f2571817aaf5f14',1,'Matrix0::Matrix0()']]],
-  ['matrix2_7',['matrix2',['../classMatrix2.html',1,'Matrix2&lt; T &gt;'],['../classMatrix2.html#a63cdc784d136d7665cdc87f2ce7b7678',1,'Matrix2::Matrix2()']]],
+  ['matrix_5',['Matrix',['../classMatrix.html',1,'Matrix'],['../classMatrix.html#af14b9bac2a5252d6fc2820cc78e9f9e5',1,'Matrix::Matrix()']]],
+  ['matrix0_6',['Matrix0',['../classMatrix0.html',1,'Matrix0'],['../classMatrix0.html#a99301a1325dee1275f2571817aaf5f14',1,'Matrix0::Matrix0()']]],
+  ['matrix2_7',['Matrix2',['../classMatrix2.html',1,'Matrix2&lt; T &gt;'],['../classMatrix2.html#a63cdc784d136d7665cdc87f2ce7b7678',1,'Matrix2::Matrix2()']]],
   ['max_5fiters_8',['max_iters',['../structOptions.html#a79ef34251f40cb7ef68615307a2dfcb0',1,'Options']]],
   ['maxiters_9',['MaxIters',['../ell__config_8hpp.html#a5e401127b1d3c1fbf7b3e1b0fbca1b27a583a30f2b08f38c3d852d46cfcad5ae7',1,'ell_config.hpp']]],
   ['moderncppstarter_20documentation_10',['ModernCppStarter Documentation',['../about.html#doc',1,'']]]

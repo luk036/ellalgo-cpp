@@ -1,13 +1,13 @@
 <map id="ellalgo/oracles/profit_oracle.hpp" name="ellalgo/oracles/profit_oracle.hpp">
-<area shape="rect" id="Node000001" title="Oracles for profit maximization problems (Cobb&#45;Douglas)" alt="" coords="86,5,241,45"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,68,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,48,68,88,65,84,131,43"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="92,93,147,119"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="155,47,135,83,130,80,150,44"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="171,93,247,119"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="177,44,197,80,193,83,172,47"/>
-<area shape="rect" id="Node000005" href="$round__robin_8hpp.html" title="Round&#45;robin index helper for cyclic constraint scanning." alt="" coords="271,93,410,119"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="207,43,303,85,301,90,205,48"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="305,167,376,192"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="343,119,343,153,338,153,338,119"/>
+<area shape="rect" id="Node000001" title="Oracles for profit maximization problems (Cobb&#45;Douglas)." alt="" coords="86,5,240,50"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,98,68,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,53,71,91,68,87,131,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="92,98,146,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="153,48,136,85,131,82,150,52"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="171,98,246,126"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="176,48,197,84,191,84,174,53"/>
+<area shape="rect" id="Node000005" href="$round__robin_8hpp.html" title="Round&#45;robin index helper for cyclic constraint scanning." alt="" coords="270,98,408,126"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="210,48,300,90,295,92,210,53"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="304,174,374,201"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="341,124,341,160,337,156,337,128"/>
 </map>

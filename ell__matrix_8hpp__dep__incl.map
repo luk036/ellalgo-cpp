@@ -1,28 +1,28 @@
 <map id="ellalgo/ell_matrix.hpp" name="ellalgo/ell_matrix.hpp">
-<area shape="rect" id="Node000001" title="Square matrix with flat storage and strided views." alt="" coords="231,5,395,31"/>
-<area shape="rect" id="Node000002" href="$ell__core_8hpp.html" title="Ellipsoid search space core with matrix update." alt="" coords="153,86,303,111"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="292,42,242,88,239,84,289,38"/>
-<area shape="rect" id="Node000007" href="$ldlt__mgr_8hpp.html" title="LDL^T factorization manager for symmetric matrices." alt="" coords="329,79,471,119"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="338,38,381,77,377,80,335,42"/>
-<area shape="rect" id="Node000003" href="$ell__base_8hpp.html" title="Shared ellipsoid search space base (compile&#45;time Strategy)" alt="" coords="149,174,301,199"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="230,125,228,174,223,173,225,125"/>
-<area shape="rect" id="Node000004" href="$ell_8hpp.html" title="Ellipsoid search space (classic Q&#45;update strategy)" alt="" coords="5,262,120,287"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="193,208,86,264,84,259,190,203"/>
-<area shape="rect" id="Node000005" href="$ell__stable_8hpp.html" title="Numerically stable ellipsoid search space (LDL^T strategy)" alt="" coords="145,262,306,287"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="228,213,228,261,223,261,223,213"/>
-<area shape="rect" id="Node000006" href="$lmi__problem_8hpp.html" title="LMI problem facade: owns data and drives the cutting&#45;plane loop." alt="" coords="217,350,397,375"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="248,296,297,348,293,351,244,299"/>
-<area shape="rect" id="Node000008" href="$lmi__oracle__base_8hpp.html" title="Shared LMI oracle skeleton (Template Method)" alt="" coords="415,167,558,207"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="431,127,469,165,466,168,427,130"/>
-<area shape="rect" id="Node000009" href="$lmi0__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality (LMI) feasibility (compact form)" alt="" coords="497,255,647,295"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="517,215,555,253,551,256,513,218"/>
-<area shape="rect" id="Node000011" href="$lmi__old__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality feasibility (explicit matrix form)" alt="" coords="671,255,814,295"/>
-<area shape="poly" id="edge10_Node000008_Node000011" title=" " alt="" coords="557,209,687,252,686,257,555,214"/>
-<area shape="rect" id="Node000012" href="$lmi__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality feasibility (lazy matrix form)" alt="" coords="330,255,473,295"/>
-<area shape="poly" id="edge12_Node000008_Node000012" title=" " alt="" coords="460,218,422,256,418,253,456,215"/>
-<area shape="rect" id="Node000010" href="$lmi__factory_8hpp.html" title="Factory functions for the LMI oracle family." alt="" coords="501,343,643,383"/>
-<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="575,309,575,342,569,342,569,309"/>
-<area shape="poly" id="edge11_Node000011_Node000010" title=" " alt="" coords="694,303,611,345,608,340,692,298"/>
-<area shape="poly" id="edge13_Node000012_Node000006" title=" " alt="" coords="372,306,322,352,318,348,368,302"/>
-<area shape="poly" id="edge14_Node000012_Node000010" title=" " alt="" coords="452,298,536,340,533,345,450,303"/>
+<area shape="rect" id="Node000001" title="Square matrix with flat storage and strided views." alt="" coords="228,5,392,33"/>
+<area shape="rect" id="Node000002" href="$ell__core_8hpp.html" title="Ellipsoid search space core with matrix update." alt="" coords="152,90,300,117"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="284,46,241,91,237,87,288,42"/>
+<area shape="rect" id="Node000007" href="$ldlt__mgr_8hpp.html" title="LDL^T factorization manager for symmetric matrices." alt="" coords="326,81,467,126"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="335,41,376,80,371,81,335,46"/>
+<area shape="rect" id="Node000003" href="$ell__base_8hpp.html" title="Shared ellipsoid search space base (compile&#45;time Strategy)." alt="" coords="148,182,299,210"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="226,130,226,183,221,181,224,135"/>
+<area shape="rect" id="Node000004" href="$ell_8hpp.html" title="Ellipsoid search space (classic Q&#45;update strategy)." alt="" coords="5,275,119,302"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="186,220,87,276,84,272,188,215"/>
+<area shape="rect" id="Node000005" href="$ell__stable_8hpp.html" title="Numerically stable ellipsoid search space (LDL^T strategy)." alt="" coords="143,275,304,302"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="225,223,226,275,221,273,222,227"/>
+<area shape="rect" id="Node000006" href="$lmi__problem_8hpp.html" title="LMI problem facade: owns data and drives the cutting&#45;plane loop." alt="" coords="214,368,393,395"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="246,312,295,367,289,367,244,317"/>
+<area shape="rect" id="Node000008" href="$lmi__oracle__base_8hpp.html" title="Shared LMI oracle skeleton (Template Method)." alt="" coords="411,174,553,218"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="428,134,465,174,459,173,427,140"/>
+<area shape="rect" id="Node000009" href="$lmi0__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality (LMI) feasibility (compact form)." alt="" coords="493,266,642,311"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="514,227,550,267,545,266,512,232"/>
+<area shape="rect" id="Node000011" href="$lmi__old__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality feasibility (explicit matrix form)." alt="" coords="666,266,807,311"/>
+<area shape="poly" id="edge10_Node000008_Node000011" title=" " alt="" coords="557,221,678,266,673,266,557,227"/>
+<area shape="rect" id="Node000012" href="$lmi__oracle_8hpp.html" title="Oracle for Linear Matrix Inequality feasibility (lazy matrix form)." alt="" coords="327,266,469,311"/>
+<area shape="poly" id="edge12_Node000008_Node000012" title=" " alt="" coords="454,228,419,268,416,264,449,231"/>
+<area shape="rect" id="Node000010" href="$lmi__factory_8hpp.html" title="Factory functions for the LMI oracle family." alt="" coords="497,359,638,404"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="569,325,569,361,565,357,565,328"/>
+<area shape="poly" id="edge11_Node000011_Node000010" title=" " alt="" coords="685,318,608,361,607,356,680,319"/>
+<area shape="poly" id="edge13_Node000012_Node000006" title=" " alt="" coords="367,321,318,369,316,365,362,323"/>
+<area shape="poly" id="edge14_Node000012_Node000010" title=" " alt="" coords="453,316,530,359,524,358,451,321"/>
 </map>

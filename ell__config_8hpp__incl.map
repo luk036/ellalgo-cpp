@@ -1,15 +1,15 @@
 <map id="ellalgo/ell_config.hpp" name="ellalgo/ell_config.hpp">
-<area shape="rect" id="Node000001" title="Configuration types and constants for the ellipsoid algorithm." alt="" coords="210,5,370,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,76,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="251,33,90,79,89,74,249,28"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="100,79,176,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="267,33,176,75,174,70,264,28"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="200,79,287,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="285,32,261,69,256,66,280,30"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="311,79,365,104"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="300,30,325,66,320,69,296,33"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="389,79,481,104"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="315,28,401,70,398,75,312,33"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="505,79,565,104"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="330,28,493,75,491,80,329,33"/>
+<area shape="rect" id="Node000001" title="Configuration types and constants for the ellipsoid algorithm." alt="" coords="207,5,366,33"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,81,75,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="243,36,90,81,89,76,242,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="98,81,174,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="262,33,178,76,175,71,257,34"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="197,81,283,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="281,32,258,70,255,66,276,35"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="306,81,360,109"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="296,31,320,69,314,67,294,36"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="385,81,476,109"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="313,31,394,74,389,74,312,36"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="501,81,560,109"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="331,31,489,80,483,81,330,36"/>
 </map>

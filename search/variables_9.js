@@ -1,7 +1,8 @@
 var searchData=
 [
   ['sigma_0',['sigma',['../structCutResult.html#a8a124f99001b4ddab4d49d83fc32d175',1,'CutResult']]],
-  ['start_1',['start',['../structRange.html#a6289f44d8b989c38d5de403ba4890d79',1,'Range']]],
-  ['status_2',['status',['../structCutResult.html#a9bee4830e34c96a03963bed93dece734',1,'CutResult::status'],['../structSolverResult.html#a7adb3f7a051f4a5042110ad231437e25',1,'SolverResult::status']]],
-  ['step_3',['step',['../structRange.html#a0fbcefe86e540906de651c8b683f1345',1,'Range']]]
+  ['stall_5fguard_1',['stall_guard',['../structOptions.html#ad34458f7a3bf777bb50037e433c5f695',1,'Options']]],
+  ['start_2',['start',['../structRange.html#a6289f44d8b989c38d5de403ba4890d79',1,'Range']]],
+  ['status_3',['status',['../structCutResult.html#a9bee4830e34c96a03963bed93dece734',1,'CutResult::status'],['../structSolverResult.html#a7adb3f7a051f4a5042110ad231437e25',1,'SolverResult::status']]],
+  ['step_4',['step',['../structRange.html#a0fbcefe86e540906de651c8b683f1345',1,'Range']]]
 ];

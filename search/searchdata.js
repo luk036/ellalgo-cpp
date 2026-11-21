@@ -10,7 +10,7 @@ var indexSectionsWithContent =
   7: "crs",
   8: "cimnsu",
   9: "e",
-  10: "ae"
+  10: "abcdefhimnoprstuwy✨❓👁🪜"
 };
 
 var indexSectionNames =

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['calc_5fbias_5fcut_0',['calc_bias_cut',['../classEllCalcCore.html#a281d9306932304d2c14387151f5ce936',1,'EllCalcCore::calc_bias_cut()'],['../classEllCalc.html#ad70b4925c8b9976e3161d384978f6e04',1,'EllCalc::calc_bias_cut()']]],
+  ['calc_5fbias_5fcut_0',['calc_bias_cut',['../classEllCalc.html#ad70b4925c8b9976e3161d384978f6e04',1,'EllCalc::calc_bias_cut()'],['../classEllCalcCore.html#a281d9306932304d2c14387151f5ce936',1,'EllCalcCore::calc_bias_cut(const double beta, const double tau) const noexcept -&gt; std::tuple&lt; double, double, double &gt;']]],
   ['calc_5fbias_5fcut_5ffast_1',['calc_bias_cut_fast',['../classEllCalcCore.html#ac799cb86d010981ab42a15d1d43ed973',1,'EllCalcCore']]],
   ['calc_5fbias_5fcut_5fq_2',['calc_bias_cut_q',['../classEllCalc.html#a5f09f4910af9a5f4d7e22c3494ffd645',1,'EllCalc']]],
   ['calc_5fcentral_5fcut_3',['calc_central_cut',['../classEllCalc.html#a537105cff5f71167c0b5e3d85e31b99d',1,'EllCalc::calc_central_cut()'],['../classEllCalcCore.html#ad95177bbaea5d078059e5059090e4401',1,'EllCalcCore::calc_central_cut()']]],
@@ -9,7 +9,7 @@ var searchData=
   ['calc_5fparallel_5fcentral_5fcut_6',['calc_parallel_central_cut',['../classEllCalc.html#a622444430f0226a602973904cfc0137f',1,'EllCalc::calc_parallel_central_cut()'],['../classEllCalcCore.html#a153f2124246c243516d7113cbe43f5f1',1,'EllCalcCore::calc_parallel_central_cut(const double beta1, const double tsq) const noexcept -&gt; std::tuple&lt; double, double, double &gt;']]],
   ['calc_5fparallel_5fcut_7',['calc_parallel_cut',['../classEllCalcCore.html#a6b5c3b462765c85488e36bb0dbb99455',1,'EllCalcCore']]],
   ['calc_5fparallel_5fcut_5ffast_8',['calc_parallel_cut_fast',['../classEllCalcCore.html#a32701a5418c01d7ff7b4f07647ddf1a1',1,'EllCalcCore']]],
-  ['chebyshevoracle_9',['chebyshevoracle',['../classChebyshevOracle.html#aec58111001fb14c3b5156d778d21f092',1,'ChebyshevOracle::ChebyshevOracle(const std::vector&lt; Vec &gt; &amp;A, const Vec &amp;b)'],['../classChebyshevOracle.html#a08aa11153ae289f86e06940c98c14952',1,'ChebyshevOracle::ChebyshevOracle(const ChebyshevOracle &amp;)=delete'],['../classChebyshevOracle.html#abccb6f8d3f9d7e2b73b4fffe38fdcf8c',1,'ChebyshevOracle::ChebyshevOracle(ChebyshevOracle &amp;&amp;)=delete']]],
+  ['chebyshevoracle_9',['ChebyshevOracle',['../classChebyshevOracle.html#aec58111001fb14c3b5156d778d21f092',1,'ChebyshevOracle::ChebyshevOracle(const std::vector&lt; Vec &gt; &amp;A, const Vec &amp;b)'],['../classChebyshevOracle.html#a08aa11153ae289f86e06940c98c14952',1,'ChebyshevOracle::ChebyshevOracle(const ChebyshevOracle &amp;)=delete'],['../classChebyshevOracle.html#abccb6f8d3f9d7e2b73b4fffe38fdcf8c',1,'ChebyshevOracle::ChebyshevOracle(ChebyshevOracle &amp;&amp;)=delete']]],
   ['clear_10',['clear',['../classMatrix.html#a9fe8ba81567a259d389d2f05d74848ff',1,'Matrix']]],
   ['cols_11',['cols',['../classArr.html#a201b42030251db5caaaa0df73496e171',1,'Arr::cols()'],['../classMatrix0.html#a013d517c1e7a777ba605cb3e7395d4ad',1,'Matrix0::cols()'],['../classMatrix2.html#a7b261927474cc71cbb94348ce1af7c06',1,'Matrix2::cols()']]],
   ['column_12',['column',['../classMatrix.html#a7f6e70c1d6cedeab84d2dafcdc0d88bf',1,'Matrix']]],
