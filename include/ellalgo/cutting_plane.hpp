@@ -7,6 +7,8 @@
 
 #include <cassert>
 #include <cmath>
+#include <limits>
+#include <optional>
 #include <tuple>
 #include <type_traits>
 
@@ -14,6 +16,26 @@
 #include "half_nonnegative.hpp"
 
 template <typename S> using CuttingPlaneArrayType = typename std::remove_reference_t<S>::ArrayType;
+
+/**
+ * @brief Report whether `tsq` has stopped decreasing beyond float resolution.
+ *
+ * An absolute threshold on `tsq` (which scales with the problem data) can be
+ * unreachable once the search space shrinks to the representable limit; the
+ * quantity then stalls above the tolerance and the loop would spin to
+ * `max_iters` without refining anything. This companion test detects that
+ * stagnation, mirroring the bracket guard already used by `bsearch`.
+ *
+ * @param[in] tsq      Current squared distance measure
+ * @param[in] tsq_prev Previous iteration's `tsq` (empty on the first iteration)
+ * @return True when the relative change is within machine epsilon
+ */
+inline auto stalled(double tsq, std::optional<double> tsq_prev) -> bool {
+    if (!tsq_prev.has_value() || tsq <= 0.0) {
+        return false;
+    }
+    return std::abs(*tsq_prev - tsq) <= std::numeric_limits<double>::epsilon() * tsq;
+}
 
 /**
  * @brief Return an invalid/sentinel value for type T
@@ -104,16 +126,27 @@ template <typename O, typename S>
     requires OracleFeas<O, typename S::ArrayType> && SearchSpace<S>
 inline auto cutting_plane_feas(O& omega, S& space, const Options& options = Options())
     -> SolverResult<CuttingPlaneArrayType<S>> {
+    std::optional<double> tsq_prev;
     for (auto niter = 0U; niter != options.max_iters; ++niter) {
         const auto cut = omega.assess_feas(space.xc());
         if (!cut) {  // feasible sol'n obtained
             return {space.xc(), niter, SolverStatus::Success};
         }
         const auto status = space.update_bias_cut(*cut);  // update space
-        if (status != CutStatus::Success || space.tsq() < options.tolerance) {
+        if (status != CutStatus::Success) {
             auto res = invalid_value<CuttingPlaneArrayType<S>>();
             return {std::move(res), niter, SolverStatus::Infeasible};
         }
+        const auto tsq = space.tsq();
+        if (tsq < options.tolerance) {
+            auto res = invalid_value<CuttingPlaneArrayType<S>>();
+            return {std::move(res), niter, SolverStatus::Infeasible};
+        }
+        if (options.stall_guard && stalled(tsq, tsq_prev)) {
+            auto res = invalid_value<CuttingPlaneArrayType<S>>();
+            return {std::move(res), niter, SolverStatus::Stalled};
+        }
+        tsq_prev = tsq;
     }
     auto res = invalid_value<CuttingPlaneArrayType<S>>();
     return {std::move(res), options.max_iters, SolverStatus::MaxIters};
@@ -175,6 +208,7 @@ template <typename O, typename S, typename N>
 inline auto cutting_plane_optim(O& omega, S& space, N& gamma, const Options& options = Options())
     -> SolverResult<CuttingPlaneArrayType<S>> {
     auto x_best = invalid_value<CuttingPlaneArrayType<S>>();
+    std::optional<double> tsq_prev;
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
         const auto _result1 = omega.assess_optim(space.xc(), gamma);
         const auto& cut = std::get<0>(_result1);
@@ -186,11 +220,23 @@ inline auto cutting_plane_optim(O& omega, S& space, N& gamma, const Options& opt
             }
             return space.update_bias_cut(cut);
         }();
-        if (status != CutStatus::Success || space.tsq() < options.tolerance) {  // no more
+        if (status != CutStatus::Success) {  // no more
             const auto outcome
                 = x_best.size() != 0U ? SolverStatus::Success : SolverStatus::Infeasible;
             return {std::move(x_best), niter, outcome};
         }
+        const auto tsq = space.tsq();
+        if (tsq < options.tolerance) {  // no more
+            const auto outcome
+                = x_best.size() != 0U ? SolverStatus::Success : SolverStatus::Infeasible;
+            return {std::move(x_best), niter, outcome};
+        }
+        if (options.stall_guard && stalled(tsq, tsq_prev)) {
+            const auto outcome
+                = x_best.size() != 0U ? SolverStatus::Success : SolverStatus::Stalled;
+            return {std::move(x_best), niter, outcome};
+        }
+        tsq_prev = tsq;
     }
     return {std::move(x_best), options.max_iters, SolverStatus::MaxIters};
 }  // END
@@ -305,6 +351,7 @@ inline auto cutting_plane_optim_q(O& omega, S& space_q, N& gamma,
     -> SolverResult<CuttingPlaneArrayType<S>> {
     using A = CuttingPlaneArrayType<S>;
     OptimQState<A> state{invalid_value<A>()};
+    std::optional<double> tsq_prev;
 
     for (auto niter = 0U; niter < options.max_iters; ++niter) {
         const auto result1 = omega.assess_optim_q(space_q.xc(), gamma, state.retry());
@@ -322,11 +369,18 @@ inline auto cutting_plane_optim_q(O& omega, S& space_q, N& gamma,
         if (outcome == OptimQState<A>::Result::NoMoreAlt) {
             break;  // no more alternative cut
         }
-        if (space_q.tsq() < options.tolerance) {  // no more
+        const auto tsq = space_q.tsq();
+        if (tsq < options.tolerance) {  // no more
             const auto res
                 = state.x_best().size() != 0U ? SolverStatus::Success : SolverStatus::Infeasible;
             return {std::move(state.x_best()), niter, res};
         }
+        if (options.stall_guard && stalled(tsq, tsq_prev)) {
+            const auto res
+                = state.x_best().size() != 0U ? SolverStatus::Success : SolverStatus::Stalled;
+            return {std::move(state.x_best()), niter, res};
+        }
+        tsq_prev = tsq;
     }
     return {std::move(state.x_best()), options.max_iters, SolverStatus::MaxIters};
 }  // END

@@ -23,14 +23,15 @@ struct Options {
     size_t max_iters;  ///< Maximum number of iterations allowed
     double tolerance;  ///< Convergence tolerance for stopping criteria
     bool verbose;      ///< Enable iteration logging
+    bool stall_guard;  ///< Stop once `tsq` stagnates at floating-point resolution
 
     /**
      * @brief Default constructor
      *
      * Initializes with default values: max_iters = 2000, tolerance = 1e-20,
-     * verbose = false.
+     * verbose = false, stall_guard = true.
      */
-    Options() : max_iters{2000}, tolerance{1e-20}, verbose{false} {}
+    Options() : max_iters{2000}, tolerance{1e-20}, verbose{false}, stall_guard{true} {}
 
     /**
      * @brief Constructor with custom parameters
@@ -38,7 +39,8 @@ struct Options {
      * @param[in] max_iters Maximum number of iterations
      * @param[in] tol Convergence tolerance
      */
-    Options(size_t max_iters, double tol) : max_iters{max_iters}, tolerance{tol}, verbose{false} {}
+    Options(size_t max_iters, double tol)
+        : max_iters{max_iters}, tolerance{tol}, verbose{false}, stall_guard{true} {}
 };
 
 /**
@@ -99,7 +101,8 @@ class ConvergenceError : public std::runtime_error {
 enum class SolverStatus {
     Success,     ///< A solution (or converged bracket) was produced
     Infeasible,  ///< Search space exhausted; no solution exists
-    MaxIters     ///< Iteration cap reached before terminating
+    MaxIters,    ///< Iteration cap reached before terminating
+    Stalled      ///< tsq stopped shrinking at float resolution before tolerance
 };
 
 /**

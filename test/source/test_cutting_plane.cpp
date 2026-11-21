@@ -148,3 +148,39 @@ TEST_CASE("SolverResult status distinguishes Infeasible from MaxIters") {
         CHECK_EQ(std::get<1>(result), 5U);
     }
 }
+
+struct StuckSpace {
+    using ArrayType = std::vector<double>;
+    ArrayType _xc{0.0, 0.0};
+
+    auto xc() const -> const ArrayType& { return this->_xc; }
+    auto tsq() const -> double { return 1e-3; }
+    auto update_bias_cut(const std::pair<ArrayType, double>& /*cut*/) -> CutStatus {
+        return CutStatus::Success;
+    }
+    auto update_central_cut(const std::pair<ArrayType, double>& /*cut*/) -> CutStatus {
+        return CutStatus::Success;
+    }
+    auto set_xc(const ArrayType& x) -> void { this->_xc = x; }
+};
+
+TEST_CASE("Stall guard reports Stalled when tsq stagnates") {
+    SUBCASE("guard enabled by default") {
+        auto options = Options();
+        auto space = StuckSpace{};
+        auto oracle = MyOracleAlwaysCut{};
+        const auto result = cutting_plane_feas(oracle, space, options);
+        CHECK(result.status == SolverStatus::Stalled);
+    }
+
+    SUBCASE("guard can be disabled") {
+        auto options = Options();
+        options.max_iters = 5;
+        options.stall_guard = false;
+        auto space = StuckSpace{};
+        auto oracle = MyOracleAlwaysCut{};
+        const auto result = cutting_plane_feas(oracle, space, options);
+        CHECK(result.status == SolverStatus::MaxIters);
+        CHECK_EQ(std::get<1>(result), 5U);
+    }
+}
